@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using CSDemo.Models;
 using Sitecore.Mvc.Controllers;
 
 namespace CSDemo.Controllers
 {
-    public class ProductController : SitecoreController
+    public class NavigationController : SitecoreController
     {
-        public ActionResult ProductDetails()
+        public ActionResult MainNavigation()
         {
-            return View(new Product());
+            throw new NotImplementedException();
         }
     }
 }
