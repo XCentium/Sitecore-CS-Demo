@@ -111,12 +111,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Kernel">
-      <HintPath>..\References\Sitecore.Kernel.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\Lib\Sitecore\Sitecore.Kernel.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Mvc">
-      <HintPath>..\References\Sitecore.Mvc.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\Lib\Sitecore\Sitecore.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -137,6 +135,18 @@
     <Reference Include="Unicorn, Version=3.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Unicorn.Core.3.1.2\lib\net45\Unicorn.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="XCore.CodeGenerator">
+      <HintPath>..\Lib\XCore2.0\XCore.CodeGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="XCore.Framework">
+      <HintPath>..\Lib\XCore2.0\XCore.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="XCore.SitecoreExtensions">
+      <HintPath>..\Lib\XCore2.0\XCore.SitecoreExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="XCore.Utilities">
+      <HintPath>..\Lib\XCore2.0\XCore.Utilities.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -171,8 +181,214 @@
     <Compile Include="Initializer.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sitecore modules\Web\XCore\CodeGen\CodeGenerationRoot.aspx.cs">
+      <DependentUpon>CodeGenerationRoot.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sitecore modules\Web\XCore\CodeGen\CodeGenerationRoot.aspx.designer.cs">
+      <DependentUpon>CodeGenerationRoot.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sitecore modules\Web\XCore\CodeGen\GenerateCode.aspx.cs">
+      <DependentUpon>GenerateCode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sitecore modules\Web\XCore\CodeGen\GenerateCode.aspx.designer.cs">
+      <DependentUpon>GenerateCode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateModels\Catalog Generated\Backpack.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\BackpackVariant.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\Boots.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\BootsVariant.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\Carabiner.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\Crampon.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\GeneralCategory.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\Harness.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\HarnessVariant.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\Pants.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\PantsVariant.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\Parka.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\ParkaVariant.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\Rockshoes.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\Shirts.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\ShirtsVariant.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\SleepingBag.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\SleepingBagVariant.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\Supplies.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\Tents.cs" />
+    <Compile Include="TemplateModels\Catalog Generated\TentsVariant.cs" />
+    <Compile Include="TemplateModels\Catalog\CommerceCatalog.cs" />
+    <Compile Include="TemplateModels\Catalog\CommerceCatalogFolder.cs" />
+    <Compile Include="TemplateModels\Catalog\CommerceCatalogGroupFolder.cs" />
+    <Compile Include="TemplateModels\Catalog\CommerceCatalogItem.cs" />
+    <Compile Include="TemplateModels\Catalog\CommerceCatalogSystem.cs" />
+    <Compile Include="TemplateModels\Catalog\CommerceCategory.cs" />
+    <Compile Include="TemplateModels\Catalog\CommerceCustomCatalog.cs" />
+    <Compile Include="TemplateModels\Catalog\CommerceDynamicCatalogGroup.cs" />
+    <Compile Include="TemplateModels\Catalog\CommerceDynamicCategory.cs" />
+    <Compile Include="TemplateModels\Catalog\CommerceNavigationItem.cs" />
+    <Compile Include="TemplateModels\Catalog\CommerceProduct.cs" />
+    <Compile Include="TemplateModels\Catalog\CommerceProductVariant.cs" />
+    <Compile Include="TemplateModels\Catalog\CommerceRelationshipFolder.cs" />
+    <Compile Include="TemplateModels\Catalog\CommerceSearchSettings.cs" />
+    <Compile Include="TemplateModels\Catalog\CommerceStaticCatalogGroup.cs" />
+    <Compile Include="TemplateModels\CommerceItem.cs" />
+    <Compile Include="TemplateModels\Fields\CommerceField.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\IBackpack.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\IBackpackVariant.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\IBoots.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\IBootsVariant.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\ICarabiner.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\ICrampon.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\IGeneralCategory.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\IHarness.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\IHarnessVariant.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\IPants.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\IPantsVariant.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\IParka.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\IParkaVariant.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\IRockshoes.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\IShirts.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\IShirtsVariant.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\ISleepingBag.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\ISleepingBagVariant.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\ISupplies.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\ITents.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog Generated\ITentsVariant.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog\ICommerceCatalog.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog\ICommerceCatalogFolder.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog\ICommerceCatalogGroupFolder.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog\ICommerceCatalogItem.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog\ICommerceCatalogSystem.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog\ICommerceCategory.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog\ICommerceCustomCatalog.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog\ICommerceDynamicCatalogGroup.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog\ICommerceDynamicCategory.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog\ICommerceNavigationItem.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog\ICommerceProduct.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog\ICommerceProductVariant.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog\ICommerceRelationshipFolder.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog\ICommerceSearchSettings.cs" />
+    <Compile Include="TemplateModels\Interfaces\Catalog\ICommerceStaticCatalogGroup.cs" />
+    <Compile Include="TemplateModels\Interfaces\Fields\ICommerceField.cs" />
+    <Compile Include="TemplateModels\Interfaces\ICommerceItem.cs" />
+    <Compile Include="TemplateModels\Interfaces\Inventory\ICommerceInventorySystem.cs" />
+    <Compile Include="TemplateModels\Interfaces\Inventory\IInventoryCatalog.cs" />
+    <Compile Include="TemplateModels\Interfaces\Inventory\IInventorySku.cs" />
+    <Compile Include="TemplateModels\Interfaces\ISampleItem.cs" />
+    <Compile Include="TemplateModels\Interfaces\ISampleSearchItem.cs" />
+    <Compile Include="TemplateModels\Interfaces\Settings\IAvailableCatalog.cs" />
+    <Compile Include="TemplateModels\Interfaces\Settings\IAvailableCatalogsFolder.cs" />
+    <Compile Include="TemplateModels\Interfaces\Settings\ICommerceBooleanSettingItem.cs" />
+    <Compile Include="TemplateModels\Interfaces\Settings\ICommerceCatalogSettingItem.cs" />
+    <Compile Include="TemplateModels\Interfaces\Settings\ICommerceDatetimeSettingItem.cs" />
+    <Compile Include="TemplateModels\Interfaces\Settings\ICommerceSettingItem.cs" />
+    <Compile Include="TemplateModels\Interfaces\Settings\ICommerceSettingsFolder.cs" />
+    <Compile Include="TemplateModels\Interfaces\Settings\ICommerceStringSettingItem.cs" />
+    <Compile Include="TemplateModels\Inventory\CommerceInventorySystem.cs" />
+    <Compile Include="TemplateModels\Inventory\InventoryCatalog.cs" />
+    <Compile Include="TemplateModels\Inventory\InventorySku.cs" />
+    <Compile Include="TemplateModels\Settings\AvailableCatalog.cs" />
+    <Compile Include="TemplateModels\Settings\AvailableCatalogsFolder.cs" />
+    <Compile Include="TemplateModels\Settings\CommerceBooleanSettingItem.cs" />
+    <Compile Include="TemplateModels\Settings\CommerceCatalogSettingItem.cs" />
+    <Compile Include="TemplateModels\Settings\CommerceDatetimeSettingItem.cs" />
+    <Compile Include="TemplateModels\Settings\CommerceSettingItem.cs" />
+    <Compile Include="TemplateModels\Settings\CommerceSettingsFolder.cs" />
+    <Compile Include="TemplateModels\Settings\CommerceStringSettingItem.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\css\animate.css" />
+    <Content Include="Assets\css\bootstrap.min.css" />
+    <Content Include="Assets\css\color-switcher.css" />
+    <Content Include="Assets\css\color\blue.css" />
+    <Content Include="Assets\css\color\brown.css" />
+    <Content Include="Assets\css\color\dark-blue.css" />
+    <Content Include="Assets\css\color\dark-red.css" />
+    <Content Include="Assets\css\color\green.css" />
+    <Content Include="Assets\css\color\light-green.css" />
+    <Content Include="Assets\css\color\orange.css" />
+    <Content Include="Assets\css\color\purple.css" />
+    <Content Include="Assets\css\color\red.css" />
+    <Content Include="Assets\css\color\yellow.css" />
+    <Content Include="Assets\css\custom.css" />
+    <Content Include="Assets\css\dragtable.css" />
+    <Content Include="Assets\css\font-awesome.min.css" />
+    <Content Include="Assets\css\grabbing.png" />
+    <Content Include="Assets\css\owl.carousel.css" />
+    <Content Include="Assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="Assets\icons\icon_facebook_circle_gray.png" />
+    <Content Include="Assets\icons\icon_google_circle_gray.png" />
+    <Content Include="Assets\icons\icon_instagram_circle_gray.png" />
+    <Content Include="Assets\icons\icon_linkedin_circle_gray.png" />
+    <Content Include="Assets\icons\icon_twitter_circle_gray.png" />
+    <Content Include="Assets\icons\icon_youtube_circle_gray.png" />
+    <Content Include="Assets\images\angle-down.png" />
+    <Content Include="Assets\images\avatar\avatar_01.jpg" />
+    <Content Include="Assets\images\avatar\avatar_02.jpg" />
+    <Content Include="Assets\images\avatar\avatar_03.jpg" />
+    <Content Include="Assets\images\avatar\avatar_04.jpg" />
+    <Content Include="Assets\images\blog\blog-1.jpg" />
+    <Content Include="Assets\images\blog\blog-2.jpg" />
+    <Content Include="Assets\images\blog\blog-3.jpg" />
+    <Content Include="Assets\images\blog\blog-4.jpg" />
+    <Content Include="Assets\images\categories\category-1.jpg" />
+    <Content Include="Assets\images\categories\category-2.jpg" />
+    <Content Include="Assets\images\categories\category-3.jpg" />
+    <Content Include="Assets\images\categories\category-4.jpg" />
+    <Content Include="Assets\images\categories\category-5.png" />
+    <Content Include="Assets\images\categories\category-6.png" />
+    <Content Include="Assets\images\categories\category-7.png" />
+    <Content Include="Assets\images\categories\category-8.png" />
+    <Content Include="Assets\images\clients\1.png" />
+    <Content Include="Assets\images\clients\2.png" />
+    <Content Include="Assets\images\clients\3.png" />
+    <Content Include="Assets\images\clients\4.png" />
+    <Content Include="Assets\images\clients\5.png" />
+    <Content Include="Assets\images\clients\6.png" />
+    <Content Include="Assets\images\clients\7.png" />
+    <Content Include="Assets\images\creditcards\amex.png" />
+    <Content Include="Assets\images\creditcards\discover.png" />
+    <Content Include="Assets\images\creditcards\mastercard.png" />
+    <Content Include="Assets\images\creditcards\visa.png" />
+    <Content Include="Assets\images\default-avatar.png" />
+    <Content Include="Assets\images\flags\cz.png" />
+    <Content Include="Assets\images\flags\de.png" />
+    <Content Include="Assets\images\flags\us.png" />
+    <Content Include="Assets\images\lookbook-1.png" />
+    <Content Include="Assets\images\lookbook-2.png" />
+    <Content Include="Assets\images\map.jpg" />
+    <Content Include="Assets\images\megamenu.png" />
+    <Content Include="Assets\images\pattern.png" />
+    <Content Include="Assets\images\products\product-1.jpg" />
+    <Content Include="Assets\images\products\product-1b.jpg" />
+    <Content Include="Assets\images\products\product-2.jpg" />
+    <Content Include="Assets\images\products\product-3.jpg" />
+    <Content Include="Assets\images\products\product-4.jpg" />
+    <Content Include="Assets\images\showcase.png" />
+    <Content Include="Assets\images\slide-1.jpg" />
+    <Content Include="Assets\images\slide-2.jpg" />
+    <Content Include="Assets\images\slide-3.jpg" />
+    <Content Include="Assets\images\slide-4.jpg" />
+    <Content Include="Assets\images\slide-5.jpg" />
+    <Content Include="Assets\images\slide-6.jpg" />
+    <Content Include="Assets\images\slide-7.jpg" />
+    <Content Include="Assets\images\store-1.jpg" />
+    <Content Include="Assets\images\store-2.jpg" />
+    <Content Include="Assets\images\store-3.jpg" />
+    <Content Include="Assets\images\store-4.jpg" />
+    <Content Include="Assets\images\store-5.jpg" />
+    <Content Include="Assets\js\bootstrap-hover-dropdown.min.js" />
+    <Content Include="Assets\js\bootstrap.min.js" />
+    <Content Include="Assets\js\color-switcher.js" />
+    <Content Include="Assets\js\custom.js" />
+    <Content Include="Assets\js\jquery.card.js" />
+    <Content Include="Assets\js\jquery.dragtable.js" />
+    <Content Include="Assets\js\jquery.mb.YTPlayer.min.js" />
+    <Content Include="Assets\js\owl.carousel.min.js" />
+    <Content Include="Assets\js\SmoothScroll.js" />
+    <Content Include="Assets\js\twitterFetcher_min.js" />
+    <Content Include="sitecore modules\Web\XCore\CodeGen\CodeGenerationRoot.aspx" />
+    <Content Include="sitecore modules\Web\XCore\CodeGen\GenerateCode.aspx" />
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
   </ItemGroup>
@@ -248,6 +464,19 @@
       <IsTransformFile>True</IsTransformFile>
     </None>
     <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
+    <Content Include="Assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="Assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="Assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Assets\fonts\FontAwesome.otf" />
+    <None Include="Properties\PublishProfiles\XcCommerce112Demo.pubxml" />
+    <Content Include="Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
