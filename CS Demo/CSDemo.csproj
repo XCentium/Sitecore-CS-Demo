@@ -391,6 +391,7 @@
     <Content Include="sitecore modules\Web\XCore\CodeGen\GenerateCode.aspx" />
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Configuration\" />
@@ -469,8 +470,9 @@
     <Content Include="Assets\fonts\fontawesome-webfont.woff" />
     <Content Include="Assets\fonts\fontawesome-webfont.woff2" />
     <Content Include="Assets\fonts\FontAwesome.otf" />
+    <None Include="App_Config\Include\CSDemo\CSDemo.Serialization.config" />
+    <None Include="Properties\PublishProfiles\csDemo.pubxml" />
     <None Include="Properties\PublishProfiles\XcCommerce112Demo.pubxml" />
-    <Content Include="Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
