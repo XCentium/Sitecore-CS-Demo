@@ -433,6 +433,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\serialization\" />
     <Folder Include="Configuration\" />
   </ItemGroup>
   <ItemGroup>
