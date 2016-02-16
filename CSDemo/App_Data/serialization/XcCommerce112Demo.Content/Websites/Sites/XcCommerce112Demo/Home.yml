@@ -1,0 +1,37 @@
+﻿---
+ID: 49b9f3e2-65cc-48f5-9a96-35efd0c752d8
+Parent: 6015bd47-0474-4cd3-9f64-237cab99bde7
+Template: 27707ef4-ea14-439a-ba20-dbd16605ae04
+Path: /sitecore/content/Websites/Sites/XcCommerce112Demo/Home
+DB: master
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 0
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{22DD9E70-D79C-4A77-BC90-FCCFB1B574F5}">
+        <r id="{027AF0D5-BC10-42A4-B796-577FB651D073}" ph="page-header" uid="{4B14CBCB-048E-4104-B47A-C73F7EF41F6C}" />
+        <r id="{5B018176-BF32-4BB1-91FA-63044B6FFE4B}" ph="page-footer" uid="{02C9CA1B-F094-472F-97F9-227DC0D33FBD}" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T160952Z
+    - ID: 3230cbc1-3e03-43ec-95ab-c6e1505de163
+      Hint: Page Title
+      Value: Home
+    - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
+      Hint: Title
+      Value: Home
+    - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
+      Hint: Meta Description
+      Value: Home Page

@@ -174,3 +174,5 @@ $RECYCLE.BIN/
 thejames.sublime-workspace
 thejames.sublime-project
 /.vs/config
+# XcCommerce112Demo Excludes
+CSDemo/App_Config/Include/CSDemo/XcCommerce112Demo.Serialization.config
