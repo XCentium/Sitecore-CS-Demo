@@ -1,16 +1,34 @@
 ﻿@using Sitecore.Mvc
+@using Sitecore.Data
+@using Sitecore.Data.Items
 
-<section class="content products">
-    <div class="container">
+@{
+    
+    var productID = Request.QueryString["id"];
+
+    if (string.IsNullOrEmpty(productID))
+    {
+        productID = "{833102C4-765F-4FA5-8DBD-A7F785D41659}";
+    }
+
+    if (!string.IsNullOrEmpty(productID))
+    {
+        var product = Sitecore.Context.Database.GetItem(new ID(productID));
+
+        if (product != null)
+        {
+            
+        }
+    }
+    
+    
+}
+
         <article class="product-item product-single">
             <div class="row">
                 <div class="col-xs-4">
                     <div class="product-carousel-wrapper">
                         <div id="product-carousel" class="owl-carousel owl-theme owl-loaded">
-
-
-
-
                             <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-710px, 0px, 0px); transition: 0s; width: 2840px;"><div class="owl-item cloned" style="width: 355px; margin-right: 0px;"><div class="item"><img src="assets/images/products/product-3.jpg" class="img-responsive" alt=""></div></div><div class="owl-item cloned" style="width: 355px; margin-right: 0px;"><div class="item"><img src="assets/images/products/product-4.jpg" class="img-responsive" alt=""></div></div><div class="owl-item active" style="width: 355px; margin-right: 0px;"><div class="item"><img src="assets/images/products/product-1.jpg" class="img-responsive" alt=""></div></div><div class="owl-item" style="width: 355px; margin-right: 0px;"><div class="item"><img src="assets/images/products/product-2.jpg" class="img-responsive" alt=""></div></div><div class="owl-item" style="width: 355px; margin-right: 0px;"><div class="item"><img src="assets/images/products/product-3.jpg" class="img-responsive" alt=""></div></div><div class="owl-item" style="width: 355px; margin-right: 0px;"><div class="item"><img src="assets/images/products/product-4.jpg" class="img-responsive" alt=""></div></div><div class="owl-item cloned" style="width: 355px; margin-right: 0px;"><div class="item"><img src="assets/images/products/product-1.jpg" class="img-responsive" alt=""></div></div><div class="owl-item cloned" style="width: 355px; margin-right: 0px;"><div class="item"><img src="assets/images/products/product-2.jpg" class="img-responsive" alt=""></div></div></div></div><div class="owl-controls"><div class="owl-nav"><div class="owl-prev" style="display: none;">prev</div><div class="owl-next" style="display: none;">next</div></div><div class="owl-dots" style=""><div class="owl-dot active"><span></span></div><div class="owl-dot"><span></span></div><div class="owl-dot"><span></span></div><div class="owl-dot"><span></span></div></div></div>
                         </div>
                     </div>
@@ -357,6 +375,3 @@
 
             </div>
         </div>
-
-    </div>
-</section>

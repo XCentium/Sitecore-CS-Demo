@@ -32,26 +32,32 @@
     if(string.IsNullOrEmpty(rowCss))  {rowCss = "row";}
     
 }
-
 @if (!string.IsNullOrEmpty(sectionCss))
 {
-    Html.Raw(string.Format("<section class=\"{0}\">", sectionCss));
+    @Html.Raw(string.Format("<section class=\"{0}\">", sectionCss));
 }
 
 @if (!string.IsNullOrEmpty(containerCss))
 {
-    Html.Raw(string.Format("<div class=\"{0}\">", containerCss));
+    @Html.Raw(string.Format("<div class=\"{0}\">", containerCss));
 }
-
-        <div class="@rowCss">
-            @Html.Sitecore().Placeholder("row2")
-        </div>
-
-@if (!string.IsNullOrEmpty(containerCss)) {
-            Html.Raw(string.Format("</div>"));
-        }
 
 @if (!string.IsNullOrEmpty(sectionCss))
 {
-    Html.Raw(string.Format("</div>"));
+    @Html.Raw(string.Format("<div class=\"{0}\">", rowCss));
+}
+            @Html.Sitecore().Placeholder("row2")
+@if (!string.IsNullOrEmpty(rowCss))
+{
+    @Html.Raw(string.Format("</div>"));
+}
+
+@if (!string.IsNullOrEmpty(containerCss))
+{
+    @Html.Raw(string.Format("</div>"));
+}
+
+@if (!string.IsNullOrEmpty(sectionCss))
+{
+    @Html.Raw(string.Format("</div>"));
 }
