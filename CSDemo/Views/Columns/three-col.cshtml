@@ -9,8 +9,46 @@
 
 }
 
+@{
 
-        <div class="row">
+
+    // Note, Will be moving to View model or Controller Rendering
+
+    var rc = Sitecore.Mvc.Presentation.RenderingContext.CurrentOrNull;
+    if (rc != null)
+    {
+        var rcParams = rc.Rendering.Parameters;
+
+        if (rcParams["Column1 CSS Class"] != null)
+        {
+            if (!string.IsNullOrEmpty(rcParams["Column1 CSS Class"]))
+            {
+                col1 = rcParams["Column1 CSS Class"].ToString().Trim();
+            }
+        }
+
+
+        if (rcParams["Column2 CSS Class"] != null)
+        {
+            if (!string.IsNullOrEmpty(rcParams["Column2 CSS Class"]))
+            {
+                col2 = rcParams["Column2 CSS Class"].ToString().Trim();
+            }
+        }
+
+
+        if (rcParams["Column3 CSS Class"] != null)
+        {
+            if (!string.IsNullOrEmpty(rcParams["Column3 CSS Class"]))
+            {
+                col3 = rcParams["Column3 CSS Class"].ToString().Trim();
+            }
+        }
+
+    }
+
+}
+
             <div class="@col1">
                 @Html.Sitecore().Placeholder("three-col-one")
             </div>
@@ -20,7 +58,3 @@
             <div class="@col3">
                 @Html.Sitecore().Placeholder("three-col-three")
             </div>
-        </div>
- 
-
-@Html.Sitecore().Placeholder("after-col")

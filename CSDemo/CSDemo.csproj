@@ -530,8 +530,18 @@
     <Content Include="Views\Columns\one-col.cshtml" />
     <Content Include="Views\Columns\three-col.cshtml" />
     <Content Include="Views\Columns\two-col.cshtml" />
-    <Content Include="Views\Rows\RowOne.cshtml" />
+    <Content Include="Views\Rows\row1.cshtml" />
     <Content Include="Views\Rows\row-footer.cshtml" />
+    <Content Include="Views\Cart\Cart.cshtml" />
+    <Content Include="Views\Product\CategoryListing.cshtml" />
+    <Content Include="Views\Product\ProductListing.cshtml" />
+    <Content Include="Views\Product\Facets.cshtml" />
+    <Content Include="Views\Rows\row2.cshtml" />
+    <Content Include="Views\Rows\row7.cshtml" />
+    <Content Include="Views\Rows\row6.cshtml" />
+    <Content Include="Views\Rows\row5.cshtml" />
+    <Content Include="Views\Rows\row4.cshtml" />
+    <Content Include="Views\Rows\row3.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
