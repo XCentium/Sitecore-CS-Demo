@@ -1,0 +1,18 @@
+﻿---
+ID: 036fb1f7-e08c-401b-a812-eff867830d91
+Parent: 3f0f8a38-70bb-45d0-b0af-613cf7e7fa7d
+Template: 5c547d4e-7111-4995-95b0-6b561751bf2e
+Path: /sitecore/layout/Placeholder Settings/XcCommerce112Demo/Rows/rowfooter
+DB: master
+SharedFields:
+- ID: 7256bdab-1fd2-49dd-b205-cb4873d2917c
+  Hint: Placeholder Key
+  Value: rowfooter
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T181707Z

@@ -178,6 +178,13 @@
     <Compile Include="Contracts\IProduct.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="DeleteAll.aspx.cs">
+      <DependentUpon>DeleteAll.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeleteAll.aspx.designer.cs">
+      <DependentUpon>DeleteAll.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Initializer.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -400,6 +407,7 @@
     <Content Include="checkout.html" />
     <Content Include="compare.html" />
     <Content Include="components.html" />
+    <Content Include="DeleteAll.aspx" />
     <Content Include="downloads.html" />
     <Content Include="email-template.html" />
     <Content Include="faq.html" />
@@ -510,10 +518,21 @@
     <Content Include="Assets\fonts\fontawesome-webfont.woff" />
     <Content Include="Assets\fonts\fontawesome-webfont.woff2" />
     <Content Include="Assets\fonts\FontAwesome.otf" />
+    <Content Include="App_Config\Include\CSDemo\XcCommerce112Demo.Serialization.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="App_Config\Include\CSDemo\CSDemo.Serialization.config" />
     <None Include="Properties\PublishProfiles\Castle Local.pubxml" />
     <None Include="Properties\PublishProfiles\csDemo.pubxml" />
     <None Include="Properties\PublishProfiles\XcCommerce112Demo.pubxml" />
+    <Content Include="Views\Headers\Header.cshtml" />
+    <Content Include="Views\Footer\Footer.cshtml" />
+    <Content Include="Views\Columns\four-col.cshtml" />
+    <Content Include="Views\Columns\one-col.cshtml" />
+    <Content Include="Views\Columns\three-col.cshtml" />
+    <Content Include="Views\Columns\two-col.cshtml" />
+    <Content Include="Views\Rows\RowOne.cshtml" />
+    <Content Include="Views\Rows\row-footer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

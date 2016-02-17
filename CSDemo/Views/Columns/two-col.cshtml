@@ -1,0 +1,22 @@
+﻿@using Sitecore.Mvc
+
+@{
+    string col_default = "col-md-6";
+
+    var col1 = col_default;
+    var col2 = col_default;
+
+}
+
+
+        <div class="row">
+            <div class="@col1">
+                @Html.Sitecore().Placeholder("two-col-one")
+            </div>
+            <div class="@col2">
+                @Html.Sitecore().Placeholder("two-col-two")
+            </div>
+        </div>
+
+
+@Html.Sitecore().Placeholder("after-col")

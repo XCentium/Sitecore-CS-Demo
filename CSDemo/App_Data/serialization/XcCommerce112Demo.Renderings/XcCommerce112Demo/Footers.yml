@@ -1,0 +1,14 @@
+﻿---
+ID: 880ea806-4ec6-4795-abf0-dba7a55c3017
+Parent: 86bc69d1-77a0-41b2-b2d0-3fa94a2eb744
+Template: 7ee0975b-0698-493e-b3a2-0b2ef33d0522
+Path: /sitecore/layout/Renderings/XcCommerce112Demo/Footers
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T181932Z

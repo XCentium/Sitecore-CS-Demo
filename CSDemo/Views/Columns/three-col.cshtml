@@ -1,0 +1,26 @@
+﻿@using Sitecore.Mvc
+
+@{
+    string col_default = "col-md-4";
+
+    var col1 = col_default;
+    var col2 = col_default;
+    var col3 = col_default;
+
+}
+
+
+        <div class="row">
+            <div class="@col1">
+                @Html.Sitecore().Placeholder("three-col-one")
+            </div>
+            <div class="@col2">
+                @Html.Sitecore().Placeholder("three-col-two")
+            </div>
+            <div class="@col3">
+                @Html.Sitecore().Placeholder("three-col-three")
+            </div>
+        </div>
+ 
+
+@Html.Sitecore().Placeholder("after-col")
