@@ -16,6 +16,8 @@ SharedFields:
       <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{22DD9E70-D79C-4A77-BC90-FCCFB1B574F5}">
         <r id="{027AF0D5-BC10-42A4-B796-577FB651D073}" ph="page-header" uid="{4B14CBCB-048E-4104-B47A-C73F7EF41F6C}" />
         <r id="{5B018176-BF32-4BB1-91FA-63044B6FFE4B}" ph="page-footer" uid="{02C9CA1B-F094-472F-97F9-227DC0D33FBD}" />
+        <r ds="" id="{5EABCDAE-1090-4374-95CE-54BAF1EBB3A7}" par="Section CSS Class=content%20categories&amp;Container CSS Class&amp;Row CSS Class=row%20row-no-padding" ph="page-body" uid="{918B9DD3-B351-4A2D-84BF-FFC0809C1403}" />
+        <r id="{7D6D8042-BC94-4B7B-A52B-B93D20E76D05}" ph="row4" uid="{0C3464DE-B8E2-41FA-A9C6-8EB6C83EABD3}" />
       </d>
     </r>
 Languages:

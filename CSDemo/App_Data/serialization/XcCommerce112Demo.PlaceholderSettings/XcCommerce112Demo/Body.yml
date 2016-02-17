@@ -1,0 +1,14 @@
+﻿---
+ID: 2ce3aba2-9b86-4a16-8789-bc86cd0b21f0
+Parent: 77708787-4603-449b-a1d5-49d27defaba5
+Template: c3b037a0-46e5-4b67-ac7a-a144b962a56f
+Path: /sitecore/layout/Placeholder Settings/XcCommerce112Demo/Body
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160217T085359Z
