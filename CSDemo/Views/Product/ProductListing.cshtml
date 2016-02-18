@@ -19,56 +19,59 @@
 
         if (categoryProducts != null)
         {
-
             <h2 class="hidden">Products</h2>
-
             <div class="col-sm-3">
-
-                <h4>Category facets here</h4>
-                @*<aside class="sidebar">
+                <aside class="sidebar">
 
                         <!-- WIDGET:CATEGORIES - START -->
                         <div class="widget widget-categories">
                             <h3><a role="button" data-toggle="collapse" href="#widget-categories-collapse" aria-expanded="true" aria-controls="widget-categories-collapse">Categories</a></h3>
                             <div class="collapse in" id="widget-categories-collapse" aria-expanded="true" role="tabpanel">
                                 <div class="widget-body">
+
                                     <ul class="list-unstyled" id="categories" role="tablist" aria-multiselectable="true">
-                                        <li class="panel">
-                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#categories" href="#parent-1" aria-expanded="false" aria-controls="parent-1">Men<span>[12]</span></a>
-                                            <ul id="parent-1" class="list-unstyled panel-collapse collapse" role="menu">
-                                                <li><a href="#">Accessories</a></li>
-                                                <li><a href="#">Jackets</a></li>
-                                                <li><a href="#">Jumpers</a></li>
-                                                <li><a href="#">Jeans</a></li>
-                                                <li><a href="#">Shoes</a></li>
-                                                <li><a href="#">T-Shirt &amp; Polo Shirts</a></li>
-                                                <li><a href="#">Blazers</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="panel">
-                                            <a role="button" data-toggle="collapse" data-parent="#categories" href="#parent-2" aria-expanded="true" aria-controls="parent-2">Women<span>[34]</span></a>
-                                            <ul id="parent-2" class="list-unstyled panel-collapse collapse in" role="menu">
-                                                <li><a href="#">Accessories</a></li>
-                                                <li><a href="#">Swimwear</a></li>
-                                                <li><a href="#">Basics</a></li>
-                                                <li class="active"><a href="#">Dresses</a></li>
-                                                <li><a href="#">Jeans</a></li>
-                                                <li><a href="#">Skirts</a></li>
-                                                <li><a href="#">Leggings</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="panel">
-                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#categories" href="#parent-3" aria-expanded="false" aria-controls="parent-3">Accessories<span>[8]</span></a>
-                                            <ul id="parent-3" class="list-unstyled panel-collapse collapse" role="menu">
-                                                <li><a href="#">Basics</a></li>
-                                                <li><a href="#">Shirts</a></li>
-                                            </ul>
-                                        </li>
+                                        @{
+                                            // get department children, for each child
+                                            var categoryies = category.Parent.GetChildren();
+                                            int currentCat = 0;
+                                        }
+                                        @foreach (Item cat in categoryies)
+                                        {
+
+                                            var current = false;
+                                            int totalChildren = cat.GetChildren().Count;
+                                            currentCat++;
+
+                                            var listClass = " class=\"collapsed\"";
+                                            var ariaExpand = "false";
+                                            var panelCollapse = "collapse";
+
+                                            if (category.ID.ToString() == cat.ID.ToString())
+                                            {
+                                                listClass = " ";
+                                                ariaExpand = "true";
+                                                panelCollapse = "collapse in";
+                                                current = true;
+                                            }
+                                            
+                                            var catProducts = cat.GetChildren();
+                                            
+                                            <li class="panel">
+                                                <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name<span>[@totalChildren]</span></a>
+                                                <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">
+                                                    @foreach (Item catProduct in catProducts)
+                                                    {
+                                                        
+                                                        <li><a href="/productlisting/productdetail?id=@catProduct.ID.ToString()">@catProduct.DisplayName.ToString()</a></li>
+                                                    }                                                 
+                                                </ul>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <!-- WIDGET:CATEGORIES - END -->
+                        @*<!-- WIDGET:CATEGORIES - END -->
                         <!-- WIDGET:PRICE - START -->
                         <div class="widget widget-price">
                             <h3><a role="button" data-toggle="collapse" href="#widget-price-collapse" aria-expanded="true" aria-controls="widget-price-collapse">Filter by price</a></h3>
@@ -190,9 +193,9 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- WIDGET:SIZE - END -->
+                        <!-- WIDGET:SIZE - END -->*@
 
-                    </aside>*@
+                    </aside>
             </div>
             <div class="col-sm-9">
                 <div class="products-header">
@@ -263,7 +266,7 @@
                                     <div class="col-sm-3">
                                         <div class="product-overlay">
                                             <div class="product-mask"></div>
-                                            <a href="single-product.html" class="product-permalink"></a>
+                                            <a href="/productlisting/productdetail?id=@product.ID.ToString()" class="product-permalink"></a>
                                             <img src="@ProductImage" class="img-responsive" alt="">
                                             <div class="product-quickview">
                                                 <a class="btn btn-quickview" data-toggle="modal" data-target="#product-quickview">Quick View</a>

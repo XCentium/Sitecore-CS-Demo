@@ -22,23 +22,11 @@
 
 @if (categoryParent != null)
 {
-    @*<h2>Listing Categories</h2>
-        <ul>
-            @foreach (Item category in categoryParent)
-            {
-                <li>@category.Name</li>
-            }
-        </ul>*@
 
-    
     // get category image if any
     var catImage = "assets/images/categories/category-2.jpg";
     
-
-
-    <section class="content categories">
-        <div class="row row-no-padding">
-            @foreach (Item category in categoryParent)
+            foreach (Item category in categoryParent)
             {
                 var catImageIds = category["Images"];
                 if (!string.IsNullOrEmpty(catImageIds))
@@ -61,10 +49,6 @@
             <!-- CATEGORY - END -->
 
             }
-
-        </div>
-
-    </section>
 
 }
 
