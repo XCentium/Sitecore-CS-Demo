@@ -262,12 +262,16 @@ $(document).ready(function() {
 		}
   	});
 	
-	$("#product-carousel").owlCarousel({
-    	items : 1,
-		loop : true,
-		animateOut: 'fadeOut',
-    	animateIn: 'fadeIn'
-  	});
+	// Only call this carousel if there is more than 1 image
+    if( $("#product-carousel .item").length > 1) {
+	    $("#product-carousel").owlCarousel({
+    	    items : 1,
+		    loop : true,
+		    animateOut: 'fadeOut',
+    	    animateIn: 'fadeIn'
+	    });
+    }
+
 	
 	$('#product-quickview').on('shown.bs.modal', function (e) {
 		
