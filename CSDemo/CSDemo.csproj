@@ -327,6 +327,7 @@
     <Content Include="Assets\css\font-awesome.min.css" />
     <Content Include="Assets\css\grabbing.png" />
     <Content Include="Assets\css\owl.carousel.css" />
+    <Content Include="Assets\css\xc-custom.css" />
     <Content Include="Assets\fonts\fontawesome-webfont.svg" />
     <Content Include="Assets\icons\icon_facebook_circle_gray.png" />
     <Content Include="Assets\icons\icon_google_circle_gray.png" />
