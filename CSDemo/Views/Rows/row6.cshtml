@@ -32,7 +32,7 @@
 }
 @if (!string.IsNullOrEmpty(sectionCss))
 {
-    @Html.Raw(string.Format("<section class=\"{0}\">", sectionCss));
+    @Html.Raw(string.Format("<section class=\"{0} i-live-in-row6\">", sectionCss));
 }
 
 @if (!string.IsNullOrEmpty(containerCss))
@@ -57,5 +57,5 @@
 
 @if (!string.IsNullOrEmpty(sectionCss))
 {
-    @Html.Raw(string.Format("</div>"));
+    @Html.Raw(string.Format("</section>"));
 }
