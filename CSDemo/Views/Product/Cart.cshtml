@@ -1,0 +1,89 @@
+﻿@using Sitecore.Mvc;
+@using CSDemo.Models.Cart;
+
+
+@{
+
+
+    var cartManager = new CartManager();
+
+    CSDemo.Models.Cart.ShoppingCart shoppingCart = cartManager.shoppingCart;
+
+}
+<!-- ==========================
+    MY ACCOUNT - START
+=========================== -->
+
+@if (shoppingCart != null && shoppingCart.Total > 0)
+{ 
+                            
+<div class="col-sm-12">
+    <article class="account-content">
+
+        <form>
+            <div class="products-order shopping-cart">
+                <div class="table-responsive">
+                    <table class="table table-products">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Product</th>
+                                <th>Unit Price</th>
+                                <th>Quantity</th>
+                                <th>Subtotal</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                           @foreach (CSDemo.Models.Cart.CartItem cartItem in shoppingCart.CartItems)
+                           {    
+                            <tr>
+                                <td class="col-xs-1"><img src="@cartItem.ImageUrl" alt="" class="img-responsive"></td>
+                                <td class="col-xs-4 col-md-5"><h4><a href="/productlisting/productdetail?id=@cartItem.ProductID">@cartItem.ProductName</a><small>...</small></h4></td>
+                                <td class="col-xs-2 text-center"><span>$@cartItem.UnitPrice</span></td>
+                                <td class="col-xs-2 col-md-1"><div class="form-group"><input type="text" class="form-control" value="@cartItem.Quantity"></div></td>
+                                <td class="col-xs-2 text-center"><span><b>$@cartItem.SubTotal</b></span></td>
+                                <td class="col-xs-1 text-center"><a href="javascript:void(0)" onclick="RemoveProductFromCart('@cartItem.ProductID');window.location.reload()" class="btn btn-primary"><i class="fa fa-times"></i></a></td>
+                            </tr>
+                           }
+
+                        </tbody>
+                    </table>
+                </div>
+                <a href="/productlisting" class="btn btn-inverse">Continue Shopping</a>
+                <a href="" class="btn btn-inverse update-cart">Update Shopping Cart</a>
+            </div>
+
+            <div class="box">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5>Enter your coupon code if you have one.</h5>
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Discount code">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">Apply Coupon</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <ul class="list-unstyled order-total">
+                            <li>Total products<span>$@shoppingCart.LineTotal</span></li>
+                            <li>Discount<span>- $@shoppingCart.Discount</span></li>
+                            <li>Subtotal<span class="total">$@shoppingCart.LineTotal</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix">
+                <a href="/checkout" class="btn btn-primary btn-lg pull-right ">Checkout</a>
+            </div>
+        </form>
+
+    </article>
+</div>
+
+}
+<!-- ==========================
+    MY ACCOUNT - END
+=========================== -->

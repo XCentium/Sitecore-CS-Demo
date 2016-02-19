@@ -173,6 +173,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AJAX\Cart.asmx.cs">
+      <DependentUpon>Cart.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="App_Start\GlassMapperSc.cs" />
     <Compile Include="App_Start\GlassMapperScCustom.cs" />
     <Compile Include="Contracts\IProduct.cs" />
@@ -186,6 +190,9 @@
       <DependentUpon>DeleteAll.aspx</DependentUpon>
     </Compile>
     <Compile Include="Initializer.cs" />
+    <Compile Include="Models\Cart\CartItem.cs" />
+    <Compile Include="Models\Cart\CartManager.cs" />
+    <Compile Include="Models\Cart\ShoppingCart.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sitecore modules\Web\XCore\CodeGen\CodeGenerationRoot.aspx.cs">
@@ -309,6 +316,7 @@
     <Content Include="add-address.html" />
     <Content Include="add-claim.html" />
     <Content Include="address.html" />
+    <Content Include="AJAX\Cart.asmx" />
     <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\bootstrap.min.css" />
     <Content Include="Assets\css\color-switcher.css" />
@@ -392,6 +400,7 @@
     <Content Include="Assets\images\store-5.jpg" />
     <Content Include="Assets\js\bootstrap-hover-dropdown.min.js" />
     <Content Include="Assets\js\bootstrap.min.js" />
+    <Content Include="Assets\js\Cart.js" />
     <Content Include="Assets\js\color-switcher.js" />
     <Content Include="Assets\js\custom.js" />
     <Content Include="Assets\js\jquery.card.js" />
@@ -535,7 +544,7 @@
     <Content Include="Views\Columns\two-col.cshtml" />
     <Content Include="Views\Rows\row1.cshtml" />
     <Content Include="Views\Rows\row-footer.cshtml" />
-    <Content Include="Views\Cart\Cart.cshtml" />
+    <Content Include="Views\Product\Cart.cshtml" />
     <Content Include="Views\Product\CategoryListing.cshtml" />
     <Content Include="Views\Product\ProductListing.cshtml" />
     <Content Include="Views\Product\Facets.cshtml" />
@@ -545,6 +554,7 @@
     <Content Include="Views\Rows\row5.cshtml" />
     <Content Include="Views\Rows\row4.cshtml" />
     <Content Include="Views\Rows\row3.cshtml" />
+    <Content Include="Views\Product\Checkout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
