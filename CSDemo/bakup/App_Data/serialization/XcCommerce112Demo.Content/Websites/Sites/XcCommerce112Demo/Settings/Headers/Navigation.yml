@@ -1,0 +1,17 @@
+﻿---
+ID: e1b87aeb-e567-4607-8ab9-eb3971f39e8b
+Parent: fdb26516-0f77-485c-844a-39e1842482a1
+Template: 06e5e610-6dc4-4942-ac32-fcfa2735de60
+Path: /sitecore/content/Websites/Sites/XcCommerce112Demo/Settings/Headers/Navigation
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T164403Z
+    - ID: 44b5d5a8-1dbd-49e8-b060-b046ee5430a8
+      Hint: Name
+      Value: Navigation

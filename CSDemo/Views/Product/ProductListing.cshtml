@@ -250,8 +250,10 @@
                         var title = product.DisplayName.ToString();
                         var description = product["Description"];
                         var ProductImageIds = product["Images"];
-                        var price = decimal.Parse(product["ListPrice"]);
-                        var delPrice = price + 100.00m;
+                        var rPrice = decimal.Parse(product["ListPrice"]);
+                        var rDelPrice = rPrice + 100.00m;
+                        var price = String.Format("{0:0.00}", rPrice);
+                        var delPrice = String.Format("{0:0.00}", rDelPrice);
 
                         if (!string.IsNullOrEmpty(ProductImageIds))
                         {

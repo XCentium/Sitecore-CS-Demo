@@ -66,7 +66,37 @@ namespace CSDemo.AJAX
 
             return cartManager.shoppingCart;
         }
-    
+
+
+        public struct CurrentCartItem
+        {
+            public string ProductId { get; set; }
+            public string Quantity { get; set; }
+        }
+        
+        [WebMethod(EnableSession = true)]
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public ShoppingCart UpdateCartList(List<CurrentCartItem> currentCartItems)
+        {
+            // check if user is logged in and not commerce customer, if true, return false
+
+            var cartManager = new CartManager();            
+
+            foreach (CurrentCartItem c in currentCartItems)
+            {
+                // ensure q can only be an integer
+                var q = c.Quantity.Trim();
+                if (string.IsNullOrEmpty(q)) { q = "0"; }
+
+                if (q.All(Char.IsDigit))
+                {
+                    cartManager.UpdateCartItem(c.ProductId, q);
+                }
+            }
+
+            return cartManager.shoppingCart;
+        }
+   
 
     }
 }

@@ -21,10 +21,14 @@
             var description = product["Description"];
             var productImageIds = product["Images"];
             var productId = product["ProductId"];
-            var price = decimal.Parse(product["ListPrice"]);
             var brand = product["Brand"];
-            var delPrice = price + 100.00m;
+
             var onsale = product["OnSale"];
+
+            var rPrice = decimal.Parse(product["ListPrice"]);
+            var rDelPrice = rPrice + 100.00m;
+            var price = String.Format("{0:0.00}", rPrice);
+            var delPrice = String.Format("{0:0.00}", rDelPrice);
 
             var productImage = "assets/images/products/product-1.jpg";
                        

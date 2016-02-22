@@ -782,19 +782,19 @@ textarea {
 }
 
 /*------------------------------
-	MODAL - ADVERTISING
+	MODAL - ADVERTISING 
 ------------------------------*/
 
-#modalAdvertising .modal-header {
+#modalAdvertising .modal-header, #modalAddToCart .modal-header {
 	background-image:url(../images/pattern.png);
 }
 
-#modalAdvertising .modal-body {
+#modalAdvertising .modal-body, #modalAddToCart .modal-body {
 	padding:15px 30px 0;
 	background-image:url(../images/pattern.png);
 }
 
-#modalAdvertising .modal-body h3 {
+#modalAdvertising .modal-body h3, #modalAddToCart .modal-body h3 {
 	font-weight:900;
     color:#666666;
     letter-spacing:-1px;
@@ -802,7 +802,7 @@ textarea {
     font-size:32px;
 }
 
-#modalAdvertising .modal-body p {
+#modalAdvertising .modal-body p, #modalAddToCart .modal-body p {
     color:#AAAAAA;
     font-weight:600;
     font-size:16px;
@@ -827,7 +827,7 @@ textarea {
 		margin:30px auto;
 	}
 	
-	#modalAdvertising .modal-dialog {
+	#modalAdvertising .modal-dialog, #modalAddToCart .modal-dialog {
 		width:600px;
 		margin:100px auto;
 	}
@@ -844,7 +844,7 @@ textarea {
 		margin:40px auto;
 	}
 	
-	#modalAdvertising .modal-dialog {
+	#modalAdvertising .modal-dialog, #modalAddToCart .modal-dialog {
 		margin:150px auto;
 	}
 }
@@ -860,7 +860,7 @@ textarea {
 		margin:50px auto;
 	}
 	
-	#modalAdvertising .modal-dialog {
+	#modalAdvertising .modal-dialog, #modalAddToCart .modal-dialog {
 		margin:200px auto;
 	}
 }
@@ -876,7 +876,7 @@ textarea {
 		margin:60px auto;
 	}
 	
-	#modalAdvertising .modal-dialog {
+	#modalAdvertising .modal-dialog, #modalAddToCart .modal-dialog {
 		margin:300px auto;
 	}
 }
@@ -5383,7 +5383,7 @@ footer.navbar a:hover {
 		margin-right:0;
 	}
 	
-	#modalAdvertising .modal-body {
+	#modalAdvertising .modal-body, #modalAddToCart .modal-body {
 		padding:0 30px 15px;
 	}
 	

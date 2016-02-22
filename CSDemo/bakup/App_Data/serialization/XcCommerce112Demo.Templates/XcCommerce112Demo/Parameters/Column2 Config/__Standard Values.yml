@@ -1,0 +1,20 @@
+﻿---
+ID: 3fd04f00-ab88-4a17-9119-ff36c0b65c95
+Parent: 18d71c58-1df4-4f15-b36c-f7065d33650c
+Template: 18d71c58-1df4-4f15-b36c-f7065d33650c
+Path: /sitecore/templates/XcCommerce112Demo/Parameters/Column2 Config/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160217T091523Z
+    - ID: 6760dccf-f40f-403a-b39c-734d08f10326
+      Hint: Column2 CSS Class
+      Value: col-md-6
+    - ID: aba1551f-acf0-4397-9009-ad73fb9a2e57
+      Hint: Column1 CSS Class
+      Value: col-md-6

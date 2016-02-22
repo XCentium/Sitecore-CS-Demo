@@ -16,6 +16,8 @@ namespace CSDemo.Models.Cart
 
         public Decimal Discount { get; set; }
 
+        public Decimal Shipping { get; set; }
+
         public string Currency { get; set; }
 
         public Decimal LineTotal { get; set; }

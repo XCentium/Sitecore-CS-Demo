@@ -1,0 +1,34 @@
+﻿---
+ID: dcb363b6-21ca-446e-b061-6cf43845876d
+Parent: 95142bfb-8ecb-4cee-bc20-4ed70ddefcc9
+Template: b3d2832f-2fbf-4466-9d95-d3a0c6476362
+Path: /sitecore/content/Websites/Sites/XcCommerce112Demo/Home/Checkout/Review
+DB: master
+SharedFields:
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s" p:p="1">
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r uid="{F08043FB-EEA5-4A86-8648-26979958DCDE}" s:ds="" s:par="Section CSS Class=content%20account&amp;Container CSS Class=container&amp;Row CSS Class=row" />
+        <r uid="{8DEB2AD4-4C8A-4846-B1D8-C74DFEC5494B}" p:after="r[@uid='{F08043FB-EEA5-4A86-8648-26979958DCDE}']" s:id="{06D5815C-624F-4260-A890-BAB99735A7F3}" s:ph="row1" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160220T061700Z
+    - ID: 3230cbc1-3e03-43ec-95ab-c6e1505de163
+      Hint: Page Title
+      Value: Review
+    - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
+      Hint: Title
+      Value: Review
+    - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
+      Hint: Meta Description
+      Value: Review Page
