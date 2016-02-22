@@ -1,0 +1,68 @@
+﻿---
+ID: 81b0cbfe-b48d-4d77-a435-fd2570ea3ba7
+Parent: 110d559f-dea5-42ea-9c1c-8a5df7e70ef9
+Template: e97b8435-b38b-4b28-8a7e-3521fda7d465
+Path: /sitecore/content/Home/Search
+DB: master
+SharedFields:
+- ID: 7e48ee19-93fc-4071-a192-470f1259eae0
+  Hint: Runtime Search Facets
+  Type: Multilist
+  Value: |
+    {F80AC325-FE72-4242-8543-E421F0CD6E74}
+    {2095E6DD-758F-4108-9B3A-214ADB44F940}
+    {BCB31BCB-F921-4CC5-8DDE-0AA47EDB74C7}
+    {7DEDCAD6-1D46-4CE2-96AB-2FAC19846A8F}
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: {A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s" p:p="1">
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r uid="{080777F2-2E12-4D64-B52D-6639924B85CB}" p:before="r[@uid='{D3E12783-DF2A-42B0-B3FA-D786EBADD5F5}']" s:id="{D8E833D6-261C-498F-8045-28D3E0DCB54C}" s:ph="main" />
+        <r uid="{D3E12783-DF2A-42B0-B3FA-D786EBADD5F5}" p:before="r[@uid='{94029BA1-BA05-4CBC-A902-278098819F69}']" s:id="{E4BD960C-BED2-4FE4-82DE-3E660C0295F7}" s:ph="/main/Row2" />
+        <r uid="{94029BA1-BA05-4CBC-A902-278098819F69}" p:before="r[@uid='{258DFB8E-F3AC-42C5-9A8E-CC2B7AEE0B26}']" s:id="{10F1E5D6-94FE-49E3-8DE1-FA36E997CCC4}" s:ph="/main/Row3" />
+        <r uid="{258DFB8E-F3AC-42C5-9A8E-CC2B7AEE0B26}" p:before="r[@uid='{BA72BDDE-02DF-45AE-8B3B-0713FA0DA2EE}']" s:id="{E4BD960C-BED2-4FE4-82DE-3E660C0295F7}" s:ph="/main/Row4" />
+        <r uid="{BA72BDDE-02DF-45AE-8B3B-0713FA0DA2EE}" s:ds="" s:id="{E891D3A6-5E76-4D6B-AD27-894C4AC54C6A}" s:par="" s:ph="/main/facets" />
+      </d>
+    </r>
+Languages:
+- Language: de-DE
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Suchen
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160211T160553Z
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: {190B1C84-F1BE-47ED-AA41-F42193D9C8FC}
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 75577384-3c97-45da-a847-81b00500e250
+      Hint: Title
+      Value: Suchen
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20131017T155606
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: {FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 75577384-3c97-45da-a847-81b00500e250
+      Hint: Title
+      Value: Search

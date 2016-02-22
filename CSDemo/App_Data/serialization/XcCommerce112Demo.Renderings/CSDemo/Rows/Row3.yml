@@ -1,0 +1,21 @@
+﻿---
+ID: 87a6f798-a787-4c9e-bf6c-36c67cb7e476
+Parent: 87e120d0-cf2c-4421-9891-094294ae8cc3
+Template: 99f8905d-4a87-4eb8-9f8b-a9bebfb3add6
+Path: /sitecore/layout/Renderings/CSDemo/Rows/Row3
+DB: master
+SharedFields:
+- ID: 51b435bc-f7b9-478a-9c51-52916af96ff5
+  Hint: Path
+  Value: /Views/Rows/Row3.cshtml
+- ID: 7d24e54f-5c16-4314-90c9-6051aa1a7da1
+  Hint: Parameters Template
+  Value: {7B654478-F079-4A49-A93A-840E17FE99E8}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160217T081930Z

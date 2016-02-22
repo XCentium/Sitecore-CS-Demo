@@ -1,0 +1,17 @@
+﻿---
+ID: f4bff274-5986-4ce0-bab0-b8ef6712b118
+Parent: a21b890e-c798-469c-8727-0f2c525787f3
+Template: a21b890e-c798-469c-8727-0f2c525787f3
+Path: /sitecore/templates/CSDemo/Folders/Settings/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T160225Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
