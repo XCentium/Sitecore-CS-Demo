@@ -182,13 +182,6 @@
     <Compile Include="Contracts\IProduct.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="DeleteAll.aspx.cs">
-      <DependentUpon>DeleteAll.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DeleteAll.aspx.designer.cs">
-      <DependentUpon>DeleteAll.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Initializer.cs" />
     <Compile Include="Models\Cart\CartItem.cs" />
     <Compile Include="Models\Cart\CartManager.cs" />
@@ -311,11 +304,6 @@
     <Compile Include="TemplateModels\Settings\CommerceStringSettingItem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="404.html" />
-    <Content Include="about-shop.html" />
-    <Content Include="add-address.html" />
-    <Content Include="add-claim.html" />
-    <Content Include="address.html" />
     <Content Include="AJAX\Cart.asmx" />
     <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\bootstrap.min.css" />
@@ -416,45 +404,10 @@
     <Content Include="Assets\js\Shipping.js" />
     <Content Include="Assets\js\SmoothScroll.js" />
     <Content Include="Assets\js\twitterFetcher_min.js" />
-    <Content Include="blog.html" />
-    <Content Include="cart.html" />
-    <Content Include="checkout-payment.html" />
-    <Content Include="checkout-review.html" />
-    <Content Include="checkout-shipping.html" />
-    <Content Include="checkout.html" />
-    <Content Include="compare.html" />
-    <Content Include="components.html" />
-    <Content Include="DeleteAll.aspx" />
-    <Content Include="downloads.html" />
-    <Content Include="email-template.html" />
-    <Content Include="faq.html" />
-    <Content Include="homepage-2.html" />
-    <Content Include="homepage-3.html" />
-    <Content Include="homepage-4.html" />
-    <Content Include="homepage-5.html" />
-    <Content Include="homepage-6.html" />
-    <Content Include="index.html" />
-    <Content Include="lookbook.html" />
-    <Content Include="lost-password.html" />
-    <Content Include="my-account.html" />
-    <Content Include="orders.html" />
-    <Content Include="privacy-policy.html" />
-    <Content Include="products.html" />
-    <Content Include="profile.html" />
-    <Content Include="signin.html" />
-    <Content Include="signup.html" />
-    <Content Include="single-claim.html" />
-    <Content Include="single-order.html" />
-    <Content Include="single-post.html" />
-    <Content Include="single-product.html" />
     <Content Include="sitecore modules\Web\XCore\CodeGen\CodeGenerationRoot.aspx" />
     <Content Include="sitecore modules\Web\XCore\CodeGen\GenerateCode.aspx" />
-    <Content Include="stores.html" />
-    <Content Include="terms-conditions.html" />
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="warranty-claims.html" />
-    <Content Include="wishlist.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
