@@ -2,7 +2,7 @@ var creditcards = {
 	list:[
 		{
 			brand: 			'American Express',
-			image: 			'assets/images/creditcards/amex.png',
+			image: 			'../assets/images/creditcards/amex.png',
 			verification: 	'^3[47][0-9]',
 			separation: 	'^([0-9]{4})([0-9]{6})?(?:([0-9]{6})([0-9]{5}))?$',
 			hidden: 		'**** ****** *[0-9][0-9][0-9][0-9]',
@@ -11,7 +11,7 @@ var creditcards = {
 		},
 		{
 			brand: 			'MasterCard',
-			image: 			'assets/images/creditcards/mastercard.png',
+			image: 			'../assets/images/creditcards/mastercard.png',
 			verification: 	'^5[1-5][0-9]',
 			separation: 	'^([0-9]{4})([0-9]{4})?([0-9]{4})?([0-9]{4})?$',
 			hidden: 		'**** **** **** [0-9][0-9][0-9][0-9]',
@@ -20,7 +20,7 @@ var creditcards = {
 		},
 		{
 			brand: 			'Visa',
-			image: 			'assets/images/creditcards/visa.png',
+			image: 			'../assets/images/creditcards/visa.png',
 			verification: 	'^4[0-9]',
 			separation: 	'^([0-9]{4})([0-9]{4})?([0-9]{4})?([0-9]{4})?$',
 			hidden: 		'**** **** **** [0-9][0-9][0-9][0-9]',
@@ -29,7 +29,7 @@ var creditcards = {
 		},
 		{
 			brand: 			'Discover',
-			image: 			'assets/images/creditcards/discover.png',
+			image: 			'../assets/images/creditcards/discover.png',
 			verification: 	'^6(?:011|5[0-9]{2})[0-9]',
 			separation: 	'^([0-9]{4})([0-9]{4})?([0-9]{4})?([0-9]{4})?$',
 			hidden: 		'**** **** **** [0-9][0-9][0-9][0-9]',

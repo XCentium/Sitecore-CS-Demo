@@ -1,0 +1,20 @@
+﻿---
+ID: 70e35e45-a8f9-46b6-b62c-9d18be93f7b4
+Parent: 99549356-0172-4d02-82c3-8edef477da33
+Template: 99549356-0172-4d02-82c3-8edef477da33
+Path: /sitecore/templates/XcCommerce112Demo/Configurations/Navigation Link/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T062744Z
+    - ID: 52c77500-7897-4bb2-a232-d6520fe849ec
+      Hint: Name
+      Value: $name
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

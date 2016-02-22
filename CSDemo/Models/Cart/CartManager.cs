@@ -188,5 +188,23 @@ namespace CSDemo.Models.Cart
 
         }
 
+
+        internal void UpdateCartItem(string id, string q)
+        {
+            // check if cart already had item with ID
+
+            if (this.shoppingCart.CartItems.Count > 0 && this.shoppingCart.CartItems.Any(p => p.ProductID == id))
+            {
+
+                // The object already exists, set the quantity attribute
+
+                this.shoppingCart.CartItems.FirstOrDefault(p => p.ProductID == id).Quantity = int.Parse(q);
+
+                // Call Shoppingcart Update data method
+
+                UpdateShppingCartData();
+
+            }
+        }
     }
 }
