@@ -387,9 +387,6 @@
     <Content Include="Assets\fonts\fontawesome-webfont.woff" />
     <Content Include="Assets\fonts\fontawesome-webfont.woff2" />
     <Content Include="Assets\fonts\FontAwesome.otf" />
-    <Content Include="App_Config\Include\CSDemo\XcCommerce112Demo.Serialization.config">
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="App_Config\Include\CSDemo\CSDemo.Serialization.config" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.Configs.Default" />
     <Content Include="App_Data\serialization\XcCommerce112Demo.Content\Websites.yml" />
