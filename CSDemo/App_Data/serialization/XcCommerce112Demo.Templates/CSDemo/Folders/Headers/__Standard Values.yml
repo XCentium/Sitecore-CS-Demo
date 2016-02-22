@@ -1,0 +1,24 @@
+﻿---
+ID: fee2b9d7-d450-43d8-9155-68b1457aee09
+Parent: 8b3eee2a-d606-4813-b1f4-b7159378b65e
+Template: 8b3eee2a-d606-4813-b1f4-b7159378b65e
+Path: /sitecore/templates/CSDemo/Folders/Headers/__Standard Values
+DB: master
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Type: TreelistEx
+  Value: |
+    {3716B095-9C55-45C8-BB60-08EACF39CDA3}
+    {06E5E610-6DC4-4942-AC32-FCFA2735DE60}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T061757Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

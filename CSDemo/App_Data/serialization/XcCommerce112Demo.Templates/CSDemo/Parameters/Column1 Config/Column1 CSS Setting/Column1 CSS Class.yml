@@ -1,0 +1,21 @@
+﻿---
+ID: aba1551f-acf0-4397-9009-ad73fb9a2e57
+Parent: 9154beb7-1c01-46f6-8bd2-214b7f7b9645
+Template: 455a3e98-a627-4b40-8035-e683a0331ac7
+Path: /sitecore/templates/CSDemo/Parameters/Column1 Config/Column1 CSS Setting/Column1 CSS Class
+DB: master
+SharedFields:
+- ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
+  Hint: Type
+  Value: Single-Line Text
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 100
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160217T090148Z
