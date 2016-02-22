@@ -7,7 +7,6 @@
 *.sln.docstates
 .sass-cache
 *Log.txt
-TacoBell.TDS.Master_*.xml
 # Build results
 
 [Dd]ebug/
@@ -167,12 +166,7 @@ $RECYCLE.BIN/
 # Mac desktop service store files
 .DS_Store
 
-#Node Modules
-/OSU.Cancer.www/OSU.Cancer.www.Website/App/node_modules
-
 #Sublime settings
-thejames.sublime-workspace
-thejames.sublime-project
 /.vs/config
 # XcCommerce112Demo Excludes
 CSDemo/App_Config/Include/CSDemo/XcCommerce112Demo.Serialization.config
