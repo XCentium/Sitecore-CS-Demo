@@ -588,6 +588,7 @@
     <Content Include="Assets\js\twitterFetcher_min.js" />
     <Content Include="sitecore modules\Web\XCore\CodeGen\CodeGenerationRoot.aspx" />
     <Content Include="sitecore modules\Web\XCore\CodeGen\GenerateCode.aspx" />
+    <Content Include="Views\Search\SearchResults.cshtml" />
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Web.config" />
@@ -697,7 +698,6 @@
     <Content Include="Views\Cart\Payment.cshtml" />
     <Content Include="Views\Cart\Review.cshtml" />
     <Content Include="Views\Cart\Thankyou.cshtml" />
-    <Content Include="Views\Search\SearchResults.cshtml" />
     <Content Include="Views\Search\SearchInput.cshtml" />
     <Content Include="Views\Search\_SearchResult.cshtml" />
     <None Include="Web.Debug.config">

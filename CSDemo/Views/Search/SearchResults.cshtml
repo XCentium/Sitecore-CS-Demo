@@ -1,0 +1,23 @@
+﻿@model CSDemo.Contracts.ISearch
+@using (Ajax.BeginForm("SearchResults", "Search", new AjaxOptions
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "search-search-results-listing",
+    InsertionMode = InsertionMode.Replace,
+    LoadingElementId = "loading",
+    LoadingElementDuration = 200
+    //OnSuccess = "siteSearch.setSearchPaging"
+}, new {@id = "global-search-form"}))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => Model.PageSize)
+    @
+    {
+        foreach (var result in Model.Results)
+        {
+            @Html.Partial("_SearchResult", result)
+    }
+}
+
+    <div style="display:none" id="loading">Loading...</div>
+}
