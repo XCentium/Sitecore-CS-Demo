@@ -1,0 +1,7 @@
+﻿@model CSDemo.Contracts.ISearchInput
+
+    @using (Html.BeginForm("SearchInput", "Search", FormMethod.Post, new { @id = "global-search-input" }))
+    {
+        @Html.TextBoxFor(t => Model.Query, new { @class = "search-input", @id = "txt-global-search" })
+        <button type="submit" value="InputSearch" name="GlobalSearch"><span class="search-glass">Search</span></button>
+    }

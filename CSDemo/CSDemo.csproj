@@ -154,8 +154,12 @@
     <Compile Include="App_Start\GlassMapperSc.cs" />
     <Compile Include="App_Start\GlassMapperScCustom.cs" />
     <Compile Include="Contracts\IProduct.cs" />
+    <Compile Include="Contracts\ISearch.cs" />
+    <Compile Include="Contracts\ISearchInput.cs" />
+    <Compile Include="Contracts\ISearchResult.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Initializer.cs" />
     <Compile Include="Models\Base\Base Pages\BasePagemeta.cs" />
     <Compile Include="Models\Cart\CartItem.cs" />
@@ -291,6 +295,8 @@
     <Compile Include="Models\Parameters\Column4Config.cs" />
     <Compile Include="Models\Parameters\RowConfig.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Search\SearchInput.cs" />
+    <Compile Include="Models\Search\SearchResult.cs" />
     <Compile Include="Models\Settings\AvailableCatalog.cs" />
     <Compile Include="Models\Settings\AvailableCatalogsFolder.cs" />
     <Compile Include="Models\Settings\CommerceBooleanSettingItem.cs" />
@@ -691,6 +697,9 @@
     <Content Include="Views\Cart\Payment.cshtml" />
     <Content Include="Views\Cart\Review.cshtml" />
     <Content Include="Views\Cart\Thankyou.cshtml" />
+    <Content Include="Views\Search\SearchResults.cshtml" />
+    <Content Include="Views\Search\SearchInput.cshtml" />
+    <Content Include="Views\Search\_SearchResult.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
