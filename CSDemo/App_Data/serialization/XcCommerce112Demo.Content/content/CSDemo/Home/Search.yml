@@ -1,0 +1,20 @@
+﻿---
+ID: 75382ed4-dede-49d1-9f42-f77ae21440e9
+Parent: 49b9f3e2-65cc-48f5-9a96-35efd0c752d8
+Template: 81a752a2-d7df-484f-82bb-1857cf636982
+Path: /sitecore/content/CSDemo/Home/Search
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160223T225542Z
+    - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
+      Hint: Title
+      Value: Search
+    - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
+      Hint: Meta Description
+      Value: Search Page

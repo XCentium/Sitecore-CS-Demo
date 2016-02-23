@@ -2,7 +2,7 @@
 ID: df8c4d4a-dfdd-473d-9897-e5737a483225
 Parent: b3d2832f-2fbf-4466-9d95-d3a0c6476362
 Template: b3d2832f-2fbf-4466-9d95-d3a0c6476362
-Path: /sitecore/templates/CSDemo/Pages/Page/__Standard Values
+Path: /sitecore/templates/CSDemo/Pages/Generic Page/__Standard Values
 DB: master
 SharedFields:
 - ID: 1172f251-dad4-4efb-a329-0c63500e4f1e

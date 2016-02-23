@@ -31,7 +31,7 @@ namespace CSDemo.Controllers
 
         public ActionResult SearchResults()
         {
-            return View();
+            return View(new Search());
         }
 
         public ActionResult SearchInput(SearchInput model)

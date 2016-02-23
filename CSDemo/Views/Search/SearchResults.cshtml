@@ -1,4 +1,6 @@
-﻿@model CSDemo.Contracts.ISearch
+﻿@using CSDemo.Models.Search
+@model CSDemo.Contracts.ISearch
+
 @using (Ajax.BeginForm("SearchResults", "Search", new AjaxOptions
 {
     HttpMethod = "POST",
@@ -11,13 +13,11 @@
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(x => Model.PageSize)
-    @
-    {
-        foreach (var result in Model.Results)
-        {
-            @Html.Partial("_SearchResult", result)
-    }
-}
+    //foreach (var result in Model.Results)
+    //{
+        @Html.Partial("_SearchResult", new SearchResult())
+    @*}*@
 
+    <p>Hello world!</p>
     <div style="display:none" id="loading">Loading...</div>
 }
