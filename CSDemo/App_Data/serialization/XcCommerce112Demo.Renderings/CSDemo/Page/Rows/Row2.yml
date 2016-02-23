@@ -1,13 +1,13 @@
 ﻿---
-ID: 928f150c-07b9-4c3d-a8b2-c2f8bb39db93
+ID: 194bfa9a-eb55-4588-a700-62e4f97fe09b
 Parent: 87e120d0-cf2c-4421-9891-094294ae8cc3
 Template: 99f8905d-4a87-4eb8-9f8b-a9bebfb3add6
-Path: /sitecore/layout/Renderings/CSDemo/Rows/Row5
+Path: /sitecore/layout/Renderings/CSDemo/Page/Rows/Row2
 DB: master
 SharedFields:
 - ID: 51b435bc-f7b9-478a-9c51-52916af96ff5
   Hint: Path
-  Value: /Views/Rows/Row5.cshtml
+  Value: /Views/Rows/Row2.cshtml
 - ID: 7d24e54f-5c16-4314-90c9-6051aa1a7da1
   Hint: Parameters Template
   Value: {7B654478-F079-4A49-A93A-840E17FE99E8}

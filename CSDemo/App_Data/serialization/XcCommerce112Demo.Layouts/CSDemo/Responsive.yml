@@ -2,7 +2,7 @@
 ID: 22dd9e70-d79c-4a77-bc90-fccfb1b574f5
 Parent: 4d43e581-58a8-4979-bf08-7a43ccc5205e
 Template: 3a45a723-64ee-4919-9d41-02fd40fd1466
-Path: /sitecore/layout/Layouts/CSDemo/XcCommerce112DemoLayout
+Path: /sitecore/layout/Layouts/CSDemo/Responsive
 DB: master
 SharedFields:
 - ID: a036b2bc-ba04-44f6-a75f-bae6cd242abf

@@ -1,16 +1,16 @@
 ﻿---
-ID: 68a499fd-22a5-4333-be54-dfc7a007791d
-Parent: cc80b574-f5f2-418b-b0ea-1397b9e92ba8
+ID: db3073de-1172-4c42-9386-2fa2e4e77ffa
+Parent: 87e120d0-cf2c-4421-9891-094294ae8cc3
 Template: 99f8905d-4a87-4eb8-9f8b-a9bebfb3add6
-Path: /sitecore/layout/Renderings/CSDemo/Columns/fourcolumns
+Path: /sitecore/layout/Renderings/CSDemo/Page/Rows/Row6
 DB: master
 SharedFields:
 - ID: 51b435bc-f7b9-478a-9c51-52916af96ff5
   Hint: Path
-  Value: /Views/Columns/four-col.cshtml
+  Value: /Views/Rows/Row6.cshtml
 - ID: 7d24e54f-5c16-4314-90c9-6051aa1a7da1
   Hint: Parameters Template
-  Value: {2C398B88-885D-476B-B0F4-273D1C44385B}
+  Value: {7B654478-F079-4A49-A93A-840E17FE99E8}
 Languages:
 - Language: en
   Versions:
@@ -18,4 +18,4 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160217T145726Z
+      Value: 20160217T081930Z

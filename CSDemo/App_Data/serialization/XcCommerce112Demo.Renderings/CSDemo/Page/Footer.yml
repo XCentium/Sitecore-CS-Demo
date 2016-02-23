@@ -1,10 +1,13 @@
 ﻿---
 ID: 5b018176-bf32-4bb1-91fa-63044b6ffe4b
-Parent: 880ea806-4ec6-4795-abf0-dba7a55c3017
+Parent: 416e2039-93c3-46b4-bf5d-2f61686f13a3
 Template: 99f8905d-4a87-4eb8-9f8b-a9bebfb3add6
-Path: /sitecore/layout/Renderings/CSDemo/Footers/Footer
+Path: /sitecore/layout/Renderings/CSDemo/Page/Footer
 DB: master
 SharedFields:
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: Apps/32x32/logviewer.png
 - ID: 51b435bc-f7b9-478a-9c51-52916af96ff5
   Hint: Path
   Value: /Views/Footer/Footer.cshtml

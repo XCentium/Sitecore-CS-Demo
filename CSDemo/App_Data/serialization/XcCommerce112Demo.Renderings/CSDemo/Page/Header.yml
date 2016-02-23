@@ -1,10 +1,13 @@
 ﻿---
 ID: 027af0d5-bc10-42a4-b796-577fb651d073
-Parent: 13b674ad-6c67-43ec-b371-2756f5022b7d
+Parent: 416e2039-93c3-46b4-bf5d-2f61686f13a3
 Template: 99f8905d-4a87-4eb8-9f8b-a9bebfb3add6
-Path: /sitecore/layout/Renderings/CSDemo/Headers/Header
+Path: /sitecore/layout/Renderings/CSDemo/Page/Header
 DB: master
 SharedFields:
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: apps/32x32/logviewer.png
 - ID: 1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f
   Hint: Datasource Template
   Value: {8B3EEE2A-D606-4813-B1F4-B7159378B65E}

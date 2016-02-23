@@ -1,8 +1,8 @@
 ﻿---
-ID: 880ea806-4ec6-4795-abf0-dba7a55c3017
-Parent: 86bc69d1-77a0-41b2-b2d0-3fa94a2eb744
+ID: 87e120d0-cf2c-4421-9891-094294ae8cc3
+Parent: 416e2039-93c3-46b4-bf5d-2f61686f13a3
 Template: 7ee0975b-0698-493e-b3a2-0b2ef33d0522
-Path: /sitecore/layout/Renderings/CSDemo/Footers
+Path: /sitecore/layout/Renderings/CSDemo/Page/Rows
 DB: master
 Languages:
 - Language: en
@@ -11,4 +11,4 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160216T181932Z
+      Value: 20160217T081703Z
