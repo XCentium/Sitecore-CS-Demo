@@ -1,0 +1,21 @@
+﻿---
+ID: 77a55a5a-9247-4e0b-a3c3-456961f95d21
+Parent: 267510a2-27b0-4cc6-b950-3f72dce28e3a
+Template: 2a3e91a0-7987-44b5-ab34-35c2d9de83b9
+Path: /sitecore/layout/Renderings/CSDemo/Search/Search Results
+DB: master
+SharedFields:
+- ID: ded9e431-3604-4921-a4b3-a6ec7636a5b6
+  Hint: Controller Action
+  Value: SearchResults
+- ID: e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7
+  Hint: Controller
+  Value: CSDemo.Controllers.SearchController, CSDemo
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160223T223330Z

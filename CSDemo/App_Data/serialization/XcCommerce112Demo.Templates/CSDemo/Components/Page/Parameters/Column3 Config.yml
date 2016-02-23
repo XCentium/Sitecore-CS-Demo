@@ -1,20 +1,17 @@
 ﻿---
-ID: a21b890e-c798-469c-8727-0f2c525787f3
-Parent: 012df092-c15e-4146-bfda-76642c96140d
+ID: 101ceb4d-e37c-49a0-883e-865ef4cd9216
+Parent: 83e153de-d7ff-49f5-83fc-8c32b40f7694
 Template: ab86861a-6030-46c5-b394-e8f99e8b87db
-Path: /sitecore/templates/CSDemo/Settings
+Path: /sitecore/templates/CSDemo/Components/Page/Parameters/Column3 Config
 DB: master
 SharedFields:
-- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
-  Hint: __Icon
-  Value: Applications/32x32/gear.png
 - ID: 12c33f3f-86c5-43a5-aeb4-5598cec45116
   Hint: __Base template
   Type: tree list
-  Value: {1930BBEB-7805-471A-A3BE-4858AC7CF696}
+  Value: {18D71C58-1DF4-4F15-B36C-F7065D33650C}
 - ID: f7d48a55-2158-4f02-9356-756654404f73
   Hint: __Standard values
-  Value: {F4BFF274-5986-4CE0-BAB0-B8EF6712B118}
+  Value: {300E0AB3-363B-4904-B167-6A7216105109}
 Languages:
 - Language: en
   Versions:
@@ -22,7 +19,7 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160216T160213Z
+      Value: 20160217T090749Z
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
       Value: sitecore\admin

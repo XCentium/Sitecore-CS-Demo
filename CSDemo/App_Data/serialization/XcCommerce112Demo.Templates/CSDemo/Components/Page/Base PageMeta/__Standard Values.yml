@@ -1,0 +1,26 @@
+﻿---
+ID: f0fea348-4a68-40db-85a1-4134724be8b8
+Parent: dc84f551-d6ad-46b4-80b0-2ab72bb0a419
+Template: dc84f551-d6ad-46b4-80b0-2ab72bb0a419
+Path: /sitecore/templates/CSDemo/Components/Page/Base PageMeta/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 122fb360-2257-4b55-8353-0d146f0a1de4
+      Hint: Author
+      Value: XCentium
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T060833Z
+    - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
+      Hint: Title
+      Value: $name
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
+      Hint: Meta Description
+      Value: $name Page
