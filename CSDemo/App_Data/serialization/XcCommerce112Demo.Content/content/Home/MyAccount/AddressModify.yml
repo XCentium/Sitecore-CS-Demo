@@ -1,0 +1,56 @@
+﻿---
+ID: 33251ab2-c29e-4d6b-ba9c-bfe328c8b856
+Parent: 0c299835-dae0-47e2-a07f-8cb9d1a1064a
+Template: 76036f5e-cbce-46d1-af0a-4143f9b557aa
+Path: /sitecore/content/Home/MyAccount/AddressModify
+DB: master
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: {A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s" p:p="1">
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r uid="{DF426C6A-F1F2-4E88-B043-602023380A85}" s:id="{6D29F611-83F0-4D71-B897-1A5BAA7C9839}" s:ph="main" />
+      </d>
+    </r>
+Languages:
+- Language: de-DE
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: AdresseModifizieren
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160211T160552Z
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: {190B1C84-F1BE-47ED-AA41-F42193D9C8FC}
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 75577384-3c97-45da-a847-81b00500e250
+      Hint: Title
+      Value: AdresseModifizieren
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20130508T090700
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: {FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 75577384-3c97-45da-a847-81b00500e250
+      Hint: Title
+      Value: AddressModify

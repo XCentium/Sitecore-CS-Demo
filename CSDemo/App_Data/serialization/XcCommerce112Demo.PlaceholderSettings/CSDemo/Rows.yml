@@ -1,0 +1,14 @@
+﻿---
+ID: 3f0f8a38-70bb-45d0-b0af-613cf7e7fa7d
+Parent: 77708787-4603-449b-a1d5-49d27defaba5
+Template: c3b037a0-46e5-4b67-ac7a-a144b962a56f
+Path: /sitecore/layout/Placeholder Settings/CSDemo/Rows
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T181423Z
