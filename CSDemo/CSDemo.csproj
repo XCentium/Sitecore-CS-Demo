@@ -663,7 +663,6 @@
     <Content Include="Assets\fonts\fontawesome-webfont.woff" />
     <Content Include="Assets\fonts\fontawesome-webfont.woff2" />
     <Content Include="Assets\fonts\FontAwesome.otf" />
-    <None Include="App_Config\Include\CSDemo\CSDemo.Serialization.config" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.Configs.Default" />
     <None Include="Properties\PublishProfiles\Castle Local.pubxml" />
     <None Include="Properties\PublishProfiles\csDemo.pubxml" />
