@@ -3,6 +3,7 @@
     @using (Html.BeginForm("SearchInput", "GeneralSearch", FormMethod.Post, new {@id = "global-search-input"}))
     {
         <div class="input-group input-group-lg">
+            @Html.HiddenFor(t=>Model.RedirectUrl)
             @Html.TextBoxFor(t => Model.Query, new {@class = "form-control", @placeholder = "Search..."})
             <span class="input-group-btn">
                 <button class="btn btn-primary" type="submit">Search</button>

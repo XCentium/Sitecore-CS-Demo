@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CSDemo.Models.GeneralSearch;
 using CSDemo.Models.Search;
 using Glass.Mapper.Sc;
 using Sitecore.Links;
@@ -37,19 +38,34 @@ namespace CSDemo.Controllers
             return View(new Search());
         }
 
-        public ActionResult SearchInput(SearchInput model)
+        [HttpGet]
+        public ActionResult SearchInput()
         {
-            if (!ModelState.IsValid || string.IsNullOrWhiteSpace(model?.Query)) return View(new SearchInput());
             var searchResultsPagePath = RenderingContext.Current.Rendering.DataSource;
             if(string.IsNullOrWhiteSpace(searchResultsPagePath))return View(new SearchInput());
 
             var searchResultsPageItem = _service.Database.GetItem(searchResultsPagePath);
             if (searchResultsPageItem == null) return View(new SearchInput());
 
-            var redirectUrl = $"{LinkManager.GetItemUrl(searchResultsPageItem)}?q={Server.UrlEncode(model.Query)}";
-            return Redirect(redirectUrl);
+            var redirectUrl = LinkManager.GetItemUrl(searchResultsPageItem);
+            var searchInputModel = new SearchInput
+            {
+                RedirectUrl = redirectUrl
+            };
+            return View(searchInputModel);
+        }
+
+        [HttpPost]
+        public ActionResult SearchInput(SearchInput model)
+        {
+            if (!ModelState.IsValid 
+                || string.IsNullOrWhiteSpace(model.RedirectUrl) 
+                || string.IsNullOrWhiteSpace(model.Query))
+                return SearchInput();
+            
+            return Redirect($"{model.RedirectUrl}?q={HttpUtility.UrlEncode(model.Query)}");
         }
 
         #endregion
-    }
+        }
 }

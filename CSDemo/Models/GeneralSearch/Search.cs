@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using CSDemo.Contracts;
 
-namespace CSDemo.Models.Search
+namespace CSDemo.Models.GeneralSearch
 {
     public class Search : ISearch
     {

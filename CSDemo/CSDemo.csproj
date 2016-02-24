@@ -295,9 +295,9 @@
     <Compile Include="Models\Parameters\Column4Config.cs" />
     <Compile Include="Models\Parameters\RowConfig.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\Search\Search.cs" />
-    <Compile Include="Models\Search\SearchInput.cs" />
-    <Compile Include="Models\Search\SearchResult.cs" />
+    <Compile Include="Models\GeneralSearch\Search.cs" />
+    <Compile Include="Models\GeneralSearch\SearchInput.cs" />
+    <Compile Include="Models\GeneralSearch\SearchResult.cs" />
     <Compile Include="Models\Settings\AvailableCatalog.cs" />
     <Compile Include="Models\Settings\AvailableCatalogsFolder.cs" />
     <Compile Include="Models\Settings\CommerceBooleanSettingItem.cs" />

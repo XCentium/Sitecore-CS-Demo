@@ -9,5 +9,6 @@ namespace CSDemo.Contracts
     public interface ISearchInput
     {
         string Query { get; set; }
+        string RedirectUrl { get; set; }
     }
 }
