@@ -11,8 +11,7 @@ SharedFields:
   Value: |
     <r xmlns:p="p" xmlns:s="s" p:p="1">
       <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-        <r uid="{F08043FB-EEA5-4A86-8648-26979958DCDE}" s:ds="" s:par="Section CSS Class=content%20products&amp;Container CSS Class=container&amp;Row CSS Class" />
-        <r uid="{75EDC8A6-0861-4DC4-B3DA-5151F8907E71}" p:after="r[@uid='{F08043FB-EEA5-4A86-8648-26979958DCDE}']" s:id="{E648F60A-676E-45CD-95AF-FAEEEC79E9AA}" s:ph="row1" />
+        <r uid="{75EDC8A6-0861-4DC4-B3DA-5151F8907E71}" p:after="r[@uid='{E5A6C541-E277-499D-9CB9-DFF8CE125A23}']" s:id="{E648F60A-676E-45CD-95AF-FAEEEC79E9AA}" s:ph="row1" />
       </d>
     </r>
 Languages:
