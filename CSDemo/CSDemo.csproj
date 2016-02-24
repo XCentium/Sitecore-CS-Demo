@@ -479,7 +479,7 @@
     <Content Include="App_Config\Include\Glass.Mapper.Sc.CodeFirst.config.exclude" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\CSDemo\CSDemo.Main.config">
+    <Content Include="App_Config\Include\zCSDemo\CSDemo.Main.config">
       <TransformOnBuild>true</TransformOnBuild>
     </Content>
   </ItemGroup>
@@ -493,11 +493,11 @@
     <Content Include="Views\Navigation\MainNavigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App_Config\Include\CSDemo\CSDemo.Main.Debug.config">
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.Debug.config">
       <DependentUpon>CSDemo.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="App_Config\Include\CSDemo\CSDemo.Main.Release.config">
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.Release.config">
       <DependentUpon>CSDemo.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
@@ -508,7 +508,7 @@
     <Content Include="Assets\fonts\fontawesome-webfont.woff2" />
     <Content Include="Assets\fonts\FontAwesome.otf" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.Configs.Default" />
-    <Content Include="App_Config\Include\CSDemo\CSDemo.Serialization.config" />
+    <Content Include="App_Config\Include\zCSDemo\CSDemo.Serialization.config" />
     <None Include="Properties\PublishProfiles\Castle Local.pubxml" />
     <None Include="Properties\PublishProfiles\csDemo.pubxml" />
     <None Include="Properties\PublishProfiles\XcCommerce112Demo.pubxml" />
