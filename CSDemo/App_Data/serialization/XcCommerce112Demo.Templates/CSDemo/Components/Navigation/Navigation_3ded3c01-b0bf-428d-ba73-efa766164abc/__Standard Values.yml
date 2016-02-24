@@ -1,0 +1,23 @@
+﻿---
+ID: 1be90679-4cbd-49bf-9078-506534907c1c
+Parent: 3ded3c01-b0bf-428d-ba73-efa766164abc
+Template: 3ded3c01-b0bf-428d-ba73-efa766164abc
+Path: /sitecore/templates/CSDemo/Components/Navigation/Navigation/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 07c471ba-fd56-453e-85bb-5f3feabc09d1
+      Hint: Navigation Title
+      Value: $name
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160224T021803Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: d2eec576-0413-4a7b-a95c-5963462e73d3
+      Hint: Show In Navigation
+      Value: 1
