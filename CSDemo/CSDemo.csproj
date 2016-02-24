@@ -153,6 +153,7 @@
     </Compile>
     <Compile Include="App_Start\GlassMapperSc.cs" />
     <Compile Include="App_Start\GlassMapperScCustom.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Contracts\IProduct.cs" />
     <Compile Include="Contracts\ISearch.cs" />
     <Compile Include="Contracts\ISearchInput.cs" />

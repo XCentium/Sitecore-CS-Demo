@@ -1,8 +1,8 @@
 ﻿---
-ID: d060115d-e390-41b3-8552-b4dfceb3bda8
-Parent: bd259e06-d2a3-46a0-a0c9-00bc1b74d3c1
+ID: e644bf23-98aa-492b-92f8-15ed3bae4b0f
+Parent: 95142bfb-8ecb-4cee-bc20-4ed70ddefcc9
 Template: b3d2832f-2fbf-4466-9d95-d3a0c6476362
-Path: /sitecore/content/CSDemo/Home/ProductListing/ProductDetail
+Path: /sitecore/content/CSDemo/Home/Checkout/Thank you
 DB: master
 SharedFields:
 - ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
@@ -11,7 +11,8 @@ SharedFields:
   Value: |
     <r xmlns:p="p" xmlns:s="s" p:p="1">
       <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-        <r uid="{75EDC8A6-0861-4DC4-B3DA-5151F8907E71}" p:after="r[@uid='{E5A6C541-E277-499D-9CB9-DFF8CE125A23}']" s:id="{E648F60A-676E-45CD-95AF-FAEEEC79E9AA}" s:ph="row1" />
+        <r uid="{6EEDDF8E-B1BA-46D6-B1D7-A9A2F053CE88}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:ds="" s:id="{04F21822-8CEA-4A49-9F13-4501594EA61D}" s:par="" s:ph="page-body" />
+        <r uid="{E5A6C541-E277-499D-9CB9-DFF8CE125A23}" p:after="r[@uid='{6EEDDF8E-B1BA-46D6-B1D7-A9A2F053CE88}']" />
       </d>
     </r>
 Languages:
@@ -21,13 +22,10 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160217T214800Z
-    - ID: 3230cbc1-3e03-43ec-95ab-c6e1505de163
-      Hint: Page Title
-      Value: ProductDetail
+      Value: 20160220T064239Z
     - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
       Hint: Page Title
-      Value: ProductDetail
+      Value: Thankyou
     - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
       Hint: Meta Description
-      Value: ProductDetail Page
+      Value: Thankyou Page

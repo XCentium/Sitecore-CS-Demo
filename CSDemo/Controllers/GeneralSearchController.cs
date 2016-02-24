@@ -63,7 +63,7 @@ namespace CSDemo.Controllers
                 || string.IsNullOrWhiteSpace(model.Query))
                 return SearchInput();
             
-            return Redirect($"{model.RedirectUrl}?q={HttpUtility.UrlEncode(model.Query)}");
+            return Redirect($"{model.RedirectUrl}?{Constants.QueryStrings.SearchQuery}={HttpUtility.UrlEncode(model.Query)}");
         }
 
         #endregion

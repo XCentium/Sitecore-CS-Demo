@@ -1,13 +1,13 @@
 ﻿---
-ID: fc71bbfa-44b6-4783-9812-604b08ef4ae4
+ID: e648f60a-676e-45cd-95af-faeeec79e9aa
 Parent: dfe6e26a-54ec-483b-8594-d6ac854b6e26
 Template: 99f8905d-4a87-4eb8-9f8b-a9bebfb3add6
-Path: /sitecore/layout/Renderings/CSDemo/Product/ProductListing
+Path: /sitecore/layout/Renderings/CSDemo/Product/Product Details
 DB: master
 SharedFields:
 - ID: 51b435bc-f7b9-478a-9c51-52916af96ff5
   Hint: Path
-  Value: /Views/Product/ProductListing.cshtml
+  Value: /Views/Product/ProductDetails.cshtml
 Languages:
 - Language: en
   Versions:
@@ -15,4 +15,4 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160217T073952Z
+      Value: 20160217T074140Z
