@@ -1,20 +1,22 @@
 ﻿---
-ID: 81a752a2-d7df-484f-82bb-1857cf636982
+ID: 6eabf83b-72e6-4e98-a3ee-bbc68a279d50
 Parent: 256d016d-255c-44c7-82d1-063b4779da23
 Template: ab86861a-6030-46c5-b394-e8f99e8b87db
-Path: /sitecore/templates/CSDemo/Pages/Search Page
+Path: /sitecore/templates/CSDemo/Pages/Base Generic Page
 DB: master
 SharedFields:
 - ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
   Hint: __Icon
-  Value: Apps/32x32/Search (1).png
+  Value: Apps/32x32/File.png
 - ID: 12c33f3f-86c5-43a5-aeb4-5598cec45116
   Hint: __Base template
   Type: tree list
-  Value: {6EABF83B-72E6-4E98-A3EE-BBC68A279D50}
+  Value: |
+    {DC84F551-D6AD-46B4-80B0-2AB72BB0A419}
+    {D673AEDB-B86F-4204-8B25-9BD45EDD5560}
 - ID: f7d48a55-2158-4f02-9356-756654404f73
   Hint: __Standard values
-  Value: {A95C3C8C-1335-43CD-8836-D10A3DAEA52C}
+  Value: {E39A4F46-EE5A-4769-AF22-C39560446953}
 Languages:
 - Language: en
   Versions:

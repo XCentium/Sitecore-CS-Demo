@@ -17,7 +17,6 @@ SharedFields:
       <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{22DD9E70-D79C-4A77-BC90-FCCFB1B574F5}">
         <r id="{027AF0D5-BC10-42A4-B796-577FB651D073}" ph="page-header" uid="{786ECE31-95BE-42A4-BD3B-7FC824D276EF}" />
         <r id="{5B018176-BF32-4BB1-91FA-63044B6FFE4B}" ph="page-footer" uid="{E5A6C541-E277-499D-9CB9-DFF8CE125A23}" />
-        <r id="{588789FD-1489-47AD-95CE-3D5D888EA686}" ph="page-body" uid="{F08043FB-EEA5-4A86-8648-26979958DCDE}" />
       </d>
     </r>
 Languages:
@@ -46,7 +45,7 @@ Languages:
       Hint: Page Title
       Value: $name
     - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
-      Hint: Title
+      Hint: Page Title
       Value: $name
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by

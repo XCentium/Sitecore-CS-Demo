@@ -4,6 +4,10 @@ Parent: dc84f551-d6ad-46b4-80b0-2ab72bb0a419
 Template: e269fbb5-3750-427a-9149-7aa950b49301
 Path: /sitecore/templates/CSDemo/Components/Page/Metadata/Metadata
 DB: master
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 900
 Languages:
 - Language: en
   Versions:
