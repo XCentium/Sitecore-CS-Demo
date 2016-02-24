@@ -62,7 +62,7 @@
                                                     @foreach (Item catProduct in catProducts)
                                                     {
                                                         
-                                                        <li><a href="/productlisting/productdetail?id=@catProduct.ID.ToString()">@catProduct.DisplayName.ToString()</a></li>
+                                                        <li><a href="/product-listing/product-detail?id=@catProduct.ID.ToString()">@catProduct.DisplayName.ToString()</a></li>
                                                     }                                                 
                                                 </ul>
                                             </li>
@@ -268,7 +268,7 @@
                                     <div class="col-sm-3">
                                         <div class="product-overlay">
                                             <div class="product-mask"></div>
-                                            <a href="/productlisting/productdetail?id=@product.ID.ToString()" class="product-permalink"></a>
+                                            <a href="/product-listing/product-detail?id=@product.ID.ToString()" class="product-permalink"></a>
                                             <img src="@ProductImage" class="img-responsive" alt="">
                                             @*<div class="product-quickview">
                                                 <a class="btn btn-quickview" data-toggle="modal" data-target="#product-quickview">Quick View</a>

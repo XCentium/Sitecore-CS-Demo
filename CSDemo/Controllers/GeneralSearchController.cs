@@ -33,7 +33,8 @@ namespace CSDemo.Controllers
 
         #region Methods
 
-        public ActionResult SearchResults()
+
+        public ActionResult SearchResults([Bind(Prefix = Constants.QueryStrings.SearchQuery)] string query)
         {
             return View(new Search());
         }
