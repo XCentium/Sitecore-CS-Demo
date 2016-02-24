@@ -4,6 +4,10 @@ Parent: 416e2039-93c3-46b4-bf5d-2f61686f13a3
 Template: 7ee0975b-0698-493e-b3a2-0b2ef33d0522
 Path: /sitecore/layout/Renderings/CSDemo/Page/Columns
 DB: master
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 200
 Languages:
 - Language: en
   Versions:

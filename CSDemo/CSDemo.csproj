@@ -159,7 +159,7 @@
     <Compile Include="Contracts\ISearchResult.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\GeneralSearchController.cs" />
     <Compile Include="Initializer.cs" />
     <Compile Include="Models\Base\Base Pages\BasePagemeta.cs" />
     <Compile Include="Models\Cart\CartItem.cs" />
@@ -425,7 +425,7 @@
     <Content Include="Assets\js\twitterFetcher_min.js" />
     <Content Include="sitecore modules\Web\XCore\CodeGen\CodeGenerationRoot.aspx" />
     <Content Include="sitecore modules\Web\XCore\CodeGen\GenerateCode.aspx" />
-    <Content Include="Views\Search\SearchResults.cshtml" />
+    <Content Include="Views\GeneralSearch\SearchResults.cshtml" />
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Web.config" />
@@ -484,7 +484,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Layouts\Responsive.cshtml" />
+    <Content Include="Views\Page\Layouts\Responsive.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Product\ProductDetails.cshtml" />
@@ -512,31 +512,31 @@
     <None Include="Properties\PublishProfiles\Castle Local.pubxml" />
     <None Include="Properties\PublishProfiles\csDemo.pubxml" />
     <None Include="Properties\PublishProfiles\XcCommerce112Demo.pubxml" />
-    <Content Include="Views\Headers\Header.cshtml" />
-    <Content Include="Views\Footer\Footer.cshtml" />
-    <Content Include="Views\Columns\four-col.cshtml" />
-    <Content Include="Views\Columns\one-col.cshtml" />
-    <Content Include="Views\Columns\three-col.cshtml" />
-    <Content Include="Views\Columns\two-col.cshtml" />
-    <Content Include="Views\Rows\row1.cshtml" />
-    <Content Include="Views\Rows\row-footer.cshtml" />
+    <Content Include="Views\Page\Header.cshtml" />
+    <Content Include="Views\Page\Footer.cshtml" />
+    <Content Include="Views\Page\Columns\four-col.cshtml" />
+    <Content Include="Views\Page\Columns\one-col.cshtml" />
+    <Content Include="Views\Page\Columns\three-col.cshtml" />
+    <Content Include="Views\Page\Columns\two-col.cshtml" />
+    <Content Include="Views\Page\Rows\row1.cshtml" />
+    <Content Include="Views\Page\Rows\row-footer.cshtml" />
     <Content Include="Views\Cart\Cart.cshtml" />
     <Content Include="Views\Product\CategoryListing.cshtml" />
     <Content Include="Views\Product\ProductListing.cshtml" />
     <Content Include="Views\Product\Facets.cshtml" />
-    <Content Include="Views\Rows\row2.cshtml" />
-    <Content Include="Views\Rows\row7.cshtml" />
-    <Content Include="Views\Rows\row6.cshtml" />
-    <Content Include="Views\Rows\row5.cshtml" />
-    <Content Include="Views\Rows\row4.cshtml" />
-    <Content Include="Views\Rows\row3.cshtml" />
+    <Content Include="Views\Page\Rows\row2.cshtml" />
+    <Content Include="Views\Page\Rows\row7.cshtml" />
+    <Content Include="Views\Page\Rows\row6.cshtml" />
+    <Content Include="Views\Page\Rows\row5.cshtml" />
+    <Content Include="Views\Page\Rows\row4.cshtml" />
+    <Content Include="Views\Page\Rows\row3.cshtml" />
     <Content Include="Views\Cart\Checkout.cshtml" />
     <Content Include="Views\Cart\Shipping.cshtml" />
     <Content Include="Views\Cart\Payment.cshtml" />
     <Content Include="Views\Cart\Review.cshtml" />
     <Content Include="Views\Cart\Thankyou.cshtml" />
-    <Content Include="Views\Search\SearchInput.cshtml" />
-    <Content Include="Views\Search\_SearchResult.cshtml" />
+    <Content Include="Views\GeneralSearch\SearchInput.cshtml" />
+    <Content Include="Views\GeneralSearch\_SearchResult.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -13,10 +13,13 @@ SharedFields:
   Value: {8B3EEE2A-D606-4813-B1F4-B7159378B65E}
 - ID: 51b435bc-f7b9-478a-9c51-52916af96ff5
   Hint: Path
-  Value: /Views/Headers/Header.cshtml
+  Value: /Views/Page/Header.cshtml
 - ID: b5b27af1-25ef-405c-87ce-369b3a004016
   Hint: Datasource Location
   Value: /sitecore/content/CSDemo/Settings/Headers
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 300
 Languages:
 - Language: en
   Versions:
