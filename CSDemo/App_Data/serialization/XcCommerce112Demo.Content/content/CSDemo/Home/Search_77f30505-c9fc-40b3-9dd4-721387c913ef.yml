@@ -4,17 +4,6 @@ Parent: 49b9f3e2-65cc-48f5-9a96-35efd0c752d8
 Template: b3d2832f-2fbf-4466-9d95-d3a0c6476362
 Path: /sitecore/content/CSDemo/Home/Search
 DB: master
-SharedFields:
-- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
-  Hint: __Renderings
-  Type: layout
-  Value: |
-    <r xmlns:p="p" xmlns:s="s" p:p="1">
-      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-        <r uid="{B681A88B-7972-409D-874C-D41BF6FCD95D}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:id="{77A55A5A-9247-4E0B-A3C3-456961F95D21}" s:ph="page-body" />
-        <r uid="{E5A6C541-E277-499D-9CB9-DFF8CE125A23}" p:after="r[@uid='{B681A88B-7972-409D-874C-D41BF6FCD95D}']" />
-      </d>
-    </r>
 Languages:
 - Language: en
   Versions:
