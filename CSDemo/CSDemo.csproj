@@ -82,6 +82,9 @@
       <HintPath>..\packages\Rainbow.Storage.Yaml.1.1.0\lib\net45\Rainbow.Storage.Yaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sitecore.Commerce.Connect.CommerceServer">
+      <HintPath>..\Lib\Sitecore\Sitecore.Commerce.Connect.CommerceServer.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\Lib\Sitecore\Sitecore.Kernel.dll</HintPath>
       <Private>True</Private>
@@ -154,10 +157,11 @@
     <Compile Include="App_Start\GlassMapperSc.cs" />
     <Compile Include="App_Start\GlassMapperScCustom.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Contracts\GeneralSearch\ISearchInfo.cs" />
     <Compile Include="Contracts\IProduct.cs" />
-    <Compile Include="Contracts\ISearch.cs" />
-    <Compile Include="Contracts\ISearchInput.cs" />
-    <Compile Include="Contracts\ISearchResult.cs" />
+    <Compile Include="Contracts\GeneralSearch\ISearch.cs" />
+    <Compile Include="Contracts\GeneralSearch\ISearchInput.cs" />
+    <Compile Include="Contracts\GeneralSearch\ISearchResult.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\GeneralSearchController.cs" />
@@ -216,6 +220,7 @@
     <Compile Include="Models\Folders\Site.cs" />
     <Compile Include="Models\Folders\Sites.cs" />
     <Compile Include="Models\Folders\Websites.cs" />
+    <Compile Include="Models\GeneralSearch\SearchInfo.cs" />
     <Compile Include="Models\Interfaces\Base\Base Pages\IBasePagemeta.cs" />
     <Compile Include="Models\Interfaces\Catalog Generated\IBackpack.cs" />
     <Compile Include="Models\Interfaces\Catalog Generated\IBackpackVariant.cs" />

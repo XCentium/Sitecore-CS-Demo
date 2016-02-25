@@ -1,4 +1,5 @@
 ﻿using CSDemo.Contracts;
+using CSDemo.Contracts.GeneralSearch;
 
 namespace CSDemo.Models.GeneralSearch
 {

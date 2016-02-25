@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using CSDemo.Contracts;
+using CSDemo.Contracts.GeneralSearch;
 using Glass.Mapper.Sc.Fields;
 
 namespace CSDemo.Models.Search

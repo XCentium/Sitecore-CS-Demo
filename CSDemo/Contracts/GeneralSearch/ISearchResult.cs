@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Glass.Mapper.Sc.Fields;
-using Sitecore.Syndication;
+﻿using Glass.Mapper.Sc.Fields;
 
-namespace CSDemo.Contracts
+namespace CSDemo.Contracts.GeneralSearch
 {
     public interface ISearchResult
     {
