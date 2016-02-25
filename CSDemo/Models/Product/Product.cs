@@ -56,6 +56,9 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.ParentCategories)]
         public IEnumerable<Item> Categories { get; set; }
 
+        [SitecoreField(Fields.Rating)]
+        public virtual decimal Rating { get; set; }
+
         public string CurrencyPrice
         {
             get

@@ -40,6 +40,13 @@
                     <span class="price">
                         <ins><span class="amount">$@Model.CurrencyPrice</span></ins>
                     </span>
+                    <div class="product-rating">
+                        <i class="fa fa-star@(Model.Rating>0 ? string.Empty:"-o" )"></i>
+                        <i class="fa fa-star@(Model.Rating>1 ? string.Empty:"-o" )"></i>
+                        <i class="fa fa-star@(Model.Rating>2 ? string.Empty:"-o" )"></i>
+                        <i class="fa fa-star@(Model.Rating>3 ? string.Empty:"-o" )"></i>
+                        <i class="fa fa-star@(Model.Rating>4 ? string.Empty:"-o" )"></i>
+                    </div>
                     <div class="buttons">
                         <a href="javascript:void(0)" onclick="AddToCart('@Model.ID.ToString()')" class="btn btn-primary add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
