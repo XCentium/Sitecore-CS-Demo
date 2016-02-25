@@ -8,7 +8,7 @@ namespace CSDemo.Models.GeneralSearch
     public class Search : ISearch
     {
         public string Query { get; set; }
-        public IList<SearchResult> Results { get; set; }
+        public IList<Product.Product> Results { get; set; }
         public int PageSize { get; set; }
         public int TotalItemCount { get; set; }
         public int TotalPageCount { get; set; }

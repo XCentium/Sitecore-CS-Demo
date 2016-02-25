@@ -3,8 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <h2>Search Term:</h2>
-                <p>@Model.Query</p>
+                <p>"@Model.Query"</p>
             </div>
         </div>
     </div>
@@ -13,12 +12,19 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <div class="row grid" id="products">
-                    @foreach (var result in Model.Results)
-                    {
-                        @Html.Partial("_SearchResult", result)
-                    }
-                </div>
+                @if (Model == null || !Model.Results.Any())
+                {
+                    <p>No products matched your search criteria. Please change your search query and try again.</p>
+                }
+                else
+                {
+                    <div class="row grid" id="products">
+                        @foreach (var result in Model.Results)
+                        {
+                            @Html.Partial("_SearchResult", result)
+                        }
+                    </div>
+                }
             </div>
         </div>
     </div>

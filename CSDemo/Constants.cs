@@ -49,7 +49,9 @@ namespace CSDemo
         {
             public const string CatalogName = "Adventure Works Catalog";
 
-            public static readonly string DefaultCurrencyCode = "USD";
+            public const string DefaultCurrencyCode = "USD";
+
+            public static string[] DefaultPriceTypeIds = new string[2] { "List", "Adjusted" };
         }
     }
 }

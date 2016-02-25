@@ -82,6 +82,10 @@
       <HintPath>..\packages\Rainbow.Storage.Yaml.1.1.0\lib\net45\Rainbow.Storage.Yaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sitecore.Commerce">
+      <HintPath>..\Lib\Sitecore\Sitecore.Commerce.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Sitecore.Commerce.Connect.CommerceServer">
       <HintPath>..\Lib\Sitecore\Sitecore.Commerce.Connect.CommerceServer.dll</HintPath>
       <Private>False</Private>
@@ -170,7 +174,6 @@
     <Compile Include="Contracts\Product\IProduct.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearch.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchInput.cs" />
-    <Compile Include="Contracts\GeneralSearch\ISearchResult.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\GeneralSearchController.cs" />
@@ -309,10 +312,10 @@
     <Compile Include="Models\Parameters\Column3Config.cs" />
     <Compile Include="Models\Parameters\Column4Config.cs" />
     <Compile Include="Models\Parameters\RowConfig.cs" />
+    <Compile Include="Models\Product\GetProductPricesRequest.cs" />
     <Compile Include="Models\Product\Product.cs" />
     <Compile Include="Models\GeneralSearch\Search.cs" />
     <Compile Include="Models\GeneralSearch\SearchInput.cs" />
-    <Compile Include="Models\GeneralSearch\SearchResult.cs" />
     <Compile Include="Models\Settings\AvailableCatalog.cs" />
     <Compile Include="Models\Settings\AvailableCatalogsFolder.cs" />
     <Compile Include="Models\Settings\CommerceBooleanSettingItem.cs" />
@@ -322,6 +325,9 @@
     <Compile Include="Models\Settings\CommerceSettingsFolder.cs" />
     <Compile Include="Models\Settings\CommerceStringSettingItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\GetProductPriceResult.cs" />
+    <Compile Include="Services\MessageResponse.cs" />
+    <Compile Include="Services\PricingServiceProvider.cs" />
     <Compile Include="sitecore modules\Web\XCore\CodeGen\CodeGenerationRoot.aspx.cs">
       <DependentUpon>CodeGenerationRoot.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -445,7 +451,9 @@
     <Content Include="packages.config" />
     <Content Include="Web.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="App_Config\Include\Rainbow.config" />
   </ItemGroup>

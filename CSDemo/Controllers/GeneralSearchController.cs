@@ -6,10 +6,14 @@ using System.Web.Mvc;
 using CSDemo.Contracts;
 using CSDemo.Contracts.GeneralSearch;
 using CSDemo.Models.GeneralSearch;
+using CSDemo.Models.Product;
+using CSDemo.Services;
 using Glass.Mapper.Sc;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Search;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
+using Sitecore.Commerce.Entities.Prices;
+using Sitecore.Commerce.Services;
 using Sitecore.ContentSearch.Linq;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
@@ -110,12 +114,8 @@ namespace CSDemo.Controllers
             return searchInfo;
         }
 
-        private ISearch GetSearchModel()
-        {
-            throw new NotImplementedException();
-        }
 
-        protected Search GetSearchModel(CommerceSearchOptions searchOptions, string searchKeyword, string catalogName)
+        private Search GetSearchModel(CommerceSearchOptions searchOptions, string searchKeyword, string catalogName)
         {
             using (new SecurityDisabler())
             {
@@ -148,14 +148,15 @@ namespace CSDemo.Controllers
                     TotalPageCount = totalPageCount,
                     CurrentPageNumber = searchOptions.StartPageIndex,
                     Facets = facets,
-                    Results = returnList.Select(i => i.GlassCast<SearchResult>()).ToList()
+                    Results = returnList.Select(i=> i.GlassCast<Product>()).ToList(),
+                    Query = searchKeyword
                 };
 
                 return result;
             }
         }
 
-        public static SearchResponse SearchCatalogItemsByKeyword(string keyword, string catalogName, CommerceSearchOptions searchOptions)
+        private static SearchResponse SearchCatalogItemsByKeyword(string keyword, string catalogName, CommerceSearchOptions searchOptions)
         {
             Assert.ArgumentNotNullOrEmpty(catalogName, "catalogName");
             var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
