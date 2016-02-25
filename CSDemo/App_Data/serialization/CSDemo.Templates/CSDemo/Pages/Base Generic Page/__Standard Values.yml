@@ -1,0 +1,38 @@
+﻿---
+ID: e39a4f46-ee5a-4769-af22-c39560446953
+Parent: 6eabf83b-72e6-4e98-a3ee-bbc68a279d50
+Template: 6eabf83b-72e6-4e98-a3ee-bbc68a279d50
+Path: /sitecore/templates/CSDemo/Pages/Base Generic Page/__Standard Values
+DB: master
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Type: TreelistEx
+  Value: {B3D2832F-2FBF-4466-9D95-D3A0C6476362}
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{22DD9E70-D79C-4A77-BC90-FCCFB1B574F5}">
+        <r id="{027AF0D5-BC10-42A4-B796-577FB651D073}" ph="page-header" uid="{786ECE31-95BE-42A4-BD3B-7FC824D276EF}" />
+        <r id="{5B018176-BF32-4BB1-91FA-63044B6FFE4B}" ph="page-footer" uid="{E5A6C541-E277-499D-9CB9-DFF8CE125A23}" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T060244Z
+    - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
+      Hint: Page Title
+      Value: $name
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
+      Hint: Meta Description
+      Value: $name Page

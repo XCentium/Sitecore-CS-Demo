@@ -22,5 +22,6 @@ namespace CSDemo.Contracts.Product
         string CurrencyPrice { get; }
         bool IsNew { get; set; }
         IEnumerable<Item> Categories { get; set; }
+        decimal Rating { get; set; }
     }
 }
