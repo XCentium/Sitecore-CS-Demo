@@ -166,7 +166,7 @@ namespace CSDemo.Controllers
             {
                 var searchResults = context.GetQueryable<CommerceProductSearchResultItem>()
                     .Where(item => item.Content.Contains(keyword))
-                    .Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product || item.CommerceSearchItemType == CommerceSearchResultItemType.Category)
+                    .Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product)
                     .Where(item => item.CatalogName == catalogName)
                     .Where(item => item.Language == Sitecore.Context.Language.Name)
                     .Select(p => new CommerceProductSearchResultItem()
