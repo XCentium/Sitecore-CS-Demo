@@ -6,15 +6,17 @@ using System.Web.Mvc;
 using CSDemo.Contracts;
 using CSDemo.Contracts.GeneralSearch;
 using CSDemo.Models.GeneralSearch;
-using CSDemo.Models.Search;
 using Glass.Mapper.Sc;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Search;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
+using Sitecore.ContentSearch.Linq;
+using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Links;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
+using Sitecore.SecurityModel;
 
 namespace CSDemo.Controllers
 {
@@ -54,7 +56,7 @@ namespace CSDemo.Controllers
 
             var searchInfo = GetSearchInfo(query, pageNumber, facetValues, sortField, pageSize, sortDirection);
 
-
+            searchModel = GetSearchModel(searchInfo.SearchOptions, searchInfo.SearchQuery, searchInfo.CatalogName);
 
 
             return View(searchModel);
@@ -98,7 +100,7 @@ namespace CSDemo.Controllers
                 SearchQuery = searchKeyword ?? string.Empty,
                 RequiredFacets = null, //searchManager.GetFacetFieldsForItem(this.Item),
                 SortFields = null, // searchManager.GetSortFieldsForItem(this.Item),
-                CatalogName = _service.Database.GetItem(CommerceConstants.KnownItemIds.DefaultCatalog).Name,
+                CatalogName =  Constants.Commerce.CatalogName,
                 ItemsPerPage = pageSize 
             };
 
@@ -111,6 +113,74 @@ namespace CSDemo.Controllers
         private ISearch GetSearchModel()
         {
             throw new NotImplementedException();
+        }
+
+        protected Search GetSearchModel(CommerceSearchOptions searchOptions, string searchKeyword, string catalogName)
+        {
+            using (new SecurityDisabler())
+            {
+                Assert.ArgumentNotNull(searchKeyword, "searchOptions");
+                Assert.ArgumentNotNull(searchKeyword, "searchKeyword");
+                Assert.ArgumentNotNull(searchKeyword, "catalogName");
+
+                var returnList = new List<Item>();
+                var totalPageCount = 0;
+                var totalProductCount = 0;
+                var facets = Enumerable.Empty<CommerceQueryFacet>();
+
+                if (!string.IsNullOrEmpty(searchKeyword.Trim()))
+                {
+                    SearchResponse searchResponse = null;
+                    searchResponse = SearchCatalogItemsByKeyword(searchKeyword, catalogName, searchOptions);
+
+                    if (searchResponse != null)
+                    {
+                        returnList.AddRange(searchResponse.ResponseItems);
+                        totalProductCount = searchResponse.TotalItemCount;
+                        totalPageCount = searchResponse.TotalPageCount;
+                        facets = searchResponse.Facets;
+                    }
+                }
+                Sitecore.Context.Item.Fields.ReadAll();
+                var result = new Search
+                {
+                    TotalItemCount = totalProductCount,
+                    TotalPageCount = totalPageCount,
+                    CurrentPageNumber = searchOptions.StartPageIndex,
+                    Facets = facets,
+                    Results = returnList.Select(i => i.GlassCast<SearchResult>()).ToList()
+                };
+
+                return result;
+            }
+        }
+
+        public static SearchResponse SearchCatalogItemsByKeyword(string keyword, string catalogName, CommerceSearchOptions searchOptions)
+        {
+            Assert.ArgumentNotNullOrEmpty(catalogName, "catalogName");
+            var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
+            var searchIndex = searchManager.GetIndex(catalogName);
+
+            using (var context = searchIndex.CreateSearchContext())
+            {
+                var searchResults = context.GetQueryable<CommerceProductSearchResultItem>()
+                    .Where(item => item.Content.Contains(keyword))
+                    .Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product || item.CommerceSearchItemType == CommerceSearchResultItemType.Category)
+                    .Where(item => item.CatalogName == catalogName)
+                    .Where(item => item.Language == Sitecore.Context.Language.Name)
+                    .Select(p => new CommerceProductSearchResultItem()
+                    {
+                        ItemId = p.ItemId,
+                        Uri = p.Uri
+                    });
+
+                searchResults = searchManager.AddSearchOptionsToQuery<CommerceProductSearchResultItem>(searchResults, searchOptions);
+
+                var results = searchResults.GetResults();
+                var response = SearchResponse.CreateFromSearchResultsItems(searchOptions, results);
+
+                return response;
+            }
         }
 
         #endregion

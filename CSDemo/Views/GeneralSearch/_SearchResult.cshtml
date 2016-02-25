@@ -1,1 +1,41 @@
-﻿@model CSDemo.Contracts.GeneralSearch.ISearchResult
+﻿@inherits  Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Contracts.GeneralSearch.ISearchResult>
+<div class="col-md-4 col-sm-3 col-xs-6">
+    <article class="product-item">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="product-overlay">
+                    <div class="product-mask"></div>
+                    <a href="@Model.Url" class="product-permalink"></a>
+                    @foreach (var image in Model.Images)
+                    {
+                        @RenderImage(image, x => x, new { Width = 262, Height = 351 }, isEditable: false);
+                    }
+                    <div class="product-quickview">
+                        <a class="btn btn-quickview" data-toggle="modal" data-target="#product-quickview">Quick View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="product-body">
+                    <h3>@Model.Title</h3>
+                    <div class="product-labels">
+                        @if (Model.IsNew)
+                        {
+                            <span class="label label-info">new</span>
+                        }
+                        @if (Model.IsOnSale)
+                        {
+                            <span class="label label-danger">sale</span>
+                        }
+                    </div>
+                    <span class="price">
+                        <ins><span class="amount">$@Model.Price</span></ins>
+                    </span>
+                    <div class="buttons">
+                        <a href="" class="btn btn-primary btn-sm add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>

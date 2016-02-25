@@ -1,20 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using CSDemo.Contracts;
+﻿using System.Collections.Generic;
 using CSDemo.Contracts.GeneralSearch;
+using Glass.Mapper.Sc.Configuration;
+using Glass.Mapper.Sc.Configuration.Attributes;
 using Glass.Mapper.Sc.Fields;
 
-namespace CSDemo.Models.Search
+
+namespace CSDemo.Models.GeneralSearch
 {
+
     public class SearchResult : ISearchResult
     {
-        public Image Image { get; set; }
-        public string Title { get; set; }
-        public double Price { get; set; }
-        public double Rating { get; set; }
-        public bool IsOnSale { get; set; }
-        public bool IsNew { get; set; }
+        #region Properties
+
+        [SitecoreInfo(SitecoreInfoType.DisplayName)]
+        public virtual string Title { get; set; }
+        
+        [SitecoreField(Product.Product.Fields.Images)]
+        public virtual IEnumerable<Image> Images { get; set; }
+
+        [SitecoreField(Product.Product.Fields.Price)]
+        public virtual decimal Price { get; set; }
+        
+        [SitecoreField(Product.Product.Fields.OnSale)]
+        public virtual bool IsOnSale { get; set; }
+
+        [SitecoreInfo(SitecoreInfoType.Url)]
+        public virtual string Url { get; set; }
+
+        public virtual bool IsNew { get; set; }
+
+        public virtual double Rating { get; set; }
+
+        
+
+        #endregion
+
     }
 }

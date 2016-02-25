@@ -44,5 +44,12 @@ namespace CSDemo
             /// </summary>
             public const string PageSize = "ps";
         }
+
+        public struct Commerce
+        {
+            public const string CatalogName = "Adventure Works Catalog";
+
+            public static readonly string DefaultCurrencyCode = "USD";
+        }
     }
 }

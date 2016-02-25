@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CSDemo.Models;
+using CSDemo.Models.Product;
 using Sitecore.Mvc.Controllers;
 
 namespace CSDemo.Controllers

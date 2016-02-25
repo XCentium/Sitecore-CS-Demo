@@ -86,6 +86,14 @@
       <HintPath>..\Lib\Sitecore\Sitecore.Commerce.Connect.CommerceServer.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Sitecore.ContentSearch">
+      <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.Linq">
+      <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.Linq.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\Lib\Sitecore\Sitecore.Kernel.dll</HintPath>
       <Private>True</Private>
@@ -159,7 +167,7 @@
     <Compile Include="App_Start\GlassMapperScCustom.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchInfo.cs" />
-    <Compile Include="Contracts\IProduct.cs" />
+    <Compile Include="Contracts\Product\IProduct.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearch.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchInput.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchResult.cs" />
@@ -301,7 +309,7 @@
     <Compile Include="Models\Parameters\Column3Config.cs" />
     <Compile Include="Models\Parameters\Column4Config.cs" />
     <Compile Include="Models\Parameters\RowConfig.cs" />
-    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Product\Product.cs" />
     <Compile Include="Models\GeneralSearch\Search.cs" />
     <Compile Include="Models\GeneralSearch\SearchInput.cs" />
     <Compile Include="Models\GeneralSearch\SearchResult.cs" />
@@ -437,9 +445,7 @@
     <Content Include="packages.config" />
     <Content Include="Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Configuration\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="App_Config\Include\Rainbow.config" />
   </ItemGroup>
