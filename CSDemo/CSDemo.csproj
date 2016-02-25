@@ -84,6 +84,7 @@
     </Reference>
     <Reference Include="Sitecore.Commerce.Connect.CommerceServer">
       <HintPath>..\Lib\Sitecore\Sitecore.Commerce.Connect.CommerceServer.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\Lib\Sitecore\Sitecore.Kernel.dll</HintPath>
