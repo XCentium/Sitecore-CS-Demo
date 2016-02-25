@@ -1,108 +1,31 @@
-﻿@using CSDemo.Models.Search
-@model CSDemo.Contracts.ISearch
-
-@using (Ajax.BeginForm("SearchResults", "GeneralSearch", new AjaxOptions
-{
-    HttpMethod = "POST",
-    UpdateTargetId = "search-search-results-listing",
-    InsertionMode = InsertionMode.Replace,
-    LoadingElementId = "loading",
-    LoadingElementDuration = 200
-    //OnSuccess = "siteSearch.setSearchPaging"
-}, new {@id = "global-search-form"}))
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(x => Model.PageSize)
-    //foreach (var result in Model.Results)
-    //{
-        @Html.Partial("_SearchResult", new SearchResult())
-    @*}*@
-
-    <p>Hello world!</p>
-    <div style="display:none" id="loading">Loading...</div>
-}
-
-<!-- Show search criteria/term/string/whatever -->
+﻿@model CSDemo.Contracts.GeneralSearch.ISearch
 <section class="breadcrumb-wrapper">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <h2>Search Term:</h2>
-                <p>puppy monkey baby</p>
+                @Model.TotalItemCount @(Model.TotalItemCount==1?"result":"results" ) for <p>"@Model.Query"</p> 
             </div>
         </div>
     </div>
 </section>
-
-<!-- Product Listing, minus the category/filters side bar -->
 <section class="content products">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <div class="row grid" id="products">
-                
-                    <!-- Begin: Result -->
-                    <div class="col-md-4 col-sm-3 col-xs-6">
-                        <article class="product-item">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="product-overlay">
-                                        <div class="product-mask"></div>
-                                        <a href="single-product.html" class="product-permalink"></a>
-                                        <img src="assets/images/products/product-1.jpg" class="img-responsive" alt="">
-                                        <img src="assets/images/products/product-1b.jpg" class="img-responsive product-image-2" alt="">
-                                        <div class="product-quickview">
-                                            <a class="btn btn-quickview" data-toggle="modal" data-target="#product-quickview">Quick View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-9">
-                                    <div class="product-body">
-                                        <h3>Product Name</h3>
-                                        <div class="product-labels">
-                                            <span class="label label-info">new</span>
-                                            <span class="label label-danger">sale</span>
-                                        </div>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                        <span class="price">
-                                            <del><span class="amount">$36.00</span></del>
-                                            <ins><span class="amount">$30.00</span></ins>
-                                        </span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut feugiat mauris eget magna egestas porta. Curabitur sagittis sagittis neque rutrum congue. Donec lobortis dui sagittis, ultrices nunc ornare, ultricies elit. Curabitur tristique felis pulvinar nibh porta. </p>
-                                        <div class="buttons">
-                                            <a href="" class="btn btn-primary btn-sm"><i class="fa fa-exchange"></i></a>
-                                            <a href="" class="btn btn-primary btn-sm add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                            <a href="" class="btn btn-primary btn-sm"><i class="fa fa-heart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
+                @if (Model == null || !Model.Results.Any())
+                {
+                    <p>No products matched your search criteria. Please change your search query and try again.</p>
+                }
+                else
+                {
+                    <div class="row grid" id="products">
+                        @foreach (var result in Model.Results)
+                        {
+                            @Html.Partial("_SearchResult", result)
+                        }
                     </div>
-                    <!-- End:   Result -->
-
-                </div>
-
-                <!-- Begin: Pagination -->
-                <div class="pagination-wrapper">
-                    <ul class="pagination">
-                        <li><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                    </ul>
-                </div>
-                <!-- End: Pagination -->
+                }
             </div>
         </div>
     </div>
 </section>
- 

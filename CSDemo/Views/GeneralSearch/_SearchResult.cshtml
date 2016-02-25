@@ -1,1 +1,50 @@
-﻿@model CSDemo.Contracts.ISearchResult
+﻿@inherits  Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Contracts.Product.IProduct>
+    @using System.Linq
+<div class="col-md-4 col-sm-3 col-xs-6">
+    <article class="product-item">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="product-overlay">
+                    <div class="product-mask"></div>
+                    <a href="/@(Model.Categories.Any() ? Model.Categories.FirstOrDefault().Name:"unknown")/@Model.ProductId" class="product-permalink"></a>
+                    @{
+                        var count = 0;
+                    }
+                    @foreach (var image in Model.Images)
+                    {
+                        count++;
+                        @RenderImage(image, x => x, new { Width = 360, Height = 351, @class= "img-responsive product-image-"+count }, isEditable: false);
+                        if (count == 2)
+                        {
+                            break;
+                        }
+                    }
+                    <div class="product-quickview">
+                        <a class="btn btn-quickview" data-toggle="modal" data-target="#product-quickview">Quick View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="product-body">
+                    <h3>@Model.Title</h3>
+                    <div class="product-labels">
+                        @if (Model.IsNew)
+                        {
+                            <span class="label label-info">new</span>
+                        }
+                        @if (Model.IsOnSale)
+                        {
+                            <span class="label label-danger">sale</span>
+                        }
+                    </div>
+                    <span class="price">
+                        <ins><span class="amount">$@Model.CurrencyPrice</span></ins>
+                    </span>
+                    <div class="buttons">
+                        <a href="javascript:void(0)" onclick="AddToCart('@Model.ID.ToString()')" class="btn btn-primary add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>
