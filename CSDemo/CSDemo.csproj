@@ -305,8 +305,6 @@
     <Compile Include="Models\Inventory\CommerceInventorySystem.cs" />
     <Compile Include="Models\Inventory\InventoryCatalog.cs" />
     <Compile Include="Models\Inventory\InventorySku.cs" />
-    <Compile Include="Models\Pages\HomePage.cs" />
-    <Compile Include="Models\Pages\Page.cs" />
     <Compile Include="Models\Parameters\Column1Config.cs" />
     <Compile Include="Models\Parameters\Column2Config.cs" />
     <Compile Include="Models\Parameters\Column3Config.cs" />

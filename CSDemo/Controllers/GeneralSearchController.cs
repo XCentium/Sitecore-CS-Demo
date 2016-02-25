@@ -28,15 +28,15 @@ namespace CSDemo.Controllers
     {
         #region Fields
 
-        private readonly ISitecoreService _service;
+        private readonly ISitecoreContext _context;
 
         #endregion
 
         #region Constructors
 
-        public GeneralSearchController(ISitecoreService service)
+        public GeneralSearchController(ISitecoreContext context)
         {
-            _service = service;
+            _context = context;
         }
 
         public GeneralSearchController() : this(new SitecoreContext()) { }
@@ -62,7 +62,6 @@ namespace CSDemo.Controllers
 
             searchModel = GetSearchModel(searchInfo.SearchOptions, searchInfo.SearchQuery, searchInfo.CatalogName);
 
-
             return View(searchModel);
         }
 
@@ -72,7 +71,7 @@ namespace CSDemo.Controllers
             var searchResultsPagePath = RenderingContext.Current.Rendering.DataSource;
             if(string.IsNullOrWhiteSpace(searchResultsPagePath))return View(new SearchInput());
 
-            var searchResultsPageItem = _service.Database.GetItem(searchResultsPagePath);
+            var searchResultsPageItem = _context.Database.GetItem(searchResultsPagePath);
             if (searchResultsPageItem == null) return View(new SearchInput());
 
             var redirectUrl = LinkManager.GetItemUrl(searchResultsPageItem);
@@ -98,20 +97,70 @@ namespace CSDemo.Controllers
 
         private ISearchInfo GetSearchInfo(string searchKeyword, int pageNumber, string facetValues, string sortField, int pageSize, CommerceConstants.SortDirection? sortDirection)
         {
-            //var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
+            var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
             var searchInfo = new SearchInfo
             {
                 SearchQuery = searchKeyword ?? string.Empty,
-                RequiredFacets = null, //searchManager.GetFacetFieldsForItem(this.Item),
-                SortFields = null, // searchManager.GetSortFieldsForItem(this.Item),
+                RequiredFacets = searchManager.GetFacetFieldsForItem(_context.GetCurrentItem<Item>()),
+                SortFields = searchManager.GetSortFieldsForItem(_context.GetCurrentItem<Item>()),
                 CatalogName =  Constants.Commerce.CatalogName,
                 ItemsPerPage = pageSize 
             };
 
             var productSearchOptions = new CommerceSearchOptions(searchInfo.ItemsPerPage, pageNumber-1);
+            UpdateOptionsWithFacets(searchInfo.RequiredFacets, facetValues, productSearchOptions);
+            UpdateOptionsWithSorting(sortField, sortDirection, productSearchOptions);
             searchInfo.SearchOptions = productSearchOptions;
 
             return searchInfo;
+        }
+
+        private void UpdateOptionsWithSorting(string sortField, CommerceConstants.SortDirection? sortDirection, CommerceSearchOptions productSearchOptions)
+        {
+            if (!string.IsNullOrEmpty(sortField))
+            {
+                productSearchOptions.SortField = sortField;
+
+                if (sortDirection.HasValue)
+                {
+                    productSearchOptions.SortDirection = sortDirection.Value;
+                }
+
+                ViewBag.SortField = sortField;
+                ViewBag.SortDirection = sortDirection;
+            }
+        }
+
+        private void UpdateOptionsWithFacets(IEnumerable<CommerceQueryFacet> facets, string valueQueryString, CommerceSearchOptions productSearchOptions)
+        {
+            if (facets != null && facets.Any())
+            {
+                if (!string.IsNullOrEmpty(valueQueryString))
+                {
+                    var facetValuesCombos = valueQueryString.Split(new char[] { '&' });
+
+                    foreach (var facetValuesCombo in facetValuesCombos)
+                    {
+                        var facetValues = facetValuesCombo.Split(new char[] { '=' });
+
+                        var name = facetValues[0];
+
+                        var existingFacet = facets.FirstOrDefault(item => item.Name.Equals(name, System.StringComparison.OrdinalIgnoreCase));
+
+                        if (existingFacet != null)
+                        {
+                            var values = facetValues[1].Split(new char[] { Constants.QueryStrings.FacetsSeparator });
+
+                            foreach (var value in values)
+                            {
+                                existingFacet.Values.Add(value);
+                            }
+                        }
+                    }
+                }
+
+                productSearchOptions.FacetFields = facets;
+            }
         }
 
 
@@ -141,7 +190,7 @@ namespace CSDemo.Controllers
                         facets = searchResponse.Facets;
                     }
                 }
-                Sitecore.Context.Item.Fields.ReadAll();
+                
                 var result = new Search
                 {
                     TotalItemCount = totalProductCount,
@@ -174,7 +223,7 @@ namespace CSDemo.Controllers
                         ItemId = p.ItemId,
                         Uri = p.Uri
                     });
-
+                
                 searchResults = searchManager.AddSearchOptionsToQuery<CommerceProductSearchResultItem>(searchResults, searchOptions);
 
                 var results = searchResults.GetResults();
