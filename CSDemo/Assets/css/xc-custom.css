@@ -154,3 +154,11 @@ form label.error {
         color: #BCC7D1;
         font-size: 14px;
     }
+
+
+/* Header Search Dropdown */
+header.navbar li.navbar-search .dropdown-menu {
+    border: 1px solid #e7e7e7;
+    border-top: none;
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,0.15);
+}
