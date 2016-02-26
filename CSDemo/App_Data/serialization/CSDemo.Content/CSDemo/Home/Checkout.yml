@@ -1,0 +1,31 @@
+﻿---
+ID: 95142bfb-8ecb-4cee-bc20-4ed70ddefcc9
+Parent: 49b9f3e2-65cc-48f5-9a96-35efd0c752d8
+Template: b3d2832f-2fbf-4466-9d95-d3a0c6476362
+Path: /sitecore/content/CSDemo/Home/Checkout
+DB: master
+SharedFields:
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s" p:p="1">
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r uid="{8C8742B7-07ED-4D0A-B605-96794EBC5CAE}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:ds="" s:id="{36E85C00-E039-465F-AD67-1A36A985DCE4}" s:par="" s:ph="page-body" />
+        <r uid="{E5A6C541-E277-499D-9CB9-DFF8CE125A23}" p:after="r[@uid='{8C8742B7-07ED-4D0A-B605-96794EBC5CAE}']" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160219T183045Z
+    - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
+      Hint: Page Title
+      Value: Checkout
+    - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
+      Hint: Meta Description
+      Value: Checkout Page

@@ -1,0 +1,61 @@
+﻿@model CSDemo.Contracts.GeneralSearch.ISearch
+<section class="breadcrumb-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                @Model.TotalItemCount @(Model.TotalItemCount==1?"result":"results" ) for <p>"@Model.Query"</p> 
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content products">
+    <div class="container">
+        <div class="row">
+            @if (Model.Facets != null && Model.Facets.Any())
+            {
+                <div class="col-sm-3">
+                    <aside class="sidebar">
+                        @foreach (var facet in Model.Facets)
+                        {
+
+                            <div class="widget widget-checkbox">
+                                <h3>
+                                    <a role="button" data-toggle="collapse" href="#widget-discount-collapse" aria-expanded="true" aria-controls="widget-discount-collapse">@facet.DisplayName</a>
+                                </h3>
+                                <div class="collapse in" id="widget-discount-collapse" aria-expanded="true" role="tabpanel">
+                                    <div class="widget-body">
+                                        @foreach (var option in facet.FoundValues)
+                                        {
+                                            <div class="checkbox">
+                                                <input id="check-with-discount" type="checkbox" value="with-discount">
+                                                <label for="check-with-discount"><a href="@Model.AddToFacets(facet.Name, option.Name, Request.Url.AbsoluteUri)">@option.Name</a></label>
+                                                <span>[@option.AggregateCount]</span>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </aside>
+                </div>
+            }
+            <div class="col-xs-@(Model.Facets != null && Model.Facets.Any() ? "9":"12")">
+                @if (Model == null || !Model.Results.Any())
+                {
+                    <p>No products matched your search criteria. Please change your search query and try again.</p>
+                }
+                else
+                {
+                    <div class="row grid" id="products">
+                        @foreach (var result in Model.Results)
+                        {
+                            @Html.Partial("_SearchResult", result)
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</section>
+

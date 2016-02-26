@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Sitecore.Mvc.Presentation;
 using CSDemo.Models;
+using CSDemo.Models.Product;
 using Sitecore.Mvc.Controllers;
 using XCore.Framework;
 using Sitecore.Commerce.Connect.CommerceServer;

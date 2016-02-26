@@ -22,34 +22,39 @@
 
 @if (categoryParent != null)
 {
+    <section class="content categories">
+        <div class="row row-no-padding">
+            @{
+                // get category image if any
+                var catImage = "assets/images/categories/category-2.jpg";
 
-    // get category image if any
-    var catImage = "assets/images/categories/category-2.jpg";
-    
-            foreach (Item category in categoryParent)
-            {
-                var catImageIds = category["Images"];
-                if (!string.IsNullOrEmpty(catImageIds))
+                foreach (Item category in categoryParent)
                 {
-                    var catImages = catImageIds.Split('|');
-                    Item catImageItem = Sitecore.Context.Database.GetItem(catImages[0]);
-                    catImage = "/~/media/" + catImageItem.ID.ToShortID() + ".ashx";
+                    var catImageIds = category["Images"];
+
+                    if (!string.IsNullOrEmpty(catImageIds))
+                    {
+                        var catImages = catImageIds.Split('|');
+                        Item catImageItem = Sitecore.Context.Database.GetItem(catImages[0]);
+                        catImage = "/~/media/" + catImageItem.ID.ToShortID() + ".ashx";
+                    }
+
+                        <!-- CATEGORY - START -->
+                            <div class="col-xs-4">
+                                <div class="category">
+                                    <a href="/product-listing?id=@category.ID.ToString()">
+                                        <img src="@catImage" class="img-responsive" alt="">
+                                        <div class="category-mask"></div>
+                                        <h3 class="category-title">@category.Name <span>Collection</span></h3>
+                                    </a>
+                                </div>
+                            </div>
+                        <!-- CATEGORY - END -->
+
                 }
-                
-            <!-- CATEGORY - START -->
-                <div class="col-xs-4">
-                    <div class="category">
-                        <a href="/ProductListing?id=@category.ID.ToString()">
-                            <img src="@catImage" class="img-responsive" alt="">
-                            <div class="category-mask"></div>
-                            <h3 class="category-title">@category.Name <span>Collection</span></h3>
-                        </a>
-                    </div>
-                </div>
-            <!-- CATEGORY - END -->
-
             }
-
+        </div>
+    </section>
 }
 
 
