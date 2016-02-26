@@ -1,19 +1,19 @@
 ﻿@using Sitecore.Mvc
 @using Sitecore.Data
 @using Sitecore.Data.Items
-@using CSDemo.Helpers; 
+@using CSDemo.Helpers;
 
 @{
 
     //var cartHelper = new CartHelper();
     //var id = cartHelper.GetVisitorID();
-   // var response = cartHelper.AddProductToCart("1", "AW074-04", "Adventure Works Catalog", "9");
+    // var response = cartHelper.AddProductToCart("1", "AW074-04", "Adventure Works Catalog", "9");
     //var cart = cartHelper.GetCustomerCart();
     //var liner = cart.Lines;
     //var minicart = cartHelper.GetMiniCart();
 
-   
-    
+
+
     var categoryID = Request.QueryString["id"];
 
     if (string.IsNullOrEmpty(categoryID))
@@ -260,19 +260,6 @@
 
                                 var ProductImage = "assets/images/products/product-1.jpg";
 
-<<<<<<< HEAD
-                        var title = product.DisplayName.ToString();
-                        var description = product["Description"];
-                        var ProductImageIds = product["Images"];
-                        var rPrice = decimal.Parse(product["ListPrice"]);
-                        var rDelPrice = rPrice + 100.00m;
-                        var price = String.Format("{0:0.00}", rPrice);
-                        var delPrice = String.Format("{0:0.00}", rDelPrice);
-                        var ProductId = product["ProductId"];
-                        var CatalogName = product["CatalogName"];
-                        
-                        var Variants = product.GetChildren();
-=======
                                 var title = product.DisplayName.ToString();
                                 var description = product["Description"];
                                 var ProductImageIds = product["Images"];
@@ -280,7 +267,10 @@
                                 var rDelPrice = rPrice + 100.00m;
                                 var price = String.Format("{0:0.00}", rPrice);
                                 var delPrice = String.Format("{0:0.00}", rDelPrice);
->>>>>>> 68d46aec3bc48de5d6e430a7f8297ef1b137f411
+                                var ProductId = product["ProductId"];
+                                var CatalogName = product["CatalogName"];
+
+                                var Variants = product.GetChildren();
 
                                 if (!string.IsNullOrEmpty(ProductImageIds))
                                 {
@@ -302,42 +292,6 @@
                                                         </div>*@
                                                 </div>
                                             </div>
-<<<<<<< HEAD
-                                            <div class="product-rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-o"></i>
-                                                <i class="fa fa-star-o"></i>
-                                            </div>
-                                            <span class="price">
-                                                <del><span class="amount">$@delPrice</span></del>
-                                                <ins><span class="amount">$@price</span></ins>
-                                            </span>
-                                            <p>@description</p>
-                                            <form name="@ProductId" id="@ProductId">
-                                                <input type="hidden" id="Quantity" name="Quantity" value="1" />
-                                                <input type="hidden" id="ProductId" name="ProductId" value="@ProductId" />
-                                                <input type="hidden" id="CatalogName" name="CatalogName" value="@CatalogName" />
-                                                <div class="form-group">
-                                                    <select class="form-control" name="VariantId" id="VariantId">
-                                                        @foreach (Item variant in Variants)
-                                                        {
-                                                            var variantName = variant.DisplayName.ToString();
-                                                            var variantId = variant["VariantId"];
-                                                            <option value="@variantId">@variantName</option>
-                                                        }
-
-                                                    </select>
-                                                </div>
-                                                <div class="buttons">
-                                                    <a href="" class="btn btn-primary btn-sm"><i class="fa fa-exchange"></i></a>
-                                                    <a href="javascript:void(0)" onclick="AddProductToCart('@ProductId')" class="btn btn-primary btn-sm add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                    <a href="" class="btn btn-primary btn-sm"><i class="fa fa-heart"></i></a>
-                                                </div>
-                                            </form>
-
-=======
                                             <div class="col-sm-9">
                                                 <div class="product-body">
                                                     <h3>@title</h3>
@@ -357,14 +311,30 @@
                                                         <ins><span class="amount">$@price</span></ins>
                                                     </span>
                                                     <p>@description</p>
-                                                    <div class="buttons">
-                                                        <a href="" class="btn btn-primary btn-sm"><i class="fa fa-exchange"></i></a>
-                                                        <a href="javascript:void(0)" onclick="AddToCart('@product.ID.ToString()')" class="btn btn-primary btn-sm add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                        <a href="" class="btn btn-primary btn-sm"><i class="fa fa-heart"></i></a>
-                                                    </div>
+                                                    <form name="@ProductId" id="@ProductId">
+                                                        <input type="hidden" id="Quantity" name="Quantity" value="1" />
+                                                        <input type="hidden" id="ProductId" name="ProductId" value="@ProductId" />
+                                                        <input type="hidden" id="CatalogName" name="CatalogName" value="@CatalogName" />
+                                                        <div class="form-group">
+                                                            <select class="form-control" name="VariantId" id="VariantId">
+                                                                @foreach (Item variant in Variants)
+                                                                {
+                                                                    var variantName = variant.DisplayName.ToString();
+                                                                    var variantId = variant["VariantId"];
+                                                                    <option value="@variantId">@variantName</option>
+                                                                }
+
+                                                            </select>
+                                                        </div>
+                                                        <div class="buttons">
+                                                            <a href="" class="btn btn-primary btn-sm"><i class="fa fa-exchange"></i></a>
+                                                            <a href="javascript:void(0)" onclick="AddProductToCart('@ProductId')" class="btn btn-primary btn-sm add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                            <a href="" class="btn btn-primary btn-sm"><i class="fa fa-heart"></i></a>
+                                                        </div>
+                                                    </form>
+
                                                 </div>
                                             </div>
->>>>>>> 68d46aec3bc48de5d6e430a7f8297ef1b137f411
                                         </div>
                                     </article>
                                 </div>

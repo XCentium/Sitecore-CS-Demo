@@ -1,24 +1,13 @@
 ﻿---
 ID: 3a18b3f7-0fd2-43b6-bcbb-4532b662fa2d
 Parent: dfe6e26a-54ec-483b-8594-d6ac854b6e26
-<<<<<<< HEAD:CSDemo/App_Data/serialization/XcCommerce112Demo.Renderings/CSDemo/Product/CategoryListing.yml
-Template: 2a3e91a0-7987-44b5-ab34-35c2d9de83b9
-Path: /sitecore/layout/Renderings/CSDemo/Product/CategoryListing
-=======
 Template: 99f8905d-4a87-4eb8-9f8b-a9bebfb3add6
 Path: /sitecore/layout/Renderings/CSDemo/Product/Category Listing
->>>>>>> 68d46aec3bc48de5d6e430a7f8297ef1b137f411:CSDemo/App_Data/serialization/CSDemo.Renderings/CSDemo/Product/Category Listing.yml
 DB: master
 SharedFields:
-- ID: 13f89250-ad6b-4548-882e-118a12c18094
-  Hint: Parameters Template
-  Value: {12AFFA53-D310-4B45-A82B-5A23990410D3}
-- ID: ded9e431-3604-4921-a4b3-a6ec7636a5b6
-  Hint: Controller Action
-  Value: CategoryListing
-- ID: e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7
-  Hint: Controller
-  Value: Product
+- ID: 51b435bc-f7b9-478a-9c51-52916af96ff5
+  Hint: Path
+  Value: /Views/Product/CategoryListing.cshtml
 Languages:
 - Language: en
   Versions:

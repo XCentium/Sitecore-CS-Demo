@@ -38,23 +38,34 @@
 
             var productImage = "assets/images/products/product-1.jpg";
 
-<<<<<<< HEAD
-                                    foreach (var productImageId in productImages)
-                                    {
-                                        Item productImageItem = Sitecore.Context.Database.GetItem(productImageId);
-                                        productImage = "/~/media/" + productImageItem.ID.ToShortID() + ".ashx";
-                                        <div class="item"><img src="@productImage" class="img-responsive" alt=""></div>
-                                    }
-                                }
-                                else
-                                {
-                                    <div class="item"><img src="~/assets/images/products/product-1.jpg" class="img-responsive" alt=""></div>
-                                }
+            <section class="content products">
+                <div class="container">
+
+                    <article class=" product-item product-single">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div class="product-carousel-wrapper">
+                                    <div id="product-carousel">
+                                        @if (!string.IsNullOrEmpty(productImageIds))
+                                        {
+                                            var productImages = productImageIds.Split('|');
+
+                                            foreach (var productImageId in productImages)
+                                            {
+                                                Item productImageItem = Sitecore.Context.Database.GetItem(productImageId);
+                                                productImage = "/~/media/" + productImageItem.ID.ToShortID() + ".ashx";
+                                                <div class="item"><img src="@productImage" class="img-responsive" alt=""></div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="item"><img src="~/assets/images/products/product-1.jpg" class="img-responsive" alt=""></div>
+                                        }
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-8">
-                        <div class="product-body">
+                            <div class="col-xs-8">
+                                <div class="product-body">
                             <form name="@ProductId" id="@ProductId">
                                 <input type="hidden" id="ProductId" name="ProductId" value="@ProductId" />
                                 <input type="hidden" id="CatalogName" name="CatalogName" value="@CatalogName" />
@@ -121,83 +132,8 @@
                                     <li><a href="#"><i class="fa fa-envelope"></i>Email to friend</a></li>
                                 </ul>
                             </form>
-=======
-            <section class="content products">
-                <div class="container">
-
-                    <article class=" product-item product-single">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <div class="product-carousel-wrapper">
-                                    <div id="product-carousel">
-                                        @if (!string.IsNullOrEmpty(productImageIds))
-                                        {
-                                            var productImages = productImageIds.Split('|');
-
-                                            foreach (var productImageId in productImages)
-                                            {
-                                                Item productImageItem = Sitecore.Context.Database.GetItem(productImageId);
-                                                productImage = "/~/media/" + productImageItem.ID.ToShortID() + ".ashx";
-                                                <div class="item"><img src="@productImage" class="img-responsive" alt=""></div>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <div class="item"><img src="~/assets/images/products/product-1.jpg" class="img-responsive" alt=""></div>
-                                        }
-                                    </div>
-                                </div>
+							</div>
                             </div>
-                            <div class="col-xs-8">
-                                <div class="product-body">
-                                    <h3>@title</h3>
-                                    <div class="product-labels">
-                                        <span class="label label-info">new</span>
-                                        <span class="label label-danger">sale</span>
-                                    </div>
-                                    <div class="product-rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </div>
-                                    <span class="price">
-                                        <del><span class="amount">$@delPrice</span></del>
-                                        <ins><span class="amount">$@price</span></ins>
-                                    </span>
-                                    <ul class="list-unstyled product-info">
-                                        <li><span>ID</span>@productId</li>
-                                        <li><span>Availability</span>In Stock</li>
-                                        <li><span>Brand</span>@brand</li>
-                                        @*<li><span>Tags</span></li>*@
-                                    </ul>
-                                    <p>@description</p>
-                                    <div class="product-form clearfix">
-                                        <div class="row row-no-padding">
-
-                                            <div class="col-xs-6">
-                                                <div class="product-quantity clearfix">
-                                                    <a class="btn btn-default" id="qty-minus">-</a>
-                                                    <input type="text" class="form-control" id="qty" value="1">
-                                                    <a class="btn btn-default" id="qty-plus">+</a>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-xs-6">
-                                                <a href="javascript:void(0)" onclick="AddToCart('@product.ID.ToString()')" class="btn btn-primary add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <ul class="list-inline product-links">
-                                        <li><a href="#"><i class="fa fa-heart"></i>Add to wishlist</a></li>
-                                        <li><a href="#"><i class="fa fa-exchange"></i>Compare</a></li>
-                                        <li><a href="#"><i class="fa fa-envelope"></i>Email to friend</a></li>
-                                    </ul>
-                                </div>
-                            </div>
->>>>>>> 68d46aec3bc48de5d6e430a7f8297ef1b137f411
                         </div>
                     </article>
 
