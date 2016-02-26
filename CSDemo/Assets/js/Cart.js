@@ -1,66 +1,121 @@
 ﻿
 $(document).ready(function () {
 
-    LoadCartData();
+    // LoadCartData();
+    LoadCart();
 
 });
+
+function AddProductToCart(formID) {
+
+    var form = document.getElementById(formID);
+ 
+    var Quantity = form.Quantity.value;
+
+    var ProductId = form.ProductId.value;
+    var CatalogName = form.CatalogName.value;
+    var VariantId = form.VariantId.value;
+
+    $.ajax({
+        type: "POST",
+        url: "/AJAX/cart.asmx/AddProductToCart",
+        data:  "{Quantity:'" + Quantity + "', ProductId:'" + ProductId + "', CatalogName:'" + CatalogName + "', VariantId:'" + VariantId + "'}", 
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+
+            //console.log(result.d)
+            //// var ShoppingCart = result.d;
+
+            //alert(result.d);
+
+            // modalAddToCart
+            ShowActionMessage("Added to Cart");
+
+            // ShowCartUpdate(ShoppingCart);
+            LoadCart();
+
+        },
+        error: function (error) {
+            console.log(error)
+            alert(error); //alert with HTTP error
+
+        }
+
+    });
+
+
+}
+
+function ShowActionMessage(message) {
+    // alertmessage
+    $('#alertmessage').html(message);
+    $('#modalAddToCart').modal('show');
+    window.setTimeout(function () {
+        $('#modalAddToCart').modal('hide');
+    }, 1500);
+}
 
 
 function AddToCart(ProductID) {
 
-    $.ajax({
-        type: "POST",
-        url: "/AJAX/cart.asmx/AddToCart",
-        data: '{ "productID" : ' + JSON.stringify(ProductID) + '}',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (result) {
+    alert('Error');
 
-            console.log(result.d)
-            var ShoppingCart = result.d;
+    //$.ajax({
+    //    type: "POST",
+    //    url: "/AJAX/cart.asmx/AddToCart",
+    //    data: '{ "productID" : ' + JSON.stringify(ProductID) + '}',
+    //    contentType: "application/json; charset=utf-8",
+    //    dataType: "json",
+    //    success: function (result) {
 
-            // modalAddToCart
-            $('#modalAddToCart').modal('show');
-            window.setTimeout(function () {
-                $('#modalAddToCart').modal('hide');
-            }, 1500);
+    //        console.log(result.d)
+    //        var ShoppingCart = result.d;
+
+    //        // modalAddToCart
+    //        $('#modalAddToCart').modal('show');
+    //        window.setTimeout(function () {
+    //            $('#modalAddToCart').modal('hide');
+    //        }, 1500);
             
-            ShowCartUpdate(ShoppingCart);
+    //        ShowCartUpdate(ShoppingCart);
 
-        },
-        error: function (error) {
-            console.log(error)
-            alert(error); //alert with HTTP error
+    //    },
+    //    error: function (error) {
+    //        console.log(error)
+    //        alert(error); //alert with HTTP error
 
-        }
+    //    }
 
-    });
+    //});
 }
 
 function RemoveProductFromCart(ProductID) {
 
-    $.ajax({
-        type: "POST",
-        url: "/AJAX/cart.asmx/RemoveFromCart",
-        data: '{ "productID" : ' + JSON.stringify(ProductID) + '}',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (result) {
+    alert('Error');
 
-            console.log(result.d)
-            var ShoppingCart = result.d;
+    //$.ajax({
+    //    type: "POST",
+    //    url: "/AJAX/cart.asmx/RemoveFromCart",
+    //    data: '{ "productID" : ' + JSON.stringify(ProductID) + '}',
+    //    contentType: "application/json; charset=utf-8",
+    //    dataType: "json",
+    //    success: function (result) {
+
+    //        console.log(result.d)
+    //        var ShoppingCart = result.d;
 
 
-            ShowCartUpdate(ShoppingCart);
+    //        ShowCartUpdate(ShoppingCart);
 
-        },
-        error: function (error) {
-            console.log(error)
-            alert(error); //alert with HTTP error
+    //    },
+    //    error: function (error) {
+    //        console.log(error)
+    //        alert(error); //alert with HTTP error
 
-        }
+    //    }
 
-    });
+    //});
 }
 
 function ShowCartUpdate(ShoppingCart) {
@@ -91,8 +146,7 @@ function ShowCartUpdate(ShoppingCart) {
 
 }
 
-
-function LoadCartData() {
+function LoadCart() {
 
     $.ajax({
         type: "POST",
@@ -104,6 +158,7 @@ function LoadCartData() {
 
             var ShoppingCart = result.d;
 
+            //console.log(ShoppingCart);
             ShowCartUpdate(ShoppingCart);
 
         },
@@ -116,16 +171,41 @@ function LoadCartData() {
 
 }
 
-var currtime = new Date().getTime();
-$(document.body).bind("mousemove keypress", function (e) {
-    currtime = new Date().getTime();
-});
+function LoadCartData() {
+    alert('Error');
+
+    //$.ajax({
+    //    type: "POST",
+    //    url: "/AJAX/cart.asmx/LoadCartData",
+    //    data: '{}',
+    //    contentType: "application/json; charset=utf-8",
+    //    dataType: "json",
+    //    success: function (result) {
+
+    //        var ShoppingCart = result.d;
+
+    //        ShowCartUpdate(ShoppingCart);
+
+    //    },
+    //    error: function (error) {
+    //        console.log(error)
+    //        alert("Error"); //alert with HTTP error
+    //    }
+
+    //});
+
+}
+
+//var currtime = new Date().getTime();
+//$(document.body).bind("mousemove keypress", function (e) {
+//    currtime = new Date().getTime();
+//});
 
 function refresh() {
-    if (new Date().getTime() - currtime >= 45000)
-        window.location.reload(true);
-    else
-        setTimeout(refresh, 4500);
+    //if (new Date().getTime() - currtime >= 45000)
+    //    window.location.reload(true);
+    //else
+    //    setTimeout(refresh, 4500);
 }
 
 function SubmitCartFormData() {

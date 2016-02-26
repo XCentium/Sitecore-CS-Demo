@@ -34,6 +34,10 @@ namespace CSDemo
             /// </summary>
             public const char FacetsSeparator = '|';
 
+            public const string FacetOptionSeparator = "||";
+
+            public const char FacetOptionDefinitionSeparator = '=';
+
             /// <summary>
             /// Used for the search keyword
             /// </summary>

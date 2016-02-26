@@ -22,5 +22,12 @@ namespace CSDemo.Models.Cart
 
         public Decimal LineTotal { get; set; }
 
+        public ShoppingCart()
+        {
+            this.Discount = 0.00m;
+            this.Currency = "USD";
+            this.Shipping = 0.00m;
+        }
+
     }
 }

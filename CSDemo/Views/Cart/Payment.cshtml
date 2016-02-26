@@ -1,67 +1,78 @@
 ﻿@using Sitecore.Mvc;
 @using CSDemo.Models.Cart;
+@using System;
+@using System.Collections.Generic;
+@using System.Web.Mvc;
+@using Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines;
+@using Sitecore.Commerce.Entities.Payments;
 
 <!-- ==========================
     MY ACCOUNT - START
 =========================== -->
+<section class="content account">
+    <div class="container">
+        <div class="row">
 
-<div class="col-sm-12">
-    <article class="account-content checkout-steps">
+            <div class="col-sm-12">
+                <article class="account-content checkout-steps">
 
-        <div class="row row-no-padding">
-            <div class="col-xs-6 col-sm-3">
-                <div class="checkout-step active">
-                    <div class="number">1</div>
-                    <div class="title">Billing & Shipping Address</div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-3">
-                <div class="checkout-step active">
-                    <div class="number">2</div>
-                    <div class="title">Shipping Method</div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-3">
-                <div class="checkout-step active">
-                    <div class="number">3</div>
-                    <div class="title">Payment Method</div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-3">
-                <div class="checkout-step">
-                    <div class="number">4</div>
-                    <div class="title">Review</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="progress checkout-progress hidden-xs"><div class="progress-bar" role="progressbar" aria-valuenow="66.6" aria-valuemin="0" aria-valuemax="100" style="width:66.6%;"></div></div>
-
-        <form id="payment-form" name="payment-form">
-            <h3>Payment Method</h3>
-            <div class="products-order checkout payment-method">
-                <div class="row">
-                    <div class="col-lg-6 col-md-8 col-sm-10">
-                        <div id="payment-methods" role="tablist" aria-multiselectable="true">
-                            <div class="panel radio">
-                                <input type="radio" name="optionsRadios" value="Cash On Delivery" id="radio-payment-1">
-                                <label for="radio-payment-1" data-toggle="collapse" data-target="#parent-1" data-parent="#payment-methods" aria-controls="parent-1">Cash On Delivery<span>($5)</span></label>
-                                <div id="parent-1" class="panel-collapse collapse" role="tabpanel"></div>
+                    <div class="row row-no-padding">
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="checkout-step active">
+                                <div class="number">1</div>
+                                <div class="title">Billing & Shipping Address</div>
                             </div>
-                            <div class="panel radio">
-                                <input type="radio" name="optionsRadios" value="Bank Transfer" id="radio-payment-2">
-                                <label for="radio-payment-2" class="collapsed" data-toggle="collapse" data-target="#parent-2" data-parent="#payment-methods" aria-controls="parent-2">Payment by Bank Transfer<span>IBAN: CZ00 0000 0000 0000 0000 0000</span></label>
-                                <div id="parent-2" class="panel-collapse collapse" role="tabpanel"></div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="checkout-step active">
+                                <div class="number">2</div>
+                                <div class="title">Shipping Method</div>
                             </div>
-                            <div class="panel radio">
-                                <input type="radio" name="optionsRadios" value="PayPal" id="radio-payment-3">
-                                <label for="radio-payment-3" class="collapsed" data-toggle="collapse" data-target="#parent-3" data-parent="#payment-methods" aria-controls="parent-3">PayPal</label>
-                                <div id="parent-3" class="panel-collapse collapse" role="tabpanel"></div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="checkout-step active">
+                                <div class="number">3</div>
+                                <div class="title">Payment Method</div>
                             </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="checkout-step">
+                                <div class="number">4</div>
+                                <div class="title">Review</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="progress checkout-progress hidden-xs"><div class="progress-bar" role="progressbar" aria-valuenow="66.6" aria-valuemin="0" aria-valuemax="100" style="width:66.6%;"></div></div>
+
+                    <form id="payment-form" name="payment-form">
+                        <h3>Payment Method</h3>
+                        <div class="products-order checkout payment-method">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-8 col-sm-10">
+                                    <div id="payment-methods" role="tablist" aria-multiselectable="true">
+
+                                        @{
+                                var provider = new Sitecore.Commerce.Services.Payments.PaymentServiceProvider();
+                                var paymentRequest = new CommerceGetPaymentMethodsRequest(Sitecore.Context.Language.ToString());
+                                var paymentResult = provider.GetPaymentMethods(paymentRequest);
+
+                                var paymentMethods = paymentResult.PaymentMethods;
+
+                                var count = 0;
+                                        }
+
+                                        @foreach (PaymentMethod paymentMethod in paymentMethods)
+                            {
+                                count++;
+                                if (paymentMethod.Name == "CreditCard")
+                                {
+
+
                             <div class="panel radio">
-                                <input type="radio" name="optionsRadios" value="Card Payment" id="radio-payment-4" checked>
-                                <label for="radio-payment-4" class="collapsed" data-toggle="collapse" data-target="#parent-4" data-parent="#payment-methods" aria-controls="parent-4">Pay via Credit Card</label>
-                                <div id="parent-4" class="panel-collapse collapse in" role="tabpanel">
+                                <input type="radio" name="optionsRadios" value="@paymentMethod.ExternalId" id="radio-payment-@count" checked>
+                                <label for="radio-payment-@count" class="collapsed" data-toggle="collapse" data-target="#parent-@count" data-parent="#payment-methods" aria-controls="parent-4">@paymentMethod.Description</label>
+                                <div id="parent-@count" class="panel-collapse collapse in" role="tabpanel">
                                     <div class="credit-card-form">
                                         <div class="row">
                                             <div class="form-group col-sm-9">
@@ -116,20 +127,38 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <input type="hidden" value="@paymentMethod.Description" name="Payment_Type_Description" id="Payment_Type_Description" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                                }
+                                else
+                                {
+
+                            <div class="panel radio">
+                                <input type="radio" name="optionsRadios" value="@paymentMethod.ExternalId" id="radio-payment-@count">
+                                <label for="radio-payment-@count" data-toggle="collapse" data-target="#parent-@count" data-parent="#payment-methods" aria-controls="parent-@count">@paymentMethod.Name<span></span></label>
+                                <div id="parent-@count" class="panel-collapse collapse" role="tabpanel"></div>
+                            </div>
+                                }
+
+                            }
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                        <div class="clearfix">
+                            <a href="/checkout/review" onclick="return SubmitPaymentFormData();" class="btn btn-primary btn-lg pull-right">Continue</a>
+                        </div>
+                    </form>
+                </article>
             </div>
-            <div class="clearfix">
-                <a href="/checkout/review" onclick="return SubmitPaymentFormData();" class="btn btn-primary btn-lg pull-right">Continue</a>
-            </div>
-        </form>
-    </article>
-</div>
+        </div>
+    </div>
+</section>
 <!-- ==================
     MY ACCOUNT - END
 =========================== -->
-
