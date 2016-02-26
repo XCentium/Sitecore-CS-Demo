@@ -4,110 +4,123 @@
 <!-- ==========================
     MY ACCOUNT - START
 =========================== -->
+@{
+    // Get shipping method from Commerce
 
-<div class="col-sm-12">
-    <article class="account-content checkout-steps">
+}
+<section class="content account">
+    <div class="container">
+        <div class="row">
 
-        <div class="row row-no-padding">
-            <div class="col-xs-6 col-sm-3">
-                <div class="checkout-step active">
-                    <div class="number">1</div>
-                    <div class="title">Billing & Shipping Address</div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-3">
-                <div class="checkout-step active">
-                    <div class="number">2</div>
-                    <div class="title">Shipping Method</div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-3">
-                <div class="checkout-step">
-                    <div class="number">3</div>
-                    <div class="title">Payment Method</div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-3">
-                <div class="checkout-step">
-                    <div class="number">4</div>
-                    <div class="title">Review</div>
-                </div>
-            </div>
-        </div>
+            <div class="col-sm-12">
+                <article class="account-content checkout-steps">
 
-        <div class="progress checkout-progress hidden-xs"><div class="progress-bar" role="progressbar" aria-valuenow="33.3" aria-valuemin="0" aria-valuemax="100" style="width:33.3%;"></div></div>
-
-        <form id="shipping-form" name="shipping-form">
-            <h3>Shipping Method</h3>
-            <div class="products-order checkout shipping-method">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div id="shipping-methods" role="tablist" aria-multiselectable="true">
-                            <div class="panel radio">
-                                <input type="radio" name="optionsRadios" value="Personal Pickup" id="radio-shipping-1" disabled="disabled">
-                                <label for="radio-shipping-1" data-toggle="collapse" data-target="#parent-1" data-parent="#shipping-methods" aria-controls="parent-1">Personal Pickup</label>
-                                <div id="parent-1" class="panel-collapse collapse" role="tabpanel">
-                                    <div class="radio">
-                                        <input type="radio" name="radioshipping1options" id="radioshipping11" disabled="disabled">
-                                        <label for="radioshipping11">California, USA <span>Tomorrow</span></label>
-                                        <div class="shipping-method-description">
-                                            <p>1443 E Washington Blvd, Pasadena, CA 91104</p>
-                                            <ul class="list-unstyled">
-                                                <li><span>Mon, Tue</span> 8:00 - 20:00</li>
-                                                <li><span>Wed - Fri</span> 12:00 - 20:00</li>
-                                                <li><span>Sat, Sun</span> Closed</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="radioshipping1options" id="radioshipping12" disabled="disabled">
-                                        <label for="radioshipping12">California, USA <span>Tomorrow</span></label>
-                                        <div class="shipping-method-description">
-                                            <p>1443 E Washington Blvd, Pasadena, CA 91104</p>
-                                            <ul class="list-unstyled">
-                                                <li><span>Mon, Tue</span> 8:00 - 20:00</li>
-                                                <li><span>Wed - Fri</span> 12:00 - 20:00</li>
-                                                <li><span>Sat, Sun</span> Closed</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="row row-no-padding">
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="checkout-step active">
+                                <div class="number">1</div>
+                                <div class="title">Billing & Shipping Address</div>
                             </div>
-                            <div class="panel radio">
-                                <input type="radio" name="optionsRadios" value="Delivery to your address" id="radio-shipping-2" checked>
-                                <label for="radio-shipping-2" class="collapsed" data-toggle="collapse" data-target="#parent-2" data-parent="#shipping-methods" aria-controls="parent-2">Delivery to your address</label>
-                                <div id="parent-2" class="panel-collapse collapse in" role="tabpanel">
-                                    <div class="radio">
-                                        <input type="radio" name="radioshipping2options" value="Post Air Mail" id="radioshipping21" checked>
-                                        <label for="radioshipping21">Post Air Mail<span>$15.00</span></label>
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="radioshipping2options" value="FedEx" id="radioshipping22">
-                                        <label for="radioshipping22">FedEx<span>$7.00</span></label>
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="radioshipping2options" value="UPS" id="radioshipping23">
-                                        <label for="radioshipping23">UPS<span>$9.00</span></label>
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="radioshipping2options" value="DHL" id="radioshipping24">
-                                        <label for="radioshipping24">DHL<span>$8.50</span></label>
-                                    </div>
-
-                                </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="checkout-step active">
+                                <div class="number">2</div>
+                                <div class="title">Shipping Method</div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="checkout-step">
+                                <div class="number">3</div>
+                                <div class="title">Payment Method</div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="checkout-step">
+                                <div class="number">4</div>
+                                <div class="title">Review</div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="clearfix">
-                <a href="/checkout/payment" onclick="return SubmitShippingFormData();" class="btn btn-primary btn-lg pull-right ">Continue</a>
-            </div>
-        </form>
 
-    </article>
+                    <div class="progress checkout-progress hidden-xs"><div class="progress-bar" role="progressbar" aria-valuenow="33.3" aria-valuemin="0" aria-valuemax="100" style="width:33.3%;"></div></div>
+
+                    <form id="shipping-form" name="shipping-form">
+                        <h3>Shipping Method</h3>
+                        <div class="products-order checkout shipping-method">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div id="shipping-methods" role="tablist" aria-multiselectable="true">
+                                        <div class="panel radio">
+                                            <input type="radio" name="optionsRadios" value="Personal Pickup" id="radio-shipping-1" disabled="disabled">
+                                            <label for="radio-shipping-1" data-toggle="collapse" data-target="#parent-1" data-parent="#shipping-methods" aria-controls="parent-1">Personal Pickup</label>
+                                            <div id="parent-1" class="panel-collapse collapse" role="tabpanel">
+                                                <div class="radio">
+                                                    <input type="radio" name="radioshipping1options" id="radioshipping11" disabled="disabled">
+                                                    <label for="radioshipping11">California, USA <span>Tomorrow</span></label>
+                                                    <div class="shipping-method-description">
+                                                        <p>1443 E Washington Blvd, Pasadena, CA 91104</p>
+                                                        <ul class="list-unstyled">
+                                                            <li><span>Mon, Tue</span> 8:00 - 20:00</li>
+                                                            <li><span>Wed - Fri</span> 12:00 - 20:00</li>
+                                                            <li><span>Sat, Sun</span> Closed</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="radio">
+                                                    <input type="radio" name="radioshipping1options" id="radioshipping12" disabled="disabled">
+                                                    <label for="radioshipping12">California, USA <span>Tomorrow</span></label>
+                                                    <div class="shipping-method-description">
+                                                        <p>1443 E Washington Blvd, Pasadena, CA 91104</p>
+                                                        <ul class="list-unstyled">
+                                                            <li><span>Mon, Tue</span> 8:00 - 20:00</li>
+                                                            <li><span>Wed - Fri</span> 12:00 - 20:00</li>
+                                                            <li><span>Sat, Sun</span> Closed</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel radio">
+                                            <input type="radio" name="optionsRadios" value="Delivery to your address" id="radio-shipping-2" checked>
+                                            <label for="radio-shipping-2" class="collapsed" data-toggle="collapse" data-target="#parent-2" data-parent="#shipping-methods" aria-controls="parent-2">Delivery to your address</label>
+                                            <div id="parent-2" class="panel-collapse collapse in" role="tabpanel">
+
+                                                @{
+                                                    var provider = new Sitecore.Commerce.Services.Shipping.ShippingServiceProvider();
+                                        var shippingRequest = new Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.CommerceGetShippingMethodsRequest(Sitecore.Context.Language.ToString());
+                                        var shippingResult = provider.GetShippingMethods(shippingRequest);
+                                        var count = 0;
+}
+
+@foreach (var shippingMethod in shippingResult.ShippingMethods)
+{
+    count++;
+
+    <div class="radio">
+        <input type="radio" name="radio_shipping_2_options" value="@shippingMethod.ExternalId" id="radio_shipping_2_@count" required>
+        <label for="radio_shipping_2_@count">@shippingMethod.Description<span> </span></label>
+    </div>
+
+}
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="clearfix">
+    <a href="/checkout/payment" onclick="return SubmitShippingFormData();" class="btn btn-primary btn-lg pull-right ">Continue</a>
+</div>
+</form>
+
+</article>
 </div>
 
+</div>
+</div>
+</section>
 <!-- ==========================
     MY ACCOUNT - END
 =========================== -->

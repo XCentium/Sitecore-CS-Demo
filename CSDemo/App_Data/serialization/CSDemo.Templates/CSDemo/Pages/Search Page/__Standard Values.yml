@@ -5,10 +5,6 @@ Template: 81a752a2-d7df-484f-82bb-1857cf636982
 Path: /sitecore/templates/CSDemo/Pages/Search Page/__Standard Values
 DB: master
 SharedFields:
-- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
-  Hint: __Masters
-  Type: TreelistEx
-  Value: {B3D2832F-2FBF-4466-9D95-D3A0C6476362}
 - ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
   Hint: __Renderings
   Type: layout
@@ -46,9 +42,6 @@ Languages:
     - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
       Hint: Page Title
       Value: $name
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
-      Hint: __Created by
-      Value: sitecore\admin
     - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
       Hint: Meta Description
       Value: $name Page

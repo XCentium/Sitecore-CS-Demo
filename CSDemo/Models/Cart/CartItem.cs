@@ -8,6 +8,7 @@ namespace CSDemo.Models.Cart
     [Serializable]
     public class CartItem
     {
+
         public string ProductID { get; set; }
         public string ImageUrl { get; set; }
         public string ProductName { get; set; }
@@ -15,5 +16,6 @@ namespace CSDemo.Models.Cart
         public Decimal UnitPrice { get; set; }
         public int Quantity { get; set; }
         public Decimal SubTotal { get; set; }
+        public string ExternalID { get; set; }
     }
 }
