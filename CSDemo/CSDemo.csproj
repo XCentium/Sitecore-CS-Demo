@@ -182,6 +182,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\GeneralSearchController.cs" />
     <Compile Include="Helpers\CartHelper.cs" />
+    <Compile Include="Helpers\ProductHelper.cs" />
     <Compile Include="Initializer.cs" />
     <Compile Include="Models\Base\Base Pages\BasePagemeta.cs" />
     <Compile Include="Models\Cart\CartItem.cs" />
@@ -731,6 +732,7 @@
     <Content Include="Views\GeneralSearch\SearchInput.cshtml" />
     <Content Include="Views\GeneralSearch\_SearchResult.cshtml" />
     <Content Include="Views\Product\CategoryListings.cshtml" />
+    <Content Include="Views\Cart\Termsandconditions.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

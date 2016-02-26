@@ -338,6 +338,8 @@ namespace CSDemo.Helpers
                         var cartItem = new CartItem();
                         var product = cartLine.Product as CommerceCartProduct;
                         cartItem.ProductName = product.DisplayName;
+
+                        // NOTE: use search when Lucene search is completed
                         // Get categoty root
                         var RootItem = Sitecore.Context.Database.GetItem(new ID("{4441D0B5-1080-4550-A91A-4C2C8245C986}"));
                         if (RootItem != null)
@@ -347,6 +349,13 @@ namespace CSDemo.Helpers
                             if (item != null)
                             {
                                 cartItem.ProductID = item.ID.ToString();
+
+                                cartItem.ImageUrl = ProductHelper.GetFirstImageFromProductItem(item);
+
+                            }
+                            else
+                            {
+                                cartItem.ImageUrl = string.Empty;
                             }
                         }
                         
@@ -354,11 +363,15 @@ namespace CSDemo.Helpers
                         cartItem.Quantity = (int)cartLine.Quantity;
                         cartItem.UnitPrice = product.Price.Amount;
                         cartItem.SubTotal = cartLine.Total.Amount;
-                        cartItem.ImageUrl = "assets/images/products/product-1.jpg";
-                        if (cartLine.Images != null && cartLine.Images.Count > 0)
+                        cartItem.ExternalID = cartLine.ExternalCartLineId;
+
+                        if (string.IsNullOrEmpty(cartItem.ImageUrl))
                         {
-                            cartItem.ImageUrl = cartLine.Images[0];
-                        } 
+                            if (cartLine.Images != null && cartLine.Images.Count > 0)
+                            {
+                                cartItem.ImageUrl = cartLine.Images[0];
+                            }
+                        }
                         
                         //var images = cartLine.
 
@@ -733,6 +746,107 @@ namespace CSDemo.Helpers
             var submitResult = provider.SubmitVisitorOrder(submitRequest);
 
             return submitResult;
+        }
+
+        internal bool RemoveItemFromCart(string externalCartLineId)
+        {
+            try
+            {
+                ClearCartFromCache();
+
+                var cart = RemoveFromCart(externalCartLineId);
+
+                AddCartToCache(cart);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                CommerceLog.Current.Error(ex.ToString(), this);
+
+                return false;
+            }
+        }
+
+        private CommerceCart RemoveFromCart(string externalCartLineId)
+        {
+            var cart = GetCustomerCart();
+
+            var lineToRemove = cart.Lines.SingleOrDefault(cl => cl.ExternalCartLineId == externalCartLineId);
+            if (lineToRemove == null)
+            {
+                return cart;
+            }
+
+            var request = new RemoveCartLinesRequest(cart, new[] { lineToRemove });
+
+            var info = CartRequestInformation.Get(request);
+
+            if (info == null)
+            {
+                info = new CartRequestInformation(request, true);
+            }
+            else
+            {
+                info.Refresh = true;
+            }
+
+            var cartResult = this._serviceProvider.RemoveCartLines(request);
+            return cartResult.Cart as CommerceCart;
+        }
+
+        internal bool UpdateCartItem(string externalID, string quantity)
+        {
+            try
+            {
+                ClearCartFromCache();
+                CommerceCart cart = ChangeCartItemQuantity(externalID, quantity);
+                AddCartToCache(cart);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                CommerceLog.Current.Error(ex.ToString(), this);
+                return false;
+            }
+
+
+        }
+
+        private CommerceCart ChangeCartItemQuantity(string externalCartLineId, string q)
+        {
+            uint quantity = uint.Parse(q);
+
+            if (quantity == 0)
+            {
+                return RemoveFromCart(externalCartLineId);
+            }
+
+            var cart = GetCustomerCart();
+
+            var cartLineToChange = cart.Lines.SingleOrDefault(cl => cl.Product != null && cl.ExternalCartLineId == externalCartLineId);
+            if (cartLineToChange == null)
+            {
+                return cart;
+            }
+
+            cartLineToChange.Quantity = quantity;
+
+            var updateRequest = new UpdateCartLinesRequest(cart, new[] { cartLineToChange });
+
+
+            var info = CartRequestInformation.Get(updateRequest);
+
+            if (info == null)
+            {
+                info = new CartRequestInformation(updateRequest, true);
+            }
+            else
+            {
+                info.Refresh = true;
+            }
+            var cartResult = this._serviceProvider.UpdateCartLines(updateRequest);
+            return cartResult.Cart as CommerceCart;
         }
     }
 }

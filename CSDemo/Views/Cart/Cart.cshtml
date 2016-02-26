@@ -47,9 +47,9 @@
                                                     <td class="col-xs-1"><img src="@cartItem.ImageUrl" alt="" class="img-responsive"></td>
                                                     <td class="col-xs-4 col-md-5"><h4><a href="/productlisting/productdetail?id=@cartItem.ProductID">@cartItem.ProductName</a><small></small></h4></td>
                                                     <td class="col-xs-2 text-center"><span>$@unitPrice</span></td>
-                                                    <td class="col-xs-2 col-md-1"><div class="form-group"><input type="text" name="q" class="form-control" value="@cartItem.Quantity"><input type="hidden" name="id" class="form-control" value="@cartItem.ProductID"></div></td>
+                                                    <td class="col-xs-2 col-md-1"><div class="form-group"><input type="text" name="quantity" class="form-control" value="@cartItem.Quantity"><input type="hidden" name="externalID" class="form-control" value="@cartItem.ExternalID"></div></td>
                                                     <td class="col-xs-2 text-center"><span><b>$@subTotal</b></span></td>
-                                                    <td class="col-xs-1 text-center"><a href="javascript:void(0)" onclick="RemoveProductFromCart('@cartItem.ProductID');window.location.reload()" class="btn btn-primary"><i class="fa fa-times"></i></a></td>
+                                                    <td class="col-xs-1 text-center"><a href="javascript:void(0)" onclick="RemoveProductFromCart('@cartItem.ExternalID');window.location.reload()" class="btn btn-primary"><i class="fa fa-times"></i></a></td>
                                                 </tr>
                                             }
 
@@ -57,7 +57,7 @@
                                     </table>
                                 </div>
                                 <a href="/productlisting" class="btn btn-inverse">Continue Shopping</a>
-                                <a href="" onclick="return SubmitCartFormData();" class="btn btn-inverse update-cart">Update Shopping Cart</a>
+                                <a href="javaScript:void(0)" onclick="return SubmitCartFormData();" class="btn btn-inverse update-cart">Update Shopping Cart</a>
                             </div>
 
                             <div class="box">

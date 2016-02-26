@@ -57,7 +57,7 @@ namespace CSDemo.Models.Cart
         {
             get
             {
-                if (this._images != null)
+                if (this._images != null && this._images.Count > 0)
                 {
                     return this._images;
                 }
@@ -66,7 +66,7 @@ namespace CSDemo.Models.Cart
 
                 var field = this.Properties["_product_Images"] as string;
 
-                if (field != null)
+                if (!string.IsNullOrEmpty(field))
                 {
                     var imageIds = field.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
 

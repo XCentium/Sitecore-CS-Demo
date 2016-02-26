@@ -16,5 +16,6 @@ namespace CSDemo.Models.Cart
         public Decimal UnitPrice { get; set; }
         public int Quantity { get; set; }
         public Decimal SubTotal { get; set; }
+        public string ExternalID { get; set; }
     }
 }

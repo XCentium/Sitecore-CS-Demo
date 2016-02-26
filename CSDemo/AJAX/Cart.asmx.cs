@@ -115,6 +115,24 @@ namespace CSDemo.AJAX
             return ret;
         }
 
+
+
+        [WebMethod(EnableSession = true)]
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public bool RemoveFromCart(string externalID)
+        {
+            // check if user is logged in and not commerce customer, if true, return false
+            var ret = false;
+
+            var cartHelper = new CartHelper();
+
+            ret = cartHelper.RemoveItemFromCart(externalID);
+
+            return ret;
+
+        }
+
+
         ///// <summary>
         ///// Add Item to cart based on ID. 
         ///// It the Item already exists, it is incremented, else, it is added as 1
@@ -162,34 +180,39 @@ namespace CSDemo.AJAX
         //}
 
 
-        //public struct CurrentCartItem
-        //{
-        //    public string ProductId { get; set; }
-        //    public string Quantity { get; set; }
-        //}
-        
-        //[WebMethod(EnableSession = true)]
-        //[System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
-        //public ShoppingCart UpdateCartList(List<CurrentCartItem> currentCartItems)
-        //{
-        //    // check if user is logged in and not commerce customer, if true, return false
+        public struct CurrentCartItem
+        {
+            public string ExternalID { get; set; }
+            public string Quantity { get; set; }
+        }
 
-        //    var cartManager = new CartManager();            
+        [WebMethod(EnableSession = true)]
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public bool UpdateCartList(List<CurrentCartItem> currentCartItems)
+        {
+            // check if user is logged in and not commerce customer, if true, return false
 
-        //    foreach (CurrentCartItem c in currentCartItems)
-        //    {
-        //        // ensure q can only be an integer
-        //        var q = c.Quantity.Trim();
-        //        if (string.IsNullOrEmpty(q)) { q = "0"; }
+            var ret = false;
 
-        //        if (q.All(Char.IsDigit))
-        //        {
-        //            cartManager.UpdateCartItem(c.ProductId, q);
-        //        }
-        //    }
+            var cartHelper = new CartHelper();
 
-        //    return cartManager.shoppingCart;
-        //}
+                      
+
+            foreach (CurrentCartItem c in currentCartItems)
+            {
+                // ensure q can only be an integer
+                var q = c.Quantity.Trim();
+                if (string.IsNullOrEmpty(q)) { q = "0"; }
+
+                if (q.All(Char.IsDigit))
+                {
+
+                    ret = cartHelper.UpdateCartItem(c.ExternalID, q);
+                }
+            }
+
+            return ret;
+        }
    
 
     }
