@@ -1,13 +1,19 @@
 ﻿---
-ID: 7d6d8042-bc94-4b7b-a52b-b93d20e76d05
+ID: 3a18b3f7-0fd2-43b6-bcbb-4532b662fa2d
 Parent: dfe6e26a-54ec-483b-8594-d6ac854b6e26
-Template: 99f8905d-4a87-4eb8-9f8b-a9bebfb3add6
+Template: 2a3e91a0-7987-44b5-ab34-35c2d9de83b9
 Path: /sitecore/layout/Renderings/CSDemo/Product/CategoryListing
 DB: master
 SharedFields:
-- ID: 51b435bc-f7b9-478a-9c51-52916af96ff5
-  Hint: Path
-  Value: /Views/Product/CategoryListing.cshtml
+- ID: 13f89250-ad6b-4548-882e-118a12c18094
+  Hint: Parameters Template
+  Value: {12AFFA53-D310-4B45-A82B-5A23990410D3}
+- ID: ded9e431-3604-4921-a4b3-a6ec7636a5b6
+  Hint: Controller Action
+  Value: CategoryListing
+- ID: e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7
+  Hint: Controller
+  Value: Product
 Languages:
 - Language: en
   Versions:
@@ -15,4 +21,4 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160217T073756Z
+      Value: 20160224T055145Z

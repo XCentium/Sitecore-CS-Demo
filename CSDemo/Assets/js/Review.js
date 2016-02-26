@@ -47,8 +47,8 @@ function LoadReviewFormData() {
 
             formValues = JSON.parse(formValues);
 
-            //console.log(formValues);
-            $("#paymentMethod").append('<li>' + formValues.optionsRadios[0] + '<li>');
+            console.log(formValues);
+            $("#paymentMethod").append('<li>' + formValues.Payment_Type_Description[0] + '<li>');
 
         }
 
@@ -60,7 +60,7 @@ function LoadReviewFormData() {
 
             console.log(formValues);
 
-            $("#shippingMethod").append('<li>' + formValues.radioshipping2options[0] + '<li>');
+            $("#shippingMethod").append('<li>' + formValues.optionsRadios[0] + '<li>');
 
         }
 
@@ -72,11 +72,31 @@ function SubmitReviewFormData() {
     // Validate form, if valid, save data return true or false;
 
     if ($('#review-form').valid()) {
-        alert(2);
+        
         //Cookies.remove('checkout_form');
+        data = "";
+
+        $.ajax({
+            type: "POST",
+            url: "/AJAX/cart.asmx/SubmitOrder",
+            data: "{" + data + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+                ShowActionMessage('Order Submitted!');
+
+            },
+            error: function (error) {
+                console.log(error)
+                alert(error); //alert with HTTP error
+
+            }
+
+        });
 
         // save data 
-        SaveFormData("#review-form", 'review_form');
+       // SaveFormData("#review-form", 'review_form');
 
         return true;
 

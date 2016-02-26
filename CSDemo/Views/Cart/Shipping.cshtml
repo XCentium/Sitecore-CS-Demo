@@ -4,6 +4,10 @@
 <!-- ==========================
     MY ACCOUNT - START
 =========================== -->
+@{
+    // Get shipping method from Commerce
+
+}
 
 <div class="col-sm-12">
     <article class="account-content checkout-steps">
@@ -77,22 +81,25 @@
                                 <input type="radio" name="optionsRadios" value="Delivery to your address" id="radio-shipping-2" checked>
                                 <label for="radio-shipping-2" class="collapsed" data-toggle="collapse" data-target="#parent-2" data-parent="#shipping-methods" aria-controls="parent-2">Delivery to your address</label>
                                 <div id="parent-2" class="panel-collapse collapse in" role="tabpanel">
-                                    <div class="radio">
-                                        <input type="radio" name="radioshipping2options" value="Post Air Mail" id="radioshipping21" checked>
-                                        <label for="radioshipping21">Post Air Mail<span>$15.00</span></label>
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="radioshipping2options" value="FedEx" id="radioshipping22">
-                                        <label for="radioshipping22">FedEx<span>$7.00</span></label>
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="radioshipping2options" value="UPS" id="radioshipping23">
-                                        <label for="radioshipping23">UPS<span>$9.00</span></label>
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="radioshipping2options" value="DHL" id="radioshipping24">
-                                        <label for="radioshipping24">DHL<span>$8.50</span></label>
-                                    </div>
+
+                                    @{
+                                        var provider = new Sitecore.Commerce.Services.Shipping.ShippingServiceProvider();
+                                        var shippingRequest = new Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.CommerceGetShippingMethodsRequest(Sitecore.Context.Language.ToString());
+                                        var shippingResult = provider.GetShippingMethods(shippingRequest);
+                                        var count = 0;
+                                    }
+
+                                    @foreach (var shippingMethod in shippingResult.ShippingMethods)
+                                    {
+                                        count++;
+
+                                        <div class="radio">
+                                            <input type="radio" name="radio_shipping_2_options" value="@shippingMethod.ExternalId" id="radio_shipping_2_@count" required>
+                                            <label for="radio_shipping_2_@count">@shippingMethod.Description<span> </span></label>
+                                        </div>
+
+                                    }
+
 
                                 </div>
                             </div>

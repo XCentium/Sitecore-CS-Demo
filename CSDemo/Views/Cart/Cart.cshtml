@@ -4,10 +4,9 @@
 
 @{
 
-
-    var cartManager = new CartManager();
-
-    CSDemo.Models.Cart.ShoppingCart shoppingCart = cartManager.shoppingCart;
+    var cartHelper = new CSDemo.Helpers.CartHelper();
+    CSDemo.Models.Cart.ShoppingCart shoppingCart = cartHelper.GetMiniCart();
+    
 
 }
 <!-- ==========================

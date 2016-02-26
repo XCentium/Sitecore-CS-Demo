@@ -5,9 +5,9 @@
 @{
 
 
-    var cartManager = new CartManager();
-
-    CSDemo.Models.Cart.ShoppingCart shoppingCart = cartManager.shoppingCart;
+    var cartHelper = new CSDemo.Helpers.CartHelper();
+    CSDemo.Models.Cart.ShoppingCart shoppingCart = cartHelper.GetMiniCart();
+    
 
 }
 
@@ -137,7 +137,7 @@
                         <input type="checkbox" id="checkout-terms-conditions">
                         <label for="checkout-terms-conditions">I have read and agree to the <a href="terms-conditions.html" target="_blank">Terms & Conditions</a></label>
                     </div>
-                    <a href="/checkout/thankyou" class="btn btn-primary btn-lg pull-right ">Confirm Order</a>
+                    <a href="/checkout/thankyou" onclick="return SubmitReviewFormData();" class="btn btn-primary btn-lg pull-right ">Confirm Order</a>
                 </div>
             }
         </form>
