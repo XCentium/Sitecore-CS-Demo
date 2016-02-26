@@ -75,11 +75,15 @@ function SubmitReviewFormData() {
         
 
         // If checkbox not checked, prevent sublission
-        if (!$("#checkout_terms_conditions").attr("checked")) {
+        var tandc = $("#checkout_terms_conditions");
+        if (tandc[0].checked == true) {
+            
+        } else {
 
             ShowActionMessage("Please indicate that you accept the Terms and Conditions");
 
-            return falsed;
+            return false;
+
         }
 
         //Cookies.remove('checkout_form');
