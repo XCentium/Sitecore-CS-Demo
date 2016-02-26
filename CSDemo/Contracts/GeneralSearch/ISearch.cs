@@ -14,7 +14,8 @@ namespace CSDemo.Contracts.GeneralSearch
         int TotalPageCount { get; set; }
         IEnumerable<CommerceQueryFacet> Facets { get; set; }
         int CurrentPageNumber { get; set; }
-
+        bool ContainsFacets(string url);
+        string RemoveFacets(string url);
         string AddToFacets(string facetName, string value, string url);
     }
 }

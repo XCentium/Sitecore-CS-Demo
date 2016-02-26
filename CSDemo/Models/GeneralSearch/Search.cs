@@ -18,13 +18,33 @@ namespace CSDemo.Models.GeneralSearch
         public IEnumerable<CommerceQueryFacet> Facets { get; set; }
         public int CurrentPageNumber { get; set; }
 
+        public bool ContainsFacets(string url)
+        {
+            if (string.IsNullOrWhiteSpace(url)) return false;
+            var uri = new Uri(url);
+            var queryStrings = HttpUtility.ParseQueryString(uri.Query);
+            var facetQueryString = queryStrings.Get(Constants.QueryStrings.Facets);
+
+            return !string.IsNullOrEmpty(facetQueryString);
+        }
+
+        public string RemoveFacets(string url)
+        {
+            if (string.IsNullOrWhiteSpace(url)) return string.Empty;
+            var uri = new Uri(url);
+            var queryStrings = HttpUtility.ParseQueryString(uri.Query);
+            queryStrings.Remove(Constants.QueryStrings.Facets);
+            var cleanUrl = uri.LocalPath;
+            var newUrl = queryStrings.Count > 0 ? $"{cleanUrl}?{queryStrings}" : cleanUrl;
+            return newUrl;
+        }
+
         public string AddToFacets(string facetName, string value, string url)
         {
             if (string.IsNullOrWhiteSpace(facetName) || string.IsNullOrWhiteSpace(value)
                 || string.IsNullOrWhiteSpace(url)) return string.Empty;
 
             url = HttpUtility.UrlDecode(url);
-
             var uri = new Uri(url);
             var queryStrings = HttpUtility.ParseQueryString(uri.Query);
             var facetQueryString = queryStrings.Get(Constants.QueryStrings.Facets);
@@ -36,8 +56,7 @@ namespace CSDemo.Models.GeneralSearch
             }
             else
             {
-                if (!facetQueryString.Contains(Constants.QueryStrings.FacetsSeparator) ||
-                    !facetQueryString.Contains("=")) return string.Empty;
+                if (!facetQueryString.Contains("=")) return string.Empty;
 
                 queryStrings.Remove(Constants.QueryStrings.Facets);
 
@@ -58,6 +77,11 @@ namespace CSDemo.Models.GeneralSearch
                         
                     isNewFacetPair = false;
                     var facetPairValue = facetParts[1];
+                    if (facetPairValue.ToLower().Contains(value.ToLower()))
+                    {
+                        updatedFacetPairs.Add(facetsPair);
+                        continue;
+                    }
                     var newFacetPair = $"{facetPairKey}{Constants.QueryStrings.FacetOptionDefinitionSeparator}{facetPairValue}{Constants.QueryStrings.FacetsSeparator}{value}";
                     updatedFacetPairs.Add(newFacetPair);
                 }
@@ -67,9 +91,9 @@ namespace CSDemo.Models.GeneralSearch
                 queryStrings.Add(Constants.QueryStrings.Facets, newFacetsValue);
             }
 
-            var cleanUrl = uri.GetLeftPart(UriPartial.Path);
+            var cleanUrl = uri.LocalPath;
             var newUrl = queryStrings.Count > 0 ? $"{cleanUrl}?{queryStrings}" : cleanUrl;
-            return HttpUtility.UrlEncode(newUrl);
+            return newUrl;
         }
     }
 }
