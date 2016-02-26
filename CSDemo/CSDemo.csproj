@@ -175,6 +175,9 @@
     <Compile Include="Configuration\Constants.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchInfo.cs" />
+    <Compile Include="Contracts\IComponents.cs" />
+    <Compile Include="Contracts\ISettings.cs" />
+    <Compile Include="Contracts\ISite.cs" />
     <Compile Include="Contracts\Product\IProduct.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearch.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchInput.cs" />
@@ -187,32 +190,12 @@
     <Compile Include="Helpers\CartHelper.cs" />
     <Compile Include="Helpers\ProductHelper.cs" />
     <Compile Include="Initializer.cs" />
-    <Compile Include="Models\Cart\CartItem.cs" />
-    <Compile Include="Models\Cart\CartLineItem.cs" />
-    <Compile Include="Models\Cart\CartManager.cs" />
-    <Compile Include="Models\Cart\CustomCommerceCartLine.cs" />
-    <Compile Include="Models\Cart\ShoppingCart.cs" />
-    <Compile Include="Models\Catalog Generated\Backpack.cs" />
-    <Compile Include="Models\Catalog Generated\BackpackVariant.cs" />
-    <Compile Include="Models\Catalog Generated\Boots.cs" />
-    <Compile Include="Models\Catalog Generated\BootsVariant.cs" />
-    <Compile Include="Models\Catalog Generated\Carabiner.cs" />
-    <Compile Include="Models\Catalog Generated\Crampon.cs" />
-    <Compile Include="Models\Catalog Generated\GeneralCategory.cs" />
-    <Compile Include="Models\Catalog Generated\Harness.cs" />
-    <Compile Include="Models\Catalog Generated\HarnessVariant.cs" />
-    <Compile Include="Models\Catalog Generated\Pants.cs" />
-    <Compile Include="Models\Catalog Generated\PantsVariant.cs" />
-    <Compile Include="Models\Catalog Generated\Parka.cs" />
-    <Compile Include="Models\Catalog Generated\ParkaVariant.cs" />
-    <Compile Include="Models\Catalog Generated\Rockshoes.cs" />
-    <Compile Include="Models\Catalog Generated\Shirts.cs" />
-    <Compile Include="Models\Catalog Generated\ShirtsVariant.cs" />
-    <Compile Include="Models\Catalog Generated\SleepingBag.cs" />
-    <Compile Include="Models\Catalog Generated\SleepingBagVariant.cs" />
-    <Compile Include="Models\Catalog Generated\Supplies.cs" />
-    <Compile Include="Models\Catalog Generated\Tents.cs" />
-    <Compile Include="Models\Catalog Generated\TentsVariant.cs" />
+    <Compile Include="Models\Checkout\Cart\CartItem.cs" />
+    <Compile Include="Models\Checkout\Cart\CartLineItem.cs" />
+    <Compile Include="Models\Checkout\Cart\CustomCommerceCartLine.cs" />
+    <Compile Include="Models\Checkout\Cart\ShoppingCart.cs" />
+    <Compile Include="Models\Checkout\Catalog Generated\GeneralCategory.cs" />
+    <Compile Include="Models\Components.cs" />
     <Compile Include="Models\GeneralSearch\SearchInfo.cs" />
     <Compile Include="Contracts\Interfaces\Catalog Generated\IBackpack.cs" />
     <Compile Include="Contracts\Interfaces\Catalog Generated\IBackpackVariant.cs" />
@@ -250,6 +233,8 @@
     <Compile Include="Models\Product\Product.cs" />
     <Compile Include="Models\GeneralSearch\Search.cs" />
     <Compile Include="Models\GeneralSearch\SearchInput.cs" />
+    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\Site.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\GetProductPriceResult.cs" />
     <Compile Include="Services\MessageResponse.cs" />
@@ -481,7 +466,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Account\" />
-    <Folder Include="Models\Checkout\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Checkout\" />
   </ItemGroup>
