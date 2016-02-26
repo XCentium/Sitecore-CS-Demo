@@ -4,19 +4,15 @@ using Sitecore.Data.Items;
 using Sitecore.Data.Fields;
 using XCore.Framework.ItemMapper.Configuration.Attributes;
 using XCore.Framework.ItemMapper;
-namespace CSDemo.Models.CatalogGenerated {
+namespace CSDemo.Contracts.Page {
     
     
-    public partial interface IShirts : ISitecoreItem {
+    public partial interface IMetadata : ISitecoreItem {
         
         #region Properties
-IEnumerable<Item> Images { get; set; } 
+string MetaDescription { get; set; } 
 
-string Brand { get; set; } 
-
-DateTime IntroductionDate { get; set; } 
-
-string ProductId { get; set; } 
+string PageTitle { get; set; } 
 #endregion
         
     }

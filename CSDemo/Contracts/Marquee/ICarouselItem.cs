@@ -4,19 +4,15 @@ using Sitecore.Data.Items;
 using Sitecore.Data.Fields;
 using XCore.Framework.ItemMapper.Configuration.Attributes;
 using XCore.Framework.ItemMapper;
-namespace CSDemo.Models.CatalogGenerated {
+namespace CSDemo.Contracts.Marquee {
     
     
-    public partial interface IParka : ISitecoreItem {
+    public partial interface ICarouselItem : ISitecoreItem {
         
         #region Properties
-string ProductId { get; set; } 
+ImageField Image { get; set; } 
 
-IEnumerable<Item> Images { get; set; } 
-
-DateTime IntroductionDate { get; set; } 
-
-string ProductSize { get; set; } 
+string Content { get; set; } 
 #endregion
         
     }

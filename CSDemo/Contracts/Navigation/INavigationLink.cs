@@ -4,15 +4,15 @@ using Sitecore.Data.Items;
 using Sitecore.Data.Fields;
 using XCore.Framework.ItemMapper.Configuration.Attributes;
 using XCore.Framework.ItemMapper;
-namespace CSDemo.Models.Pages {
+namespace CSDemo.Contracts.Navigation {
     
     
-    public partial interface IPage : ISitecoreItem {
+    public partial interface INavigationLink : ISitecoreItem {
         
         #region Properties
-string Body { get; set; } 
+LinkField Link { get; set; } 
 
-string PageTitle { get; set; } 
+Item MegaLink { get; set; } 
 #endregion
         
     }

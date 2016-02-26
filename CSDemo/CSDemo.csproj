@@ -178,6 +178,10 @@
     <Compile Include="Contracts\IComponents.cs" />
     <Compile Include="Contracts\ISettings.cs" />
     <Compile Include="Contracts\ISite.cs" />
+    <Compile Include="Contracts\Marquee\ICarouselItem.cs" />
+    <Compile Include="Contracts\Navigation\INavigation.cs" />
+    <Compile Include="Contracts\Navigation\INavigationLink.cs" />
+    <Compile Include="Contracts\Page\IMetadata.cs" />
     <Compile Include="Contracts\Product\IProduct.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearch.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchInput.cs" />
@@ -194,40 +198,16 @@
     <Compile Include="Models\Checkout\Cart\CartLineItem.cs" />
     <Compile Include="Models\Checkout\Cart\CustomCommerceCartLine.cs" />
     <Compile Include="Models\Checkout\Cart\ShoppingCart.cs" />
-    <Compile Include="Models\Checkout\Catalog Generated\GeneralCategory.cs" />
+    <Compile Include="Models\Marquee\CarouselItem.cs" />
+    <Compile Include="Models\Navigation\Navigation.cs" />
+    <Compile Include="Models\Navigation\NavigationLink.cs" />
+    <Compile Include="Models\Page\Metadata.cs" />
+    <Compile Include="Models\Product\Catalog Generated\GeneralCategory.cs" />
     <Compile Include="Models\Components.cs" />
     <Compile Include="Models\GeneralSearch\SearchInfo.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\IBackpack.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\IBackpackVariant.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\IBoots.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\IBootsVariant.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\ICarabiner.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\ICrampon.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\IGeneralCategory.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\IHarness.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\IHarnessVariant.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\IPants.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\IPantsVariant.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\IParka.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\IParkaVariant.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\IRockshoes.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\IShirts.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\IShirtsVariant.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\ISleepingBag.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\ISleepingBagVariant.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\ISupplies.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\ITents.cs" />
-    <Compile Include="Contracts\Interfaces\Catalog Generated\ITentsVariant.cs" />
-    <Compile Include="Contracts\Interfaces\Components\IContentBlock.cs" />
-    <Compile Include="Contracts\Interfaces\Pages\IHomePage.cs" />
-    <Compile Include="Contracts\Interfaces\Pages\IPage.cs" />
-    <Compile Include="Contracts\Interfaces\Parameters\ICategorylistingConfig.cs" />
-    <Compile Include="Contracts\Interfaces\Parameters\IColumn1Config.cs" />
-    <Compile Include="Contracts\Interfaces\Parameters\IColumn2Config.cs" />
-    <Compile Include="Contracts\Interfaces\Parameters\IColumn3Config.cs" />
-    <Compile Include="Contracts\Interfaces\Parameters\IColumn4Config.cs" />
-    <Compile Include="Contracts\Interfaces\Parameters\IRowConfig.cs" />
-    <Compile Include="Models\Parameters\CategorylistingConfig.cs" />
+    <Compile Include="Contracts\Product\Catalog Generated\IGeneralCategory.cs" />
+    <Compile Include="Contracts\Product\Parameters\ICategorylistingConfig.cs" />
+    <Compile Include="Models\Product\Parameters\CategorylistingConfig.cs" />
     <Compile Include="Models\Product\CategoryListingViewModel.cs" />
     <Compile Include="Models\Product\GetProductPricesRequest.cs" />
     <Compile Include="Models\Product\Product.cs" />
@@ -465,6 +445,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Contracts\Checkout\" />
     <Folder Include="Models\Account\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Checkout\" />
