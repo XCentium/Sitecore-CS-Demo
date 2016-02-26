@@ -73,6 +73,10 @@ function SubmitReviewFormData() {
 
     if ($('#review-form').valid()) {
         
+        if ($("#checkout_terms_conditions").attr("checked")) {
+            ShowActionMessage("Please indicate that you accept the Terms and Conditions");
+        }
+
         //Cookies.remove('checkout_form');
         data = "";
 
