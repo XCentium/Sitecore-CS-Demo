@@ -461,9 +461,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="App_Config\Include\Rainbow.config" />
   </ItemGroup>
   <ItemGroup>

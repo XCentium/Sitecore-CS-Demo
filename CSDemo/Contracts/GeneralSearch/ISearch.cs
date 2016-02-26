@@ -9,13 +9,17 @@ namespace CSDemo.Contracts.GeneralSearch
         string Query { get; set; }
         IList<Models.Product.Product> Results { get; set; }
         int PageSize { get; set; }
-
         int TotalItemCount { get; set; }
         int TotalPageCount { get; set; }
         IEnumerable<CommerceQueryFacet> Facets { get; set; }
         int CurrentPageNumber { get; set; }
+
+        #region Methods
+
         bool ContainsFacets(string url);
         string RemoveFacets(string url);
         string AddToFacets(string facetName, string value, string url);
+
+        #endregion 
     }
 }
