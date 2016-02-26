@@ -178,6 +178,7 @@
     <Compile Include="Contracts\Product\IProduct.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearch.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchInput.cs" />
+    <Compile Include="Controllers\MarqueeController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\GeneralSearchController.cs" />
@@ -733,6 +734,7 @@
     <Content Include="Views\GeneralSearch\_SearchResult.cshtml" />
     <Content Include="Views\Product\CategoryListings.cshtml" />
     <Content Include="Views\Cart\Termsandconditions.cshtml" />
+    <Content Include="Views\Marquee\Carousel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -740,6 +742,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -757,7 +760,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2809</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
