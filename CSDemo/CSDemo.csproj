@@ -199,6 +199,7 @@
     <Compile Include="Models\Checkout\Cart\CustomCommerceCartLine.cs" />
     <Compile Include="Models\Checkout\Cart\ShoppingCart.cs" />
     <Compile Include="Models\Marquee\CarouselItem.cs" />
+    <Compile Include="Models\Marquee\CarouselViewModel.cs" />
     <Compile Include="Models\Navigation\Navigation.cs" />
     <Compile Include="Models\Navigation\NavigationLink.cs" />
     <Compile Include="Models\Page\Metadata.cs" />
