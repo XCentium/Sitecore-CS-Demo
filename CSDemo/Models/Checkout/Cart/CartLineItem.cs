@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CSDemo.Models.Cart
+﻿namespace CSDemo.Models.Cart
 {
     public class CartLineItem
     {

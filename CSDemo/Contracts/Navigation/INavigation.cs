@@ -1,17 +1,17 @@
-using System;
-using System.Collections.Generic;
-using Sitecore.Data.Items;
-using Sitecore.Data.Fields;
-using XCore.Framework.ItemMapper.Configuration.Attributes;
+#region
+
 using XCore.Framework.ItemMapper;
-namespace CSDemo.Contracts.Navigation {
-    
-    
-    public partial interface INavigation : ISitecoreItem {
-        
-        #region Properties
-string Name { get; set; } 
+
 #endregion
-        
+
+namespace CSDemo.Contracts.Navigation
+{
+    public partial interface INavigation : ISitecoreItem
+    {
+        #region Properties
+
+        string Name { get; set; }
+
+        #endregion
     }
 }

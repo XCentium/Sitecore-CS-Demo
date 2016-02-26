@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace CSDemo.Models.Cart
 {
     [Serializable]
     public class CartItem
     {
-
         public string ProductID { get; set; }
         public string ImageUrl { get; set; }
         public string ProductName { get; set; }

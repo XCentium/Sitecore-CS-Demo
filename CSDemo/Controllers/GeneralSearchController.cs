@@ -1,19 +1,16 @@
-﻿using System;
+﻿#region
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using CSDemo.Contracts;
 using CSDemo.Contracts.GeneralSearch;
 using CSDemo.Models.GeneralSearch;
 using CSDemo.Models.Product;
-using CSDemo.Services;
 using Glass.Mapper.Sc;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Search;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
-using Sitecore.Commerce.Entities.Prices;
-using Sitecore.Commerce.Services;
 using Sitecore.ContentSearch.Linq;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
@@ -21,6 +18,8 @@ using Sitecore.Links;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 using Sitecore.SecurityModel;
+
+#endregion
 
 namespace CSDemo.Controllers
 {
@@ -39,20 +38,21 @@ namespace CSDemo.Controllers
             _context = context;
         }
 
-        public GeneralSearchController() : this(new SitecoreContext()) { }
+        public GeneralSearchController() : this(new SitecoreContext())
+        {
+        }
 
         #endregion
 
         #region Methods
 
-
         public ActionResult SearchResults(
             [Bind(Prefix = Constants.QueryStrings.SearchQuery)] string query,
-            
             [Bind(Prefix = Constants.QueryStrings.Facets)] string facetValues,
             [Bind(Prefix = Constants.QueryStrings.Sort)] string sortField = "Title",
-            [Bind(Prefix = Constants.QueryStrings.PageSize)] int pageSize=50,
-            [Bind(Prefix = Constants.QueryStrings.SortDirection)] CommerceConstants.SortDirection sortDirection = CommerceConstants.SortDirection.Desc,
+            [Bind(Prefix = Constants.QueryStrings.PageSize)] int pageSize = 50,
+            [Bind(Prefix = Constants.QueryStrings.SortDirection)] CommerceConstants.SortDirection sortDirection =
+                CommerceConstants.SortDirection.Desc,
             [Bind(Prefix = Constants.QueryStrings.Paging)] int pageNumber = 1)
         {
             var searchModel = new Search();
@@ -69,7 +69,7 @@ namespace CSDemo.Controllers
         public ActionResult SearchInput()
         {
             var searchResultsPagePath = RenderingContext.Current.Rendering.DataSource;
-            if(string.IsNullOrWhiteSpace(searchResultsPagePath))return View(new SearchInput());
+            if (string.IsNullOrWhiteSpace(searchResultsPagePath)) return View(new SearchInput());
 
             var searchResultsPageItem = _context.Database.GetItem(searchResultsPagePath);
             if (searchResultsPageItem == null) return View(new SearchInput());
@@ -85,17 +85,20 @@ namespace CSDemo.Controllers
         [HttpPost]
         public ActionResult SearchInput(SearchInput model)
         {
-            if (!ModelState.IsValid 
-                || string.IsNullOrWhiteSpace(model.RedirectUrl) 
+            if (!ModelState.IsValid
+                || string.IsNullOrWhiteSpace(model.RedirectUrl)
                 || string.IsNullOrWhiteSpace(model.Query))
                 return SearchInput();
-            
-            return Redirect($"{model.RedirectUrl}?{Constants.QueryStrings.SearchQuery}={HttpUtility.UrlEncode(model.Query)}");
+
+            return
+                Redirect(
+                    $"{model.RedirectUrl}?{Constants.QueryStrings.SearchQuery}={HttpUtility.UrlEncode(model.Query)}");
         }
 
         #region Private Helpers
 
-        private ISearchInfo GetSearchInfo(string searchKeyword, int pageNumber, string facetValues, string sortField, int pageSize, CommerceConstants.SortDirection? sortDirection)
+        private ISearchInfo GetSearchInfo(string searchKeyword, int pageNumber, string facetValues, string sortField,
+            int pageSize, CommerceConstants.SortDirection? sortDirection)
         {
             var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
             var searchInfo = new SearchInfo
@@ -103,11 +106,11 @@ namespace CSDemo.Controllers
                 SearchQuery = searchKeyword ?? string.Empty,
                 RequiredFacets = searchManager.GetFacetFieldsForItem(_context.GetCurrentItem<Item>()),
                 SortFields = searchManager.GetSortFieldsForItem(_context.GetCurrentItem<Item>()),
-                CatalogName =  Constants.Commerce.CatalogName,
-                ItemsPerPage = pageSize 
+                CatalogName = Constants.Commerce.CatalogName,
+                ItemsPerPage = pageSize
             };
 
-            var productSearchOptions = new CommerceSearchOptions(searchInfo.ItemsPerPage, pageNumber-1);
+            var productSearchOptions = new CommerceSearchOptions(searchInfo.ItemsPerPage, pageNumber - 1);
             UpdateOptionsWithFacets(searchInfo.RequiredFacets, facetValues, productSearchOptions);
             UpdateOptionsWithSorting(sortField, sortDirection, productSearchOptions);
             searchInfo.SearchOptions = productSearchOptions;
@@ -115,7 +118,8 @@ namespace CSDemo.Controllers
             return searchInfo;
         }
 
-        private void UpdateOptionsWithSorting(string sortField, CommerceConstants.SortDirection? sortDirection, CommerceSearchOptions productSearchOptions)
+        private void UpdateOptionsWithSorting(string sortField, CommerceConstants.SortDirection? sortDirection,
+            CommerceSearchOptions productSearchOptions)
         {
             if (!string.IsNullOrEmpty(sortField))
             {
@@ -131,25 +135,28 @@ namespace CSDemo.Controllers
             }
         }
 
-        private void UpdateOptionsWithFacets(IEnumerable<CommerceQueryFacet> facets, string valueQueryString, CommerceSearchOptions productSearchOptions)
+        private void UpdateOptionsWithFacets(IEnumerable<CommerceQueryFacet> facets, string valueQueryString,
+            CommerceSearchOptions productSearchOptions)
         {
             if (facets != null && facets.Any())
             {
                 if (!string.IsNullOrEmpty(valueQueryString))
                 {
-                    var facetValuesCombos = valueQueryString.Split(new char[] { '&' });
+                    var facetValuesCombos = valueQueryString.Split(new char[] {'&'});
 
                     foreach (var facetValuesCombo in facetValuesCombos)
                     {
-                        var facetValues = facetValuesCombo.Split(new char[] { '=' });
+                        var facetValues = facetValuesCombo.Split(new char[] {'='});
 
                         var name = facetValues[0];
 
-                        var existingFacet = facets.FirstOrDefault(item => item.Name.Equals(name, System.StringComparison.OrdinalIgnoreCase));
+                        var existingFacet =
+                            facets.FirstOrDefault(
+                                item => item.Name.Equals(name, System.StringComparison.OrdinalIgnoreCase));
 
                         if (existingFacet != null)
                         {
-                            var values = facetValues[1].Split(new char[] { Constants.QueryStrings.FacetsSeparator });
+                            var values = facetValues[1].Split(new char[] {Constants.QueryStrings.FacetsSeparator});
 
                             foreach (var value in values)
                             {
@@ -190,14 +197,14 @@ namespace CSDemo.Controllers
                         facets = searchResponse.Facets;
                     }
                 }
-                
+
                 var result = new Search
                 {
                     TotalItemCount = totalProductCount,
                     TotalPageCount = totalPageCount,
                     CurrentPageNumber = searchOptions.StartPageIndex,
                     Facets = facets,
-                    Results = returnList.Select(i=> i.GlassCast<Product>()).ToList(),
+                    Results = returnList.Select(i => i.GlassCast<Product>()).ToList(),
                     Query = searchKeyword
                 };
 
@@ -205,7 +212,8 @@ namespace CSDemo.Controllers
             }
         }
 
-        private static SearchResponse SearchCatalogItemsByKeyword(string keyword, string catalogName, CommerceSearchOptions searchOptions)
+        private static SearchResponse SearchCatalogItemsByKeyword(string keyword, string catalogName,
+            CommerceSearchOptions searchOptions)
         {
             Assert.ArgumentNotNullOrEmpty(catalogName, "catalogName");
             var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
@@ -223,8 +231,9 @@ namespace CSDemo.Controllers
                         ItemId = p.ItemId,
                         Uri = p.Uri
                     });
-                
-                searchResults = searchManager.AddSearchOptionsToQuery<CommerceProductSearchResultItem>(searchResults, searchOptions);
+
+                searchResults = searchManager.AddSearchOptionsToQuery<CommerceProductSearchResultItem>(searchResults,
+                    searchOptions);
 
                 var results = searchResults.GetResults();
                 var response = SearchResponse.CreateFromSearchResultsItems(searchOptions, results);

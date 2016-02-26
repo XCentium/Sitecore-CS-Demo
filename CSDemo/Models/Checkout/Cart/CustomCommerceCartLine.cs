@@ -1,17 +1,15 @@
-﻿using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
+﻿#region
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Sitecore.Data.Items;
-using System;
-using System.Collections.Generic;
+using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
+
+#endregion
 
 namespace CSDemo.Models.Cart
 {
     public class CustomCommerceCartLine : CommerceCartLine
     {
-
         private List<String> _images;
 
         /// <summary>
@@ -39,18 +37,15 @@ namespace CSDemo.Models.Cart
         {
             get
             {
-                if(!string.IsNullOrEmpty(this._sitecoreID)){
+                if (!string.IsNullOrEmpty(this._sitecoreID))
+                {
                     return this._sitecoreID;
                 }
 
 
-
                 return this.Product.SitecoreProductItemId.ToString();
-            
             }
-            
         }
-        
 
 
         public List<String> Images
@@ -68,12 +63,12 @@ namespace CSDemo.Models.Cart
 
                 if (!string.IsNullOrEmpty(field))
                 {
-                    var imageIds = field.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                    var imageIds = field.Split(new char[] {'|'}, StringSplitOptions.RemoveEmptyEntries);
 
                     foreach (var id in imageIds)
                     {
-                        Item ProductImageItem = Sitecore.Context.Database.GetItem(id);
-                 
+                        var ProductImageItem = Sitecore.Context.Database.GetItem(id);
+
                         var ImageUrl = "/~/media/" + ProductImageItem.ID.ToShortID() + ".ashx";
                         this._images.Add(ImageUrl);
                     }
@@ -82,6 +77,5 @@ namespace CSDemo.Models.Cart
                 return this._images;
             }
         }
-
     }
 }

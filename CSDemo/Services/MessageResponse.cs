@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿#region
+
 using Sitecore.Commerce.Services;
+
+#endregion
 
 namespace CSDemo.Services
 {

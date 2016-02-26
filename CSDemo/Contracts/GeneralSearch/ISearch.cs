@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
-using CSDemo.Models.GeneralSearch;
+﻿#region
+
+using System.Collections.Generic;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
+
+#endregion
 
 namespace CSDemo.Contracts.GeneralSearch
 {
@@ -20,6 +23,6 @@ namespace CSDemo.Contracts.GeneralSearch
         string RemoveFacets(string url);
         string AddToFacets(string facetName, string value, string url);
 
-        #endregion 
+        #endregion
     }
 }

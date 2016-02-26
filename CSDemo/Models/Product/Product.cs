@@ -1,12 +1,15 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-using CSDemo.Contracts;
 using CSDemo.Contracts.Product;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using Glass.Mapper.Sc.Fields;
 using Sitecore.Data.Items;
+
+#endregion
 
 namespace CSDemo.Models.Product
 {
@@ -63,7 +66,7 @@ namespace CSDemo.Models.Product
         {
             get
             {
-                var info = (NumberFormatInfo)Sitecore.Context.Language.CultureInfo.NumberFormat.Clone();
+                var info = (NumberFormatInfo) Sitecore.Context.Language.CultureInfo.NumberFormat.Clone();
                 info.CurrencySymbol = Constants.Commerce.DefaultCurrencyCode;
                 info.CurrencyPositivePattern = 3;
                 return Price.ToString("C", info);

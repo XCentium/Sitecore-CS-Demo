@@ -1,9 +1,10 @@
-﻿using System;
+﻿#region
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using CSDemo.Contracts.GeneralSearch;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
+
+#endregion
 
 namespace CSDemo.Models.GeneralSearch
 {
@@ -21,5 +22,4 @@ namespace CSDemo.Models.GeneralSearch
 
         public CommerceSearchOptions SearchOptions { get; set; }
     }
-
 }
