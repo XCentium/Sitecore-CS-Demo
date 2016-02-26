@@ -12,6 +12,11 @@ header.navbar li.navbar-cart .dropdown-menu h4 {
     max-width: calc(100% - 20px);
 }
 
+/* Categories Component */
+.categories.content {
+    background-color: #fff;
+}
+
 /* Form Customizations */
 .form-control {
     transition: background-color .5s, border-color .5s;
