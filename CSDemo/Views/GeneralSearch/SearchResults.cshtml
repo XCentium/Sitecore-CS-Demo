@@ -1,4 +1,8 @@
 ﻿@model CSDemo.Contracts.GeneralSearch.ISearch
+@if (Model == null)
+{
+    return;
+}
 <section class="breadcrumb-wrapper">
     <div class="container">
         <div class="row">
@@ -11,23 +15,25 @@
 <section class="content products">
     <div class="container">
         <div class="row">
-            @if (Model.Facets != null && Model.Facets.Any())
+            @if (Model.Facets != null && Model.Facets.Any() && Model.Results.Any())
             {
                 <div class="col-sm-3">
                     <aside class="sidebar">
                         @foreach (var facet in Model.Facets)
                         {
-
-                            <div class="widget widget-checkbox">
+                            if (!facet.FoundValues.Any())
+                            {
+                                continue;
+                            }
+                            <div class="widget widget-@facet.DisplayName.ToLower()">
                                 <h3>
-                                    <a role="button" data-toggle="collapse" href="#widget-discount-collapse" aria-expanded="true" aria-controls="widget-discount-collapse">@facet.DisplayName</a>
+                                    <a role="button" data-toggle="collapse" href="#widget-@facet.DisplayName.ToLower()-collapse" aria-expanded="true" aria-controls="widget-@facet.DisplayName.ToLower()-collapse">@facet.DisplayName</a>
                                 </h3>
-                                <div class="collapse in" id="widget-discount-collapse" aria-expanded="true" role="tabpanel">
+                                <div class="collapse in" id="widget-@facet.DisplayName.ToLower()-collapse" aria-expanded="true" role="tabpanel">
                                     <div class="widget-body">
                                         @foreach (var option in facet.FoundValues)
                                         {
                                             <div class="checkbox">
-                                                <input id="check-with-discount" type="checkbox" value="with-discount">
                                                 <label for="check-with-discount"><a href="@Model.AddToFacets(facet.Name, option.Name, Request.Url.AbsoluteUri)">@option.Name</a></label>
                                                 <span>[@option.AggregateCount]</span>
                                             </div>
@@ -36,11 +42,15 @@
                                 </div>
                             </div>
                         }
+                        @if (Model.ContainsFacets(Request.Url.AbsoluteUri))
+                        {
+                            <a href="@Model.RemoveFacets(Request.Url.AbsoluteUri)">Reset Filters</a>
+                        }
                     </aside>
                 </div>
             }
-            <div class="col-xs-@(Model.Facets != null && Model.Facets.Any() ? "9":"12")">
-                @if (Model == null || !Model.Results.Any())
+            <div class="col-xs-@(Model.Results.Any() ? "9":"12")">
+                @if (!Model.Results.Any())
                 {
                     <p>No products matched your search criteria. Please change your search query and try again.</p>
                 }

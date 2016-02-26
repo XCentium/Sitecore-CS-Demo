@@ -55,6 +55,10 @@ namespace CSDemo.Controllers
             [Bind(Prefix = Constants.QueryStrings.SortDirection)] CommerceConstants.SortDirection sortDirection = CommerceConstants.SortDirection.Desc,
             [Bind(Prefix = Constants.QueryStrings.Paging)] int pageNumber = 1)
         {
+            if (!string.IsNullOrWhiteSpace(facetValues))
+            {
+                facetValues = HttpUtility.UrlDecode(facetValues);
+            }
             var searchModel = new Search();
             if (string.IsNullOrWhiteSpace(query)) return View(searchModel);
 
@@ -137,11 +141,11 @@ namespace CSDemo.Controllers
             {
                 if (!string.IsNullOrEmpty(valueQueryString))
                 {
-                    var facetValuesCombos = valueQueryString.Split(new char[] { '&' });
+                    var facetValuesCombos = valueQueryString.Split(new [] { Constants.QueryStrings.FacetOptionSeparator }, StringSplitOptions.None);
 
                     foreach (var facetValuesCombo in facetValuesCombos)
                     {
-                        var facetValues = facetValuesCombo.Split(new char[] { '=' });
+                        var facetValues = facetValuesCombo.Split('=');
 
                         var name = facetValues[0];
 
@@ -149,7 +153,7 @@ namespace CSDemo.Controllers
 
                         if (existingFacet != null)
                         {
-                            var values = facetValues[1].Split(new char[] { Constants.QueryStrings.FacetsSeparator });
+                            var values = facetValues[1].Split(Constants.QueryStrings.FacetsSeparator);
 
                             foreach (var value in values)
                             {
