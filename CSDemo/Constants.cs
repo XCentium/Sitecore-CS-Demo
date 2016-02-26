@@ -7,6 +7,8 @@ namespace CSDemo
 {
     public class Constants
     {
+        public const string DefaultSiteName = "Website"; 
+
         public struct QueryStrings
         {
             /// <summary>
@@ -56,6 +58,8 @@ namespace CSDemo
             public const string DefaultCurrencyCode = "USD";
 
             public static string[] DefaultPriceTypeIds = new string[2] { "List", "Adjusted" };
+
+            public const string Departments = "Departments";
         }
     }
 }

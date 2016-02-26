@@ -1,11 +1,12 @@
 ﻿@using Sitecore.Mvc;
 @using CSDemo.Models.Cart;
+@using CSDemo.Models.Checkout.Cart
 
 
 @{
 
 
-    var cartHelper = new CSDemo.Helpers.CartHelper();
+    var cartHelper = new CartHelper();
     CSDemo.Models.Cart.ShoppingCart shoppingCart = cartHelper.GetMiniCart();
 
 

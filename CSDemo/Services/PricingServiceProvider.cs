@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿#region
+
 using Sitecore.Commerce.Services;
 using Sitecore.Commerce.Services.Prices;
+
+#endregion
 
 namespace CSDemo.Services
 {
@@ -14,9 +14,14 @@ namespace CSDemo.Services
         /// </summary>
         /// <param name="request">The request.</param>
         /// <returns>Returns Cart totals</returns>
-        public virtual Sitecore.Commerce.Services.Prices.GetCartTotalResult GetCartTotal(Sitecore.Commerce.Services.Prices.GetCartTotalRequest request)
+        public virtual Sitecore.Commerce.Services.Prices.GetCartTotalResult GetCartTotal(
+            Sitecore.Commerce.Services.Prices.GetCartTotalRequest request)
         {
-            return this.RunPipeline<Sitecore.Commerce.Services.Prices.GetCartTotalRequest, Sitecore.Commerce.Services.Prices.GetCartTotalResult>("commerce.prices.getCartTotal", request);
+            return
+                this
+                    .RunPipeline
+                    <Sitecore.Commerce.Services.Prices.GetCartTotalRequest,
+                        Sitecore.Commerce.Services.Prices.GetCartTotalResult>("commerce.prices.getCartTotal", request);
         }
 
         /// <summary>
@@ -26,7 +31,9 @@ namespace CSDemo.Services
         /// <returns>Returns product bulk prices.</returns>
         public virtual GetProductBulkPricesResult GetProductBulkPrices(GetProductBulkPricesRequest request)
         {
-            return this.RunPipeline<GetProductBulkPricesRequest, GetProductBulkPricesResult>("commerce.prices.getProductBulkPrices", request);
+            return
+                this.RunPipeline<GetProductBulkPricesRequest, GetProductBulkPricesResult>(
+                    "commerce.prices.getProductBulkPrices", request);
         }
 
         /// <summary>
@@ -36,7 +43,8 @@ namespace CSDemo.Services
         /// <returns>Returns product prices.</returns>
         public virtual GetProductPricesResult GetProductPrices(GetProductPricesRequest request)
         {
-            return this.RunPipeline<GetProductPricesRequest, GetProductPricesResult>("commerce.prices.getProductPrices", request);
+            return this.RunPipeline<GetProductPricesRequest, GetProductPricesResult>(
+                "commerce.prices.getProductPrices", request);
         }
     }
 }

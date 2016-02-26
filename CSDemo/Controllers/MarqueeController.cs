@@ -1,8 +1,10 @@
-﻿using System.Web.Mvc;
-using CSDemo.Models.Marquee;
+﻿#region
+
+using System.Web.Mvc;
 using Glass.Mapper.Sc;
 using Sitecore.Mvc.Controllers;
-using Sitecore.Mvc.Presentation;
+
+#endregion
 
 namespace CSDemo.Controllers
 {
@@ -18,20 +20,10 @@ namespace CSDemo.Controllers
 
         public ActionResult Carousel()
         {
-            var model = GetCarouselViewModel();
-            return View(model);
+            return View();
         }
 
         #region Private Helpers
-
-        private CarouselViewModel GetCarouselViewModel()
-        {
-            CarouselViewModel model = new CarouselViewModel();
-            var ds = RenderingContext.Current.Rendering.DataSource;
-            // TBD:
-            return model;
-        }
-
 
         #endregion
 

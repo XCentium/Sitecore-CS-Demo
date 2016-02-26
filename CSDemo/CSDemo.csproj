@@ -172,7 +172,6 @@
     </Compile>
     <Compile Include="App_Start\GlassMapperSc.cs" />
     <Compile Include="App_Start\GlassMapperScCustom.cs" />
-    <Compile Include="Configuration\Constants.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchInfo.cs" />
     <Compile Include="Contracts\IComponents.cs" />
@@ -191,9 +190,9 @@
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\GeneralSearchController.cs" />
-    <Compile Include="Helpers\CartHelper.cs" />
-    <Compile Include="Helpers\ProductHelper.cs" />
-    <Compile Include="Initializer.cs" />
+    <Compile Include="Models\Checkout\Cart\CartHelper.cs" />
+    <Compile Include="Models\Product\ProductHelper.cs" />
+    <Compile Include="App_Start\Initializer.cs" />
     <Compile Include="Models\Checkout\Cart\CartItem.cs" />
     <Compile Include="Models\Checkout\Cart\CartLineItem.cs" />
     <Compile Include="Models\Checkout\Cart\CustomCommerceCartLine.cs" />

@@ -1,8 +1,12 @@
+#region
+
 using XCore.Framework.ItemMapper;
 
-namespace CSDemo.Contracts {
-    
-    
-    public partial interface ISettings : ISitecoreItem {
+#endregion
+
+namespace CSDemo.Contracts
+{
+    public partial interface ISettings : ISitecoreItem
+    {
     }
 }

@@ -1,9 +1,9 @@
-﻿using System;
+﻿#region
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
+
+#endregion
 
 namespace CSDemo.Contracts.GeneralSearch
 {

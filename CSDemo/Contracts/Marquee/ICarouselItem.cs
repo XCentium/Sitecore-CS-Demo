@@ -1,9 +1,13 @@
+#region
+
 using Sitecore.Data.Fields;
 using XCore.Framework.ItemMapper;
 
+#endregion
+
 namespace CSDemo.Contracts.Marquee
 {
-    public interface ICarouselItem : ISitecoreItem
+    public partial interface ICarouselItem : ISitecoreItem
     {
         #region Properties
 

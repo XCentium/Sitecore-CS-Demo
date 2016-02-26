@@ -1,15 +1,14 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Services;
-using Sitecore;
-using Sitecore.Data;
-using Sitecore.Data.Items;
 using System.Web.Script.Services;
+using System.Web.Services;
 using CSDemo.Models.Cart;
-using CSDemo.Helpers;
-using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
+using CSDemo.Models.Checkout.Cart;
+
+#endregion
 
 namespace CSDemo.AJAX
 {
@@ -22,8 +21,6 @@ namespace CSDemo.AJAX
     [System.ComponentModel.ToolboxItem(false)]
     public class Cart : System.Web.Services.WebService
     {
-
-
         [WebMethod(EnableSession = true)]
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
         public ShoppingCart LoadCart()
@@ -35,9 +32,7 @@ namespace CSDemo.AJAX
             var cart = cartHelper.GetMiniCart();
 
             return cart;
-
         }
-
 
 
         [WebMethod(EnableSession = true)]
@@ -73,16 +68,20 @@ namespace CSDemo.AJAX
         // 
         [WebMethod(EnableSession = true)]
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
-        public bool ApplyShippingAndBillingToCart(string firstname, string lastname, string email, string company, string address, string addressline1, string city, string country, string fax, string phone, string zip, string firstname2, string lastname2, string email2, string company2, string address2, string addressline12, string city2, string country2, string fax2, string phone2, string zip2, string billandshipping)
+        public bool ApplyShippingAndBillingToCart(string firstname, string lastname, string email, string company,
+            string address, string addressline1, string city, string country, string fax, string phone, string zip,
+            string firstname2, string lastname2, string email2, string company2, string address2, string addressline12,
+            string city2, string country2, string fax2, string phone2, string zip2, string billandshipping)
         {
             // check if user is logged in and not commerce customer, if true, return false
             var ret = false;
 
 
-
             var cartHelper = new CartHelper();
 
-            ret = cartHelper.ApplyShippingAndBillingToCart(firstname, lastname, email, company, address, addressline1, city, country, fax, phone, zip, firstname2, lastname2, email2, company2, address2, addressline12, city2, country2, fax2, phone2, zip2);
+            ret = cartHelper.ApplyShippingAndBillingToCart(firstname, lastname, email, company, address, addressline1,
+                city, country, fax, phone, zip, firstname2, lastname2, email2, company2, address2, addressline12, city2,
+                country2, fax2, phone2, zip2);
 
             return ret;
         }
@@ -103,18 +102,18 @@ namespace CSDemo.AJAX
 
         [WebMethod(EnableSession = true)]
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
-        public bool ApplyPaymentMethodToCart(string paymentExternalID, string nameoncard, string creditcard, string expmonth, string expyear, string ccv)
+        public bool ApplyPaymentMethodToCart(string paymentExternalID, string nameoncard, string creditcard,
+            string expmonth, string expyear, string ccv)
         {
             // check if user is logged in and not commerce customer, if true, return false
             var ret = false;
 
             var cartHelper = new CartHelper();
 
-            ret = cartHelper.ApplyPaymentMethodToCart( paymentExternalID, nameoncard, creditcard, expmonth, expyear, ccv);
+            ret = cartHelper.ApplyPaymentMethodToCart(paymentExternalID, nameoncard, creditcard, expmonth, expyear, ccv);
 
             return ret;
         }
-
 
 
         [WebMethod(EnableSession = true)]
@@ -129,7 +128,6 @@ namespace CSDemo.AJAX
             ret = cartHelper.RemoveItemFromCart(externalID);
 
             return ret;
-
         }
 
 
@@ -173,7 +171,6 @@ namespace CSDemo.AJAX
         //    // check if user is logged in and not commerce customer, if true, return false
 
 
-
         //    var cartManager = new CartManager();
 
         //    return cartManager.shoppingCart;
@@ -196,24 +193,23 @@ namespace CSDemo.AJAX
 
             var cartHelper = new CartHelper();
 
-                      
 
-            foreach (CurrentCartItem c in currentCartItems)
+            foreach (var c in currentCartItems)
             {
                 // ensure q can only be an integer
                 var q = c.Quantity.Trim();
-                if (string.IsNullOrEmpty(q)) { q = "0"; }
+                if (string.IsNullOrEmpty(q))
+                {
+                    q = "0";
+                }
 
                 if (q.All(Char.IsDigit))
                 {
-
                     ret = cartHelper.UpdateCartItem(c.ExternalID, q);
                 }
             }
 
             return ret;
         }
-   
-
     }
 }

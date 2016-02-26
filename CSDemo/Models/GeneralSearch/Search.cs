@@ -1,11 +1,13 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
 using System.Web;
-using CSDemo.Contracts;
 using CSDemo.Contracts.GeneralSearch;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
+
+#endregion
 
 namespace CSDemo.Models.GeneralSearch
 {
@@ -54,7 +56,7 @@ namespace CSDemo.Models.GeneralSearch
 
             if (string.IsNullOrEmpty(facetQueryString))
             {
-                queryStrings.Add(Constants.QueryStrings.Facets, 
+                queryStrings.Add(Constants.QueryStrings.Facets,
                     HttpUtility.UrlEncode($"{facetName}{Constants.QueryStrings.FacetOptionDefinitionSeparator}{value}"));
             }
             else
@@ -72,11 +74,13 @@ namespace CSDemo.Models.GeneralSearch
 
         #region Private Helpers
 
-        private static NameValueCollection SetFacet(string facetName, string value, NameValueCollection queryStrings, string facetQueryString)
+        private static NameValueCollection SetFacet(string facetName, string value, NameValueCollection queryStrings,
+            string facetQueryString)
         {
             queryStrings.Remove(Constants.QueryStrings.Facets);
 
-            var facetsPairs = facetQueryString.Split(new[] { Constants.QueryStrings.FacetOptionSeparator }, StringSplitOptions.None);
+            var facetsPairs = facetQueryString.Split(new[] {Constants.QueryStrings.FacetOptionSeparator},
+                StringSplitOptions.None);
             var updatedFacetPairs = new List<string>();
             var isNewFacetPair = true;
             foreach (var facetsPair in facetsPairs)
@@ -97,12 +101,15 @@ namespace CSDemo.Models.GeneralSearch
                     updatedFacetPairs.Add(facetsPair);
                     continue;
                 }
-                var newFacetPair = $"{facetPairKey}{Constants.QueryStrings.FacetOptionDefinitionSeparator}{facetPairValue}{Constants.QueryStrings.FacetsSeparator}{value}";
+                var newFacetPair =
+                    $"{facetPairKey}{Constants.QueryStrings.FacetOptionDefinitionSeparator}{facetPairValue}{Constants.QueryStrings.FacetsSeparator}{value}";
                 updatedFacetPairs.Add(newFacetPair);
             }
 
             var newFacetsValue = string.Join(Constants.QueryStrings.FacetOptionSeparator, updatedFacetPairs);
-            newFacetsValue = isNewFacetPair ? $"{newFacetsValue}{Constants.QueryStrings.FacetOptionSeparator}{facetName}{Constants.QueryStrings.FacetOptionDefinitionSeparator}{value}" : newFacetsValue;
+            newFacetsValue = isNewFacetPair
+                ? $"{newFacetsValue}{Constants.QueryStrings.FacetOptionSeparator}{facetName}{Constants.QueryStrings.FacetOptionDefinitionSeparator}{value}"
+                : newFacetsValue;
             queryStrings.Add(Constants.QueryStrings.Facets, newFacetsValue);
 
             return queryStrings;

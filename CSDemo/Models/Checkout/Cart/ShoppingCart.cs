@@ -1,15 +1,15 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+
+#endregion
 
 namespace CSDemo.Models.Cart
 {
-
     [Serializable]
     public class ShoppingCart
     {
-
         public List<CartItem> CartItems = new List<CartItem>();
 
         public int Total { get; set; }
@@ -28,6 +28,5 @@ namespace CSDemo.Models.Cart
             this.Currency = "USD";
             this.Shipping = 0.00m;
         }
-
     }
 }

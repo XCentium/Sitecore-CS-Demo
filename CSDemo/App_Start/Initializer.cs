@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿#region
+
 using Sitecore.Pipelines;
+
+#endregion
 
 namespace CSDemo
 {
@@ -14,7 +14,6 @@ namespace CSDemo
         /// <param name="args">The arguments.</param>
         public void Process(PipelineArgs args)
         {
-            
         }
     }
 }

@@ -1,5 +1,8 @@
-﻿using CSDemo.Contracts;
+﻿#region
+
 using CSDemo.Contracts.GeneralSearch;
+
+#endregion
 
 namespace CSDemo.Models.GeneralSearch
 {
