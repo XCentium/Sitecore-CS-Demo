@@ -768,6 +768,11 @@ namespace CSDemo.Helpers
             }
         }
 
+        /// <summary>
+        /// CCC
+        /// </summary>
+        /// <param name="externalCartLineId"></param>
+        /// <returns></returns>
         private CommerceCart RemoveFromCart(string externalCartLineId)
         {
             var cart = GetCustomerCart();
@@ -795,6 +800,12 @@ namespace CSDemo.Helpers
             return cartResult.Cart as CommerceCart;
         }
 
+        /// <summary>
+        /// CCC
+        /// </summary>
+        /// <param name="externalID"></param>
+        /// <param name="quantity"></param>
+        /// <returns></returns>
         internal bool UpdateCartItem(string externalID, string quantity)
         {
             try
@@ -812,6 +823,13 @@ namespace CSDemo.Helpers
 
 
         }
+
+        /// <summary>
+        /// CCC
+        /// </summary>
+        /// <param name="externalCartLineId"></param>
+        /// <param name="q"></param>
+        /// <returns></returns>
 
         private CommerceCart ChangeCartItemQuantity(string externalCartLineId, string q)
         {

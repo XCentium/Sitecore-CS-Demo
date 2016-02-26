@@ -23,5 +23,10 @@ namespace CSDemo.Helpers
 
             return ProductImage;
         }
+
+
+
+
+
     }
 }
