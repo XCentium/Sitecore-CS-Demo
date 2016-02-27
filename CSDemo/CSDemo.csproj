@@ -191,6 +191,7 @@
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\GeneralSearchController.cs" />
+    <Compile Include="Models\Account\AccountHelper.cs" />
     <Compile Include="Models\Checkout\Cart\CartHelper.cs" />
     <Compile Include="Models\Marquee\CarouselSlideContainer.cs" />
     <Compile Include="Models\Product\ProductHelper.cs" />
@@ -453,7 +454,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contracts\Checkout\" />
-    <Folder Include="Models\Account\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Checkout\" />
   </ItemGroup>
