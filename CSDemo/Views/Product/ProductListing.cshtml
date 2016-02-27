@@ -36,7 +36,9 @@
                                                 int currentCat = 0;
                                             }
                                             @foreach (Item cat in categoryies)
-                                            {                                      
+                                            {
+
+                                                var current = false;
                                                 int totalChildren = cat.GetChildren().Count;
                                                 currentCat++;
 
