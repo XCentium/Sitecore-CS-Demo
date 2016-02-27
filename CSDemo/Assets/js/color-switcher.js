@@ -9,7 +9,21 @@
  * http://creativecommons.org/licenses/by/4.0/
 ----------------------------------------------------*/
 
-$(document).ready(function() {
+/* --------------------------------------
+ * Updated by C.Castle of XCentium to
+ * include the bits with localStorage
+ * to carry the theme color over from
+ * page to page, and future visits.
+-------------------------------------- */
+
+$(document).ready(function () {
+
+    // Set the theme color at page load to match what is in local storage
+    if (localStorage != undefined) {
+        console.log('color is defined');
+        $("#main-color").attr("href", "assets/css/color/" + localStorage.themeColor + ".css");
+    }
+
 	var CSduration = 500;
 	$('#color-switcher > ul > li').tooltip();
 	
@@ -26,10 +40,12 @@ $(document).ready(function() {
 			$(this).find('i').addClass('fa-times');
 			$('#color-switcher').animate({'left':'0'},CSduration);
 		}
-	}); 
+	});
 	
-	$('#color-switcher > ul > li').click(function() {
-		var color = $(this).attr("id");
+	$('#color-switcher > ul > li').click(function () {
+	    var color = $(this).attr("id");
+	    localStorage.themeColor = color;
+
 		$("#main-color").attr("href","assets/css/color/" + color + ".css");
 	});
 	
