@@ -3508,7 +3508,7 @@ footer.navbar a:hover {
 
 #homepage-1-carousel .slide-1 {
 	text-align:center;
-	background-image:url(../images/slide-1.jpg);
+	/*background-image:url(../images/slide-1.jpg);*/
 	background-position-y:-230px;
 }
 
@@ -3525,7 +3525,7 @@ footer.navbar a:hover {
 /* HOME1 - SLIDE 2 */
 
 #homepage-1-carousel .slide-2 {
-	background-image:url(../images/slide-2.jpg);
+	/*background-image:url(../images/slide-2.jpg);*/
 }
 
 #homepage-1-carousel .slide-2 .slide-mask {
@@ -3542,7 +3542,7 @@ footer.navbar a:hover {
 
 #homepage-1-carousel .slide-3 {
 	text-align:right;
-	background-image:url(../images/slide-3.jpg);
+	/*background-image:url(../images/slide-3.jpg);*/
 }
 
 #homepage-1-carousel .slide-3 .slide-mask {
@@ -3558,7 +3558,7 @@ footer.navbar a:hover {
 /* HOME2 - SLIDE 1 */
 
 #homepage-2-carousel .slide-1 {
-	background-image:url(../images/slide-4.jpg);
+	/*background-image:url(../images/slide-4.jpg);*/
 	text-align:center;
 }
 
@@ -3581,7 +3581,7 @@ footer.navbar a:hover {
 /* HOME2 - SLIDE 2 */
 
 #homepage-2-carousel .slide-2 {
-	background-image:url(../images/slide-5.jpg);
+	/*background-image:url(../images/slide-5.jpg);*/
 }
 
 #homepage-2-carousel .slide-2 .slide-mask {
@@ -3615,7 +3615,7 @@ footer.navbar a:hover {
 
 #homepage-3-carousel .slide-1 {
 	text-align:center;
-	background-image:url(../images/slide-7.jpg);
+	/*background-image:url(../images/slide-7.jpg);*/
 }
 
 #homepage-3-carousel .slide-1 h1 {
@@ -3630,7 +3630,7 @@ footer.navbar a:hover {
 /* HOME3 - SLIDE 2 */
 
 #homepage-3-carousel .slide-2 {
-	background-image:url(../images/slide-6.jpg);
+	/*background-image:url(../images/slide-6.jpg);*/
 	background-position:0 -200px;
 }
 
@@ -3647,7 +3647,7 @@ footer.navbar a:hover {
 /* HOME4 - SLIDE 1 */
 
 #homepage-4-carousel .slide-1 {
-	background-image:url(../images/slide-6.jpg);
+	/*background-image:url(../images/slide-6.jpg);*/
 }
 
 #homepage-4-carousel .slide-1 .slide-mask {
@@ -3663,7 +3663,7 @@ footer.navbar a:hover {
 /* HOME4 - SLIDE 2 */
 
 #homepage-4-carousel .slide-2 {
-	background-image:url(../images/slide-7.jpg);
+	/*background-image:url(../images/slide-7.jpg);*/
 }
 
 #homepage-4-carousel .slide-2 h1 {

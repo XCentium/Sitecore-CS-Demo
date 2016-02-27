@@ -4,7 +4,7 @@ using CSDemo.Contracts.Marquee;
 using Sitecore.Data.Fields;
 using XCore.Framework.ItemMapper;
 using XCore.Framework.ItemMapper.Configuration.Attributes;
-
+using Glass.Mapper.Sc.Fields;
 #endregion
 
 namespace CSDemo.Models.Marquee

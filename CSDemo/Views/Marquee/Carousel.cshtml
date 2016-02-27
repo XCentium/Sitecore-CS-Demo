@@ -11,7 +11,7 @@
         <div id="homepage-1-carousel" class="nav-inside owl-animation">
             @foreach (var slide in Model.CarouselSlides)
             {
-                <div class="item slide-1" style="background-image: @MediaManager.GetMediaUrl(@slide.Image.MediaItem)">
+                <div class="item slide-1" style="background-image: url(@slide.Url)">
                     <div class="slide-mask"></div>
                     <div class="slide-body">
                         <div class="container">
