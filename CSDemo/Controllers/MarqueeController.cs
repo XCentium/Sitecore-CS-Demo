@@ -39,12 +39,11 @@ namespace CSDemo.Controllers
             var parentItem = _context.Database.GetItem(datasource);
             if(parentItem != null)
             {
-                // TBD:
-                // var slides = parentItem.Children.OrderBy(i => i.Appearance.Sortorder).Convert<CarouselItem>();
-                //if (slides != null && slides.Any())
-                //{
-                //    model.CarouselSlides = slides;
-                //}
+                var slides = parentItem.Children.OrderBy(i => i.Appearance.Sortorder).CreateAs<CarouselItem>().ToList();
+                if(slides != null && slides.Any())
+                {
+                    model.CarouselSlides = slides;
+                }
             }
             return model;
         }
