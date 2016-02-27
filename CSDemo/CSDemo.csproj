@@ -178,6 +178,7 @@
     <Compile Include="Contracts\ISettings.cs" />
     <Compile Include="Contracts\ISite.cs" />
     <Compile Include="Contracts\Marquee\ICarouselItem.cs" />
+    <Compile Include="Contracts\Marquee\ICarouselSlideContainer.cs" />
     <Compile Include="Contracts\Navigation\INavigation.cs" />
     <Compile Include="Contracts\Navigation\INavigationLink.cs" />
     <Compile Include="Contracts\Page\IMetadata.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Controllers\GeneralSearchController.cs" />
     <Compile Include="Models\Account\AccountHelper.cs" />
     <Compile Include="Models\Checkout\Cart\CartHelper.cs" />
+    <Compile Include="Models\Marquee\CarouselSlideContainer.cs" />
     <Compile Include="Models\Product\ProductHelper.cs" />
     <Compile Include="App_Start\Initializer.cs" />
     <Compile Include="Models\Checkout\Cart\CartItem.cs" />
