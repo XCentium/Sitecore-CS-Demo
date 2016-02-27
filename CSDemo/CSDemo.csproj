@@ -437,6 +437,11 @@
     <Content Include="Views\Product\CategoryListings.cshtml" />
     <Content Include="Views\Cart\Termsandconditions.cshtml" />
     <Content Include="Views\Marquee\Carousel.cshtml" />
+    <Content Include="Views\Page\Home\FeaturedBlogs.cshtml" />
+    <Content Include="Views\Page\Home\FeaturedCategories.cshtml" />
+    <Content Include="Views\Page\Home\FeaturedProducts.cshtml" />
+    <Content Include="Views\Page\Home\FeaturedServices.cshtml" />
+    <Content Include="Views\Page\Home\FeaturedStores.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
