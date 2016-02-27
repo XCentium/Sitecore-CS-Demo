@@ -8,6 +8,6 @@ namespace CSDemo.Models.Marquee
 {
     public class CarouselViewModel : RenderingModel
     {
-        IEnumerable<CarouselItem> Carouselitems { get; set; }
+        public IEnumerable<CarouselItem> CarouselSlides { get; set; }
     }
 }
