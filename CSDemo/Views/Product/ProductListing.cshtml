@@ -1,24 +1,11 @@
 ﻿@using Sitecore.Mvc
 @using Sitecore.Data
 @using Sitecore.Data.Items
+@using CSDemo.Models.Checkout.Cart;
 
 @{
 
-    //var cartHelper = new CartHelper();
-    //var id = cartHelper.GetVisitorID();
-    // var response = cartHelper.AddProductToCart("1", "AW074-04", "Adventure Works Catalog", "9");
-    //var cart = cartHelper.GetCustomerCart();
-    //var liner = cart.Lines;
-    //var minicart = cartHelper.GetMiniCart();
-
-
-
     var categoryID = Request.QueryString["id"];
-
-    if (string.IsNullOrEmpty(categoryID))
-    {
-        categoryID = "{833102C4-765F-4FA5-8DBD-A7F785D41659}";
-    }
 
     if (!string.IsNullOrEmpty(categoryID))
     {
@@ -43,9 +30,10 @@
 
                                         <ul class="list-unstyled" id="categories" role="tablist" aria-multiselectable="true">
                                             @{
-            // get department children, for each child
-            var categoryies = category.Parent.GetChildren();
-            int currentCat = 0;
+                                                // get department children, for each child
+            
+                                                var categoryies = category.Parent.GetChildren();
+                                                int currentCat = 0;
                                             }
                                             @foreach (Item cat in categoryies)
                                             {
@@ -254,90 +242,93 @@
                             </div>
                         </div>
                         <div class="row grid" id="products">
+
                             @foreach (Item product in categoryProducts)
                             {
-
-                                var ProductImage = "assets/images/products/product-1.jpg";
-
-                                var title = product.DisplayName.ToString();
-                                var description = product["Description"];
-                                var ProductImageIds = product["Images"];
-                                var rPrice = decimal.Parse(product["ListPrice"]);
-                                var rDelPrice = rPrice + 100.00m;
-                                var price = String.Format("{0:0.00}", rPrice);
-                                var delPrice = String.Format("{0:0.00}", rDelPrice);
-                                var ProductId = product["ProductId"];
-                                var CatalogName = product["CatalogName"];
-
-                                var Variants = product.GetChildren();
-
-                                if (!string.IsNullOrEmpty(ProductImageIds))
+                                if (!string.IsNullOrEmpty(product["ListPrice"].Trim()))
                                 {
-                                    var ProductImages = ProductImageIds.Split('|');
-                                    Item ProductImageItem = Sitecore.Context.Database.GetItem(ProductImages[0]);
-                                    ProductImage = "/~/media/" + ProductImageItem.ID.ToShortID() + ".ashx";
-                                }
+                                    var ProductImage = "assets/images/products/product-1.jpg";
+
+                                    var title = product.DisplayName.ToString();
+                                    var description = product["Description"];
+                                    var ProductImageIds = product["Images"];
+                                    var rPrice = decimal.Parse(product["ListPrice"], System.Globalization.CultureInfo.InvariantCulture);
+                                    var rDelPrice = rPrice + 100.00m;
+                                    var price = String.Format("{0:0.00}", rPrice);
+                                    var delPrice = String.Format("{0:0.00}", rDelPrice);
+                                    var ProductId = product["ProductId"];
+                                    var CatalogName = product["CatalogName"];
+
+                                    var Variants = product.GetChildren();
+
+                                    if (!string.IsNullOrEmpty(ProductImageIds))
+                                    {
+                                        var ProductImages = ProductImageIds.Split('|');
+                                        Item ProductImageItem = Sitecore.Context.Database.GetItem(ProductImages[0]);
+                                        ProductImage = "/~/media/" + ProductImageItem.ID.ToShortID() + ".ashx";
+                                    }
                     <!-- PRODUCT - START -->
-                                <div class="col-sm-4 col-xs-6">
-                                    <article class="product-item">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <div class="product-overlay">
-                                                    <div class="product-mask"></div>
-                                                    <a href="/product-listing/product-detail?id=@product.ID.ToString()" class="product-permalink"></a>
-                                                    <img src="@ProductImage" class="img-responsive" alt="">
-                                                    @*<div class="product-quickview">
-                                                            <a class="btn btn-quickview" data-toggle="modal" data-target="#product-quickview">Quick View</a>
-                                                        </div>*@
+                                    <div class="col-sm-4 col-xs-6">
+                                        <article class="product-item">
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <div class="product-overlay">
+                                                        <div class="product-mask"></div>
+                                                        <a href="/product-listing/product-detail?id=@product.ID.ToString()" class="product-permalink"></a>
+                                                        <img src="@ProductImage" class="img-responsive" alt="">
+                                                        @*<div class="product-quickview">
+                                                                <a class="btn btn-quickview" data-toggle="modal" data-target="#product-quickview">Quick View</a>
+                                                            </div>*@
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <div class="product-body">
+                                                        <h3>@title</h3>
+                                                        <div class="product-labels">
+                                                            <span class="label label-info">new</span>
+                                                            <span class="label label-danger">sale</span>
+                                                        </div>
+                                                        <div class="product-rating">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-o"></i>
+                                                            <i class="fa fa-star-o"></i>
+                                                        </div>
+                                                        <span class="price">
+                                                            <del><span class="amount">$@delPrice</span></del>
+                                                            <ins><span class="amount">$@price</span></ins>
+                                                        </span>
+                                                        <p>@description</p>
+                                                        <form name="@ProductId" id="@ProductId">
+                                                            <input type="hidden" id="Quantity" name="Quantity" value="1" />
+                                                            <input type="hidden" id="ProductId" name="ProductId" value="@ProductId" />
+                                                            <input type="hidden" id="CatalogName" name="CatalogName" value="@CatalogName" />
+                                                            <div class="form-group">
+                                                                <select class="form-control" name="VariantId" id="VariantId">
+                                                                    @foreach (Item variant in Variants)
+                                                                    {
+                                                                        var variantName = variant.DisplayName.ToString();
+                                                                        var variantId = variant["VariantId"];
+                                                                        <option value="@variantId">@variantName</option>
+                                                                    }
+
+                                                                </select>
+                                                            </div>
+                                                            <div class="buttons">
+                                                                <a href="" class="btn btn-primary btn-sm"><i class="fa fa-exchange"></i></a>
+                                                                <a href="javascript:void(0)" onclick="AddProductToCart('@ProductId')" class="btn btn-primary btn-sm add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                <a href="" class="btn btn-primary btn-sm"><i class="fa fa-heart"></i></a>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-9">
-                                                <div class="product-body">
-                                                    <h3>@title</h3>
-                                                    <div class="product-labels">
-                                                        <span class="label label-info">new</span>
-                                                        <span class="label label-danger">sale</span>
-                                                    </div>
-                                                    <div class="product-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o"></i>
-                                                        <i class="fa fa-star-o"></i>
-                                                    </div>
-                                                    <span class="price">
-                                                        <del><span class="amount">$@delPrice</span></del>
-                                                        <ins><span class="amount">$@price</span></ins>
-                                                    </span>
-                                                    <p>@description</p>
-                                                    <form name="@ProductId" id="@ProductId">
-                                                        <input type="hidden" id="Quantity" name="Quantity" value="1" />
-                                                        <input type="hidden" id="ProductId" name="ProductId" value="@ProductId" />
-                                                        <input type="hidden" id="CatalogName" name="CatalogName" value="@CatalogName" />
-                                                        <div class="form-group">
-                                                            <select class="form-control" name="VariantId" id="VariantId">
-                                                                @foreach (Item variant in Variants)
-                                                                {
-                                                                    var variantName = variant.DisplayName.ToString();
-                                                                    var variantId = variant["VariantId"];
-                                                                    <option value="@variantId">@variantName</option>
-                                                                }
-
-                                                            </select>
-                                                        </div>
-                                                        <div class="buttons">
-                                                            <a href="" class="btn btn-primary btn-sm"><i class="fa fa-exchange"></i></a>
-                                                            <a href="javascript:void(0)" onclick="AddProductToCart('@ProductId')" class="btn btn-primary btn-sm add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                            <a href="" class="btn btn-primary btn-sm"><i class="fa fa-heart"></i></a>
-                                                        </div>
-                                                    </form>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
+                                        </article>
+                                    </div>
                     <!-- PRODUCT - END -->
+                                }
                             }
                         </div>
 
