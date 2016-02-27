@@ -1,0 +1,28 @@
+﻿---
+ID: 8b238625-6bef-4234-8ff9-db6e4191fa70
+Parent: feee5cca-b864-4ae6-81f0-f30f7c76bbc4
+Template: 6d36df55-60e5-4591-899c-efccaf83579a
+Path: /sitecore/content/CSDemo/Components/Carousel/Slide 1
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160226T215339Z
+    - ID: 35d787ae-0f1f-412a-a570-d5a79018ebb8
+      Hint: Image
+      Value: "<image mediaid=\"{A4088D35-B3FD-424A-BC5A-92CF118CD13D}\" />"
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 8ef3659b-8284-4484-9b7e-6fff97496411
+      Hint: Content
+      Value: |
+        <div class="container">
+        <em class="fa fa-paper-plane animation top-to-bottom delay-1 slow"></em>
+        <h1 class="animation top-to-bottom slow">XCMarket</h1>
+        <p class="animation bottom-to-top slow">30+ HTML Pages &bull; Simple Design &bull; Components </p>
+        </div>
