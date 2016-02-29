@@ -33,7 +33,7 @@
                                     <div class="widget-body">
                                         @foreach (var option in facet.FoundValues)
                                         {
-                                            <div class="checkbox">
+                                            <div>
                                                 <label for="check-with-discount"><a href="@Model.AddToFacets(facet.Name, option.Name, Request.Url.AbsoluteUri)">@option.Name</a></label>
                                                 <span>[@option.AggregateCount]</span>
                                             </div>

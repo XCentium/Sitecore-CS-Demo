@@ -18,6 +18,7 @@ using Sitecore.Links;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 using Sitecore.SecurityModel;
+using System;
 
 #endregion
 
@@ -57,7 +58,7 @@ namespace CSDemo.Controllers
         {
             var searchModel = new Search();
             if (string.IsNullOrWhiteSpace(query)) return View(searchModel);
-
+            facetValues = HttpUtility.UrlDecode(facetValues);
             var searchInfo = GetSearchInfo(query, pageNumber, facetValues, sortField, pageSize, sortDirection);
 
             searchModel = GetSearchModel(searchInfo.SearchOptions, searchInfo.SearchQuery, searchInfo.CatalogName);
@@ -142,11 +143,11 @@ namespace CSDemo.Controllers
             {
                 if (!string.IsNullOrEmpty(valueQueryString))
                 {
-                    var facetValuesCombos = valueQueryString.Split(new char[] {'&'});
+                    var facetValuesCombos = valueQueryString.Split(new string[] {Constants.QueryStrings.FacetOptionSeparator}, StringSplitOptions.RemoveEmptyEntries);
 
                     foreach (var facetValuesCombo in facetValuesCombos)
                     {
-                        var facetValues = facetValuesCombo.Split(new char[] {'='});
+                        var facetValues = facetValuesCombo.Split(new char[] {Constants.QueryStrings.FacetOptionDefinitionSeparator});
 
                         var name = facetValues[0];
 
