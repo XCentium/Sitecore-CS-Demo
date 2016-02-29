@@ -43,6 +43,7 @@ namespace CSDemo.Controllers
             if (parentItem == null) return model;
             var slides = parentItem.Children.OrderBy(i => i.Appearance.Sortorder).CreateAs<CarouselItem>().ToList();
             if (!slides.Any()) return model;
+            model.DisplayOn = true;
             foreach (var slide in slides)
             {
                 var image = slide.Image;
@@ -54,6 +55,9 @@ namespace CSDemo.Controllers
                         slide.Url = url;
                     }
                 }
+                // Image and Content are necessary to display a slide, hide if not available
+                if (!slide.Url.IsEmptyOrNull() && !slide.Content.IsEmptyOrNull())
+                    slide.CanShowSlide = true;
             }
             model.CarouselSlides = slides;
             return model;

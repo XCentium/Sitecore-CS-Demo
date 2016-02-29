@@ -9,5 +9,6 @@ namespace CSDemo.Models.Marquee
     public class CarouselViewModel : RenderingModel
     {
         public IEnumerable<CarouselItem> CarouselSlides { get; set; }
+        public bool DisplayOn { get; set; }
     }
 }

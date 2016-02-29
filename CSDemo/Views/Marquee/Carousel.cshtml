@@ -5,20 +5,23 @@
 <!-- ==========================
     JUMBOTRON - START
 =========================== -->
-@if (Model != null)
+@if (Model != null && Model.DisplayOn)
 {
     <section class="content jumbotron">
         <div id="homepage-1-carousel" class="nav-inside owl-animation">
             @foreach (var slide in Model.CarouselSlides)
             {
-                <div class="item slide-1" style="background-image: url(@slide.Url)">
-                    <div class="slide-mask"></div>
-                    <div class="slide-body">
-                        <div class="container">
-                            @Html.Raw(@slide.Content)
+                if (slide.CanShowSlide)
+                {
+                    <div class="item slide-1" style="background-image: url(@slide.Url)">
+                        <div class="slide-mask"></div>
+                        <div class="slide-body">
+                            <div class="container">
+                                @Html.Raw(@slide.Content)
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
             }
         </div>
     </section>

@@ -35,5 +35,11 @@ namespace CSDemo.Models.Marquee
         public virtual string Content { get; set; }
 
         #endregion
+
+        #region Display
+
+        public bool CanShowSlide { get; set; }
+
+        #endregion
     }
 }
