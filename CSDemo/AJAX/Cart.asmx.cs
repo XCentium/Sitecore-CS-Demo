@@ -7,6 +7,7 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using CSDemo.Models.Cart;
 using CSDemo.Models.Checkout.Cart;
+using Sitecore.Analytics.Data.Items;
 
 #endregion
 
@@ -47,9 +48,10 @@ namespace CSDemo.AJAX
             ret = cartHelper.AddProductToCart(Quantity, ProductId, CatalogName, VariantId);
 
             return ret;
+
+            RegisterGoal(Constants.Marketing.AddToCartGoalId);
         }
 
-         
         [WebMethod(EnableSession = true)]
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
         public string SubmitOrder()
@@ -162,5 +164,28 @@ namespace CSDemo.AJAX
 
             return ret;
         }
+
+        #region Private Helpers
+
+        private void RegisterGoal(string addToCartGoalId)
+        {
+            if (!Sitecore.Analytics.Tracker.Current.IsActive)
+                Sitecore.Analytics.Tracker.Current.StartTracking();
+
+            if (!Sitecore.Analytics.Tracker.Current.IsActive
+                || Sitecore.Analytics.Tracker.Current.CurrentPage == null)
+                return;
+
+            var goalItem = Sitecore.Context.Database.GetItem(addToCartGoalId);
+            var goal = new PageEventItem(goalItem);
+            var pageEventsRow = Sitecore.Analytics.Tracker.Current.CurrentPage.Register(goal);
+
+            pageEventsRow.Data = "Product added to cart - "
+                + DateTime.Now.ToString("F");
+            pageEventsRow.ItemId = Sitecore.Context.Item.ID.Guid;
+            pageEventsRow.DataKey = Sitecore.Context.Item.Paths.Path;
+        }
+
+        #endregion
     }
 }

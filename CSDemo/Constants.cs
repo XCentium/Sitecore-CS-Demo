@@ -61,5 +61,10 @@ namespace CSDemo
 
             public const string Departments = "Departments";
         }
+
+        public struct Marketing
+        {
+            public const string AddToCartGoalId = "{027F31D6-E67E-49C8-B7B2-C589BD62D7B0}";
+        }
     }
 }
