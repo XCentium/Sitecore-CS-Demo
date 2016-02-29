@@ -19,8 +19,7 @@
 $(document).ready(function () {
 
     // Set the theme color at page load to match what is in local storage
-    if (localStorage != undefined) {
-        console.log('color is defined');
+    if (localStorage.themeColor != undefined) {
         $("#main-color").attr("href", "assets/css/color/" + localStorage.themeColor + ".css");
     }
 
