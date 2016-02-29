@@ -13,7 +13,7 @@
                     @foreach (var image in Model.Images)
                     {
                         count++;
-                        @RenderImage(image, x => x, new { Width = 360, Height = 351, @class= "img-responsive product-image-"+count }, isEditable: false);
+                        @RenderImage(image, x => x, new { Width = 360, Height = 351, AS=1, BC="ffffff", @class= "img-responsive product-image-"+count }, isEditable: false);
                         if (count == 2)
                         {
                             break;
