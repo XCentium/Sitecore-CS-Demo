@@ -1,0 +1,33 @@
+﻿---
+ID: 3c5bbd6a-528f-4807-baf0-20f238f16c0a
+Parent: 49b9f3e2-65cc-48f5-9a96-35efd0c752d8
+Template: b3d2832f-2fbf-4466-9d95-d3a0c6476362
+Path: /sitecore/content/CSDemo/Home/Category
+DB: master
+SharedFields:
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s" p:p="1">
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r uid="{95FE6DFA-F7C0-4F4A-9B45-9C30F1643FCB}" p:after="r[@uid='{E5A6C541-E277-499D-9CB9-DFF8CE125A23}']" s:id="{99CA4BEB-25C9-4223-9102-2EBA9D6BF24B}" s:ph="page-body" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160229T091224Z
+    - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
+      Hint: Page Title
+      Value: Category
+    - ID: 55a55b4d-d866-4df7-9821-46e9f9cf3ee3
+      Hint: Title
+      Value: Category
+    - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
+      Hint: Meta Description
+      Value: Category Page

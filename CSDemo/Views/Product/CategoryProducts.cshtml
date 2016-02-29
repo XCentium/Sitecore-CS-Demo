@@ -8,12 +8,15 @@
 @using System.Linq
 
 @{
-    
-    var categoryID = Request.QueryString["id"];
+    var parentID = "{4441D0B5-1080-4550-A91A-4C2C8245C986}";
+
+    var categoryID = Sitecore.Web.WebUtil.GetUrlName(0);
 
     if (!string.IsNullOrEmpty(categoryID))
     {
-        var category = Sitecore.Context.Database.GetItem(new ID(categoryID));
+        var parent = Sitecore.Context.Database.GetItem(new ID(parentID));
+
+        var category = parent.GetChildren().ToArray().AsQueryable().FirstOrDefault(x => x.Name.Equals(categoryID));
 
         var categoryProducts = category.GetChildren();
 
@@ -34,10 +37,10 @@
 
                                         <ul class="list-unstyled" id="categories" role="tablist" aria-multiselectable="true">
                                             @{
-                                                // get department children, for each child
-            
-                                                var categoryies = category.Parent.GetChildren();
-                                                int currentCat = 0;
+            // get department children, for each child
+
+            var categoryies = category.Parent.GetChildren();
+            int currentCat = 0;
                                             }
                                             @foreach (Item cat in categoryies)
                                             {
@@ -65,8 +68,10 @@
                                                     <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">
                                                         @foreach (Item catProduct in catProducts)
                                                         {
+                                                            var ProductId = catProduct["ProductId"];
+                                                            var CatalogName = catProduct["CatalogName"];
 
-                                                            <li><a href="/product-listing/product-detail?id=@catProduct.ID.ToString()">@catProduct.DisplayName.ToString()</a></li>
+                                                            <li><a href="/Category/@categoryID/@ProductId">@catProduct.DisplayName.ToString()</a></li>
                                                         }
                                                     </ul>
                                                 </li>
@@ -278,7 +283,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="product-overlay">
                                                         <div class="product-mask"></div>
-                                                        <a href="/product-listing/product-detail?id=@product.ID.ToString()" class="product-permalink"></a>
+                                                        <a href="/Category/@categoryID/@ProductId" class="product-permalink"></a>
                                                         <img src="@ProductImage" class="img-responsive" alt="">
                                                         @*<div class="product-quickview">
                                                                 <a class="btn btn-quickview" data-toggle="modal" data-target="#product-quickview">Quick View</a>

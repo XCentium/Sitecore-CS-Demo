@@ -777,7 +777,7 @@ namespace CSDemo.Models.Checkout.Cart
 
             var submitResult = provider.SubmitVisitorOrder(submitRequest);
 
-           
+
             return submitResult;
         }
 
@@ -785,7 +785,7 @@ namespace CSDemo.Models.Checkout.Cart
         {
             try
             {
-                
+
 
                 var cart = RemoveFromCart(externalCartLineId);
 
