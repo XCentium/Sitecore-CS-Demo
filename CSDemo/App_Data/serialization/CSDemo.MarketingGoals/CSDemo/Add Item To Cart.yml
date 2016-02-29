@@ -1,8 +1,8 @@
 ﻿---
-ID: b7949a07-ddd5-4c18-929e-78767b03d6f8
+ID: 027f31d6-e67e-49c8-b7b2-c589bd62d7b0
 Parent: 4588ef7c-be6f-42db-b49d-185ad831c8e0
 Template: 475e9026-333f-432d-a4dc-52e03b75cb6b
-Path: /sitecore/system/Marketing Control Panel/Goals/CSDemo/View Product
+Path: /sitecore/system/Marketing Control Panel/Goals/CSDemo/Add Item To Cart
 DB: master
 SharedFields:
 - ID: 2f2ae296-8b58-4d94-8eee-0e82589d61a4
@@ -10,13 +10,13 @@ SharedFields:
   Value: 1
 - ID: 33ae0e84-74a0-437f-ab2b-859dfa96f6c9
   Hint: Points
-  Value: 10
+  Value: 25
 - ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
   Hint: __Workflow
   Value: {689E2994-4656-4C58-9112-7826CB46EE69}
 - ID: ac6ba888-4213-43bd-b787-d8da2b6b881f
   Hint: Name
-  Value: View Product
+  Value: Add Item To Cart
 - ID: afc95c7c-d078-41df-b3be-9b7948992584
   Hint: Category
   Value: CSDemo
@@ -27,7 +27,7 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160229T231555Z
+      Value: 20160229T231641Z
     - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
       Hint: __Workflow state
       Value: {EDCBB550-BED3-490F-82B8-7B2F14CCD26E}
