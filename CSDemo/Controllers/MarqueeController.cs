@@ -39,6 +39,7 @@ namespace CSDemo.Controllers
         {
             CarouselViewModel model = new CarouselViewModel();
             var datasource = RenderingContext.Current.Rendering.DataSource;
+            if (datasource.IsEmptyOrNull()) return model;
             var parentItem = _context.Database.GetItem(datasource);
             if (parentItem == null) return model;
             var slides = parentItem.Children.OrderBy(i => i.Appearance.Sortorder).CreateAs<CarouselItem>().ToList();
