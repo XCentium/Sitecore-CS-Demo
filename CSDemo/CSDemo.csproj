@@ -182,7 +182,6 @@
     <Compile Include="Contracts\ISettings.cs" />
     <Compile Include="Contracts\ISite.cs" />
     <Compile Include="Contracts\Marquee\ICarouselItem.cs" />
-    <Compile Include="Contracts\Marquee\ICarouselSlideContainer.cs" />
     <Compile Include="Contracts\Navigation\INavigation.cs" />
     <Compile Include="Contracts\Navigation\INavigationLink.cs" />
     <Compile Include="Contracts\Page\IMetadata.cs" />
@@ -196,8 +195,8 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\GeneralSearchController.cs" />
     <Compile Include="Models\Account\AccountHelper.cs" />
+    <Compile Include="Models\Account\LoginModel.cs" />
     <Compile Include="Models\Checkout\Cart\CartHelper.cs" />
-    <Compile Include="Models\Marquee\CarouselSlideContainer.cs" />
     <Compile Include="Models\Product\ProductHelper.cs" />
     <Compile Include="App_Start\Initializer.cs" />
     <Compile Include="Models\Checkout\Cart\CartItem.cs" />
@@ -341,6 +340,7 @@
     <Content Include="Assets\js\Review.js" />
     <Content Include="Assets\js\Shipping.js" />
     <Content Include="Assets\js\SmoothScroll.js" />
+    <Content Include="Assets\js\ThankYou.js" />
     <Content Include="Assets\js\twitterFetcher_min.js" />
     <Content Include="sitecore modules\Web\XCore\CodeGen\CodeGenerationRoot.aspx" />
     <Content Include="sitecore modules\Web\XCore\CodeGen\GenerateCode.aspx" />
@@ -449,6 +449,11 @@
     <Content Include="Views\Page\Home\FeaturedProducts.cshtml" />
     <Content Include="Views\Page\Home\FeaturedServices.cshtml" />
     <Content Include="Views\Page\Home\FeaturedStores.cshtml" />
+    <Content Include="Views\Account\Account.cshtml" />
+    <Content Include="Views\Account\Signin.cshtml" />
+    <Content Include="Views\Account\LostPasword.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Signoff.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -458,7 +463,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contracts\Checkout\" />
-    <Folder Include="Views\Account\" />
     <Folder Include="Views\Checkout\" />
   </ItemGroup>
   <PropertyGroup>

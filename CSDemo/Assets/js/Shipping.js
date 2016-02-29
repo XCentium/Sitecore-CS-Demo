@@ -43,7 +43,7 @@ function SubmitShippingFormData() {
 
         console.log(formValues);
 
-        var data = "shippingMethodId:'" + JSON.stringify(formValues.radio_shipping_2_options[0]) + "'";
+        var data = "shippingMethodId:'" + formValues.radio_shipping_2_options[0] + "'";
 
         $.ajax({
             type: "POST",

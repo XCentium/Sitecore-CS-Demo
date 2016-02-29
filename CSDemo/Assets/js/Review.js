@@ -97,6 +97,8 @@ function SubmitReviewFormData() {
             dataType: "json",
             success: function (result) {
 
+                var orderID = result.d;
+                Cookies.set("orderConfirmationID", orderID, { expires: 7 });
                 ShowActionMessage('Order Submitted!');
 
             },

@@ -6,21 +6,39 @@
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
                 <div class="login-form-wrapper">
-                    <form>
+                    <form action="/Account/signin" method="post" id="Signin-form">
                         <h3>Sign In</h3>
+                        @{
+                            var message = Request.QueryString["msg"];
+
+                            if (!string.IsNullOrEmpty(message))
+                            {
+                                
+                                <span class="error-text"><strong>Error:</strong>@message</span>
+                                
+                            }
+                            
+                        }
                         <div class="form-group">
                             <label>Email<span class="required">*</span></label>
-                            <input type="email" class="form-control">
+                            <input type="text" id="Email" name="email" 
+                                   class="form-control" 
+                                   placeholder="Username or Email" maxlength="75"
+                                    required />
                         </div>
                         <div class="form-group">
                             <label>Password<span class="required">*</span></label>
-                            <input type="password" class="form-control">
+                            <input type="Password" id="password" name="password" 
+                                   class="form-control" maxlength="100"
+                                    required />
                         </div>
                         <div class="form-group">
                             <div class="checkbox">
-                                <input type="checkbox" id="signin-remember">
-                                <label for="signin-remember">Remember me</label>
+                                <input type="checkbox" id="RememberMe" name="RememberMe"
+                                       value="true" />
+                                <label for="RememberMe">Remember me</label>
                             </div>
+                            <input type="hidden" value="false" name="RememberMe" />
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
                     </form>

@@ -2,8 +2,24 @@
 @using Sitecore.Data
 @using Sitecore.Data.Items
 @using CSDemo.Models.Checkout.Cart;
+@using CSDemo.Models.Account
+@using Sitecore.Commerce.Entities.Customers
+@using System.Collections.Generic
+@using System.Linq
 
 @{
+    
+
+    // AccountHelper acc = new AccountHelper();
+    
+    CartHelper c = new CartHelper();
+
+    var cart = c.GetMiniCart();
+
+
+
+
+    
 
     var categoryID = Request.QueryString["id"];
 

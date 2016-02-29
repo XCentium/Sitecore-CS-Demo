@@ -377,6 +377,8 @@ namespace CSDemo.Models.Checkout.Cart
         {
             var cart = GetCustomerCart();
 
+            CommerceTotal shoppingCartTotal = cart.Total as CommerceTotal;
+
             var shoppingCart = new ShoppingCart();
 
             if (cart != null)
@@ -404,9 +406,7 @@ namespace CSDemo.Models.Checkout.Cart
                             if (item != null)
                             {
                                 cartItem.ProductID = item.ID.ToString();
-
                                 cartItem.ImageUrl = ProductHelper.GetFirstImageFromProductItem(item);
-
                             }
                             else
                             {
@@ -427,18 +427,12 @@ namespace CSDemo.Models.Checkout.Cart
                                 cartItem.ImageUrl = cartLine.Images[0];
                             }
                         }
-
                         //var images = cartLine.
-
                         cartItems.Add(cartItem);
-
                     }
-
                     shoppingCart.CartItems = cartItems;
                 }
-
             }
-
 
             return shoppingCart;
         }
@@ -463,7 +457,7 @@ namespace CSDemo.Models.Checkout.Cart
 
             var updatedCart = cart;
 
-            CommerceParty billing = cart.Parties.Cast<CommerceParty>().FirstOrDefault(party => party.Name == "Billing");
+            CommerceParty billing = updatedCart.Parties.Cast<CommerceParty>().FirstOrDefault(party => party.Name == "Billing");
 
             if (billing == null)
             {
@@ -472,6 +466,8 @@ namespace CSDemo.Models.Checkout.Cart
                 billing.Name = "Billing";
 
                 updatedCart = AddPartyToCart(updatedCart, billing);
+
+                billing = updatedCart.Parties.Cast<CommerceParty>().FirstOrDefault(party => party.Name == "Billing");
             }
 
             billing.FirstName = firstname;
@@ -494,9 +490,10 @@ namespace CSDemo.Models.Checkout.Cart
                 shipping.Name = "Shipping";
 
                 updatedCart = AddPartyToCart(updatedCart, shipping);
+                shipping = updatedCart.Parties.Cast<CommerceParty>().FirstOrDefault(party => party.Name == "Shipping");
             }
 
-            shipping.Name = "Billing";
+            shipping.Name = "Shipping";
             shipping.FirstName = firstname2;
             shipping.LastName = lastname2;
             shipping.Address1 = address2;
@@ -508,7 +505,7 @@ namespace CSDemo.Models.Checkout.Cart
             shipping.FaxNumber = fax2;
             shipping.Country = country2;
 
-            updatedCart = UpdatePartiesInCart(cart, new List<CommerceParty>() { billing, shipping });
+            updatedCart = UpdatePartiesInCart(updatedCart, new List<CommerceParty>() { billing, shipping });
 
             // clear cart cache and add updated cart to cache
 
@@ -602,9 +599,9 @@ namespace CSDemo.Models.Checkout.Cart
 
             // if shippingMethodId is not empty, get Shipping Party, if shipping party is not empty, apply shippingMethodId to cart, refresh cart cache
 
-            if (string.IsNullOrEmpty(shippingMethodId))
+            if (!string.IsNullOrEmpty(shippingMethodId))
             {
-                CommerceParty shipping = cart.Parties.Cast<CommerceParty>().FirstOrDefault(party => party.Name == "Shipping");
+                CommerceParty shipping = updatedCart.Parties.Cast<CommerceParty>().FirstOrDefault(party => party.Name == "Shipping");
                 if (shipping != null)
                 {
                     updatedCart = AddShippingMethodInfoToCart(cart, shipping, shippingMethodId);
@@ -661,9 +658,9 @@ namespace CSDemo.Models.Checkout.Cart
             updatedCart = RemovePaymentInfoFromCart(cart, cart.Payment.ToList());
             // add payment info to cart
             // get billing, if billing is not null 
-            if (string.IsNullOrEmpty(paymentExternalID))
+            if (!string.IsNullOrEmpty(paymentExternalID))
             {
-                CommerceParty billing = cart.Parties.Cast<CommerceParty>().FirstOrDefault(party => party.Name == "Billing");
+                CommerceParty billing = updatedCart.Parties.Cast<CommerceParty>().FirstOrDefault(party => party.Name == "Billing");
                 if (billing != null)
                 {
 
@@ -730,8 +727,10 @@ namespace CSDemo.Models.Checkout.Cart
             ;
         }
 
-        internal bool SubmitCart()
+        internal string SubmitCart()
         {
+            var ret = string.Empty;
+
             CommerceCart cart = GetCustomerCart();
             // check for cart errors 
             if (cart.Properties["_Basket_Errors"] == null)
@@ -749,14 +748,14 @@ namespace CSDemo.Models.Checkout.Cart
 
                 cart = submitResult.CartWithErrors as CommerceCart;
 
-
+                ret = submitResult.Order.OrderID;
             }
             else
             {
-                return false;
+                return ret;
             }
 
-            return true;
+            return ret;
         }
 
         private SubmitVisitorOrderResult SubmitOrder(CommerceCart cart)
@@ -778,6 +777,7 @@ namespace CSDemo.Models.Checkout.Cart
 
             var submitResult = provider.SubmitVisitorOrder(submitRequest);
 
+           
             return submitResult;
         }
 
@@ -785,9 +785,11 @@ namespace CSDemo.Models.Checkout.Cart
         {
             try
             {
-                ClearCartFromCache();
+                
 
                 var cart = RemoveFromCart(externalCartLineId);
+
+                ClearCartFromCache();
 
                 AddCartToCache(cart);
 
@@ -843,8 +845,14 @@ namespace CSDemo.Models.Checkout.Cart
         {
             try
             {
-                ClearCartFromCache();
+
+                // get the cart line to update
+                // get the current cart quantity
+                // if current new quantity is greater tnan current, Add new-current to cart
+                // if less remove the item and add new
+
                 CommerceCart cart = ChangeCartItemQuantity(externalID, quantity);
+                ClearCartFromCache();
                 AddCartToCache(cart);
                 return true;
             }

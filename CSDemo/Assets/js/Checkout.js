@@ -103,7 +103,7 @@ function SubmitCheckoutFormData() {
             error: function (error) {
                 console.log(error)
                 alert(error); //alert with HTTP error
-
+                return false;
             }
 
         });

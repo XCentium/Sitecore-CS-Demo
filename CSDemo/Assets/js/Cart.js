@@ -53,41 +53,7 @@ function ShowActionMessage(message) {
     $('#modalAddToCart').modal('show');
     window.setTimeout(function () {
         $('#modalAddToCart').modal('hide');
-    }, 1500);
-}
-
-
-function AddToCart(ProductID) {
-
-    alert('Error');
-
-    //$.ajax({
-    //    type: "POST",
-    //    url: "/AJAX/cart.asmx/AddToCart",
-    //    data: '{ "productID" : ' + JSON.stringify(ProductID) + '}',
-    //    contentType: "application/json; charset=utf-8",
-    //    dataType: "json",
-    //    success: function (result) {
-
-    //        console.log(result.d)
-    //        var ShoppingCart = result.d;
-
-    //        // modalAddToCart
-    //        $('#modalAddToCart').modal('show');
-    //        window.setTimeout(function () {
-    //            $('#modalAddToCart').modal('hide');
-    //        }, 1500);
-            
-    //        ShowCartUpdate(ShoppingCart);
-
-    //    },
-    //    error: function (error) {
-    //        console.log(error)
-    //        alert(error); //alert with HTTP error
-
-    //    }
-
-    //});
+    }, 1750);
 }
 
 function RemoveProductFromCart(externalID) {
@@ -103,7 +69,6 @@ function RemoveProductFromCart(externalID) {
             console.log(result.d)
             var ShoppingCart = result.d;
 
-
             // modalAddToCart
             ShowActionMessage("Removed from Cart");
 
@@ -115,7 +80,7 @@ function RemoveProductFromCart(externalID) {
             console.log(error)
             alert(error); //alert with HTTP error
 
-        }
+        },
 
     });
 }
@@ -140,9 +105,6 @@ function ShowCartUpdate(ShoppingCart) {
 
         $("#cart-items-list").append('<li><div class="row"><div class="col-sm-6"><a href="/cart" class="btn btn-primary btn-block">View Cart</a></div><div class="col-sm-6"><a href="/checkout" class="btn btn-primary btn-block">Checkout</a></div></div></li>');
             
-        // Ensure session does not timeout if cart has product.
-        // If no activity for 45 seconds, reload to keep 
-        setTimeout(refresh, 4500);
     }
 
 
@@ -173,14 +135,6 @@ function LoadCart() {
 
 }
 
-
-function refresh() {
-    //if (new Date().getTime() - currtime >= 45000)
-    //    window.location.reload(true);
-    //else
-    //    setTimeout(refresh, 4500);
-}
-
 function SubmitCartFormData() {
 
     var vals = $("#cart-form").values();
@@ -190,12 +144,10 @@ function SubmitCartFormData() {
     for (var i = 0; i < vals.quantity.length; i++) {
 
         var obj = new Object();
-        obj.ExternalID = JSON.stringify(vals.externalID[i]);
+        obj.ExternalID = vals.externalID[i];
         obj.Quantity = vals.quantity[i];
         JSONObject.push(obj);
     }
-
-    console.log(JSONObject);
 
 
     $.ajax({
@@ -204,25 +156,34 @@ function SubmitCartFormData() {
         data: JSON.stringify({ currentCartItems: JSONObject }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        async: false,
         success: function (result) {
 
-
-            // modalAddToCart
-            ShowActionMessage("Cart Updated");
-
             // ShowCartUpdate(ShoppingCart);
-            LoadCart();
-
+            ShowActionMessage("Cart Updated");
+           LoadCart();
+           ReloadPage();
             return true;
         },
         error: function (error) {
+            return false;
             console.log(error)
             alert(error); //alert with HTTP error
-        }
+        },
+        //complete: function () {
+        //    // modalAddToCart
+        //    alert(2);
+        //},
+
     });
+
     return false;
 }
 
-
+function ReloadPage() {
+    window.setTimeout(function () {
+        window.location.reload();
+    }, 1800);
+}
 
 

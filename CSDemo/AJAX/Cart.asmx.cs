@@ -49,13 +49,13 @@ namespace CSDemo.AJAX
             return ret;
         }
 
-        // 
+         
         [WebMethod(EnableSession = true)]
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
-        public bool SubmitOrder()
+        public string SubmitOrder()
         {
             // check if user is logged in and not commerce customer, if true, return false
-            var ret = false;
+            var ret = string.Empty;
 
             var cartHelper = new CartHelper();
 
@@ -75,7 +75,6 @@ namespace CSDemo.AJAX
         {
             // check if user is logged in and not commerce customer, if true, return false
             var ret = false;
-
 
             var cartHelper = new CartHelper();
 
@@ -130,53 +129,6 @@ namespace CSDemo.AJAX
             return ret;
         }
 
-
-        ///// <summary>
-        ///// Add Item to cart based on ID. 
-        ///// It the Item already exists, it is incremented, else, it is added as 1
-        ///// Item can only be added to Cart by Anonymous user or user logged in with CommerceCustomer group
-        ///// </summary>
-        ///// <param name="productID">This is the Sitecore ItemID of the product</param>
-        ///// <returns>It returns true if successful, else, it returns false</returns>
-        //[WebMethod(EnableSession = true)]
-        //[System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
-        //public ShoppingCart AddToCart(string productID)
-        //{
-        //    // check if user is logged in and not commerce customer, if true, return false
-
-        //    var cartManager = new CartManager();
-
-        //    cartManager.AddToCart(productID);
-
-        //    return cartManager.shoppingCart;
-        //}
-
-        //[WebMethod(EnableSession = true)]
-        //[System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
-        //public ShoppingCart RemoveFromCart(string productID)
-        //{
-        //    // check if user is logged in and not commerce customer, if true, return false
-
-        //    var cartManager = new CartManager();
-
-        //    cartManager.RemoveItemFromCart(productID);
-
-        //    return cartManager.shoppingCart;
-        //}
-
-        //[WebMethod(EnableSession = true)]
-        //[System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
-        //public ShoppingCart LoadCartData()
-        //{
-        //    // check if user is logged in and not commerce customer, if true, return false
-
-
-        //    var cartManager = new CartManager();
-
-        //    return cartManager.shoppingCart;
-        //}
-
-
         public struct CurrentCartItem
         {
             public string ExternalID { get; set; }
@@ -192,7 +144,6 @@ namespace CSDemo.AJAX
             var ret = false;
 
             var cartHelper = new CartHelper();
-
 
             foreach (var c in currentCartItems)
             {

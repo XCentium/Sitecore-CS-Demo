@@ -41,7 +41,7 @@ function SubmitPaymentFormData() {
 
         console.log(formValues);
 
-        var data = "paymentExternalID:'" + JSON.stringify(formValues.optionsRadios[0]) + "',";
+        var data = "paymentExternalID:'" + formValues.optionsRadios[0] + "',";
         data += "nameoncard:'" + formValues.nameoncard[0] + "',";
         data += "creditcard:'" + formValues.creditcard[0] + "',";
         data += "expmonth:'" + formValues.expmonth[0] + "',";

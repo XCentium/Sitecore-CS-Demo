@@ -306,14 +306,14 @@ $(document).ready(function() {
 		PRODUCT QUANTITY
 	------------------------------*/			
 	$('#qty-plus').click(function(e) {
-		var temp = $('#qty').val();
-		$('#qty').attr("value",parseInt(temp) + 1);
+	    var temp = $('#Quantity').val();
+	    $('#Quantity').attr("value", parseInt(temp) + 1);
 	});
 	
 	$('#qty-minus').click(function(e) {
-		var temp = $('#qty').val();
-		if(parseInt(temp) > 0) {
-			$('#qty').attr("value",parseInt(temp) - 1);
+	    var temp = $('#Quantity').val();
+		if(parseInt(temp) > 1) {
+		    $('#Quantity').attr("value", parseInt(temp) - 1);
 		}
 	});
 	
