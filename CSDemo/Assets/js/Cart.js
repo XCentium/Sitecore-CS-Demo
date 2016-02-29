@@ -115,7 +115,6 @@ function LoadCart() {
     $.ajax({
         type: "POST",
         url: "/AJAX/cart.asmx/LoadCart",
-        data: '{}',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
