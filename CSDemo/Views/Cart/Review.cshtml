@@ -112,7 +112,7 @@
                                                 var subTotal = String.Format("{0:0.00}", cartItem.SubTotal);
                                                 <tr>
                                                     <td class="col-xs-1"><img src="@cartItem.ImageUrl" alt="" class="img-responsive"></td>
-                                                    <td class="col-xs-4 col-md-5"><h4><a href="/productlisting/productdetail?id=@cartItem.ProductID">@cartItem.ProductName</a><small></small></h4></td>
+                                                    <td class="col-xs-4 col-md-5"><h4><a href="/category/@cartItem.Category/@cartItem.CSProductId">@cartItem.ProductName</a><small></small></h4></td>
                                                     <td class="col-xs-2 text-center"><span>$@unitPrice</span></td>
                                                     <td class="col-xs-2 col-md-1 text-center"><span><b>@cartItem.Quantity</b></span></td>
                                                     <td class="col-xs-2 text-center"><span><b>$@subTotal</b></span></td>

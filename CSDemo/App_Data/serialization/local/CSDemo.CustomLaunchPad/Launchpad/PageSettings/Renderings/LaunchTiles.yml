@@ -1,0 +1,72 @@
+﻿---
+ID: beeedcf8-45df-4895-a261-caee9b91c77f
+Parent: f57be984-17d8-4f5b-ae63-8d9da8fcaf4f
+Template: 99f8905d-4a87-4eb8-9f8b-a9bebfb3add6
+Path: /sitecore/client/Applications/Launchpad/PageSettings/Renderings/LaunchTiles
+DB: core
+SharedFields:
+- ID: 1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f
+  Hint: Datasource Template
+  Value: {32AA92BA-C374-4A3D-AF79-F9E81880A9F1}
+- ID: 51b435bc-f7b9-478a-9c51-52916af96ff5
+  Hint: Path
+  Value: /sitecore/shell/client/Applications/LaunchPad/Layouts/Renderings/LaunchTiles.cshtml
+- ID: 7d24e54f-5c16-4314-90c9-6051aa1a7da1
+  Hint: Parameters Template
+  Value: {32AA92BA-C374-4A3D-AF79-F9E81880A9F1}
+- ID: b5b27af1-25ef-405c-87ce-369b3a004016
+  Hint: Datasource Location
+  Value: PageSettings
+Languages:
+- Language: da
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: LaunchTile
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160115T143215Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: de-DE
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: LaunchTiles
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160115T143326Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20140616T082651
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: ja-JP
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: ラウンチ タイル
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160115T143432Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

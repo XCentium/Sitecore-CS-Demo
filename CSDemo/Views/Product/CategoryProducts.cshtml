@@ -71,7 +71,7 @@
                                                             var ProductId = catProduct["ProductId"];
                                                             var CatalogName = catProduct["CatalogName"];
 
-                                                            <li><a href="/Category/@categoryID/@ProductId">@catProduct.DisplayName.ToString()</a></li>
+                                                            <li><a href="/Category/@cat.Name/@ProductId">@catProduct.DisplayName.ToString()</a></li>
                                                         }
                                                     </ul>
                                                 </li>
@@ -305,7 +305,6 @@
                                                             <i class="fa fa-star-o"></i>
                                                         </div>
                                                         <span class="price">
-                                                            <del><span class="amount">$@delPrice</span></del>
                                                             <ins><span class="amount">$@price</span></ins>
                                                         </span>
                                                         <p>@description</p>

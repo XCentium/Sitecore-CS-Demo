@@ -417,9 +417,6 @@
     <Content Include="Views\Page\Layouts\Responsive.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Product\ProductDetails.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Navigation\MainNavigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -438,15 +435,23 @@
     <Content Include="Assets\fonts\fontawesome-webfont.woff2" />
     <Content Include="Assets\fonts\FontAwesome.otf" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.Configs.Default" />
-    <Content Include="App_Config\Include\zCSDemo\CSDemo.Serialization.config" />
+    <Content Include="App_Config\Include\zCSDemo\CSDemo.Serialization.config">
+      <TransformOnBuild>true</TransformOnBuild>
+    </Content>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Debug.config">
+      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Release.config">
+      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
     <None Include="Properties\PublishProfiles\Castle Local.pubxml" />
     <None Include="Properties\PublishProfiles\csDemo.pubxml" />
     <None Include="Properties\PublishProfiles\XcCommerce112Demo.pubxml" />
     <Content Include="Views\Page\Header.cshtml" />
     <Content Include="Views\Page\Footer.cshtml" />
     <Content Include="Views\Cart\Cart.cshtml" />
-    <Content Include="Views\Product\CategoryListing.cshtml" />
-    <Content Include="Views\Product\ProductListing.cshtml" />
     <Content Include="Views\Product\Facets.cshtml" />
     <Content Include="Views\Cart\Checkout.cshtml" />
     <Content Include="Views\Cart\Shipping.cshtml" />
@@ -455,7 +460,6 @@
     <Content Include="Views\Cart\Thankyou.cshtml" />
     <Content Include="Views\GeneralSearch\SearchInput.cshtml" />
     <Content Include="Views\GeneralSearch\_SearchResult.cshtml" />
-    <Content Include="Views\Product\CategoryListings.cshtml" />
     <Content Include="Views\Cart\Termsandconditions.cshtml" />
     <Content Include="Views\Marquee\Carousel.cshtml" />
     <Content Include="Views\Page\Home\FeaturedBlogs.cshtml" />

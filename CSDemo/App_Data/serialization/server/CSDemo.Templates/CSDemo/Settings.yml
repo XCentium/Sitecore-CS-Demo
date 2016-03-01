@@ -1,0 +1,28 @@
+﻿---
+ID: a21b890e-c798-469c-8727-0f2c525787f3
+Parent: 012df092-c15e-4146-bfda-76642c96140d
+Template: ab86861a-6030-46c5-b394-e8f99e8b87db
+Path: /sitecore/templates/CSDemo/Settings
+DB: master
+SharedFields:
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: Apps/32x32/Options.png
+- ID: 12c33f3f-86c5-43a5-aeb4-5598cec45116
+  Hint: __Base template
+  Type: tree list
+  Value: {1930BBEB-7805-471A-A3BE-4858AC7CF696}
+- ID: f7d48a55-2158-4f02-9356-756654404f73
+  Hint: __Standard values
+  Value: {F4BFF274-5986-4CE0-BAB0-B8EF6712B118}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T160213Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

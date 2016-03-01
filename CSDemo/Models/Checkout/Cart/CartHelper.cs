@@ -407,6 +407,7 @@ namespace CSDemo.Models.Checkout.Cart
                             {
                                 cartItem.ProductID = item.ID.ToString();
                                 cartItem.ImageUrl = ProductHelper.GetFirstImageFromProductItem(item);
+                                cartItem.Category = item.Parent.Name;
                             }
                             else
                             {
@@ -419,6 +420,7 @@ namespace CSDemo.Models.Checkout.Cart
                         cartItem.UnitPrice = product.Price.Amount;
                         cartItem.SubTotal = cartLine.Total.Amount;
                         cartItem.ExternalID = cartLine.ExternalCartLineId;
+                        
 
                         if (string.IsNullOrEmpty(cartItem.ImageUrl))
                         {
