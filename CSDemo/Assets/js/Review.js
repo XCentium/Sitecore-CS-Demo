@@ -67,7 +67,7 @@ function LoadReviewFormData() {
     }
 }
 
-function SubmitReviewFormData(thisObj) {
+function SubmitReviewFormData(thisObj, contextItemId) {
 
     // Validate form, if valid, save data return true or false;
 
@@ -92,7 +92,7 @@ function SubmitReviewFormData(thisObj) {
         $.ajax({
             type: "POST",
             url: "/AJAX/cart.asmx/SubmitOrder",
-            data: "{" + data + "}",
+            data: "{contextItemId:'" + contextItemId + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (result) {
