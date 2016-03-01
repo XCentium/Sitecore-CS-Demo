@@ -30,49 +30,48 @@ namespace CSDemo.AJAX
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
         public ShoppingCart LoadCart()
         {
-            // check if user is logged in and not commerce customer, if true, return false
-
-            var cartHelper = new CartHelper();
-
-            var cart = cartHelper.GetMiniCart();
-
-            return cart;
+            return CartHelper.GetMiniCart();
         }
-
 
         [WebMethod(EnableSession = true)]
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
-        public bool AddProductToCart(string Quantity, string ProductId, string CatalogName, string VariantId)
+        public string CheckIfCommerceActionsAllowed()
         {
-            // check if user is logged in and not commerce customer, if true, return false
-            var ret = false;
+            if (!string.IsNullOrEmpty(ActionAllowed)) { return ActionAllowed; }
 
-            var cartHelper = new CartHelper();
+            return string.Empty;
+        }
 
-            ret = cartHelper.AddProductToCart(Quantity, ProductId, CatalogName, VariantId);
+        [WebMethod(EnableSession = true)]
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public string AddProductToCart(string Quantity, string ProductId, string CatalogName, string VariantId)
+        {
+            var ret = string.Empty; 
+
+            ret = CartHelper.AddProductToCart(Quantity, ProductId, CatalogName, VariantId);
+
+            // Vasiliy, the line below is throwing error.
+            // RegisterGoal(Constants.Marketing.AddToCartGoalId);
 
             return ret;
 
-            RegisterGoal(Constants.Marketing.AddToCartGoalId);
         }
 
         [WebMethod(EnableSession = true)]
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
         public string SubmitOrder()
         {
-            // check if user is logged in and not commerce customer, if true, return false
-            var ret = string.Empty;
-            var cartHelper = new CartHelper();
-            ret = cartHelper.SubmitCart();
-
-            RegisterGoal(Constants.Marketing.SubmitOrderGoalId);
-            RegisterOutcome(new ID(Constants.Marketing.PurchaseOutcomeDefinitionId));
+            string ret;
+            ret = CartHelper.SubmitCart();
 
             return ret;
+            // The following line is throwing error
+            RegisterGoal(Constants.Marketing.SubmitOrderGoalId);
+            RegisterOutcome(new ID(Constants.Marketing.PurchaseOutcomeDefinitionId));
         }
 
 
-        // 
+        
         [WebMethod(EnableSession = true)]
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
         public bool ApplyShippingAndBillingToCart(string firstname, string lastname, string email, string company,
@@ -80,30 +79,18 @@ namespace CSDemo.AJAX
             string firstname2, string lastname2, string email2, string company2, string address2, string addressline12,
             string city2, string country2, string fax2, string phone2, string zip2, string billandshipping)
         {
-            // check if user is logged in and not commerce customer, if true, return false
-            var ret = false;
 
-            var cartHelper = new CartHelper();
-
-            ret = cartHelper.ApplyShippingAndBillingToCart(firstname, lastname, email, company, address, addressline1,
+            return CartHelper.ApplyShippingAndBillingToCart(firstname, lastname, email, company, address, addressline1,
                 city, country, fax, phone, zip, firstname2, lastname2, email2, company2, address2, addressline12, city2,
                 country2, fax2, phone2, zip2);
 
-            return ret;
         }
 
         [WebMethod(EnableSession = true)]
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
         public bool ApplyShippingMethodToCart(string shippingMethodId)
         {
-            // check if user is logged in and not commerce customer, if true, return false
-            var ret = false;
-
-            var cartHelper = new CartHelper();
-
-            ret = cartHelper.AddShippingMethodToCart(shippingMethodId);
-
-            return ret;
+            return CartHelper.AddShippingMethodToCart(shippingMethodId);
         }
 
         [WebMethod(EnableSession = true)]
@@ -111,14 +98,7 @@ namespace CSDemo.AJAX
         public bool ApplyPaymentMethodToCart(string paymentExternalID, string nameoncard, string creditcard,
             string expmonth, string expyear, string ccv)
         {
-            // check if user is logged in and not commerce customer, if true, return false
-            var ret = false;
-
-            var cartHelper = new CartHelper();
-
-            ret = cartHelper.ApplyPaymentMethodToCart(paymentExternalID, nameoncard, creditcard, expmonth, expyear, ccv);
-
-            return ret;
+            return CartHelper.ApplyPaymentMethodToCart(paymentExternalID, nameoncard, creditcard, expmonth, expyear, ccv);
         }
 
 
@@ -126,14 +106,7 @@ namespace CSDemo.AJAX
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
         public bool RemoveFromCart(string externalID)
         {
-            // check if user is logged in and not commerce customer, if true, return false
-            var ret = false;
-
-            var cartHelper = new CartHelper();
-
-            ret = cartHelper.RemoveItemFromCart(externalID);
-
-            return ret;
+            return CartHelper.RemoveItemFromCart(externalID);
         }
 
         public struct CurrentCartItem
@@ -150,8 +123,6 @@ namespace CSDemo.AJAX
 
             var ret = false;
 
-            var cartHelper = new CartHelper();
-
             foreach (var c in currentCartItems)
             {
                 // ensure q can only be an integer
@@ -163,12 +134,23 @@ namespace CSDemo.AJAX
 
                 if (q.All(Char.IsDigit))
                 {
-                    ret = cartHelper.UpdateCartItem(c.ExternalID, q);
+                    ret = CartHelper.UpdateCartItem(c.ExternalID, q);
                 }
             }
 
             return ret;
         }
+
+        public CartHelper CartHelper { get; set; }
+        public string ActionAllowed { get; set; }
+        public Cart()
+        {
+            this.CartHelper = new CartHelper();
+
+            this.ActionAllowed = this.CartHelper.CustomerOrAnonymous();
+        }
+
+
 
         #region Private Helpers
 
@@ -187,6 +169,8 @@ namespace CSDemo.AJAX
 
             pageEventsRow.Data = "Product added to cart - "
                 + DateTime.Now.ToString("F");
+
+            // Vasiliy, this line below is throwing error (Ola)
             pageEventsRow.ItemId = Sitecore.Context.Item.ID.Guid;
             pageEventsRow.DataKey = Sitecore.Context.Item.Paths.Path;
         }

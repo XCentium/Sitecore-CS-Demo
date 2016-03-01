@@ -67,12 +67,13 @@ function LoadReviewFormData() {
     }
 }
 
-function SubmitReviewFormData() {
+function SubmitReviewFormData(thisObj) {
 
     // Validate form, if valid, save data return true or false;
 
     if ($('#review-form').valid()) {
         
+        event.preventDefault();
 
         // If checkbox not checked, prevent sublission
         var tandc = $("#checkout_terms_conditions");
@@ -86,7 +87,6 @@ function SubmitReviewFormData() {
 
         }
 
-        //Cookies.remove('checkout_form');
         data = "";
 
         $.ajax({
@@ -100,11 +100,11 @@ function SubmitReviewFormData() {
                 var orderID = result.d;
                 Cookies.set("orderConfirmationID", orderID, { expires: 7 });
                 ShowActionMessage('Order Submitted!');
-
+                RedirectPage(thisObj.href);
             },
             error: function (error) {
+
                 console.log(error)
-                alert(error); //alert with HTTP error
 
             }
 

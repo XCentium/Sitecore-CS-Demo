@@ -8,8 +8,8 @@
     var cartHelper = new CartHelper();
     CSDemo.Models.Cart.ShoppingCart shoppingCart = cartHelper.GetMiniCart();
 
-
 }
+
 <!-- ==========================
     MY ACCOUNT - START
 =========================== -->
@@ -58,7 +58,7 @@
                                     </table>
                                 </div>
                                 <a href="/productlisting" class="btn btn-inverse">Continue Shopping</a>
-                                <a href="/cart" onclick="return SubmitCartFormData()" class="btn btn-inverse update-cart">Update Shopping Cart</a>
+                                <a href="/cart" onclick="SubmitCartFormData(this)" class="btn btn-inverse update-cart">Update Shopping Cart</a>
                             </div>
 
                             <div class="box">

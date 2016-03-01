@@ -28,23 +28,20 @@ function LoadCheckoutFormData() {
     } 
 }
 
-function SubmitCheckoutFormData() {
+function SubmitCheckoutFormData(thisObj) {
 
     // Validate form, if valid, save data return true or false;
 
-
     if ($('#checkout-form').valid()) {
 
-        //Cookies.remove('checkout_form');
+        event.preventDefault();
 
         // save data 
         SaveFormData("#checkout-form", 'checkout_form');
 
-
         var formValues = $("#checkout-form").values();
 
         console.log(formValues);
-
 
         var data = "firstname:'" + formValues.firstname[0] + "',";
         data += "lastname:'" + formValues.lastname[0] + "',";
@@ -98,7 +95,7 @@ function SubmitCheckoutFormData() {
 
                 
                 ShowActionMessage('Shipping and Billing Applied');
-
+                RedirectPage(thisObj.href);
             },
             error: function (error) {
                 console.log(error)
