@@ -96,6 +96,10 @@
       <HintPath>..\Lib\Sitecore\Sitecore.Analytics.Model.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Sitecore.Analytics.Outcome">
+      <HintPath>..\Lib\Sitecore\Sitecore.Analytics.Outcome.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Sitecore.Commerce">
       <HintPath>..\Lib\Sitecore\Sitecore.Commerce.dll</HintPath>
       <Private>False</Private>
