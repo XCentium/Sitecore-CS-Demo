@@ -47,10 +47,9 @@ namespace CSDemo.AJAX
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
         public string AddProductToCart(string Quantity, string ProductId, string CatalogName, string VariantId, string contextItemId)
         {
-            RegisterGoal(Constants.Marketing.AddToCartGoalId, contextItemId);
             var ret = string.Empty;
             ret = CartHelper.AddProductToCart(Quantity, ProductId, CatalogName, VariantId);
-            
+            RegisterGoal(Constants.Marketing.AddToCartGoalId, contextItemId);
             return ret;
         }
 
@@ -58,11 +57,10 @@ namespace CSDemo.AJAX
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
         public string SubmitOrder(string contextItemId)
         {
-            RegisterGoal(Constants.Marketing.SubmitOrderGoalId, contextItemId);
-            RegisterOutcome(new ID(Constants.Marketing.PurchaseOutcomeDefinitionId));
             string ret;
             ret = CartHelper.SubmitCart();
-            
+            RegisterGoal(Constants.Marketing.SubmitOrderGoalId, contextItemId);
+            RegisterOutcome(new ID(Constants.Marketing.PurchaseOutcomeDefinitionId));
             return ret;
         }
 
