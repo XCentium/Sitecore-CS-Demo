@@ -150,36 +150,42 @@ namespace CSDemo.AJAX
 
         private void RegisterGoal(string goalId, string itemId)
         {
-            if (!Tracker.Current.IsActive)
-                Tracker.Current.StartTracking();
+            try {
+                if (!Tracker.Current.IsActive)
+                    Tracker.Current.StartTracking();
 
-            if (!Tracker.Current.IsActive
-                || Tracker.Current.CurrentPage == null)
-                return;
+                if (!Tracker.Current.IsActive
+                    || Tracker.Current.CurrentPage == null)
+                    return;
 
-            var deliveryDatabase = Sitecore.Configuration.Factory.GetDatabase(Constants.DeliveryDatabase);
-            if (deliveryDatabase == null) return;
-            var goalItem = deliveryDatabase.GetItem(goalId);
-            if (goalItem == null)
-            {
-                Log.Error($"Unable to register goal with ID {goalId}. Make sure everything is deployed and published correctly.", this);
+                var deliveryDatabase = Sitecore.Configuration.Factory.GetDatabase(Constants.DeliveryDatabase);
+                if (deliveryDatabase == null) return;
+                var goalItem = deliveryDatabase.GetItem(goalId);
+                if (goalItem == null)
+                {
+                    Log.Error($"Unable to register goal with ID {goalId}. Make sure everything is deployed and published correctly.", this);
+                }
+                var goal = new PageEventItem(goalItem);
+                if (goal == null)
+                {
+                    Log.Error($"Unable to register page event goal with ID {goalId}. Make sure everything is deployed and published correctly.", this);
+                }
+                var pageEventsRow = Tracker.Current.CurrentPage.Register(goal);
+
+                pageEventsRow.Data = "Product added to cart - "
+                    + DateTime.Now.ToString("F");
+
+                if (string.IsNullOrWhiteSpace(itemId)) return;
+                var contextItem = deliveryDatabase.GetItem(itemId);
+                if (contextItem == null) return;
+
+                pageEventsRow.ItemId = contextItem.ID.Guid;
+                pageEventsRow.DataKey = contextItem.Paths.Path;
             }
-            var goal = new PageEventItem(goalItem);
-            if (goal == null)
+            catch(Exception ex)
             {
-                Log.Error($"Unable to register page event goal with ID {goalId}. Make sure everything is deployed and published correctly.", this);
+                Log.Error($"Unable to register goal with ID {goalId}.", ex);
             }
-            var pageEventsRow = Tracker.Current.CurrentPage.Register(goal);
-
-            pageEventsRow.Data = "Product added to cart - "
-                + DateTime.Now.ToString("F");
-
-            if (string.IsNullOrWhiteSpace(itemId)) return;
-            var contextItem = deliveryDatabase.GetItem(itemId);
-            if (contextItem == null) return;
-
-            pageEventsRow.ItemId = contextItem.ID.Guid;
-            pageEventsRow.DataKey = contextItem.Paths.Path;
         }
 
         private void RegisterOutcome(ID outcomeDefinitionId)
