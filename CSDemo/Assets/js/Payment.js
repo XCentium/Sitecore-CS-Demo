@@ -26,13 +26,13 @@ function LoadPaymentFormData() {
     }
 }
 
-function SubmitPaymentFormData() {
+function SubmitPaymentFormData(thisObj) {
 
     // Validate form, if valid, save data return true or false;
 
     if ($('#payment-form').valid()) {
 
-        //Cookies.remove('checkout_form');
+        event.preventDefault();
 
         // save data 
         SaveFormData("#payment-form", 'payment_form');
@@ -47,7 +47,6 @@ function SubmitPaymentFormData() {
         data += "expmonth:'" + formValues.expmonth[0] + "',";
         data += "expyear:'" + formValues.expyear[0] + "',";
         data += "ccv:'" + formValues.ccv[0] + "'";
-      //  alert(data);
 
         $.ajax({
             type: "POST",
@@ -59,11 +58,12 @@ function SubmitPaymentFormData() {
 
                 ShowActionMessage('Payment Method Applied');
 
+                RedirectPage(thisObj.href);
+
             },
             error: function (error) {
                 console.log(error)
-                alert(error); //alert with HTTP error
-
+               
             }
 
         });

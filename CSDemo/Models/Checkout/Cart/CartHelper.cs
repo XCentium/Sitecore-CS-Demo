@@ -49,17 +49,17 @@ namespace CSDemo.Models.Checkout.Cart
                 Tracker.StartTracking();
             }
 
-            this.ShopName = Constants.DefaultSiteName; //Context.Site.Name;
+            this.ShopName = Context.Site.Name; // Constants.DefaultSiteName; //
             this.DefaultCartName = CommerceConstants.CartSettings.DefaultCartName;
             this._accountService = new CSDemo.Models.Account.AccountHelper(this, new CustomerServiceProvider());
         }
 
 
 
-        public bool AddProductToCart(string Quantity, string ProductId, string CatalogName, string VariantId)
+        public string AddProductToCart(string Quantity, string ProductId, string CatalogName, string VariantId)
         {
 
-            var ret = true;
+            var ret = string.Empty;
 
             // Create cart object
             var cartLineItem = new CartLineItem();
@@ -72,7 +72,7 @@ namespace CSDemo.Models.Checkout.Cart
             if (cart == null || cart.Properties["_Basket_Errors"] != null)
             {
                 // no cart OR _basket_errors present
-                ret = false;
+                ret = "Error in Basket";
             }
 
             return ret;
@@ -958,6 +958,24 @@ namespace CSDemo.Models.Checkout.Cart
             }
 
             return userCart;
+        }
+
+        /// <summary>
+        /// Only Anonymous and customers allowed
+        /// </summary>
+        /// <returns></returns>
+        internal string CustomerOrAnonymous()
+        {
+            string ret = string.Empty;
+            if (Sitecore.Context.User.IsAuthenticated) {
+                var uid = this._accountService.GetCommerceUserID(Sitecore.Context.User.Name);
+                if (string.IsNullOrEmpty(uid))
+                {
+                    return "Action DENIED! Only Visitors or Signed in Customers Allowed";
+                }
+            }
+
+            return ret;
         }
     }
 }

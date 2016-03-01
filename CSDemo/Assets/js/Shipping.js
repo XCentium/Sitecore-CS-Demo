@@ -28,13 +28,13 @@ function LoadShippingFormData() {
     }
 }
 
-function SubmitShippingFormData() {
+function SubmitShippingFormData(thisObj) {
 
     // Validate form, if valid, save data return true or false;
 
     if ($('#shipping-form').valid()) {
 
-        //Cookies.remove('checkout_form');
+        event.preventDefault();
 
         // save data 
         SaveFormData("#shipping-form", 'shipping_form');
@@ -55,10 +55,10 @@ function SubmitShippingFormData() {
 
                 ShowActionMessage('Shipping Method Applied');
 
+                RedirectPage(thisObj.href);
             },
             error: function (error) {
                 console.log(error)
-                alert(error); //alert with HTTP error
 
             }
 

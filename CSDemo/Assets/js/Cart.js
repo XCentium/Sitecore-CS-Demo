@@ -1,12 +1,45 @@
-﻿
+﻿//
+var commerceActionAllowed = false;  // This variable will determine if the user can perform commerce actions
+
 $(document).ready(function () {
 
-    // LoadCartData();
-    LoadCart();
-
+    CheckIfCommerceActionsAllowed();
 });
 
+function CheckIfCommerceActionsAllowed() {
+
+    $.ajax({
+        type: "POST",
+        url: "/AJAX/cart.asmx/CheckIfCommerceActionsAllowed",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            if (result.d == "") {
+                
+                LoadCart();
+                commerceActionAllowed = true;
+
+            } else {
+
+                commerceActionAllowed = false;
+            }
+        },
+        error: function (error) {
+            console.log(error)
+        }
+
+    });
+
+}
+
+function ShowDisallowedMessage() {
+
+    ShowActionMessage("Action DENIED! To this user type.");
+}
+
 function AddProductToCart(formID) {
+
+    if (commerceActionAllowed === false) { ShowDisallowedMessage(); return false;}
 
     var form = document.getElementById(formID);
  
@@ -19,32 +52,28 @@ function AddProductToCart(formID) {
     $.ajax({
         type: "POST",
         url: "/AJAX/cart.asmx/AddProductToCart",
-        data:  "{Quantity:'" + Quantity + "', ProductId:'" + ProductId + "', CatalogName:'" + CatalogName + "', VariantId:'" + VariantId + "'}", 
+        data: "{Quantity:'" + Quantity + "', ProductId:'" + ProductId + "', CatalogName:'" + CatalogName + "', VariantId:'" + VariantId + "'}",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
 
-            //console.log(result.d)
-            //// var ShoppingCart = result.d;
+            if (result.d == "") {
 
-            //alert(result.d);
+                ShowActionMessage("Added to Cart");
+                LoadCart();
 
-            // modalAddToCart
-            ShowActionMessage("Added to Cart");
-
-            // ShowCartUpdate(ShoppingCart);
-            LoadCart();
+            } else {
+                ShowActionMessage(result.d);
+            }
 
         },
-        error: function (error) {
+            error: function (error) {
             console.log(error)
             alert(error); //alert with HTTP error
 
         }
 
     });
-
-
 }
 
 function ShowActionMessage(message) {
@@ -57,6 +86,7 @@ function ShowActionMessage(message) {
 }
 
 function RemoveProductFromCart(externalID) {
+    if (commerceActionAllowed === false) { ShowDisallowedMessage(); return false;}
 
     $.ajax({
         type: "POST",
@@ -120,21 +150,22 @@ function LoadCart() {
         success: function (result) {
 
             var ShoppingCart = result.d;
-
-            //console.log(ShoppingCart);
             ShowCartUpdate(ShoppingCart);
 
         },
         error: function (error) {
             console.log(error)
-            alert("Error"); //alert with HTTP error
         }
 
     });
 
 }
 
-function SubmitCartFormData() {
+function SubmitCartFormData(thisObj) {
+
+    if (commerceActionAllowed === false) { ShowDisallowedMessage(); return false; }
+
+    event.preventDefault();
 
     var vals = $("#cart-form").values();
 
@@ -158,31 +189,32 @@ function SubmitCartFormData() {
         async: false,
         success: function (result) {
 
-            // ShowCartUpdate(ShoppingCart);
             ShowActionMessage("Cart Updated");
-           LoadCart();
-           ReloadPage();
+            LoadCart();
+            RedirectPage(thisObj.href);
+           // ReloadPage();
             return true;
         },
         error: function (error) {
             return false;
             console.log(error)
-            alert(error); //alert with HTTP error
         },
-        //complete: function () {
-        //    // modalAddToCart
-        //    alert(2);
-        //},
+
 
     });
 
-    return false;
 }
 
 function ReloadPage() {
     window.setTimeout(function () {
         window.location.reload();
     }, 1800);
+}
+
+function RedirectPage(newPage) {
+    window.setTimeout(function () {
+        window.location = newPage;
+    }, 1760);
 }
 
 
