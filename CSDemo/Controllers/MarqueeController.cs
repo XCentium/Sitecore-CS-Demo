@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Collections.Generic;
 using System.Web.Mvc;
 using CSDemo.Models.Marquee;
 using Glass.Mapper.Sc;
@@ -27,7 +28,7 @@ namespace CSDemo.Controllers
 
         public ActionResult Carousel()
         {
-            var model = GetCarouselViewModel();
+            var model = GetCarouselSlides();
             return View(model);
         }
 
@@ -35,33 +36,17 @@ namespace CSDemo.Controllers
 
         #region Private Helpers
 
-        private CarouselViewModel GetCarouselViewModel()
+        private IEnumerable<CarouselItem> GetCarouselSlides()
         {
-            CarouselViewModel model = new CarouselViewModel();
+            var items = new List<CarouselItem>();
             var datasource = RenderingContext.Current.Rendering.DataSource;
-            if (datasource.IsEmptyOrNull()) return model;
+            if (datasource.IsEmptyOrNull()) return items;
             var parentItem = _context.Database.GetItem(datasource);
-            if (parentItem == null) return model;
-            var slides = parentItem.Children.OrderBy(i => i.Appearance.Sortorder).CreateAs<CarouselItem>().ToList();
-            if (!slides.Any()) return model;
-            model.DisplayOn = true;
-            foreach (var slide in slides)
-            {
-                var image = slide.Image;
-                if (image != null)
-                {
-                    var url = MediaManager.GetMediaUrl(image.MediaItem);
-                    if (!url.IsEmptyOrNull())
-                    {
-                        slide.Url = url;
-                    }
-                }
-                // Image and Content are necessary to display a slide, hide if not available
-                if (!slide.Url.IsEmptyOrNull() && !slide.Content.IsEmptyOrNull())
-                    slide.CanShowSlide = true;
-            }
-            model.CarouselSlides = slides;
-            return model;
+            if (parentItem == null) return items;
+            var slides = parentItem.Children.OrderBy(i => i.Appearance.Sortorder).ToList();
+            if (!slides.Any()) return items;
+            items.AddRange(slides.Select(t => t.GlassCast<CarouselItem>()));
+            return items;
         }
 
         #endregion

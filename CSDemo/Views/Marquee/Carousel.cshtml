@@ -1,27 +1,24 @@
-﻿@using Sitecore.Links
+﻿@using Sitecore.Links;
 @using Sitecore.Mvc;
-@using Sitecore.Resources.Media
-@model CSDemo.Models.Marquee.CarouselViewModel
+@using Sitecore.Resources.Media;
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<CSDemo.Models.Marquee.CarouselItem>>
 <!-- ==========================
     JUMBOTRON - START
 =========================== -->
-@if (Model != null && Model.DisplayOn)
+@if (Model != null)
 {
     <section class="content jumbotron">
         <div id="homepage-1-carousel" class="nav-inside owl-animation">
-            @foreach (var slide in Model.CarouselSlides)
+            @foreach (var slide in Model)
             {
-                if (slide.CanShowSlide)
-                {
-                    <div class="item slide-1" style="background-image: url(@slide.Url)">
-                        <div class="slide-mask"></div>
-                        <div class="slide-body">
-                            <div class="container">
-                                @Html.Raw(@slide.Content)
-                            </div>
+                <div class="item slide-1" style="background-image: url(@slide.Image.Src)">
+                    <div class="slide-mask"></div>
+                    <div class="slide-body">
+                        <div class="container">
+                            @Html.Raw(@slide.Content)
                         </div>
                     </div>
-                }
+                </div>
             }
         </div>
     </section>
