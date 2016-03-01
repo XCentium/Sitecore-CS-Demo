@@ -7,7 +7,8 @@ namespace CSDemo
 {
     public class Constants
     {
-        public const string DefaultSiteName = "Website"; 
+        public const string DefaultSiteName = "Website";
+        public const string DeliveryDatabase = "web";
 
         public struct QueryStrings
         {

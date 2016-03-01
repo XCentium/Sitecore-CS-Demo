@@ -12,6 +12,7 @@ using Sitecore.Analytics;
 using Sitecore.Analytics.Outcome.Extensions;
 using Sitecore.Analytics.Outcome.Model;
 using Sitecore.Data;
+using Sitecore.Diagnostics;
 
 #endregion
 
@@ -44,30 +45,23 @@ namespace CSDemo.AJAX
 
         [WebMethod(EnableSession = true)]
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
-        public string AddProductToCart(string Quantity, string ProductId, string CatalogName, string VariantId)
+        public string AddProductToCart(string Quantity, string ProductId, string CatalogName, string VariantId, string contextItemId)
         {
-            var ret = string.Empty; 
-
+            var ret = string.Empty;
             ret = CartHelper.AddProductToCart(Quantity, ProductId, CatalogName, VariantId);
-
-            // Vasiliy, the line below is throwing error.
-            // RegisterGoal(Constants.Marketing.AddToCartGoalId);
-
+            RegisterGoal(Constants.Marketing.AddToCartGoalId, contextItemId);
             return ret;
-
         }
 
         [WebMethod(EnableSession = true)]
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
-        public string SubmitOrder()
+        public string SubmitOrder(string contextItemId)
         {
             string ret;
             ret = CartHelper.SubmitCart();
-
-            return ret;
-            // The following line is throwing error
-            RegisterGoal(Constants.Marketing.SubmitOrderGoalId);
+            RegisterGoal(Constants.Marketing.SubmitOrderGoalId, contextItemId);
             RegisterOutcome(new ID(Constants.Marketing.PurchaseOutcomeDefinitionId));
+            return ret;
         }
 
 
@@ -154,31 +148,57 @@ namespace CSDemo.AJAX
 
         #region Private Helpers
 
-        private void RegisterGoal(string goalId)
+        private void RegisterGoal(string goalId, string itemId)
         {
-            if (!Tracker.Current.IsActive)
-                Tracker.Current.StartTracking();
+            try {
+                if (!Tracker.Current.IsActive)
+                    Tracker.Current.StartTracking();
 
-            if (!Tracker.Current.IsActive
-                || Tracker.Current.CurrentPage == null)
-                return;
+                if (!Tracker.Current.IsActive
+                    || Tracker.Current.CurrentPage == null)
+                    return;
 
-            var goalItem = Sitecore.Context.Database.GetItem(goalId);
-            var goal = new PageEventItem(goalItem);
-            var pageEventsRow = Tracker.Current.CurrentPage.Register(goal);
+                var deliveryDatabase = Sitecore.Configuration.Factory.GetDatabase(Constants.DeliveryDatabase);
+                if (deliveryDatabase == null) return;
+                var goalItem = deliveryDatabase.GetItem(goalId);
+                if (goalItem == null)
+                {
+                    Log.Error($"Unable to register goal with ID {goalId}. Make sure everything is deployed and published correctly.", this);
+                }
+                var goal = new PageEventItem(goalItem);
+                if (goal == null)
+                {
+                    Log.Error($"Unable to register page event goal with ID {goalId}. Make sure everything is deployed and published correctly.", this);
+                }
+                var pageEventsRow = Tracker.Current.CurrentPage.Register(goal);
 
-            pageEventsRow.Data = "Product added to cart - "
-                + DateTime.Now.ToString("F");
+                pageEventsRow.Data = "Product added to cart - "
+                    + DateTime.Now.ToString("F");
 
-            // Vasiliy, this line below is throwing error (Ola)
-            pageEventsRow.ItemId = Sitecore.Context.Item.ID.Guid;
-            pageEventsRow.DataKey = Sitecore.Context.Item.Paths.Path;
+                if (string.IsNullOrWhiteSpace(itemId)) return;
+                var contextItem = deliveryDatabase.GetItem(itemId);
+                if (contextItem == null) return;
+
+                pageEventsRow.ItemId = contextItem.ID.Guid;
+                pageEventsRow.DataKey = contextItem.Paths.Path;
+            }
+            catch(Exception ex)
+            {
+                Log.Error($"Unable to register goal with ID {goalId}.", ex);
+            }
         }
 
         private void RegisterOutcome(ID outcomeDefinitionId)
         {
-            var outcome = new ContactOutcome(ID.NewID, outcomeDefinitionId, new ID(Tracker.Current.Contact.ContactId));
-            Tracker.Current.RegisterContactOutcome(outcome);
+            try
+            {
+                var outcome = new ContactOutcome(ID.NewID, outcomeDefinitionId, new ID(Tracker.Current.Contact.ContactId));
+                Tracker.Current.RegisterContactOutcome(outcome);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Unable to register a goal with ID " + outcomeDefinitionId, ex);
+            }
         }
 
         #endregion

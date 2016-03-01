@@ -37,7 +37,7 @@ function ShowDisallowedMessage() {
     ShowActionMessage("Action DENIED! To this user type.");
 }
 
-function AddProductToCart(formID) {
+function AddProductToCart(formID, contextItemId) {
 
     if (commerceActionAllowed === false) { ShowDisallowedMessage(); return false;}
 
@@ -52,7 +52,7 @@ function AddProductToCart(formID) {
     $.ajax({
         type: "POST",
         url: "/AJAX/cart.asmx/AddProductToCart",
-        data: "{Quantity:'" + Quantity + "', ProductId:'" + ProductId + "', CatalogName:'" + CatalogName + "', VariantId:'" + VariantId + "'}",
+        data: "{Quantity:'" + Quantity + "', ProductId:'" + ProductId + "', CatalogName:'" + CatalogName + "', VariantId:'" + VariantId + "', contextItemId:'" + contextItemId + "'}",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
