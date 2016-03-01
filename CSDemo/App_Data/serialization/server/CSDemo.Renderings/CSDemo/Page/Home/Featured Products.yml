@@ -8,6 +8,12 @@ SharedFields:
 - ID: 51b435bc-f7b9-478a-9c51-52916af96ff5
   Hint: Path
   Value: /Views/Page/Home/FeaturedProducts.cshtml
+- ID: ded9e431-3604-4921-a4b3-a6ec7636a5b6
+  Hint: Controller Action
+  Value: FeaturedProducts
+- ID: e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7
+  Hint: Controller
+  Value: CSDemo.Controllers.ProductController, CSDemo
 Languages:
 - Language: en
   Versions:
