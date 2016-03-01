@@ -36,6 +36,16 @@ Languages:
     - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
       Hint: Page Title
       Value: Home
+    - ID: f7a94e99-fb47-4133-9355-3f65e9071fb0
+      Hint: Products
+      Type: Multilist with Search
+      Value: |
+        {894B16BA-5C4A-4DC3-A882-5890CB1BF466}
+        {14A9FC87-EBB4-4589-A41A-AB20D73C4ADD}
+        {05A5B780-29F8-45B1-A62B-C040E85E93AC}
+        {48958F76-3E68-41D5-B87D-C13B9883FFC0}
+        {DE817F3A-7348-497B-A84B-C676D8F7A8DF}
+        {5875F0D3-DD4A-4060-82F4-DA5AF7D3EEAA}
     - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
       Hint: Meta Description
       Value: Home Page

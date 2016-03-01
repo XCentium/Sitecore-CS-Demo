@@ -1,22 +1,20 @@
 ﻿---
-ID: 27707ef4-ea14-439a-ba20-dbd16605ae04
-Parent: 256d016d-255c-44c7-82d1-063b4779da23
+ID: a05c2234-612c-4317-bc7a-9236802596f4
+Parent: ccb03503-be65-415b-bf9f-79ac8fa515bf
 Template: ab86861a-6030-46c5-b394-e8f99e8b87db
-Path: /sitecore/templates/CSDemo/Pages/Home Page
+Path: /sitecore/templates/CSDemo/Components/Product/Featured Product
 DB: master
 SharedFields:
 - ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
   Hint: __Icon
-  Value: Apps/32x32/Home.png
+  Value: Applications/16x16/star_blue.png
 - ID: 12c33f3f-86c5-43a5-aeb4-5598cec45116
   Hint: __Base template
   Type: tree list
-  Value: |
-    {6EABF83B-72E6-4E98-A3EE-BBC68A279D50}
-    {A05C2234-612C-4317-BC7A-9236802596F4}
+  Value: {1930BBEB-7805-471A-A3BE-4858AC7CF696}
 - ID: f7d48a55-2158-4f02-9356-756654404f73
   Hint: __Standard values
-  Value: {F4625D9E-FD29-41BD-9B69-DE3266E9CB7C}
+  Value: {9567A1F9-90A6-41F8-843D-175A1D7B3692}
 Languages:
 - Language: en
   Versions:
@@ -24,7 +22,7 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160216T055241Z
+      Value: 20160301T170322Z
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
       Value: sitecore\admin
