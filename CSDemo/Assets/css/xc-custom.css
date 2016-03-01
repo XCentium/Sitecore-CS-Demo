@@ -76,6 +76,7 @@ form label.error {
 .comments-reviews #idc-container div.idc-text_noresize,
 .comments-reviews #idc-container textarea.idc-text_noresize {
     background: none;
+    font-weight: normal;
     min-height: 160px;
 }
 
