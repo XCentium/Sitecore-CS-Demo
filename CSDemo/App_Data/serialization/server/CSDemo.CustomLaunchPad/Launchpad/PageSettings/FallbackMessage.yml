@@ -1,0 +1,71 @@
+﻿---
+ID: a2f582bc-e73e-4c2c-bc04-ebcf34f94dfd
+Parent: afe511e0-249f-47af-8439-4e3641dafab8
+Template: 6437cfd5-76ca-48aa-bfbd-8b8d73eb5581
+Path: /sitecore/client/Applications/Launchpad/PageSettings/FallbackMessage
+DB: core
+Languages:
+- Language: da
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: FallbackMessage
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160115T143212Z
+    - ID: 3564b3d0-3804-4d86-9880-b5e7473ef56c
+      Hint: Text
+      Value: Sitecore XP 8.0 giver dig mulighed for at konfigurere dette dashboard, så det viser de vigtigste analysegrafer, hver gang du kommer tilbage til startområdet. Brug dette område til at holde styr på de målinger, der er vigtigst for jeres organisation.
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: de-DE
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: FallbackNachricht
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160115T143322Z
+    - ID: 3564b3d0-3804-4d86-9880-b5e7473ef56c
+      Hint: Text
+      Value: Sitecore XP 8.0 versetzt Sie in die Lage, dieses Dashboard zu konfigurieren, um die wichtigsten Analyseschaubilder anzuzeigen und zwar jedes Mal, wenn Sie zum Launchpad zurückkehren. Verwenden Sie diese Fläche, um immer top aktuell über die Ihr Unternehmen betreffenden Metriken informiert zu sein.
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20141118T114003Z
+    - ID: 3564b3d0-3804-4d86-9880-b5e7473ef56c
+      Hint: Text
+      Value: Sitecore XP 8.0 enables you to configure this dashboard to show the most important analytics graphs every time you come back to the Launchpad. Use this space to keep on top of the metrics most important to your organization.
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: ja-JP
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: フォールバック メッセージ
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160115T143429Z
+    - ID: 3564b3d0-3804-4d86-9880-b5e7473ef56c
+      Hint: Text
+      Value: Sitecore XP 8.0 ではダッシュボードをカスタマイズして、スタート画面に最も重要なアナリティクスのチャートを表示させることができます。このスペースを使用して最も重要なメトリクスを表示してください。
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

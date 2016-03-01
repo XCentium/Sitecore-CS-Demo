@@ -1,0 +1,71 @@
+﻿---
+ID: b79c9216-e15d-49fe-b7ce-73ad44afefe2
+Parent: afe511e0-249f-47af-8439-4e3641dafab8
+Template: 6437cfd5-76ca-48aa-bfbd-8b8d73eb5581
+Path: /sitecore/client/Applications/Launchpad/PageSettings/CustomAnalytics
+DB: core
+Languages:
+- Language: da
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: CustomAnalytics
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160115T143214Z
+    - ID: 3564b3d0-3804-4d86-9880-b5e7473ef56c
+      Hint: Text
+      Value: Brugerdefinerede analytics
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: de-DE
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: BenutzerdefinierteAnalysen
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160115T143325Z
+    - ID: 3564b3d0-3804-4d86-9880-b5e7473ef56c
+      Hint: Text
+      Value: Benutzerdefinierte Analysen
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 00010101T000000
+    - ID: 3564b3d0-3804-4d86-9880-b5e7473ef56c
+      Hint: Text
+      Value: XCentium Demo Analytics
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: ja-JP
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: カスタム アナリティクス
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160115T143431Z
+    - ID: 3564b3d0-3804-4d86-9880-b5e7473ef56c
+      Hint: Text
+      Value: カスタム アナリティクス
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
