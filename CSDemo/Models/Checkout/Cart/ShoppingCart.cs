@@ -22,11 +22,26 @@ namespace CSDemo.Models.Cart
 
         public Decimal LineTotal { get; set; }
 
+        public Decimal Tax { get; set; }
+
+        private Decimal grandTotal;
+
+        public Decimal GrandTotal
+        {
+            get { return this.Shipping + this.LineTotal +this.Tax - this.Discount; }
+            set { grandTotal = value; }
+        }
+        
+
+
         public ShoppingCart()
         {
             this.Discount = 0.00m;
             this.Currency = "USD";
-            this.Shipping = 0.00m;
+            this.Shipping = 0.00m; 
+            this.Tax = 0.00m;
+            this.GrandTotal = 0.00m;
+
         }
     }
 }
