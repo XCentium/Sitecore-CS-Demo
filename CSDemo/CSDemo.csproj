@@ -84,6 +84,21 @@
     </Reference>
     <Reference Include="Sitecore.Analytics">
       <HintPath>..\Lib\Sitecore\Sitecore.Analytics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.Core, Version=8.0.5401.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Sitecore\Sitecore.Analytics.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.Model, Version=8.0.5401.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Sitecore\Sitecore.Analytics.Model.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.Outcome">
+      <HintPath>..\Lib\Sitecore\Sitecore.Analytics.Outcome.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Commerce">
       <HintPath>..\Lib\Sitecore\Sitecore.Commerce.dll</HintPath>
