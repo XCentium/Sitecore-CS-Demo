@@ -418,9 +418,6 @@
     <Content Include="Views\Page\Layouts\Responsive.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Product\ProductDetails.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Navigation\MainNavigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -456,8 +453,6 @@
     <Content Include="Views\Page\Header.cshtml" />
     <Content Include="Views\Page\Footer.cshtml" />
     <Content Include="Views\Cart\Cart.cshtml" />
-    <Content Include="Views\Product\CategoryListing.cshtml" />
-    <Content Include="Views\Product\ProductListing.cshtml" />
     <Content Include="Views\Product\Facets.cshtml" />
     <Content Include="Views\Cart\Checkout.cshtml" />
     <Content Include="Views\Cart\Shipping.cshtml" />
@@ -466,7 +461,6 @@
     <Content Include="Views\Cart\Thankyou.cshtml" />
     <Content Include="Views\GeneralSearch\SearchInput.cshtml" />
     <Content Include="Views\GeneralSearch\_SearchResult.cshtml" />
-    <Content Include="Views\Product\CategoryListings.cshtml" />
     <Content Include="Views\Cart\Termsandconditions.cshtml" />
     <Content Include="Views\Marquee\Carousel.cshtml" />
     <Content Include="Views\Page\Home\FeaturedBlogs.cshtml" />
