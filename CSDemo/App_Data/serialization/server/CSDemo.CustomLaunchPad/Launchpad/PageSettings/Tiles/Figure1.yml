@@ -1,0 +1,83 @@
+﻿---
+ID: b4e4e237-6b50-4c40-8365-a6d4368a4ada
+Parent: 54c55a0c-d46d-4287-8643-d51aca584084
+Template: 3b8662fc-2516-4ead-b262-bb94b261e932
+Path: /sitecore/client/Applications/Launchpad/PageSettings/Tiles/Figure1
+DB: core
+Languages:
+- Language: da
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Figure1
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160115T143214Z
+    - ID: 38c7d191-9dcd-4d5e-9508-a077718774a2
+      Hint: DisplayName
+      Value: Kampagnekonverteringer
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: ae54d761-334d-42c4-993c-2bc9a3079d64
+      Hint: Text
+      Value: "<img src=\"/sitecore/shell/client/Applications/LaunchPad/Assets/Campaign-Conversions.png\" />"
+- Language: de-DE
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Abbildung1
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160115T143325Z
+    - ID: 38c7d191-9dcd-4d5e-9508-a077718774a2
+      Hint: DisplayName
+      Value: Kampagne Konversionen
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: ae54d761-334d-42c4-993c-2bc9a3079d64
+      Hint: Text
+      Value: "<img src=\"/sitecore/shell/client/Applications/LaunchPad/Assets/Campaign-Conversions.png\" />"
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20140619T114953
+    - ID: 38c7d191-9dcd-4d5e-9508-a077718774a2
+      Hint: DisplayName
+      Value: Campaign Conversions
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: ae54d761-334d-42c4-993c-2bc9a3079d64
+      Hint: Text
+      Value: "<img src=\"/sitecore/shell/client/Applications/LaunchPad/Assets/Campaign-Conversions.png\" />"
+- Language: ja-JP
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: 図 1
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160115T143431Z
+    - ID: 38c7d191-9dcd-4d5e-9508-a077718774a2
+      Hint: DisplayName
+      Value: キャンペーンのコンバージョン
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: ae54d761-334d-42c4-993c-2bc9a3079d64
+      Hint: Text
+      Value: "<img src=\"/sitecore/shell/client/Applications/LaunchPad/Assets/Campaign-Conversions.png\" />"

@@ -1,0 +1,27 @@
+﻿---
+ID: 2e1bec1d-14fe-4db9-a436-f7d5a5f882ae
+Parent: 3f0f8a38-70bb-45d0-b0af-613cf7e7fa7d
+Template: 5c547d4e-7111-4995-95b0-6b561751bf2e
+Path: /sitecore/layout/Placeholder Settings/CSDemo/Rows/row5
+DB: master
+SharedFields:
+- ID: 7256bdab-1fd2-49dd-b205-cb4873d2917c
+  Hint: Placeholder Key
+  Value: row5
+- ID: e391b526-d0c5-439d-803e-17512eae6222
+  Hint: Allowed Controls
+  Type: TreelistEx
+  Value: |
+    {119957CB-7F4A-44D9-8C56-68DE46337DA0}
+    {E3B5297C-27C3-4854-BF00-C07A4BD41127}
+    {F95EC01D-3CA7-4909-B344-ECABD2266956}
+    {68A499FD-22A5-4333-BE54-DFC7A007791D}
+    {7D6D8042-BC94-4B7B-A52B-B93D20E76D05}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160217T085610Z
