@@ -6,7 +6,7 @@
             <div class="col-sm-3">
                 <div class="product-overlay">
                     <div class="product-mask"></div>
-                    <a href="/@(Model.Categories.Any() ? Model.Categories.FirstOrDefault().Name:"unknown")/@Model.ProductId" class="product-permalink"></a>
+                    <a href="@Model.Url" class="product-permalink"></a>
                     @{
                         var count = 0;
                     }
