@@ -1,5 +1,6 @@
 ﻿#region
 
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using CSDemo.Models.Marquee;
@@ -7,6 +8,7 @@ using Glass.Mapper.Sc;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 using System.Linq;
+using Sitecore.Diagnostics;
 using Sitecore.DynamicSerialization;
 using Sitecore.Mvc.Extensions;
 using Sitecore.Resources.Media;
@@ -78,13 +80,20 @@ namespace CSDemo.Controllers
         private IEnumerable<CarouselItem> GetCarouselSlides()
         {
             var items = new List<CarouselItem>();
-            var datasource = RenderingContext.Current.Rendering.DataSource;
-            if (datasource.IsEmptyOrNull()) return items;
-            var parentItem = _context.Database.GetItem(datasource);
-            if (parentItem == null) return items;
-            var slides = parentItem.Children.OrderBy(i => i.Appearance.Sortorder).ToList();
-            if (!slides.Any()) return items;
-            items.AddRange(slides.Select(t => t.GlassCast<CarouselItem>()));
+            try
+            {
+                var datasource = RenderingContext.Current.Rendering.DataSource;
+                if (datasource.IsEmptyOrNull()) return items;
+                var parentItem = _context.Database.GetItem(datasource);
+                if (parentItem == null) return items;
+                var slides = parentItem.Children.OrderBy(i => i.Appearance.Sortorder).ToList();
+                if (!slides.Any()) return items;
+                items.AddRange(slides.Select(t => t.GlassCast<CarouselItem>()));
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+            }
             return items;
         }
 
