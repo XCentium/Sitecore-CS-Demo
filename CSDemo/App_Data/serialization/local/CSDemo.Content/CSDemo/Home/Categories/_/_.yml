@@ -12,6 +12,16 @@ SharedFields:
     <tracking>
       <event id="{B7949A07-DDD5-4C18-929E-78767B03D6F8}" name="View Product" />
     </tracking>
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s" p:p="1">
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r uid="{7DD1272B-A366-4D6F-B92C-6D292370635E}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:id="{8C7ADD92-1F95-4C06-BF35-181D9E002C90}" s:ph="page-body" />
+        <r uid="{E5A6C541-E277-499D-9CB9-DFF8CE125A23}" p:after="r[@uid='{7DD1272B-A366-4D6F-B92C-6D292370635E}']" />
+      </d>
+    </r>
 Languages:
 - Language: en
   Versions:

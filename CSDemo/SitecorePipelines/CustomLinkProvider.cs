@@ -17,7 +17,7 @@ namespace CSDemo.SitecorePipelines
             if (item == null) return base.GetItemUrl(item, options);
             if(item.Template.BaseTemplates.Any(t=>t.ID== new ID(Constants.Commerce.ProductBaseTemplateId)))
             {
-                var categoryUrl = GetCategoryUrl(item, options);
+                var categoryUrl = GetCategoryUrl(item.Parent, options);
                 return $"{categoryUrl}/{(options.LowercaseUrls ? item.Name.ToLower() : item.Name)}";
             }
 
@@ -31,11 +31,11 @@ namespace CSDemo.SitecorePipelines
 
         #region Private Helpers
 
-        private string GetCategoryUrl(Item item, UrlOptions options)
+        private string GetCategoryUrl(Item categoryItem, UrlOptions options)
         {
             var categoriesListingPage = Sitecore.Context.Database.GetItem(Constants.Pages.CategoriesListingPageId);
-            if (categoriesListingPage == null) return base.GetItemUrl(item, options);
-            return $"{LinkManager.GetItemUrl(categoriesListingPage)}/{(options.LowercaseUrls ? categoriesListingPage.Name.ToLower() : categoriesListingPage.Name)}";
+            if (categoriesListingPage == null) return base.GetItemUrl(categoryItem, options);
+            return $"{LinkManager.GetItemUrl(categoriesListingPage)}/{(options.LowercaseUrls ? categoryItem.Name.ToLower() : categoryItem.Name)}";
         }
 
         #endregion
