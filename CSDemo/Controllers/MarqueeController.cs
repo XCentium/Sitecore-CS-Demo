@@ -47,36 +47,6 @@ namespace CSDemo.Controllers
 
         #region Private Helpers
 
-        private static IEnumerable<IProduct> GetRecentlyViewedProducts()
-        {
-            var products = new List<IProduct>();
-            ITracker tracker = Tracker.Current;
-            if (tracker == null) return products;
-            if (tracker.Contact == null) return products;
-
-            if (tracker.Interaction == null || tracker.Interaction.Pages == null || tracker.Interaction.Pages.Length == 0)
-                return products;
-
-            foreach (var page in tracker.Interaction.Pages)
-            {
-                if (page.Item == null) continue;
-                var itemId = new ID(page.Item.Id);
-                var language = Language.Parse(page.Item.Language);
-                var item = Sitecore.Context.Database.GetItem(itemId, language);
-                if (item == null) continue;
-
-                if (item.TemplateID == new ID(Constants.Pages.ProductDetailPageId))
-                {
-                    //Get product here from the details page
-                    //  products.Add(item.GlassCast<Product>());
-                }
-
-                var maxNumberOfProductsToShow = 10;
-                if (products.Count > maxNumberOfProductsToShow) break;
-            }
-            return products;
-        }
-
         private IEnumerable<CarouselItem> GetCarouselSlides()
         {
             var items = new List<CarouselItem>();

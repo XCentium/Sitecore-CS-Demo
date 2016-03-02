@@ -12,6 +12,8 @@ using Sitecore.Diagnostics;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 using XCore.Framework;
+using CSDemo.Contracts.Product;
+using Sitecore.Analytics;
 
 #endregion
 
@@ -22,6 +24,7 @@ namespace CSDemo.Controllers
         #region Fields
 
         private readonly ISitecoreContext _context;
+        private const int _maxNumberOfProductsToShow = 10;
 
         #endregion
 
@@ -86,13 +89,15 @@ namespace CSDemo.Controllers
         public ActionResult FeaturedProducts()
         {
             List<Product> products = new List<Product>();
+            products.AddRange(GetRecentlyViewedProducts());
+            if (products.Count == _maxNumberOfProductsToShow) return View(products);
             try
             {
                 var item = RenderingContext.Current.Rendering.Item;
                 var featuredProduct = item.GlassCast<FeaturedProduct>();
                 if (featuredProduct?.Products != null && featuredProduct.Products.Any())
                 {
-                    products.AddRange(featuredProduct.Products);
+                    products.AddRange(featuredProduct.Products.Take(_maxNumberOfProductsToShow- products.Count));
                 }
             }
             catch (Exception ex)
@@ -101,5 +106,29 @@ namespace CSDemo.Controllers
             }
             return View(products);
         }
+
+        #region Private Helpers
+
+        private static IEnumerable<Product> GetRecentlyViewedProducts()
+        {
+            var products = new List<Product>();
+            var tracker = Tracker.Current;
+            if (tracker == null) return products;
+            if (tracker.Contact == null) return products;
+
+            if (tracker.Interaction == null || tracker.Interaction.Pages == null || tracker.Interaction.Pages.Length == 0)
+                return products;
+
+            foreach (var page in tracker.Interaction.Pages)
+            {
+                if (page.Item == null) continue;
+                // we need to get the URL out of the page.Item and lookup the product by the last part of the URL
+
+                if (products.Count > _maxNumberOfProductsToShow) break;
+            }
+            return products;
+        }
+
+        #endregion
     }
 }
