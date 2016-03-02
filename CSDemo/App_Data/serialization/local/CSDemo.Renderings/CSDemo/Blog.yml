@@ -1,8 +1,8 @@
 ﻿---
-ID: ba14cc5a-fb83-462d-8e22-4834c395d2f3
-Parent: 416e2039-93c3-46b4-bf5d-2f61686f13a3
+ID: 41b8ff25-175c-4651-a3f6-26a9445dbc10
+Parent: 86bc69d1-77a0-41b2-b2d0-3fa94a2eb744
 Template: 7ee0975b-0698-493e-b3a2-0b2ef33d0522
-Path: /sitecore/layout/Renderings/CSDemo/Page/Home
+Path: /sitecore/layout/Renderings/CSDemo/Blog
 DB: master
 Languages:
 - Language: en
@@ -11,4 +11,4 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160226T185809Z
+      Value: 20160302T210605Z
