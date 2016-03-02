@@ -1,0 +1,17 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Page.Article>
+@if (Model == null)
+{
+    return;
+}
+<section class="content">
+    <div class="container">
+        @if (!string.IsNullOrWhiteSpace(Model.Title))
+        {
+            <h1>@Editable(t => Model.Title)</h1>
+        }
+        @if (!string.IsNullOrWhiteSpace(Model.Content))
+        {
+            @Editable(t => Model.Content)
+        }
+    </div>
+</section>

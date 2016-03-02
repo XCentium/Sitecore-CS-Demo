@@ -199,6 +199,7 @@
     <Compile Include="Contracts\Marquee\ICarouselItem.cs" />
     <Compile Include="Contracts\Navigation\INavigation.cs" />
     <Compile Include="Contracts\Navigation\INavigationLink.cs" />
+    <Compile Include="Contracts\Page\IArticle.cs" />
     <Compile Include="Contracts\Page\IMetadata.cs" />
     <Compile Include="Contracts\Product\IFeaturedProduct.cs" />
     <Compile Include="Contracts\Product\IProduct.cs" />
@@ -208,11 +209,13 @@
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\MarqueeController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\GeneralSearchController.cs" />
     <Compile Include="Models\Account\AccountHelper.cs" />
     <Compile Include="Models\Account\LoginModel.cs" />
     <Compile Include="Models\Checkout\Cart\CartHelper.cs" />
+    <Compile Include="Models\Page\Article.cs" />
     <Compile Include="Models\Product\FeaturedProduct.cs" />
     <Compile Include="Models\Product\ProductHelper.cs" />
     <Compile Include="App_Start\Initializer.cs" />
@@ -504,6 +507,7 @@
     <Content Include="Views\Product\Category.cshtml" />
     <Content Include="Views\Product\Product.cshtml" />
     <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
+    <Content Include="Views\Page\Article.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
