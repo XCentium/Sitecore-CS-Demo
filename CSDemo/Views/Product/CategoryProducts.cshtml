@@ -16,7 +16,7 @@
     {
         var parent = Sitecore.Context.Database.GetItem(new ID(parentID));
 
-        var category = parent.GetChildren().ToArray().AsQueryable().FirstOrDefault(x => x.Name.Equals(categoryID));
+        var category = parent.GetChildren().ToArray().AsQueryable().FirstOrDefault(x => x.Key.Equals(categoryID));
 
         var categoryProducts = category.GetChildren();
 
@@ -71,7 +71,7 @@
                                                             var ProductId = catProduct["ProductId"];
                                                             var CatalogName = catProduct["CatalogName"];
 
-                                                            <li><a href="/Category/@cat.Name/@ProductId">@catProduct.DisplayName.ToString()</a></li>
+                                                            <li><a href="@Sitecore.Links.LinkManager.GetItemUrl(catProduct)">@catProduct.DisplayName.ToString()</a></li>
                                                         }
                                                     </ul>
                                                 </li>
@@ -283,7 +283,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="product-overlay">
                                                         <div class="product-mask"></div>
-                                                        <a href="/Category/@categoryID/@ProductId" class="product-permalink"></a>
+                                                        <a href="@Sitecore.Links.LinkManager.GetItemUrl(product)" class="product-permalink"></a>
                                                         <img src="@ProductImage?w=420&as=1&h=287" class="img-responsive" alt="">
                                                         @*<div class="product-quickview">
                                                                 <a class="btn btn-quickview" data-toggle="modal" data-target="#product-quickview">Quick View</a>

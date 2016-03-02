@@ -21,14 +21,15 @@
                         <div class="col-xs-6 col-sm-3">
                             <article class="product-item">
                                 @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { @class = "img-responsive"}, isEditable: false)
-                                <h3><a href="@featuredProduct.Url">@featuredProduct.CatalogName</a>
+                                <h3>
+                                    <a href="@featuredProduct.Url">@featuredProduct.Title</a>
                                 </h3>
                                 <div class="product-rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-star@(featuredProduct.Rating>0 ? string.Empty:"-o" )"></i>
+                                    <i class="fa fa-star@(featuredProduct.Rating>1 ? string.Empty:"-o" )"></i>
+                                    <i class="fa fa-star@(featuredProduct.Rating>2 ? string.Empty:"-o" )"></i>
+                                    <i class="fa fa-star@(featuredProduct.Rating>3 ? string.Empty:"-o" )"></i>
+                                    <i class="fa fa-star@(featuredProduct.Rating>4 ? string.Empty:"-o" )"></i>
                                 </div>
                                 <span class="price">
                                     <ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>
@@ -37,25 +38,6 @@
                         </div>
                     }
                 }
-
-                @*<div class="col-xs-6 col-sm-3">
-                        <article class="product-item">
-                            <img src="/~/media/3780CFBAC7494BEFAEDBBF8B3F6E2013.ashx" class="img-responsive" alt="">
-                            <h3>
-                                <a href="/Category/Pants/AW048-01">Unisex Drawstring pants</a>
-                            </h3>
-                            <div class="product-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                            <span class="price">
-                                <ins><span class="amount">$48.00</span></ins>
-                            </span>
-                        </article>
-                    </div>*@
                 <!-- ==========================
                 END FEATURED PRODUCT HEROS
                 =========================== -->
@@ -72,14 +54,14 @@
                                     <li class="clearfix">
                                         <a href="@featuredProduct.Url">
                                             @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { Width = 60, Height = 80, AS = 1, @class = "img-responsive" }, isEditable: false)
-                                            <h3>@featuredProduct.CatalogName</h3>
+                                            <h3>@featuredProduct.Title</h3>
                                         </a>
                                         <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
+                                            <i class="fa fa-star@(featuredProduct.Rating>0 ? string.Empty:"-o" )"></i>
+                                            <i class="fa fa-star@(featuredProduct.Rating>1 ? string.Empty:"-o" )"></i>
+                                            <i class="fa fa-star@(featuredProduct.Rating>2 ? string.Empty:"-o" )"></i>
+                                            <i class="fa fa-star@(featuredProduct.Rating>3 ? string.Empty:"-o" )"></i>
+                                            <i class="fa fa-star@(featuredProduct.Rating>4 ? string.Empty:"-o" )"></i>
                                         </div>
                                         <span class="price">
                                             <ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>
@@ -100,14 +82,14 @@
                                 <li class="clearfix">
                                     <a href="@featuredProduct.Url">
                                         @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { Width = 60, Height = 80, AS = 1, @class = "img-responsive" }, isEditable: false)
-                                        <h3>@featuredProduct.CatalogName</h3>
+                                        <h3>@featuredProduct.Title</h3>
                                     </a>
                                     <div class="product-rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star@(featuredProduct.Rating>0 ? string.Empty:"-o" )"></i>
+                                        <i class="fa fa-star@(featuredProduct.Rating>1 ? string.Empty:"-o" )"></i>
+                                        <i class="fa fa-star@(featuredProduct.Rating>2 ? string.Empty:"-o" )"></i>
+                                        <i class="fa fa-star@(featuredProduct.Rating>3 ? string.Empty:"-o" )"></i>
+                                        <i class="fa fa-star@(featuredProduct.Rating>4 ? string.Empty:"-o" )"></i>
                                     </div>
                                     <span class="price">
                                         <ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>

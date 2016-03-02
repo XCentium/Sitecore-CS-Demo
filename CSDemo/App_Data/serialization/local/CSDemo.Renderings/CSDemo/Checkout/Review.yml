@@ -1,0 +1,18 @@
+﻿---
+ID: 06d5815c-624f-4260-a890-bab99735a7f3
+Parent: 8b5179af-9591-4c08-86e4-32ec7201542f
+Template: 99f8905d-4a87-4eb8-9f8b-a9bebfb3add6
+Path: /sitecore/layout/Renderings/CSDemo/Checkout/Review
+DB: master
+SharedFields:
+- ID: 51b435bc-f7b9-478a-9c51-52916af96ff5
+  Hint: Path
+  Value: /Views/Checkout/Review.cshtml
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160217T073756Z

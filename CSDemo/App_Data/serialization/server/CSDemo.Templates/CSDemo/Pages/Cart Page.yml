@@ -1,0 +1,28 @@
+﻿---
+ID: 3ed0653e-a6f5-45df-8646-ae081915d7f1
+Parent: 256d016d-255c-44c7-82d1-063b4779da23
+Template: ab86861a-6030-46c5-b394-e8f99e8b87db
+Path: /sitecore/templates/CSDemo/Pages/Cart Page
+DB: master
+SharedFields:
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: apps/32x32/carts.png
+- ID: 12c33f3f-86c5-43a5-aeb4-5598cec45116
+  Hint: __Base template
+  Type: tree list
+  Value: {6EABF83B-72E6-4E98-A3EE-BBC68A279D50}
+- ID: f7d48a55-2158-4f02-9356-756654404f73
+  Hint: __Standard values
+  Value: {C7376895-63EE-4A91-890F-B379C783928F}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T055335Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

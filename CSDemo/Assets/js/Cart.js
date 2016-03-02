@@ -69,8 +69,6 @@ function AddProductToCart(formID, contextItemId) {
         },
             error: function (error) {
             console.log(error)
-            alert(error); //alert with HTTP error
-
         }
 
     });
@@ -108,7 +106,6 @@ function RemoveProductFromCart(externalID) {
         },
         error: function (error) {
             console.log(error)
-            alert(error); //alert with HTTP error
 
         },
 

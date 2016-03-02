@@ -16,7 +16,7 @@
     {
         var parent = Sitecore.Context.Database.GetItem(new ID(parentID));
 
-        Item product = parent.Axes.GetDescendants().ToArray().AsQueryable().FirstOrDefault(x => (x.Parent.Name.Equals(categoryID) && x["ProductId"].ToString().Equals(productID)));
+        Item product = parent.Axes.GetDescendants().ToArray().AsQueryable().FirstOrDefault(x => (x.Parent.Key.Equals(categoryID) && x["ProductId"].ToString().ToLower().Equals(productID)));
 
         if (product != null)
         {
