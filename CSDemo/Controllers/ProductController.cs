@@ -175,6 +175,13 @@ namespace CSDemo.Controllers
                         ContentSearchManager.GetIndex((SitecoreIndexableItem) item).CreateSearchContext())
                 {
                     SearchResultItem result = searchContext.GetQueryable<SearchResultItem>().FirstOrDefault(t => String.Equals(t.Name, productName, StringComparison.CurrentCultureIgnoreCase)); // && t.TemplateName.Contains("a matching template name")
+                    if (result != null)
+                    {
+                        var resultItem = result.GetItem();
+                        var product = resultItem.GlassCast<Product>();
+                        if(products.Any(t => t.ID != product.ID))
+                            products.Add(product);
+                    }
                 }
                 if (products.Count > _maxNumberOfProductsToShow) break;
             }
