@@ -1,6 +1,7 @@
 #region
 
 using CSDemo.Contracts.Page;
+using Glass.Mapper.Sc.Configuration.Attributes;
 using XCore.Framework.ItemMapper;
 using XCore.Framework.ItemMapper.Configuration.Attributes;
 
@@ -8,18 +9,12 @@ using XCore.Framework.ItemMapper.Configuration.Attributes;
 
 namespace CSDemo.Models.Page
 {
-    [SitecoreItemTemplate(SitecoreItemTemplateId)]
-    public partial class Metadata : SitecoreItem, ISitecoreItem, IMetadata
+    [SitecoreType]
+    public class Metadata : IMetadata
     {
         #region Members
 
-        public const string SitecoreItemTemplateId = "{DC84F551-D6AD-46B4-80B0-2AB72BB0A419}";
-
-        public const string MetaDescriptionFieldId = "{FBEFDCF0-C9DE-473A-AAB7-E043D2E335BA}";
-
         public const string MetaDescriptionFieldName = "Meta Description";
-
-        public const string PageTitleFieldId = "{4D027FFA-64CF-4502-8C87-F5195FF18D76}";
 
         public const string PageTitleFieldName = "Page Title";
 
@@ -27,10 +22,10 @@ namespace CSDemo.Models.Page
 
         #region Properties
 
-        [SitecoreItemField(MetaDescriptionFieldId)]
+        [SitecoreField(MetaDescriptionFieldName)]
         public virtual string MetaDescription { get; set; }
 
-        [SitecoreItemField(PageTitleFieldId)]
+        [SitecoreField(PageTitleFieldName)]
         public virtual string PageTitle { get; set; }
 
         #endregion

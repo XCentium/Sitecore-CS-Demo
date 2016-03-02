@@ -1,5 +1,6 @@
 ﻿using CSDemo.Models.Page;
 using Glass.Mapper.Sc;
+using Sitecore.Data.Items;
 using Sitecore.Mvc.Controllers;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,14 @@ namespace CSDemo.Controllers
         public ActionResult Article()
         {
             var articleModel = _context.GetCurrentItem<Article>();
+            return View(articleModel);
+        }
+
+        public ActionResult Metadata()
+        {
+            var contextItem = _context.GetCurrentItem<Item>();
+            if (contextItem == null) return View();
+            var articleModel = contextItem.GlassCast<Metadata>();
             return View(articleModel);
         }
     }

@@ -163,3 +163,42 @@ header.navbar li.navbar-search .dropdown-menu {
     border-top: none;
     box-shadow: 0 1px 5px 0 rgba(0,0,0,0.15);
 }
+
+
+/* Sticky Footer*/
+html, body, #page-wrapper{}
+
+body {}
+
+#page-wrapper {
+    height: auto !important;
+    min-height: 100%;
+    position: relative;
+    /*margin-bottom: -387px;*/
+    padding-bottom: 387px;
+}
+
+@media(max-width: 991px) {
+    #page-wrapper {
+        padding-bottom: 395px;
+    }
+}
+
+@media(max-width: 767px) {
+    #page-wrapper {
+        padding-bottom: 760px;
+    }
+}
+
+@media(max-width: 568px) {
+    #page-wrapper {
+        padding-bottom: 1087px;
+    }
+}
+
+footer.navbar {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
