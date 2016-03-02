@@ -497,6 +497,7 @@
     <Content Include="Views\Marquee\Carousel.cshtml" />
     <Content Include="Views\Page\Home\FeaturedBlogs.cshtml" />
     <Content Include="Views\Page\Home\FeaturedCategories.cshtml" />
+
     <Content Include="Views\Page\Home\FeaturedServices.cshtml" />
     <Content Include="Views\Page\Home\FeaturedStores.cshtml" />
     <Content Include="Views\Account\Account.cshtml" />
