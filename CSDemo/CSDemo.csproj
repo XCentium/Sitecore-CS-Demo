@@ -503,6 +503,7 @@
     <Content Include="Views\Product\Product.cshtml" />
     <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
     <Content Include="Views\Page\Article.cshtml" />
+    <Content Include="Views\Page\Metadata.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

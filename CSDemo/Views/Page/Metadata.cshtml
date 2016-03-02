@@ -1,0 +1,13 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Page.Metadata>
+@if (Model == null)
+{
+    return;
+}
+@if (!string.IsNullOrWhiteSpace(Model.PageTitle))
+{
+    <title>@Model.PageTitle</title>
+}
+@if (!string.IsNullOrWhiteSpace(Model.MetaDescription))
+{
+    <meta name="description" content="@Model.MetaDescription">
+}
