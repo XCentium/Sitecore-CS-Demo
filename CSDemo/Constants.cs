@@ -69,5 +69,10 @@ namespace CSDemo
             public const string PurchaseOutcomeDefinitionId = "{9016E456-95CB-42E9-AD58-997D6D77AE83}";
             public const string SubmitOrderGoalId = "{00F026E7-D067-4546-8C6F-2E67E591494A}";
         }
+
+        public struct Pages
+        {
+            public const string ProductDetailPageId = "{94377B9C-75CE-4D60-AB6F-4CF627E0A8EC}";
+        }
     }
 }

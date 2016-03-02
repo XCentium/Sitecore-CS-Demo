@@ -2,7 +2,7 @@
 ID: 3c5bbd6a-528f-4807-baf0-20f238f16c0a
 Parent: 49b9f3e2-65cc-48f5-9a96-35efd0c752d8
 Template: b3d2832f-2fbf-4466-9d95-d3a0c6476362
-Path: /sitecore/content/CSDemo/Home/Category
+Path: /sitecore/content/CSDemo/Home/Categories
 DB: master
 SharedFields:
 - ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
