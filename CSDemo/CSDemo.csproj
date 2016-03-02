@@ -424,6 +424,12 @@
     <Content Include="Views\Navigation\MainNavigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Config\Include\zCSDemo\CSDemo.LinkOveride.config" />
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.Debug.config">
+      <DependentUpon>CSDemo.Main.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
     <Content Include="Assets\fonts\fontawesome-webfont.eot" />
     <Content Include="Assets\fonts\fontawesome-webfont.ttf" />
     <Content Include="Assets\fonts\fontawesome-webfont.woff" />
