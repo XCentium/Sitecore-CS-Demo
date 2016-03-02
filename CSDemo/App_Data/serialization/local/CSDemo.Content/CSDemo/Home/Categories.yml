@@ -5,6 +5,9 @@ Template: b3d2832f-2fbf-4466-9d95-d3a0c6476362
 Path: /sitecore/content/CSDemo/Home/Categories
 DB: master
 SharedFields:
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: apps/32x32/objects.png
 - ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
   Hint: __Renderings
   Type: layout
@@ -12,7 +15,7 @@ SharedFields:
     <r xmlns:p="p" xmlns:s="s" p:p="1">
       <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
         <r uid="{95FE6DFA-F7C0-4F4A-9B45-9C30F1643FCB}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:id="{99CA4BEB-25C9-4223-9102-2EBA9D6BF24B}" s:ph="page-body" />
-        <r uid="{E5A6C541-E277-499D-9CB9-DFF8CE125A23}" p:after="r[@uid='{95FE6DFA-F7C0-4F4A-9B45-9C30F1643FCB}']" />
+        <r uid="{63223E3A-7BE4-4C4F-A69F-29C0F4CD44EA}" p:after="r[@uid='{E5A6C541-E277-499D-9CB9-DFF8CE125A23}']" />
       </d>
     </r>
 Languages:
