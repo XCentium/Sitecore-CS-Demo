@@ -162,20 +162,12 @@ namespace CSDemo.Controllers
                 if(data.Pages != null && data.Pages.Any())
                     recentPageHistory.AddRange(data.Pages);
             }
-            foreach (Page page in recentPageHistory.Where(t => 
-            t.Item != null && 
-            t.Item.Id != Guid.Empty && 
-            !t.Url.Path.Equals("/") && 
-            !t.Url.Path.ToLower().Contains("/ajax/")))
+            foreach (Page page in recentPageHistory.Where(t => t.Item != null && t.Item.Id != Guid.Empty && new ID(t.Item.Id) == categoriesAliasId))
             {
                 ID itemId = new ID(page.Item.Id);
-                if (itemId != categoriesAliasId)
-                    continue;
-
                 Item item = Sitecore.Context.Database.GetItem(itemId);
                 // if this is a product the name will be "*" due to link provider resolution, so fetch it from the interaction page url
                 var productName = FetchProductName(page.Url.Path); 
-
                 // Hunt down the item from the search context
                 using (
                     IProviderSearchContext searchContext =
