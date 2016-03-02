@@ -6,7 +6,7 @@ using XCore.Framework.ItemMapper;
 
 namespace CSDemo.Contracts.Page
 {
-    public partial interface IMetadata : ISitecoreItem
+    public interface IMetadata
     {
         #region Properties
 
