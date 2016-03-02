@@ -161,7 +161,6 @@ namespace CSDemo.Controllers
             !t.Url.Path.Equals("/") && 
             !t.Url.Path.ToLower().Contains("/ajax/")))
             {
-                if (page.Item == null) continue;
                 ID itemId = new ID(page.Item.Id);
                 if (itemId != categoriesAliasId)
                     continue;
