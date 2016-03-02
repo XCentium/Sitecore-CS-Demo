@@ -1,5 +1,6 @@
 ﻿#region
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -7,6 +8,7 @@ using CSDemo.Models.CatalogGenerated;
 using CSDemo.Models.Parameters;
 using CSDemo.Models.Product;
 using Glass.Mapper.Sc;
+using Sitecore.Diagnostics;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 using XCore.Framework;
@@ -83,12 +85,19 @@ namespace CSDemo.Controllers
 
         public ActionResult FeaturedProducts()
         {
-            var item = RenderingContext.Current.Rendering.Item;
-            var featuredProduct = item.GlassCast<FeaturedProduct>();
             List<Product> products = new List<Product>();
-            if (featuredProduct?.Products != null && featuredProduct.Products.Any())
+            try
             {
-                products.AddRange(featuredProduct.Products);
+                var item = RenderingContext.Current.Rendering.Item;
+                var featuredProduct = item.GlassCast<FeaturedProduct>();
+                if (featuredProduct?.Products != null && featuredProduct.Products.Any())
+                {
+                    products.AddRange(featuredProduct.Products);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
             }
             return View(products);
         }
