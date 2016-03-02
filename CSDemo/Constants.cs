@@ -61,6 +61,9 @@ namespace CSDemo
             public static string[] DefaultPriceTypeIds = new string[2] { "List", "Adjusted" };
 
             public const string Departments = "Departments";
+
+            public const string ProductBaseTemplateId = "{225F8638-2611-4841-9B89-19A5440A1DA1}";
+            public const string CategoryBaseTemplateId = "{4C4FD207-A9F7-443D-B32A-50AA33523661}";
         }
 
         public struct Marketing
@@ -73,6 +76,7 @@ namespace CSDemo
         public struct Pages
         {
             public const string ProductDetailPageId = "{94377B9C-75CE-4D60-AB6F-4CF627E0A8EC}";
+            public const string CategoriesListingPageId = "{3C5BBD6A-528F-4807-BAF0-20F238F16C0A}";
         }
     }
 }

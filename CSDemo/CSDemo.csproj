@@ -443,10 +443,6 @@
       <DependentUpon>CSDemo.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.Debug.config">
-      <DependentUpon>CSDemo.Main.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
     <None Include="App_Config\Include\zCSDemo\CSDemo.Main.foxsean.ca.config">
       <DependentUpon>CSDemo.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
@@ -497,7 +493,6 @@
     <Content Include="Views\Marquee\Carousel.cshtml" />
     <Content Include="Views\Page\Home\FeaturedBlogs.cshtml" />
     <Content Include="Views\Page\Home\FeaturedCategories.cshtml" />
-
     <Content Include="Views\Page\Home\FeaturedServices.cshtml" />
     <Content Include="Views\Page\Home\FeaturedStores.cshtml" />
     <Content Include="Views\Account\Account.cshtml" />
