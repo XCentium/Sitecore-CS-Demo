@@ -1,8 +1,8 @@
 ﻿---
 ID: ab9df062-ecc5-4fe2-a63b-93971bb0c388
-Parent: ba14cc5a-fb83-462d-8e22-4834c395d2f3
+Parent: dfe6e26a-54ec-483b-8594-d6ac854b6e26
 Template: 2a3e91a0-7987-44b5-ab34-35c2d9de83b9
-Path: /sitecore/layout/Renderings/CSDemo/Page/Home/Featured Products
+Path: /sitecore/layout/Renderings/CSDemo/Product/Featured Products
 DB: master
 SharedFields:
 - ID: ded9e431-3604-4921-a4b3-a6ec7636a5b6
