@@ -359,6 +359,7 @@
     <Content Include="Assets\js\SmoothScroll.js" />
     <Content Include="Assets\js\ThankYou.js" />
     <Content Include="Assets\js\twitterFetcher_min.js" />
+    <Content Include="favicon.ico" />
     <Content Include="sitecore modules\Web\XCore\CodeGen\CodeGenerationRoot.aspx" />
     <Content Include="sitecore modules\Web\XCore\CodeGen\GenerateCode.aspx" />
     <Content Include="Views\GeneralSearch\SearchResults.cshtml" />
