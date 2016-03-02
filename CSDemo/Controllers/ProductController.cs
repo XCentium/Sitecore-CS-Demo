@@ -108,7 +108,14 @@ namespace CSDemo.Controllers
                 FeaturedProduct featuredProduct = item.GlassCast<FeaturedProduct>();
                 if (featuredProduct?.Products != null && featuredProduct.Products.Any())
                 {
-                    products.AddRange(featuredProduct.Products.Take(_maxNumberOfProductsToShow- products.Count));
+                    foreach (var product in featuredProduct.Products)
+                    {
+                        if (products.Count < _maxNumberOfProductsToShow)
+                        {
+                            if (!products.Exists(t => t.ID == product.ID))
+                                products.Add(product);
+                        }
+                    }
                 }
             }
             catch (Exception ex)
