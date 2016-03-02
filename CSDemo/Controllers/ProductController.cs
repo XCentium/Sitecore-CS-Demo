@@ -18,6 +18,8 @@ using Sitecore.Analytics.Core;
 using Sitecore.Analytics.Data;
 using Sitecore.Analytics.Tracking;
 using Sitecore.Collections;
+using Sitecore.ContentSearch;
+using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
@@ -130,7 +132,7 @@ namespace CSDemo.Controllers
             {
                 recentPageHistory.AddRange(currentPages);
             }
-            var interactionData = tracker.Contact.LoadHistorycalData(100); // configure me
+            var interactionData = tracker.Contact.LoadHistorycalData(100); // configure this
             foreach (IInteractionData data in interactionData)
             {
                 if(data.Pages != null && data.Pages.Any())
@@ -138,12 +140,24 @@ namespace CSDemo.Controllers
             }
             foreach (Page page in recentPageHistory.Where(t => t.Item != null && t.Item.Id != Guid.Empty))
             {
-                ID itemId = new ID(page.Item.Id);
                 if (page.Item == null) continue;
+                ID itemId = new ID(page.Item.Id);
                 Item item = Sitecore.Context.Database.GetItem(itemId);
-                // TBD : Resolve the currnt item to a product
-                // - or -
-                // We need to get the URL out of the page.Item and lookup the product by the last part of the URL
+
+                // Is this a commerce item?
+                var isCommerceItem = item.Template?.BaseTemplates != null && item.Template.BaseTemplates.Any(t => t.Name == "Commerce Item");
+                // TBD: if so try casting it to a Product to add to the collection
+                // ...
+
+                // Alternatively, use the search context
+                using (
+                    IProviderSearchContext searchContext =
+                        ContentSearchManager.GetIndex((SitecoreIndexableItem) item).CreateSearchContext())
+                {
+                    SearchResultItem result = searchContext.GetQueryable<SearchResultItem>().FirstOrDefault(t => t.Name == item.Name); // && t.TemplateName.Contains("a matching template name")
+                    // TBD: Resolve the result to a Product to add to the collection
+                }
+
                 if (products.Count > _maxNumberOfProductsToShow) break;
             }
             return products;
