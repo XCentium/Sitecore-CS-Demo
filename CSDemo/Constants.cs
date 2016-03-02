@@ -64,6 +64,7 @@ namespace CSDemo
 
             public const string ProductBaseTemplateId = "{225F8638-2611-4841-9B89-19A5440A1DA1}";
             public const string CategoryBaseTemplateId = "{4C4FD207-A9F7-443D-B32A-50AA33523661}";
+            public const string CategoriesAliasItemId = "{9FB913A0-E51D-426B-9AC3-F99FD71BA08C}";
         }
 
         public struct Marketing
