@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.EnterpriseServices;
 using System.Linq;
 using System.Web.Mvc;
 using CSDemo.Models.CatalogGenerated;
@@ -23,6 +24,7 @@ using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
+using Sitecore.Mvc.Extensions;
 
 #endregion
 
@@ -118,9 +120,24 @@ namespace CSDemo.Controllers
 
         #region Private Helpers
 
+        private static string FetchProductName(string interactionPageUrl)
+        {
+            var categoriesIndex = interactionPageUrl.ToLower().IndexOf("categories", StringComparison.Ordinal);
+            var lastSlashIndex = interactionPageUrl.LastIndexOf("/", StringComparison.Ordinal);
+            if (lastSlashIndex > categoriesIndex && interactionPageUrl.Length > lastSlashIndex)
+            {
+                var productName = interactionPageUrl.Substring(lastSlashIndex + 1);
+                if(!productName.IsEmptyOrNull())
+                    return productName;
+            }
+            return string.Empty;
+        }
+
         private static IEnumerable<Product> GetRecentlyViewedProducts()
         {
             List<Product> products = new List<Product>();
+            var categoriesAliasId = new ID(Constants.Commerce.CategoriesAliasItemId);
+
             ITracker tracker = Tracker.Current;
             if (tracker == null) return products;
             if (tracker.Contact == null) return products;
@@ -138,26 +155,28 @@ namespace CSDemo.Controllers
                 if(data.Pages != null && data.Pages.Any())
                     recentPageHistory.AddRange(data.Pages);
             }
-            foreach (Page page in recentPageHistory.Where(t => t.Item != null && t.Item.Id != Guid.Empty))
+            foreach (Page page in recentPageHistory.Where(t => 
+            t.Item != null && 
+            t.Item.Id != Guid.Empty && 
+            !t.Url.Path.Equals("/") && 
+            !t.Url.Path.ToLower().Contains("/ajax/")))
             {
                 if (page.Item == null) continue;
                 ID itemId = new ID(page.Item.Id);
+                if (itemId != categoriesAliasId)
+                    continue;
+
                 Item item = Sitecore.Context.Database.GetItem(itemId);
+                // if this is a product the name will be "*" due to link provider resolution, so fetch it from the interaction page url
+                var productName = FetchProductName(page.Url.Path); 
 
-                // Is this a commerce item?
-                var isCommerceItem = item.Template?.BaseTemplates != null && item.Template.BaseTemplates.Any(t => t.Name == "Commerce Item");
-                // TBD: if so try casting it to a Product to add to the collection
-                // ...
-
-                // Alternatively, use the search context
+                // Hunt down the item from the search context
                 using (
                     IProviderSearchContext searchContext =
                         ContentSearchManager.GetIndex((SitecoreIndexableItem) item).CreateSearchContext())
                 {
-                    SearchResultItem result = searchContext.GetQueryable<SearchResultItem>().FirstOrDefault(t => t.Name == item.Name); // && t.TemplateName.Contains("a matching template name")
-                    // TBD: Resolve the result to a Product to add to the collection
+                    SearchResultItem result = searchContext.GetQueryable<SearchResultItem>().FirstOrDefault(t => String.Equals(t.Name, productName, StringComparison.CurrentCultureIgnoreCase)); // && t.TemplateName.Contains("a matching template name")
                 }
-
                 if (products.Count > _maxNumberOfProductsToShow) break;
             }
             return products;
