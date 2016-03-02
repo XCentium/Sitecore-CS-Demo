@@ -179,7 +179,7 @@ namespace CSDemo.Controllers
                     {
                         var resultItem = result.GetItem();
                         var product = resultItem.GlassCast<Product>();
-                        if(products.Any(t => t.ID != product.ID))
+                        if(!products.Any() || !products.Exists(t => t.ID == product.ID))
                             products.Add(product);
                     }
                 }
