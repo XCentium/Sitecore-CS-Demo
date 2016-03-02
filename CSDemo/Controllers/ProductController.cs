@@ -14,6 +14,13 @@ using Sitecore.Mvc.Presentation;
 using XCore.Framework;
 using CSDemo.Contracts.Product;
 using Sitecore.Analytics;
+using Sitecore.Analytics.Core;
+using Sitecore.Analytics.Data;
+using Sitecore.Analytics.Tracking;
+using Sitecore.Collections;
+using Sitecore.Data;
+using Sitecore.Data.Items;
+using Sitecore.Globalization;
 
 #endregion
 
@@ -48,16 +55,16 @@ namespace CSDemo.Controllers
 
         public ActionResult CategoryListing()
         {
-            var model = new CSDemo.Models.Product.CategoryListingViewModel();
+            CategoryListingViewModel model = new CSDemo.Models.Product.CategoryListingViewModel();
 
 
             // get the current rendering
-            var rc = Sitecore.Mvc.Presentation.RenderingContext.CurrentOrNull;
+            RenderingContext rc = Sitecore.Mvc.Presentation.RenderingContext.CurrentOrNull;
             if (rc != null)
             {
-                var rcParams = rc.Rendering.Parameters;
+                RenderingParameters rcParams = rc.Rendering.Parameters;
 
-                var catalogueId = string.Empty;
+                string catalogueId = string.Empty;
 
                 if (rcParams[CategorylistingConfig.TargetCatalogueFieldName] != null)
                 {
@@ -65,7 +72,7 @@ namespace CSDemo.Controllers
                     {
                         catalogueId = rcParams[CategorylistingConfig.TargetCatalogueFieldName].ToString().Trim();
 
-                        var catalogueCategories =
+                        ChildList catalogueCategories =
                             Sitecore.Context.Database.GetItem(catalogueId)
                                 .Children.AsQueryable()
                                 .FirstOrDefault(x => x.Name.Equals(Constants.Commerce.Departments))
@@ -93,8 +100,8 @@ namespace CSDemo.Controllers
             if (products.Count == _maxNumberOfProductsToShow) return View(products);
             try
             {
-                var item = RenderingContext.Current.Rendering.Item;
-                var featuredProduct = item.GlassCast<FeaturedProduct>();
+                Item item = RenderingContext.Current.Rendering.Item;
+                FeaturedProduct featuredProduct = item.GlassCast<FeaturedProduct>();
                 if (featuredProduct?.Products != null && featuredProduct.Products.Any())
                 {
                     products.AddRange(featuredProduct.Products.Take(_maxNumberOfProductsToShow- products.Count));
@@ -111,19 +118,32 @@ namespace CSDemo.Controllers
 
         private static IEnumerable<Product> GetRecentlyViewedProducts()
         {
-            var products = new List<Product>();
-            var tracker = Tracker.Current;
+            List<Product> products = new List<Product>();
+            ITracker tracker = Tracker.Current;
             if (tracker == null) return products;
             if (tracker.Contact == null) return products;
-
-            if (tracker.Interaction == null || tracker.Interaction.Pages == null || tracker.Interaction.Pages.Length == 0)
+            if (tracker.Interaction?.Pages == null || tracker.Interaction.Pages.Length == 0)
                 return products;
-
-            foreach (var page in tracker.Interaction.Pages)
+            List<Page> recentPageHistory = new List<Page>();
+            var currentPages = tracker.Interaction.Pages;
+            if (currentPages != null && currentPages.Any())
             {
+                recentPageHistory.AddRange(currentPages);
+            }
+            var interactionData = tracker.Contact.LoadHistorycalData(100); // configure me
+            foreach (IInteractionData data in interactionData)
+            {
+                if(data.Pages != null && data.Pages.Any())
+                    recentPageHistory.AddRange(data.Pages);
+            }
+            foreach (Page page in recentPageHistory.Where(t => t.Item != null && t.Item.Id != Guid.Empty))
+            {
+                ID itemId = new ID(page.Item.Id);
                 if (page.Item == null) continue;
-                // we need to get the URL out of the page.Item and lookup the product by the last part of the URL
-
+                Item item = Sitecore.Context.Database.GetItem(itemId);
+                // TBD : Resolve the currnt item to a product
+                // - or -
+                // We need to get the URL out of the page.Item and lookup the product by the last part of the URL
                 if (products.Count > _maxNumberOfProductsToShow) break;
             }
             return products;
