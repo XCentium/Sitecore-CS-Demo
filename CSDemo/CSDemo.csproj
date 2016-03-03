@@ -419,9 +419,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Page\Layouts\Responsive.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Navigation\MainNavigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -479,8 +476,6 @@
     <None Include="Properties\PublishProfiles\Castle Local.pubxml" />
     <None Include="Properties\PublishProfiles\csDemo.pubxml" />
     <None Include="Properties\PublishProfiles\XcCommerce112Demo.pubxml" />
-    <Content Include="Views\Page\Header.cshtml" />
-    <Content Include="Views\Page\Footer.cshtml" />
     <Content Include="Views\Checkout\Cart.cshtml" />
     <Content Include="Views\Product\Facets.cshtml" />
     <Content Include="Views\Checkout\Checkout.cshtml" />
@@ -504,6 +499,9 @@
     <Content Include="Views\Product\Product.cshtml" />
     <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
     <Content Include="Views\Page\Article.cshtml" />
+    <Content Include="Views\Page\Footer.cshtml" />
+    <Content Include="Views\Page\Header.cshtml" />
+    <Content Include="Views\Page\Layouts\Responsive.cshtml" />
     <Content Include="Views\Page\Metadata.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
