@@ -212,3 +212,9 @@ header.navbar li.navbar-cart .dropdown-menu > li {
     margin-bottom: 0;
     padding: 15px;
 }
+
+
+/* Carousel / Jumbotron */
+.jumbotron .item:not(:first-child) {
+    display: none;
+}
