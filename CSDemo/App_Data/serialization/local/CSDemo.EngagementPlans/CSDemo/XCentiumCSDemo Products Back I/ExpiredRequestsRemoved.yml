@@ -1,0 +1,35 @@
+﻿---
+ID: 7e8eb153-260a-4fed-b52e-161cfd19b60e
+Parent: b8249271-2721-4a1f-bbfa-9f52d5a9b5f2
+Template: 8ce2707a-3742-4a89-933b-065e5be02bc9
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CSDemo/XCentiumCSDemo Products Back In Stock/ExpiredRequestsRemoved
+DB: master
+SharedFields:
+- ID: 07ce07cb-078c-415e-8f92-96690babd6c7
+  Hint: Time interval
+  Value: 1
+- ID: 3f72bc07-de92-483e-a724-d430769d9ba4
+  Hint: Designer ID
+  Value: dfeb93c9-3ad1-4dee-a388-bf4794d2f58b
+- ID: 575a25c8-5c6f-4530-a48f-f38e23e9dbd5
+  Hint: Page Event Subscription
+  Type: TreelistEx
+  Value: {AF0BD645-3B30-4148-AB36-4E9EC963AEE7}
+- ID: 7642ed71-348b-4b88-8634-cc7b28949472
+  Hint: Origin ID
+  Value: 00000000-0000-0000-0000-000000000000
+Languages:
+- Language: en
+  Fields:
+  - ID: 06f2d72a-1924-4b9a-ba1e-186ce4e57efd
+    Hint: Description
+    Value: Notification requests that have past the interest date are removed from the visitor notification list.
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Expired requests removed
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160212T025549Z
