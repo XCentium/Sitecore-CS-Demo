@@ -1,0 +1,40 @@
+﻿---
+ID: ee0025fd-602e-42f7-9f2a-3afeb7e78dc2
+Parent: 0d03863d-d1f6-4299-a675-e9f707f1119f
+Template: 8c5ead00-5f68-4310-ab0c-84f283b5ee0a
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CSDemo/XCentiumCSDemo Abandoned Carts/Initial State/Has email/Send E-Mail Message
+DB: master
+SharedFields:
+- ID: 1507131d-cee3-49e9-af32-de5403a37b49
+  Hint: Parameters
+  Value: AutomationActionDescription=Abandoned cart&Subject=Abandoned cart&Content=%3cp%3eHello!%3c%2fp%3e%0a%3cp%3eWe%27ve+noticed+that+you+were+interested+in+a+few+products+from+our+XC+Demo+website.%26nbsp%3bPlease+let+us+know%2c+if+we+can+help+answer+any+questions+for+you!+%3c%2fp%3e%0a%3cp%3eOur+Customer+Service%26nbsp%3bis+a+one-man+army+-+Amrit+(feel+free+to%26nbsp%3bprank-call+him).%3c%2fp%3e%0a%3cp%3eCheers!%3c%2fp%3e&FixedEmail=&FromName=Web Dev&FromEmail=web.dev@xcentium.com&BaseSiteURL=http://csdemo.xcentium.net
+- ID: 3f72bc07-de92-483e-a724-d430769d9ba4
+  Hint: Designer ID
+  Value: c03cf4ff-806f-4fcb-a75e-4d2d21026a8a
+- ID: 7642ed71-348b-4b88-8634-cc7b28949472
+  Hint: Origin ID
+  Value: bc62a688-ae9e-4462-abd4-73e28782d74a
+- ID: 8728a037-47d3-4180-b754-87926eda7ae8
+  Hint: Editor
+  Value: /sitecore/shell/~/xaml/Sitecore.Shell.Applications.MarketingAutomation.Dialogs.ActionEditors.SendEmailMessage.aspx
+- ID: a291a22b-99e2-46bb-a27b-8ec744275396
+  Hint: Type
+  Value: Sitecore.Automation.MarketingAutomation.AutomationActions.SendEmailMessageAction,Sitecore.Analytics.Automation
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 0
+Languages:
+- Language: en
+  Fields:
+  - ID: 06f2d72a-1924-4b9a-ba1e-186ce4e57efd
+    Hint: Description
+    Value: 
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Send E-Mail Message
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160212T025544Z
