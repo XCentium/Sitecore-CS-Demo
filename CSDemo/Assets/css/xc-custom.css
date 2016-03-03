@@ -202,3 +202,19 @@ footer.navbar {
     position: absolute;
     width: 100%;
 }
+
+
+/* Nav Cart */
+header.navbar li.navbar-cart .dropdown-menu {
+    padding: 0;
+}
+header.navbar li.navbar-cart .dropdown-menu > li {
+    margin-bottom: 0;
+    padding: 15px;
+}
+
+
+/* Carousel / Jumbotron */
+.jumbotron .item:not(:first-child) {
+    display: none;
+}
