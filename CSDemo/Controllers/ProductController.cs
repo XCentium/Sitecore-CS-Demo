@@ -102,7 +102,7 @@ namespace CSDemo.Controllers
             if (cookie != null && !cookie.Value.IsEmptyOrNull())
             {
                 var ids = cookie.Value.Split(',').ToList();
-                foreach (var id in ids)
+                foreach (var id in ids.AsEnumerable().Reverse())
                 {
                     Item item = Sitecore.Context.Database.GetItem(Constants.Commerce.CategoriesAliasItemId);
                     using (
