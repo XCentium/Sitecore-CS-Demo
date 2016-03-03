@@ -19,19 +19,14 @@ Languages:
       Hint: Title
       Value: Thank You!
     - ID: e982e4f8-0f07-41c1-8456-825a33e1a64a
-      Hint: Body
+      Hint: Content
       Value: |
-        
-        		<div class="row">
-                    <div class="col-sm-12">
-                        
-                            <h2>Thank you your order is being processed</h2>
-                            <h3>Your order number is: <strong>123456789</strong></h3>
-                        
-                    </div>
-        
-                </div>
-        
+        <div class="row">
+        <div class="col-sm-12">
+        <h2>Your order is being processed</h2>
+        <h3>Your order number is: <strong id="orderConfirmationID">123456789</strong></h3>
+        </div>
+        </div>
     - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
       Hint: Meta Description
       Value: Thankyou Page

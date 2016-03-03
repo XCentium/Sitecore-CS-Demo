@@ -7,7 +7,7 @@ DB: master
 SharedFields:
 - ID: 1507131d-cee3-49e9-af32-de5403a37b49
   Hint: Parameters
-  Value: AutomationActionDescription=Abandoned cart&Subject=Abandoned cart&Content=%3cp%3eHello!%3c%2fp%3e%0a%3cp%3eWe%27ve+noticed+that+you+were+interested+in+a+few+products+from+our+XC+Demo+website.%26nbsp%3bPlease+let+us+know%2c+if+we+can+help+answer+any+questions+for+you!+%3c%2fp%3e%0a%3cp%3eOur+Customer+Service%26nbsp%3bis+a+one-man+army+-+Amrit+(feel+free+to%26nbsp%3bprank-call+him).%3c%2fp%3e%0a%3cp%3eCheers!%3c%2fp%3e&FixedEmail=&FromName=Web Dev&FromEmail=web.dev@xcentium.com&BaseSiteURL=http://csdemo.xcentium.net
+  Value: AutomationActionDescription=Abandoned cart&Subject=Abandoned cart&Content=%3cp%3eHello!%3c%2fp%3e%0a%3cp%3eWe%27ve+noticed+that+you+were+interested+in+a+few+products+from+our+XC+Demo+website.%26nbsp%3bPlease+let+us+know%2c+if+we+can+help+answer+any+questions+for+you!+%3c%2fp%3e%0a%3cp%3eOur+Customer+Service%26nbsp%3bis+a+very+effective+-+(feel+free+to+call).%3c%2fp%3e%0a%3cp%3eCheers!%3c%2fp%3e&FixedEmail=&FromName=Web Dev&FromEmail=web.dev@xcentium.com&BaseSiteURL=http://csdemo.xcentium.net
 - ID: 3f72bc07-de92-483e-a724-d430769d9ba4
   Hint: Designer ID
   Value: c03cf4ff-806f-4fcb-a75e-4d2d21026a8a

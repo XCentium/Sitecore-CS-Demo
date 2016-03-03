@@ -11,6 +11,8 @@ using System.Web;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Analytics.Model.Entities;
 using Sitecore.SecurityModel;
+using Sitecore.Data.Items;
+using System.IO;
 
 
 namespace CSDemo.Models.Account
@@ -122,6 +124,22 @@ namespace CSDemo.Models.Account
                                 }
 
                             }
+
+                            var pictureFacet = Tracker.Current.Contact.GetFacet<IContactPicture>("Picture");
+                            string photoPath = "/sitecore/media library/CSDemo/Customers/" + user.LocalName;
+                            MediaItem photoItem = Sitecore.Context.Database.GetItem(photoPath);
+
+                            if (photoItem != null)
+                            {
+                                var stream = photoItem.GetMediaStream();
+                                var memoryStream = new MemoryStream();
+                                if (stream != null) { 
+                                    stream.CopyTo(memoryStream);
+                                    pictureFacet.Picture = memoryStream.ToArray();
+                                    pictureFacet.MimeType = photoItem.MimeType;
+                                }
+                            }
+
                         }
                     }
 

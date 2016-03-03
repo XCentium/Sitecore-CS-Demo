@@ -169,4 +169,4 @@ $RECYCLE.BIN/
 #Sublime settings
 /.vs/config
 # XcCommerce112Demo Excludes
-CSDemo/App_Config/Include/CSDemo/XcCommerce112Demo.Serialization.config
+CSDemo/App_Config/Include/zCSDemo/XcCommerce112Demo.Serialization.config
