@@ -52,51 +52,6 @@ namespace CSDemo.Controllers
 
         #endregion
 
-        public ActionResult ProductDetails()
-        {
-            return View();
-        }
-
-        public ActionResult CategoryListing()
-        {
-            CategoryListingViewModel model = new CSDemo.Models.Product.CategoryListingViewModel();
-
-
-            // get the current rendering
-            RenderingContext rc = Sitecore.Mvc.Presentation.RenderingContext.CurrentOrNull;
-            if (rc != null)
-            {
-                RenderingParameters rcParams = rc.Rendering.Parameters;
-
-                string catalogueId = string.Empty;
-
-                if (rcParams[CategorylistingConfig.TargetCatalogueFieldName] != null)
-                {
-                    if (!string.IsNullOrEmpty(rcParams[CategorylistingConfig.TargetCatalogueFieldName]))
-                    {
-                        catalogueId = rcParams[CategorylistingConfig.TargetCatalogueFieldName].ToString().Trim();
-
-                        ChildList catalogueCategories =
-                            Sitecore.Context.Database.GetItem(catalogueId)
-                                .Children.AsQueryable()
-                                .FirstOrDefault(x => x.Name.Equals(Constants.Commerce.Departments))
-                                .GetChildren();
-
-                        if (catalogueCategories != null)
-                        {
-                            model.Categories = from c in catalogueCategories
-                                select c.CreateAs<GeneralCategory>();
-                            return View("~/Views/Product/CategoryListings.cshtml", catalogueCategories);
-                        }
-                    }
-                }
-            }
-
-            // get the parameter value
-
-            return View("~/Views/Product/CategoryListings.cshtml", model);
-        }
-
         public ActionResult FeaturedProducts()
         {
             List<Product> products = new List<Product>();
@@ -143,46 +98,28 @@ namespace CSDemo.Controllers
         private static IEnumerable<Product> GetRecentlyViewedProducts()
         {
             List<Product> products = new List<Product>();
-            var categoriesAliasId = new ID(Constants.Commerce.CategoriesAliasItemId);
-
-            ITracker tracker = Tracker.Current;
-            if (tracker == null) return products;
-            if (tracker.Contact == null) return products;
-            if (tracker.Interaction?.Pages == null || tracker.Interaction.Pages.Length == 0)
-                return products;
-            List<Page> recentPageHistory = new List<Page>();
-            var currentPages = tracker.Interaction.Pages;
-            if (currentPages != null && currentPages.Any())
+            var cookie = Cookie.Get("featuredProducts");
+            if (cookie != null && !cookie.Value.IsEmptyOrNull())
             {
-                recentPageHistory.AddRange(currentPages);
-            }
-            var interactionData = tracker.Contact.LoadHistorycalData(100); // configure this
-            foreach (IInteractionData data in interactionData)
-            {
-                if(data.Pages != null && data.Pages.Any())
-                    recentPageHistory.AddRange(data.Pages);
-            }
-            foreach (Page page in recentPageHistory.Where(t => t.Item != null && t.Item.Id != Guid.Empty && new ID(t.Item.Id) == categoriesAliasId))
-            {
-                ID itemId = new ID(page.Item.Id);
-                Item item = Sitecore.Context.Database.GetItem(itemId);
-                // if this is a product the name will be "*" due to link provider resolution, so fetch it from the interaction page url
-                var productName = FetchProductName(page.Url.Path); 
-                // Hunt down the item from the search context
-                using (
-                    IProviderSearchContext searchContext =
-                        ContentSearchManager.GetIndex((SitecoreIndexableItem) item).CreateSearchContext())
+                var ids = cookie.Value.Split(',').ToList();
+                foreach (var id in ids)
                 {
-                    SearchResultItem result = searchContext.GetQueryable<SearchResultItem>().FirstOrDefault(t => String.Equals(t.Name, productName, StringComparison.CurrentCultureIgnoreCase)); // && t.TemplateName.Contains("a matching template name")
-                    if (result != null)
+                    Item item = Sitecore.Context.Database.GetItem(Constants.Commerce.CategoriesAliasItemId);
+                    using (
+                    IProviderSearchContext searchContext =
+                        ContentSearchManager.GetIndex((SitecoreIndexableItem)item).CreateSearchContext())
                     {
-                        var resultItem = result.GetItem();
-                        var product = resultItem.GlassCast<Product>();
-                        if(!products.Any() || !products.Exists(t => t.ID == product.ID))
-                            products.Add(product);
+                        SearchResultItem result = searchContext.GetQueryable<SearchResultItem>().FirstOrDefault(t => String.Equals(t.Name, id, StringComparison.CurrentCultureIgnoreCase));
+                        if (result != null)
+                        {
+                            var resultItem = result.GetItem();
+                            var product = resultItem.GlassCast<Product>();
+                            if (!products.Any() || !products.Exists(t => t.ID == product.ID))
+                                products.Add(product);
+                        }
                     }
+                    if (products.Count > _maxNumberOfProductsToShow) break;
                 }
-                if (products.Count > _maxNumberOfProductsToShow) break;
             }
             return products;
         }

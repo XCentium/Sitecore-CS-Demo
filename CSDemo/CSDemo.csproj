@@ -216,6 +216,7 @@
     <Compile Include="Models\Account\LoginModel.cs" />
     <Compile Include="Models\Checkout\Cart\CartHelper.cs" />
     <Compile Include="Models\Page\Article.cs" />
+    <Compile Include="Models\Product\Cookie.cs" />
     <Compile Include="Models\Product\FeaturedProduct.cs" />
     <Compile Include="Models\Product\ProductHelper.cs" />
     <Compile Include="App_Start\Initializer.cs" />

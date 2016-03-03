@@ -3,6 +3,7 @@
 @using Sitecore.Data.Items
 @using System.Collections.Generic
 @using System.Linq
+@using Sitecore.Mvc.Extensions
 
 @{
 
@@ -11,6 +12,11 @@
     var categoryID = Sitecore.Web.WebUtil.GetUrlName(1);
     var productID = Sitecore.Web.WebUtil.GetUrlName(0).Replace(' ','-');
 
+    // CSDemo#49
+    if (!productID.IsEmptyOrNull())
+    {
+        CSDemo.Models.Product.Cookie.SaveFeaturedProductCookie(productID);
+    }
 
     if (!string.IsNullOrEmpty(categoryID) && !string.IsNullOrEmpty(productID))
     {
@@ -57,10 +63,10 @@
                                             foreach (var productImageId in productImages)
                                             {
                                                 Item productImageItem = Sitecore.Context.Database.GetItem(productImageId);
-                                                productImage = "/~/media/" + productImageItem.ID.ToShortID() + ".ashx?w=538&as=1&h=583";
+            productImage = "/~/media/" + productImageItem.ID.ToShortID() + ".ashx?w=538&as=1&h=583";
                                                 <div class="item"><img src="@productImage" class="img-responsive" alt=""></div>
                                             }
-                                        }
+    }
                                         else
                                         {
                                             <div class="item"><img src="~/assets/images/products/product-1.jpg" class="img-responsive" alt=""></div>
