@@ -5,9 +5,6 @@ Template: 2a3e91a0-7987-44b5-ab34-35c2d9de83b9
 Path: /sitecore/layout/Renderings/CSDemo/Page/Metadata
 DB: master
 SharedFields:
-- ID: 1c0af338-70a8-455f-8366-173135e03be6
-  Hint: Placeholder
-  Value: 
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
   Value: 500

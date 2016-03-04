@@ -21,5 +21,5 @@ Languages:
       Hint: __Created by
       Value: sitecore\admin
     - ID: 72f686c7-2294-47d9-8389-243ce79f9671
-      Hint: Menu Item Title
+      Hint: Title
       Value: $name

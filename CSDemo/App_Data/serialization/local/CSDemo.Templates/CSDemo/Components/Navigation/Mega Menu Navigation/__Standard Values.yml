@@ -16,5 +16,5 @@ Languages:
       Hint: __Created by
       Value: sitecore\admin
     - ID: 7c445b60-6911-46b6-966a-736a76c7f549
-      Hint: Mega Menu Item Title
+      Hint: Title
       Value: $name
