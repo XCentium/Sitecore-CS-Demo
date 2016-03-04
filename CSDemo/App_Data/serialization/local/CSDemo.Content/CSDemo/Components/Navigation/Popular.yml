@@ -1,0 +1,14 @@
+﻿---
+ID: 790f391f-eace-49aa-93be-06f9df0b6141
+Parent: d02ea62d-8ad2-4837-9f0d-4d7f56037ae5
+Template: 338f84ba-3cdf-466e-8fb2-54ca845715d5
+Path: /sitecore/content/CSDemo/Components/Navigation/Popular
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T210541Z

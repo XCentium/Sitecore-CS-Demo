@@ -1,0 +1,17 @@
+﻿---
+ID: 59f6a751-ebcb-4fd0-9689-3ff40f4c3cf9
+Parent: d02ea62d-8ad2-4837-9f0d-4d7f56037ae5
+Template: 338f84ba-3cdf-466e-8fb2-54ca845715d5
+Path: /sitecore/content/CSDemo/Components/Navigation/Home
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T184338Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

@@ -1,0 +1,17 @@
+﻿---
+ID: 57fd9788-1ffb-4820-8a0e-e690bf6860ee
+Parent: 790f391f-eace-49aa-93be-06f9df0b6141
+Template: 0a2a31a0-a3b8-493c-b5fe-1935e1723f52
+Path: /sitecore/content/CSDemo/Components/Navigation/Popular/Camping
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T212059Z
+    - ID: 7c445b60-6911-46b6-966a-736a76c7f549
+      Hint: Title
+      Value: Camping
