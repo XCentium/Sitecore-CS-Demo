@@ -20,7 +20,7 @@ $(document).ready(function () {
 
     // Set the theme color at page load to match what is in local storage
     if (localStorage.themeColor != undefined) {
-        $("#main-color").attr("href", "assets/css/color/" + localStorage.themeColor + ".css");
+        $("#main-color").attr("href", "/assets/css/color/" + localStorage.themeColor + ".css");
     }
 
 	var CSduration = 500;
@@ -45,7 +45,7 @@ $(document).ready(function () {
 	    var color = $(this).attr("id");
 	    localStorage.themeColor = color;
 
-		$("#main-color").attr("href","assets/css/color/" + color + ".css");
+		$("#main-color").attr("href","/assets/css/color/" + color + ".css");
 	});
 	
 	$('#page-boxed-toggle').click(function() {
