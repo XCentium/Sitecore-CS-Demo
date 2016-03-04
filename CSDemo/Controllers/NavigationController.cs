@@ -12,7 +12,7 @@ namespace CSDemo.Controllers
     {
         public ActionResult MainNavigation()
         {
-            throw new NotImplementedException();
+            return View();
         }
     }
 }
