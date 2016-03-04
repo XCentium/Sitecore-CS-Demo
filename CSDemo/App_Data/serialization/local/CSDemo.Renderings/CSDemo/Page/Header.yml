@@ -20,6 +20,12 @@ SharedFields:
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
   Value: 300
+- ID: ded9e431-3604-4921-a4b3-a6ec7636a5b6
+  Hint: Controller Action
+  Value: Header
+- ID: e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7
+  Hint: Controller
+  Value: CSDemo.Controllers.PageController, CSDemo
 Languages:
 - Language: en
   Versions:

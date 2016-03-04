@@ -44,5 +44,10 @@ namespace CSDemo.Controllers
             var articleModel = contextItem.GlassCast<Metadata>();
             return View(articleModel);
         }
+
+        public ActionResult Header()
+        {
+            return View("~/Views/Page/Header.cshtml");
+        }
     }
 }
