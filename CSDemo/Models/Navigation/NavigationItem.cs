@@ -15,14 +15,21 @@ using XCore.Framework.ItemMapper.Configuration.Attributes;
 namespace CSDemo.Models.Navigation
 {
     [SitecoreType(AutoMap = true)]
-    public class NavigationItem
+    public class NavigationItem : INavigationItem
     {
+        public struct NavigationConstants
+        {
+            public const string MegaMenuImage = "Mega Menu Image";
+            public const string MegaMenuTitle = "Mega Menu Image";
+        }
+
         [SitecoreField]
-        public virtual string Title { get; set; }
+        public Link Link { get; set; }
+        
+        [SitecoreField(NavigationConstants.MegaMenuTitle)]
+        public string MegaMenuTitle { get; set; }
 
-        [SitecoreChildren]
-        public virtual IEnumerable<MegaMenuNavigationItem> MegaMenuNavigationItems { get; set; }
-
-
+        [SitecoreField(NavigationConstants.MegaMenuImage)]
+        public virtual Image MegaMenuImage { get; set; }
     }
 }
