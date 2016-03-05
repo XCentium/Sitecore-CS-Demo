@@ -215,6 +215,7 @@
     <Compile Include="Models\Account\AccountHelper.cs" />
     <Compile Include="Models\Account\LoginModel.cs" />
     <Compile Include="Models\Checkout\Cart\CartHelper.cs" />
+    <Compile Include="Models\Navigation\MegaMenuNavigationItem.cs" />
     <Compile Include="Models\Page\Article.cs" />
     <Compile Include="Models\Product\Cookie.cs" />
     <Compile Include="Models\Product\FeaturedProduct.cs" />
@@ -225,8 +226,8 @@
     <Compile Include="Models\Checkout\Cart\CustomCommerceCartLine.cs" />
     <Compile Include="Models\Checkout\Cart\ShoppingCart.cs" />
     <Compile Include="Models\Marquee\CarouselItem.cs" />
-    <Compile Include="Models\Navigation\Navigation.cs" />
-    <Compile Include="Models\Navigation\NavigationLink.cs" />
+    <Compile Include="Models\Navigation\MainNavigation.cs" />
+    <Compile Include="Models\Navigation\NavigationItem.cs" />
     <Compile Include="Models\Page\Metadata.cs" />
     <Compile Include="Models\Product\Catalog Generated\GeneralCategory.cs" />
     <Compile Include="Models\Components.cs" />

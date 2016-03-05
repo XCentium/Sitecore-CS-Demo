@@ -1,16 +1,16 @@
 ﻿---
-ID: 44b7a11b-247b-4d8c-bd69-467f0ca2b1b5
-Parent: 4797bb65-042e-4af6-8944-c364625080f3
+ID: 4eea4436-4221-4d03-8370-43ff9b6af926
+Parent: 793e1c51-113d-4efd-bf0c-6fe19c910277
 Template: 455a3e98-a627-4b40-8035-e683a0331ac7
-Path: /sitecore/templates/CSDemo/Components/Navigation/Navigation Item/Navigation/Enable Mega Menu
+Path: /sitecore/templates/CSDemo/Components/Navigation/Main Navigation/Main Navigation/MegaMenuImage
 DB: master
 SharedFields:
 - ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
   Hint: Type
-  Value: Checkbox
+  Value: Image
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
-  Value: 200
+  Value: 100
 Languages:
 - Language: en
   Versions:
@@ -18,4 +18,4 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160304T184433Z
+      Value: 20160304T235317Z

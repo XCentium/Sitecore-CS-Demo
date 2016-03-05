@@ -1,0 +1,27 @@
+﻿---
+ID: 8a2d8b8a-0441-4331-9e8a-04bdf8dba8fa
+Parent: 790f391f-eace-49aa-93be-06f9df0b6141
+Template: 0a2a31a0-a3b8-493c-b5fe-1935e1723f52
+Path: /sitecore/content/CSDemo/Components/Navigation/Popular/Clothing
+DB: master
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 300
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T234955Z
+    - ID: 28100e2e-3cf3-4ee9-b446-b7f7f0780484
+      Hint: Links
+      Type: Multilist with Search
+      Value: |
+        {623C9762-EFFD-4151-88E8-2B1E1BBD0D3F}
+        {D9CCD9B1-2F5A-4895-AED9-864536161BD4}
+    - ID: 7c445b60-6911-46b6-966a-736a76c7f549
+      Hint: Title
+      Value: Clothing
