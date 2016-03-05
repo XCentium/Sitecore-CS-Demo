@@ -12,6 +12,9 @@ Languages:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
       Value: 20160304T210541Z
+    - ID: 44b7a11b-247b-4d8c-bd69-467f0ca2b1b5
+      Hint: Enable Mega Menu
+      Value: 1
     - ID: 72f686c7-2294-47d9-8389-243ce79f9671
       Hint: Title
       Value: Popular

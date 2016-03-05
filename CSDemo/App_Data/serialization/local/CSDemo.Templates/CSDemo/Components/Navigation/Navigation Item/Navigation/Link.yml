@@ -2,7 +2,7 @@
 ID: 525e09fb-d3cd-4cdb-b78c-1929bf4588d8
 Parent: 4797bb65-042e-4af6-8944-c364625080f3
 Template: 455a3e98-a627-4b40-8035-e683a0331ac7
-Path: /sitecore/templates/CSDemo/Components/Navigation/Navigation Item/Menu Navigation Item/Link
+Path: /sitecore/templates/CSDemo/Components/Navigation/Navigation Item/Navigation/Link
 DB: master
 SharedFields:
 - ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32

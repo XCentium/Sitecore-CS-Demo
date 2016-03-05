@@ -2,7 +2,7 @@
 ID: 7c445b60-6911-46b6-966a-736a76c7f549
 Parent: 8d3d0c83-dd04-4504-9835-a52095e7d09c
 Template: 455a3e98-a627-4b40-8035-e683a0331ac7
-Path: /sitecore/templates/CSDemo/Components/Navigation/Mega Menu Navigation/Mega Menu Navigation/Title
+Path: /sitecore/templates/CSDemo/Components/Navigation/Mega Menu Navigation Item/Mega Menu Navigation/Title
 DB: master
 SharedFields:
 - ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32

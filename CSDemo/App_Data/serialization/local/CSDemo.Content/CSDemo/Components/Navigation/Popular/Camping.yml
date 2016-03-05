@@ -4,6 +4,10 @@ Parent: 790f391f-eace-49aa-93be-06f9df0b6141
 Template: 0a2a31a0-a3b8-493c-b5fe-1935e1723f52
 Path: /sitecore/content/CSDemo/Components/Navigation/Popular/Camping
 DB: master
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 100
 Languages:
 - Language: en
   Versions:
