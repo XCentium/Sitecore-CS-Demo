@@ -1,7 +1,7 @@
 ﻿---
 ID: d02ea62d-8ad2-4837-9f0d-4d7f56037ae5
 Parent: 3c9bcc3d-7201-4a32-9a62-51cab9bd4ead
-Template: d6073202-b059-46f4-976d-1b0998397f31
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
 Path: /sitecore/content/CSDemo/Components/Navigation
 DB: master
 SharedFields:
@@ -17,9 +17,6 @@ Languages:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
       Value: 20160304T003206Z
-    - ID: 4eea4436-4221-4d03-8370-43ff9b6af926
-      Hint: Mega Menu Image
-      Value: "<image mediaid=\"{1BF8590C-E4C3-4FC4-AD1D-0E40A8B39612}\" />"
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
       Value: sitecore\devlific
