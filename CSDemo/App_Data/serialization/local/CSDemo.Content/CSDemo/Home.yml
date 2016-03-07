@@ -36,6 +36,13 @@ Languages:
     - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
       Hint: Page Title
       Value: Home
+    - ID: c1f479fe-39e3-4851-bdbf-3ac347a44c2d
+      Hint: Categories
+      Type: Multilist with Search
+      Value: |
+        {833102C4-765F-4FA5-8DBD-A7F785D41659}
+        {D3D058E0-54C1-430D-A25C-5707786183AB}
+        {560ECC9F-77C4-4247-97C4-4D4FB5EBF136}
     - ID: f7a94e99-fb47-4133-9355-3f65e9071fb0
       Hint: Products
       Type: Multilist with Search
