@@ -3,25 +3,17 @@
 @using Sitecore.Data.Items
 @using CSDemo.Models.Checkout.Cart;
 @using CSDemo.Models.Account
-@using Sitecore.Commerce.Entities.Customers
 @using System.Collections.Generic
-@using System.Linq
 
-@{
-    var parentID = "{4441D0B5-1080-4550-A91A-4C2C8245C986}";
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Product.CategoryProductViewModel>
 
-    var categoryID = Sitecore.Web.WebUtil.GetUrlName(0);
-
-    if (!string.IsNullOrEmpty(categoryID))
-    {
-        var parent = Sitecore.Context.Database.GetItem(new ID(parentID));
-
-        var category = parent.GetChildren().ToArray().AsQueryable().FirstOrDefault(x => x.Key.Equals(categoryID));
-
-        var categoryProducts = category.GetChildren();
-
-        if (categoryProducts != null)
+@if (Model != null)
+{
+    var currentCat = 0;
+    
+    if (Model.CategoryMenulist != null)
         {
+        
             <section class="content products">
                 <div class="container">
 
@@ -36,24 +28,18 @@
                                     <div class="widget-body">
 
                                         <ul class="list-unstyled" id="categories" role="tablist" aria-multiselectable="true">
-                                            @{
-            // get department children, for each child
-
-            var categoryies = category.Parent.GetChildren();
-            int currentCat = 0;
-                                            }
-                                            @foreach (Item cat in categoryies)
+ 
+                                            @foreach (var cat in Model.CategoryMenulist)
                                             {
 
                                                 var current = false;
-                                                int totalChildren = cat.GetChildren().Count;
                                                 currentCat++;
 
                                                 var listClass = " class=\"collapsed\"";
                                                 var ariaExpand = "false";
                                                 var panelCollapse = "collapse";
 
-                                                if (category.ID.ToString() == cat.ID.ToString())
+                                                if (cat.Name.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase))
                                                 {
                                                     listClass = " ";
                                                     ariaExpand = "true";
@@ -61,17 +47,14 @@
                                                     current = true;
                                                 }
 
-                                                var catProducts = cat.GetChildren();
+                                                var catProducts = cat.ProductMenulistViewModel;
 
                                                 <li class="panel">
-                                                    <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name<span>[@totalChildren]</span></a>
+                                                    <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name<span>[@cat.ProductsCount]</span></a>
                                                     <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">
-                                                        @foreach (Item catProduct in catProducts)
+                                                        @foreach (CSDemo.Models.Product.ProductMenulistViewModel catProduct in catProducts)
                                                         {
-                                                            var ProductId = catProduct["ProductId"];
-                                                            var CatalogName = catProduct["CatalogName"];
-
-                                                            <li><a href="@Sitecore.Links.LinkManager.GetItemUrl(catProduct)">@catProduct.DisplayName.ToString()</a></li>
+                                                            <li><a href="@catProduct.Url">@catProduct.Name</a></li>
                                                         }
                                                     </ul>
                                                 </li>
@@ -80,147 +63,25 @@
                                     </div>
                                 </div>
                             </div>
-                            @*<!-- WIDGET:CATEGORIES - END -->
-                                <!-- WIDGET:PRICE - START -->
-                                <div class="widget widget-price">
-                                    <h3><a role="button" data-toggle="collapse" href="#widget-price-collapse" aria-expanded="true" aria-controls="widget-price-collapse">Filter by price</a></h3>
-                                    <div class="collapse in" id="widget-price-collapse" aria-expanded="true" role="tabpanel">
-                                        <div class="widget-body">
-                                            <div class="price-slider">
-                                                <input type="text" class="pull-left" id="amount" readonly="">
-                                                <input type="text" class="pull-right" id="amount2" readonly="">
-                                                <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- WIDGET:PRICE - END -->
-                                <!-- WIDGET:COLOR - START -->
-                                <div class="widget widget-color">
-                                    <h3><a role="button" data-toggle="collapse" href="#widget-color-collapse" aria-expanded="true" aria-controls="widget-color-collapse">Filter by color</a></h3>
-                                    <div class="collapse in" id="widget-color-collapse" aria-expanded="true" role="tabpanel">
-                                        <div class="widget-body">
-                                            <div class="checkbox blue">
-                                                <input type="checkbox" value="blue" id="check-blue" checked="">
-                                                <label data-toggle="tooltip" data-placement="top" title="" for="check-blue" data-original-title="Blue"></label>
-                                            </div>
-                                            <div class="checkbox red">
-                                                <input type="checkbox" value="red" id="check-red">
-                                                <label data-toggle="tooltip" data-placement="top" title="" for="check-red" data-original-title="Red"></label>
-                                            </div>
-                                            <div class="checkbox green">
-                                                <input type="checkbox" value="green" id="check-green">
-                                                <label data-toggle="tooltip" data-placement="top" title="" for="check-green" data-original-title="Green"></label>
-                                            </div>
-                                            <div class="checkbox dark-gray">
-                                                <input type="checkbox" value="dark-gray" id="check-dark-gray">
-                                                <label data-toggle="tooltip" data-placement="top" title="" for="check-dark-gray" data-original-title="Dark Gray"></label>
-                                            </div>
-                                            <div class="checkbox dark-cyan">
-                                                <input type="checkbox" value="dark-cyan" id="check-dark-cyan">
-                                                <label data-toggle="tooltip" data-placement="top" title="" for="check-dark-cyan" data-original-title="Dark Cyan"></label>
-                                            </div>
-                                            <div class="checkbox orange">
-                                                <input type="checkbox" value="orange" id="check-orange">
-                                                <label data-toggle="tooltip" data-placement="top" title="" for="check-orange" data-original-title="Orange"></label>
-                                            </div>
-                                            <div class="checkbox pink">
-                                                <input type="checkbox" value="pink" id="check-pink">
-                                                <label data-toggle="tooltip" data-placement="top" title="" for="check-pink" data-original-title="Pink"></label>
-                                            </div>
-                                            <div class="checkbox purple">
-                                                <input type="checkbox" value="purple" id="check-purple">
-                                                <label data-toggle="tooltip" data-placement="top" title="" for="check-purple" data-original-title="Purple"></label>
-                                            </div>
-                                            <div class="checkbox brown">
-                                                <input type="checkbox" value="brown" id="check-brown">
-                                                <label data-toggle="tooltip" data-placement="top" title="" for="check-brown" data-original-title="Brown"></label>
-                                            </div>
-                                            <div class="checkbox yellow">
-                                                <input type="checkbox" value="yellow" id="check-yellow">
-                                                <label data-toggle="tooltip" data-placement="top" title="" for="check-yellow" data-original-title="Yellow"></label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- WIDGET:COLOR - END -->
-                                <!-- WIDGET:SIZE - START -->
-                                <div class="widget widget-checkbox">
-                                    <h3><a role="button" data-toggle="collapse" href="#widget-size-collapse" aria-expanded="true" aria-controls="widget-size-collapse">Filter by size</a></h3>
-                                    <div class="collapse in" id="widget-size-collapse" aria-expanded="true" role="tabpanel">
-                                        <div class="widget-body">
-
-                                            <div class="checkbox">
-                                                <input id="check-size-xs" type="checkbox" value="size-xs" checked="">
-                                                <label for="check-size-xs">XS</label>
-                                                <span>[12]</span>
-                                            </div>
-                                            <div class="checkbox">
-                                                <input id="check-size-s" type="checkbox" value="size-s">
-                                                <label for="check-size-s">S</label>
-                                                <span>[12]</span>
-                                            </div>
-                                            <div class="checkbox">
-                                                <input id="check-size-m" type="checkbox" value="size-m">
-                                                <label for="check-size-m">M</label>
-                                                <span>[12]</span>
-                                            </div>
-                                            <div class="checkbox">
-                                                <input id="check-size-l" type="checkbox" value="size-l">
-                                                <label for="check-size-l">L</label>
-                                                <span>[12]</span>
-                                            </div>
-                                            <div class="checkbox">
-                                                <input id="check-size-xl" type="checkbox" value="size-xl">
-                                                <label for="check-size-xl">XL</label>
-                                                <span>[12]</span>
-                                            </div>
-                                            <div class="checkbox">
-                                                <input id="check-size-xll" type="checkbox" value="size-xll">
-                                                <label for="check-size-xll">XXL</label>
-                                                <span>[12]</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- WIDGET:SIZE - END -->
-                                <!-- WIDGET:DISCOUNT - START -->
-                                <div class="widget widget-checkbox">
-                                    <h3><a role="button" data-toggle="collapse" href="#widget-discount-collapse" aria-expanded="true" aria-controls="widget-discount-collapse">Discount</a></h3>
-                                    <div class="collapse in" id="widget-discount-collapse" aria-expanded="true" role="tabpanel">
-                                        <div class="widget-body">
-                                            <div class="checkbox">
-                                                <input id="check-with-discount" type="checkbox" value="with-discount">
-                                                <label for="check-with-discount">Products with discount</label>
-                                                <span>[12]</span>
-                                            </div>
-                                            <div class="checkbox">
-                                                <input id="check-without-discount" type="checkbox" value="without-discount">
-                                                <label for="check-without-discount">Products without discount</label>
-                                                <span>[112]</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- WIDGET:SIZE - END -->*@
-
                         </aside>
                     </div>
                     <div class="col-sm-9">
                         <div class="products-header">
                             <div class="row">
                                 <div class="col-xs-6 col-sm-4">
-                                    <form class="form-inline products-per-page">
+                                    <form name="products_per_page" id="products_per_page" class="form-inline products-per-page">
                                         <div class="form-group">
                                             <label>Show:</label>
                                         </div>
                                         <div class="form-group">
-                                            <select class="form-control">
-                                                <option>6</option>
-                                                <option>12</option>
-                                                <option>18</option>
-                                                <option>24</option>
-                                                <option selected="selected">ALL</option>
+                                            <select name="prod_page_show" id="prod_page_show" class="form-control">
+                                                @for (int i = 1; i < 11; i++)
+                                                {
+                                                    <option @(Model.PaginationViewModel.PageSize == i ? " selected " : string.Empty) value="@i">@i</option>
+                                                }
+                                                <option @(Model.PaginationViewModel.PageSize == 12 ? " selected " : string.Empty) value="12">12</option>
+                                                <option @(Model.PaginationViewModel.PageSize == 24 ? " selected " : string.Empty) value="24">24</option>
+                                                <option @(Model.PaginationViewModel.PageSize == 10000 ? " selected " : string.Empty) value="10000">ALL</option>
                                             </select>
                                         </div>
                                     </form>
@@ -231,19 +92,23 @@
                                         <button type="button" class="btn btn-default active" id="toggle-grid"><i class="fa fa-th"></i></button>
                                         <button type="button" class="btn btn-default" id="toggle-list"><i class="fa fa-list"></i></button>
                                     </div>
-                                    <form class="form-inline order-by">
+                                    <form name="products_sort" id="products_sort" class="form-inline order-by">
                                         <div class="form-group">
                                             <label>Sort by:</label>
                                         </div>
                                         <div class="form-group">
-                                            <select class="form-control">
-                                                <option selected="selected">Default</option>
-                                                <option>Popularity</option>
-                                                <option>Average rating</option>
-                                                <option>Newness</option>
-                                                <option>Price: low to high</option>
-                                                <option>Price: high to low</option>
+                                            <select name="OrderBy" id="OrderBy" class="form-control" >
+                                                <option @(Model.PaginationViewModel.OrderBy == string.Empty ? " selected " : string.Empty) value="">Default</option>
+                                                <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByBrand ? " selected " : string.Empty) value="@Constants.Products.OrderByBrand">@Constants.Products.OrderByBrand</option>
+                                                <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByRatings ? " selected " : string.Empty) value="@Constants.Products.OrderByRatings">@Constants.Products.OrderByRatings</option>
+                                                <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByNewness ? " selected " : string.Empty) value="@Constants.Products.OrderByNewness">@Constants.Products.OrderByNewness</option>
+                                                <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByPriceAsc ? " selected " : string.Empty) value="@Constants.Products.OrderByPriceAsc">@Constants.Products.OrderByPriceAsc</option>
+                                                <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByPriceDesc ? " selected " : string.Empty) value="@Constants.Products.OrderByPriceDesc">@Constants.Products.OrderByPriceDesc</option>
                                             </select>
+                                            <input type="hidden" name="CategoryID" id="Category" value="@Model.PaginationViewModel.CategoryID.ToString()" />
+                                            <input type="hidden" name="Category" id="Category" value="@Model.PaginationViewModel.Category" />
+                                            <input type="hidden" name="PageSize" id="PageSize" value="@Model.PaginationViewModel.PageSize" />
+                                            <input type="hidden" name="CurrentPage" id="CurrentPage" value="@Model.PaginationViewModel.CurrentPage" />
                                         </div>
                                     </form>
                                 </div>
@@ -252,30 +117,10 @@
                         </div>
                         <div class="row grid" id="products">
 
-                            @foreach (Item product in categoryProducts)
+                            @foreach (CSDemo.Models.Product.Product product in Model.Category.Products)
                             {
-                                if (!string.IsNullOrEmpty(product["ListPrice"].Trim()))
+                                if (!string.IsNullOrEmpty(product.ListPrice.Trim()))
                                 {
-                                    var ProductImage = "assets/images/products/product-1.jpg";
-
-                                    var title = product.DisplayName.ToString();
-                                    var description = product["Description"];
-                                    var ProductImageIds = product["Images"];
-                                    var rPrice = decimal.Parse(product["ListPrice"], System.Globalization.CultureInfo.InvariantCulture);
-                                    var rDelPrice = rPrice + 100.00m;
-                                    var price = String.Format("{0:0.00}", rPrice);
-                                    var delPrice = String.Format("{0:0.00}", rDelPrice);
-                                    var ProductId = product["ProductId"];
-                                    var CatalogName = product["CatalogName"];
-
-                                    var Variants = product.GetChildren();
-
-                                    if (!string.IsNullOrEmpty(ProductImageIds))
-                                    {
-                                        var ProductImages = ProductImageIds.Split('|');
-                                        Item ProductImageItem = Sitecore.Context.Database.GetItem(ProductImages[0]);
-                                        ProductImage = "/~/media/" + ProductImageItem.ID.ToShortID() + ".ashx";
-                                    }
                     <!-- PRODUCT - START -->
                                     <div class="col-sm-4 col-xs-6">
                                         <article class="product-item">
@@ -283,49 +128,52 @@
                                                 <div class="col-sm-3">
                                                     <div class="product-overlay">
                                                         <div class="product-mask"></div>
-                                                        <a href="@Sitecore.Links.LinkManager.GetItemUrl(product)" class="product-permalink"></a>
-                                                        <img src="@ProductImage?w=420&as=1&h=287" class="img-responsive" alt="">
-                                                        @*<div class="product-quickview">
-                                                                <a class="btn btn-quickview" data-toggle="modal" data-target="#product-quickview">Quick View</a>
-                                                            </div>*@
+                                                        <a href="@product.Url" class="product-permalink"></a>
+                                                        @foreach (var image in product.Images)
+                                                        {
+                                                            @RenderImage(image, x => x, new { Width = 420, Height = 287, AS = 1, @class = "img-responsive" }, isEditable: false);
+                                                                                                                                                                                
+                                                            break;                                                                                                                                                                              
+                                                        }
+                           
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <div class="product-body">
-                                                        <h3>@title</h3>
+                                                        <h3>@product.Title</h3>
                                                         <div class="product-labels">
                                                             <span class="label label-info">new</span>
                                                             <span class="label label-danger">sale</span>
                                                         </div>
                                                         <div class="product-rating">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                            <i class="fa fa-star-o"></i>
+                                                            <i class="fa fa-star@(product.Rating > 0 ? string.Empty : "-o")"></i>
+                                                            <i class="fa fa-star@(product.Rating > 1 ? string.Empty : "-o")"></i>
+                                                            <i class="fa fa-star@(product.Rating > 2 ? string.Empty : "-o")"></i>
+                                                            <i class="fa fa-star@(product.Rating > 3 ? string.Empty : "-o")"></i>
+                                                            <i class="fa fa-star@(product.Rating > 4 ? string.Empty : "-o")"></i>
                                                         </div>
                                                         <span class="price">
-                                                            <ins><span class="amount">$@price</span></ins>
+                                                            <ins><span class="amount">$@product.ListPrice</span></ins>
                                                         </span>
-                                                        <p>@description</p>
-                                                        <form name="@ProductId" id="@ProductId">
+                                                        <p>@product.Description</p>
+                                                        <form name="@product.ProductId" id="@product.ProductId">
                                                             <input type="hidden" id="Quantity" name="Quantity" value="1" />
-                                                            <input type="hidden" id="ProductId" name="ProductId" value="@ProductId" />
-                                                            <input type="hidden" id="CatalogName" name="CatalogName" value="@CatalogName" />
+                                                            <input type="hidden" id="ProductId" name="ProductId" value="@product.ProductId" />
+                                                            <input type="hidden" id="CatalogName" name="CatalogName" value="@product.CatalogName" />
                                                             <div class="form-group">
                                                                 <select class="form-control" name="VariantId" id="VariantId">
-                                                                    @foreach (Item variant in Variants)
-                                                                    {
-                                                                        var variantName = variant.DisplayName.ToString();
-                                                                        var variantId = variant["VariantId"];
-                                                                        <option value="@variantId">@variantName</option>
+                                                                    @if (product.ProductVariants != null) { 
+                                                                        foreach (var variant in product.ProductVariants)
+                                                                        {
+                                                                            <option value="@variant.VariantId">@variant.Name</option>
+                                                                        }
                                                                     }
 
                                                                 </select>
                                                             </div>
                                                             <div class="buttons">
                                                                 <a href="" class="btn btn-primary btn-sm"><i class="fa fa-exchange"></i></a>
-                                                                <a href="javascript:void(0)" onclick="AddProductToCart('@ProductId', '@Sitecore.Context.Item.ID.ToString()')" class="btn btn-primary btn-sm add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                <a href="javascript:void(0)" onclick="AddProductToCart('@product.ProductId', '@product.ID.ToString()')" class="btn btn-primary btn-sm add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                                 <a href="" class="btn btn-primary btn-sm"><i class="fa fa-heart"></i></a>
                                                             </div>
                                                         </form>
@@ -339,17 +187,27 @@
                                 }
                             }
                         </div>
+                        @if (Model.PaginationViewModel.TotalPages > 1) { 
+                                            
+                            var active = "";           
+                            var thePage = 0;
 
-                        @*<div class="pagination-wrapper">
-                            <ul class="pagination">
-                                <li><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                                <li><a href="#">1</a></li>
-                                <li class="active"><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                            var left = (Model.PaginationViewModel.CurrentPage > 1) ? Model.PaginationViewModel.CurrentPage - 1 : 1;
+                            var right = (Model.PaginationViewModel.CurrentPage < Model.PaginationViewModel.TotalPages) ? Model.PaginationViewModel.CurrentPage + 1 : Model.PaginationViewModel.TotalPages;
+                            
+                        <div class="pagination-wrapper">
+                            <ul id="products_page" class="pagination">
+                                <li><a val="@left" href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                                @for (int i = 0; i < Model.PaginationViewModel.TotalPages;i++ )
+                                {
+                                    thePage = i + 1;
+                                    active = (Model.PaginationViewModel.CurrentPage == thePage) ? " class=active" : "";
+                                    <li @active><a val="@thePage" href="#">@thePage</a></li>
+                                }                               
+                                <li><a val="@right" href="#"><i class="fa fa-angle-double-right"></i></a></li>
                             </ul>
-                        </div>*@
+                        </div>
+                        }
 
                     </div>
 

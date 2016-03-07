@@ -9,6 +9,7 @@ namespace CSDemo
     {
         public const string DefaultSiteName = "Website";
         public const string DeliveryDatabase = "web";
+        public const string WebIndex = "sitecore_web_index";
 
         public struct QueryStrings
         {
@@ -79,5 +80,21 @@ namespace CSDemo
             public const string ProductDetailPageId = "{94377B9C-75CE-4D60-AB6F-4CF627E0A8EC}";
             public const string CategoriesListingPageId = "{3C5BBD6A-528F-4807-BAF0-20F238F16C0A}";
         }
+
+        public struct Products
+        {
+            public const string IDSeparator = "|";
+            public const string ParameterKey = "Product Categories";
+            public const string ImagesField = "Images";
+            public const string ImagesUrlFormat = "/~/media/{0}.ashx";
+            public const string CategoryUrlFormat = "categories/{0}";
+            public const string CategoriesParentId = "{4441D0B5-1080-4550-A91A-4C2C8245C986}";
+            public const string OrderByBrand = "Brand";
+            public const string OrderByRatings = "Average rating";
+            public const string OrderByNewness = "Newness";
+            public const string OrderByPriceAsc = "Price: low to high";
+            public const string OrderByPriceDesc = "Price: high to low";
+        }
+
     }
 }

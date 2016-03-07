@@ -62,5 +62,44 @@ namespace CSDemo.Controllers
             }
             return this.Redirect("/account/signin");
         }
+
+
+         public ActionResult Account()
+        {
+            if (Sitecore.Context.User.IsAuthenticated)
+            {
+                return View();
+            }
+            return this.Redirect("/account/signin");
+
+            
+        }
+
+         public ActionResult Orders()
+         {
+             if (Sitecore.Context.User.IsAuthenticated)
+             {
+                 AccountHelper usr = new AccountHelper();
+
+                 var orders = usr.GetOrders();
+
+                 return View();
+             }
+             return this.Redirect("/account/signin");
+
+         }
+
+         public ActionResult OrderDetail()
+         {
+             if (Sitecore.Context.User.IsAuthenticated)
+             {
+                 AccountHelper usr = new AccountHelper();
+
+                 return View();
+             }
+             return this.Redirect("/account/signin");
+
+         }
+
     }
 }

@@ -116,6 +116,9 @@
       <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.Linq.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Sitecore.ContentSearch.LuceneProvider">
+      <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.LuceneProvider.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\Lib\Sitecore\Sitecore.Kernel.dll</HintPath>
       <Private>True</Private>
@@ -128,6 +131,7 @@
       <HintPath>..\Lib\Sitecore\Sitecore.Mvc.Analytics.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -197,12 +201,16 @@
     <Compile Include="Contracts\ISettings.cs" />
     <Compile Include="Contracts\ISite.cs" />
     <Compile Include="Contracts\Marquee\ICarouselItem.cs" />
+    <Compile Include="Contracts\Navigation\INavigation.cs" />
+    <Compile Include="Contracts\Navigation\INavigationLink.cs" />
     <Compile Include="Contracts\Page\IArticle.cs" />
     <Compile Include="Contracts\Page\IMetadata.cs" />
     <Compile Include="Contracts\Product\IFeaturedProduct.cs" />
+    <Compile Include="Contracts\Product\ICategory.cs" />
     <Compile Include="Contracts\Product\IProduct.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearch.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchInput.cs" />
+    <Compile Include="Contracts\Product\IProductVariant.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\MarqueeController.cs" />
@@ -212,13 +220,17 @@
     <Compile Include="Controllers\GeneralSearchController.cs" />
     <Compile Include="Models\Account\AccountHelper.cs" />
     <Compile Include="Models\Account\LoginModel.cs" />
+    <Compile Include="Models\Account\OrderDetailViewModel.cs" />
+    <Compile Include="Models\Account\OrdersViewModel.cs" />
     <Compile Include="Models\Checkout\Cart\CartHelper.cs" />
-    <Compile Include="Contracts\Navigation\IMegaMenuNavigationItem.cs" />
-    <Compile Include="Contracts\Navigation\INavigationItem.cs" />
-    <Compile Include="Models\Navigation\MegaMenuNavigationItem.cs" />
     <Compile Include="Models\Page\Article.cs" />
+    <Compile Include="Models\Product\CategoriesViewModel.cs" />
+    <Compile Include="Models\Product\CategoryMenulistViewModel.cs" />
+    <Compile Include="Models\Product\CategoryProductViewModel.cs" />
     <Compile Include="Models\Product\Cookie.cs" />
     <Compile Include="Models\Product\FeaturedProduct.cs" />
+    <Compile Include="Models\Product\Category.cs" />
+    <Compile Include="Models\Product\PaginationViewModel.cs" />
     <Compile Include="Models\Product\ProductHelper.cs" />
     <Compile Include="App_Start\Initializer.cs" />
     <Compile Include="Models\Checkout\Cart\CartItem.cs" />
@@ -226,19 +238,20 @@
     <Compile Include="Models\Checkout\Cart\CustomCommerceCartLine.cs" />
     <Compile Include="Models\Checkout\Cart\ShoppingCart.cs" />
     <Compile Include="Models\Marquee\CarouselItem.cs" />
-    <Compile Include="Models\Navigation\NavigationItem.cs" />
+    <Compile Include="Models\Navigation\Navigation.cs" />
+    <Compile Include="Models\Navigation\NavigationLink.cs" />
     <Compile Include="Models\Page\Metadata.cs" />
     <Compile Include="Models\Product\Catalog Generated\GeneralCategory.cs" />
     <Compile Include="Models\Components.cs" />
     <Compile Include="Models\GeneralSearch\SearchInfo.cs" />
     <Compile Include="Contracts\Product\Catalog Generated\IGeneralCategory.cs" />
     <Compile Include="Contracts\Product\Parameters\ICategorylistingConfig.cs" />
-    <Compile Include="Models\Product\Parameters\CategorylistingConfig.cs" />
-    <Compile Include="Models\Product\CategoryListingViewModel.cs" />
     <Compile Include="Models\Product\GetProductPricesRequest.cs" />
     <Compile Include="Models\Product\Product.cs" />
     <Compile Include="Models\GeneralSearch\Search.cs" />
     <Compile Include="Models\GeneralSearch\SearchInput.cs" />
+    <Compile Include="Models\Product\ProductMenulistViewModel.cs" />
+    <Compile Include="Models\Product\ProductVariant.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\Site.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -344,6 +357,7 @@
     <Content Include="Assets\js\bootstrap-hover-dropdown.min.js" />
     <Content Include="Assets\js\bootstrap.min.js" />
     <Content Include="Assets\js\Cart.js" />
+    <Content Include="Assets\js\CategoryProducts.js" />
     <Content Include="Assets\js\Checkout.js" />
     <Content Include="Assets\js\color-switcher.js" />
     <Content Include="Assets\js\custom.js" />
@@ -496,7 +510,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Signoff.cshtml" />
     <Content Include="Views\Product\CategoryProducts.cshtml" />
-    <Content Include="Views\Product\Category.cshtml" />
     <Content Include="Views\Product\Product.cshtml" />
     <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
     <Content Include="Views\Page\Article.cshtml" />
@@ -504,6 +517,8 @@
     <Content Include="Views\Page\Header.cshtml" />
     <Content Include="Views\Page\Layouts\Responsive.cshtml" />
     <Content Include="Views\Page\Metadata.cshtml" />
+    <Content Include="Views\Product\Categories.cshtml" />
+    <Content Include="Views\Account\Orders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

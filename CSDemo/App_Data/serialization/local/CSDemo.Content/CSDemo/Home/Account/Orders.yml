@@ -1,21 +1,20 @@
 ﻿---
-ID: bbf093e6-0d73-4c92-98b8-24a65f7d45b4
-Parent: 3c5bbd6a-528f-4807-baf0-20f238f16c0a
+ID: 2d79662a-511a-4b8c-b251-4735bb96c081
+Parent: a3df5bf4-2c09-498b-996a-8a3da9c97a72
 Template: b3d2832f-2fbf-4466-9d95-d3a0c6476362
-Path: /sitecore/content/CSDemo/Home/Categories/*
+Path: /sitecore/content/CSDemo/Home/Account/Orders
 DB: master
 SharedFields:
-- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
-  Hint: __Icon
-  Value: apps/32x32/file (1).png
 - ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
   Hint: __Renderings
   Type: layout
   Value: |
     <r xmlns:p="p" xmlns:s="s" p:p="1">
       <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-        <r uid="{D7EAA133-E9CF-4BDC-B663-1C56EABA9D6D}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:id="{AD905941-14F8-4F16-92CB-B52CB55F5437}" s:ph="page-body" />
-        <r uid="{63223E3A-7BE4-4C4F-A69F-29C0F4CD44EA}" p:after="r[@uid='{E5A6C541-E277-499D-9CB9-DFF8CE125A23}']" />
+        <r uid="{63223E3A-7BE4-4C4F-A69F-29C0F4CD44EA}">
+          <p:d />
+        </r>
+        <r uid="{D817DC2E-6715-4B8B-B46D-8E16D3557704}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:id="{4EC94CED-4A4C-4D41-88C0-82B657419E2C}" s:ph="page-body" />
       </d>
     </r>
 Languages:
@@ -25,13 +24,13 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160229T091235Z
+      Value: 20160307T154418Z
     - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
       Hint: Page Title
-      Value: *
+      Value: Ordres
     - ID: 55a55b4d-d866-4df7-9821-46e9f9cf3ee3
       Hint: Title
-      Value: *
+      Value: Orders
     - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
       Hint: Meta Description
-      Value: * Page
+      Value: Ordres Page

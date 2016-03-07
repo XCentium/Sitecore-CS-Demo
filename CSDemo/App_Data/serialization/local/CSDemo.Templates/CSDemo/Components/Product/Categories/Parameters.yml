@@ -1,0 +1,17 @@
+﻿---
+ID: 0b77c324-1f1e-45f4-a254-fdfac8d14993
+Parent: b2e03ec2-f166-4ad9-9985-e99c85ded750
+Template: 0437fee2-44c9-46a6-abe9-28858d9fee8c
+Path: /sitecore/templates/CSDemo/Components/Product/Categories/Parameters
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T053854Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

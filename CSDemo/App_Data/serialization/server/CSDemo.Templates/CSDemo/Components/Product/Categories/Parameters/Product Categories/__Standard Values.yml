@@ -1,0 +1,22 @@
+﻿---
+ID: 5b7ee959-2763-42f3-b400-657ad4b69fd5
+Parent: 9c1bb9e1-d757-4ac8-ac7b-898c29f43cce
+Template: 9c1bb9e1-d757-4ac8-ac7b-898c29f43cce
+Path: /sitecore/templates/CSDemo/Components/Product/Categories/Parameters/Product Categories/__Standard Values
+DB: master
+SharedFields:
+- ID: 3094d236-5985-4c4f-ae6a-e30740885532
+  Hint: Caching
+  Value: 0|0|0|0|0|0|0|0
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T060320Z
+    - ID: 6fcf3d93-0edd-4ca1-8bc5-f978d13ba245
+      Hint: Product Categories
+      Type: Treelist
+      Value: 
