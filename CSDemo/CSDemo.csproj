@@ -201,8 +201,8 @@
     <Compile Include="Contracts\ISettings.cs" />
     <Compile Include="Contracts\ISite.cs" />
     <Compile Include="Contracts\Marquee\ICarouselItem.cs" />
-    <Compile Include="Contracts\Navigation\INavigation.cs" />
-    <Compile Include="Contracts\Navigation\INavigationLink.cs" />
+    <Compile Include="Contracts\Navigation\IMegaMenuNavigationItem.cs" />
+    <Compile Include="Contracts\Navigation\INavigationItem.cs" />
     <Compile Include="Contracts\Page\IArticle.cs" />
     <Compile Include="Contracts\Page\IMetadata.cs" />
     <Compile Include="Contracts\Product\IFeaturedProduct.cs" />
@@ -223,6 +223,8 @@
     <Compile Include="Models\Account\OrderDetailViewModel.cs" />
     <Compile Include="Models\Account\OrdersViewModel.cs" />
     <Compile Include="Models\Checkout\Cart\CartHelper.cs" />
+    <Compile Include="Models\Navigation\MegaMenuNavigationItem.cs" />
+    <Compile Include="Models\Navigation\NavigationItem.cs" />
     <Compile Include="Models\Page\Article.cs" />
     <Compile Include="Models\Product\CategoriesViewModel.cs" />
     <Compile Include="Models\Product\CategoryMenulistViewModel.cs" />
@@ -238,8 +240,6 @@
     <Compile Include="Models\Checkout\Cart\CustomCommerceCartLine.cs" />
     <Compile Include="Models\Checkout\Cart\ShoppingCart.cs" />
     <Compile Include="Models\Marquee\CarouselItem.cs" />
-    <Compile Include="Models\Navigation\Navigation.cs" />
-    <Compile Include="Models\Navigation\NavigationLink.cs" />
     <Compile Include="Models\Page\Metadata.cs" />
     <Compile Include="Models\Product\Catalog Generated\GeneralCategory.cs" />
     <Compile Include="Models\Components.cs" />

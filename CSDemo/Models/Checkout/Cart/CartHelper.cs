@@ -760,7 +760,7 @@ namespace CSDemo.Models.Checkout.Cart
             return ret;
         }
 
-        private GetVisitorOrdersResult GetOrders(String customerID, string shopName)
+        public GetVisitorOrdersResult GetOrders(String customerID, string shopName)
         {
             var submitRequest = new GetVisitorOrdersRequest(customerID, shopName);
 
