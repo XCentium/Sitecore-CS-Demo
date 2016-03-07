@@ -760,6 +760,32 @@ namespace CSDemo.Models.Checkout.Cart
             return ret;
         }
 
+        private GetVisitorOrdersResult GetOrders(String customerID, string shopName)
+        {
+            var submitRequest = new GetVisitorOrdersRequest(customerID, shopName);
+
+            var provider = new CommerceOrderServiceProvider();
+
+            var req = CartRequestInformation.Get(submitRequest);
+
+
+            //            req = Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.GetVisitorOrders
+
+            if (req == null)
+            {
+                req = new CartRequestInformation(submitRequest, true);
+            }
+            else
+            {
+                req.Refresh = true;
+            }
+
+            var submitResult = provider.GetVisitorOrders(submitRequest);
+
+
+            return submitResult;
+        }
+
         private SubmitVisitorOrderResult SubmitOrder(CommerceCart cart)
         {
             var submitRequest = new SubmitVisitorOrderRequest(cart);
@@ -767,6 +793,7 @@ namespace CSDemo.Models.Checkout.Cart
             var provider = new CommerceOrderServiceProvider();
 
             var req = CartRequestInformation.Get(submitRequest);
+
 
             if (req == null)
             {

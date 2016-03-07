@@ -62,6 +62,22 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.Rating)]
         public virtual decimal Rating { get; set; }
 
+        [SitecoreField(Fields.SortFields)]
+        public IEnumerable<Item> SortFields { get; set; }
+
+        [SitecoreField(Fields.ItemsPerPage)] 
+        public virtual string ItemsPerPage { get; set; }
+
+        [SitecoreField(Fields.Variants)]
+        public virtual string Variants { get; set; }
+
+        [SitecoreField(Fields.Brand)]
+        public virtual string Brand { get; set; }
+
+        public virtual Item FirstImage { get; set; }
+
+        public IEnumerable<ProductVariant> ProductVariants { get; set; }
+
         public string CurrencyPrice
         {
             get
@@ -73,6 +89,13 @@ namespace CSDemo.Models.Product
             }
         }
 
+        public string ListPrice
+        {
+            get
+            {
+                return String.Format("{0:0.00}", Price);
+            }
+        }
         #endregion
 
         #region Fields
@@ -90,6 +113,11 @@ namespace CSDemo.Models.Product
             public const string OnSale = "OnSale";
             public const string ParentCategories = "ParentCategories";
             public const string DateOfIntroduction = "IntroductionDate";
+            public const string SortFields = "Sort Fields";
+            public const string ItemsPerPage = "Items Per Page";
+            public const string Variants = "Variants";
+            public const string Brand = "Brand";
+            public const string ListPrice = "ListPrice";
         }
 
         #endregion

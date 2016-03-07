@@ -12,7 +12,7 @@
                 <ul class="list-inline links">
                     @if (Sitecore.Context.User.IsAuthenticated)
                     {
-                        <li>Welcome @Sitecore.Context.User.LocalName <a href="#">My account</a></li>
+                        <li>Welcome [@Sitecore.Context.User.LocalName] <a href="~/Account">My account</a></li>
                         <li><a href="/account/signoff">Logout</a></li>
                     }
                     else

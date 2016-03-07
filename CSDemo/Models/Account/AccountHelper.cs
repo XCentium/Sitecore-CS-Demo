@@ -259,5 +259,19 @@ namespace CSDemo.Models.Account
             return !userName.StartsWith(defaultDomain, StringComparison.OrdinalIgnoreCase) ? string.Concat(defaultDomain, @"\", userName) : userName;
 
         }
+
+
+
+        internal object GetOrders()
+        {
+            var customerID = GetCommerceUserID(Sitecore.Context.User.Name);
+            if (!string.IsNullOrEmpty(customerID)) {
+                var Orders = CartHelper.GetOrders(customerID, CartHelper.ShopName);
+                return Orders;
+            }
+
+            
+            return null;
+        }
     }
 }

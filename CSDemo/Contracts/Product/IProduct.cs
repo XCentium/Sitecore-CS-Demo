@@ -27,5 +27,9 @@ namespace CSDemo.Contracts.Product
         bool IsNew { get; set; }
         IEnumerable<Item> Categories { get; set; }
         decimal Rating { get; set; }
+        string ItemsPerPage { get; set; }
+        string Variants { get; set; }
+        string Brand { get; set; }
+        IEnumerable<Item> SortFields { get; set; }
     }
 }

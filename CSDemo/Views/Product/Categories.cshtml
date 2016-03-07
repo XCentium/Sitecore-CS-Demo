@@ -1,0 +1,41 @@
+﻿@using Sitecore.Mvc
+@using Sitecore.Mvc.Presentation
+@using Sitecore.Data
+@using Sitecore.Data.Items
+@using CSDemo.Models.Product
+@using CSDemo.Models
+@using System
+@using System.Data.Linq
+@using Sitecore.Data.Fields
+@using Sitecore.Collections
+@using System.Collections.Generic
+
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<CSDemo.Models.Category>>
+
+
+
+@if (Model != null)
+{
+    <section class="content categories">
+        <div class="row row-no-padding">
+            @foreach (Category category in Model)
+            {
+            <!-- CATEGORY - START -->
+                <div class="col-xs-4">
+                    <div class="category">
+                        <a href="@category.Url">
+                            <img src="@ProductHelper.GetFirstImageFromItems(category.Images)" class="img-responsive" alt="@category.Name Collection" style="max-height:310px">
+                            <div class="category-mask"></div>
+                            <h3 class="category-title">@category.Name <span>Collection</span></h3>
+                        </a>
+                    </div>
+                </div>
+            <!-- CATEGORY - END -->
+            }
+        </div>
+    </section>
+}
+
+
+
+
