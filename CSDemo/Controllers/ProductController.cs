@@ -50,7 +50,7 @@ namespace CSDemo.Controllers
 
         public ActionResult FeaturedCategories()
         {
-            return Content("TBD");
+            return View();
         }
 
         #region Private Helpers
