@@ -48,6 +48,11 @@ namespace CSDemo.Controllers
             return View(products);
         }
 
+        public ActionResult FeaturedCategories()
+        {
+            return Content("TBD");
+        }
+
         #region Private Helpers
 
         private static IEnumerable<Product> GetRecentlyViewedProducts()

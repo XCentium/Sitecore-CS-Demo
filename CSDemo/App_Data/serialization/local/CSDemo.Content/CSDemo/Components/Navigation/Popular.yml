@@ -15,9 +15,6 @@ Languages:
     - ID: 525e09fb-d3cd-4cdb-b78c-1929bf4588d8
       Hint: Link
       Value: "<link text=\"Popular\" linktype=\"external\" url=\"#\" anchor=\"\" target=\"\" />"
-    - ID: 9827b1e9-e3c9-4935-a330-5d695383c09e
-      Hint: Mega Menu Title
-      Value: 
     - ID: eb2b469b-8798-46df-aa28-f89727a6dd10
       Hint: Mega Menu Image
       Value: "<image mediaid=\"{1BF8590C-E4C3-4FC4-AD1D-0E40A8B39612}\" />"
