@@ -1,10 +1,13 @@
 ﻿#region
 
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using CSDemo.Models.Navigation;
 using Glass.Mapper.Sc;
+using Sitecore.Data.Items;
 using Sitecore.Mvc.Controllers;
+using Sitecore.Mvc.Extensions;
 using Sitecore.Mvc.Presentation;
 
 #endregion
@@ -17,10 +20,25 @@ namespace CSDemo.Controllers
 
         public ActionResult MainNavigation()
         {
-            // TBD: fill up a view model
-            // var datasourceItem = RenderingContext.Current;
+            List<NavigationItem> navigationItems = new List<NavigationItem>();
 
-            return View();
+            // TBD: fill up a view model
+            var datasource = RenderingContext.Current.Rendering.DataSource;
+            if (!datasource.IsEmptyOrNull())
+            {
+                var parentItem = _context.Database.GetItem(datasource);
+                if (parentItem == null || !parentItem.HasChildren) return View(navigationItems);
+                var children = parentItem.Children;
+                foreach (Item child in children)
+                {
+                    var navigationItem = child.GlassCast<NavigationItem>();
+                    if (navigationItem != null)
+                    {
+                        navigationItems.Add(navigationItem);
+                    }
+                }
+            }
+            return View(navigationItems);
         }
 
         #endregion

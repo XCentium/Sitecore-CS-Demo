@@ -20,7 +20,7 @@ namespace CSDemo.Models.Navigation
         public struct NavigationConstants
         {
             public const string MegaMenuImage = "Mega Menu Image";
-            public const string MegaMenuTitle = "Mega Menu Image";
+            public const string MegaMenuTitle = "Mega Menu Title";
         }
 
         [SitecoreField]
@@ -31,5 +31,8 @@ namespace CSDemo.Models.Navigation
 
         [SitecoreField(NavigationConstants.MegaMenuImage)]
         public virtual Image MegaMenuImage { get; set; }
+
+        [SitecoreChildren]
+        public virtual IEnumerable<MegaMenuNavigationItem> MegaMenuItems { get; set; } 
     }
 }

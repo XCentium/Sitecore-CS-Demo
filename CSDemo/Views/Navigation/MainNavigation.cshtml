@@ -1,42 +1,45 @@
 ﻿@using Sitecore.Mvc
-<li class="dropdown">
-    <a href="/">Home</a>
-</li>
-<li class="dropdown megamenu">
-    <a href="/categories" data-toggle="dropdown" data-hover="dropdown" data-delay="300" data-close-others="true">Popular</a>
-    <ul class="dropdown-menu">
-        <li class="col-sm-4 col-md-3">
-            <ul class="list-unstyled">
-                <li class="title">Climbing</li>
-                <li><a href="/categories/carabiners">Carabiners</a></li>
-                <li><a href="/categories/crampons">Crampons</a></li>
-                <li><a href="/categories/harnesses">Harnesses</a></li>
-                <li><a href="/categories/rockshoes">Rockshoes</a></li>
-            </ul>
-        </li>
-        <li class="col-sm-4 col-md-3">
-            <ul class="list-unstyled">
-                <li class="title">Clothing</li>
-                <li><a href="/categories/boots">Boots</a></li>
-                <li><a href="/categories/pants">Pants</a></li>
-                <li><a href="/categories/parkas">Parkas</a></li>
-                <li><a href="/categories/shirts">Shirts</a></li>
-            </ul>
-        </li>
-        <li class="col-sm-4 col-md-3">
-            <ul class="list-unstyled">
-                <li class="title">Accessories</li>
-                <li><a href="/categories/backpacks">Backpacks</a></li>
-                <li><a href="/categories/sleepingBags">Sleeping Bags</a></li>
-                <li><a href="/categories/supplies">Supplies</a></li>
-                <li><a href="/categories/tents">Tents</a></li>
-            </ul>
-        </li>
-        <li class="hidden-xs hidden-sm col-md-3">
-            <img src="http://lorempixel.com/300/200/animals/" class="img-responsive center-block" alt="">
-        </li>
-    </ul>
-</li>
-<li class="">
-    <a href="/categories">Categories</a>
-</li>
+@using System.Linq
+@using Sitecore.Links
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<CSDemo.Models.Navigation.NavigationItem>>
+@if (Model != null)
+{
+    foreach (var navigationItem in Model)
+    {
+        if (navigationItem.MegaMenuItems != null && navigationItem.MegaMenuItems.Any())
+        {
+            <li class="dropdown megamenu">
+                <a data-toggle="dropdown" data-hover="dropdown" data-delay="300" data-close-others="true">@navigationItem.MegaMenuTitle</a>
+                <ul class="dropdown-menu">
+                    @foreach (var megaMenuNavigationItem in navigationItem.MegaMenuItems)
+                    {
+                        <li class="col-sm-4 col-md-3">
+                            <ul class="list-unstyled">
+                                <li class="title">@megaMenuNavigationItem.Title</li>
+                                @foreach (var link in megaMenuNavigationItem.Links)
+                                {
+                                    var itemUrl = LinkManager.GetItemUrl(link);
+                                    <li>
+                                        <a href="@itemUrl">@link.Name</a>
+                                    </li>
+                                }
+                                @*<li><a href="/categories/crampons">Crampons</a></li>
+                                <li><a href="/categories/harnesses">Harnesses</a></li>
+                                <li><a href="/categories/rockshoes">Rockshoes</a></li>*@
+                            </ul>
+                        </li>
+                    }
+                    <li class="hidden-xs hidden-sm col-md-3">
+                        @RenderImage(navigationItem.MegaMenuImage, x => x, new { @class = "img-responsive center-block" }, isEditable: false)
+                    </li>
+                </ul>
+            </li>
+        }
+        else
+        {
+            <li class="dropdown">
+                <a href="@navigationItem.Link.Url">@navigationItem.Link.Text</a>
+            </li>
+        }
+    }
+}
