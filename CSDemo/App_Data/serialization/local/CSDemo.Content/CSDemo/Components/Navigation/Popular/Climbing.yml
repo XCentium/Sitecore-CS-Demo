@@ -2,7 +2,7 @@
 ID: 57fd9788-1ffb-4820-8a0e-e690bf6860ee
 Parent: 790f391f-eace-49aa-93be-06f9df0b6141
 Template: 0a2a31a0-a3b8-493c-b5fe-1935e1723f52
-Path: /sitecore/content/CSDemo/Components/Navigation/Popular/Camping
+Path: /sitecore/content/CSDemo/Components/Navigation/Popular/Climbing
 DB: master
 SharedFields:
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
@@ -20,8 +20,10 @@ Languages:
       Hint: Links
       Type: Multilist with Search
       Value: |
-        {8DF6789E-C042-4A28-B98A-021C70FA05EF}
-        {23567FBF-72AD-4F46-99BE-56E55FDB1813}
+        {DBC814A9-05D2-4944-8E61-F8FB14150E00}
+        {B59E1DED-ED1C-4BD2-B031-7845092CBA9E}
+        {D3D058E0-54C1-430D-A25C-5707786183AB}
+        {F6B8AAED-A34D-48E8-9FBE-A984E4BD13EF}
     - ID: 7c445b60-6911-46b6-966a-736a76c7f549
       Hint: Title
-      Value: Camping
+      Value: Climbing
