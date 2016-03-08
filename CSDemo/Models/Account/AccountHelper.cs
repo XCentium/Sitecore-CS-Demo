@@ -260,18 +260,5 @@ namespace CSDemo.Models.Account
 
         }
 
-
-
-        internal object GetOrders()
-        {
-            var customerID = GetCommerceUserID(Sitecore.Context.User.Name);
-            if (!string.IsNullOrEmpty(customerID)) {
-                var Orders = CartHelper.GetOrders(customerID, CartHelper.ShopName);
-                return Orders;
-            }
-
-            
-            return null;
-        }
     }
 }

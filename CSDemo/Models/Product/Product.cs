@@ -30,6 +30,9 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.DateOfIntroduction)]
         public virtual DateTime DateOfIntroduction { get; set; }
 
+        [SitecoreField(Fields.FullDescription)]
+        public virtual string FullDescription { get; set; }
+
         [SitecoreField(Fields.Size)]
         public virtual string Size { get; set; }
 
@@ -104,12 +107,12 @@ namespace CSDemo.Models.Product
         {
             public const string Size = "ProductSize";
             public const string Price = "ListPrice";
-            public const string DefinitionName = "Definition Name";
+            public const string DefinitionName = "DefinitionName";
             public const string Description = "Description";
             public const string Rating = "Rating";
             public const string ProductId = "ProductId";
             public const string Images = "Images";
-            public const string CatalogName = "Catalog Name";
+            public const string CatalogName = "CatalogName";
             public const string OnSale = "OnSale";
             public const string ParentCategories = "ParentCategories";
             public const string DateOfIntroduction = "IntroductionDate";
@@ -118,6 +121,7 @@ namespace CSDemo.Models.Product
             public const string Variants = "Variants";
             public const string Brand = "Brand";
             public const string ListPrice = "ListPrice";
+            public const string FullDescription = "Full Description";
         }
 
         #endregion

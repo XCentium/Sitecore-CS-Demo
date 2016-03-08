@@ -14,6 +14,7 @@ using Sitecore.Diagnostics;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Extensions;
 using Sitecore.Mvc.Presentation;
+using CSDemo.Models;
 
 #endregion
 
@@ -48,6 +49,7 @@ namespace CSDemo.Controllers
             }
             return View(products);
         }
+
 
         public ActionResult FeaturedCategories()
         {
@@ -123,6 +125,27 @@ namespace CSDemo.Controllers
             }
 
             return View(categoryProduct);
+        }
+
+
+        public ActionResult ProductDetail()
+        {
+            var categoryID = Sitecore.Web.WebUtil.GetUrlName(1);
+            var productID = Sitecore.Web.WebUtil.GetUrlName(0).Replace(' ', '-');
+
+            // CSDemo#49
+            if (!productID.IsEmptyOrNull())
+            {
+                CSDemo.Models.Product.Cookie.SaveFeaturedProductCookie(productID);
+            }
+
+            if (!string.IsNullOrEmpty(productID))
+            {
+                var model = ProductHelper.GetProductByNameAndCategory(productID, categoryID);
+                return View(model);
+            }
+
+            return View();
         }
 
         #region Private Helpers

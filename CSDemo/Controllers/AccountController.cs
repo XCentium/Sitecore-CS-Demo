@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using CSDemo.Models.Account;
 using Sitecore.Mvc.Controllers;
+using CSDemo.Models.Product;
+using CSDemo.Models.Checkout.Cart;
 
 namespace CSDemo.Controllers
 {
@@ -79,11 +81,9 @@ namespace CSDemo.Controllers
          {
              if (Sitecore.Context.User.IsAuthenticated)
              {
-                 AccountHelper usr = new AccountHelper();
+                 var model = ProductHelper.GetCustomerOrders(new CartHelper());
 
-                 var orders = usr.GetOrders();
-
-                 return View();
+                 return View(model);
              }
              return this.Redirect("/account/signin");
 
@@ -93,7 +93,14 @@ namespace CSDemo.Controllers
          {
              if (Sitecore.Context.User.IsAuthenticated)
              {
-                 AccountHelper usr = new AccountHelper();
+                 var orderID = Sitecore.Web.WebUtil.GetUrlName(0);
+
+                 if (!string.IsNullOrEmpty(orderID))
+                 {
+                     var model = ProductHelper.GetCustomerOrderDetail(orderID, new CartHelper());
+
+                     return View(model);
+                 }
 
                  return View();
              }

@@ -760,32 +760,6 @@ namespace CSDemo.Models.Checkout.Cart
             return ret;
         }
 
-        public GetVisitorOrdersResult GetOrders(String customerID, string shopName)
-        {
-            var submitRequest = new GetVisitorOrdersRequest(customerID, shopName);
-
-            var provider = new CommerceOrderServiceProvider();
-
-            var req = CartRequestInformation.Get(submitRequest);
-
-
-            //            req = Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.GetVisitorOrders
-
-            if (req == null)
-            {
-                req = new CartRequestInformation(submitRequest, true);
-            }
-            else
-            {
-                req.Refresh = true;
-            }
-
-            var submitResult = provider.GetVisitorOrders(submitRequest);
-
-
-            return submitResult;
-        }
-
         private SubmitVisitorOrderResult SubmitOrder(CommerceCart cart)
         {
             var submitRequest = new SubmitVisitorOrderRequest(cart);
@@ -814,7 +788,6 @@ namespace CSDemo.Models.Checkout.Cart
         {
             try
             {
-
 
                 var cart = RemoveFromCart(externalCartLineId);
 
@@ -1004,5 +977,90 @@ namespace CSDemo.Models.Checkout.Cart
 
             return ret;
         }
+
+
+        //public SubmitVisitorOrderResult SubmitOrder([NotNull] CommerceCart cart)
+        //{
+        //    var submitRequest = new SubmitVisitorOrderRequest(cart);
+
+        //    var provider = new CommerceOrderServiceProvider();
+        //    submitRequest.RefreshCart(true);
+        //    var submitResult = provider.SubmitVisitorOrder(submitRequest);
+
+        //    return submitResult;
+        //}
+
+        //public GetVisitorOrdersResult GetOrders(String customerID, string shopName)
+        //{
+        //    var submitRequest = new GetVisitorOrdersRequest(customerID, shopName);
+
+        //    var provider = new CommerceOrderServiceProvider();
+
+        //    var req = CartRequestInformation.Get(submitRequest);
+
+
+        //    //            req = Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.GetVisitorOrders
+
+        //    if (req == null)
+        //    {
+        //        req = new CartRequestInformation(submitRequest, false);
+        //    }
+        //    else
+        //    {
+        //        req.Refresh = false;
+        //    }
+
+        //    var submitResult = provider.GetVisitorOrders(submitRequest);
+
+        //    return submitResult;
+        //}
+
+        //public GetVisitorOrderResult GetOrderHead(string orderID, string customerID, string shopName)
+        //{
+        //    var submitRequest = new GetVisitorOrderRequest(orderID, customerID, shopName);
+
+        //    var provider = new CommerceOrderServiceProvider();
+
+        //    var req = CartRequestInformation.Get(submitRequest);
+
+        //    if (req == null)
+        //    {
+        //        req = new CartRequestInformation(submitRequest, false);
+        //    }
+        //    else
+        //    {
+        //        req.Refresh = false;
+        //    }
+
+        //    var submitResult = provider.GetVisitorOrder(submitRequest);
+
+
+        //    return submitResult;
+        //}
+
+        public GetVisitorOrdersResult GetOrders(String customerID, string shopName)
+        {
+            var submitRequest = new GetVisitorOrdersRequest(customerID, shopName);
+
+            var provider = new CommerceOrderServiceProvider();
+
+            var submitResult = provider.GetVisitorOrders(submitRequest);
+
+            return submitResult;
+        }
+
+
+        public GetVisitorOrderResult GetOrderHead(string orderID, string customerID, string shopName)
+        {
+            var submitRequest = new GetVisitorOrderRequest(orderID, customerID, shopName);
+
+            var provider = new CommerceOrderServiceProvider();
+
+            var submitResult = provider.GetVisitorOrder(submitRequest);
+
+            return submitResult;
+        }
+
+
     }
 }

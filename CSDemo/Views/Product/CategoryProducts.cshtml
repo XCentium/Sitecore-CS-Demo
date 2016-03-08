@@ -10,209 +10,209 @@
 @if (Model != null)
 {
     var currentCat = 0;
-    
+
     if (Model.CategoryMenulist != null)
-        {
-        
-            <section class="content products">
-                <div class="container">
+    {
 
-                    <h2 class="hidden">Products</h2>
-                    <div class="col-sm-3">
-                        <aside class="sidebar">
+        <section class="content products">
+            <div class="container">
 
-                            <!-- WIDGET:CATEGORIES - START -->
-                            <div class="widget widget-categories">
-                                <h3><a role="button" data-toggle="collapse" href="#widget-categories-collapse" aria-expanded="true" aria-controls="widget-categories-collapse">Categories</a></h3>
-                                <div class="collapse in" id="widget-categories-collapse" aria-expanded="true" role="tabpanel">
-                                    <div class="widget-body">
+                <h2 class="hidden">Products</h2>
+                <div class="col-sm-3">
+                    <aside class="sidebar">
 
-                                        <ul class="list-unstyled" id="categories" role="tablist" aria-multiselectable="true">
- 
-                                            @foreach (var cat in Model.CategoryMenulist)
+                        <!-- WIDGET:CATEGORIES - START -->
+                        <div class="widget widget-categories">
+                            <h3><a role="button" data-toggle="collapse" href="#widget-categories-collapse" aria-expanded="true" aria-controls="widget-categories-collapse">Categories</a></h3>
+                            <div class="collapse in" id="widget-categories-collapse" aria-expanded="true" role="tabpanel">
+                                <div class="widget-body">
+
+                                    <ul class="list-unstyled" id="categories" role="tablist" aria-multiselectable="true">
+
+                                        @foreach (var cat in Model.CategoryMenulist)
+                                        {
+
+                                            var current = false;
+                                            currentCat++;
+
+                                            var listClass = " class=\"collapsed\"";
+                                            var ariaExpand = "false";
+                                            var panelCollapse = "collapse";
+
+                                            if (cat.Name.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase))
                                             {
-
-                                                var current = false;
-                                                currentCat++;
-
-                                                var listClass = " class=\"collapsed\"";
-                                                var ariaExpand = "false";
-                                                var panelCollapse = "collapse";
-
-                                                if (cat.Name.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase))
-                                                {
-                                                    listClass = " ";
-                                                    ariaExpand = "true";
-                                                    panelCollapse = "collapse in";
-                                                    current = true;
-                                                }
-
-                                                var catProducts = cat.ProductMenulistViewModel;
-
-                                                <li class="panel">
-                                                    <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name<span>[@cat.ProductsCount]</span></a>
-                                                    <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">
-                                                        @foreach (CSDemo.Models.Product.ProductMenulistViewModel catProduct in catProducts)
-                                                        {
-                                                            <li><a href="@catProduct.Url">@catProduct.Name</a></li>
-                                                        }
-                                                    </ul>
-                                                </li>
+                                                listClass = " ";
+                                                ariaExpand = "true";
+                                                panelCollapse = "collapse in";
+                                                current = true;
                                             }
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </aside>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="products-header">
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-4">
-                                    <form name="products_per_page" id="products_per_page" class="form-inline products-per-page">
-                                        <div class="form-group">
-                                            <label>Show:</label>
-                                        </div>
-                                        <div class="form-group">
-                                            <select name="prod_page_show" id="prod_page_show" class="form-control">
-                                                @for (int i = 1; i < 11; i++)
-                                                {
-                                                    <option @(Model.PaginationViewModel.PageSize == i ? " selected " : string.Empty) value="@i">@i</option>
-                                                }
-                                                <option @(Model.PaginationViewModel.PageSize == 12 ? " selected " : string.Empty) value="12">12</option>
-                                                <option @(Model.PaginationViewModel.PageSize == 24 ? " selected " : string.Empty) value="24">24</option>
-                                                <option @(Model.PaginationViewModel.PageSize == 10000 ? " selected " : string.Empty) value="10000">ALL</option>
-                                            </select>
-                                        </div>
-                                    </form>
-                                </div>
 
-                                <div class="col-xs-6 col-sm-8">
-                                    <div class="btn-group toggle-list-grid hidden-xs" role="group">
-                                        <button type="button" class="btn btn-default active" id="toggle-grid"><i class="fa fa-th"></i></button>
-                                        <button type="button" class="btn btn-default" id="toggle-list"><i class="fa fa-list"></i></button>
-                                    </div>
-                                    <form name="products_sort" id="products_sort" class="form-inline order-by">
-                                        <div class="form-group">
-                                            <label>Sort by:</label>
-                                        </div>
-                                        <div class="form-group">
-                                            <select name="OrderBy" id="OrderBy" class="form-control" >
-                                                <option @(Model.PaginationViewModel.OrderBy == string.Empty ? " selected " : string.Empty) value="">Default</option>
-                                                <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByBrand ? " selected " : string.Empty) value="@Constants.Products.OrderByBrand">@Constants.Products.OrderByBrand</option>
-                                                <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByRatings ? " selected " : string.Empty) value="@Constants.Products.OrderByRatings">@Constants.Products.OrderByRatings</option>
-                                                <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByNewness ? " selected " : string.Empty) value="@Constants.Products.OrderByNewness">@Constants.Products.OrderByNewness</option>
-                                                <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByPriceAsc ? " selected " : string.Empty) value="@Constants.Products.OrderByPriceAsc">@Constants.Products.OrderByPriceAsc</option>
-                                                <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByPriceDesc ? " selected " : string.Empty) value="@Constants.Products.OrderByPriceDesc">@Constants.Products.OrderByPriceDesc</option>
-                                            </select>
-                                            <input type="hidden" name="CategoryID" id="Category" value="@Model.PaginationViewModel.CategoryID.ToString()" />
-                                            <input type="hidden" name="Category" id="Category" value="@Model.PaginationViewModel.Category" />
-                                            <input type="hidden" name="PageSize" id="PageSize" value="@Model.PaginationViewModel.PageSize" />
-                                            <input type="hidden" name="CurrentPage" id="CurrentPage" value="@Model.PaginationViewModel.CurrentPage" />
-                                        </div>
-                                    </form>
-                                </div>
+                                            var catProducts = cat.ProductMenulistViewModel;
 
+                                            <li class="panel">
+                                                <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name<span>[@cat.ProductsCount]</span></a>
+                                                <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">
+                                                    @foreach (CSDemo.Models.Product.ProductMenulistViewModel catProduct in catProducts)
+                                                    {
+                                                        <li><a href="@catProduct.Url">@catProduct.Name</a></li>
+                                                    }
+                                                </ul>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                        <div class="row grid" id="products">
+                    </aside>
+                </div>
+                <div class="col-sm-9">
+                    <div class="products-header">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-4">
+                                <form name="products_per_page" id="products_per_page" class="form-inline products-per-page">
+                                    <div class="form-group">
+                                        <label>Show:</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <select name="prod_page_show" id="prod_page_show" class="form-control">
+                                            @for (int i = 1; i < 11; i++)
+                                            {
+                                                <option @(Model.PaginationViewModel.PageSize == i ? " selected " : string.Empty) value="@i">@i</option>
+                                            }
+                                            <option @(Model.PaginationViewModel.PageSize == 12 ? " selected " : string.Empty) value="12">12</option>
+                                            <option @(Model.PaginationViewModel.PageSize == 24 ? " selected " : string.Empty) value="24">24</option>
+                                            <option @(Model.PaginationViewModel.PageSize == 10000 ? " selected " : string.Empty) value="10000">ALL</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
 
-                            @foreach (CSDemo.Models.Product.Product product in Model.Category.Products)
+                            <div class="col-xs-6 col-sm-8">
+                                <div class="btn-group toggle-list-grid hidden-xs" role="group">
+                                    <button type="button" class="btn btn-default active" id="toggle-grid"><i class="fa fa-th"></i></button>
+                                    <button type="button" class="btn btn-default" id="toggle-list"><i class="fa fa-list"></i></button>
+                                </div>
+                                <form name="products_sort" id="products_sort" class="form-inline order-by">
+                                    <div class="form-group">
+                                        <label>Sort by:</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <select name="OrderBy" id="OrderBy" class="form-control">
+                                            <option @(Model.PaginationViewModel.OrderBy == string.Empty ? " selected " : string.Empty) value="">Default</option>
+                                            <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByBrand ? " selected " : string.Empty) value="@Constants.Products.OrderByBrand">@Constants.Products.OrderByBrand</option>
+                                            <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByRatings ? " selected " : string.Empty) value="@Constants.Products.OrderByRatings">@Constants.Products.OrderByRatings</option>
+                                            <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByNewness ? " selected " : string.Empty) value="@Constants.Products.OrderByNewness">@Constants.Products.OrderByNewness</option>
+                                            <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByPriceAsc ? " selected " : string.Empty) value="@Constants.Products.OrderByPriceAsc">@Constants.Products.OrderByPriceAsc</option>
+                                            <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByPriceDesc ? " selected " : string.Empty) value="@Constants.Products.OrderByPriceDesc">@Constants.Products.OrderByPriceDesc</option>
+                                        </select>
+                                        <input type="hidden" name="CategoryID" id="Category" value="@Model.PaginationViewModel.CategoryID.ToString()" />
+                                        <input type="hidden" name="Category" id="Category" value="@Model.PaginationViewModel.Category" />
+                                        <input type="hidden" name="PageSize" id="PageSize" value="@Model.PaginationViewModel.PageSize" />
+                                        <input type="hidden" name="CurrentPage" id="CurrentPage" value="@Model.PaginationViewModel.CurrentPage" />
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row grid" id="products">
+
+                        @foreach (CSDemo.Models.Product.Product product in Model.Category.Products)
+                        {
+                            if (!string.IsNullOrEmpty(product.ListPrice.Trim()))
                             {
-                                if (!string.IsNullOrEmpty(product.ListPrice.Trim()))
-                                {
                     <!-- PRODUCT - START -->
-                                    <div class="col-sm-4 col-xs-6">
-                                        <article class="product-item">
-                                            <div class="row">
-                                                <div class="col-sm-3">
-                                                    <div class="product-overlay">
-                                                        <div class="product-mask"></div>
-                                                        <a href="@product.Url" class="product-permalink"></a>
-                                                        @foreach (var image in product.Images)
-                                                        {
-                                                            @RenderImage(image, x => x, new { Width = 420, Height = 287, AS = 1, @class = "img-responsive" }, isEditable: false);
-                                                                                                                                                                                
-                                                            break;                                                                                                                                                                              
-                                                        }
-                           
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-9">
-                                                    <div class="product-body">
-                                                        <h3>@product.Title</h3>
-                                                        <div class="product-labels">
-                                                            <span class="label label-info">new</span>
-                                                            <span class="label label-danger">sale</span>
-                                                        </div>
-                                                        <div class="product-rating">
-                                                            <i class="fa fa-star@(product.Rating > 0 ? string.Empty : "-o")"></i>
-                                                            <i class="fa fa-star@(product.Rating > 1 ? string.Empty : "-o")"></i>
-                                                            <i class="fa fa-star@(product.Rating > 2 ? string.Empty : "-o")"></i>
-                                                            <i class="fa fa-star@(product.Rating > 3 ? string.Empty : "-o")"></i>
-                                                            <i class="fa fa-star@(product.Rating > 4 ? string.Empty : "-o")"></i>
-                                                        </div>
-                                                        <span class="price">
-                                                            <ins><span class="amount">$@product.ListPrice</span></ins>
-                                                        </span>
-                                                        <p>@product.Description</p>
-                                                        <form name="@product.ProductId" id="@product.ProductId">
-                                                            <input type="hidden" id="Quantity" name="Quantity" value="1" />
-                                                            <input type="hidden" id="ProductId" name="ProductId" value="@product.ProductId" />
-                                                            <input type="hidden" id="CatalogName" name="CatalogName" value="@product.CatalogName" />
-                                                            <div class="form-group">
-                                                                <select class="form-control" name="VariantId" id="VariantId">
-                                                                    @if (product.ProductVariants != null) { 
-                                                                        foreach (var variant in product.ProductVariants)
-                                                                        {
-                                                                            <option value="@variant.VariantId">@variant.Name</option>
-                                                                        }
-                                                                    }
+                                <div class="col-sm-4 col-xs-6">
+                                    <article class="product-item">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <div class="product-overlay">
+                                                    <div class="product-mask"></div>
+                                                    <a href="@product.Url" class="product-permalink"></a>
+                                                    @foreach (var image in product.Images)
+                                                    {
+                                                        @RenderImage(image, x => x, new { Width = 420, Height = 287, AS = 1, @class = "img-responsive" }, isEditable: false);                                                                                                                                           break;
+                                                    }
 
-                                                                </select>
-                                                            </div>
-                                                            <div class="buttons">
-                                                                <a href="" class="btn btn-primary btn-sm"><i class="fa fa-exchange"></i></a>
-                                                                <a href="javascript:void(0)" onclick="AddProductToCart('@product.ProductId', '@product.ID.ToString()')" class="btn btn-primary btn-sm add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                                <a href="" class="btn btn-primary btn-sm"><i class="fa fa-heart"></i></a>
-                                                            </div>
-                                                        </form>
-
-                                                    </div>
                                                 </div>
                                             </div>
-                                        </article>
-                                    </div>
-                    <!-- PRODUCT - END -->
-                                }
-                            }
-                        </div>
-                        @if (Model.PaginationViewModel.TotalPages > 1) { 
-                                            
-                            var active = "";           
-                            var thePage = 0;
+                                            <div class="col-sm-9">
+                                                <div class="product-body">
+                                                    <h3>@product.Title</h3>
+                                                    <div class="product-labels">
+                                                        <span class="label label-info">new</span>
+                                                        <span class="label label-danger">sale</span>
+                                                    </div>
+                                                    <div class="product-rating">
+                                                        <i class="fa fa-star@(product.Rating > 0 ? string.Empty : "-o")"></i>
+                                                        <i class="fa fa-star@(product.Rating > 1 ? string.Empty : "-o")"></i>
+                                                        <i class="fa fa-star@(product.Rating > 2 ? string.Empty : "-o")"></i>
+                                                        <i class="fa fa-star@(product.Rating > 3 ? string.Empty : "-o")"></i>
+                                                        <i class="fa fa-star@(product.Rating > 4 ? string.Empty : "-o")"></i>
+                                                    </div>
+                                                    <span class="price">
+                                                        <ins><span class="amount">$@product.ListPrice</span></ins>
+                                                    </span>
+                                                    <p>@product.Description</p>
+                                                    <form name="@product.ProductId" id="@product.ProductId">
+                                                        <input type="hidden" id="Quantity" name="Quantity" value="1" />
+                                                        <input type="hidden" id="ProductId" name="ProductId" value="@product.ProductId" />
+                                                        <input type="hidden" id="CatalogName" name="CatalogName" value="@product.CatalogName" />
+                                                        <div class="form-group">
+                                                            <select class="form-control" name="VariantId" id="VariantId">
+                                                                @if (product.ProductVariants != null)
+                                                                {
+                                                                    foreach (var variant in product.ProductVariants)
+                                                                    {
+                                                                        <option value="@variant.VariantId">@variant.Name</option>
+                                                                    }
+                                                                }
 
-                            var left = (Model.PaginationViewModel.CurrentPage > 1) ? Model.PaginationViewModel.CurrentPage - 1 : 1;
-                            var right = (Model.PaginationViewModel.CurrentPage < Model.PaginationViewModel.TotalPages) ? Model.PaginationViewModel.CurrentPage + 1 : Model.PaginationViewModel.TotalPages;
-                            
+                                                            </select>
+                                                        </div>
+                                                        <div class="buttons">
+                                                            <a href="" class="btn btn-primary btn-sm"><i class="fa fa-exchange"></i></a>
+                                                            <a href="javascript:void(0)" onclick="AddProductToCart('@product.ProductId', '@Sitecore.Data.ID.Parse(product.ID).ToString()')" class="btn btn-primary btn-sm add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                            <a href="" class="btn btn-primary btn-sm"><i class="fa fa-heart"></i></a>
+                                                        </div>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                    <!-- PRODUCT - END -->
+                            }
+                        }
+                    </div>
+                    @if (Model.PaginationViewModel.TotalPages > 1)
+                    {
+
+                        var active = "";
+                        var thePage = 0;
+
+                        var left = (Model.PaginationViewModel.CurrentPage > 1) ? Model.PaginationViewModel.CurrentPage - 1 : 1;
+                        var right = (Model.PaginationViewModel.CurrentPage < Model.PaginationViewModel.TotalPages) ? Model.PaginationViewModel.CurrentPage + 1 : Model.PaginationViewModel.TotalPages;
+
                         <div class="pagination-wrapper">
                             <ul id="products_page" class="pagination">
                                 <li><a val="@left" href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                                @for (int i = 0; i < Model.PaginationViewModel.TotalPages;i++ )
+                                @for (int i = 0; i < Model.PaginationViewModel.TotalPages; i++)
                                 {
                                     thePage = i + 1;
                                     active = (Model.PaginationViewModel.CurrentPage == thePage) ? " class=active" : "";
                                     <li @active><a val="@thePage" href="#">@thePage</a></li>
-                                }                               
+                                }
                                 <li><a val="@right" href="#"><i class="fa fa-angle-double-right"></i></a></li>
                             </ul>
                         </div>
-                        }
-
-                    </div>
+                    }
 
                 </div>
-            </section>
-        }
+
+            </div>
+        </section>
     }
+}
 }

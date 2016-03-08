@@ -1,0 +1,132 @@
+﻿@using Sitecore.Mvc
+@using Sitecore.Data
+@using Sitecore.Data.Items
+@using System.Collections.Generic
+@using System.Linq
+@using Sitecore.Mvc.Extensions
+
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Product.Product>
+
+@if (Model != null)
+{
+    <section class="content products">
+        <div class="container">
+
+            <article class=" product-item product-single">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="product-carousel-wrapper">
+                            <div id="product-carousel">
+                                @if (Model.Images != null)
+                                {
+                                    foreach (var image in Model.Images)
+                                    {
+                                        @RenderImage(image, x => x, new { Width = 538, Height = 538, AS = 1, @class = "img-responsive" }, isEditable: false);
+
+                                                                                                                                                            
+                                    break;
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="product-body">
+                            <form name="@Model.ProductId" id="@Model.ProductId">
+                                <input type="hidden" id="ProductId" name="ProductId" value="@Model.ProductId" />
+                                <input type="hidden" id="CatalogName" name="CatalogName" value="@Model.CatalogName" />
+
+                                <h3>@Model.Title</h3>
+                                <div class="product-labels">
+                                    <span class="label label-info">new</span>
+                                    <span class="label label-danger">sale</span>
+                                </div>
+                                <div class="product-rating">
+                                    <i class="fa fa-star@(Model.Rating > 0 ? string.Empty : "-o")"></i>
+                                    <i class="fa fa-star@(Model.Rating > 1 ? string.Empty : "-o")"></i>
+                                    <i class="fa fa-star@(Model.Rating > 2 ? string.Empty : "-o")"></i>
+                                    <i class="fa fa-star@(Model.Rating > 3 ? string.Empty : "-o")"></i>
+                                    <i class="fa fa-star@(Model.Rating > 4 ? string.Empty : "-o")"></i>
+                                </div>
+                                <span class="price">
+                                    <ins><span class="amount">$@Model.ListPrice</span></ins>
+                                </span>
+                                <ul class="list-unstyled product-info">
+                                    <li><span>ID</span>@Model.ProductId</li>
+                                    <li><span>Availability</span>In Stock</li>
+                                    <li><span>Brand</span>@Model.Brand</li>
+                                    @*<li><span>Tags</span></li>*@
+                                </ul>
+                                <p>@Model.Description</p>
+                                <div class="product-form clearfix">
+                                    <div class="row row-no-padding">
+
+                                        <div class="col-xs-6">
+                                            <div class="product-quantity clearfix">
+                                                <a class="btn btn-default" id="qty-minus">-</a>
+                                                <input type="text" class="form-control" id="Quantity" value="1" />
+                                                <a class="btn btn-default" id="qty-plus">+</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <select class="form-control" name="VariantId" id="VariantId">
+                                                    @if (Model.ProductVariants != null)
+                                                    {
+                                                        foreach (var variant in Model.ProductVariants)
+                                                        {
+                                                            <option value="@variant.VariantId">@variant.Name</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                            <a href="javascript:void(0)" onclick="AddProductToCart('@Model.ProductId', '@Sitecore.Data.ID.Parse(Model.ID).ToString()')" class="btn btn-primary add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <ul class="list-inline product-links">
+                                    <li><a href="#"><i class="fa fa-heart"></i>Add to wishlist</a></li>
+                                    <li><a href="#"><i class="fa fa-exchange"></i>Compare</a></li>
+                                    <li><a href="#"><i class="fa fa-envelope"></i>Email to friend</a></li>
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <div class="tabs product-tabs">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#description" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="true">Description</a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">Reviews</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="description">
+                        @Model.FullDescription
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane in" id="reviews">
+                        <div class="comments-reviews">
+                            <!-- Begin: Intense Debate Scripting (comments service) -->
+                            <script>
+                                var idcomments_acct = 'e51a68d7ae9a2ded4bf583c290a77ae9';
+                                var idcomments_post_id;
+                                var idcomments_post_url;
+                            </script>
+                            <span id="IDCommentsPostTitle" style="display:none"></span>
+                            <script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+                            <!-- End:   Intense Debate Scripting (comments service) -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

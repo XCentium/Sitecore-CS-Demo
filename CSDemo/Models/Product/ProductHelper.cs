@@ -14,6 +14,11 @@ using System;
 using Sitecore.Diagnostics;
 using Glass.Mapper.Sc;
 using Sitecore.Links;
+using CSDemo.Models.Checkout.Cart;
+using CSDemo.Models.Account;
+using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
+using Sitecore.Commerce.Entities.Carts;
+using Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines;
 
 #endregion
 
@@ -29,13 +34,16 @@ namespace CSDemo.Models.Product
         /// <returns></returns>
         public static string GetFirstImageFromProductItem(Item product)
         {
-            var ProductImageIds = product[Constants.Products.ImagesField];
             var ProductImage = string.Empty;
-            if (!string.IsNullOrEmpty(ProductImageIds))
+            if (product != null)
             {
-                ProductImage = GetFirstImageFromField(ProductImageIds);
-            }
+                var ProductImageIds = product[Constants.Products.ImagesField];
 
+                if (!string.IsNullOrEmpty(ProductImageIds))
+                {
+                    ProductImage = GetFirstImageFromField(ProductImageIds);
+                }
+            }
             return ProductImage;
         }
 
@@ -218,12 +226,12 @@ namespace CSDemo.Models.Product
                         .Take(model.PageSize);
 
                     // Update ProductVariants
-                    foreach (var Product in category.Products)
+                    foreach (var product in category.Products)
                     {
-                        Item catProdItem = catItem.GetChildren().FirstOrDefault(x => x.ID.ToGuid() == Product.ID);
+                        Item catProdItem = catItem.GetChildren().FirstOrDefault(x => x.ID.ToGuid() == product.ID);
                         if (catProdItem != null && catProdItem.HasChildren)
                         {
-                            Product.ProductVariants = catProdItem.GetChildren().Select(x=>x.GlassCast<ProductVariant>());                         
+                            product.ProductVariants = catProdItem.GetChildren().Select(x=>x.GlassCast<ProductVariant>());                         
                         }
                     }  
                 }
@@ -330,10 +338,232 @@ namespace CSDemo.Models.Product
             catch (Exception ex)
             {
                 Log.Error(ex.StackTrace, ex);
-
             }
 
             return string.Empty;
+
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="itemName"></param>
+        /// <param name="parentID"></param>
+        /// <returns></returns>
+        internal static SearchResultItem GetItemByProductID(string productID)
+        {
+            var index = ContentSearchManager.GetIndex(Constants.WebIndex);
+            try
+            {
+                var culture = Sitecore.Context.Language.CultureInfo;
+                using (var context = index.CreateSearchContext())
+                {
+                    var queryable = context.GetQueryable<SearchResultItem>()
+                        .Where(x => x.Language == Sitecore.Context.Language.Name);
+                    return queryable.FirstOrDefault(x => String.Equals(x.Name, productID, StringComparison.CurrentCultureIgnoreCase));
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.StackTrace, ex);
+            }
+
+            return null;
+
+        }
+
+        internal static string GetOrders()
+        {
+            // GetVisitorOrdersResult
+
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cartHelper"></param>
+        /// <returns></returns>
+        internal static OrdersViewModel GetCustomerOrders(CartHelper cartHelper)
+        {
+            var ordersViewModel = new OrdersViewModel();
+            List<OrderDetailViewModel> orderDetails = new List<OrderDetailViewModel>();
+
+            var orders = cartHelper.GetOrders(cartHelper.GetVisitorID(), cartHelper.ShopName);
+            if (orders != null)
+            {
+                
+                foreach (var order in orders.OrderHeaders) {
+                    var orderDetail = new OrderDetailViewModel();
+
+                    var orderHead = cartHelper.GetOrderHead(order.OrderID, order.CustomerId, order.ShopName);
+                    var commerceOrderHead = orderHead.Order as CommerceOrder;
+                  
+                    orderDetail.OrderDate = commerceOrderHead.Created.ToString("MMMM dd, yyyy");
+                    orderDetail.OrderID = commerceOrderHead.OrderID;
+                    orderDetail.OrderStatus = commerceOrderHead.Status;
+                    orderDetail.UserID = commerceOrderHead.UserId.ToString();
+                    orderDetail.TotalPrice = commerceOrderHead.Total.Amount.ToString("C2");
+                    orderDetail.NumberofItems = commerceOrderHead.LineItemCount;
+                    orderDetail.ExternalID = commerceOrderHead.ExternalId.ToString();
+
+                    orderDetails.Add(orderDetail);
+                }
+                ordersViewModel.Orders = orderDetails;
+            }
+
+            return ordersViewModel;
+        }
+
+        internal static OrderDetailViewModel GetCustomerOrderDetail(string orderID, CartHelper cartHelper)
+        {
+            var orderDetail = new OrderDetailViewModel();
+
+            var orderHead = cartHelper.GetOrderHead(orderID, cartHelper.GetVisitorID(), cartHelper.ShopName);
+            var commerceOrderHead = orderHead.Order as CommerceOrder;
+
+            if (commerceOrderHead != null)
+            {
+                orderDetail.OrderID = commerceOrderHead.OrderID;
+                orderDetail.OrderDate = commerceOrderHead.Created.ToString("MMMM dd, yyyy hh:mm");
+                orderDetail.NumberofItems = commerceOrderHead.LineItemCount;
+
+                var commerceTotal = commerceOrderHead.Total as CommerceTotal;
+
+                orderDetail.SubTotalPrice = commerceTotal.Subtotal.ToString("C2"); 
+                orderDetail.TotalPrice = commerceTotal.Amount.ToString("C2");
+                orderDetail.Tax = commerceTotal.TaxTotal.Amount.ToString("C2");
+                orderDetail.ShippingCost = commerceTotal.ShippingTotal.ToString("C2");
+                orderDetail.OrderStatus = commerceOrderHead.Status;
+                orderDetail.UserID = commerceOrderHead.UserId;
+                orderDetail.ExternalID = commerceOrderHead.ExternalId;
+
+                orderDetail.Billing = commerceOrderHead.Parties.Cast<CommerceParty>().FirstOrDefault(party => party.Name == Constants.Products.BillingAddress);
+                orderDetail.Shipping = commerceOrderHead.Parties.Cast<CommerceParty>().FirstOrDefault(party => party.Name == Constants.Products.ShippingAddress);
+
+                var paymentMethodID = commerceOrderHead.Payment.ElementAt(0).PaymentMethodID;
+                var shippingMethodID = commerceOrderHead.Shipping.ElementAt(0).ShippingMethodID;
+                orderDetail.ShippingMethod = GetShippingMethod(shippingMethodID);
+
+                orderDetail.PaymentMethod = GetPaymentMethod(paymentMethodID);
+                
+                var Lines = commerceOrderHead.Lines.ToList();
+                orderDetail.OrderLines = GetOrderLines(Lines);
+              
+            }
+
+            return orderDetail;
+        }
+
+        private static string GetPaymentMethod(string paymentMethodID)
+        {
+                        
+            var resp = string.Empty;
+
+            try
+            {
+            var provider = new Sitecore.Commerce.Services.Payments.PaymentServiceProvider();
+            var paymentRequest = new CommerceGetPaymentMethodsRequest(Sitecore.Context.Language.ToString());
+            var paymentResult = provider.GetPaymentMethods(paymentRequest);
+
+            var paymentMethods = paymentResult.PaymentMethods;
+
+            resp = paymentResult.PaymentMethods.FirstOrDefault(x => x.ExternalId == paymentMethodID).Name;
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+            }
+
+            return resp;
+          
+
+        }
+
+        private static IEnumerable<OrderLine> GetOrderLines(IEnumerable<CartLine> Lines)
+        {
+            var orderLines = new List<OrderLine>();
+            foreach (CommerceCartLine line in Lines)
+            {
+             //   var line = cartLine as CommerceCartLine;
+                var ol = new OrderLine();
+                ol.UnitPrice = line.Product.Price.Amount.ToString("C2");
+                ol.Quantity = line.Quantity;
+                ol.SubTotal = (line.Product.Price.Amount * line.Quantity).ToString("C2");
+                var product = line.Product as CommerceCartProduct;
+                ol.ProductName = product.DisplayName;
+                var sItem = GetItemByProductID(product.ProductId);
+                if (sItem != null)
+                {
+                    ol.ImageUrl = GetFirstImageFromProductItem(sItem.GetItem());
+                    ol.Url = LinkManager.GetItemUrl(sItem.GetItem());
+                }
+                orderLines.Add(ol);
+            }
+
+            return orderLines;
+        }
+
+        private static string GetShippingMethod(string ShippingMethodID)
+        {
+            var resp = string.Empty;
+
+            try
+            {
+
+                var provider = new Sitecore.Commerce.Services.Shipping.ShippingServiceProvider();
+                var shippingRequest = new Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.CommerceGetShippingMethodsRequest(Sitecore.Context.Language.ToString());
+                var shippingResult = provider.GetShippingMethods(shippingRequest);
+
+                resp = shippingResult.ShippingMethods.FirstOrDefault(x => x.ExternalId == ShippingMethodID).Name;
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+            }
+
+            return resp;
+        }
+
+
+        internal static Product GetProductByNameAndCategory(string productID, string categoryID)
+        {
+            Product product = new Product();
+            var productResult = GetItemByName(productID);
+            if (productResult != null)
+            {
+                Item productItem = productResult.GetItem();
+                product = productItem.GlassCast<Product>();
+                product.ProductVariants = productItem.GetChildren().Select(x => x.GlassCast<ProductVariant>());                         
+            }
+
+            return product;
+        }
+
+        internal static SearchResultItem GetItemByName(string productID)
+        {
+            var index = ContentSearchManager.GetIndex(Constants.WebIndex);
+            try
+            {
+                var culture = Sitecore.Context.Language.CultureInfo;
+                using (var context = index.CreateSearchContext())
+                {
+                    var queryable = context.GetQueryable<SearchResultItem>()
+                        .Where(x => x.Language == Sitecore.Context.Language.Name);
+                    return queryable.FirstOrDefault(x => String.Equals(x.Name, productID, StringComparison.CurrentCultureIgnoreCase));
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.StackTrace, ex);
+            }
+
+            return null;
 
         }
     }

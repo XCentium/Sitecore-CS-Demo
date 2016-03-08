@@ -1,0 +1,154 @@
+﻿@using CSDemo
+@using Sitecore.Mvc;
+@using Sitecore.Commerce.Connect.CommerceServer
+@model CSDemo.Models.Account.OrderDetailViewModel
+
+<!-- ==========================
+    MY ACCOUNT - START
+=========================== -->
+<section class="content account">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <aside class="sidebar">
+
+                    <!-- WIDGET:CATEGORIES - START -->
+                    <div class="widget widget-navigation">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="my-account.html">Account Dashboard</a></li>
+                            <li><a href="profile.html">Personal Infromation</a></li>
+                            <li><a href="address.html">My Address</a></li>
+                            <li class="active"><a href="orders.html">My Orders</a></li>
+                            <li><a href="warranty-claims.html">Warranty Claims</a></li>
+                            <li><a href="wishlist.html">Wishlist</a></li>
+                            <li><a href="products.html">Back to Shop</a></li>
+                        </ul>
+                    </div>
+                    <!-- WIDGET:CATEGORIES - END -->
+
+                </aside>
+            </div>
+            @if (Model != null)
+            {
+                <div class="col-sm-9">
+                    <article class="account-content">
+                        <div class="alert alert-warning alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="fa fa-times"></i></button>
+                            <strong>Warning!</strong> This order is unpaid.
+                        </div>
+                        <h3>Order # @Model.OrderID</h3>
+                        <div class="order-meta">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <span class="label label-lg label-warning order-status">Pending Payment</span>
+                                </div>
+                                <div class="col-xs-8">
+                                    <ul class="list-inline order-action">
+                                        <li><a onclick="print_window();" class="btn btn-primary btn-sm">Print</a></li>
+                                        <li><a href="#" class="btn btn-primary btn-sm">Save to PDF</a></li>
+                                        <li><a href="#" class="btn btn-primary btn-sm">Cancel Order</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="box">
+                                    <h4>Billing Address</h4>
+                                    <ul class="list-unstyled">
+                                        <li><b>@Model.Billing.FirstName @Model.Billing.LastName</b></li>
+                                        <li>@Model.Billing.Address1</li>
+                                        <li>@Model.Billing.ZipPostalCode @Model.Billing.City</li>
+                                        <li>@Model.Billing.Country</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="box">
+                                    <h4>Shipping Address</h4>
+                                    <ul class="list-unstyled">
+                                        <li><b>@Model.Shipping.FirstName @Model.Shipping.LastName</b></li>
+                                        <li>@Model.Shipping.Address1</li>
+                                        <li>@Model.Shipping.ZipPostalCode @Model.Shipping.City</li>
+                                        <li>@Model.Shipping.Country</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="box">
+                                    <h4>Payment Method</h4>
+                                    <ul class="list-unstyled">
+                                        <li>@Model.PaymentMethod</li>
+                                    </ul>
+                                </div>
+                                <div class="box">
+                                    <h4>Shipping Method</h4>
+                                    <ul class="list-unstyled">
+                                        <li>@Model.ShippingMethod</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="box">
+                                    <h4>Order Details</h4>
+                                    <ul class="list-unstyled">
+                                        <li><b>Email: </b>@Model.Billing.Email</li>
+                                        <li><b>Phone: </b>@Model.Billing.PhoneNumber @Model.Shipping.PhoneNumber</li>
+                                    </ul>
+                                    <h5>Addition information:</h5>
+                                    <p>.</p>
+                                </div>
+                            </div>
+                        </div>
+                        @if (Model.OrderLines != null)
+                        {
+                            <div class="products-order">
+
+                                <div class="table-responsive">
+                                    <table class="table table-products">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Product</th>
+                                                <th>Unit Price</th>
+                                                <th>Quantity</th>
+                                                <th>Subtotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var line in Model.OrderLines)
+                                            {
+                                                
+                                                <tr>
+                                                    <td class="col-xs-1"><img src="@line.ImageUrl" alt="" class="img-responsive"></td>
+                                                    <td class="col-xs-4 col-md-5"><h4><a href="@line.Url">@line.ProductName</h4></td>
+                                                    <td class="col-xs-2 text-center"><span>@line.UnitPrice</span></td>
+                                                    <td class="col-xs-2 col-md-1 text-center"><span><b>@line.Quantity items</b></span></td>
+                                                    <td class="col-xs-2 text-center"><span><b>@line.SubTotal</b></span></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <ul class="list-unstyled order-total">
+                                    <li>Total products<span>@Model.NumberofItems</span></li>
+                                    <li>Shipping<span>@Model.ShippingCost</span></li>
+                                    @*<li>Discount<span>@Model.Discount</span></li>*@
+                                    <li>Tax<span>@Model.Tax</span></li>
+                                    <li>Sub Total<span>@Model.SubTotalPrice</span></li>
+                                    <li>Total<span class="total">@Model.TotalPrice</span></li>
+                                </ul>
+                            </div>
+                        }
+                    </article>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- ==========================
+    MY ACCOUNT - END
+=========================== -->

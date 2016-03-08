@@ -81,6 +81,11 @@ namespace CSDemo
             public const string CategoriesListingPageId = "{3C5BBD6A-528F-4807-BAF0-20F238F16C0A}";
         }
 
+        public struct Orders
+        {
+
+        }
+
         public struct Products
         {
             public const string IDSeparator = "|";
@@ -94,6 +99,8 @@ namespace CSDemo
             public const string OrderByNewness = "Newness";
             public const string OrderByPriceAsc = "Price: low to high";
             public const string OrderByPriceDesc = "Price: high to low";
+            public const string BillingAddress = "Billing";
+            public const string ShippingAddress = "Shipping";
         }
 
     }

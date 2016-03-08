@@ -220,7 +220,9 @@
     <Compile Include="Controllers\GeneralSearchController.cs" />
     <Compile Include="Models\Account\AccountHelper.cs" />
     <Compile Include="Models\Account\LoginModel.cs" />
+    <Compile Include="Models\Account\OrderAddress.cs" />
     <Compile Include="Models\Account\OrderDetailViewModel.cs" />
+    <Compile Include="Models\Account\OrderLine.cs" />
     <Compile Include="Models\Account\OrdersViewModel.cs" />
     <Compile Include="Models\Checkout\Cart\CartHelper.cs" />
     <Compile Include="Models\Navigation\MegaMenuNavigationItem.cs" />
@@ -512,7 +514,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Signoff.cshtml" />
     <Content Include="Views\Product\CategoryProducts.cshtml" />
-    <Content Include="Views\Product\Product.cshtml" />
     <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
     <Content Include="Views\Page\Article.cshtml" />
     <Content Include="Views\Page\Footer.cshtml" />
@@ -521,6 +522,8 @@
     <Content Include="Views\Page\Metadata.cshtml" />
     <Content Include="Views\Product\Categories.cshtml" />
     <Content Include="Views\Account\Orders.cshtml" />
+    <Content Include="Views\Account\OrderDetail.cshtml" />
+    <Content Include="Views\Product\ProductDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

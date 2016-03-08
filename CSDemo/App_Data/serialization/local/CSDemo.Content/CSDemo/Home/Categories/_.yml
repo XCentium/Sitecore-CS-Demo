@@ -14,8 +14,10 @@ SharedFields:
   Value: |
     <r xmlns:p="p" xmlns:s="s" p:p="1">
       <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-        <r uid="{D7EAA133-E9CF-4BDC-B663-1C56EABA9D6D}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:id="{AD905941-14F8-4F16-92CB-B52CB55F5437}" s:ph="page-body" />
-        <r uid="{63223E3A-7BE4-4C4F-A69F-29C0F4CD44EA}" p:after="r[@uid='{E5A6C541-E277-499D-9CB9-DFF8CE125A23}']" />
+        <r uid="{63223E3A-7BE4-4C4F-A69F-29C0F4CD44EA}">
+          <p:d />
+        </r>
+        <r uid="{05E774CC-12B2-46FC-9D63-0D99364157ED}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:id="{AD905941-14F8-4F16-92CB-B52CB55F5437}" s:ph="page-body" />
       </d>
     </r>
 Languages:
