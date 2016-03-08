@@ -230,7 +230,7 @@
     <Compile Include="Models\Product\CategoryMenulistViewModel.cs" />
     <Compile Include="Models\Product\CategoryProductViewModel.cs" />
     <Compile Include="Models\Product\Cookie.cs" />
-    <Compile Include="Models\Product\FeaturedProduct.cs" />
+    <Compile Include="Models\Product\FeaturedProducts.cs" />
     <Compile Include="Models\Product\Category.cs" />
     <Compile Include="Models\Product\PaginationViewModel.cs" />
     <Compile Include="Models\Product\ProductHelper.cs" />

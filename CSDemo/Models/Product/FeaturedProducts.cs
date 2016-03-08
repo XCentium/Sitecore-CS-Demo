@@ -11,7 +11,7 @@ using XCore.Framework.ItemMapper.Configuration.Attributes;
 namespace CSDemo.Models.Product
 {
     [SitecoreType(AutoMap = true)]
-    public class FeaturedProduct
+    public class FeaturedProducts
     {
         public virtual IEnumerable<Models.Product.Product> Products { get; set; }
     }

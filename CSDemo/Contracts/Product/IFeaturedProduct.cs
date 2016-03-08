@@ -4,7 +4,7 @@ using XCore.Framework.ItemMapper;
 
 namespace CSDemo.Contracts.Product
 {
-    public interface IFeaturedProduct
+    public interface IFeaturedProducts
     {
         IEnumerable<Models.Product.Product> Products { get; set; }
     }

@@ -28,7 +28,7 @@ namespace CSDemo.Controllers
             try
             {
                 var item = RenderingContext.Current.Rendering.Item;
-                var featuredProduct = item.GlassCast<FeaturedProduct>();
+                var featuredProduct = item.GlassCast<FeaturedProducts>();
                 if (featuredProduct?.Products != null && featuredProduct.Products.Any())
                 {
                     foreach (var product in featuredProduct.Products)
