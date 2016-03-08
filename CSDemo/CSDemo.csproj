@@ -205,7 +205,7 @@
     <Compile Include="Contracts\Navigation\INavigationItem.cs" />
     <Compile Include="Contracts\Page\IArticle.cs" />
     <Compile Include="Contracts\Page\IMetadata.cs" />
-    <Compile Include="Contracts\Product\IFeaturedProduct.cs" />
+    <Compile Include="Contracts\Product\IFeaturedProducts.cs" />
     <Compile Include="Contracts\Product\ICategory.cs" />
     <Compile Include="Contracts\Product\IProduct.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearch.cs" />
@@ -230,8 +230,10 @@
     <Compile Include="Models\Product\CategoryMenulistViewModel.cs" />
     <Compile Include="Models\Product\CategoryProductViewModel.cs" />
     <Compile Include="Models\Product\Cookie.cs" />
+    <Compile Include="Models\Product\FeaturedCategories.cs" />
     <Compile Include="Models\Product\FeaturedProducts.cs" />
     <Compile Include="Models\Product\Category.cs" />
+    <Compile Include="Contracts\Product\IFeaturedCategories.cs" />
     <Compile Include="Models\Product\PaginationViewModel.cs" />
     <Compile Include="Models\Product\ProductHelper.cs" />
     <Compile Include="App_Start\Initializer.cs" />
@@ -241,10 +243,10 @@
     <Compile Include="Models\Checkout\Cart\ShoppingCart.cs" />
     <Compile Include="Models\Marquee\CarouselItem.cs" />
     <Compile Include="Models\Page\Metadata.cs" />
-    <Compile Include="Models\Product\Catalog Generated\GeneralCategory.cs" />
+    <Compile Include="Models\Product\GeneralCategory.cs" />
     <Compile Include="Models\Components.cs" />
     <Compile Include="Models\GeneralSearch\SearchInfo.cs" />
-    <Compile Include="Contracts\Product\Catalog Generated\IGeneralCategory.cs" />
+    <Compile Include="Contracts\Product\IGeneralCategory.cs" />
     <Compile Include="Contracts\Product\Parameters\ICategorylistingConfig.cs" />
     <Compile Include="Models\Product\GetProductPricesRequest.cs" />
     <Compile Include="Models\Product\Product.cs" />

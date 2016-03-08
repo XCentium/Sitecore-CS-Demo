@@ -1,23 +1,20 @@
 #region
 
+using System;
 using System.Collections.Generic;
+using Glass.Mapper.Sc.Configuration.Attributes;
 using Sitecore.Data.Items;
-using XCore.Framework.ItemMapper;
 
 #endregion
 
-namespace CSDemo.Models.CatalogGenerated
+namespace CSDemo.Contracts.Product
 {
-    public partial interface IGeneralCategory : ISitecoreItem
+    public interface IGeneralCategory
     {
-        #region Properties
-
+        Guid ID { get; set; }
+        string Title { get; set; }
         string Brand { get; set; }
-
         string Description { get; set; }
-
         IEnumerable<Item> Images { get; set; }
-
-        #endregion
     }
 }

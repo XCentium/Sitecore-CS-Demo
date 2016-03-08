@@ -50,7 +50,14 @@ namespace CSDemo.Controllers
 
         public ActionResult FeaturedCategories()
         {
-            return View();
+            List<GeneralCategory> categories = new List<GeneralCategory>();
+            var item = RenderingContext.Current.Rendering.Item; // csdemo >> home
+            var featuredCategories = item.GlassCast<FeaturedCategories>();
+            if (featuredCategories?.Categories != null && featuredCategories.Categories.Any())
+            {
+                categories.AddRange(featuredCategories.Categories);
+            }
+            return View(categories);
         }
 
         #region Private Helpers

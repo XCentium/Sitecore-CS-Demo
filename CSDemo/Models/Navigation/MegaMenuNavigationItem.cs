@@ -2,7 +2,6 @@
 
 using System.Collections.Generic;
 using CSDemo.Contracts.Navigation;
-using CSDemo.Models.CatalogGenerated;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using Glass.Mapper.Sc.Fields;
 using Sitecore.Data.Items;
