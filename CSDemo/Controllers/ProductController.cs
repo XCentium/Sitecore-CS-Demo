@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using CSDemo.Models;
 using CSDemo.Models.Product;
 using Glass.Mapper.Sc;
 using Sitecore;
@@ -58,6 +59,70 @@ namespace CSDemo.Controllers
                 categories.AddRange(featuredCategories.Categories);
             }
             return View(categories);
+        }
+
+        public ActionResult Categories()
+        {
+            var model = new List<Category>();
+
+            var rc = Sitecore.Mvc.Presentation.RenderingContext.CurrentOrNull;
+
+            if (rc != null)
+            {
+                var rcParams = rc.Rendering.Parameters;
+
+                var categoryIDs = rcParams[Constants.Products.ParameterKey];
+
+                if (categoryIDs != null)
+                {
+                    if (!string.IsNullOrEmpty(categoryIDs))
+                    {
+                        model = ProductHelper.GetCategories(categoryIDs);
+
+                    }
+                }
+            }
+
+            return View(model);
+
+        }
+
+        public ActionResult CategoryProducts([CanBeNull]PaginationViewModel model)
+        {
+            var categoryProduct = new CategoryProductViewModel();
+
+            if (model == null || string.IsNullOrEmpty(model.Category))
+            {
+                model = new PaginationViewModel();
+                var categoryName = Sitecore.Web.WebUtil.GetUrlName(0);
+                model.Category = categoryName;
+                if (!string.IsNullOrEmpty(categoryName))
+                {
+                    var categoryID = ProductHelper.GetItemIDFromName(categoryName, Constants.Products.CategoriesParentId);
+
+                    if (!string.IsNullOrEmpty(categoryID))
+                    {
+                        model.CategoryID = categoryID;
+                        model.CurrentPage = 1;
+                        model.PageSize = 2;
+                        model.OrderBy = string.Empty;
+
+                        categoryProduct = ProductHelper.GetCategoryProducts(model);
+
+                    }
+                }
+
+            }
+            else
+            {
+
+                if (ModelState.IsValid)
+                {
+                    categoryProduct = ProductHelper.GetCategoryProducts(model);
+                }
+            }
+
+            return View(categoryProduct);
         }
 
         #region Private Helpers
