@@ -450,11 +450,28 @@ namespace CSDemo.Models.Product
                 orderDetail.Billing = commerceOrderHead.Parties.Cast<CommerceParty>().FirstOrDefault(party => party.Name == Constants.Products.BillingAddress);
                 orderDetail.Shipping = commerceOrderHead.Parties.Cast<CommerceParty>().FirstOrDefault(party => party.Name == Constants.Products.ShippingAddress);
 
-                var paymentMethodID = commerceOrderHead.Payment.ElementAt(0).PaymentMethodID;
-                var shippingMethodID = commerceOrderHead.Shipping.ElementAt(0).ShippingMethodID;
-                orderDetail.ShippingMethod = GetShippingMethod(shippingMethodID);
 
-                orderDetail.PaymentMethod = GetPaymentMethod(paymentMethodID);
+                try
+                {
+                    var paymentMethodID = commerceOrderHead.Payment.ElementAt(0).PaymentMethodID;
+                    orderDetail.PaymentMethod = GetPaymentMethod(paymentMethodID);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex.Message, ex);
+                }
+
+                try
+                {
+                    var shippingMethodID = commerceOrderHead.Shipping.ElementAt(0).ShippingMethodID;
+                    orderDetail.ShippingMethod = GetShippingMethod(shippingMethodID);
+
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex.Message, ex);
+                }
+
                 
                 var Lines = commerceOrderHead.Lines.ToList();
                 orderDetail.OrderLines = GetOrderLines(Lines);
