@@ -97,9 +97,14 @@ namespace CSDemo.Controllers
 
                  if (!string.IsNullOrEmpty(orderID))
                  {
-                     var model = ProductHelper.GetCustomerOrderDetail(orderID, new CartHelper());
+                     var cartHelper = new CartHelper();
+                     var model = ProductHelper.GetCustomerOrderDetail(orderID, cartHelper);
 
-                     return View(model);
+                     // Only show the order detail if the viewer is the rightful owner
+                     if (model.UserID == cartHelper.GetVisitorID())
+                     {
+                        return View(model);
+                     }
                  }
 
                  return View();

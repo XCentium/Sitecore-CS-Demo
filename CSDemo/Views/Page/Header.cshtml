@@ -13,6 +13,11 @@
                     @if (Sitecore.Context.User.IsAuthenticated)
                     {
                         <li>Welcome [@Sitecore.Context.User.LocalName] <a href="~/Account">My account</a></li>
+                    }
+                    <li><a href="~/cart">Cart</a></li>
+                    <li><a href="~/checkout">Checkout</a></li>
+                    @if (Sitecore.Context.User.IsAuthenticated)
+                    {
                         <li><a href="/account/signoff">Logout</a></li>
                     }
                     else

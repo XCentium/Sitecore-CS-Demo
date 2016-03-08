@@ -417,6 +417,13 @@ namespace CSDemo.Models.Product
             return ordersViewModel;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="orderID"></param>
+        /// <param name="cartHelper"></param>
+        /// <returns></returns>
         internal static OrderDetailViewModel GetCustomerOrderDetail(string orderID, CartHelper cartHelper)
         {
             var orderDetail = new OrderDetailViewModel();
