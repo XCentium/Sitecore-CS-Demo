@@ -195,6 +195,7 @@
     </Compile>
     <Compile Include="App_Start\GlassMapperSc.cs" />
     <Compile Include="App_Start\GlassMapperScCustom.cs" />
+    <Compile Include="Configuration\Conditions\ReturnedVisitorAfterPurchase.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchInfo.cs" />
     <Compile Include="Contracts\IComponents.cs" />
@@ -273,7 +274,7 @@
     <Compile Include="sitecore modules\Web\XCore\CodeGen\GenerateCode.aspx.designer.cs">
       <DependentUpon>GenerateCode.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SitecorePipelines\CustomLinkProvider.cs" />
+    <Compile Include="Configuration\CustomLinkProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AJAX\Cart.asmx" />
