@@ -195,6 +195,7 @@
     </Compile>
     <Compile Include="App_Start\GlassMapperSc.cs" />
     <Compile Include="App_Start\GlassMapperScCustom.cs" />
+    <Compile Include="Configuration\Conditions\LastPurchaseAmountCheck.cs" />
     <Compile Include="Configuration\Conditions\ReturnedVisitorAfterPurchase.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchInfo.cs" />
