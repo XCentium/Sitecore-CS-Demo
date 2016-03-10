@@ -1,31 +1,35 @@
 ﻿
-$("#products_page a").click(function (e) {
+(function (window, $, undefined) {
 
-    e.preventDefault();
+    $("#products_page a").click(function (e) {
 
-    var currentPage = $(this).attr("val");
+        e.preventDefault();
 
-    $("#CurrentPage").val(currentPage);
+        var currentPage = $(this).attr("val");
 
-    $("#products_sort").submit();
+        $("#CurrentPage").val(currentPage);
 
-});
+        $("#products_sort").submit();
 
-$("#prod_page_show").change(function (e) {
+    });
 
-    $("#CurrentPage").val("1");
+    $("#prod_page_show").change(function (e) {
 
-    $("#PageSize").val($(this).val());
+        $("#CurrentPage").val("1");
 
-    $("#products_sort").submit();
+        $("#PageSize").val($(this).val());
 
-});
+        $("#products_sort").submit();
 
-$("#OrderBy").change(function (e) {
+    });
 
-    $("#CurrentPage").val("1");
+    $("#OrderBy").change(function (e) {
 
-    $("#products_sort").submit();
+        $("#CurrentPage").val("1");
 
-});
+        $("#products_sort").submit();
+
+    });
+
+})(window, jQuery);
 

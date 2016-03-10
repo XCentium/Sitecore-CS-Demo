@@ -1,26 +1,30 @@
-﻿$(document).ready(function () {
+﻿(function (window, $, undefined) {
 
-    LoadOrderConfirmationData();
+    $(document).ready(function () {
 
-});
+        LoadOrderConfirmationData();
 
-function LoadOrderConfirmationData() {
+    });
 
-    // if CheckoutForm exists
-    if ($("#orderConfirmationID").length) {
+    function LoadOrderConfirmationData() {
 
-        // If checkoutFormCookie exists
-        if (typeof (Cookies.get('orderConfirmationID')) !== "undefined") {
+        // if CheckoutForm exists
+        if ($("#orderConfirmationID").length) {
 
-            // Load the data
-            // Get data from cookie
-            var orderConfirmationID = Cookies.get('orderConfirmationID');
+            // If checkoutFormCookie exists
+            if (typeof (Cookies.get('orderConfirmationID')) !== "undefined") {
 
-            ShowActionMessage('Your order ID is: ' + orderConfirmationID);
+                // Load the data
+                // Get data from cookie
+                var orderConfirmationID = Cookies.get('orderConfirmationID');
 
-            $('#orderConfirmationID').text(orderConfirmationID);
+                ShowActionMessage('Your order ID is: ' + orderConfirmationID);
+
+                $('#orderConfirmationID').text(orderConfirmationID);
+            }
+
         }
 
     }
 
-}
+})(window, jQuery);
