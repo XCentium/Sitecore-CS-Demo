@@ -81,6 +81,8 @@ namespace CSDemo.Models.Product
 
         public IEnumerable<ProductVariant> ProductVariants { get; set; }
 
+        public IEnumerable<Product> RelatedProducts { get; set; } 
+
         public string CurrencyPrice
         {
             get
@@ -122,6 +124,7 @@ namespace CSDemo.Models.Product
             public const string Brand = "Brand";
             public const string ListPrice = "ListPrice";
             public const string FullDescription = "Full Description";
+            public const string RelationshipList = "Relationship List";
         }
 
         #endregion
