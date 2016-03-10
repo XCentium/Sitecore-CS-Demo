@@ -65,7 +65,7 @@ namespace CSDemo.Models.Product
                     image = string.Format(Constants.Products.ImagesUrlFormat, ID.Parse(images[0]).ToShortID());
                 }
 
-                
+
             }
             return image;
         }
@@ -121,7 +121,7 @@ namespace CSDemo.Models.Product
                 {
                     Log.Error(ex.StackTrace, ex);
 
-                }                          
+                }
             }
 
             return categories;
@@ -174,16 +174,18 @@ namespace CSDemo.Models.Product
             SearchResultItem searchedItem = GetSearchResultItemById(model.CategoryID);
 
             if (searchedItem != null)
-            {           
+            {
                 var catItem = searchedItem.GetItem();
-                
+
                 category = catItem.GlassCast<Category>();
 
                 if (catItem.HasChildren)
                 {
 
-                    var catChildren = catItem.GetChildren().Where(t => t.TemplateID != ID.Parse(Constants.Products.CategoriesTemplateId)).Select(x => x.GlassCast<Product>()).ToList();
-                    
+                    var catChildren = catItem.GetChildren().Select(x => x.GlassCast<Product>()).ToList();
+
+
+
                     model.TotalItems = catChildren.Count();
 
                     model.TotalPages = (long)Math.Ceiling((double)model.TotalItems / model.PageSize);
@@ -219,7 +221,7 @@ namespace CSDemo.Models.Product
                         }
 
                     }
-                
+
                     // do paging
                     category.Products = catChildren
                         .Skip(model.PageSize * (model.CurrentPage - 1))
@@ -232,12 +234,12 @@ namespace CSDemo.Models.Product
                         if (catProdItem != null && catProdItem.HasChildren)
                         {
                             // Update ProductVariants
-                            product.ProductVariants = catProdItem.GetChildren().Select(x=>x.GlassCast<ProductVariant>());
-                            
+                            product.ProductVariants = catProdItem.GetChildren().Select(x => x.GlassCast<ProductVariant>());
+
                             BuildUIVariants(product);
 
                         }
-                    }  
+                    }
                 }
 
             }
@@ -266,7 +268,7 @@ namespace CSDemo.Models.Product
                     variantBoxLine.VariantID = productVariant.VariantId;
                     variantBoxLine.Size = (!string.IsNullOrEmpty(productVariant.ProductSize)) ? productVariant.ProductSize.Trim() : string.Empty;
                     variantBoxLine.Color = (!string.IsNullOrEmpty(productVariant.ProductColor)) ? productVariant.ProductColor.Trim() : string.Empty;
-                    variantBoxLine.Price =Decimal.Parse(productVariant.ListPrice).ToString("c", cultureInfo);
+                    variantBoxLine.Price = Decimal.Parse(productVariant.ListPrice).ToString("c", cultureInfo);
                     if (productVariant.Variant_Images != null && productVariant.Variant_Images.Count() > 0)
                     {
                         variantBoxLine.Images = productVariant.Variant_Images.Select(x => x.ID.ToShortID().ToString()).ToList().Aggregate((i, j) => string.Format(Constants.Products.ImagesUrlFormat, i) + "," + string.Format(Constants.Products.ImagesUrlFormat, j));
@@ -289,27 +291,27 @@ namespace CSDemo.Models.Product
                 var availSizes = variantBoxLines.Where(s => s.Size != "").GroupBy(s => s.Size).Select(g => g.First()).OrderBy(s => s.Size).ThenBy(c => c.Color).ToList();
                 if (availSizes.Count() > 0)
                 {
-                    
+
                     var variantSizeLines = new List<VariantSizeLine>();
                     int pos = 0;
                     foreach (var s in availSizes)
                     {
                         var variantSizeLine = new VariantSizeLine();
                         variantSizeLine.Size = s.Size;
-                        variantSizeLine.Value = string.Format("{0}|{1}|{2}",s.VariantID,s.Price,s.Images);
+                        variantSizeLine.Value = string.Format("{0}|{1}|{2}", s.VariantID, s.Price, s.Images);
 
                         variantSizeLines.Add(variantSizeLine);
 
                         // set default variant
                         if (pos < 1) { product.DefaultVariant = s.VariantID; }
 
-                       
+
 
                         // build the colors for the current size
                         var availColors = variantBoxLines.Where(t => t.Size.Equals(s.Size) && s.Color != "").GroupBy(c => c.Color).Select(g => g.First()).OrderBy(c => c.Color).ToList();
                         if (availColors.Count() > 0)
                         {
-                            
+
                             var variantColor = new VariantColor();
                             variantColor.Name = string.Format("{0}{1}", s.Size, "ProductColor");
                             variantColor.Display = (pos == 0) ? "Block" : "None";
@@ -363,7 +365,7 @@ namespace CSDemo.Models.Product
                 }
 
             }
-            
+
         }
 
 
@@ -375,7 +377,7 @@ namespace CSDemo.Models.Product
         private static IEnumerable<CategoryMenulistViewModel> GetCategoryMenuList(string parentID)
         {
             var CategoryMenulistViewModel = new List<CategoryMenulistViewModel>();
-            
+
             List<SearchResultItem> categories = GetCategoryMenuListByParentID(parentID);
 
             if (categories != null)
@@ -386,7 +388,7 @@ namespace CSDemo.Models.Product
                     var c = new CategoryMenulistViewModel();
                     c.ID = category.ItemId.ToString();
                     c.Name = category.Name;
-                    var categoryChildern = category.GetItem().GetChildren().Where(t => t.TemplateID != ID.Parse(Constants.Products.CategoriesTemplateId));
+                    var categoryChildern = category.GetItem().GetChildren();
                     c.ProductsCount = categoryChildern.Count();
 
                     var pList = new List<ProductMenulistViewModel>();
@@ -400,10 +402,11 @@ namespace CSDemo.Models.Product
                             p.Url = LinkManager.GetItemUrl(categoryChild);
                             pList.Add(p);
                         }
+
                     }
                     c.ProductMenulistViewModel = pList;
                     CategoryMenulistViewModel.Add(c);
-                    
+
                 }
 
             }
@@ -426,7 +429,7 @@ namespace CSDemo.Models.Product
                 {
                     var queryable = context.GetQueryable<SearchResultItem>()
                         .Where(x => x.Language == Sitecore.Context.Language.Name);
-                    return queryable.Where(x => x.Paths.Contains(ID.Parse(parentID)) && x.TemplateId == ID.Parse(Constants.Products.CategoriesTemplateId)).ToList();
+                    return queryable.Where(x => x.Parent == ID.Parse(parentID)).ToList();
 
                 }
             }
@@ -457,7 +460,7 @@ namespace CSDemo.Models.Product
                 {
                     var queryable = context.GetQueryable<SearchResultItem>()
                         .Where(x => x.Language == Sitecore.Context.Language.Name);
-                    return queryable.FirstOrDefault(x => String.Equals(x.Name, itemName, StringComparison.CurrentCultureIgnoreCase) && x.Paths.Contains(ID.Parse(parentID))).ItemId.ToString();
+                    return queryable.FirstOrDefault(x => String.Equals(x.Name, itemName, StringComparison.CurrentCultureIgnoreCase) && x.Parent == ID.Parse(parentID)).ItemId.ToString();
 
                 }
             }
@@ -520,13 +523,14 @@ namespace CSDemo.Models.Product
             var orders = cartHelper.GetOrders(cartHelper.GetVisitorID(), cartHelper.ShopName);
             if (orders != null)
             {
-                
-                foreach (var order in orders.OrderHeaders) {
+
+                foreach (var order in orders.OrderHeaders)
+                {
                     var orderDetail = new OrderDetailViewModel();
 
                     var orderHead = cartHelper.GetOrderHead(order.OrderID, order.CustomerId, order.ShopName);
                     var commerceOrderHead = orderHead.Order as CommerceOrder;
-                  
+
                     orderDetail.OrderDate = commerceOrderHead.Created.ToString("MMMM dd, yyyy");
                     orderDetail.OrderID = commerceOrderHead.OrderID;
                     orderDetail.OrderStatus = commerceOrderHead.Status;
@@ -565,7 +569,7 @@ namespace CSDemo.Models.Product
 
                 var commerceTotal = commerceOrderHead.Total as CommerceTotal;
 
-                orderDetail.SubTotalPrice = commerceTotal.Subtotal.ToString("C2"); 
+                orderDetail.SubTotalPrice = commerceTotal.Subtotal.ToString("C2");
                 orderDetail.TotalPrice = commerceTotal.Amount.ToString("C2");
                 orderDetail.Tax = commerceTotal.TaxTotal.Amount.ToString("C2");
                 orderDetail.ShippingCost = commerceTotal.ShippingTotal.ToString("C2");
@@ -585,15 +589,18 @@ namespace CSDemo.Models.Product
                     orderDetail.PaymentMethod = GetPaymentMethod(paymentMethodID);
                 }
 
+
                 if (commerceOrderHead.Shipping.ElementAtOrDefault(0) != null)
                 {
                     var shippingMethodID = commerceOrderHead.Shipping.ElementAt(0).ShippingMethodID;
                     orderDetail.ShippingMethod = GetShippingMethod(shippingMethodID);
                 }
-            
+
+
+
                 var Lines = commerceOrderHead.Lines.ToList();
                 orderDetail.OrderLines = GetOrderLines(Lines);
-              
+
             }
 
             return orderDetail;
@@ -607,18 +614,18 @@ namespace CSDemo.Models.Product
         /// <returns></returns>
         private static string GetPaymentMethod(string paymentMethodID)
         {
-                        
+
             var resp = string.Empty;
 
             try
             {
-            var provider = new Sitecore.Commerce.Services.Payments.PaymentServiceProvider();
-            var paymentRequest = new CommerceGetPaymentMethodsRequest(Sitecore.Context.Language.ToString());
-            var paymentResult = provider.GetPaymentMethods(paymentRequest);
+                var provider = new Sitecore.Commerce.Services.Payments.PaymentServiceProvider();
+                var paymentRequest = new CommerceGetPaymentMethodsRequest(Sitecore.Context.Language.ToString());
+                var paymentResult = provider.GetPaymentMethods(paymentRequest);
 
-            var paymentMethods = paymentResult.PaymentMethods;
+                var paymentMethods = paymentResult.PaymentMethods;
 
-            resp = paymentResult.PaymentMethods.FirstOrDefault(x => x.ExternalId == paymentMethodID).Name;
+                resp = paymentResult.PaymentMethods.FirstOrDefault(x => x.ExternalId == paymentMethodID).Name;
 
             }
             catch (Exception ex)
@@ -627,7 +634,7 @@ namespace CSDemo.Models.Product
             }
 
             return resp;
-          
+
 
         }
 
@@ -641,7 +648,7 @@ namespace CSDemo.Models.Product
             var orderLines = new List<OrderLine>();
             foreach (CommerceCartLine line in Lines)
             {
-             //   var line = cartLine as CommerceCartLine;
+                //   var line = cartLine as CommerceCartLine;
                 var ol = new OrderLine();
                 ol.UnitPrice = line.Product.Price.Amount.ToString("C2");
                 ol.Quantity = line.Quantity;
@@ -693,6 +700,7 @@ namespace CSDemo.Models.Product
         /// <param name="productID"></param>
         /// <param name="categoryID"></param>
         /// <returns></returns>
+
         internal static Product GetProductByNameAndCategory(string productID, string categoryID)
         {
             Product product = new Product();
