@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using CSDemo.Contracts;
 using CSDemo.Contracts.Product;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
@@ -14,12 +15,15 @@ using Sitecore.Data.Items;
 namespace CSDemo.Models.Product
 {
     [SitecoreType(AutoMap = true)]
-    public class Product : IProduct
+    public class Product : IProduct, IEditableBase
     {
         #region Properties
 
         [SitecoreId]
         public virtual Guid ID { get; set; }
+
+        [SitecoreInfo(SitecoreInfoType.Path)]
+        public virtual string Path { get; set; }
 
         [SitecoreInfo(SitecoreInfoType.DisplayName)]
         public virtual string Title { get; set; }

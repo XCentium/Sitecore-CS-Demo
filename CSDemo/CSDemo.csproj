@@ -200,6 +200,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchInfo.cs" />
     <Compile Include="Contracts\IComponents.cs" />
+    <Compile Include="Contracts\IEditableBase.cs" />
     <Compile Include="Contracts\ISettings.cs" />
     <Compile Include="Contracts\ISite.cs" />
     <Compile Include="Contracts\Marquee\ICarouselItem.cs" />
@@ -462,6 +463,10 @@
       <DependentUpon>CSDemo.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.DebuLocal.config">
+      <DependentUpon>CSDemo.Main.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
     <None Include="App_Config\Include\zCSDemo\CSDemo.Main.foxsean.ca.config">
       <DependentUpon>CSDemo.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
@@ -482,6 +487,10 @@
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.DebuLocal.config">
+      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
     <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.foxsean.ca.config">
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
@@ -496,6 +505,7 @@
     </None>
     <None Include="Properties\PublishProfiles\Castle Local.pubxml" />
     <None Include="Properties\PublishProfiles\csDemo.pubxml" />
+    <None Include="Properties\PublishProfiles\DebuLocal.pubxml" />
     <None Include="Properties\PublishProfiles\XcCommerce112Demo.pubxml" />
     <Content Include="Views\Checkout\Cart.cshtml" />
     <Content Include="Views\Product\Facets.cshtml" />
