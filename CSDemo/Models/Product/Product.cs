@@ -119,8 +119,8 @@ namespace CSDemo.Models.Product
         {
             get
             {
-                if (ProductId == null) { return string.Empty;  }
-                return String.Format(Constants.Products.VariantIDFormat, ProductId.Replace(Constants.Common.Dash,Constants.Common.Underscore));
+                if (ProductId == null) return string.Empty;
+                return string.Format(Constants.Products.VariantIDFormat, ProductId.Replace(Constants.Common.Dash,Constants.Common.Underscore));
             }
         }
         #endregion
