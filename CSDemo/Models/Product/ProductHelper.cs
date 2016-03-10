@@ -716,6 +716,7 @@ namespace CSDemo.Models.Product
         /// <returns></returns>
         internal static SearchResultItem GetItemByName(string productID)
         {
+            //
             var index = ContentSearchManager.GetIndex(Constants.WebIndex);
             try
             {
