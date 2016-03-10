@@ -9,8 +9,6 @@
     var idToShow = "#" + objText + "ProductColor" + num;
 
 
-    alert(idToShow);
-
     // hide all ProductColor with class   ProductColor + num
     $(classToHide).hide();
 
@@ -60,5 +58,5 @@ function DoProductColorChange(objValue, num) {
 
         // $("#product-carousel").html(outputs);
     }
-    // alert(images);
+    // console.log(images);
 }
