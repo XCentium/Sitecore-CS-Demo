@@ -50,7 +50,7 @@
                                             var catProducts = cat.ProductMenulistViewModel;
 
                                             <li class="panel">
-                                                <a class="@listClass" role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name<span>[@cat.ProductsCount]</span></a>
+                                                <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name<span>[@cat.ProductsCount]</span></a>
                                                 <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">
                                                     @foreach (CSDemo.Models.Product.ProductMenulistViewModel catProduct in catProducts)
                                                     {
