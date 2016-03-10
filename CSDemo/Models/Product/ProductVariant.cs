@@ -27,12 +27,25 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.ListPrice)]
         public virtual string ListPrice { get; set; }
 
+        [SitecoreField(Fields.Variant_Images)]
+        public IEnumerable<Item> Variant_Images { get; set; }
+
+        [SitecoreField(Fields.ProductSize)]
+        public virtual string ProductSize { get; set; }
+
+        [SitecoreField(Fields.ProductColor)]
+        public virtual string ProductColor { get; set; }
+
+
         #endregion
         #region Fields
         public struct Fields
         {
             public const string VariantId = "VariantId";
             public const string ListPrice = "ListPrice";
+            public const string Variant_Images = "Variant_Images";
+            public const string ProductSize = "ProductSize";
+            public const string ProductColor = "ProductColor";
         }
         #endregion 
 

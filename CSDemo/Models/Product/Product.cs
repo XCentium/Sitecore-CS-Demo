@@ -79,7 +79,15 @@ namespace CSDemo.Models.Product
 
         public virtual Item FirstImage { get; set; }
 
+        public virtual string DefaultVariant { get; set; }
+
         public IEnumerable<ProductVariant> ProductVariants { get; set; }
+
+        public virtual VariantBox VariantBox { get; set; }
+
+        public virtual VariantSize VariantSize { get; set; }
+
+        public IEnumerable<VariantColor> VariantColors { get; set; }
 
         public string CurrencyPrice
         {
@@ -96,7 +104,16 @@ namespace CSDemo.Models.Product
         {
             get
             {
-                return String.Format("{0:0.00}", Price);
+                var cultureInfo = Sitecore.Context.Culture;
+                return Price.ToString("c", cultureInfo);
+            }
+        }
+
+        public string VariantProdId
+        {
+            get
+            {
+                return String.Format("_{0}", ProductId.Replace('-','_'));
             }
         }
         #endregion

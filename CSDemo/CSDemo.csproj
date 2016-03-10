@@ -256,6 +256,12 @@
     <Compile Include="Models\GeneralSearch\SearchInput.cs" />
     <Compile Include="Models\Product\ProductMenulistViewModel.cs" />
     <Compile Include="Models\Product\ProductVariant.cs" />
+    <Compile Include="Models\Product\VariantBox.cs" />
+    <Compile Include="Models\Product\VariantBoxLine.cs" />
+    <Compile Include="Models\Product\VariantColor.cs" />
+    <Compile Include="Models\Product\VariantColorLine.cs" />
+    <Compile Include="Models\Product\VariantSize.cs" />
+    <Compile Include="Models\Product\VariantSizeLine.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\Site.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -373,6 +379,7 @@
     <Content Include="Assets\js\jquery.validate.min.js" />
     <Content Include="Assets\js\owl.carousel.min.js" />
     <Content Include="Assets\js\Payment.js" />
+    <Content Include="Assets\js\Product.js" />
     <Content Include="Assets\js\Review.js" />
     <Content Include="Assets\js\Shipping.js" />
     <Content Include="Assets\js\SmoothScroll.js" />
