@@ -86,6 +86,13 @@ namespace CSDemo
 
         }
 
+        public struct Common
+        {
+            public const string Dash = "-";
+            public const string Underscore = "_";
+
+        }
+
         public struct Products
         {
             public const string IDSeparator = "|";
@@ -94,6 +101,7 @@ namespace CSDemo
             public const string ImagesUrlFormat = "/~/media/{0}.ashx";
             public const string CategoryUrlFormat = "categories/{0}";
             public const string CategoriesParentId = "{4441D0B5-1080-4550-A91A-4C2C8245C986}";
+            public const string CategoriesTemplateId = "{C118EAAE-D723-4560-ABFC-917E58F46F18}";
             public const string OrderByBrand = "Brand";
             public const string OrderByRatings = "Average rating";
             public const string OrderByNewness = "Newness";
@@ -101,6 +109,7 @@ namespace CSDemo
             public const string OrderByPriceDesc = "Price: high to low";
             public const string BillingAddress = "Billing";
             public const string ShippingAddress = "Shipping";
+            public const string VariantIDFormat = "_{0}";
         }
 
     }

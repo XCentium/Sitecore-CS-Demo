@@ -181,9 +181,9 @@ namespace CSDemo.Models.Product
 
                 if (catItem.HasChildren)
                 {
-                    
-                    var catChildren = catItem.GetChildren().Select(x => x.GlassCast<Product>()).ToList();
 
+                    var catChildren = catItem.GetChildren().Where(t => t.TemplateID != ID.Parse(Constants.Products.CategoriesTemplateId)).Select(x => x.GlassCast<Product>()).ToList();
+                    
                     model.TotalItems = catChildren.Count();
 
                     model.TotalPages = (long)Math.Ceiling((double)model.TotalItems / model.PageSize);
@@ -225,13 +225,17 @@ namespace CSDemo.Models.Product
                         .Skip(model.PageSize * (model.CurrentPage - 1))
                         .Take(model.PageSize);
 
-                    // Update ProductVariants
+                    // Process ProductVariants
                     foreach (var product in category.Products)
                     {
                         Item catProdItem = catItem.GetChildren().FirstOrDefault(x => x.ID.ToGuid() == product.ID);
                         if (catProdItem != null && catProdItem.HasChildren)
                         {
-                            product.ProductVariants = catProdItem.GetChildren().Select(x=>x.GlassCast<ProductVariant>());                         
+                            // Update ProductVariants
+                            product.ProductVariants = catProdItem.GetChildren().Select(x=>x.GlassCast<ProductVariant>());
+                            
+                            BuildUIVariants(product);
+
                         }
                     }  
                 }
@@ -241,6 +245,125 @@ namespace CSDemo.Models.Product
             categoryProductVM.Category = category;
 
             return categoryProductVM;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="product"></param>
+        private static void BuildUIVariants(Product product)
+        {
+            var cultureInfo = Sitecore.Context.Culture;
+
+            if (product.ProductVariants.Count() > 0)
+            {
+                var variantBox = new VariantBox();
+                List<VariantBoxLine> variantBoxLines = new List<VariantBoxLine>();
+                foreach (var productVariant in product.ProductVariants)
+                {
+
+                    var variantBoxLine = new VariantBoxLine();
+                    variantBoxLine.VariantID = productVariant.VariantId;
+                    variantBoxLine.Size = (!string.IsNullOrEmpty(productVariant.ProductSize)) ? productVariant.ProductSize.Trim() : string.Empty;
+                    variantBoxLine.Color = (!string.IsNullOrEmpty(productVariant.ProductColor)) ? productVariant.ProductColor.Trim() : string.Empty;
+                    variantBoxLine.Price =Decimal.Parse(productVariant.ListPrice).ToString("c", cultureInfo);
+                    if (productVariant.Variant_Images != null && productVariant.Variant_Images.Count() > 0)
+                    {
+                        variantBoxLine.Images = productVariant.Variant_Images.Select(x => x.ID.ToShortID().ToString()).ToList().Aggregate((i, j) => string.Format(Constants.Products.ImagesUrlFormat, i) + "," + string.Format(Constants.Products.ImagesUrlFormat, j));
+                    }
+                    else
+                    {
+                        variantBoxLine.Images = product.Images.Select(x => x.Src).ToList().Aggregate((i, j) => i + "," + j);
+                    }
+
+                    variantBoxLines.Add(variantBoxLine);
+                }
+                variantBoxLines.OrderBy(s => s.Size).ThenBy(c => c.Color);
+                variantBox.VariantBoxLines = variantBoxLines;
+                product.VariantBox = variantBox;
+
+                var variantSize = new VariantSize();
+                List<VariantColor> variantColors = new List<VariantColor>();
+
+                // get size
+                var availSizes = variantBoxLines.Where(s => s.Size != "").GroupBy(s => s.Size).Select(g => g.First()).OrderBy(s => s.Size).ThenBy(c => c.Color).ToList();
+                if (availSizes.Count() > 0)
+                {
+                    
+                    var variantSizeLines = new List<VariantSizeLine>();
+                    int pos = 0;
+                    foreach (var s in availSizes)
+                    {
+                        var variantSizeLine = new VariantSizeLine();
+                        variantSizeLine.Size = s.Size;
+                        variantSizeLine.Value = string.Format("{0}|{1}|{2}",s.VariantID,s.Price,s.Images);
+
+                        variantSizeLines.Add(variantSizeLine);
+
+                        // set default variant
+                        if (pos < 1) { product.DefaultVariant = s.VariantID; }
+
+                       
+
+                        // build the colors for the current size
+                        var availColors = variantBoxLines.Where(t => t.Size.Equals(s.Size) && s.Color != "").GroupBy(c => c.Color).Select(g => g.First()).OrderBy(c => c.Color).ToList();
+                        if (availColors.Count() > 0)
+                        {
+                            
+                            var variantColor = new VariantColor();
+                            variantColor.Name = string.Format("{0}{1}", s.Size, "ProductColor");
+                            variantColor.Display = (pos == 0) ? "Block" : "None";
+
+                            var variantColorLines = new List<VariantColorLine>();
+                            foreach (var c in availColors)
+                            {
+                                var variantColorLine = new VariantColorLine();
+                                variantColorLine.Color = c.Color;
+                                variantColorLine.Value = string.Format("{0}|{1}|{2}", c.VariantID, c.Price, c.Images);
+
+                                variantColorLines.Add(variantColorLine);
+                            }
+                            variantColor.VariantColorLines = variantColorLines;
+                            variantColors.Add(variantColor);
+                        }
+
+                        pos++;
+
+                    }
+                    variantSize.VariantSizeLines = variantSizeLines;
+                    product.VariantSize = variantSize;
+                    product.VariantColors = variantColors;
+
+                }
+                else
+                {
+                    // No sizes, let us focus on color
+                    var availColors = variantBoxLines.Where(c => c.Color != "").GroupBy(c => c.Color).Select(g => g.First()).OrderBy(c => c.Color).ToList();
+                    if (availColors.Count() > 0)
+                    {
+                        var pos = 0;
+                        var variantColor = new VariantColor();
+                        variantColor.Name = "ProductColor";
+                        variantColor.Display = "Block";
+                        var variantColorLines = new List<VariantColorLine>();
+                        foreach (var c in availColors)
+                        {
+                            var variantColorLine = new VariantColorLine();
+                            variantColorLine.Color = c.Color;
+                            variantColorLine.Value = string.Format("{0}|{1}|{2}", c.VariantID, c.Price, c.Images);
+
+                            variantColorLines.Add(variantColorLine);
+                            if (pos < 1) { product.DefaultVariant = c.VariantID; }
+                            pos++;
+                        }
+                        variantColor.VariantColorLines = variantColorLines;
+                        variantColors.Add(variantColor);
+                        product.VariantColors = variantColors;
+                    }
+                }
+
+            }
+            
         }
 
 
@@ -263,17 +386,20 @@ namespace CSDemo.Models.Product
                     var c = new CategoryMenulistViewModel();
                     c.ID = category.ItemId.ToString();
                     c.Name = category.Name;
-                    var categoryChildern = category.GetItem().GetChildren();
+                    var categoryChildern = category.GetItem().GetChildren().Where(t => t.TemplateID != ID.Parse(Constants.Products.CategoriesTemplateId));
                     c.ProductsCount = categoryChildern.Count();
 
                     var pList = new List<ProductMenulistViewModel>();
 
                     foreach (Item categoryChild in categoryChildern)
                     {
-                        var p = new ProductMenulistViewModel();
-                        p.Name = categoryChild.DisplayName;
-                        p.Url = LinkManager.GetItemUrl(categoryChild);
-                        pList.Add(p);
+                        if (categoryChild.TemplateID.ToString() != Constants.Products.CategoriesTemplateId)
+                        {
+                            var p = new ProductMenulistViewModel();
+                            p.Name = categoryChild.DisplayName;
+                            p.Url = LinkManager.GetItemUrl(categoryChild);
+                            pList.Add(p);
+                        }
                     }
                     c.ProductMenulistViewModel = pList;
                     CategoryMenulistViewModel.Add(c);
@@ -300,7 +426,7 @@ namespace CSDemo.Models.Product
                 {
                     var queryable = context.GetQueryable<SearchResultItem>()
                         .Where(x => x.Language == Sitecore.Context.Language.Name);
-                    return queryable.Where(x => x.Parent == ID.Parse(parentID)).ToList();
+                    return queryable.Where(x => x.Paths.Contains(ID.Parse(parentID)) && x.TemplateId == ID.Parse(Constants.Products.CategoriesTemplateId)).ToList();
 
                 }
             }
@@ -331,7 +457,7 @@ namespace CSDemo.Models.Product
                 {
                     var queryable = context.GetQueryable<SearchResultItem>()
                         .Where(x => x.Language == Sitecore.Context.Language.Name);
-                    return queryable.FirstOrDefault(x => String.Equals(x.Name, itemName, StringComparison.CurrentCultureIgnoreCase) && x.Parent == ID.Parse(parentID)).ItemId.ToString();
+                    return queryable.FirstOrDefault(x => String.Equals(x.Name, itemName, StringComparison.CurrentCultureIgnoreCase) && x.Paths.Contains(ID.Parse(parentID))).ItemId.ToString();
 
                 }
             }
@@ -473,6 +599,12 @@ namespace CSDemo.Models.Product
             return orderDetail;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="paymentMethodID"></param>
+        /// <returns></returns>
         private static string GetPaymentMethod(string paymentMethodID)
         {
                         
@@ -499,6 +631,11 @@ namespace CSDemo.Models.Product
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Lines"></param>
+        /// <returns></returns>
         private static IEnumerable<OrderLine> GetOrderLines(IEnumerable<CartLine> Lines)
         {
             var orderLines = new List<OrderLine>();
@@ -523,6 +660,11 @@ namespace CSDemo.Models.Product
             return orderLines;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ShippingMethodID"></param>
+        /// <returns></returns>
         private static string GetShippingMethod(string ShippingMethodID)
         {
             var resp = string.Empty;
@@ -545,7 +687,12 @@ namespace CSDemo.Models.Product
             return resp;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <param name="categoryID"></param>
+        /// <returns></returns>
         internal static Product GetProductByNameAndCategory(string productID, string categoryID)
         {
             Product product = new Product();
@@ -554,12 +701,19 @@ namespace CSDemo.Models.Product
             {
                 Item productItem = productResult.GetItem();
                 product = productItem.GlassCast<Product>();
-                product.ProductVariants = productItem.GetChildren().Select(x => x.GlassCast<ProductVariant>());                         
+                product.ProductVariants = productItem.GetChildren().Select(x => x.GlassCast<ProductVariant>());
+
+                BuildUIVariants(product);
             }
 
             return product;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
         internal static SearchResultItem GetItemByName(string productID)
         {
             var index = ContentSearchManager.GetIndex(Constants.WebIndex);
