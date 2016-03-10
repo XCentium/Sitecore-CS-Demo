@@ -86,6 +86,13 @@ namespace CSDemo
 
         }
 
+        public struct Common
+        {
+            public const string Dash = "-";
+            public const string Underscore = "_";
+
+        }
+
         public struct Products
         {
             public const string IDSeparator = "|";
@@ -102,6 +109,7 @@ namespace CSDemo
             public const string OrderByPriceDesc = "Price: high to low";
             public const string BillingAddress = "Billing";
             public const string ShippingAddress = "Shipping";
+            public const string VariantIDFormat = "_{0}";
         }
 
     }

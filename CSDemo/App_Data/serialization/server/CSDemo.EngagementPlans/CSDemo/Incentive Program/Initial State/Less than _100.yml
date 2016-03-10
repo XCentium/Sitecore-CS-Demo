@@ -1,0 +1,51 @@
+﻿---
+ID: 3de50d31-6bb4-4ffa-8d40-b9ee13a78a67
+Parent: 465bfd1c-addd-473a-ad1b-fd8865734631
+Template: 0a43a0fe-7e0e-49ef-95d4-e3de34f4f175
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CSDemo/Incentive Program/Initial State/Less than $100
+DB: master
+SharedFields:
+- ID: 21f3482b-bb14-4555-ba5d-af20d400d5b9
+  Hint: Rule
+  Type: Rules
+  Value: |
+    <ruleset>
+      <rule uid="{84351DB0-5A9C-420D-B219-9F811C599165}">
+        <conditions>
+          <condition id="{9FC0402C-3105-4A88-91D3-71ED6802E094}" uid="0DF69C618D0B4F0C961A8401DB8D3290" operatorid="{E362A3A4-E230-4A40-A7C4-FC42767E908F}" value="100" />
+        </conditions>
+      </rule>
+    </ruleset>
+- ID: 3f72bc07-de92-483e-a724-d430769d9ba4
+  Hint: Designer ID
+  Value: 19137e4e-f01e-42f2-a2ee-8aa37ca9b5f1
+- ID: 7642ed71-348b-4b88-8634-cc7b28949472
+  Hint: Origin ID
+  Value: 00000000-0000-0000-0000-000000000000
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 0
+- ID: d2368879-c784-4031-9b79-6a3bf3cb444e
+  Hint: Next state
+  Value: aa9b8ec1-aa74-4375-b63a-f776943e8be3
+- ID: e13dcd09-d9bb-43c9-8d7d-438c79d714ca
+  Hint: Evaluate
+  Value: {B81C1F4C-8B83-44D9-902F-448463DBCCBC}
+Languages:
+- Language: en
+  Fields:
+  - ID: 06f2d72a-1924-4b9a-ba1e-186ce4e57efd
+    Hint: Description
+    Value: Has the customer made a purchase for less than a given amount?
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Less than $100?
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160309T020425Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
