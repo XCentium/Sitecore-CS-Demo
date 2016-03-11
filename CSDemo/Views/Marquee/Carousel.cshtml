@@ -8,19 +8,39 @@
 @if (Model != null)
 {
     <section class="content jumbotron">
-        <div id="homepage-1-carousel" class="nav-inside owl-animation">
-            @foreach (var slide in Model)
+
+        @if (IsInEditingMode)
+        {
+            foreach (var slide in Model)
             {
-                <div class="item slide-1" style="background-image: url(@slide.Image.Src)">
-                    <div class="slide-mask"></div>
-                    <div class="slide-body">
-                        <div class="container">
-                            @Html.Raw(@slide.Content)
+                using (BeginEditFrame(slide.Path))
+                {
+                    <div class="slide-body" style="background-color:black">
+                        @Editable(slide, x => x.Content)
+                    </div>
+                    <br /><br /><br /><br /><br />
+                    <div>
+                        @Editable(slide, x => x.Image)
+                    </div>
+                }
+            }
+        }
+        else
+        { 
+            <div id="homepage-1-carousel" class="nav-inside owl-animation">
+                @foreach (var slide in Model)
+                {
+                    <div class="item slide-1" style="background-image: url(@slide.Image.Src)">
+                        <div class="slide-mask"></div>
+                        <div class="slide-body">
+                            <div class="container">
+                                @Html.Raw(@slide.Content)
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
-        </div>
+                }
+            </div>
+        }
     </section>
 }
 <!-- ==========================

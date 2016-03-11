@@ -15,6 +15,11 @@ namespace CSDemo.Contracts.Product
         string VariantId { get; set; }
         string ListPrice { get; set; }
         string Name { get; set; }
+
+        IEnumerable<Item> Variant_Images { get; set; }
+        string ProductSize { get; set; }
+        string ProductColor { get; set; }
+
         #endregion 
     }
 }

@@ -4,14 +4,12 @@
 @using System.Collections.Generic
 @using System.Linq
 @using Sitecore.Mvc.Extensions
-
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Product.Product>
-
 @if (Model != null)
 {
+    int pos = 1;
     <section class="content products">
         <div class="container">
-
             <article class=" product-item product-single">
                 <div class="row">
                     <div class="col-xs-4">
@@ -21,13 +19,11 @@
                                 {
                                     foreach (var image in Model.Images)
                                     {
-                                        @RenderImage(image, x => x, new { Width = 538, Height = 538, AS = 1, @class = "img-responsive" }, isEditable: false);
-
-                                                                                                                                                            
-                                    break;
+                                        <div class="item">
+                                            @RenderImage(image, x => x, new { Width = 538, Height = 538, AS = 1, @class = "img-responsive" }, isEditable: false)
+                                        </div>
                                     }
                                 }
-
                             </div>
                         </div>
                     </div>
@@ -36,7 +32,7 @@
                             <form name="@Model.ProductId" id="@Model.ProductId">
                                 <input type="hidden" id="ProductId" name="ProductId" value="@Model.ProductId" />
                                 <input type="hidden" id="CatalogName" name="CatalogName" value="@Model.CatalogName" />
-
+                                <input type="hidden" name="VariantId" id="@string.Concat("VariantID", Model.VariantProdId)" value="@Model.DefaultVariant" />
                                 <h3>@Model.Title</h3>
                                 <div class="product-labels">
                                     <span class="label label-info">new</span>
@@ -50,7 +46,7 @@
                                     <i class="fa fa-star@(Model.Rating > 4 ? string.Empty : "-o")"></i>
                                 </div>
                                 <span class="price">
-                                    <ins><span class="amount">$@Model.ListPrice</span></ins>
+                                    <ins><span id="@string.Concat("productAmount", Model.VariantProdId)" class="amount">@Model.ListPrice</span></ins>
                                 </span>
                                 <ul class="list-unstyled product-info">
                                     <li><span>ID</span>@Model.ProductId</li>
@@ -61,29 +57,55 @@
                                 <p>@Model.Description</p>
                                 <div class="product-form clearfix">
                                     <div class="row row-no-padding">
-
-                                        <div class="col-xs-6">
+                                        <div class="col-xs-3">
                                             <div class="product-quantity clearfix">
                                                 <a class="btn btn-default" id="qty-minus">-</a>
                                                 <input type="text" class="form-control" id="Quantity" value="1" />
                                                 <a class="btn btn-default" id="qty-plus">+</a>
                                             </div>
                                         </div>
-                                        <div class="col-xs-6">
-                                            <div class="form-group">
-                                                <select class="form-control" name="VariantId" id="VariantId">
-                                                    @if (Model.ProductVariants != null)
-                                                    {
-                                                        foreach (var variant in Model.ProductVariants)
-                                                        {
-                                                            <option value="@variant.VariantId">@variant.Name</option>
-                                                        }
-                                                    }
-                                                </select>
+                                        @if (Model.VariantSize != null)
+                                        {
+                                            <div class="col-xs-3">
+                                                <div class="product-size">
+                                                    <div class="form-group">
+                                                        <label>Size:</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <select name="ProductSize" id="ProductSize" onchange="DoProductSizeChange('#ProductSize', '@Model.VariantProdId')" class="form-control">
+                                                            @foreach (var size in Model.VariantSize.VariantSizeLines)
+                                                            {
+                                                                <option value="@size.Value">@size.Size</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
+                                        }
+                                        @if (Model.VariantColors != null)
+                                        {
+                                            <div class="col-xs-3">
+                                                <div class="product-color">
+                                                    <div class="form-group">
+                                                        <label>Color:</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @foreach (var variantColor in Model.VariantColors)
+                                                        {
+                                                            <select name="@variantColor.Name" id="@string.Concat(variantColor.Name, Model.VariantProdId)" style="display:@variantColor.Display" onchange="DoProductColorChange(this.value, '@Model.VariantProdId')" class="@string.Concat("ProductColor",Model.VariantProdId) form-control">
+                                                                @foreach (var color in variantColor.VariantColorLines)
+                                                                {
+                                                                    <option value="@color.Value">@color.Color</option>
+                                                                }
+                                                            </select>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        <div class="col-xs-3 col-sm-12">
                                             <a href="javascript:void(0)" onclick="AddProductToCart('@Model.ProductId', '@Sitecore.Data.ID.Parse(Model.ID).ToString()')" class="btn btn-primary add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </div>
-
                                     </div>
                                 </div>
                                 <ul class="list-inline product-links">
@@ -96,7 +118,6 @@
                     </div>
                 </div>
             </article>
-
             <div class="tabs product-tabs">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">
@@ -106,12 +127,10 @@
                         <a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">Reviews</a>
                     </li>
                 </ul>
-
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="description">
-                        @Model.FullDescription
+                        @Html.Raw(Model.FullDescription)
                     </div>
-
                     <div role="tabpanel" class="tab-pane in" id="reviews">
                         <div class="comments-reviews">
                             <!-- Begin: Intense Debate Scripting (comments service) -->
@@ -128,5 +147,6 @@
                 </div>
             </div>
         </div>
+        @Html.Partial("~/Views/Product/RelatedProducts.cshtml", Model.RelatedProducts)
     </section>
 }

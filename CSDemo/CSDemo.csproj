@@ -200,6 +200,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchInfo.cs" />
     <Compile Include="Contracts\IComponents.cs" />
+    <Compile Include="Contracts\IEditableBase.cs" />
     <Compile Include="Contracts\ISettings.cs" />
     <Compile Include="Contracts\ISite.cs" />
     <Compile Include="Contracts\Marquee\ICarouselItem.cs" />
@@ -258,6 +259,12 @@
     <Compile Include="Models\GeneralSearch\SearchInput.cs" />
     <Compile Include="Models\Product\ProductMenulistViewModel.cs" />
     <Compile Include="Models\Product\ProductVariant.cs" />
+    <Compile Include="Models\Product\VariantBox.cs" />
+    <Compile Include="Models\Product\VariantBoxLine.cs" />
+    <Compile Include="Models\Product\VariantColor.cs" />
+    <Compile Include="Models\Product\VariantColorLine.cs" />
+    <Compile Include="Models\Product\VariantSize.cs" />
+    <Compile Include="Models\Product\VariantSizeLine.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\Site.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -375,6 +382,7 @@
     <Content Include="Assets\js\jquery.validate.min.js" />
     <Content Include="Assets\js\owl.carousel.min.js" />
     <Content Include="Assets\js\Payment.js" />
+    <Content Include="Assets\js\Product.js" />
     <Content Include="Assets\js\Review.js" />
     <Content Include="Assets\js\Shipping.js" />
     <Content Include="Assets\js\SmoothScroll.js" />
@@ -462,6 +470,10 @@
       <DependentUpon>CSDemo.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.DebuLocal.config">
+      <DependentUpon>CSDemo.Main.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
     <None Include="App_Config\Include\zCSDemo\CSDemo.Main.foxsean.ca.config">
       <DependentUpon>CSDemo.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
@@ -482,6 +494,10 @@
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.DebuLocal.config">
+      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
     <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.foxsean.ca.config">
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
@@ -496,6 +512,7 @@
     </None>
     <None Include="Properties\PublishProfiles\Castle Local.pubxml" />
     <None Include="Properties\PublishProfiles\csDemo.pubxml" />
+    <None Include="Properties\PublishProfiles\DebuLocal.pubxml" />
     <None Include="Properties\PublishProfiles\XcCommerce112Demo.pubxml" />
     <Content Include="Views\Checkout\Cart.cshtml" />
     <Content Include="Views\Product\Facets.cshtml" />
@@ -526,6 +543,7 @@
     <Content Include="Views\Account\Orders.cshtml" />
     <Content Include="Views\Account\OrderDetail.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
+    <Content Include="Views\Product\RelatedProducts.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

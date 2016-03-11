@@ -9,9 +9,10 @@ using Sitecore.Data.Items;
 
 namespace CSDemo.Contracts.Product
 {
-    public interface IProduct
+    public interface IProduct//: IEditableBase
     {
         Guid ID { get; set; }
+
         string Title { get; set; }
         string ProductId { get; set; }
         DateTime DateOfIntroduction { get; set; }

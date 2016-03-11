@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using CSDemo.Contracts;
 using CSDemo.Contracts.Product;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
@@ -14,12 +15,15 @@ using Sitecore.Data.Items;
 namespace CSDemo.Models.Product
 {
     [SitecoreType(AutoMap = true)]
-    public class Product : IProduct
+    public class Product : IProduct, IEditableBase
     {
         #region Properties
 
         [SitecoreId]
         public virtual Guid ID { get; set; }
+
+        [SitecoreInfo(SitecoreInfoType.Path)]
+        public virtual string Path { get; set; }
 
         [SitecoreInfo(SitecoreInfoType.DisplayName)]
         public virtual string Title { get; set; }
@@ -79,7 +83,17 @@ namespace CSDemo.Models.Product
 
         public virtual Item FirstImage { get; set; }
 
+        public virtual string DefaultVariant { get; set; }
+
         public IEnumerable<ProductVariant> ProductVariants { get; set; }
+
+        public virtual VariantBox VariantBox { get; set; }
+
+        public virtual VariantSize VariantSize { get; set; }
+
+        public IEnumerable<VariantColor> VariantColors { get; set; }
+
+        public IEnumerable<Product> RelatedProducts { get; set; } 
 
         public string CurrencyPrice
         {
@@ -96,7 +110,17 @@ namespace CSDemo.Models.Product
         {
             get
             {
-                return String.Format("{0:0.00}", Price);
+                var cultureInfo = Sitecore.Context.Culture;
+                return Price.ToString("c", cultureInfo);
+            }
+        }
+
+        public string VariantProdId
+        {
+            get
+            {
+                if (ProductId == null) return string.Empty;
+                return string.Format(Constants.Products.VariantIDFormat, ProductId.Replace(Constants.Common.Dash,Constants.Common.Underscore));
             }
         }
         #endregion
@@ -122,6 +146,7 @@ namespace CSDemo.Models.Product
             public const string Brand = "Brand";
             public const string ListPrice = "ListPrice";
             public const string FullDescription = "Full Description";
+            public const string RelationshipList = "Relationship List";
         }
 
         #endregion
