@@ -1,14 +1,22 @@
+using System;
 using System.Collections.Generic;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using Glass.Mapper.Sc.Fields;
 using Sitecore.Data.Items;
+using CSDemo.Contracts;
 
 namespace CSDemo.Models.Product
 {
     [SitecoreType(AutoMap = true)]
-    public class GeneralCategory
+    public class GeneralCategory : IEditableBase
     {
+        [SitecoreId]
+        public virtual Guid ID { get; set; }
+
+        [SitecoreInfo(SitecoreInfoType.Path)]
+        public virtual string Path { get; set; }
+
         [SitecoreInfo(SitecoreInfoType.Url)]
         public virtual string Url { get; set; } 
 

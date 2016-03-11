@@ -14,15 +14,18 @@
             <!-- CATEGORY - START -->
             @foreach (var category in Model.ToList())
             {
-                <div class="col-xs-4">
-                    <div class="category">
-                        <a href="@category.Url">
-                            @RenderImage(category.Images.ElementAt(0), t => t, new { @class = "img-responsive" })
-                            <div class="category-mask"></div>
-                            <h3 class="category-title">@category.Title <span>Collection</span></h3>
-                        </a>
+                using (BeginEditFrame(category.Path))
+                { 
+                    <div class="col-xs-4">
+                        <div class="category">
+                            <a href="@category.Url">
+                                @RenderImage(category.Images.ElementAt(0), t => t, new { @class = "img-responsive" })
+                                <div class="category-mask"></div>
+                                <h3 class="category-title">@category.Title <span>Collection</span></h3>
+                            </a>
+                        </div>
                     </div>
-                </div>
+                }
             }
             <!-- CATEGORY - END -->
         </div>

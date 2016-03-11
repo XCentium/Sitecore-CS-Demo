@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using CSDemo.Contracts;
 using CSDemo.Contracts.Product;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
@@ -17,11 +18,15 @@ namespace CSDemo.Models
 
 
     [SitecoreType(AutoMap = true)]
-    public partial class Category : ICategory
+    public partial class Category : ICategory,IEditableBase
     {
         #region Properties
         [SitecoreId]
         public virtual Guid ID { get; set; }
+
+        [SitecoreInfo(SitecoreInfoType.Path)]
+        public virtual string Path { get; set; }
+
         [SitecoreInfo(SitecoreInfoType.DisplayName)]
         public virtual string Name { get; set; }
         [SitecoreField(Fields.CatalogName)]

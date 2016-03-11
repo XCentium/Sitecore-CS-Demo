@@ -5,13 +5,17 @@
 }
 <section class="content">
     <div class="container">
-        @if (!string.IsNullOrWhiteSpace(Model.Title))
-        {
-            <h1>@Model.Title</h1>
-        }
-        @if (!string.IsNullOrWhiteSpace(Model.Content))
-        {
-            @Html.Raw(Model.Content)
+        @using (BeginEditFrame(Model.Path))
+        { 
+            
+            if (!string.IsNullOrWhiteSpace(Model.Title))
+            {
+                <h1>@Editable(Model, x => x.Title)</h1>
+            }
+            if (!string.IsNullOrWhiteSpace(Model.Content))
+            {
+                @Html.Raw(@Editable(Model, x => x.Content))
+            }
         }
     </div>
 </section>
