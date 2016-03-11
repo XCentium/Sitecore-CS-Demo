@@ -18,7 +18,10 @@
                     <div class="slide-body" style="background-color:black">
                         @Editable(slide, x => x.Content)
                     </div>
+            
+                    //this is needed as otherwise the content text hides behind the image
                     <br /><br /><br /><br /><br />
+            
                     <div>
                         @Editable(slide, x => x.Image)
                     </div>

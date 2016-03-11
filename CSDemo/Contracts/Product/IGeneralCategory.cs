@@ -12,7 +12,6 @@ namespace CSDemo.Contracts.Product
 {
     public interface IGeneralCategory 
     {
-        Guid ID { get; set; }
         string Title { get; set; }
         string Brand { get; set; }
         string Description { get; set; }

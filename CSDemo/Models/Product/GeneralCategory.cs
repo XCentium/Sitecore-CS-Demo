@@ -5,11 +5,12 @@ using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using Glass.Mapper.Sc.Fields;
 using Sitecore.Data.Items;
+using CSDemo.Contracts;
 
 namespace CSDemo.Models.Product
 {
     [SitecoreType(AutoMap = true)]
-    public class GeneralCategory : IGeneralCategory
+    public class GeneralCategory : IEditableBase, IGeneralCategory
     {
         [SitecoreId]
         public virtual Guid ID { get; set; }
