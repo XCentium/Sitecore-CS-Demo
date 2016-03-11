@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CSDemo.Contracts.Product;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using Glass.Mapper.Sc.Fields;
@@ -9,7 +10,7 @@ using CSDemo.Contracts;
 namespace CSDemo.Models.Product
 {
     [SitecoreType(AutoMap = true)]
-    public class GeneralCategory : IEditableBase
+    public class GeneralCategory : IEditableBase, IGeneralCategory
     {
         [SitecoreId]
         public virtual Guid ID { get; set; }
