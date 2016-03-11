@@ -5,7 +5,6 @@
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<CSDemo.Models.Product.Product>>
 @if (Model != null)
 {
-
     <!-- ==========================
         GRID PRODUCTS - START
     =========================== -->
@@ -25,10 +24,9 @@
                             <article class="product-item">
                                 @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { Width = 200, Height = 300, AS = 1, @class = "img-responsive"}, isEditable: false)
                                 <h3>
-                                    <a href="@featuredProduct.Url)">@featuredProduct.Title)</a>
+                                    <a href="@featuredProduct.Url)">@featuredProduct.Title</a>
                                     
                                 </h3>
-
                                 <div class="product-rating">
                                     @if (IsInEditingMode)
                                     {
@@ -45,8 +43,6 @@
                                 </div>
  
                                 <span class="price">
-                                    @*<ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>*@
-
                                     @if (IsInEditingMode)
                                     { 
                                         <ins><span class="amount">@Editable(featuredProduct, x => x.Price)</span></ins>
@@ -79,7 +75,6 @@
                                     <li class="clearfix">
                                         <a href="@featuredProduct.Url">
                                             @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { Width = 60, Height = 80, AS = 1, @class = "img-responsive" }, isEditable: false)
-
                                             <h3>@featuredProduct.Title</h3>
                                         </a>
                                         <div class="product-rating">
@@ -97,8 +92,6 @@
                                             }
                                         </div>
                                         <span class="price">
-                                            @*<ins><span class="amount">@Editable(featuredProduct, x => x.Price.ToString("C"))</span></ins>*@
-
                                             @if (IsInEditingMode)
                                             {
                                                 <ins><span class="amount">@Editable(featuredProduct, x => x.Price)</span></ins>
@@ -107,7 +100,6 @@
                                             {
                                                 <ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>
                                             }
-
                                         </span>
                                     </li>
                                 <!-- PRODUCT - END -->
@@ -170,6 +162,4 @@
     <!-- ==========================
         GRID PRODUCTS - END
     =========================== -->
-
-        
 }
