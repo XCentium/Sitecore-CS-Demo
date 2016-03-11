@@ -2,7 +2,7 @@
 @using System.Linq
 @using Sitecore.Links
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<CSDemo.Models.Navigation.NavigationItem>>
-@if (Model != null)
+@if (Model == null)
 {
     return;
 }
@@ -30,10 +30,10 @@
                 }
                 <li class="hidden-xs hidden-sm col-md-3">
                     @RenderImage(navigationItem.MegaMenuImage, x => x, new
-                   {
-                       @class = "img-responsive center-block",
-                       @style = "padding-bottom: 10px; display: block; margin - right: auto; margin - left: auto; padding - bottom: 10px;"
-                   }, isEditable: false)
+               {
+                   @class = "img-responsive center-block",
+                   @style = "padding-bottom: 10px; display: block; margin - right: auto; margin - left: auto; padding - bottom: 10px;"
+               }, isEditable: false)
                 </li>
             </ul>
         </li>

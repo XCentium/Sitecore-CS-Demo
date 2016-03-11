@@ -4,7 +4,7 @@
 @using System.Linq;
 @using CSDemo.Models.Product
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<CSDemo.Models.Product.GeneralCategory>>
-@if (Model != null && Model.Any())
+@if (Model == null && !Model.Any())
 {
     return;
 }
