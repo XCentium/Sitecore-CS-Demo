@@ -56,14 +56,9 @@ namespace CSDemo.Controllers
 
         public ActionResult FeaturedCategories()
         {
-            var categories = new List<GeneralCategory>();
             var item = RenderingContext.Current.Rendering.Item; // csdemo >> home
             var featuredCategories = item.GlassCast<FeaturedCategories>();
-            if (featuredCategories?.Categories != null && featuredCategories.Categories.Any())
-            {
-                categories.AddRange(featuredCategories.Categories);
-            }
-            return View(categories);
+            return View(featuredCategories.Categories);
         }
 
         public ActionResult Categories()
