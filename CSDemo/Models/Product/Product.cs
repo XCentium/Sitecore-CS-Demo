@@ -121,6 +121,7 @@ namespace CSDemo.Models.Product
             {
                 if (ProductId == null) return string.Empty;
                 return string.Format(Constants.Products.VariantIDFormat, ProductId.Replace(Constants.Common.Dash,Constants.Common.Underscore));
+
             }
         }
         #endregion
