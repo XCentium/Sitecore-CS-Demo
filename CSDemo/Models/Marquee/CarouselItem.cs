@@ -14,15 +14,9 @@ namespace CSDemo.Models.Marquee
     [SitecoreType(AutoMap = true)]
     public class CarouselItem : ICarouselItem, IEditableBase
     {
-        [SitecoreField]
         public virtual Image Image { get; set; }
-
-        [SitecoreField]
         public virtual string Content { get; set; }
-
-        [SitecoreId]
         public virtual Guid ID { get; set; }
-
         [SitecoreInfo(SitecoreInfoType.Path)]
         public virtual string Path { get; set; }
     }

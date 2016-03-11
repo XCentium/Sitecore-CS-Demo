@@ -22,16 +22,13 @@ namespace CSDemo.Models.Navigation
             public const string MegaMenuImage = "Mega Menu Image";
             public const string MegaMenuTitle = "Mega Menu Title";
         }
-
-        [SitecoreField]
+        [SitecoreInfo(SitecoreInfoType.Path)]
+        public virtual string Path { get; set; }
         public Link Link { get; set; }
-        
         [SitecoreField(NavigationConstants.MegaMenuTitle)]
         public string MegaMenuTitle { get; set; }
-
         [SitecoreField(NavigationConstants.MegaMenuImage)]
         public virtual Image MegaMenuImage { get; set; }
-
         [SitecoreChildren]
         public virtual IEnumerable<MegaMenuNavigationItem> MegaMenuItems { get; set; } 
     }

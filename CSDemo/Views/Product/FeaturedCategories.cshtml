@@ -6,14 +6,18 @@
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<CSDemo.Models.Product.GeneralCategory>>
 @if (Model != null && Model.Any())
 {
-    <!-- ==========================
-        CATEGORIES - START
-    =========================== -->
-    <section class="content categories"> 
-        <div class="row row-no-padding"> 
-            <!-- CATEGORY - START -->
-            @foreach (var category in Model.ToList())
+    return;
+}
+<!-- ==========================
+    CATEGORIES - START
+=========================== -->
+<section class="content categories">
+    <div class="row row-no-padding">
+        <!-- CATEGORY - START -->
+        @foreach (var category in Model.ToList())
             {
+                using (BeginEditFrame(category.Path))
+                {
                 <div class="col-xs-4">
                     <div class="category">
                         <a href="@category.Url">
@@ -24,12 +28,11 @@
                     </div>
                 </div>
             }
-            <!-- CATEGORY - END -->
-        </div>
+        }
+        <!-- CATEGORY - END -->
+    </div>
 
-    </section>
-    <!-- ==========================
-        CATEGORIES - END
-    =========================== -->
-}
-
+</section>
+<!-- ==========================
+    CATEGORIES - END
+=========================== -->
