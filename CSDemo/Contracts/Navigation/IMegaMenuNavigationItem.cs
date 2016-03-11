@@ -5,6 +5,7 @@ namespace CSDemo.Contracts.Navigation
 {
     public interface IMegaMenuNavigationItem
     {
+        string Path { get; set; }
         string Title { get; set; }
         IEnumerable<Item> Links { get; set; }
     }

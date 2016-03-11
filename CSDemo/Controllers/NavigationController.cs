@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using CSDemo.Models.Navigation;
 using Glass.Mapper.Sc;
@@ -24,20 +25,11 @@ namespace CSDemo.Controllers
 
             // TBD: fill up a view model
             var datasource = RenderingContext.Current.Rendering.DataSource;
-            if (!datasource.IsEmptyOrNull())
-            {
-                var parentItem = _context.Database.GetItem(datasource);
-                if (parentItem == null || !parentItem.HasChildren) return View(navigationItems);
-                var children = parentItem.Children;
-                foreach (Item child in children)
-                {
-                    var navigationItem = child.GlassCast<NavigationItem>();
-                    if (navigationItem != null)
-                    {
-                        navigationItems.Add(navigationItem);
-                    }
-                }
-            }
+            if (datasource.IsEmptyOrNull()) return View(navigationItems);
+            var parentItem = _context.Database.GetItem(datasource);
+            if (parentItem == null || !parentItem.HasChildren) return View(navigationItems);
+            var children = parentItem.Children.ToList();
+            navigationItems.AddRange(children.Select(child => child.GlassCast<NavigationItem>()).Where(navigationItem => navigationItem != null));
             return View(navigationItems);
         }
 
