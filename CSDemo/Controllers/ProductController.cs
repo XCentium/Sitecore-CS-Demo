@@ -125,6 +125,11 @@ namespace CSDemo.Controllers
             return View(categoryProduct);
         }
 
+        /// <summary>
+        /// CSDEMO#89
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private IEnumerable<Product> FetchRelatedProducts(Guid id)
         {
             List<Product> relatedProducts = new List<Product>();
@@ -135,10 +140,7 @@ namespace CSDemo.Controllers
             IEnumerable<Item> productRelationshipTargets = control.GetProductRelationshipsTargets();
             IEnumerable<Item> relationshipTargets = productRelationshipTargets as Item[] ?? productRelationshipTargets.ToArray();
             if (productRelationshipTargets == null || !relationshipTargets.Any()) return relatedProducts;
-            foreach (var target in relationshipTargets)
-            {
-                SearchForProduct(target, target.Name, relatedProducts);
-            }
+            relatedProducts.AddRange(relationshipTargets.Select(t => t.GlassCast<Product>()).Where(t => t != null));
             return relatedProducts;
         }
 
