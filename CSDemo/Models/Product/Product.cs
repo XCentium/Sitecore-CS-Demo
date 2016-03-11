@@ -119,7 +119,11 @@ namespace CSDemo.Models.Product
         {
             get
             {
-                if (ProductId == null) { return string.Empty;  }
+                if (ProductId == null) { 
+                    
+                    return string.Empty;  
+                
+                }
                 return String.Format(Constants.Products.VariantIDFormat, ProductId.Replace(Constants.Common.Dash,Constants.Common.Underscore));
             }
         }
