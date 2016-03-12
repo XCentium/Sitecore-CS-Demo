@@ -227,6 +227,7 @@
     <Compile Include="Controllers\GeneralSearchController.cs" />
     <Compile Include="Models\Account\AccountHelper.cs" />
     <Compile Include="Models\Account\LoginModel.cs" />
+    <Compile Include="Models\Account\Order.cs" />
     <Compile Include="Models\Account\OrderAddress.cs" />
     <Compile Include="Models\Account\OrderDetailViewModel.cs" />
     <Compile Include="Models\Account\OrderLine.cs" />
