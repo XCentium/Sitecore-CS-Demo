@@ -544,6 +544,8 @@
     <Content Include="Views\Account\OrderDetail.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
     <Content Include="Views\Product\RelatedProducts.cshtml" />
+    <Content Include="Views\Page\Layouts\Scripts.cshtml" />
+    <Content Include="Views\Page\Layouts\Styles.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
