@@ -163,6 +163,7 @@ namespace CSDemo.Models.Product
         /// <returns></returns>
         internal static CategoryProductViewModel GetCategoryProducts(PaginationViewModel model)
         {
+            var cartHelper = new CartHelper();
             var categoryProductVM = new CategoryProductViewModel();
 
             categoryProductVM.PaginationViewModel = model;
@@ -239,6 +240,8 @@ namespace CSDemo.Models.Product
                             BuildUIVariants(product);
 
                         }
+
+                        var stockInfo = cartHelper.GetProductStockInformation(product.ProductId, product.CatalogName);
                     }
                 }
 
@@ -704,6 +707,7 @@ namespace CSDemo.Models.Product
         internal static Product GetProductByNameAndCategory(string productID, string categoryID)
         {
             Product product = new Product();
+            var cartHelper = new CartHelper();
             var productResult = GetItemByName(productID);
             if (productResult != null)
             {
@@ -712,6 +716,8 @@ namespace CSDemo.Models.Product
                 product.ProductVariants = productItem.GetChildren().Select(x => x.GlassCast<ProductVariant>());
 
                 BuildUIVariants(product);
+       
+                product.StockInformation = cartHelper.GetProductStockInformation(product.ProductId, product.CatalogName);
             }
 
             return product;

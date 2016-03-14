@@ -253,6 +253,16 @@ namespace CSDemo.Models.Checkout.Cart
             return cart;
         }
 
+        internal StockInformation GetProductStockInformation(string productId, string catalogName)
+        {
+            var products = new List<InventoryProduct> { new CommerceInventoryProduct { ProductId = productId, CatalogName = catalogName } };
+            var stockInfoRequest = new GetStockInformationRequest(this.ShopName, products, StockDetailsLevel.Count);
+            var stockInfoResult = this._inventoryServiceProvider.GetStockInformation(stockInfoRequest);
+            return stockInfoResult.StockInformation.FirstOrDefault();
+        }
+
+
+
         private void UpdateStockInformation(CommerceCartLine cartLine, string catalogName)
         {
 
