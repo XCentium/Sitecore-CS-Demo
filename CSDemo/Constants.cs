@@ -90,6 +90,7 @@ namespace CSDemo
         {
             public const string Dash = "-";
             public const string Underscore = "_";
+            public const string Space = " ";
 
         }
 
@@ -110,6 +111,14 @@ namespace CSDemo
             public const string BillingAddress = "Billing";
             public const string ShippingAddress = "Shipping";
             public const string VariantIDFormat = "_{0}";
+            public const string CurrencyFormat = "C2";
+            public const string DateFormat = "MMMM dd, yyyy hh:mm";
+            public const string DateTimeFormat = "MMMM dd, yyyy hh:mm";
+            public const string VariantColorName = "ProductColor";
+            public const string VariantColorDisplay = "Block";
+            public const string VariantColorDisplayNone = "None";
+            public const string VariantColorLineFormat = "{0}|{1}|{2}";
+            public const string VariantColorNameFormat = "{0}{1}";
         }
 
     }

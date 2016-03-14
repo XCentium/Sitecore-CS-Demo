@@ -301,7 +301,7 @@ namespace CSDemo.Models.Product
                     {
                         var variantSizeLine = new VariantSizeLine();
                         variantSizeLine.Size = s.Size;
-                        variantSizeLine.Value = string.Format("{0}|{1}|{2}", s.VariantID, s.Price, s.Images);
+                        variantSizeLine.Value = string.Format(Constants.Products.VariantColorLineFormat, s.VariantID, s.Price, s.Images);
 
                         variantSizeLines.Add(variantSizeLine);
 
@@ -316,15 +316,15 @@ namespace CSDemo.Models.Product
                         {
 
                             var variantColor = new VariantColor();
-                            variantColor.Name = string.Format("{0}{1}", s.Size, "ProductColor");
-                            variantColor.Display = (pos == 0) ? "Block" : "None";
+                            variantColor.Name = string.Format(Constants.Products.VariantColorNameFormat, s.Size, Constants.Products.VariantColorName);
+                            variantColor.Display = (pos == 0) ? Constants.Products.VariantColorDisplay : Constants.Products.VariantColorDisplayNone;
 
                             var variantColorLines = new List<VariantColorLine>();
                             foreach (var c in availColors)
                             {
                                 var variantColorLine = new VariantColorLine();
                                 variantColorLine.Color = c.Color;
-                                variantColorLine.Value = string.Format("{0}|{1}|{2}", c.VariantID, c.Price, c.Images);
+                                variantColorLine.Value = string.Format(Constants.Products.VariantColorLineFormat, c.VariantID, c.Price, c.Images);
 
                                 variantColorLines.Add(variantColorLine);
                             }
@@ -348,14 +348,14 @@ namespace CSDemo.Models.Product
                     {
                         var pos = 0;
                         var variantColor = new VariantColor();
-                        variantColor.Name = "ProductColor";
-                        variantColor.Display = "Block";
+                        variantColor.Name = Constants.Products.VariantColorName; 
+                        variantColor.Display = Constants.Products.VariantColorDisplay;
                         var variantColorLines = new List<VariantColorLine>();
                         foreach (var c in availColors)
                         {
                             var variantColorLine = new VariantColorLine();
                             variantColorLine.Color = c.Color;
-                            variantColorLine.Value = string.Format("{0}|{1}|{2}", c.VariantID, c.Price, c.Images);
+                            variantColorLine.Value = string.Format(Constants.Products.VariantColorLineFormat, c.VariantID, c.Price, c.Images);
 
                             variantColorLines.Add(variantColorLine);
                             if (pos < 1) { product.DefaultVariant = c.VariantID; }
@@ -534,11 +534,11 @@ namespace CSDemo.Models.Product
                     var orderHead = cartHelper.GetOrderHead(order.OrderID, order.CustomerId, order.ShopName);
                     var commerceOrderHead = orderHead.Order as CommerceOrder;
 
-                    orderDetail.OrderDate = commerceOrderHead.Created.ToString("MMMM dd, yyyy");
+                    orderDetail.OrderDate = commerceOrderHead.Created.ToString(Constants.Products.DateFormat);
                     orderDetail.OrderID = commerceOrderHead.OrderID;
                     orderDetail.OrderStatus = commerceOrderHead.Status;
                     orderDetail.UserID = commerceOrderHead.UserId.ToString();
-                    orderDetail.TotalPrice = commerceOrderHead.Total.Amount.ToString("C2");
+                    orderDetail.TotalPrice = commerceOrderHead.Total.Amount.ToString(Constants.Products.CurrencyFormat);
                     orderDetail.NumberofItems = commerceOrderHead.LineItemCount;
                     orderDetail.ExternalID = commerceOrderHead.ExternalId.ToString();
 
@@ -567,15 +567,15 @@ namespace CSDemo.Models.Product
             if (commerceOrderHead != null)
             {
                 orderDetail.OrderID = commerceOrderHead.OrderID;
-                orderDetail.OrderDate = commerceOrderHead.Created.ToString("MMMM dd, yyyy hh:mm");
+                orderDetail.OrderDate = commerceOrderHead.Created.ToString(Constants.Products.DateTimeFormat);
                 orderDetail.NumberofItems = commerceOrderHead.LineItemCount;
 
                 var commerceTotal = commerceOrderHead.Total as CommerceTotal;
 
-                orderDetail.SubTotalPrice = commerceTotal.Subtotal.ToString("C2");
-                orderDetail.TotalPrice = commerceTotal.Amount.ToString("C2");
-                orderDetail.Tax = commerceTotal.TaxTotal.Amount.ToString("C2");
-                orderDetail.ShippingCost = commerceTotal.ShippingTotal.ToString("C2");
+                orderDetail.SubTotalPrice = commerceTotal.Subtotal.ToString(Constants.Products.CurrencyFormat);
+                orderDetail.TotalPrice = commerceTotal.Amount.ToString(Constants.Products.CurrencyFormat);
+                orderDetail.Tax = commerceTotal.TaxTotal.Amount.ToString(Constants.Products.CurrencyFormat);
+                orderDetail.ShippingCost = commerceTotal.ShippingTotal.ToString(Constants.Products.CurrencyFormat);
                 orderDetail.OrderStatus = commerceOrderHead.Status;
                 orderDetail.UserID = commerceOrderHead.UserId;
                 orderDetail.ExternalID = commerceOrderHead.ExternalId;
@@ -652,19 +652,19 @@ namespace CSDemo.Models.Product
             foreach (CommerceCartLine line in Lines)
             {
                 //   var line = cartLine as CommerceCartLine;
-                var ol = new OrderLine();
-                ol.UnitPrice = line.Product.Price.Amount.ToString("C2");
-                ol.Quantity = line.Quantity;
-                ol.SubTotal = (line.Product.Price.Amount * line.Quantity).ToString("C2");
+                var orderLine = new OrderLine();
+                orderLine.UnitPrice = line.Product.Price.Amount.ToString(Constants.Products.CurrencyFormat);
+                orderLine.Quantity = line.Quantity;
+                orderLine.SubTotal = (line.Product.Price.Amount * line.Quantity).ToString(Constants.Products.CurrencyFormat);
                 var product = line.Product as CommerceCartProduct;
-                ol.ProductName = product.DisplayName;
+                orderLine.ProductName = product.DisplayName;
                 var sItem = GetItemByProductID(product.ProductId);
                 if (sItem != null)
                 {
-                    ol.ImageUrl = GetFirstImageFromProductItem(sItem.GetItem());
-                    ol.Url = LinkManager.GetItemUrl(sItem.GetItem());
+                    orderLine.ImageUrl = GetFirstImageFromProductItem(sItem.GetItem());
+                    orderLine.Url = LinkManager.GetItemUrl(sItem.GetItem());
                 }
-                orderLines.Add(ol);
+                orderLines.Add(orderLine);
             }
 
             return orderLines;
