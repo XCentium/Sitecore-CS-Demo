@@ -5,69 +5,69 @@
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<CSDemo.Models.Product.Product>>
 @if (Model != null)
 {
-    <!-- ==========================
-         GRID PRODUCTS - START
-     =========================== -->
-    <section class="content border-top">
-        <div class="container">
-            <div class="row">
-                <!-- ==========================
-                    FEATURED PRODUCT HERO'S
-                =========================== -->
-                @if (Model.Count() > 0)
+    <div class="releated-products">
+        <h2>Related Products</h2>
+        <div class="row grid" id="products">
+            @foreach (var product in Model)
+            {
+                @using (BeginEditFrame(product.Path))
                 {
-                    foreach (var featuredProduct in Model.Take(4).ToList())
-                    {
-                        using (BeginEditFrame(featuredProduct.Path))
-                        {
-                            // 2 columns on phones, 4 columns on everything else
-                            // < 768 phone, > everything else desktop tablet
-                            <div class="col-xs-6 col-sm-3 grid-products">
-                                <article class="product-item">
-                                    @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { Width = 200, Height = 300, AS = 1, @class = "img-responsive" }, isEditable: false)
-                                    <h3>
-                                        <a href="@featuredProduct.Url">@featuredProduct.Title</a>
+                    <div class="col-sm-3 col-xs-6">
+                        <article class="product-item">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="product-overlay">
+                                        <div class="product-mask"></div>
+                                        <a href="@product.Url" class="product-permalink"></a>
+                                        @RenderImage(product.Images.ElementAt(0), x => x, new { AS = 1, @class = "img-responsive" }, isEditable: false)
 
-                                    </h3>
-                                    <div class="product-rating">
-                                        @if (IsInEditingMode)
-                                        {
-                                            @Editable(featuredProduct, x => x.Rating)
-                                        }
-                                        else
-                                        {
-                                            <i class="fa fa-star@(featuredProduct.Rating>0 ? string.Empty:"-o" )"></i>
-                                            <i class="fa fa-star@(featuredProduct.Rating>1 ? string.Empty:"-o" )"></i>
-                                            <i class="fa fa-star@(featuredProduct.Rating>2 ? string.Empty:"-o" )"></i>
-                                            <i class="fa fa-star@(featuredProduct.Rating>3 ? string.Empty:"-o" )"></i>
-                                            <i class="fa fa-star@(featuredProduct.Rating>4 ? string.Empty:"-o" )"></i>
-                                        }
+                                        @*@*Per Vasiliy, leave out for now*@
+                                        @*<div class="product-quickview">
+                                                <a href="@product.Url" class="btn btn-quickview" data-toggle="modal" data-target="#product-quickview">View Product</a>
+                                            </div>*@
                                     </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="product-body">
+                                        <h3>
+                                            <a href="@product.Url">@product.Title</a>
+                                        </h3>
+                                        @*Per Vasiliy, add for now*@
+                                        <div class="product-rating">
+                                            @if (IsInEditingMode)
+                                            {
+                                                @Editable(product, x => x.Rating)
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-star@(product.Rating>0 ? string.Empty:"-o" )"></i>
+                                                <i class="fa fa-star@(product.Rating>1 ? string.Empty:"-o" )"></i>
+                                                <i class="fa fa-star@(product.Rating>2 ? string.Empty:"-o" )"></i>
+                                                <i class="fa fa-star@(product.Rating>3 ? string.Empty:"-o" )"></i>
+                                                <i class="fa fa-star@(product.Rating>4 ? string.Empty:"-o" )"></i>
+                                            }
+                                        </div>
+                                        <span class="price">
+                                            @*Per Vasiliy, leave out for now*@
+                                            @*<ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>*@
 
-                                    <span class="price">
-                                        @*<ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>*@
-                                        @if (IsInEditingMode)
-                                        {
-                                            <ins><span class="amount">@Editable(featuredProduct, x => x.Price)</span></ins>
-                                        }
-                                        else
-                                        {
-                                            <ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>
-                                        }
-                                    </span>
-                                </article>
+                                            @if (IsInEditingMode)
+                                            {
+                                                <ins><span class="amount">@Editable(product, x => x.Price)</span></ins>
+                                            }
+                                            else
+                                            {
+                                                <ins><span class="amount">@product.Price.ToString("C")</span></ins>
+                                            }
+                                        </span>
+                                        <br /><br />
+                                    </div>
+                                </div>
                             </div>
-                        }
-                    }
+                        </article>
+                    </div>
                 }
-                <!-- ==========================
-                END FEATURED PRODUCT HEROS
-                =========================== -->
-            </div>
+            }
         </div>
-    </section>
-    <!-- ==========================
-        GRID PRODUCTS - END
-    =========================== -->
-
+    </div>
 }

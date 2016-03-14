@@ -152,16 +152,15 @@
                                 var idcomments_post_id;
                                 var idcomments_post_url;
                             </script>
-                            <span id="IDCommentsPostTitle" style="display:none"></span>
+                            <span id="IDCommentsPostTitle" style="display: none"></span>
                             <script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
-                            <!-- End:   Intense Debate Scripting (comments service) -->
+                            <!-- End: Intense Debate Scripting (comments service) -->
                         </div>
                     </div>
                 </div>
             </div>
+            @Html.Partial("~/Views/Product/RelatedProducts.cshtml", Model.RelatedProducts)
         </div>
         }
-
-        @Html.Partial("~/Views/Product/RelatedProducts.cshtml", Model.RelatedProducts)
     </section>
 }
