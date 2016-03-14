@@ -86,6 +86,10 @@
       <HintPath>..\Lib\Sitecore\Sitecore.Analytics.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Sitecore.Analytics.Automation">
+      <HintPath>..\Lib\Sitecore\Sitecore.Analytics.Automation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Sitecore.Analytics.Core, Version=8.0.5401.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Sitecore\Sitecore.Analytics.Core.dll</HintPath>
@@ -223,6 +227,7 @@
     <Compile Include="Controllers\GeneralSearchController.cs" />
     <Compile Include="Models\Account\AccountHelper.cs" />
     <Compile Include="Models\Account\LoginModel.cs" />
+    <Compile Include="Models\Account\Order.cs" />
     <Compile Include="Models\Account\OrderAddress.cs" />
     <Compile Include="Models\Account\OrderDetailViewModel.cs" />
     <Compile Include="Models\Account\OrderLine.cs" />
