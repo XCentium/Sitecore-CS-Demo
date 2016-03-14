@@ -45,7 +45,7 @@
                         <i class="fa fa-star@(Model.Rating>4 ? string.Empty:"-o" )"></i>
                     </div>
                     <div class="buttons">
-                        <a href="javascript:void(0)" onclick="AddProductToCart('@Model.ID.ToString()', '@Sitecore.Context.Item.ID.ToString()')" class="btn btn-primary add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
                 </div>
             </div>

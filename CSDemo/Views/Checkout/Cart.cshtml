@@ -50,7 +50,7 @@
                                                     <td class="col-xs-2 text-center"><span>$@unitPrice</span></td>
                                                     <td class="col-xs-2 col-md-1"><div class="form-group"><input type="text" name="quantity" class="form-control" value="@cartItem.Quantity"><input type="hidden" name="externalID" class="form-control" value="@cartItem.ExternalID"></div></td>
                                                     <td class="col-xs-2 text-center"><span><b>$@subTotal</b></span></td>
-                                                    <td class="col-xs-1 text-center"><a href="javascript:void(0)" onclick="RemoveProductFromCart('@cartItem.ExternalID');$(this).parent().parent().hide();" class="btn btn-primary"><i class="fa fa-times"></i></a></td>
+                                                    <td class="col-xs-1 text-center"><a href="javascript:void(0)" data-externalid="@cartItem.ExternalID" class="btn btn-primary RemoveProduct"><i class="fa fa-times"></i></a></td>
                                                 </tr>
                                             }
 
@@ -58,7 +58,7 @@
                                     </table>
                                 </div>
                                 <a href="/productlisting" class="btn btn-inverse">Continue Shopping</a>
-                                <a href="/cart" onclick="SubmitCartFormData(this)" class="btn btn-inverse update-cart">Update Shopping Cart</a>
+                                <a href="/cart" class="btn btn-inverse update-cart">Update Shopping Cart</a>
                             </div>
 
                             <div class="box">

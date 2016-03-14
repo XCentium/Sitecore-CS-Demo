@@ -87,39 +87,36 @@
 
                                                 @{
                                                     var provider = new Sitecore.Commerce.Services.Shipping.ShippingServiceProvider();
-                                        var shippingRequest = new Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.CommerceGetShippingMethodsRequest(Sitecore.Context.Language.ToString());
-                                        var shippingResult = provider.GetShippingMethods(shippingRequest);
-                                        var count = 0;
-}
+                                                    var shippingRequest = new Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.CommerceGetShippingMethodsRequest(Sitecore.Context.Language.ToString());
+                                                    var shippingResult = provider.GetShippingMethods(shippingRequest);
+                                                    var count = 0;
+                                                }
 
-@foreach (var shippingMethod in shippingResult.ShippingMethods)
-{
-    count++;
+                                                @foreach (var shippingMethod in shippingResult.ShippingMethods)
+                                                {
+                                                    count++;
 
-    <div class="radio">
-        <input type="radio" name="radio_shipping_2_options" value="@shippingMethod.ExternalId" id="radio_shipping_2_@count" required>
-        <label for="radio_shipping_2_@count">@shippingMethod.Description<span> </span></label>
+                                                    <div class="radio">
+                                                        <input type="radio" name="radio_shipping_2_options" value="@shippingMethod.ExternalId" id="radio_shipping_2_@count" required>
+                                                        <label for="radio_shipping_2_@count">@shippingMethod.Description<span> </span></label>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <a href="/checkout/payment" class="btn btn-primary btn-lg pull-right SubmitShipping">Continue</a>
+                        </div>
+                    </form>
+
+                </article>
+            </div>
+
+        </div>
     </div>
-
-}
-
-
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="clearfix">
-    <a href="/checkout/payment" onclick="SubmitShippingFormData(this);" class="btn btn-primary btn-lg pull-right ">Continue</a>
-</div>
-</form>
-
-</article>
-</div>
-
-</div>
-</div>
 </section>
 <!-- ==========================
     MY ACCOUNT - END

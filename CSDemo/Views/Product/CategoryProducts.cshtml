@@ -159,7 +159,7 @@
                                                         @if (product.VariantSize != null)
                                                         {
                                                             <div class="form-group">
-                                                                <select name="ProductSize" id="@string.Concat("ProductSize", product.VariantProdId)" onchange="DoProductSizeChange('@string.Concat("#ProductSize", product.VariantProdId)', '@product.VariantProdId')" class="form-control">
+                                                                <select name="ProductSize" id="@string.Concat("ProductSize", product.VariantProdId)" data-objid="@string.Concat("#ProductSize", product.VariantProdId)" data-num="@product.VariantProdId" class="form-control ProductSize">
                                                                     @foreach (var size in product.VariantSize.VariantSizeLines)
                                                                     {
                                                                         <option value="@size.Value">@size.Size</option>
@@ -174,7 +174,7 @@
                                                             <div class="form-group">
                                                                 @foreach (var variantColor in product.VariantColors)
                                                                 {
-                                                                    <select name="@variantColor.Name" id="@string.Concat(variantColor.Name, product.VariantProdId)" style="display:@variantColor.Display" onchange="DoProductColorChange(this.value, '@product.VariantProdId')" class="@string.Concat("ProductColor", product.VariantProdId) form-control">
+                                                                    <select name="@variantColor.Name" id="@string.Concat(variantColor.Name, product.VariantProdId)" style="display:@variantColor.Display" data-num="@product.VariantProdId" class="@string.Concat("ProductColor", product.VariantProdId) ProductColor form-control">
                                                                         @foreach (var color in variantColor.VariantColorLines)
                                                                         {
                                                                             <option value="@color.Value">@color.Color</option>
@@ -185,7 +185,7 @@
                                                         }
                                                         <div class="buttons">
                                                             <a href="" class="btn btn-primary btn-sm"><i class="fa fa-exchange"></i></a>
-                                                            <a href="javascript:void(0)" onclick="AddProductToCart('@product.ProductId', '@Sitecore.Data.ID.Parse(product.ID).ToString()')" class="btn btn-primary btn-sm add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                            <a href="javascript:void(0)" data-formid="@product.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(product.ID).ToString()" class="btn btn-primary btn-sm add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                             <a href="" class="btn btn-primary btn-sm"><i class="fa fa-heart"></i></a>
                                                         </div>
                                                     </form>

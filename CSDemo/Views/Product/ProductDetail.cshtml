@@ -81,7 +81,7 @@
                                                         <label>Size:</label>
                                                     </div>
                                                     <div class="form-group">
-                                                        <select name="ProductSize" id="ProductSize" onchange="DoProductSizeChange('#ProductSize', '@Model.VariantProdId')" class="form-control">
+                                                        <select name="ProductSize" id="ProductSize" data-objid="#ProductSize" data-num="@Model.VariantProdId" onchange="DoProductSizeChange('#ProductSize', '@Model.VariantProdId')" class="form-control ProductSize">
                                                             @foreach (var size in Model.VariantSize.VariantSizeLines)
                                                             {
                                                                 <option value="@size.Value">@size.Size</option>
@@ -101,7 +101,7 @@
                                                     <div class="form-group">
                                                         @foreach (var variantColor in Model.VariantColors)
                                                         {
-                                                            <select name="@variantColor.Name" id="@string.Concat(variantColor.Name, Model.VariantProdId)" style="display:@variantColor.Display" onchange="DoProductColorChange(this.value, '@Model.VariantProdId')" class="@string.Concat("ProductColor",Model.VariantProdId) form-control">
+                                                            <select name="@variantColor.Name" id="@string.Concat(variantColor.Name, Model.VariantProdId)" style="display:@variantColor.Display" data-num="@Model.VariantProdId" class="@string.Concat("ProductColor",Model.VariantProdId) ProductColor form-control">
                                                                 @foreach (var color in variantColor.VariantColorLines)
                                                                 {
                                                                     <option value="@color.Value">@color.Color</option>
@@ -113,7 +113,7 @@
                                             </div>
                                         }
                                         <div class="col-xs-3 col-sm-12">
-                                            <a href="javascript:void(0)" onclick="AddProductToCart('@Model.ProductId', '@Sitecore.Data.ID.Parse(Model.ID).ToString()')" class="btn btn-primary add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </div>
                                     </div>
                                 </div>
