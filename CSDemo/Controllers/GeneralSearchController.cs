@@ -51,18 +51,49 @@ namespace CSDemo.Controllers
             [Bind(Prefix = Constants.QueryStrings.SearchQuery)] string query,
             [Bind(Prefix = Constants.QueryStrings.Facets)] string facetValues,
             [Bind(Prefix = Constants.QueryStrings.Sort)] string sortField = "Title",
-            [Bind(Prefix = Constants.QueryStrings.PageSize)] int pageSize = 50,
+            [Bind(Prefix = Constants.QueryStrings.PageSize)] int pageSize = 2,
             [Bind(Prefix = Constants.QueryStrings.SortDirection)] CommerceConstants.SortDirection sortDirection =
                 CommerceConstants.SortDirection.Desc,
             [Bind(Prefix = Constants.QueryStrings.Paging)] int pageNumber = 1)
         {
+            
             var searchModel = new Search();
             if (string.IsNullOrWhiteSpace(query)) return View(searchModel);
             facetValues = HttpUtility.UrlDecode(facetValues);
-            var searchInfo = GetSearchInfo(query, pageNumber, facetValues, sortField, pageSize, sortDirection);
 
-            searchModel = GetSearchModel(searchInfo.SearchOptions, searchInfo.SearchQuery, searchInfo.CatalogName);
+            var theSortField = sortField; 
 
+            
+            if(sortField == Constants.Products.Title){
+                theSortField = "DisplayName";
+                sortDirection = CommerceConstants.SortDirection.Asc;
+            }
+
+
+            if(sortField == Constants.Products.OrderByPriceAsc){
+                theSortField = "Price";
+                sortDirection = CommerceConstants.SortDirection.Asc;
+            }
+
+            if(sortField == Constants.Products.OrderByPriceDesc){
+                theSortField = "Price";
+                sortDirection = CommerceConstants.SortDirection.Desc;
+            }
+
+                        
+            if(sortField == Constants.Products.OrderByNewness){
+                theSortField = "DateOfIntroduction";
+            }
+
+            if(sortField == Constants.Products.OrderByRatings){
+                theSortField = "Rating";
+            }
+
+
+            var searchInfo = GetSearchInfo(query, pageNumber, facetValues, theSortField, pageSize, sortDirection);
+
+            searchModel = GetSearchModel(searchInfo.SearchOptions, searchInfo.SearchQuery, searchInfo.CatalogName,pageSize,pageNumber,sortField);
+                    
             return View(searchModel);
         }
 
@@ -172,7 +203,7 @@ namespace CSDemo.Controllers
         }
 
 
-        private Search GetSearchModel(CommerceSearchOptions searchOptions, string searchKeyword, string catalogName)
+        private Search GetSearchModel(CommerceSearchOptions searchOptions, string searchKeyword, string catalogName, int pageSize, int pageNumber, string sortField)
         {
             using (new SecurityDisabler())
             {
@@ -209,6 +240,34 @@ namespace CSDemo.Controllers
                     Query = searchKeyword
                 };
 
+                result.CurrentPageNumber = pageNumber;
+                result.PageSize = pageSize;
+                result.SortField = sortField;
+
+
+                if(sortField == Constants.Products.Title){
+	                result.Results = result.Results.OrderBy(x=>x.Title).ToList();
+                }
+
+
+                if(sortField == Constants.Products.OrderByPriceAsc){
+	                result.Results = result.Results.OrderBy(x=>x.ListPrice).ToList();
+                }
+
+                if(sortField == Constants.Products.OrderByPriceDesc){
+	                result.Results = result.Results.OrderByDescending(x=>x.ListPrice).ToList();
+                }
+
+		
+                if(sortField == Constants.Products.OrderByNewness){
+	                result.Results = result.Results.OrderByDescending(x=>x.DateOfIntroduction).ToList();
+                }
+
+
+                if(sortField == Constants.Products.OrderByRatings){
+	                result.Results = result.Results.OrderByDescending(x=>x.Rating).ToList();
+                }
+                         
                 return result;
             }
         }

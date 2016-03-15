@@ -121,6 +121,7 @@
                         {
                             if (!string.IsNullOrEmpty(product.ListPrice.Trim()))
                             {
+                                int count = 0;
                     <!-- PRODUCT - START -->
                                 <div class="col-sm-4 col-xs-6">
                                     <article class="product-item">
@@ -128,8 +129,13 @@
                                             <div class="col-sm-3">
                                                 <div class="product-overlay">
                                                     <div class="product-mask"></div>
-                                                    <a href="@product.Url" class="product-permalink"></a>                                                   
-                                                    @RenderImage(product.Images.ElementAt(0), x => x, new { Width = 420, Height = 287, AS = 1, @class = "img-responsive" }, isEditable: false)
+                                                    <a href="@product.Url" class="product-permalink"></a>
+                                                    @foreach (var image in product.Images)
+                                                    {
+                                                        count++;
+                                                        @RenderImage(image, x => x, new { Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive product-image-" + count }, isEditable: false);                                                                                                                                                                                                                                                                     
+                                                        if (count == 2) { break; }
+                                                    }
                                                 </div>
                                             </div>
                                             <div class="col-sm-9">
@@ -167,7 +173,7 @@
                                                                 </select>
                                                             </div>
                                                         }
-                                                        
+
                                                         @if (product.VariantColors != null)
                                                         {
 

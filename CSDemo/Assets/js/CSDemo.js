@@ -398,6 +398,38 @@
 
     });
 
+    //===== SEARCHPAGING =====
+
+    $("#products_search_page a").click(function (e) {
+
+        e.preventDefault();
+
+        var currentPage = $(this).attr("val");
+
+        $("#pn").val(currentPage);
+
+        $("#products_sort").submit();
+
+    });
+
+    $("#prod_result_size").change(function (e) {
+
+        $("#pn").val("1");
+
+        $("#ps").val($(this).val());
+
+        $("#products_sort").submit();
+
+    });
+
+    $("#s").change(function (e) {
+
+        $("#pn").val("1");
+
+        $("#products_sort").submit();
+
+    });
+
     //===== FORMDATA MANAGER =====
 
     /* jQuery.values: get or set all of the name/value pairs from child input controls   
