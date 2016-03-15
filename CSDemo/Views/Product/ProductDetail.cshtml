@@ -39,6 +39,10 @@
                                 <input type="hidden" name="VariantId" id="@string.Concat("VariantID", Model.VariantProdId)" value="@Model.DefaultVariant" />
                                 <h3>@Model.Title</h3>
                                 <div class="product-labels">
+                                    @if (Model.IsNew)
+                                    {
+                                        <span class="label label-danger">sale</span>
+                                    }
                                     <span class="label label-info">new</span>
                                     @if (Model.IsOnSale)
                                     {
