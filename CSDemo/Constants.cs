@@ -91,6 +91,8 @@ namespace CSDemo
             public const string Dash = "-";
             public const string Underscore = "_";
             public const string Space = " ";
+            public const string Comma = ",";
+            public const string Empty = "";
 
         }
 
@@ -112,6 +114,7 @@ namespace CSDemo
             public const string ShippingAddress = "Shipping";
             public const string VariantIDFormat = "_{0}";
             public const string CurrencyFormat = "C2";
+            public const string CurrencyDecimalFormat = "c";
             public const string DateFormat = "MMMM dd, yyyy hh:mm";
             public const string DateTimeFormat = "MMMM dd, yyyy hh:mm";
             public const string VariantColorName = "ProductColor";
