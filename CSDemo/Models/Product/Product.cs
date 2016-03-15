@@ -9,6 +9,7 @@ using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using Glass.Mapper.Sc.Fields;
 using Sitecore.Data.Items;
+using Sitecore.Commerce.Entities.Inventory;
 
 #endregion
 
@@ -93,7 +94,9 @@ namespace CSDemo.Models.Product
 
         public IEnumerable<VariantColor> VariantColors { get; set; }
 
-        public IEnumerable<Product> RelatedProducts { get; set; } 
+        public IEnumerable<Product> RelatedProducts { get; set; }
+
+        public StockInformation StockInformation { get; set;}
 
         public string CurrencyPrice
         {

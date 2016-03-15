@@ -163,6 +163,7 @@ namespace CSDemo.Models.Product
         /// <returns></returns>
         internal static CategoryProductViewModel GetCategoryProducts(PaginationViewModel model)
         {
+            var cartHelper = new CartHelper();
             var categoryProductVM = new CategoryProductViewModel();
 
             categoryProductVM.PaginationViewModel = model;
@@ -239,6 +240,8 @@ namespace CSDemo.Models.Product
                             BuildUIVariants(product);
 
                         }
+
+                        var stockInfo = cartHelper.GetProductStockInformation(product.ProductId, product.CatalogName);
                     }
                 }
 
@@ -268,14 +271,14 @@ namespace CSDemo.Models.Product
                     variantBoxLine.VariantID = productVariant.VariantId;
                     variantBoxLine.Size = (!string.IsNullOrEmpty(productVariant.ProductSize)) ? productVariant.ProductSize.Trim() : string.Empty;
                     variantBoxLine.Color = (!string.IsNullOrEmpty(productVariant.ProductColor)) ? productVariant.ProductColor.Trim() : string.Empty;
-                    variantBoxLine.Price = Decimal.Parse(productVariant.ListPrice).ToString("c", cultureInfo);
+                    variantBoxLine.Price = Decimal.Parse(productVariant.ListPrice).ToString(Constants.Products.CurrencyDecimalFormat, cultureInfo);
                     if (productVariant.Variant_Images != null && productVariant.Variant_Images.Count() > 0)
                     {
-                        variantBoxLine.Images = productVariant.Variant_Images.Select(x => x.ID.ToShortID().ToString()).ToList().Aggregate((i, j) => string.Format(Constants.Products.ImagesUrlFormat, i) + "," + string.Format(Constants.Products.ImagesUrlFormat, j));
+                        variantBoxLine.Images = productVariant.Variant_Images.Select(x => x.ID.ToShortID().ToString()).ToList().Aggregate((i, j) => string.Format(Constants.Products.ImagesUrlFormat, i) + Constants.Common.Comma + string.Format(Constants.Products.ImagesUrlFormat, j));
                     }
                     else
                     {
-                        variantBoxLine.Images = product.Images.Select(x => x.Src).ToList().Aggregate((i, j) => i + "," + j);
+                        variantBoxLine.Images = product.Images.Select(x => x.Src).ToList().Aggregate((i, j) => i + Constants.Common.Comma + j);
                     }
 
                     variantBoxLines.Add(variantBoxLine);
@@ -288,7 +291,7 @@ namespace CSDemo.Models.Product
                 List<VariantColor> variantColors = new List<VariantColor>();
 
                 // get size
-                var availSizes = variantBoxLines.Where(s => s.Size != "").GroupBy(s => s.Size).Select(g => g.First()).OrderBy(s => s.Size).ThenBy(c => c.Color).ToList();
+                var availSizes = variantBoxLines.Where(s => s.Size != Constants.Common.Empty).GroupBy(s => s.Size).Select(g => g.First()).OrderBy(s => s.Size).ThenBy(c => c.Color).ToList();
                 if (availSizes.Count() > 0)
                 {
 
@@ -298,7 +301,7 @@ namespace CSDemo.Models.Product
                     {
                         var variantSizeLine = new VariantSizeLine();
                         variantSizeLine.Size = s.Size;
-                        variantSizeLine.Value = string.Format("{0}|{1}|{2}", s.VariantID, s.Price, s.Images);
+                        variantSizeLine.Value = string.Format(Constants.Products.VariantColorLineFormat, s.VariantID, s.Price, s.Images);
 
                         variantSizeLines.Add(variantSizeLine);
 
@@ -308,20 +311,20 @@ namespace CSDemo.Models.Product
 
 
                         // build the colors for the current size
-                        var availColors = variantBoxLines.Where(t => t.Size.Equals(s.Size) && s.Color != "").GroupBy(c => c.Color).Select(g => g.First()).OrderBy(c => c.Color).ToList();
+                        var availColors = variantBoxLines.Where(t => t.Size.Equals(s.Size) && s.Color != Constants.Common.Empty).GroupBy(c => c.Color).Select(g => g.First()).OrderBy(c => c.Color).ToList();
                         if (availColors.Count() > 0)
                         {
 
                             var variantColor = new VariantColor();
-                            variantColor.Name = string.Format("{0}{1}", s.Size, "ProductColor");
-                            variantColor.Display = (pos == 0) ? "Block" : "None";
+                            variantColor.Name = string.Format(Constants.Products.VariantColorNameFormat, s.Size, Constants.Products.VariantColorName);
+                            variantColor.Display = (pos == 0) ? Constants.Products.VariantColorDisplay : Constants.Products.VariantColorDisplayNone;
 
                             var variantColorLines = new List<VariantColorLine>();
                             foreach (var c in availColors)
                             {
                                 var variantColorLine = new VariantColorLine();
                                 variantColorLine.Color = c.Color;
-                                variantColorLine.Value = string.Format("{0}|{1}|{2}", c.VariantID, c.Price, c.Images);
+                                variantColorLine.Value = string.Format(Constants.Products.VariantColorLineFormat, c.VariantID, c.Price, c.Images);
 
                                 variantColorLines.Add(variantColorLine);
                             }
@@ -340,19 +343,19 @@ namespace CSDemo.Models.Product
                 else
                 {
                     // No sizes, let us focus on color
-                    var availColors = variantBoxLines.Where(c => c.Color != "").GroupBy(c => c.Color).Select(g => g.First()).OrderBy(c => c.Color).ToList();
+                    var availColors = variantBoxLines.Where(c => c.Color != Constants.Common.Empty).GroupBy(c => c.Color).Select(g => g.First()).OrderBy(c => c.Color).ToList();
                     if (availColors.Count() > 0)
                     {
                         var pos = 0;
                         var variantColor = new VariantColor();
-                        variantColor.Name = "ProductColor";
-                        variantColor.Display = "Block";
+                        variantColor.Name = Constants.Products.VariantColorName; 
+                        variantColor.Display = Constants.Products.VariantColorDisplay;
                         var variantColorLines = new List<VariantColorLine>();
                         foreach (var c in availColors)
                         {
                             var variantColorLine = new VariantColorLine();
                             variantColorLine.Color = c.Color;
-                            variantColorLine.Value = string.Format("{0}|{1}|{2}", c.VariantID, c.Price, c.Images);
+                            variantColorLine.Value = string.Format(Constants.Products.VariantColorLineFormat, c.VariantID, c.Price, c.Images);
 
                             variantColorLines.Add(variantColorLine);
                             if (pos < 1) { product.DefaultVariant = c.VariantID; }
@@ -531,11 +534,11 @@ namespace CSDemo.Models.Product
                     var orderHead = cartHelper.GetOrderHead(order.OrderID, order.CustomerId, order.ShopName);
                     var commerceOrderHead = orderHead.Order as CommerceOrder;
 
-                    orderDetail.OrderDate = commerceOrderHead.Created.ToString("MMMM dd, yyyy");
+                    orderDetail.OrderDate = commerceOrderHead.Created.ToString(Constants.Products.DateFormat);
                     orderDetail.OrderID = commerceOrderHead.OrderID;
                     orderDetail.OrderStatus = commerceOrderHead.Status;
                     orderDetail.UserID = commerceOrderHead.UserId.ToString();
-                    orderDetail.TotalPrice = commerceOrderHead.Total.Amount.ToString("C2");
+                    orderDetail.TotalPrice = commerceOrderHead.Total.Amount.ToString(Constants.Products.CurrencyFormat);
                     orderDetail.NumberofItems = commerceOrderHead.LineItemCount;
                     orderDetail.ExternalID = commerceOrderHead.ExternalId.ToString();
 
@@ -564,15 +567,15 @@ namespace CSDemo.Models.Product
             if (commerceOrderHead != null)
             {
                 orderDetail.OrderID = commerceOrderHead.OrderID;
-                orderDetail.OrderDate = commerceOrderHead.Created.ToString("MMMM dd, yyyy hh:mm");
+                orderDetail.OrderDate = commerceOrderHead.Created.ToString(Constants.Products.DateTimeFormat);
                 orderDetail.NumberofItems = commerceOrderHead.LineItemCount;
 
                 var commerceTotal = commerceOrderHead.Total as CommerceTotal;
 
-                orderDetail.SubTotalPrice = commerceTotal.Subtotal.ToString("C2");
-                orderDetail.TotalPrice = commerceTotal.Amount.ToString("C2");
-                orderDetail.Tax = commerceTotal.TaxTotal.Amount.ToString("C2");
-                orderDetail.ShippingCost = commerceTotal.ShippingTotal.ToString("C2");
+                orderDetail.SubTotalPrice = commerceTotal.Subtotal.ToString(Constants.Products.CurrencyFormat);
+                orderDetail.TotalPrice = commerceTotal.Amount.ToString(Constants.Products.CurrencyFormat);
+                orderDetail.Tax = commerceTotal.TaxTotal.Amount.ToString(Constants.Products.CurrencyFormat);
+                orderDetail.ShippingCost = commerceTotal.ShippingTotal.ToString(Constants.Products.CurrencyFormat);
                 orderDetail.OrderStatus = commerceOrderHead.Status;
                 orderDetail.UserID = commerceOrderHead.UserId;
                 orderDetail.ExternalID = commerceOrderHead.ExternalId;
@@ -649,19 +652,19 @@ namespace CSDemo.Models.Product
             foreach (CommerceCartLine line in Lines)
             {
                 //   var line = cartLine as CommerceCartLine;
-                var ol = new OrderLine();
-                ol.UnitPrice = line.Product.Price.Amount.ToString("C2");
-                ol.Quantity = line.Quantity;
-                ol.SubTotal = (line.Product.Price.Amount * line.Quantity).ToString("C2");
+                var orderLine = new OrderLine();
+                orderLine.UnitPrice = line.Product.Price.Amount.ToString(Constants.Products.CurrencyFormat);
+                orderLine.Quantity = line.Quantity;
+                orderLine.SubTotal = (line.Product.Price.Amount * line.Quantity).ToString(Constants.Products.CurrencyFormat);
                 var product = line.Product as CommerceCartProduct;
-                ol.ProductName = product.DisplayName;
+                orderLine.ProductName = product.DisplayName;
                 var sItem = GetItemByProductID(product.ProductId);
                 if (sItem != null)
                 {
-                    ol.ImageUrl = GetFirstImageFromProductItem(sItem.GetItem());
-                    ol.Url = LinkManager.GetItemUrl(sItem.GetItem());
+                    orderLine.ImageUrl = GetFirstImageFromProductItem(sItem.GetItem());
+                    orderLine.Url = LinkManager.GetItemUrl(sItem.GetItem());
                 }
-                orderLines.Add(ol);
+                orderLines.Add(orderLine);
             }
 
             return orderLines;
@@ -704,6 +707,7 @@ namespace CSDemo.Models.Product
         internal static Product GetProductByNameAndCategory(string productID, string categoryID)
         {
             Product product = new Product();
+            var cartHelper = new CartHelper();
             var productResult = GetItemByName(productID);
             if (productResult != null)
             {
@@ -712,6 +716,9 @@ namespace CSDemo.Models.Product
                 product.ProductVariants = productItem.GetChildren().Select(x => x.GlassCast<ProductVariant>());
 
                 BuildUIVariants(product);
+                
+                // CSDEMO#99
+                product.StockInformation = cartHelper.GetProductStockInformation(product.ProductId, product.CatalogName);
             }
 
             return product;
