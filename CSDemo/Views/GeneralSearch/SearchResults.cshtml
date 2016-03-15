@@ -96,7 +96,7 @@
                                         </select>
                                         <input type="hidden" name="q" id="q" value="@Model.Query" />
                                         <input type="hidden" name="ps" id="ps" value="@Model.PageSize" />
-                                        <input type="hidden" name="p" id="p" value="@Model.CurrentPageNumber" />
+                                        <input type="hidden" name="pn" id="pn" value="@Model.CurrentPageNumber" />
                                     </div>
                                 </form>
                             </div>
@@ -128,13 +128,13 @@
             [Bind(Prefix = Constants.QueryStrings.Paging)] int pageNumber = 1)
                          */
 
-                        var leftUrl = string.Format("q={0}&p={1}",Model.Query, left);
+                        var leftUrl = string.Format("q={0}&pn={1}",Model.Query, left);
                         if (Model.PageSize > 0)
                         {
                             leftUrl += string.Format("&ps={0}", Model.PageSize);
                         }
 
-                        var rightUrl = string.Format("q={0}&p={1}", Model.Query, right);
+                        var rightUrl = string.Format("q={0}&pn={1}", Model.Query, right);
                         if (Model.PageSize > 0)
                         {
                             rightUrl += string.Format("&ps={0}", Model.PageSize);
@@ -148,7 +148,7 @@
                                     thePage = i + 1;
                                     active = (Model.CurrentPageNumber == thePage) ? " class=active" : "";
 
-                                    var currentpageUrl = string.Format("q={0}&p={1}", Model.Query, thePage);
+                                    var currentpageUrl = string.Format("q={0}&pn={1}", Model.Query, thePage);
                                     if (Model.PageSize > 0)
                                     {
                                         currentpageUrl += string.Format("&ps={0}", Model.PageSize);
