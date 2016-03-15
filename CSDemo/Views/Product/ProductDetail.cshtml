@@ -40,7 +40,10 @@
                                 <h3>@Model.Title</h3>
                                 <div class="product-labels">
                                     <span class="label label-info">new</span>
-                                    <span class="label label-danger">sale</span>
+                                    @if (Model.IsOnSale)
+                                    {
+                                        <span class="label label-danger">sale</span>
+                                    }
                                 </div>
                                 <div class="product-rating">
                                 @if (IsInEditingMode)
