@@ -8,6 +8,8 @@
 @if (Model != null)
 {
     int pos = 1;
+    // CSDEMO#99
+    string stockLabel = Model.StockInformation != null && Model.StockInformation.Count > 0 ? string.Format("{0:#,###0} In Stock", Convert.ToInt32(Model.StockInformation.Count)) : "Out Of Stock";
     <section class="content products">
         @using (BeginEditFrame(Model.Path))
         { 
@@ -59,7 +61,8 @@
                                 </span>
                                 <ul class="list-unstyled product-info">
                                     <li><span>ID</span>@Model.ProductId</li>
-                                    <li><span>Availability</span>In Stock</li>
+                                    @*CSDEMO#99*@
+                                    <li><span>Availability</span>@stockLabel</li>
                                     <li><span>Brand</span>@Editable(Model, x => x.Brand)</li>
                                     @*<li><span>Tags</span></li>*@
                                 </ul>
