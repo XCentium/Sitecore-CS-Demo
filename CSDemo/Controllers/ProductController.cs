@@ -142,7 +142,7 @@ namespace CSDemo.Controllers
         public ActionResult ProductDetail()
         {
             var categoryID = WebUtil.GetUrlName(1);
-            var productID = WebUtil.GetUrlName(0).Replace(' ', '-');
+            var productID = WebUtil.GetUrlName(0).Replace(Constants.Common.Space, Constants.Common.Dash);
 
             // CSDEMO#49 Save featured products
             if (!productID.IsEmptyOrNull())
