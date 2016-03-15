@@ -271,14 +271,14 @@ namespace CSDemo.Models.Product
                     variantBoxLine.VariantID = productVariant.VariantId;
                     variantBoxLine.Size = (!string.IsNullOrEmpty(productVariant.ProductSize)) ? productVariant.ProductSize.Trim() : string.Empty;
                     variantBoxLine.Color = (!string.IsNullOrEmpty(productVariant.ProductColor)) ? productVariant.ProductColor.Trim() : string.Empty;
-                    variantBoxLine.Price = Decimal.Parse(productVariant.ListPrice).ToString("c", cultureInfo);
+                    variantBoxLine.Price = Decimal.Parse(productVariant.ListPrice).ToString(Constants.Products.CurrencyDecimalFormat, cultureInfo);
                     if (productVariant.Variant_Images != null && productVariant.Variant_Images.Count() > 0)
                     {
-                        variantBoxLine.Images = productVariant.Variant_Images.Select(x => x.ID.ToShortID().ToString()).ToList().Aggregate((i, j) => string.Format(Constants.Products.ImagesUrlFormat, i) + "," + string.Format(Constants.Products.ImagesUrlFormat, j));
+                        variantBoxLine.Images = productVariant.Variant_Images.Select(x => x.ID.ToShortID().ToString()).ToList().Aggregate((i, j) => string.Format(Constants.Products.ImagesUrlFormat, i) + Constants.Common.Comma + string.Format(Constants.Products.ImagesUrlFormat, j));
                     }
                     else
                     {
-                        variantBoxLine.Images = product.Images.Select(x => x.Src).ToList().Aggregate((i, j) => i + "," + j);
+                        variantBoxLine.Images = product.Images.Select(x => x.Src).ToList().Aggregate((i, j) => i + Constants.Common.Comma + j);
                     }
 
                     variantBoxLines.Add(variantBoxLine);
@@ -291,7 +291,7 @@ namespace CSDemo.Models.Product
                 List<VariantColor> variantColors = new List<VariantColor>();
 
                 // get size
-                var availSizes = variantBoxLines.Where(s => s.Size != "").GroupBy(s => s.Size).Select(g => g.First()).OrderBy(s => s.Size).ThenBy(c => c.Color).ToList();
+                var availSizes = variantBoxLines.Where(s => s.Size != Constants.Common.Empty).GroupBy(s => s.Size).Select(g => g.First()).OrderBy(s => s.Size).ThenBy(c => c.Color).ToList();
                 if (availSizes.Count() > 0)
                 {
 
@@ -311,7 +311,7 @@ namespace CSDemo.Models.Product
 
 
                         // build the colors for the current size
-                        var availColors = variantBoxLines.Where(t => t.Size.Equals(s.Size) && s.Color != "").GroupBy(c => c.Color).Select(g => g.First()).OrderBy(c => c.Color).ToList();
+                        var availColors = variantBoxLines.Where(t => t.Size.Equals(s.Size) && s.Color != Constants.Common.Empty).GroupBy(c => c.Color).Select(g => g.First()).OrderBy(c => c.Color).ToList();
                         if (availColors.Count() > 0)
                         {
 
@@ -343,7 +343,7 @@ namespace CSDemo.Models.Product
                 else
                 {
                     // No sizes, let us focus on color
-                    var availColors = variantBoxLines.Where(c => c.Color != "").GroupBy(c => c.Color).Select(g => g.First()).OrderBy(c => c.Color).ToList();
+                    var availColors = variantBoxLines.Where(c => c.Color != Constants.Common.Empty).GroupBy(c => c.Color).Select(g => g.First()).OrderBy(c => c.Color).ToList();
                     if (availColors.Count() > 0)
                     {
                         var pos = 0;

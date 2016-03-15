@@ -22,6 +22,7 @@ namespace CSDemo.Configuration.Conditions
             var contact = automationRuleContext.Contact;
 
             var mostRecentOrder = Order.GetMostRecentOrder(contact);
+            if (mostRecentOrder == null) return false;
 
             var orderDate = mostRecentOrder.Created;
             var repository = new ContactRepository();

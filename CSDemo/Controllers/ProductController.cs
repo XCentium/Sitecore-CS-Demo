@@ -102,7 +102,7 @@ namespace CSDemo.Controllers
                     {
                         model.CategoryID = categoryID;
                         model.CurrentPage = 1;
-                        model.PageSize = 2;
+                        model.PageSize = 15;
                         model.OrderBy = string.Empty;
 
                         categoryProduct = ProductHelper.GetCategoryProducts(model);
@@ -144,21 +144,21 @@ namespace CSDemo.Controllers
             var categoryID = WebUtil.GetUrlName(1);
             var productID = WebUtil.GetUrlName(0).Replace(Constants.Common.Space, Constants.Common.Dash);
 
+            if (productID.IsEmptyOrNull())
+            {
+                return View();
+            }
+
             // CSDEMO#49 Save featured products
-            if (!productID.IsEmptyOrNull())
-            {
-                Cookie.SaveFeaturedProductCookie(productID);
-            }
 
-            if (!string.IsNullOrEmpty(productID))
-            {
-                var model = ProductHelper.GetProductByNameAndCategory(productID, categoryID);
-                // CSDEMO#89 Add related products from product relationships
-                model.RelatedProducts = FetchRelatedProducts(model.ID);
-                return View(model);
-            }
+            Cookie.SaveFeaturedProductCookie(productID);
 
-            return View();
+            var model = ProductHelper.GetProductByNameAndCategory(productID, categoryID);
+            // CSDEMO#89 Add related products from product relationships
+            model.RelatedProducts = FetchRelatedProducts(model.ID);
+            return View(model);
+
+            
         }
 
         #region Private Helpers
