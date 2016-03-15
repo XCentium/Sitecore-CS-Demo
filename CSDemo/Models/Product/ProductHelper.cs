@@ -716,7 +716,8 @@ namespace CSDemo.Models.Product
                 product.ProductVariants = productItem.GetChildren().Select(x => x.GlassCast<ProductVariant>());
 
                 BuildUIVariants(product);
-       
+                
+                // CSDEMO#99
                 product.StockInformation = cartHelper.GetProductStockInformation(product.ProductId, product.CatalogName);
             }
 
