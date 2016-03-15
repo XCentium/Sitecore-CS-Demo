@@ -7,7 +7,7 @@ DB: master
 SharedFields:
 - ID: 13f89250-ad6b-4548-882e-118a12c18094
   Hint: Parameters Template
-  Value: {9C1BB9E1-D757-4AC8-AC7B-898C29F43CCE}
+  Value: {A80EE381-58CC-4C20-9297-4A4C002C95D1}
 - ID: ded9e431-3604-4921-a4b3-a6ec7636a5b6
   Hint: Controller Action
   Value: CategoryProducts

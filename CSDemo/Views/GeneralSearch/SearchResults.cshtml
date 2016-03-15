@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                @Model.TotalItemCount @(Model.TotalItemCount==1?"result":"results" ) for <p>"@Model.Query"</p> 
+                @Model.TotalItemCount @(Model.TotalItemCount == 1 ? "result" : "results") for <p>"@Model.Query"</p>
             </div>
         </div>
     </div>
@@ -50,22 +50,119 @@
                 </div>
             }
             <div class="col-xs-@(Model.Results.Any() ? "9":"12")">
+
+
+
+
                 @if (!Model.Results.Any())
                 {
                     <p>No products matched your search criteria. Please change your search query and try again.</p>
                 }
                 else
                 {
+                    <div class="products-header">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-4">
+                                <form name="products_per_page" id="products_per_page" class="form-inline products-per-page">
+                                    <div class="form-group">
+                                        <label>Show:</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <select name="ps" id="prod_result_size" class="form-control">
+                                            @for (int i = 1; i < 11; i++)
+                                            {
+                                                <option @(Model.PageSize == i ? " selected " : string.Empty) value="@i">@i</option>
+                                            }
+                                            <option @(Model.PageSize == 12 ? " selected " : string.Empty) value="12">12</option>
+                                            <option @(Model.PageSize == 24 ? " selected " : string.Empty) value="24">24</option>
+                                            <option @(Model.PageSize == 10000 ? " selected " : string.Empty) value="10000">ALL</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-8">
+                                <div class="btn-group toggle-list-grid hidden-xs" role="group">
+                                    <button type="button" class="btn btn-default active" id="toggle-grid"><i class="fa fa-th"></i></button>
+                                    <button type="button" class="btn btn-default" id="toggle-list"><i class="fa fa-list"></i></button>
+                                </div>
+                                <form name="products_sort" id="products_sort" class="form-inline order-by">
+                                    <div class="form-group">
+                                        <label>Sort by:</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <select name="s" id="OrderBy" class="form-control">
+                                            <option value="Title">Title</option>
+                                        </select>
+                                        <input type="hidden" name="q" id="q" value="@Model.Query" />
+                                        <input type="hidden" name="ps" id="ps" value="@Model.PageSize" />
+                                        <input type="hidden" name="pn" id="pn" value="@Model.CurrentPageNumber" />
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
                     <div class="row grid" id="products">
                         @foreach (var result in Model.Results)
                         {
                             @Html.Partial("_SearchResult", result)
                         }
                     </div>
+                    if (Model.TotalPageCount > 1)
+                    {
+                        var active = "";
+                        var thePage = 0;
+
+                        var left = (Model.CurrentPageNumber > 1) ? Model.CurrentPageNumber - 1 : 1;
+                        var right = (Model.CurrentPageNumber < Model.TotalPageCount) ? Model.CurrentPageNumber + 1 : Model.TotalPageCount;
+
+                        /*
+                              [Bind(Prefix = Constants.QueryStrings.SearchQuery)] string query,
+            [Bind(Prefix = Constants.QueryStrings.Facets)] string facetValues,
+            [Bind(Prefix = Constants.QueryStrings.Sort)] string sortField = "Title",
+            [Bind(Prefix = Constants.QueryStrings.PageSize)] int pageSize = 2,
+            [Bind(Prefix = Constants.QueryStrings.SortDirection)] CommerceConstants.SortDirection sortDirection =
+                CommerceConstants.SortDirection.Desc,
+            [Bind(Prefix = Constants.QueryStrings.Paging)] int pageNumber = 1)
+                         */
+
+                        var leftUrl = string.Format("q={0}&pn={1}",Model.Query, left);
+                        if (Model.PageSize > 0)
+                        {
+                            leftUrl += string.Format("&ps={0}", Model.PageSize);
+                        }
+
+                        var rightUrl = string.Format("q={0}&pn={1}", Model.Query, right);
+                        if (Model.PageSize > 0)
+                        {
+                            rightUrl += string.Format("&ps={0}", Model.PageSize);
+                        }
+                        
+                        <div class="pagination-wrapper">
+                            <ul id="products_search_page" class="pagination">
+                                <li><a val="@left" href="~/search?@leftUrl"><i class="fa fa-angle-double-left"></i></a></li>
+                                @for (int i = 0; i < Model.TotalPageCount; i++)
+                                {
+                                    thePage = i + 1;
+                                    active = (Model.CurrentPageNumber == thePage) ? " class=active" : "";
+
+                                    var currentpageUrl = string.Format("q={0}&pn={1}", Model.Query, thePage);
+                                    if (Model.PageSize > 0)
+                                    {
+                                        currentpageUrl += string.Format("&ps={0}", Model.PageSize);
+                                    }
+                                    
+                                    <li @active><a val="@thePage" href="~/search?@currentpageUrl">@thePage</a></li>
+                                }
+                                <li><a val="@right" href="~/search?@rightUrl"><i class="fa fa-angle-double-right"></i></a></li>
+                            </ul>
+                        </div>
+                    }
                 }
             </div>
         </div>
 
     </div>
 </section>
-
