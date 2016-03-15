@@ -10,7 +10,7 @@
         <div class="row grid" id="products">
             @foreach (var product in Model)
             {
-                @using (BeginEditFrame(product.Path))
+                using (BeginEditFrame(product.Path))
                 {
                     <div class="col-sm-3 col-xs-6">
                         <article class="product-item">
