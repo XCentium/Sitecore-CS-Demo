@@ -17,6 +17,8 @@ namespace CSDemo.Contracts.GeneralSearch
         IEnumerable<CommerceQueryFacet> Facets { get; set; }
         int CurrentPageNumber { get; set; }
 
+        string SortField { get; set; }
+
         #region Methods
 
         bool ContainsFacets(string url);

@@ -16,7 +16,7 @@ namespace CSDemo
             /// <summary>
             /// Used for paging
             /// </summary>
-            public const string Paging = "p";
+            public const string Paging = "pn";
 
             /// <summary>
             /// Used for the sorting field
@@ -100,11 +100,13 @@ namespace CSDemo
         {
             public const string IDSeparator = "|";
             public const string ParameterKey = "Product Categories";
+            public const string PageSize = "PageSize";
             public const string ImagesField = "Images";
             public const string ImagesUrlFormat = "/~/media/{0}.ashx";
             public const string CategoryUrlFormat = "categories/{0}";
             public const string CategoriesParentId = "{4441D0B5-1080-4550-A91A-4C2C8245C986}";
             public const string CategoriesTemplateId = "{C118EAAE-D723-4560-ABFC-917E58F46F18}";
+            public const string Title = "Title";
             public const string OrderByBrand = "Brand";
             public const string OrderByRatings = "Average rating";
             public const string OrderByNewness = "Newness";

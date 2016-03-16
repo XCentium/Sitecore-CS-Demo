@@ -20,6 +20,7 @@ namespace CSDemo.Models.GeneralSearch
         public int TotalPageCount { get; set; }
         public IEnumerable<CommerceQueryFacet> Facets { get; set; }
         public int CurrentPageNumber { get; set; }
+        public  string SortField { get; set; }
 
         #region Public Methods
 

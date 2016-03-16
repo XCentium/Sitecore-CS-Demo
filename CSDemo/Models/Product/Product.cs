@@ -62,6 +62,7 @@ namespace CSDemo.Models.Product
         [SitecoreInfo(SitecoreInfoType.Url)]
         public virtual string Url { get; set; }
 
+        [SitecoreField(Fields.IsNew)]
         public virtual bool IsNew { get; set; }
 
         [SitecoreField(Fields.ParentCategories)]
@@ -142,6 +143,7 @@ namespace CSDemo.Models.Product
             public const string Images = "Images";
             public const string CatalogName = "CatalogName";
             public const string OnSale = "OnSale";
+            public const string IsNew = "IsNew";
             public const string ParentCategories = "ParentCategories";
             public const string DateOfIntroduction = "IntroductionDate";
             public const string SortFields = "Sort Fields";

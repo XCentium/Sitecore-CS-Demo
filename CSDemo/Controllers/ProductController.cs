@@ -100,9 +100,26 @@ namespace CSDemo.Controllers
 
                     if (!string.IsNullOrEmpty(categoryID))
                     {
+                        var rc = RenderingContext.CurrentOrNull;
+
+                        if (rc != null && rc.Rendering.Parameters[Constants.Products.PageSize] != null)
+                        {
+                            var pageSizeData = rc.Rendering.Parameters[Constants.Products.PageSize];
+                            if (!pageSizeData.IsEmptyOrNull())
+                            {
+                                int pageSize = 0;
+                                var success = int.TryParse(pageSizeData, out pageSize);
+                                model.PageSize = 2;
+                                if (success)
+                                {
+                                    model.PageSize = pageSize;
+                                }
+                            }
+
+                        }
+
                         model.CategoryID = categoryID;
                         model.CurrentPage = 1;
-                        model.PageSize = 15;
                         model.OrderBy = string.Empty;
 
                         categoryProduct = ProductHelper.GetCategoryProducts(model);
@@ -129,9 +146,9 @@ namespace CSDemo.Controllers
         {
             List<Product> relatedProducts = new List<Product>();
             var contextProductItem = Context.Database.GetItem(new ID(id));
-            if(contextProductItem == null) return relatedProducts;
+            if (contextProductItem == null) return relatedProducts;
             RelationshipField control = contextProductItem.Fields[Product.Fields.RelationshipList];
-            if(control == null) return relatedProducts;
+            if (control == null) return relatedProducts;
             IEnumerable<Item> productRelationshipTargets = control.GetProductRelationshipsTargets();
             IEnumerable<Item> relationshipTargets = productRelationshipTargets as Item[] ?? productRelationshipTargets.ToArray();
             if (productRelationshipTargets == null || !relationshipTargets.Any()) return relatedProducts;
@@ -158,7 +175,7 @@ namespace CSDemo.Controllers
             model.RelatedProducts = FetchRelatedProducts(model.ID);
             return View(model);
 
-            
+
         }
 
         #region Private Helpers
@@ -184,7 +201,7 @@ namespace CSDemo.Controllers
         {
             using (
                 var searchContext =
-                    ContentSearchManager.GetIndex((SitecoreIndexableItem) item).CreateSearchContext())
+                    ContentSearchManager.GetIndex((SitecoreIndexableItem)item).CreateSearchContext())
             {
                 var result =
                     searchContext.GetQueryable<SearchResultItem>()
@@ -216,7 +233,8 @@ namespace CSDemo.Controllers
             _context = context;
         }
 
-        public ProductController() : this(new SitecoreContext())
+        public ProductController()
+            : this(new SitecoreContext())
         {
         }
 
