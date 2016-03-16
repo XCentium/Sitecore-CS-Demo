@@ -281,6 +281,7 @@ namespace CSDemo.Controllers
 
             using (var context = searchIndex.CreateSearchContext())
             {
+                // TODO: add tags clause
                 var searchResults = context.GetQueryable<CommerceProductSearchResultItem>()
                     .Where(item => item.Content.Contains(keyword))
                     .Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product)
