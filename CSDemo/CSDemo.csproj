@@ -288,6 +288,13 @@
       <DependentUpon>GenerateCode.aspx</DependentUpon>
     </Compile>
     <Compile Include="Configuration\CustomLinkProvider.cs" />
+    <Compile Include="sitecore modules\Web\XCore\CodeGen\TagGenerator.aspx.cs">
+      <DependentUpon>TagGenerator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sitecore modules\Web\XCore\CodeGen\TagGenerator.aspx.designer.cs">
+      <DependentUpon>TagGenerator.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AJAX\Cart.asmx" />
@@ -388,6 +395,7 @@
     <Content Include="favicon.ico" />
     <Content Include="sitecore modules\Web\XCore\CodeGen\CodeGenerationRoot.aspx" />
     <Content Include="sitecore modules\Web\XCore\CodeGen\GenerateCode.aspx" />
+    <Content Include="sitecore modules\Web\XCore\CodeGen\TagGenerator.aspx" />
     <Content Include="Views\GeneralSearch\SearchResults.cshtml" />
     <Content Include="Views\Product\FeaturedProducts.cshtml" />
     <Content Include="Views\web.config" />

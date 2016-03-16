@@ -1,0 +1,17 @@
+﻿---
+ID: ef0cf46c-920a-4f4a-8c28-d104f3ee2578
+Parent: e95daa23-11d6-4c06-beed-53823daa948d
+Template: 3c937b2d-ea5e-4cb0-8fbd-1799bfa30475
+Path: /sitecore/content/CSDemo/Components/Tags/Rockies
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160316T004536Z
+    - ID: b5620c00-330b-479e-9b54-57857040e1e0
+      Hint: Tag Name
+      Value: Rockies
