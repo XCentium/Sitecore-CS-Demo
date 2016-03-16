@@ -34,7 +34,7 @@
         </div>
         <div style="padding: 5px">
             Generate Tags <asp:button runat="server" id="ButtonGenerate" text="Generate" OnClick="ButtonGenerate_Click" /><br /><br />
-            Dry Run (Message Output Only? <asp:CheckBox runat="server" ID="DryRunOnly"/>
+            Dry Run - Message Output Only <asp:CheckBox runat="server" ID="DryRunOnly"/>
         </div>
         <br/><hr/>
         <asp:Label runat="server" ID="Message"></asp:Label>
