@@ -13,7 +13,7 @@
         <asp:textbox id="TagTemplateId" runat="server" width="400px"></asp:textbox>
         </div>
         <div style="padding: 5px">
-            Start Catalog Identifier
+            Select a Start Catalog<br/>
             <asp:DropDownList runat="server" ID="CatalogsDropDown" width="400px" />
             <%--<asp:textbox id="StartCatalogId" runat="server" width="400px"></asp:textbox>--%>
         </div>
