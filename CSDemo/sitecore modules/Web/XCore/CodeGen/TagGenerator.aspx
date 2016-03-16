@@ -14,7 +14,8 @@
         </div>
         <div style="padding: 5px">
             Start Catalog Identifier
-        <asp:textbox id="StartCatalogId" runat="server" width="400px"></asp:textbox>
+            <asp:DropDownList runat="server" ID="CatalogsDropDown" width="400px" />
+            <%--<asp:textbox id="StartCatalogId" runat="server" width="400px"></asp:textbox>--%>
         </div>
         <div style="padding: 5px">
             Tag Container Identifier
