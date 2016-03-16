@@ -9,20 +9,19 @@
 <body>
     <form id="form1" runat="server">
         <div style="padding: 5px">
-            Tag Template Identifier
+            Tag Template Identifier<br/>
         <asp:textbox id="TagTemplateId" runat="server" width="400px"></asp:textbox>
         </div>
         <div style="padding: 5px">
             Select a Start Catalog<br/>
             <asp:DropDownList runat="server" ID="CatalogsDropDown" width="400px" />
-            <%--<asp:textbox id="StartCatalogId" runat="server" width="400px"></asp:textbox>--%>
         </div>
         <div style="padding: 5px">
-            Tag Container Identifier
+            Tag Container Identifier<br/>
         <asp:textbox id="TagContainerId" runat="server" width="400px"></asp:textbox>
         </div>
         <div style="padding: 5px">
-            Base Wildcard Match
+            Base Wildcard Match<br/>
         <asp:textbox id="BaseWildcardMatch" runat="server" width="400px"></asp:textbox>
         </div>
        <%-- <div style="padding: 5px">
@@ -30,7 +29,7 @@
             <asp:TextBox ID="ExcludedTemplateIds" runat="server" TextMode="MultiLine" Rows="10" width="400px"></asp:TextBox>
         </div>--%>
         <div style="padding: 5px">
-            Exclude Templates (By Contains Text)<br />
+            Exclude Templates (By Contains Text, One Line Per Word)<br />
             <asp:TextBox ID="ExcludedTemplateNamesContains" runat="server" TextMode="MultiLine" Rows="10" width="400px"></asp:TextBox>
         </div>
         <div style="padding: 5px">
