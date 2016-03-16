@@ -21,7 +21,7 @@
         <asp:textbox id="TagContainerId" runat="server" width="400px"></asp:textbox>
         </div>
         <div style="padding: 5px">
-            Tag Container Identifier
+            Base Wildcard Match
         <asp:textbox id="BaseWildcardMatch" runat="server" width="400px"></asp:textbox>
         </div>
        <%-- <div style="padding: 5px">
