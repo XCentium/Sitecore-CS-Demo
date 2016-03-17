@@ -137,25 +137,6 @@ namespace CSDemo.Controllers
             return View(categoryProduct);
         }
 
-        /// <summary>
-        /// CSDEMO#89
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        private IEnumerable<Product> FetchRelatedProducts(Guid id)
-        {
-            List<Product> relatedProducts = new List<Product>();
-            var contextProductItem = Context.Database.GetItem(new ID(id));
-            if (contextProductItem == null) return relatedProducts;
-            RelationshipField control = contextProductItem.Fields[Product.Fields.RelationshipList];
-            if (control == null) return relatedProducts;
-            IEnumerable<Item> productRelationshipTargets = control.GetProductRelationshipsTargets();
-            IEnumerable<Item> relationshipTargets = productRelationshipTargets as Item[] ?? productRelationshipTargets.ToArray();
-            if (productRelationshipTargets == null || !relationshipTargets.Any()) return relatedProducts;
-            relatedProducts.AddRange(relationshipTargets.Select(t => t.GlassCast<Product>()).Where(t => t != null));
-            return relatedProducts;
-        }
-
         public ActionResult ProductDetail()
         {
             var categoryID = WebUtil.GetUrlName(1);
