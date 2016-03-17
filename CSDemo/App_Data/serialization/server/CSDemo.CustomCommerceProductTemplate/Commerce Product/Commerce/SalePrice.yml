@@ -1,31 +1,31 @@
 ﻿---
-ID: eaaa346b-4c4d-4ff1-a12d-20e7884086f9
+ID: 7ade8644-a095-4fb4-b644-387331018447
 Parent: 616cad27-50c7-424b-b907-4b929cd9fc29
 Template: 455a3e98-a627-4b40-8035-e683a0331ac7
-Path: /sitecore/templates/Commerce/Catalog/Commerce Product/Commerce/Sale Price
+Path: /sitecore/templates/Commerce/Catalog/Commerce Product/Commerce/SalePrice
 DB: master
 SharedFields:
 - ID: 21828437-ea4b-40a1-8c61-4ce60ea41db6
   Hint: Validate Button
   Type: tree list
-  Value: {FE271793-824D-4500-960A-634F8BEA5730}
+  Value: {5594E940-DE4C-4831-9E7C-181113E695AD}
 - ID: 337e20e1-999a-4eea-85ad-b58a03ae75cc
   Hint: Quick Action Bar
   Type: tree list
-  Value: {FE271793-824D-4500-960A-634F8BEA5730}
+  Value: {5594E940-DE4C-4831-9E7C-181113E695AD}
 - ID: 39847666-389d-409b-95bd-f2016f11eed5
   Hint: Unversioned
   Value: 1
 - ID: 9c903e29-650d-4af2-b9bd-526d5c14a1a5
   Hint: Validator Bar
   Type: tree list
-  Value: {FE271793-824D-4500-960A-634F8BEA5730}
+  Value: {5594E940-DE4C-4831-9E7C-181113E695AD}
 - ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
   Hint: Type
   Value: Commerce Decimal Control
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
-  Value: 82
+  Value: 83
 - ID: be351a73-fcb0-4213-93fa-c302d8ab4f51
   Hint: Shared
   Value: 1
@@ -37,16 +37,16 @@ Languages:
   Fields:
   - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
     Hint: Title
-    Value: Sale Price
+    Value: SalePrice
   - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
     Hint: __Display name
-    Value: Sale Price
+    Value: SalePrice
   Versions:
   - Version: 1
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160317T190147Z
+      Value: 20160317T212226Z
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
       Value: default\Anonymous
@@ -55,7 +55,7 @@ Languages:
       Value: 0
     - ID: 7ee38888-5f13-4cb1-bad0-09f5b7759856
       Hint: Specification Searchable
-      Value: 0
+      Value: 1
     - ID: 81180d30-1185-426f-ae2d-7da7741399a1
       Hint: Free Text Searchable
       Value: 0
@@ -67,7 +67,7 @@ Languages:
       Value: 1
     - ID: ff45e279-7051-42ad-bf91-117f5ec4bd16
       Hint: Display On Site
-      Value: 0
+      Value: 1
 - Language: fr-FR
   Versions:
   - Version: 1
@@ -75,16 +75,16 @@ Languages:
   Fields:
   - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
     Hint: Title
-    Value: Sale Price
+    Value: SalePrice
   - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
     Hint: __Display name
-    Value: Sale Price
+    Value: SalePrice
   Versions:
   - Version: 1
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160317T190147Z
+      Value: 20160317T212226Z
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
       Value: default\Anonymous

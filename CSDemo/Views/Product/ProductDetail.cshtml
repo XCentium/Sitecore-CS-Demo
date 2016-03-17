@@ -14,174 +14,183 @@
         <div class="container">
             @using (BeginEditFrame(Model, "Edit Metadata", x => x.Images, x => x.Title, x => x.ProductId, x => x.CatalogName, x => x.VariantProdId, x => x.DefaultVariant, x => x.IsNew, x => x.IsOnSale, x => x.Rating, x => x.ListPrice, x => x.Brand, x => x.Description, x => x.VariantSize, x => x.VariantColors, x => x.FullDescription))
             {
-            <article class=" product-item product-single">
-                <div class="row">
-                    <div class="col-xs-4">
-                        <div class="product-carousel-wrapper">
-                            <div id="product-carousel">
-                                @if (Model.Images != null)
-                                {
-                                    foreach (var image in Model.Images)
+                <article class=" product-item product-single">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="product-carousel-wrapper">
+                                <div id="product-carousel">
+                                    @if (Model.Images != null)
                                     {
-                                        <div class="item">
-                                            @RenderImage(image, x => x, new { Width = 538, Height = 538, AS = 1, @class = "img-responsive" }, isEditable: false)
-                                        </div>
+                                        foreach (var image in Model.Images)
+                                        {
+                                            <div class="item">
+                                                @RenderImage(image, x => x, new { Width = 538, Height = 538, AS = 1, @class = "img-responsive" }, isEditable: false)
+                                            </div>
+                                        }
                                     }
-                                }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="product-body">
+                                <form name="@Model.ProductId" id="@Model.ProductId">
+                                    <input type="hidden" id="ProductId" name="ProductId" value="@Model.ProductId" />
+                                    <input type="hidden" id="CatalogName" name="CatalogName" value="@Model.CatalogName" />
+                                    <input type="hidden" name="VariantId" id="@string.Concat("VariantID", Model.VariantProdId)" value="@Model.DefaultVariant" />
+                                    <h3>@Editable(Model, x => x.Title)</h3>
+                                    <div class="product-labels">
+                                        @if (Model.IsNew)
+                                        {
+                                            <span class="label label-danger">new</span>
+                                        }
+                                        @if (Model.IsOnSale)
+                                        {
+                                            <span class="label label-danger">sale</span>
+                                        }
+                                    </div>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star@(Model.Rating > 0 ? string.Empty : "-o")"></i>
+                                        <i class="fa fa-star@(Model.Rating > 1 ? string.Empty : "-o")"></i>
+                                        <i class="fa fa-star@(Model.Rating > 2 ? string.Empty : "-o")"></i>
+                                        <i class="fa fa-star@(Model.Rating > 3 ? string.Empty : "-o")"></i>
+                                        <i class="fa fa-star@(Model.Rating > 4 ? string.Empty : "-o")"></i>
+                                    </div>
+                                    @if (Model.IsOnSale && Model.SalePrice > 0)
+                                    {
+                                        <span class="price">
+                                            <del><span id="@string.Concat("productAmount", Model.VariantProdId)" class="amount">@Editable(Model, x => x.ListPrice)</span></del>
+                                        </span>
+                                        <span class="price">
+                                            <ins><span id="@string.Concat("productAmount", Model.VariantProdId)" class="amount">@Editable(Model, x => x.SalePrice)</span></ins>
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="price">
+                                            <ins><span id="@string.Concat("productAmount", Model.VariantProdId)" class="amount">@Editable(Model, x => x.ListPrice)</span></ins>
+                                        </span>
+                                    }
+                                    <ul class="list-unstyled product-info">
+                                        <li><span>ID</span>@Editable(Model, x => x.ProductId)</li>
+                                        @*CSDEMO#99*@
+                                        <li>
+                                            <span>Availability</span>@stockLabel
+                                            -
+                                            <a href="#" class="collapsed notify-me__link" data-toggle="collapse" data-target="#notify-collapse"><span class="notify-me__closed-text">Notify me when back in stock</span><span class="notify-me__opened-text">Cancel</span></a>
+                                            <div id="notify-collapse" class="collapse form-inline notify-me__form">
+                                                <div class="form-group">
+                                                    <input type="email" placeholder="Email Address" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-primary btn-xs">Sign Up</button>
+                                                </div>
+                                                <!--Dev Note:
+                                                        This next bit is intended as a "thank you" message,
+                                                        Show it after the user signs up, or if they already have.
+                                                -->
+                                                <p class="notify-me__signed-up">We'll notify you as soon as this item is back in stock!</p>
+                                            </div>
+                                        </li>
+                                        <li><span>Brand</span>@Editable(Model, x => x.Brand)</li>
+                                        @*<li><span>Tags</span></li>*@
+                                    </ul>
+                                    <p>@Editable(Model, x => x.Description)</p>
+                                    <div class="product-form clearfix">
+                                        <div class="row row-no-padding">
+                                            <div class="col-md-3 col-sm-4">
+                                                <div class="product-quantity clearfix">
+                                                    <a class="btn btn-default" id="qty-minus">-</a>
+                                                    <input type="text" class="form-control" id="Quantity" value="1" />
+                                                    <a class="btn btn-default" id="qty-plus">+</a>
+                                                </div>
+                                            </div>
+                                            @if (Model.VariantSize != null)
+                                            {
+                                                <div class="col-md-3 col-sm-4">
+                                                    <div class="product-size">
+                                                        <div class="form-inline">
+                                                            <div class="form-group">
+                                                                <label>Size:</label>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <select name="ProductSize" id="ProductSize" data-objid="#ProductSize" data-num="@Model.VariantProdId" onchange="DoProductSizeChange('#ProductSize', '@Model.VariantProdId')" class="form-control ProductSize">
+                                                                    @foreach (var size in Model.VariantSize.VariantSizeLines)
+                                                                    {
+                                                                        <option value="@size.Value">@size.Size</option>
+                                                                    }
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            @if (Model.VariantColors != null)
+                                            {
+                                                <div class="col-md-3 col-sm-4">
+                                                    <div class="product-color">
+                                                        <div class="form-inline">
+                                                            <div class="form-group">
+                                                                <label>Color:</label>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                @foreach (var variantColor in Model.VariantColors)
+                                                                {
+                                                                    <select name="@variantColor.Name" id="@string.Concat(variantColor.Name, Model.VariantProdId)" style="display:@variantColor.Display" data-num="@Model.VariantProdId" class="@string.Concat("ProductColor",Model.VariantProdId) ProductColor form-control">
+                                                                        @foreach (var color in variantColor.VariantColorLines)
+                                                                        {
+                                                                            <option value="@color.Value">@color.Color</option>
+                                                                        }
+                                                                    </select>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            <div class="col-md-3 col-sm-12">
+                                                <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="list-inline product-links">
+                                        <li><a href="#"><i class="fa fa-heart"></i>Add to wishlist</a></li>
+                                        <li><a href="#"><i class="fa fa-exchange"></i>Compare</a></li>
+                                        <li><a href="#"><i class="fa fa-envelope"></i>Email to friend</a></li>
+                                    </ul>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-8">
-                        <div class="product-body">
-                            <form name="@Model.ProductId" id="@Model.ProductId">
-                                <input type="hidden" id="ProductId" name="ProductId" value="@Model.ProductId" />
-                                <input type="hidden" id="CatalogName" name="CatalogName" value="@Model.CatalogName" />
-                                <input type="hidden" name="VariantId" id="@string.Concat("VariantID", Model.VariantProdId)" value="@Model.DefaultVariant" />
-                                <h3>@Editable(Model, x => x.Title)</h3>
-                                <div class="product-labels">
-                                    @if (Model.IsNew)
-                                    {
-                                        <span class="label label-danger">new</span>
-                                    }
-                                    @if (Model.IsOnSale)
-                                    {
-                                        <span class="label label-danger">sale</span>
-                                    }
-                                </div>
-                                <div class="product-rating">
-                                    <i class="fa fa-star@(Model.Rating > 0 ? string.Empty : "-o")"></i>
-                                    <i class="fa fa-star@(Model.Rating > 1 ? string.Empty : "-o")"></i>
-                                    <i class="fa fa-star@(Model.Rating > 2 ? string.Empty : "-o")"></i>
-                                    <i class="fa fa-star@(Model.Rating > 3 ? string.Empty : "-o")"></i>
-                                    <i class="fa fa-star@(Model.Rating > 4 ? string.Empty : "-o")"></i>
-                                </div>
-                                <span class="price">
-                                    <ins><span id="@string.Concat("productAmount", Model.VariantProdId)" class="amount">@Editable(Model, x => x.ListPrice)</span></ins>
-                                </span>
-                                <ul class="list-unstyled product-info">
-                                    <li><span>ID</span>@Editable(Model, x => x.ProductId)</li>
-                                    @*CSDEMO#99*@
-                                    <li>
-                                        <span>Availability</span>@stockLabel
-                                         - 
-                                        <a href="#" class="collapsed notify-me__link"  data-toggle="collapse" data-target="#notify-collapse"><span class="notify-me__closed-text">Notify me when back in stock</span><span class="notify-me__opened-text">Cancel</span></a>
-                                        
-                                        <div id="notify-collapse" class="collapse form-inline notify-me__form">
-                                            <div class="form-group">
-                                                <input type="email" placeholder="Email Address" />
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="button" class="btn btn-primary btn-xs">Sign Up</button>
-                                            </div>
-
-                                            <!--Dev Note:
-                                                    This next bit is intended as a "thank you" message,
-                                                    Show it after the user signs up, or if they already have.
-                                            -->
-                                            <p class="notify-me__signed-up">We'll notify you as soon as this item is back in stock!</p>
-                                        </div>
-                                    </li>
-                                    <li><span>Brand</span>@Editable(Model, x => x.Brand)</li>
-                                    @*<li><span>Tags</span></li>*@
-                                </ul>
-                                <p>@Editable(Model, x => x.Description)</p>
-                                <div class="product-form clearfix">
-                                    <div class="row row-no-padding">
-                                        <div class="col-md-3 col-sm-4">
-                                            <div class="product-quantity clearfix">
-                                                <a class="btn btn-default" id="qty-minus">-</a>
-                                                <input type="text" class="form-control" id="Quantity" value="1" />
-                                                <a class="btn btn-default" id="qty-plus">+</a>
-                                            </div>
-                                        </div>
-                                        @if (Model.VariantSize != null)
-                                        {
-                                            <div class="col-md-3 col-sm-4">
-                                                <div class="product-size">
-                                                    <div class="form-inline">
-                                                        <div class="form-group">
-                                                            <label>Size:</label>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <select name="ProductSize" id="ProductSize" data-objid="#ProductSize" data-num="@Model.VariantProdId" onchange="DoProductSizeChange('#ProductSize', '@Model.VariantProdId')" class="form-control ProductSize">
-                                                                @foreach (var size in Model.VariantSize.VariantSizeLines)
-                                                                {
-                                                                    <option value="@size.Value">@size.Size</option>
-                                                                }
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
-                                        @if (Model.VariantColors != null)
-                                        {
-                                            <div class="col-md-3 col-sm-4">
-                                                <div class="product-color">
-                                                    <div class="form-inline">
-                                                        <div class="form-group">
-                                                            <label>Color:</label>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            @foreach (var variantColor in Model.VariantColors)
-                                                            {
-                                                                <select name="@variantColor.Name" id="@string.Concat(variantColor.Name, Model.VariantProdId)" style="display:@variantColor.Display" data-num="@Model.VariantProdId" class="@string.Concat("ProductColor",Model.VariantProdId) ProductColor form-control">
-                                                                    @foreach (var color in variantColor.VariantColorLines)
-                                                                    {
-                                                                        <option value="@color.Value">@color.Color</option>
-                                                                    }
-                                                                </select>
-                                                            }
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
-                                        <div class="col-md-3 col-sm-12">
-                                            <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <ul class="list-inline product-links">
-                                    <li><a href="#"><i class="fa fa-heart"></i>Add to wishlist</a></li>
-                                    <li><a href="#"><i class="fa fa-exchange"></i>Compare</a></li>
-                                    <li><a href="#"><i class="fa fa-envelope"></i>Email to friend</a></li>
-                                </ul>
-                            </form>
+                </article>
+                <div class="tabs product-tabs">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#description" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="true">Description</a>
+                        </li>
+                        <li role="presentation" class="">
+                            <a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">Reviews</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="description">
+                            @Editable(Model, x => x.FullDescription)
+                        </div>
+                        <div role="tabpanel" class="tab-pane in" id="reviews">
+                            <div class="comments-reviews">
+                                <!-- Begin: Intense Debate Scripting (comments service) -->
+                                <script>
+                                    var idcomments_acct = 'e51a68d7ae9a2ded4bf583c290a77ae9';
+                                    var idcomments_post_id;
+                                    var idcomments_post_url;
+                                </script>
+                                <span id="IDCommentsPostTitle" style="display: none"></span>
+                                <script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+                                <!-- End: Intense Debate Scripting (comments service) -->
+                            </div>
                         </div>
                     </div>
                 </div>
-            </article>
-            <div class="tabs product-tabs">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active">
-                        <a href="#description" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="true">Description</a>
-                    </li>
-                    <li role="presentation" class="">
-                        <a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">Reviews</a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="description">
-                        @Editable(Model, x => x.FullDescription)
-                    </div>
-                    <div role="tabpanel" class="tab-pane in" id="reviews">
-                        <div class="comments-reviews">
-                            <!-- Begin: Intense Debate Scripting (comments service) -->
-                            <script>
-                                var idcomments_acct = 'e51a68d7ae9a2ded4bf583c290a77ae9';
-                                var idcomments_post_id;
-                                var idcomments_post_url;
-                            </script>
-                            <span id="IDCommentsPostTitle" style="display: none"></span>
-                            <script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
-                            <!-- End: Intense Debate Scripting (comments service) -->
-                        </div>
-                    </div>
-                </div>
-            </div>
             }
-
             @Html.Partial("~/Views/Product/RelatedProducts.cshtml", Model.RelatedProducts)
         </div>
     </section>

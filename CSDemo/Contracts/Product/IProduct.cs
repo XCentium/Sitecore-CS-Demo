@@ -21,6 +21,7 @@ namespace CSDemo.Contracts.Product
         IEnumerable<Image> Images { get; set; }
         string CatalogName { get; set; }
         decimal Price { get; set; }
+        decimal SalePrice { get; set; }
         string DefinitionName { get; set; }
         string Description { get; set; }
         bool IsOnSale { get; set; }

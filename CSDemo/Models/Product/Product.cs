@@ -56,6 +56,8 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.Price)]
         public virtual decimal Price { get; set; }
 
+        public virtual decimal SalePrice { get; set; }
+
         [SitecoreField(Fields.DefinitionName)]
         public virtual string DefinitionName { get; set; }
 
