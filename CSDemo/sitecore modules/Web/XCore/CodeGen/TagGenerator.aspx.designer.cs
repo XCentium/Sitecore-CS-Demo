@@ -31,13 +31,13 @@ namespace CSDemo.sitecore_modules.Web.XCore.CodeGen {
         protected global::System.Web.UI.WebControls.TextBox TagTemplateId;
         
         /// <summary>
-        /// StartCatalogId control.
+        /// CatalogsDropDown control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox StartCatalogId;
+        protected global::System.Web.UI.WebControls.DropDownList CatalogsDropDown;
         
         /// <summary>
         /// TagContainerId control.
