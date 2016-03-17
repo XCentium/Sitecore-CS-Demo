@@ -218,3 +218,32 @@ header.navbar li.navbar-cart .dropdown-menu > li {
 .jumbotron .item:not(:first-child) {
     display: none;
 }
+
+
+
+/* Notify Me */
+.notify-me {}
+
+.notify-me__link {
+    display: inline-block;
+}
+
+.notify-me__form {
+    padding: 10px 0;
+}
+
+.notify-me__closed-text {
+    display: none!important;
+}
+
+.notify-me__opened-text {
+    display: inline!important;
+}
+
+.collapsed .notify-me__closed-text {
+    display: inline!important;
+}
+
+.collapsed .notify-me__opened-text {
+    display: none!important;
+}
