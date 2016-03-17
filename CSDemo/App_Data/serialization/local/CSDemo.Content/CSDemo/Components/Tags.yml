@@ -9,6 +9,15 @@ SharedFields:
   Hint: __Masters
   Type: TreelistEx
   Value: {3C937B2D-EA5E-4CB0-8FBD-1799BFA30475}
+- ID: a0cb3965-8884-4c7a-8815-b6b2e5ced162
+  Hint: __Editors
+  Type: TreelistEx
+  Value: |
+    {59F53BBB-D1F5-4E38-8EBA-0D73109BB59B}
+    {A0C460F4-DBAE-4A5A-8F3A-C4ADFCDACEEA}
+- ID: d312103c-b36c-4ca5-864a-c85f9abda503
+  Hint: __Is Bucket
+  Value: 1
 Languages:
 - Language: en
   Versions:

@@ -1,0 +1,21 @@
+﻿---
+ID: 1b468121-4301-47f2-8552-d2b56dd08f65
+Parent: df78358a-cbf6-4e6f-8702-0bf669f46584
+Template: 3c937b2d-ea5e-4cb0-8fbd-1799bfa30475
+Path: /sitecore/content/CSDemo/Components/Tags/2016/03/16/00/45/Black Diamond Bod
+DB: master
+SharedFields:
+- ID: 9dafca1d-d618-4616-86b8-a8acd6b28a63
+  Hint: __Bucket Parent Reference
+  Value: {E95DAA23-11D6-4C06-BEED-53823DAA948D}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160316T004536Z
+    - ID: b5620c00-330b-479e-9b54-57857040e1e0
+      Hint: Tag Name
+      Value: Black Diamond Bod
