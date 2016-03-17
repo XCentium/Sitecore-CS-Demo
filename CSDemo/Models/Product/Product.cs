@@ -3,13 +3,18 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using CSDemo.Contracts;
 using CSDemo.Contracts.Product;
+using Glass.Mapper.Sc;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using Glass.Mapper.Sc.Fields;
+using Sitecore;
+using Sitecore.Commerce.Connect.CommerceServer.Catalog.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Commerce.Entities.Inventory;
+using Sitecore.Data;
 
 #endregion
 
@@ -95,7 +100,22 @@ namespace CSDemo.Models.Product
 
         public IEnumerable<VariantColor> VariantColors { get; set; }
 
-        public IEnumerable<Product> RelatedProducts { get; set; }
+        public IEnumerable<Product> RelatedProducts
+        {
+            get
+            {
+                List<Product> relatedProducts = new List<Product>();
+                var contextProductItem = Context.Database.GetItem(new ID(ID));
+                if (contextProductItem == null) return relatedProducts;
+                RelationshipField control = contextProductItem.Fields[Product.Fields.RelationshipList];
+                if (control == null) return relatedProducts;
+                IEnumerable<Item> productRelationshipTargets = control.GetProductRelationshipsTargets();
+                IEnumerable<Item> relationshipTargets = productRelationshipTargets as Item[] ?? productRelationshipTargets.ToArray();
+                if (productRelationshipTargets == null || !relationshipTargets.Any()) return relatedProducts;
+                relatedProducts.AddRange(relationshipTargets.Select(t => t.GlassCast<Product>()).Where(t => t != null));
+                return relatedProducts;
+            }
+        }
 
         public StockInformation StockInformation { get; set;}
 

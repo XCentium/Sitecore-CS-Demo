@@ -167,12 +167,9 @@ namespace CSDemo.Controllers
             }
 
             // CSDEMO#49 Save featured products
-
             Cookie.SaveFeaturedProductCookie(productID);
 
             var model = ProductHelper.GetProductByNameAndCategory(productID, categoryID);
-            // CSDEMO#89 Add related products from product relationships
-            model.RelatedProducts = FetchRelatedProducts(model.ID);
             return View(model);
 
 
