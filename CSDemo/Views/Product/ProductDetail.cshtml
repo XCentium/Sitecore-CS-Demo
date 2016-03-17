@@ -68,7 +68,26 @@
                                 <ul class="list-unstyled product-info">
                                     <li><span>ID</span>@Model.ProductId</li>
                                     @*CSDEMO#99*@
-                                    <li><span>Availability</span>@stockLabel</li>
+                                    <li>
+                                        <span>Availability</span>@stockLabel
+                                         - 
+                                        <a href="#" class="collapsed notify-me__link"  data-toggle="collapse" data-target="#notify-collapse"><span class="notify-me__closed-text">Notify me when back in stock</span><span class="notify-me__opened-text">Cancel</span></a>
+                                        
+                                        <div id="notify-collapse" class="collapse form-inline notify-me__form">
+                                            <div class="form-group">
+                                                <input type="email" placeholder="Email Address" />
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-primary btn-xs">Sign Up</button>
+                                            </div>
+
+                                            <!--Dev Note:
+                                                    This next bit is intended as a "thank you" message,
+                                                    Show it after the user signs up, or if they already have.
+                                            -->
+                                            <p class="notify-me__signed-up">We'll notify you as soon as this item is back in stock!</p>
+                                        </div>
+                                    </li>
                                     <li><span>Brand</span>@Editable(Model, x => x.Brand)</li>
                                     @*<li><span>Tags</span></li>*@
                                 </ul>
