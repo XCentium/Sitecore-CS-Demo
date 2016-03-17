@@ -61,7 +61,7 @@
                                             <del><span id="@string.Concat("productAmount", Model.VariantProdId)" class="amount">@Editable(Model, x => x.ListPrice)</span></del>
                                         </span>
                                         <span class="price">
-                                            <ins><span id="@string.Concat("productAmount", Model.VariantProdId)" class="amount">@Editable(Model, x => x.SalePrice)</span></ins>
+                                            <ins><span id="@string.Concat("productAmount", Model.VariantProdId)" class="amount">@Editable(Model, x => x.SalePrice.ToString("C"))</span></ins>
                                         </span>
                                     }
                                     else

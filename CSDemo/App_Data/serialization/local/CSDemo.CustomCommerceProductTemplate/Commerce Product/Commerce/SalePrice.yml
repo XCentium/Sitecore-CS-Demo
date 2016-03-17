@@ -31,6 +31,13 @@ SharedFields:
   Value: 1
 Languages:
 - Language: de-DE
+  Fields:
+  - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
+    Hint: Title
+    Value: SalePrice
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: SalePrice
   Versions:
   - Version: 1
 - Language: en
@@ -69,6 +76,13 @@ Languages:
       Hint: Display On Site
       Value: 1
 - Language: fr-FR
+  Fields:
+  - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
+    Hint: Title
+    Value: SalePrice
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: SalePrice
   Versions:
   - Version: 1
 - Language: ja-JP
