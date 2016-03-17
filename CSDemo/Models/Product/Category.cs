@@ -27,10 +27,12 @@ namespace CSDemo.Models
         [SitecoreInfo(SitecoreInfoType.Path)]
         public virtual string Path { get; set; }
 
-        [SitecoreInfo(SitecoreInfoType.DisplayName)]
+        [SitecoreField(Fields.DisplayName)]
         public virtual string Name { get; set; }
+        
         [SitecoreField(Fields.CatalogName)]
         public virtual string CatalogName { get; set; }
+
         [SitecoreField(Fields.Brand)]
         public virtual string Brand { get; set; }
         [SitecoreField(Fields.ChildProducts)]
@@ -90,6 +92,7 @@ namespace CSDemo.Models
             public const string Description = "Description";
             public const string ListPrice = "ListPrice";
             public const string Images = "Images";
+            public const string DisplayName = "__Display name";
         }
         #endregion 
 

@@ -11,9 +11,9 @@
     // CSDEMO#99
     string stockLabel = Model.StockInformation != null && Model.StockInformation.Count > 0 ? string.Format("{0:#,###0} In Stock", Convert.ToInt32(Model.StockInformation.Count)) : "Out Of Stock";
     <section class="content products">
-        @using (BeginEditFrame(Model.Path))
-        { 
         <div class="container">
+            @using (BeginEditFrame(Model, "Edit Metadata", x => x.Images, x => x.Title, x => x.ProductId, x => x.CatalogName, x => x.VariantProdId, x => x.DefaultVariant, x => x.IsNew, x => x.IsOnSale, x => x.Rating, x => x.ListPrice, x => x.Brand, x => x.Description, x => x.VariantSize, x => x.VariantColors, x => x.FullDescription))
+            {
             <article class=" product-item product-single">
                 <div class="row">
                     <div class="col-xs-4">
@@ -37,7 +37,7 @@
                                 <input type="hidden" id="ProductId" name="ProductId" value="@Model.ProductId" />
                                 <input type="hidden" id="CatalogName" name="CatalogName" value="@Model.CatalogName" />
                                 <input type="hidden" name="VariantId" id="@string.Concat("VariantID", Model.VariantProdId)" value="@Model.DefaultVariant" />
-                                <h3>@Model.Title</h3>
+                                <h3>@Editable(Model, x => x.Title)</h3>
                                 <div class="product-labels">
                                     @if (Model.IsNew)
                                     {
@@ -49,24 +49,17 @@
                                     }
                                 </div>
                                 <div class="product-rating">
-                                @if (IsInEditingMode)
-                                {
-                                    @Editable(Model, x => x.Rating)
-                                }
-                                else
-                                {
                                     <i class="fa fa-star@(Model.Rating > 0 ? string.Empty : "-o")"></i>
                                     <i class="fa fa-star@(Model.Rating > 1 ? string.Empty : "-o")"></i>
                                     <i class="fa fa-star@(Model.Rating > 2 ? string.Empty : "-o")"></i>
                                     <i class="fa fa-star@(Model.Rating > 3 ? string.Empty : "-o")"></i>
                                     <i class="fa fa-star@(Model.Rating > 4 ? string.Empty : "-o")"></i>
-                                }
                                 </div>
                                 <span class="price">
                                     <ins><span id="@string.Concat("productAmount", Model.VariantProdId)" class="amount">@Editable(Model, x => x.ListPrice)</span></ins>
                                 </span>
                                 <ul class="list-unstyled product-info">
-                                    <li><span>ID</span>@Model.ProductId</li>
+                                    <li><span>ID</span>@Editable(Model, x => x.ProductId)</li>
                                     @*CSDEMO#99*@
                                     <li>
                                         <span>Availability</span>@stockLabel
@@ -170,7 +163,7 @@
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="description">
-                        @Html.Raw(@Editable(Model, x => x.FullDescription))
+                        @Editable(Model, x => x.FullDescription)
                     </div>
                     <div role="tabpanel" class="tab-pane in" id="reviews">
                         <div class="comments-reviews">
@@ -187,8 +180,9 @@
                     </div>
                 </div>
             </div>
+            }
+
             @Html.Partial("~/Views/Product/RelatedProducts.cshtml", Model.RelatedProducts)
         </div>
-        }
     </section>
 }

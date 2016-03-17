@@ -31,7 +31,8 @@ namespace CSDemo.Models.Product
         [SitecoreInfo(SitecoreInfoType.Path)]
         public virtual string Path { get; set; }
 
-        [SitecoreInfo(SitecoreInfoType.DisplayName)]
+        //[SitecoreInfo(SitecoreInfoType.DisplayName)]
+        [SitecoreField(Fields.DisplayName)]
         public virtual string Title { get; set; }
 
         [SitecoreField(Fields.ProductId)]
@@ -173,6 +174,7 @@ namespace CSDemo.Models.Product
             public const string ListPrice = "ListPrice";
             public const string FullDescription = "Full Description";
             public const string RelationshipList = "Relationship List";
+            public const string DisplayName = "__Display name";
         }
 
         #endregion

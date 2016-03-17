@@ -19,9 +19,9 @@ namespace CSDemo.Models.Product
         public virtual string Path { get; set; }
 
         [SitecoreInfo(SitecoreInfoType.Url)]
-        public virtual string Url { get; set; } 
+        public virtual string Url { get; set; }
 
-        [SitecoreInfo(SitecoreInfoType.DisplayName)]
+        [SitecoreField("__Display name")]
         public virtual string Title { get; set; }
 
         [SitecoreField]

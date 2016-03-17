@@ -20,21 +20,21 @@
         <div class="row row-no-padding">
             @foreach (Category category in Model)
             {
-                using (BeginEditFrame(category.Path))
-                { 
             <!-- CATEGORY - START -->
                 <div class="col-xs-4">
-                    <div class="category">
-                        <a href="@category.Url"> 
-                            <img src="@ProductHelper.GetFirstImageFromItems(category.Images)" class="img-responsive" alt="@category.Name Collection" style="max-height:310px">
-                            <div class="category-mask"></div>
-                            <h3 class="category-title">@category.Name <span>Collection</span></h3>
-                        </a>
-                    </div>
+                    @using (BeginEditFrame(category, "Edit Metadata", x => x.Images, x => x.Name))
+                    {
+                        <div class="category">
+                            <a href="@category.Url"> 
+                                <img src="@ProductHelper.GetFirstImageFromItems(category.Images)" class="img-responsive" alt="@category.Name Collection" style="max-height:310px">
+                                <div class="category-mask"></div>
+                                <h3 class="category-title">@Editable(category, x => x.Name) <span>Collection</span></h3>
+                            </a>
+                        </div>
+                    }
                 </div>
             <!-- CATEGORY - END -->
                 }
-            }
         </div>
     </section>
 }

@@ -14,7 +14,7 @@
             }
             if (!string.IsNullOrWhiteSpace(Model.Content))
             {
-                @Html.Raw(@Editable(Model, x => x.Content))
+                @Editable(Model, x => x.Content)
             }
         }
     </div>

@@ -11,25 +11,43 @@
 
         @if (IsInEditingMode)
         {
-            foreach (var slide in Model)
-            {
-                using (BeginEditFrame(slide.Path))
+            
+            //THIS SHOWS UP FINE IF UNCOMMENTED
+            @*<div id="carousel" class="nav-inside">
+                @foreach (var slide in Model)
                 {
-                    <div class="slide-body" style="background-color:black">
-                        @Editable(slide, x => x.Content)
-                    </div>
-            
-                    //this is needed as otherwise the content text hides behind the image
-                    <br /><br /><br /><br /><br />
-            
-                    <div>
+                    using (BeginEditFrame(slide, "Edit Metadata", x => x.Content, x => x.Image))
+                    {
+                        <div class="slide-body" style="background-color:black">
+                            @Editable(slide, x => x.Content)
+                        </div>
+                    
                         @Editable(slide, x => x.Image)
-                    </div>
+                    }
                 }
-            }
+            </div>*@
+            
+
+                <div id="div-carousel" class="nav-inside">
+                    @foreach (var slide in Model)
+                    {
+                        using (BeginEditFrame(slide, "Edit Metadata", x => x.Content, x => x.Image))
+                        {
+                            <div class="item slide-1" style="background-image: url(@slide.Image.Src)">
+                                <div class="slide-mask"></div>
+                                <div class="slide-body">
+                                    <div class="container">
+                                        @Editable(slide, x => x.Content)
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
         }
         else
-        { 
+        {
             <div id="homepage-1-carousel" class="nav-inside owl-animation">
                 @foreach (var slide in Model)
                 {

@@ -18,43 +18,29 @@
                 {
                     foreach (var featuredProduct in Model.Take(2).ToList())
                     {
-                        using (BeginEditFrame(featuredProduct.Path))
-                        { 
                         <div class="col-xs-6 col-sm-3">
+                            @using (BeginEditFrame(featuredProduct, "Edit Metadata", x => x.Images, x => x.Title, x => x.Rating, x => x.Price))
+                            {
                             <article class="product-item">
                                 @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { Width = 200, Height = 300, AS = 1, @class = "img-responsive"}, isEditable: false)
                                 <h3>
-                                    <a href="@featuredProduct.Url">@featuredProduct.Title</a>
+                                    <a href="@featuredProduct.Url">@Editable(featuredProduct, x => x.Title)</a>
                                     
                                 </h3>
                                 <div class="product-rating">
-                                    @if (IsInEditingMode)
-                                    {
-                                        @Editable(featuredProduct, x => x.Rating)
-                                    }
-                                    else
-                                    {
-                                        <i class="fa fa-star@(featuredProduct.Rating>0 ? string.Empty:"-o" )"></i>
-                                        <i class="fa fa-star@(featuredProduct.Rating>1 ? string.Empty:"-o" )"></i>
-                                        <i class="fa fa-star@(featuredProduct.Rating>2 ? string.Empty:"-o" )"></i>
-                                        <i class="fa fa-star@(featuredProduct.Rating>3 ? string.Empty:"-o" )"></i>
-                                        <i class="fa fa-star@(featuredProduct.Rating>4 ? string.Empty:"-o" )"></i>
-                                    }
+                                    <i class="fa fa-star@(featuredProduct.Rating>0 ? string.Empty:"-o" )"></i>
+                                    <i class="fa fa-star@(featuredProduct.Rating>1 ? string.Empty:"-o" )"></i>
+                                    <i class="fa fa-star@(featuredProduct.Rating>2 ? string.Empty:"-o" )"></i>
+                                    <i class="fa fa-star@(featuredProduct.Rating>3 ? string.Empty:"-o" )"></i>
+                                    <i class="fa fa-star@(featuredProduct.Rating>4 ? string.Empty:"-o" )"></i>
                                 </div>
  
                                 <span class="price">
-                                    @if (IsInEditingMode)
-                                    { 
-                                        <ins><span class="amount">@Editable(featuredProduct, x => x.Price)</span></ins>
-                                    }
-                                    else
-                                    {
-                                        <ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>
-                                    }
+                                    <ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>
                                 </span>
                             </article>
+                            }
                         </div>
-                        }
                     }
                 }
                 <!-- ==========================
@@ -69,41 +55,27 @@
                         <ul class="list-unstyled small-product">
                             @foreach (var featuredProduct in Model.Skip(2).Take(4))
                             {
-                                using (BeginEditFrame(featuredProduct.Path))
-                                { 
                                     <!-- PRODUCT - START -->
                                     <li class="clearfix">
+                                        @using (BeginEditFrame(featuredProduct, "Edit Metadata", x => x.Images, x => x.Title, x => x.Rating, x => x.Price))
+                                        {
                                         <a href="@featuredProduct.Url">
                                             @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { Width = 60, Height = 80, AS = 1, @class = "img-responsive" }, isEditable: false)
-                                            <h3>@featuredProduct.Title</h3>
+                                            <h3>@Editable(featuredProduct, x => x.Title)</h3>
                                         </a>
                                         <div class="product-rating">
-                                            @if (IsInEditingMode)
-                                            {
-                                                @Editable(featuredProduct, x => x.Rating)
-                                            }
-                                            else
-                                            {
-                                                <i class="fa fa-star@(featuredProduct.Rating>0 ? string.Empty:"-o" )"></i>
-                                                <i class="fa fa-star@(featuredProduct.Rating>1 ? string.Empty:"-o" )"></i>
-                                                <i class="fa fa-star@(featuredProduct.Rating>2 ? string.Empty:"-o" )"></i>
-                                                <i class="fa fa-star@(featuredProduct.Rating>3 ? string.Empty:"-o" )"></i>
-                                                <i class="fa fa-star@(featuredProduct.Rating>4 ? string.Empty:"-o" )"></i>
-                                            }
+                                            <i class="fa fa-star@(featuredProduct.Rating>0 ? string.Empty:"-o" )"></i>
+                                            <i class="fa fa-star@(featuredProduct.Rating>1 ? string.Empty:"-o" )"></i>
+                                            <i class="fa fa-star@(featuredProduct.Rating>2 ? string.Empty:"-o" )"></i>
+                                            <i class="fa fa-star@(featuredProduct.Rating>3 ? string.Empty:"-o" )"></i>
+                                            <i class="fa fa-star@(featuredProduct.Rating>4 ? string.Empty:"-o" )"></i>
                                         </div>
                                         <span class="price">
-                                            @if (IsInEditingMode)
-                                            {
-                                                <ins><span class="amount">@Editable(featuredProduct, x => x.Price)</span></ins>
-                                            }
-                                            else
-                                            {
-                                                <ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>
-                                            }
+                                            <ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>
                                         </span>
+                                        }
                                     </li>
                                 <!-- PRODUCT - END -->
-                                }
                             }
                         </ul>
                     </div>
@@ -114,41 +86,27 @@
                         <ul class="list-unstyled small-product">
                             @foreach (var featuredProduct in Model.Skip(6).Take(4))
                             {
-                                using (BeginEditFrame(featuredProduct.Path))
-                                { 
                                 <!-- PRODUCT - START -->
                                 <li class="clearfix">
+                                    @using (BeginEditFrame(featuredProduct, "Edit Metadata", x => x.Images, x => x.Title, x => x.Rating, x => x.Price))
+                                    {
                                     <a href="@featuredProduct.Url">
                                         @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { Width = 60, Height = 80, AS = 1, @class = "img-responsive" }, isEditable: false)
-                                        <h3>@featuredProduct.Title</h3>
+                                        <h3>@Editable(featuredProduct, x => x.Title)</h3>
                                     </a>
                                     <div class="product-rating">
-                                        @if (IsInEditingMode)
-                                        {
-                                            @Editable(featuredProduct, x => x.Rating)
-                                        }
-                                        else
-                                        {
-                                            <i class="fa fa-star@(featuredProduct.Rating>0 ? string.Empty:"-o" )"></i>
-                                            <i class="fa fa-star@(featuredProduct.Rating>1 ? string.Empty:"-o" )"></i>
-                                            <i class="fa fa-star@(featuredProduct.Rating>2 ? string.Empty:"-o" )"></i>
-                                            <i class="fa fa-star@(featuredProduct.Rating>3 ? string.Empty:"-o" )"></i>
-                                            <i class="fa fa-star@(featuredProduct.Rating>4 ? string.Empty:"-o" )"></i>
-                                        }
+                                        <i class="fa fa-star@(featuredProduct.Rating>0 ? string.Empty:"-o" )"></i>
+                                        <i class="fa fa-star@(featuredProduct.Rating>1 ? string.Empty:"-o" )"></i>
+                                        <i class="fa fa-star@(featuredProduct.Rating>2 ? string.Empty:"-o" )"></i>
+                                        <i class="fa fa-star@(featuredProduct.Rating>3 ? string.Empty:"-o" )"></i>
+                                        <i class="fa fa-star@(featuredProduct.Rating>4 ? string.Empty:"-o" )"></i>
                                     </div>
                                     <span class="price">
-                                        @if (IsInEditingMode)
-                                        {
-                                            <ins><span class="amount">@Editable(featuredProduct, x => x.Price)</span></ins>
-                                        }
-                                        else
-                                        {
-                                            <ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>
-                                        }
+                                        <ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>
                                     </span>
+                                    }
                                 </li>
                                 <!-- PRODUCT - END -->
-                                }
                             }
                         </ul>
                     </div>
