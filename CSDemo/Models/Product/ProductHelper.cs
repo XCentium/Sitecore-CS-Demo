@@ -8,6 +8,7 @@ using CSDemo.Models.Account;
 using CSDemo.Models.Checkout.Cart;
 using Glass.Mapper.Sc;
 using Sitecore;
+using Sitecore.Analytics;
 using Sitecore.Analytics.Data;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines;
@@ -34,7 +35,8 @@ namespace CSDemo.Models.Product
         {
             var productItem = context.Database.GetItem(new ID(model.ID));
             if (productItem == null) return;
-            TrackingFieldProcessor.Process(productItem);
+            var trackingField = new TrackingField(productItem.Fields[Constants.Products.TrackingFieldId]);
+            TrackingFieldProcessor.ProcessProfiles(Tracker.Current.Interaction, trackingField);
 
             // Readable
             var profiles = Sitecore.Analytics.Tracker.Current.Interaction.Profiles;
