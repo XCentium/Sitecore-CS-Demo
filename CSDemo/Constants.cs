@@ -124,6 +124,7 @@ namespace CSDemo
             public const string VariantColorDisplayNone = "None";
             public const string VariantColorLineFormat = "{0}|{1}|{2}";
             public const string VariantColorNameFormat = "{0}{1}";
+            public const string TrackingFieldId = "{B0A67B2A-8B07-4E0B-8809-69F751709806}";
         }
 
     }

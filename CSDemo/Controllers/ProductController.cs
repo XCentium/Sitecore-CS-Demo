@@ -8,6 +8,7 @@ using CSDemo.Models;
 using CSDemo.Models.Product;
 using Glass.Mapper.Sc;
 using Sitecore;
+using Sitecore.Analytics;
 using Sitecore.Commerce.Connect.CommerceServer.Catalog.Fields;
 using Sitecore.Commerce.Connect.CommerceServer.Controls;
 using Sitecore.ContentSearch;
@@ -150,10 +151,12 @@ namespace CSDemo.Controllers
             // CSDEMO#49 Save featured products
             Cookie.SaveFeaturedProductCookie(productID);
 
-            var model = ProductHelper.GetProductByNameAndCategory(productID, categoryID);
+            Product model = ProductHelper.GetProductByNameAndCategory(productID, categoryID);
+
+            // CSDEMO#115
+            model.ProfileProduct(_context);
+
             return View(model);
-
-
         }
 
         #region Private Helpers
