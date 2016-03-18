@@ -9,6 +9,7 @@ using Glass.Mapper.Sc;
 using Sitecore;
 using Sitecore.Analytics;
 using Sitecore.Analytics.Data;
+using Sitecore.Analytics.Tracking;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines;
 using Sitecore.Commerce.Entities.Carts;
@@ -35,18 +36,19 @@ namespace CSDemo.Models.Product
             var productItem = context.Database.GetItem(new ID(model.ID));
             if (productItem == null) return;
             var trackingField = new TrackingField(productItem.Fields[Constants.Products.TrackingFieldId]);
+            // Process the tracking profiles associated with this product
             TrackingFieldProcessor.ProcessProfiles(Tracker.Current.Interaction, trackingField);
-            var profile =
-                trackingField.Profiles?.FirstOrDefault(
-                    profileData => profileData.Name.Equals("Score") && profileData.IsSavedInField);
-            if (profile == null) return;
-            var profileKeys = profile.Keys;
-            var profiles = Tracker.Current.Interaction.Profiles;
-            if (profiles?["Score"] != null)
+            // Finally score the profile and update this visitor's pattern
+            var trackerProfiles = Tracker.Current.Interaction.Profiles;
+            if (trackingField.Profiles != null && trackingField.Profiles.Any() && trackerProfiles != null)
             {
-                var scoreProfile = profiles["Score"];
-                if (profileKeys != null)
+                var profiles = trackingField.Profiles.Where(t => t.IsSavedInField).ToList();
+                foreach (var profile in profiles)
                 {
+                    if (!trackerProfiles.ContainsProfile(profile.Name)) continue;
+                    var profileKeys = profile.Keys;
+                    if (profileKeys == null) continue;
+                    var scoreProfile = trackerProfiles[profile.Name];
                     scoreProfile.Score(profile);
                     scoreProfile.UpdatePattern();
                 }
