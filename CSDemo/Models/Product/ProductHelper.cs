@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using CSDemo.Models.Account;
 using CSDemo.Models.Checkout.Cart;
 using Glass.Mapper.Sc;
@@ -29,7 +28,7 @@ namespace CSDemo.Models.Product
     public static class ProductHelper
     {
         /// <summary>
-        /// CSDEMO#115 
+        ///     CSDEMO#115
         /// </summary>
         public static void ProfileProduct(this Product model, ISitecoreContext context)
         {
@@ -37,9 +36,21 @@ namespace CSDemo.Models.Product
             if (productItem == null) return;
             var trackingField = new TrackingField(productItem.Fields[Constants.Products.TrackingFieldId]);
             TrackingFieldProcessor.ProcessProfiles(Tracker.Current.Interaction, trackingField);
-
-            // Readable
-            var profiles = Sitecore.Analytics.Tracker.Current.Interaction.Profiles;
+            var profile =
+                trackingField.Profiles?.FirstOrDefault(
+                    profileData => profileData.Name.Equals("Score") && profileData.IsSavedInField);
+            if (profile == null) return;
+            var profileKeys = profile.Keys;
+            var profiles = Tracker.Current.Interaction.Profiles;
+            if (profiles?["Score"] != null)
+            {
+                var scoreProfile = profiles["Score"];
+                if (profileKeys != null)
+                {
+                    scoreProfile.Score(profile);
+                    scoreProfile.UpdatePattern();
+                }
+            }
         }
 
         /// <summary>
