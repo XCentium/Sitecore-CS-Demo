@@ -13,6 +13,8 @@ using Sitecore.Analytics.Outcome.Extensions;
 using Sitecore.Analytics.Outcome.Model;
 using Sitecore.Data;
 using Sitecore.Diagnostics;
+using Sitecore.Analytics.Model.Framework;
+using CSDemo.Configuration.Facets;
 
 #endregion
 
@@ -55,12 +57,13 @@ namespace CSDemo.AJAX
 
         [WebMethod(EnableSession = true)]
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
-        public string SubmitOrder(string contextItemId)
+        public string SubmitOrder(string contextItemId, string orderTotal)
         {
             string ret;
             ret = CartHelper.SubmitCart();
             RegisterGoal(Constants.Marketing.SubmitOrderGoalId, contextItemId);
             RegisterOutcome(new ID(Constants.Marketing.PurchaseOutcomeDefinitionId));
+            SavePurchaseAmount(orderTotal);
             return ret;
         }
 
@@ -147,6 +150,16 @@ namespace CSDemo.AJAX
 
 
         #region Private Helpers
+
+        private void SavePurchaseAmount(string orderTotal)
+        {
+            decimal amount = 0;
+            if (string.IsNullOrWhiteSpace(orderTotal) || Tracker.Current.Contact == null || !decimal.TryParse(orderTotal, out amount)) return;
+            var lastOrderTotalFacet = Tracker.Current.Contact.GetFacet<ILastOrderTotal>(LastOrderTotal._FACET_NAME);
+            if (lastOrderTotalFacet == null) return;
+            lastOrderTotalFacet.Updated = DateTime.Now.ToUniversalTime();
+            lastOrderTotalFacet.Amount = amount;
+        }
 
         private void RegisterGoal(string goalId, string itemId)
         {
