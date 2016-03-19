@@ -683,7 +683,7 @@
             $.ajax({
                 type: "POST",
                 url: "/AJAX/cart.asmx/SubmitOrder",
-                data: "{contextItemId:'" + contextItemId + "'}",
+                data: "{contextItemId:'" + contextItemId + "', lastOrderAmount:'"+300+"'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result) {

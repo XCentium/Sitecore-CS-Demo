@@ -126,6 +126,9 @@
       <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Sitecore.ContentSearch.Analytics">
+      <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.Analytics.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.ContentSearch.Linq">
       <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.Linq.dll</HintPath>
       <Private>False</Private>
@@ -209,8 +212,11 @@
     </Compile>
     <Compile Include="App_Start\GlassMapperSc.cs" />
     <Compile Include="App_Start\GlassMapperScCustom.cs" />
+    <Compile Include="Configuration\Conditions\ContactEmailCheck.cs" />
     <Compile Include="Configuration\Conditions\LastPurchaseAmountCheck.cs" />
     <Compile Include="Configuration\Conditions\ReturnedVisitorAfterPurchase.cs" />
+    <Compile Include="Configuration\Facets\ILastOrderTotal.cs" />
+    <Compile Include="Configuration\Facets\LastOrderTotal.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchInfo.cs" />
     <Compile Include="Contracts\IComponents.cs" />
@@ -243,8 +249,8 @@
     <Compile Include="Models\Account\OrderLine.cs" />
     <Compile Include="Models\Account\OrdersViewModel.cs" />
     <Compile Include="Models\Checkout\Cart\CartHelper.cs" />
-    <Compile Include="Models\Navigation\MegaMenuNavigationItem.cs" />
-    <Compile Include="Models\Navigation\NavigationItem.cs" />
+    <Compile Include="Models\Page\Navigation\MegaMenuNavigationItem.cs" />
+    <Compile Include="Models\Page\Navigation\NavigationItem.cs" />
     <Compile Include="Models\Page\Article.cs" />
     <Compile Include="Models\Product\CategoriesViewModel.cs" />
     <Compile Include="Models\Product\CategoryMenulistViewModel.cs" />
@@ -573,7 +579,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contracts\Checkout\" />
-    <Folder Include="Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

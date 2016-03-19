@@ -1,8 +1,8 @@
 ﻿---
 ID: 6b411d3c-2c3f-414c-95d2-138e52500867
-Parent: 3de50d31-6bb4-4ffa-8d40-b9ee13a78a67
+Parent: 1eebdb44-b83c-4e56-870b-8107c66b19a2
 Template: 8c5ead00-5f68-4310-ab0c-84f283b5ee0a
-Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CSDemo/Incentive Program/Initial State/Less than $100/Send E-Mail Message
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CSDemo/Incentive Program/Initial State/Has email/Send E-Mail Message
 DB: master
 SharedFields:
 - ID: 1507131d-cee3-49e9-af32-de5403a37b49

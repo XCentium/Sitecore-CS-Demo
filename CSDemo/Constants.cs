@@ -81,9 +81,9 @@ namespace CSDemo
             public const string CategoriesListingPageId = "{3C5BBD6A-528F-4807-BAF0-20F238F16C0A}";
         }
 
-        public struct Orders
+        public struct Sitecore
         {
-
+            public const string AnalyticsIndexName = "sitecore_analytics_index";
         }
 
         public struct Common

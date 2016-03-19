@@ -1,19 +1,8 @@
-﻿using CSDemo.Models.Account;
-using CSDemo.Models.Checkout.Cart;
-using CSDemo.Models.Product;
+﻿using CSDemo.Configuration.Facets;
 using Sitecore.Analytics.Automation.Rules.Workflows;
 using Sitecore.Analytics.Tracking;
-using Sitecore.Commerce.Connect.CommerceServer.Orders;
-using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
-using Sitecore.Commerce.Contacts;
-using Sitecore.Commerce.Services.Orders;
 using Sitecore.Rules;
 using Sitecore.Rules.Conditions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
 
 namespace CSDemo.Configuration.Conditions
 {
@@ -29,10 +18,7 @@ namespace CSDemo.Configuration.Conditions
             if (automationRuleContext == null) return false;
             var contact = automationRuleContext.Contact;
 
-            var mostRecentOrder = Order.GetMostRecentOrder(contact);
-            if (mostRecentOrder == null) return false;
-
-            decimal lastPurchaseAmount = mostRecentOrder.Total.Amount;
+            decimal lastPurchaseAmount = GetLastPurchaseAmount(contact);
             switch (GetOperator())
             {
                 case ConditionOperator.Equal:
@@ -50,6 +36,15 @@ namespace CSDemo.Configuration.Conditions
                 default:
                     return false;
             }
+        }
+
+        private static decimal GetLastPurchaseAmount(Contact contact)
+        {
+            decimal amount = 0;
+            if (contact == null) return amount;
+            var lastOrderTotalFacet = contact.GetFacet<ILastOrderTotal>(LastOrderTotal._FACET_NAME);
+            if (lastOrderTotalFacet == null) return amount;
+            return lastOrderTotalFacet.Amount;
         }
     }
 }
