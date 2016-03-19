@@ -1,0 +1,39 @@
+﻿@using Sitecore.Links;
+@using Sitecore.Mvc;
+@using Sitecore.Resources.Media;
+@using System.Linq;
+@using CSDemo.Models.Product
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<CSDemo.Models.Product.Product>>
+@if (Model == null && !Model.Any())
+{
+    return;
+}
+<!-- ==========================
+    PRODUCTS - START
+=========================== -->
+<section class="content categories">
+    <div class="row row-no-padding">
+        <!-- PRODUCT - START -->
+        @foreach (var product in Model.ToList())
+        {
+            <div class="col-xs-4">
+                @using (BeginEditFrame(product, "Edit Metadata", x => x.Images, x => x.Title))
+                {
+                    <div class="category">
+                        <a href="@product.Url">
+                            @RenderImage(product.Images.ElementAt(0), t => t, new { @class = "img-responsive" })
+                            <div class="category-mask"></div>
+                            <h3 class="category-title">@Editable(product, x => x.Title) <span>Collection</span></h3>
+                            @*<h3 class="category-title">@category.Title <span>Collection</span></h3>*@
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+        <!-- PRODUCT - END -->
+    </div>
+
+</section>
+<!-- ==========================
+    PRODUCTS - END
+=========================== -->

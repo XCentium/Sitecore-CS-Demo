@@ -254,7 +254,9 @@
     <Compile Include="Models\Product\FeaturedProducts.cs" />
     <Compile Include="Models\Product\Category.cs" />
     <Compile Include="Contracts\Product\IFeaturedCategories.cs" />
+    <Compile Include="Contracts\Product\IPersonalizedProducts.cs" />
     <Compile Include="Models\Product\PaginationViewModel.cs" />
+    <Compile Include="Models\Product\PersonalizedProducts.cs" />
     <Compile Include="Models\Product\ProductHelper.cs" />
     <Compile Include="App_Start\Initializer.cs" />
     <Compile Include="Models\Checkout\Cart\CartItem.cs" />
@@ -561,6 +563,7 @@
     <Content Include="Views\Product\RelatedProducts.cshtml" />
     <Content Include="Views\Page\Layouts\Scripts.cshtml" />
     <Content Include="Views\Page\Layouts\Styles.cshtml" />
+    <Content Include="Views\Product\SpecialtySelectedForYou.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

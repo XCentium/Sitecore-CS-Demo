@@ -20,6 +20,7 @@ using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Extensions;
 using Sitecore.Mvc.Presentation;
 using Sitecore.Web;
+using XCore.Framework;
 
 #endregion
 
@@ -60,6 +61,17 @@ namespace CSDemo.Controllers
             var item = RenderingContext.Current.Rendering.Item; // csdemo >> home
             var featuredCategories = item.GlassCast<FeaturedCategories>();
             return View(featuredCategories.Categories);
+        }
+
+        public ActionResult SpecialtySelectedForYou()
+        {
+            var empty = new List<Product>();
+            var datasource = RenderingContext.Current.Rendering.DataSource;
+            if (datasource.IsEmptyOrNull()) return View(empty);
+            var parentItem = _context.Database.GetItem(datasource);
+            if (parentItem == null) return View(empty);
+            var personalizedProducts = parentItem.GlassCast<PersonalizedProducts>();
+            return personalizedProducts?.Products != null ? View(personalizedProducts.Products) : View(empty);
         }
 
         public ActionResult Categories()

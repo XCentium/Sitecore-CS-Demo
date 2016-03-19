@@ -1,0 +1,21 @@
+﻿---
+ID: aea9a1b0-8fd3-4c16-9612-866f4fb31bcd
+Parent: acfac707-9422-4f3b-a8a7-626855403c26
+Template: e619e625-3af2-463b-9204-92cb08205b93
+Path: /sitecore/content/CSDemo/Components/Products/BargainHunters
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160319T001413Z
+    - ID: 7aa7edb7-dfbd-4117-a31a-ad9128c9c84b
+      Hint: Products
+      Type: Multilist with Search
+      Value: |
+        {AFF77E47-1C57-4283-BC7A-49459D7C2AE5}
+        {E43C60D0-0F86-4881-A129-B7A6BE795076}
+        {385C56B5-881A-49F4-85E0-D82DC1FCA792}
