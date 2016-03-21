@@ -1,8 +1,8 @@
 ﻿---
-ID: b2e5a402-3b17-46f0-a9b1-bfbb05c19f69
-Parent: d97e26ae-6f08-4edd-97c1-315f781df637
+ID: 6274c96f-2115-4620-a4d6-1d9071087710
+Parent: a3c147c8-9c04-42a7-bf75-c1da7aa1327f
 Template: 0a43a0fe-7e0e-49ef-95d4-e3de34f4f175
-Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CSDemo/Dormant Customer/Initial State/User returned
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CSDemo/XCentiumCSDemo New Order Placed/Incentive Plan/True
 DB: master
 SharedFields:
 - ID: 21f3482b-bb14-4555-ba5d-af20d400d5b9
@@ -10,15 +10,15 @@ SharedFields:
   Type: Rules
   Value: |
     <ruleset>
-      <rule uid="{12216422-7462-4426-B7BF-635604D97EED}">
+      <rule uid="{C8FA8B80-9757-414D-8A9D-875E00BCC803}">
         <conditions>
-          <condition id="{32DB717A-F74B-4D7F-B49B-045DBBE5D187}" uid="E35896D192B9427DA134B9A0DFA1660D" />
+          <condition id="{4888ABBB-F17D-4485-B14B-842413F88732}" uid="9576EED8A66D4637988A9D6934F67669" />
         </conditions>
       </rule>
     </ruleset>
 - ID: 3f72bc07-de92-483e-a724-d430769d9ba4
   Hint: Designer ID
-  Value: 4cdbd1eb-ca25-424b-8a6d-a1fb529bca0d
+  Value: 15b845e1-0347-42ae-a0f5-638b088799f7
 - ID: 7642ed71-348b-4b88-8634-cc7b28949472
   Hint: Origin ID
   Value: 00000000-0000-0000-0000-000000000000
@@ -27,7 +27,7 @@ SharedFields:
   Value: 0
 - ID: d2368879-c784-4031-9b79-6a3bf3cb444e
   Hint: Next state
-  Value: 53b15bf4-e1e9-4f91-aaa2-5ecd343cc946
+  Value: e7674545-42a2-4605-9d70-5d075ff21a16
 - ID: e13dcd09-d9bb-43c9-8d7d-438c79d714ca
   Hint: Evaluate
   Value: {B81C1F4C-8B83-44D9-902F-448463DBCCBC}
@@ -36,16 +36,13 @@ Languages:
   Fields:
   - ID: 06f2d72a-1924-4b9a-ba1e-186ce4e57efd
     Hint: Description
-    Value: Has the user visited the website within a given time?
+    Value: All customers get marked as evaluated buyers once passed through all the plans.
   - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
     Hint: __Display name
-    Value: User returned?
+    Value: True
   Versions:
   - Version: 1
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160309T015217Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
-      Hint: __Created by
-      Value: sitecore\csdemo
+      Value: 20160312T025842Z
