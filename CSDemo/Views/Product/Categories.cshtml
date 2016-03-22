@@ -22,13 +22,13 @@
             {
             <!-- CATEGORY - START -->
                 <div class="col-xs-4">
-                    @using (BeginEditFrame(category, "Edit Metadata", x => x.Images, x => x.Name))
+                    @using (BeginEditFrame(category, "Edit Category", x => x.Images, x => x.Name))
                     {
                         <div class="category">
                             <a href="@category.Url"> 
                                 <img src="@ProductHelper.GetFirstImageFromItems(category.Images)" class="img-responsive" alt="@category.Name Collection" style="max-height:310px">
                                 <div class="category-mask"></div>
-                                <h3 class="category-title">@Editable(category, x => x.Name) <span>Collection</span></h3>
+                                <h3 class="category-title">@category.Name <span>Collection</span></h3>
                             </a>
                         </div>
                     }

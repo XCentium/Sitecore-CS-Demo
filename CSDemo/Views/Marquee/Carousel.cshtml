@@ -31,7 +31,7 @@
                 <div id="div-carousel" class="nav-inside">
                     @foreach (var slide in Model)
                     {
-                        using (BeginEditFrame(slide, "Edit Metadata", x => x.Content, x => x.Image))
+                        using (BeginEditFrame(slide, "Edit Hero Slide", x => x.Content, x => x.Image))
                         {
                             <div class="item slide-1" style="background-image: url(@slide.Image.Src)">
                                 <div class="slide-mask"></div>
