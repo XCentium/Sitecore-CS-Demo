@@ -170,3 +170,5 @@ $RECYCLE.BIN/
 /.vs/config
 # XcCommerce112Demo Excludes
 CSDemo/App_Config/Include/zCSDemo/XcCommerce112Demo.Serialization.config
+CSDemo.CustomLaunchPad
+CSDemo.CustomLaunchPad
