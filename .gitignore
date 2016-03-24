@@ -172,3 +172,5 @@ $RECYCLE.BIN/
 CSDemo/App_Config/Include/zCSDemo/XcCommerce112Demo.Serialization.config
 CSDemo.CustomLaunchPad
 CSDemo.CustomLaunchPad
+/CSDemo/App_Data/serialization.zip
+/CSDemo/Properties/PublishProfiles/Deployment.pubxml
