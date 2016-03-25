@@ -217,6 +217,7 @@
     <Compile Include="Configuration\Conditions\ReturnedVisitorAfterPurchase.cs" />
     <Compile Include="Configuration\Facets\ILastOrderTotal.cs" />
     <Compile Include="Configuration\Facets\LastOrderTotal.cs" />
+    <Compile Include="Configuration\ItemResolver.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchInfo.cs" />
     <Compile Include="Contracts\IComponents.cs" />
@@ -578,7 +579,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Contracts\Checkout\" />
   </ItemGroup>
   <PropertyGroup>
