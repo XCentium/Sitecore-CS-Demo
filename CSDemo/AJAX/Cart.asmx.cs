@@ -63,7 +63,8 @@ namespace CSDemo.AJAX
             ret = CartHelper.SubmitCart();
             RegisterGoal(Constants.Marketing.SubmitOrderGoalId, contextItemId);
             RegisterOutcome(new ID(Constants.Marketing.PurchaseOutcomeDefinitionId));
-            SavePurchaseAmount(orderTotal);
+          
+            // SavePurchaseAmount(orderTotal); // Throwing error, so commented out
             return ret;
         }
 
