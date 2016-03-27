@@ -38,7 +38,7 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.DisplayName)]
         public virtual string Title { get; set; }
 
-        [SitecoreField(Fields.ProductId)]
+        [SitecoreInfo(SitecoreInfoType.Name)]
         public virtual string ProductId { get; set; }
 
         [SitecoreField(Fields.DateOfIntroduction)]
