@@ -106,7 +106,7 @@ namespace CSDemo.Models.Product
 
         public IEnumerable<VariantColor> VariantColors { get; set; }
 
-        public IEnumerable<Product> ComplementaryProducts
+        public IEnumerable<Product> AlsoBoughtProducts
         {
             get
             {
