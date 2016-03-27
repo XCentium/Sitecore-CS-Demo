@@ -80,6 +80,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Lib\Sitecore\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Rainbow, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Rainbow.Core.1.1.0\lib\net45\Rainbow.dll</HintPath>
       <Private>True</Private>
@@ -262,6 +266,7 @@
     <Compile Include="Models\Product\CategoriesViewModel.cs" />
     <Compile Include="Models\Product\CategoryMenulistViewModel.cs" />
     <Compile Include="Models\Product\CategoryProductViewModel.cs" />
+    <Compile Include="Models\Product\ComplementaryProductResult.cs" />
     <Compile Include="Models\Product\Cookie.cs" />
     <Compile Include="Models\Product\FeaturedCategories.cs" />
     <Compile Include="Models\Product\FeaturedProducts.cs" />
@@ -577,6 +582,7 @@
     <Content Include="Views\Page\Layouts\Scripts.cshtml" />
     <Content Include="Views\Page\Layouts\Styles.cshtml" />
     <Content Include="Views\Product\SpecialtySelectedForYou.cshtml" />
+    <Content Include="Views\Product\ComplementaryProducts.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
