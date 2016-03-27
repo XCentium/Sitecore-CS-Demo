@@ -49,11 +49,6 @@ namespace CSDemo.AJAX
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
         public string AddProductToCart(string Quantity, string ProductId, string CatalogName, string VariantId, string contextItemId)
         {
-            if(!string.IsNullOrWhiteSpace(ProductId))
-            {
-                ProductId = ProductId.ToLower();
-            }
-            
             var ret = string.Empty;
             ret = CartHelper.AddProductToCart(Quantity, ProductId, CatalogName, VariantId);
             RegisterGoal(Constants.Marketing.AddToCartGoalId, contextItemId);
