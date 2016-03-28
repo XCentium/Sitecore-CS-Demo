@@ -1,0 +1,14 @@
+﻿---
+ID: d9ae449d-4c67-4379-9642-7152843014a7
+Parent: e7cbefe8-9112-4b95-a978-4e470d94c54a
+Template: 54dae7cd-bfd8-4e69-9679-75f2ae9f9034
+Path: /sitecore/system/Settings/Rules/Definitions/Elements/CS Demo
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160327T232811Z

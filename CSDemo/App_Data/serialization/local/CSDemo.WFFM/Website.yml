@@ -1,0 +1,92 @@
+﻿---
+ID: f1f7aab6-c8ce-422f-a214-f610c109fa63
+Parent: d81ac026-07b6-4929-9588-40acbdc56435
+Template: c0a68a37-3c0a-4eeb-8f84-76a7df7c840e
+Path: /sitecore/system/Modules/Web Forms for Marketers/Website
+DB: master
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Type: TreelistEx
+  Value: 
+- ID: 3346103f-6db0-48af-bd92-43b823ae6522
+  Hint: MVC Form Alignment
+  Value: {A2EDA278-A892-4E7C-91E6-DB6C9915C659}
+- ID: 5337e30d-bffb-4605-9a3a-f9273180c26e
+  Hint: MVC Form Type
+  Value: {BE28D311-92DF-4C27-9D57-1A7658640D31}
+- ID: 95d0616e-f735-4494-ab5a-c99408631fd2
+  Hint: Color
+  Value: {792182FB-3DA6-404D-B0DD-79AC1C552463}
+- ID: bfe0d177-b7e9-4c29-9d4c-b1d67e0d4798
+  Hint: Theme
+  Value: {B6E7F06F-4208-46B1-B704-E6FE62404891}
+Languages:
+- Language: da
+  Fields:
+  - ID: 9541e67d-ce8c-4225-803d-33f7f29f09ef
+    Hint: __Short description
+    Value: Hjemmesideformularer
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Hjemmeside
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160327T003704Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: de-DE
+  Fields:
+  - ID: 9541e67d-ce8c-4225-803d-33f7f29f09ef
+    Hint: __Short description
+    Value: Website Formulare
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Website
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160327T004011Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: en
+  Fields:
+  - ID: 9541e67d-ce8c-4225-803d-33f7f29f09ef
+    Hint: __Short description
+    Value: Website Forms
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Website
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20080418T173700Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: ja-JP
+  Fields:
+  - ID: 9541e67d-ce8c-4225-803d-33f7f29f09ef
+    Hint: __Short description
+    Value: Web サイト フォーム
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Web サイト
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160327T004313Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
