@@ -5,6 +5,9 @@ Template: c9e1bf85-800a-4247-a3a3-c3f5dfbfd6aa
 Path: /sitecore/system/Modules/Web Forms for Marketers/Website/Notify When Back In Stock/Email
 DB: master
 SharedFields:
+- ID: 358e7aa0-e3e6-4ef6-92df-ec1301737b50
+  Hint: Parameters
+  Value: <CssClass>.stock-notify-form-group-email</CssClass>
 - ID: 35c76a0b-b630-458c-aecc-1d62c50d24fc
   Hint: Field Link
   Value: {84ABDA34-F9B1-4D3A-A69B-E28F39697069}

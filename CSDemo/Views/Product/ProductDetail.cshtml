@@ -84,24 +84,25 @@
                                             {
                                                  
                                                 clickCMD = "out-of-stock";
-                                                
-                                                
                                                 <!-- ==========================
-                                                    NOTIFY BACK IN STOCK - START
+                                                NOTIFY BACK IN STOCK - START
                                                 =========================== -->
-                                                <a href="#" class="collapsed notify-me__link" data-toggle="collapse" data-target="#notify-collapse">
-                                                    <span class="notify-me__closed-text">Notify me when back in stock</span>
-                                                    <span class="notify-me__opened-text">Cancel</span>
-                                                </a>
-                                                <div id="notify-collapse" class="collapse form-inline notify-me__form">
-                                                    @Html.Sitecore().Placeholder("page-notify-backinstock")
-                                                    <!--Dev Note:
-                                                            This next bit is intended as a "thank you" message,
-                                                            Show it after the user signs up, or if they already have.
-                                                    -->
-                                                    <p class="notify-me__signed-up">We'll notify you as soon as this item is back in stock!</p>
+                                                <div class="stock-notify-form-group">
+                                                    <a href="#" class="collapsed notify-me__link" data-toggle="collapse" data-target="#notify-collapse">
+                                                        <span class="notify-me__closed-text">Notify me when back in stock</span>
+                                                        <span class="notify-me__opened-text">Cancel</span>
+                                                    </a>
+                                                    <div id="notify-collapse" class="collapse form-inline notify-me__form">
+                                                        @Html.Sitecore().Placeholder("page-notify-backinstock")
+                                                        <!--Dev Note:
+                                                        This next bit is intended as a "thank you" message,
+                                                        Show it after the user signs up, or if they already have.
+                                                -->
+                                                        <p class="notify-me__signed-up">We'll notify you as soon as this item is back in stock!</p>
+                                                    </div>
+                                                    <br /><br />
                                                 </div>
-                                                <br/><br/>
+                                                
                                                 <!-- ==========================
                                                     NOTIFY BACK IN STOCK - END
                                                 =========================== -->
