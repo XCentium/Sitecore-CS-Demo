@@ -12,7 +12,7 @@ SharedFields:
     <ruleset>
       <rule uid="{12216422-7462-4426-B7BF-635604D97EED}">
         <conditions>
-          <condition id="{32DB717A-F74B-4D7F-B49B-045DBBE5D187}" uid="E35896D192B9427DA134B9A0DFA1660D" />
+          <condition id="{2ACD2616-DAC5-450D-8CDF-63F08F1AC9A1}" uid="E011D2D2EBDC495AAF415461BF55B1FD" Number="1" />
         </conditions>
       </rule>
     </ruleset>

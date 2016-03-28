@@ -29,7 +29,7 @@ namespace CSDemo.Configuration.Conditions
 
             var lastVisitDate = GetLastVisitDate(contact);
             if (lastVisitDate == DateTime.MinValue) return false;
-            return lastVisitDate > DateTime.Now.AddMinutes(-Number).ToUniversalTime();
+            return lastVisitDate > DateTime.Now.ToUniversalTime().AddMinutes(-Number);
         }
 
         private static DateTime GetLastVisitDate(Contact contact)
