@@ -64,8 +64,7 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.Description)]
         public virtual string Description { get; set; }
 
-        [SitecoreField(Fields.OnSale)]
-        public virtual bool IsOnSale { get; set; }
+        public bool IsOnSale => SalePrice > 0;
 
         [SitecoreInfo(SitecoreInfoType.Url)]
         public virtual string Url { get; set; }
