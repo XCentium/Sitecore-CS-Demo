@@ -67,8 +67,7 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.Description)]
         public virtual string Description { get; set; }
 
-        [SitecoreField(Fields.OnSale)]
-        public virtual bool IsOnSale { get; set; }
+        public bool IsOnSale { get; set; }
 
         [SitecoreInfo(SitecoreInfoType.Url)]
         public virtual string Url { get; set; }
@@ -198,7 +197,6 @@ namespace CSDemo.Models.Product
             public const string ProductId = "ProductId";
             public const string Images = "Images";
             public const string CatalogName = "CatalogName";
-            public const string OnSale = "OnSale";
             public const string IsNew = "IsNew";
             public const string ParentCategories = "ParentCategories";
             public const string DateOfIntroduction = "IntroductionDate";
