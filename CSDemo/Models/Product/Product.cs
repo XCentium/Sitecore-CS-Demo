@@ -18,6 +18,13 @@ using Sitecore.Data;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Sitecore.Diagnostics;
+using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
+using Sitecore.Commerce.Connect.CommerceServer.Inventory;
+using Sitecore.Commerce.Contacts;
+using Sitecore.Commerce.Multishop;
+using Sitecore.Commerce.Services.Inventory;
+using Sitecore.Configuration;
+
 
 #endregion
 
@@ -187,6 +194,49 @@ namespace CSDemo.Models.Product
 
             }
         }
+
+
+        public static void VisitorSignupForStockNotification([NotNull] string shopName, NotificationSigneupInput model, string location)
+        {
+            Assert.ArgumentNotNull(shopName, "shopName");
+            Assert.ArgumentNotNull(model, "model");
+            Assert.ArgumentNotNullOrEmpty(model.ProductId, "model.ProductId");
+            Assert.ArgumentNotNullOrEmpty(model.Email, "model.Email");
+
+            var contactFactory = new ContactFactory();
+            var visitorId = contactFactory.GetContact();
+            var builder = new CommerceInventoryProductBuilder();
+            CommerceInventoryProduct inventoryProduct = (CommerceInventoryProduct)builder.CreateInventoryProduct(model.ProductId);
+            if (string.IsNullOrEmpty(model.VariantId))
+            {
+                (inventoryProduct).VariantId = model.VariantId;
+            }
+
+            if (string.IsNullOrEmpty(inventoryProduct.CatalogName))
+            {
+                (inventoryProduct).CatalogName = model.CatalogName;
+            }
+
+            DateTime interestDate;
+            var isDate = DateTime.TryParse(model.InterestDate, out interestDate);
+            var request = new VisitorSignUpForStockNotificationRequest(shopName, visitorId, model.Email, inventoryProduct) { Location = location };
+            if (isDate)
+            {
+                request.InterestDate = interestDate;
+            }
+
+            var inventoryManager = new InventoryServiceProvider();
+            var result = inventoryManager.VisitorSignUpForStockNotification(request);
+            if (!result.Success)
+            {
+                foreach(var message in result.SystemMessages)
+                {
+                    Log.Error(message.Message, message);
+                }
+            }
+        }
+
+
         #endregion
 
         #region Fields
