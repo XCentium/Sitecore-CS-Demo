@@ -24,7 +24,7 @@ namespace CSDemo.Contracts.Product
         decimal SalePrice { get; set; }
         string DefinitionName { get; set; }
         string Description { get; set; }
-        bool IsOnSale { get; set; }
+        bool IsOnSale { get; }
         string Url { get; set; }
         string CurrencyPrice { get; }
         bool IsNew { get; set; }
