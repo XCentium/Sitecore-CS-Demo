@@ -97,14 +97,15 @@
                                         <label>Sort by:</label>
                                     </div>
                                     <div class="form-group">
-                                        <select name="OrderBy" id="OrderBy" class="form-control">
+                                        @*//TODO: this select control is throwing an error after the upgrade*@
+                                        @*<select name="OrderBy" id="OrderBy" class="form-control">
                                             <option @(Model.PaginationViewModel.OrderBy == string.Empty ? " selected " : string.Empty) value="">Default</option>
                                             <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByBrand ? " selected " : string.Empty) value="@Constants.Products.OrderByBrand">@Constants.Products.OrderByBrand</option>
                                             <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByRatings ? " selected " : string.Empty) value="@Constants.Products.OrderByRatings">@Constants.Products.OrderByRatings</option>
                                             <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByNewness ? " selected " : string.Empty) value="@Constants.Products.OrderByNewness">@Constants.Products.OrderByNewness</option>
                                             <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByPriceAsc ? " selected " : string.Empty) value="@Constants.Products.OrderByPriceAsc">@Constants.Products.OrderByPriceAsc</option>
                                             <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByPriceDesc ? " selected " : string.Empty) value="@Constants.Products.OrderByPriceDesc">@Constants.Products.OrderByPriceDesc</option>
-                                        </select>
+                                        </select>*@
                                         <input type="hidden" name="CategoryID" id="Category" value="@Model.PaginationViewModel.CategoryID.ToString()" />
                                         <input type="hidden" name="Category" id="Category" value="@Model.PaginationViewModel.Category" />
                                         <input type="hidden" name="PageSize" id="PageSize" value="@Model.PaginationViewModel.PageSize" />

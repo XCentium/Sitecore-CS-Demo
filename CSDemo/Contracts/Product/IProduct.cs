@@ -34,5 +34,6 @@ namespace CSDemo.Contracts.Product
         string Variants { get; set; }
         string Brand { get; set; }
         IEnumerable<Item> SortFields { get; set; }
+        IEnumerable<Models.Product.Product> AlsoBoughtProducts { get;}
     }
 }

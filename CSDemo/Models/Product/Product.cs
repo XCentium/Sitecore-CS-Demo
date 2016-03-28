@@ -15,6 +15,9 @@ using Sitecore.Commerce.Connect.CommerceServer.Catalog.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Commerce.Entities.Inventory;
 using Sitecore.Data;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
+using Sitecore.Diagnostics;
 
 #endregion
 
@@ -35,7 +38,7 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.DisplayName)]
         public virtual string Title { get; set; }
 
-        [SitecoreField(Fields.ProductId)]
+        [SitecoreInfo(SitecoreInfoType.Name)]
         public virtual string ProductId { get; set; }
 
         [SitecoreField(Fields.DateOfIntroduction)]
@@ -102,6 +105,36 @@ namespace CSDemo.Models.Product
         public virtual VariantSize VariantSize { get; set; }
 
         public IEnumerable<VariantColor> VariantColors { get; set; }
+
+        public IEnumerable<Product> AlsoBoughtProducts
+        {
+            get
+            {
+                //TODO: replace with web service call once the web service is fixed
+
+                var response = "{\"success\": true, \"messages\": [], \"result\": [\"AW099-15\",\"AW013-08\",\"AW140-13\"]}";
+                var result = JsonConvert.DeserializeObject<ComplementaryProductResult>(response);
+                if (!result.IsSuccessful)
+                {
+                    if (result.Messages == null) yield return null;
+                    foreach (var message in result.Messages)
+                    {
+                        Log.Warn(message, this);
+                    }
+                    yield return null;
+                }
+                if (result.ProductIds == null || !result.ProductIds.Any()) yield return null;
+                foreach (var productId in result.ProductIds)
+                {
+                    var productResult = ProductHelper.GetItemByProductID(productId);
+                    if (productResult != null)
+                    {
+                        var productItem = productResult.GetItem();
+                        yield return productItem.GlassCast<Product>();
+                    }
+                }
+            }
+        }
 
         public IEnumerable<Product> RelatedProducts
         {

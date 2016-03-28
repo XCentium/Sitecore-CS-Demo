@@ -80,6 +80,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Lib\Sitecore\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Rainbow, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Rainbow.Core.1.1.0\lib\net45\Rainbow.dll</HintPath>
       <Private>True</Private>
@@ -128,6 +132,7 @@
     </Reference>
     <Reference Include="Sitecore.ContentSearch.Analytics">
       <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.Analytics.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.ContentSearch.Linq">
       <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.Linq.dll</HintPath>
@@ -135,14 +140,15 @@
     </Reference>
     <Reference Include="Sitecore.ContentSearch.LuceneProvider">
       <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.LuceneProvider.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\Lib\Sitecore\Sitecore.Kernel.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Mvc">
       <HintPath>..\Lib\Sitecore\Sitecore.Mvc.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Mvc.Analytics">
       <HintPath>..\Lib\Sitecore\Sitecore.Mvc.Analytics.dll</HintPath>
@@ -171,15 +177,19 @@
     </Reference>
     <Reference Include="XCore.CodeGenerator">
       <HintPath>..\Lib\XCore2.0\XCore.CodeGenerator.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="XCore.Framework">
       <HintPath>..\Lib\XCore2.0\XCore.Framework.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="XCore.SitecoreExtensions">
       <HintPath>..\Lib\XCore2.0\XCore.SitecoreExtensions.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="XCore.Utilities">
       <HintPath>..\Lib\XCore2.0\XCore.Utilities.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +266,7 @@
     <Compile Include="Models\Product\CategoriesViewModel.cs" />
     <Compile Include="Models\Product\CategoryMenulistViewModel.cs" />
     <Compile Include="Models\Product\CategoryProductViewModel.cs" />
+    <Compile Include="Models\Product\ComplementaryProductResult.cs" />
     <Compile Include="Models\Product\Cookie.cs" />
     <Compile Include="Models\Product\FeaturedCategories.cs" />
     <Compile Include="Models\Product\FeaturedProducts.cs" />
@@ -571,6 +582,8 @@
     <Content Include="Views\Page\Layouts\Scripts.cshtml" />
     <Content Include="Views\Page\Layouts\Styles.cshtml" />
     <Content Include="Views\Product\SpecialtySelectedForYou.cshtml" />
+    <Content Include="Views\Product\ComplementaryProducts.cshtml" />
+    <None Include="Properties\PublishProfiles\xccommerce113demo.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -579,7 +592,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Contracts\Checkout\" />
   </ItemGroup>
   <PropertyGroup>

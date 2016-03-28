@@ -46,6 +46,11 @@
     }
 
 
+    $('.out-of-stock').click(function () {
+
+        ShowActionMessage("This Product is Currently Out of Stock!");
+    });
+
     $('.add-to-cart').click(function () {
 
         if ($(this).data('formid') && $(this).data('contextitemid')) { AddProductToCart($(this).data('formid'), $(this).data('contextitemid')); }
@@ -541,6 +546,10 @@
 
             event.preventDefault();
 
+
+            var radioVal = $(":radio[name='optionsRadios']:checked").val();
+            var radioIdx = $(":radio[name='optionsRadios']:checked").index(":radio[name='optionsRadios']");
+
             // save data 
             SaveFormData("#payment-form", 'payment_form');
 
@@ -548,12 +557,12 @@
 
             console.log(formValues);
 
-            var data = "paymentExternalID:'" + formValues.optionsRadios[0] + "',";
-            data += "nameoncard:'" + formValues.nameoncard[0] + "',";
-            data += "creditcard:'" + formValues.creditcard[0] + "',";
-            data += "expmonth:'" + formValues.expmonth[0] + "',";
-            data += "expyear:'" + formValues.expyear[0] + "',";
-            data += "ccv:'" + formValues.ccv[0] + "'";
+            var data = "paymentExternalID:'" + radioVal + "',";
+            data += "nameoncard:'" + formValues.nameoncard[radioIdx] + "',";
+            data += "creditcard:'" + formValues.creditcard[radioIdx] + "',";
+            data += "expmonth:'" + formValues.expmonth[radioIdx] + "',";
+            data += "expyear:'" + formValues.expyear[radioIdx] + "',";
+            data += "ccv:'" + formValues.ccv[radioIdx] + "'";
 
             $.ajax({
                 type: "POST",
@@ -678,12 +687,13 @@
 
             }
 
-            data = "";
+            var data = "contextItemId:'" + contextItemId + "',";
+            data += "orderTotal:'" + 300 + "'";
 
             $.ajax({
                 type: "POST",
                 url: "/AJAX/cart.asmx/SubmitOrder",
-                data: "{contextItemId:'" + contextItemId + "', lastOrderAmount:'"+300+"'}",
+                data: "{" + data + "}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result) {

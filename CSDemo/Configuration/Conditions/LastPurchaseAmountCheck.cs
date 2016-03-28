@@ -1,4 +1,5 @@
 ﻿using CSDemo.Configuration.Facets;
+using CSDemo.Models.Account;
 using Sitecore.Analytics.Automation.Rules.Workflows;
 using Sitecore.Analytics.Tracking;
 using Sitecore.Rules;
@@ -18,7 +19,7 @@ namespace CSDemo.Configuration.Conditions
             if (automationRuleContext == null) return false;
             var contact = automationRuleContext.Contact;
 
-            decimal lastPurchaseAmount = GetLastPurchaseAmount(contact);
+            decimal lastPurchaseAmount = Order.GetLastOrderAmount(contact);
             switch (GetOperator())
             {
                 case ConditionOperator.Equal:
@@ -36,15 +37,6 @@ namespace CSDemo.Configuration.Conditions
                 default:
                     return false;
             }
-        }
-
-        private static decimal GetLastPurchaseAmount(Contact contact)
-        {
-            decimal amount = 0;
-            if (contact == null) return amount;
-            var lastOrderTotalFacet = contact.GetFacet<ILastOrderTotal>(LastOrderTotal._FACET_NAME);
-            if (lastOrderTotalFacet == null) return amount;
-            return lastOrderTotalFacet.Amount;
         }
     }
 }

@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
+using Sitecore.Data;
 
 #endregion
 
@@ -43,7 +44,7 @@ namespace CSDemo.Models.Cart
                 }
 
 
-                return this.Product.SitecoreProductItemId.ToString();
+                return (!ID.IsNullOrEmpty(Product.SitecoreProductItemId) ? this.Product.SitecoreProductItemId.ToString(): null);
             }
         }
 
