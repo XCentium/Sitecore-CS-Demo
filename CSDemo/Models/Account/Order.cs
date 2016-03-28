@@ -30,7 +30,7 @@ namespace CSDemo.Models.Account
             var manager = Factory.CreateObject("outcome/outcomeManager", true) as OutcomeManager;
             var outcomes = manager.GetForEntity<ContactOutcome>(new ID(contact.ContactId));
             if (outcomes == null || !outcomes.Any()) return 0;
-            var purchaseOutcomes = outcomes.OrderByDescending(o => o.DateTime).Where(o => o.Id == new ID(Constants.Commerce.PurchaseOutcomeId)).ToList();
+            var purchaseOutcomes = outcomes.OrderByDescending(o => o.DateTime).Where(o => o.DefinitionId == new ID(Constants.Commerce.PurchaseOutcomeId)).ToList();
             if (purchaseOutcomes == null || !purchaseOutcomes.Any()) return 0;
 
             var latestPurchaseOutcome = purchaseOutcomes.First();
