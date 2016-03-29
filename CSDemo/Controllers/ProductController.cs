@@ -187,8 +187,9 @@ namespace CSDemo.Controllers
                 Email = model.VisitorSignupForStockNotificationEmail,
                 ProductId = model.ProductId
             };
-            var siteInfo = Sitecore.Context.Site.SiteInfo;
-            Product.VisitorSignupForStockNotification(model.CatalogName, inputModel, model.LocationName ?? string.Empty);
+
+            // TBD
+            // Product.VisitorSignupForStockNotification(model.CatalogName, inputModel, model.LocationName ?? string.Empty);
             ViewBag.SuccessMessage = "Thank you! ";
             return Redirect(model.Url);
         }
