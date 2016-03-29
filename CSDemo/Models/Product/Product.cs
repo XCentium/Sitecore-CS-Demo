@@ -112,7 +112,16 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.Brand)]
         public virtual string Brand { get; set; }
 
-        public virtual Item FirstImage { get; set; }
+        public virtual string FirstImage
+        {
+
+            get
+            {
+
+                return this.Images.ElementAt(0).Src;
+            }
+
+        }
 
         public virtual string DefaultVariant { get; set; }
 

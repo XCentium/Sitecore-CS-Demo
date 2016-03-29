@@ -4,6 +4,8 @@
 @using CSDemo.Models.Checkout.Cart;
 @using CSDemo.Models.Account
 @using System.Collections.Generic
+@using CSDemo.Models
+@using CSDemo.Models.Product
 
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Product.CategoryProductViewModel>
 
@@ -46,12 +48,13 @@
                                                 panelCollapse = "collapse in";
                                                 current = true;
                                             }
-
+                                            
                                             var catProducts = cat.ProductMenulistViewModel;
 
-                                            <li class="panel">
+                                            <li class="panel">                                                
                                                 <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name<span>[@cat.ProductsCount]</span></a>
-                                                <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">
+                                                <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">                                              
+                                                    <li><a href="@cat.Url"><span class="fa fa-arrow-right"></span></a></li>
                                                     @foreach (CSDemo.Models.Product.ProductMenulistViewModel catProduct in catProducts)
                                                     {
                                                         <li><a href="@catProduct.Url">@catProduct.Name</a></li>
@@ -99,13 +102,13 @@
                                     <div class="form-group">
                                         @*//TODO: this select control is throwing an error after the upgrade*@
                                         @*<select name="OrderBy" id="OrderBy" class="form-control">
-                                            <option @(Model.PaginationViewModel.OrderBy == string.Empty ? " selected " : string.Empty) value="">Default</option>
-                                            <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByBrand ? " selected " : string.Empty) value="@Constants.Products.OrderByBrand">@Constants.Products.OrderByBrand</option>
-                                            <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByRatings ? " selected " : string.Empty) value="@Constants.Products.OrderByRatings">@Constants.Products.OrderByRatings</option>
-                                            <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByNewness ? " selected " : string.Empty) value="@Constants.Products.OrderByNewness">@Constants.Products.OrderByNewness</option>
-                                            <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByPriceAsc ? " selected " : string.Empty) value="@Constants.Products.OrderByPriceAsc">@Constants.Products.OrderByPriceAsc</option>
-                                            <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByPriceDesc ? " selected " : string.Empty) value="@Constants.Products.OrderByPriceDesc">@Constants.Products.OrderByPriceDesc</option>
-                                        </select>*@
+                                                <option @(Model.PaginationViewModel.OrderBy == string.Empty ? " selected " : string.Empty) value="">Default</option>
+                                                <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByBrand ? " selected " : string.Empty) value="@Constants.Products.OrderByBrand">@Constants.Products.OrderByBrand</option>
+                                                <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByRatings ? " selected " : string.Empty) value="@Constants.Products.OrderByRatings">@Constants.Products.OrderByRatings</option>
+                                                <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByNewness ? " selected " : string.Empty) value="@Constants.Products.OrderByNewness">@Constants.Products.OrderByNewness</option>
+                                                <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByPriceAsc ? " selected " : string.Empty) value="@Constants.Products.OrderByPriceAsc">@Constants.Products.OrderByPriceAsc</option>
+                                                <option @(Model.PaginationViewModel.OrderBy == Constants.Products.OrderByPriceDesc ? " selected " : string.Empty) value="@Constants.Products.OrderByPriceDesc">@Constants.Products.OrderByPriceDesc</option>
+                                            </select>*@
                                         <input type="hidden" name="CategoryID" id="Category" value="@Model.PaginationViewModel.CategoryID.ToString()" />
                                         <input type="hidden" name="Category" id="Category" value="@Model.PaginationViewModel.Category" />
                                         <input type="hidden" name="PageSize" id="PageSize" value="@Model.PaginationViewModel.PageSize" />
@@ -122,10 +125,34 @@
                         {
                             if (!string.IsNullOrEmpty(product.ListPrice.Trim()))
                             {
-                                
+
                                 bool isInStock = product.StockInformation != null && product.StockInformation.Count > 0;
                                 var clickCMD = (isInStock == true) ? "add-to-cart" : "out-of-stock";
                                 int count = 0;
+
+                                if (product.DefinitionName == "GeneralCategory")
+                                {
+
+                                            <!-- CATEGORY - START -->
+                                    <div class="col-xs-4">
+                                            <div class="category">
+                                                <a href="@product.Url">
+                                                    @foreach (var image in product.Images)
+                                                    {
+                                                        count++;
+                                                        @RenderImage(image, x => x, new { mw = 310, @class = "img-responsive " }, isEditable: false);
+                                                                                                                                                                                                                  if (count == 1) { break; }
+                                                    }
+                                                    <div class="category-mask"></div>
+                                                    <h3 class="category-title">@product.Title <span>Collection</span></h3>
+                                                </a>
+                                            </div>
+                                    </div>
+            <!-- CATEGORY - END -->
+                                        continue;
+                                }
+
+
                     <!-- PRODUCT - START -->
                                 <div class="col-sm-4 col-xs-6">
                                     <article class="product-item">
@@ -137,8 +164,8 @@
                                                     @foreach (var image in product.Images)
                                                     {
                                                         count++;
-                                                        @RenderImage(image, x => x, new { Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive product-image-" + count }, isEditable: false);                                                                                                                                                                                                                                                                     
-                                                        if (count == 2) { break; }
+                                                        @RenderImage(image, x => x, new { Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive product-image-" + count }, isEditable: false);
+                                                       if (count == 2) { break; }
                                                     }
                                                 </div>
                                             </div>

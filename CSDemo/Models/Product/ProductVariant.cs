@@ -21,7 +21,7 @@ namespace CSDemo.Models.Product
         [SitecoreInfo(SitecoreInfoType.DisplayName)]
         public virtual string Name { get; set; }
 
-        [SitecoreField(Fields.VariantId)]
+        [SitecoreInfo(SitecoreInfoType.Name)]
         public virtual string VariantId { get; set; }
 
         [SitecoreField(Fields.ListPrice)]

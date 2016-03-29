@@ -384,6 +384,7 @@ namespace CSDemo.Models.Product
                     var c = new CategoryMenulistViewModel();
                     c.ID = category.ItemId.ToString();
                     c.Name = category.Name;
+                    c.Url = LinkManager.GetItemUrl(category.GetItem());
                     var categoryChildern = category.GetItem().GetChildren();
                     c.ProductsCount = categoryChildern.Count();
                     var pList = new List<ProductMenulistViewModel>();
@@ -419,7 +420,7 @@ namespace CSDemo.Models.Product
                 {
                     var queryable = context.GetQueryable<SearchResultItem>()
                         .Where(x => x.Language == Context.Language.Name);
-                    return queryable.Where(x => x.Parent == ID.Parse(parentID)).ToList();
+                    return queryable.Where(x => x.Parent == ID.Parse(parentID) && x.TemplateName=="GeneralCategory").ToList();
                 }
             }
             catch (Exception ex)
@@ -448,7 +449,8 @@ namespace CSDemo.Models.Product
                         queryable.FirstOrDefault(
                             x =>
                                 string.Equals(x.Name, itemName, StringComparison.CurrentCultureIgnoreCase) &&
-                                x.Parent == ID.Parse(parentID)).ItemId.ToString();
+                                x.TemplateName == "GeneralCategory").ItemId.ToString();
+
                 }
             }
             catch (Exception ex)
@@ -456,6 +458,26 @@ namespace CSDemo.Models.Product
                 Log.Error(ex.StackTrace, ex);
             }
             return string.Empty;
+
+            //                                 (x.TemplateName == "GeneralCategory")).ToString();
+            //try
+            //{
+            //    var culture = Context.Language.CultureInfo;
+            //    using (var context = index.CreateSearchContext())
+            //    {
+            //        var queryable = context.GetQueryable<SearchResultItem>()
+            //            .Where(x => x.Language == Context.Language.Name);
+            //        return
+            //            queryable.FirstOrDefault(
+            //                x =>
+            //                    string.Equals(x.Name, itemName, StringComparison.CurrentCultureIgnoreCase) &&
+            //                    x.Parent == ID.Parse(parentID)).ItemId.ToString();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Log.Error(ex.StackTrace, ex);
+            //}
         }
 
         /// <summary>
@@ -662,7 +684,13 @@ namespace CSDemo.Models.Product
                 product.ProductVariants = productItem.GetChildren().Select(x => x.GlassCast<ProductVariant>());
                 BuildUIVariants(product);
                 // CSDEMO#99
-                product.StockInformation = cartHelper.GetProductStockInformation(product.ProductId, product.CatalogName);
+                if (!string.IsNullOrEmpty(product.DefaultVariant)) {
+                    product.StockInformation = cartHelper.GetProductStockInformation(product.ProductId, product.CatalogName, product.DefaultVariant);
+                }
+                else
+                {
+                    product.StockInformation = cartHelper.GetProductStockInformation(product.ProductId, product.CatalogName);
+                }
             }
             return product;
         }

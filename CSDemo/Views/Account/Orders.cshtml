@@ -40,7 +40,7 @@
                             @if (Model != null) { 
                                 foreach(var order in Model.Orders){
                                     <tr>
-                                        <td><a href="single-order.html">#@order.OrderID</a></td>
+                                        <td><a href="~/account/orders/@order.OrderID">#@order.OrderID</a></td>
                                         <td> @order.OrderDate </td>
                                         <td class="hidden-xs hidden-sm">@order.NumberofItems</td>
                                         <td>@order.TotalPrice</td>

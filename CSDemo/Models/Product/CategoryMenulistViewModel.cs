@@ -9,6 +9,8 @@ namespace CSDemo.Models.Product
     {
         public string ID { get; set; }
         public string Name { get; set; }
+
+        public string Url { get; set; }
         public IEnumerable<ProductMenulistViewModel> ProductMenulistViewModel { get; set; }
 
         public int ProductsCount { get; set; }

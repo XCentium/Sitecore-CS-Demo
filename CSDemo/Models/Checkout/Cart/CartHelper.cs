@@ -225,12 +225,19 @@ namespace CSDemo.Models.Checkout.Cart
         /// <param name="productId"></param>
         /// <param name="catalogName"></param>
         /// <returns></returns>
-        internal StockInformation GetProductStockInformation(string productId, string catalogName)
+        internal StockInformation GetProductStockInformation(string productId, string catalogName, string variantId = "")
         {
-            var products = new List<InventoryProduct>
-            {
-                new CommerceInventoryProduct {ProductId = productId, CatalogName = catalogName}
-            };
+            var commerceInventoryProduct = new CommerceInventoryProduct();
+            commerceInventoryProduct.ProductId = productId;
+            commerceInventoryProduct.CatalogName = catalogName;
+            if (!string.IsNullOrEmpty(variantId)) { commerceInventoryProduct.VariantId = variantId; }
+            var products = new List<InventoryProduct>();
+            products.Add(commerceInventoryProduct);
+
+            //var products = new List<InventoryProduct>
+            //{
+            //    new CommerceInventoryProduct {ProductId = productId, CatalogName = catalogName}
+            //};
             var stockInfoRequest = new GetStockInformationRequest(ShopName, products, StockDetailsLevel.All);
             var stockInfoResult = _inventoryServiceProvider.GetStockInformation(stockInfoRequest);
             return stockInfoResult.StockInformation.FirstOrDefault();
@@ -372,7 +379,7 @@ namespace CSDemo.Models.Checkout.Cart
                             var children = RootItem.Axes.GetDescendants();
                             var item =
                                 children.AsQueryable()
-                                    .FirstOrDefault(x => x["ProductId"].ToString().Equals(product.ProductId));
+                                    .FirstOrDefault(x => x.Name.Equals(product.ProductId));
                             if (item != null)
                             {
                                 cartItem.ProductID = item.ID.ToString();
