@@ -146,9 +146,16 @@
                                                 <div class="product-body">
                                                     <h3>@product.Title</h3>
                                                     <div class="product-labels">
-                                                        <span class="label label-info">new</span>
-                                                        <span class="label label-danger">sale</span>
+                                                        @if (@product.IsNew)
+                                                        {
+                                                            <span class="label label-info">new</span>
+                                                        }
+                                                        @if (@product.IsOnSale)
+                                                        {
+                                                            <span class="label label-danger">sale</span>
+                                                        }
                                                     </div>
+
                                                     <div class="product-rating">
                                                         <i class="fa fa-star@(product.Rating > 0 ? string.Empty : "-o")"></i>
                                                         <i class="fa fa-star@(product.Rating > 1 ? string.Empty : "-o")"></i>
