@@ -122,13 +122,22 @@ namespace CSDemo.Models.Product
         {
             get
             {
-                //TODO: replace with web service call once the web service is fixed
+                var response = string.Empty;
 
-                var url = string.Format("http://xcp13n.xcentium.net/api/data/relatedproducts/csdemo/{0}",this.ProductId);
+                try
+                {
+                    var url = string.Format(Constants.Products.AlsoBoughtProductsURL, this.ProductId);
 
-                var syncClient = new WebClient();
+                    var syncClient = new WebClient();
 
-                var response = syncClient.DownloadString(url);
+                    response = syncClient.DownloadString(url);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex.Message, ex, this);
+                }
+
+                if (string.IsNullOrEmpty(response)) yield return null;
 
                 var result = JsonConvert.DeserializeObject<ComplementaryProductResult>(response);
                 if (!result.IsSuccessful)
