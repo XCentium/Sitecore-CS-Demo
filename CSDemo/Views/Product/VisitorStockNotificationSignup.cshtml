@@ -3,8 +3,12 @@
 @using Sitecore.Data.Items
 @using System.Collections.Generic
 @using System.Linq
+@using Castle.Core.Internal
 @using Sitecore.Mvc.Extensions
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Product.Product>
+@{
+    var result = !Request.QueryString["msg"].IsNullOrEmpty() ? Request.QueryString["msg"] : string.Empty;
+}
 @if (Model != null)
 {
     <!-- ==========================
@@ -16,30 +20,36 @@
         @Html.HiddenFor(x => x.ProductId)
         @Html.HiddenFor(x => x.CatalogName)
         @Html.HiddenFor(x => x.Url)
+        @Html.HiddenFor(x => x.LocationName)
         @Html.AntiForgeryToken()
+
         <div class="stock-notify-form-group">
-            <a href="#" class="collapsed notify-me__link" data-toggle="collapse" data-target="#notify-collapse">
-                <span class="notify-me__closed-text">Notify me when back in stock</span>
-                <span class="notify-me__opened-text">Cancel</span>
-            </a>
-            <div id="notify-collapse" class="collapse form-inline notify-me__form">
-                <fieldset>
-                    <div class="form-group">
-                        @Html.TextBoxFor(x => x.VisitorSignupForStockNotificationEmail, "", new { @placeholder = "Email Address" })
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-xs">Sign Up</button>
-                    </div>
-                </fieldset>
-                @if (@ViewBag.SuccessMessage != "")
-                {
-                    <p class="notify-me__signed-up">@ViewBag.successMessage We'll notify you as soon as this item is back in stock!</p>
-                }
-                else
-                {
+            @if (result == "success")
+            {
+                <p class="notify-me__signed-up">Thank you! We'll notify you as soon as this item is back in stock!</p>
+            }
+            else
+            {
+                <a href="#" class="collapsed notify-me__link" data-toggle="collapse" data-target="#notify-collapse">
+                    <span class="notify-me__closed-text"><b>Notify me when back in stock</b></span>
+                    <span class="notify-me__opened-text">Cancel</span>
+                </a>
+                <div id="notify-collapse" class="collapse form-inline notify-me__form">
+                    <fieldset>
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.VisitorSignupForStockNotificationEmail, "", new {@placeholder = "Email Address"})
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-xs">Sign Up</button>
+                        </div>
+                    </fieldset>
+                    @if (result == "error")
+                    {
+                        <p class="notify-me__signed-up">Oops! Something went wrong, please try again.</p>
+                    }
                     <p class="notify-me__signed-up">We'll notify you as soon as this item is back in stock!</p>
-                }
-            </div>
+                </div>
+            }
         </div>
     }
     <!-- ==========================

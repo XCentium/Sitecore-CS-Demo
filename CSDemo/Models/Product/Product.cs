@@ -21,6 +21,9 @@ using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Sitecore.Diagnostics;
 using System.Net;
+using Sitecore.Analytics;
+using Sitecore.Analytics.Automation.Data;
+using Sitecore.Analytics.Automation.MarketingAutomation;
 using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Inventory;
 using Sitecore.Commerce.Contacts;
@@ -257,6 +260,13 @@ namespace CSDemo.Models.Product
                     Log.Error(message.Message, message);
                 }
             }
+        }
+
+        public static void AddUserVisitorSignupForStockNotification(string user, Item engagementPlan)
+        {
+            Tracker.Current.Session.Identify(user);
+            AutomationStateManager manager = Tracker.Current.Session.CreateAutomationStateManager();
+            manager.EnrollInEngagementPlan(engagementPlan.ID, engagementPlan.Children.First().ID);
         }
 
         #endregion

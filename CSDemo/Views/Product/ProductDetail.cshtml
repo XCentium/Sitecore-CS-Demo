@@ -75,6 +75,15 @@
                                             <ins><span id="@string.Concat("productAmount", Model.VariantProdId)" class="amount">@Editable(Model, x => x.ListPrice)</span></ins>
                                         </span>
                                     }
+                                    <ul class="list-unstyled product-info">
+                                        <li><span>ID</span>@Editable(Model, x => x.ProductId)</li>
+                                        @*CSDEMO#99*@
+                                        <li>
+                                            <span>Availability</span>@stockLabel
+                                        </li>
+                                        <li><span>Brand</span>@Editable(Model, x => x.Brand)</li>
+                                        @*<li><span>Tags</span></li>*@
+                                    </ul>
                                     <p>@Editable(Model, x => x.Description)</p>
                                     <div class="product-form clearfix">
                                         <div class="row row-no-padding">
@@ -127,10 +136,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             }
                                             <div class="col-md-3 col-sm-12">
-                                                <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary @clickCMD"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                             </div>
                                         </div>
                                     </div>
@@ -140,22 +148,11 @@
                                         <li><a href="#"><i class="fa fa-envelope"></i>Email to friend</a></li>
                                     </ul>
                                 </form>
-                                <ul class="list-unstyled product-info">
-                                    <li><span>ID</span>@Editable(Model, x => x.ProductId)</li>
-                                    @*CSDEMO#99*@
-                                    <li>
-                                        <span>Availability</span>@stockLabel
-                                        @if (!isInStock)
-                                        {
-
-                                            clickCMD = "out-of-stock";
-                                            @Html.Partial("~/Views/Product/VisitorStockNotificationSignup.cshtml", Model)
-                                        }
-                                    </li>
-                                    <li><span>Brand</span>@Editable(Model, x => x.Brand)</li>
-                                    @*<li><span>Tags</span></li>*@
-                                </ul>
-
+                                @if (!isInStock)
+                                {
+                                    clickCMD = "out-of-stock";
+                                    @Html.Partial("~/Views/Product/VisitorStockNotificationSignup.cshtml", Model)
+                                }
                             </div>
                         </div>
                     </div>

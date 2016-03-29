@@ -4,11 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using CSDemo.Configuration;
 using CSDemo.Models;
 using CSDemo.Models.Product;
 using Glass.Mapper.Sc;
 using Sitecore;
 using Sitecore.Analytics;
+using Sitecore.Analytics.Data.DataAccess.VisitorCache;
 using Sitecore.Commerce.Connect.CommerceServer.Catalog.Fields;
 using Sitecore.Commerce.Connect.CommerceServer.Controls;
 using Sitecore.ContentSearch;
@@ -19,8 +21,15 @@ using Sitecore.Diagnostics;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Extensions;
 using Sitecore.Mvc.Presentation;
+using Sitecore.Sites;
 using Sitecore.Web;
 using XCore.Framework;
+
+using Sitecore.Analytics;
+using Sitecore.Analytics.Automation;
+using Sitecore.Analytics.Automation.Data;
+using Sitecore.Analytics.Automation.MarketingAutomation;
+using Sitecore.Commerce.Contacts;
 
 #endregion
 
@@ -181,17 +190,18 @@ namespace CSDemo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult VisitorSignupForStockNotification(Product model)
         {
-            NotificationSigneupInput inputModel = new NotificationSigneupInput()
+            if (ModelState.IsValid)
             {
-                CatalogName = model.CatalogName,
-                Email = model.VisitorSignupForStockNotificationEmail,
-                ProductId = model.ProductId
-            };
-
-            // TBD
-            // Product.VisitorSignupForStockNotification(model.CatalogName, inputModel, model.LocationName ?? string.Empty);
-            ViewBag.SuccessMessage = "Thank you! ";
-            return Redirect(model.Url);
+                NotificationSigneupInput inputModel = new NotificationSigneupInput()
+                {
+                    CatalogName = model.CatalogName,
+                    Email = model.VisitorSignupForStockNotificationEmail,
+                    ProductId = model.ProductId
+                };
+                Product.VisitorSignupForStockNotification(Context.Site.Name, inputModel, model.LocationName ?? string.Empty);
+                return Redirect(model.Url + "?msg=error");
+            }
+            return Redirect(model.Url + "?msg=success");
         }
 
         #region Private Helpers
