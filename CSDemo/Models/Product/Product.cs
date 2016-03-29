@@ -77,7 +77,9 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.Description)]
         public virtual string Description { get; set; }
 
-        public bool IsOnSale { get
+        public bool IsOnSale
+        {
+            get
             {
                 return SalePrice > 0;
             }
@@ -98,7 +100,7 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.SortFields)]
         public IEnumerable<Item> SortFields { get; set; }
 
-        [SitecoreField(Fields.ItemsPerPage)] 
+        [SitecoreField(Fields.ItemsPerPage)]
         public virtual string ItemsPerPage { get; set; }
 
         [SitecoreField(Fields.Variants)]
@@ -180,13 +182,13 @@ namespace CSDemo.Models.Product
             }
         }
 
-        public StockInformation StockInformation { get; set;}
+        public StockInformation StockInformation { get; set; }
 
         public string CurrencyPrice
         {
             get
             {
-                var info = (NumberFormatInfo) Sitecore.Context.Language.CultureInfo.NumberFormat.Clone();
+                var info = (NumberFormatInfo)Sitecore.Context.Language.CultureInfo.NumberFormat.Clone();
                 info.CurrencySymbol = Constants.Commerce.DefaultCurrencyCode;
                 info.CurrencyPositivePattern = 3;
                 return Price.ToString("C", info);
@@ -207,7 +209,7 @@ namespace CSDemo.Models.Product
             get
             {
                 if (ProductId == null) return string.Empty;
-                return string.Format(Constants.Products.VariantIDFormat, ProductId.Replace(Constants.Common.Dash,Constants.Common.Underscore));
+                return string.Format(Constants.Products.VariantIDFormat, ProductId.Replace(Constants.Common.Dash, Constants.Common.Underscore));
 
             }
         }
@@ -247,16 +249,15 @@ namespace CSDemo.Models.Product
             }
 
             var inventoryManager = new InventoryServiceProvider();
-            var result = inventoryManager.PipelineService.RunPipeline()
+            var result = inventoryManager.VisitorSignUpForStockNotification(request);
             if (!result.Success)
             {
-                foreach(var message in result.SystemMessages)
+                foreach (var message in result.SystemMessages)
                 {
                     Log.Error(message.Message, message);
                 }
             }
         }
-
 
         #endregion
 
