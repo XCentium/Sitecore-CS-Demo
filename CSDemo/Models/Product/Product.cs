@@ -205,6 +205,7 @@ namespace CSDemo.Models.Product
         [DataType(DataType.EmailAddress)]
         public string VisitorSignupForStockNotificationEmail { get; set; }
 
+        public string LocationName { get; set; }
 
         public static void VisitorSignupForStockNotification([NotNull] string shopName, NotificationSigneupInput model, string location)
         {

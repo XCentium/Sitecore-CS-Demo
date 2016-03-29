@@ -168,6 +168,12 @@ namespace CSDemo.Controllers
             // CSDEMO#115
             model.ProfileProduct(_context);
 
+            // CSDEMO#116
+            if (model.StockInformation?.Location != null)
+            {
+                model.LocationName = model.StockInformation.Location.Name;
+            }
+
             return View(model);
         }
 
@@ -180,7 +186,7 @@ namespace CSDemo.Controllers
                 Email = model.VisitorSignupForStockNotificationEmail,
                 ProductId = model.ProductId
             }; 
-            Product.VisitorSignupForStockNotification(model.CatalogName, inputModel, string.Empty);
+            Product.VisitorSignupForStockNotification(model.CatalogName, inputModel, model.LocationName ?? string.Empty);
             ViewBag.SuccessMessage = "Thank you! ";
             return Redirect(model.Url);
         }
