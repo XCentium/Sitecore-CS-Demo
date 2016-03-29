@@ -178,6 +178,7 @@ namespace CSDemo.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult VisitorSignupForStockNotification(Product model)
         {
             NotificationSigneupInput inputModel = new NotificationSigneupInput()
@@ -185,7 +186,8 @@ namespace CSDemo.Controllers
                 CatalogName = model.CatalogName,
                 Email = model.VisitorSignupForStockNotificationEmail,
                 ProductId = model.ProductId
-            }; 
+            };
+            var siteInfo = Sitecore.Context.Site.SiteInfo;
             Product.VisitorSignupForStockNotification(model.CatalogName, inputModel, model.LocationName ?? string.Empty);
             ViewBag.SuccessMessage = "Thank you! ";
             return Redirect(model.Url);

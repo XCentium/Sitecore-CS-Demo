@@ -25,6 +25,7 @@ using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Inventory;
 using Sitecore.Commerce.Contacts;
 using Sitecore.Commerce.Multishop;
+using Sitecore.Commerce.Services;
 using Sitecore.Commerce.Services.Inventory;
 using Sitecore.Configuration;
 
@@ -246,7 +247,7 @@ namespace CSDemo.Models.Product
             }
 
             var inventoryManager = new InventoryServiceProvider();
-            var result = inventoryManager.VisitorSignUpForStockNotification(request);
+            var result = inventoryManager.PipelineService.RunPipeline()
             if (!result.Success)
             {
                 foreach(var message in result.SystemMessages)
