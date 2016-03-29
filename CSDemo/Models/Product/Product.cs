@@ -18,6 +18,7 @@ using Sitecore.Data;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Sitecore.Diagnostics;
+using System.Net;
 
 #endregion
 
@@ -112,7 +113,14 @@ namespace CSDemo.Models.Product
             {
                 //TODO: replace with web service call once the web service is fixed
 
-                var response = "{\"success\": true, \"messages\": [], \"result\": [\"AW099-15\",\"AW013-08\",\"AW140-13\"]}";
+                var url = string.Format("http://xcp13n.xcentium.net/api/data/relatedproducts/csdemo/{0}",this.ProductId);
+
+                var syncClient = new WebClient();
+
+                var response = syncClient.DownloadString(url);
+
+ //               var responseTest = "{\"success\": true, \"messages\": [], \"result\": [\"AW099-15\",\"AW013-08\",\"AW140-13\"]}";
+
                 var result = JsonConvert.DeserializeObject<ComplementaryProductResult>(response);
                 if (!result.IsSuccessful)
                 {
