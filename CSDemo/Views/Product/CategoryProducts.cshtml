@@ -128,6 +128,7 @@
 
                                 bool isInStock = product.StockInformation != null && product.StockInformation.Count > 0;
                                 var clickCMD = (isInStock == true) ? "add-to-cart" : "out-of-stock";
+                                clickCMD = "add-to-cart";
                                 int count = 0;
 
                                 if (product.DefinitionName == "GeneralCategory")
