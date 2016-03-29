@@ -10,15 +10,12 @@
     <!-- ==========================
     NOTIFY BACK IN STOCK - START
     =========================== -->
-    using (Html.BeginRouteForm(Sitecore.Mvc.Configuration.MvcSettings.SitecoreRouteName, FormMethod.Post))
+    using (@Html.BeginForm("VisitorSignupForStockNotification", "Product", FormMethod.Post, new { }))
     {
-        @Html.Sitecore().FormHandler("Product", "VisitorSignupForStockNotification")
-        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
         @Html.HiddenFor(x => x.ProductId)
         @Html.HiddenFor(x => x.CatalogName)
         @Html.HiddenFor(x => x.Url)
-        @Html.HiddenFor(x => x.LocationName)
-        @Html.ValidationSummary(true)
         <div class="stock-notify-form-group">
             <a href="#" class="collapsed notify-me__link" data-toggle="collapse" data-target="#notify-collapse">
                 <span class="notify-me__closed-text">Notify me when back in stock</span>
