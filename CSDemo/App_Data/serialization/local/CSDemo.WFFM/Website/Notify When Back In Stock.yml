@@ -1,0 +1,71 @@
+﻿---
+ID: 54841d58-7f7d-477b-a094-77a3df4650d7
+Parent: f1f7aab6-c8ce-422f-a214-f610c109fa63
+Template: ffb1da32-2764-47db-83b0-95b843546a7e
+Path: /sitecore/system/Modules/Web Forms for Marketers/Website/Notify When Back In Stock
+DB: master
+SharedFields:
+- ID: 46fb324a-9741-43bd-a0c9-5081a39d40aa
+  Hint: Show Introduction
+  Value: 0
+- ID: 66ff6dfb-5c2a-4e24-9f89-f7dffd0c1093
+  Hint: Submit Button type
+  Value: {612F07E6-595D-45C6-A139-8BE56BDA8559}
+- ID: a42052f7-6c18-424a-a2a1-7a72054cb1a6
+  Hint: Show Title
+  Value: 0
+- ID: a7f779b9-5fcf-45cc-866b-7c973f5c4fac
+  Hint: Save Actions
+  Value: |
+    <?xml version="1.0" encoding="utf-16"?>
+    <li xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <g id="{E5EABB1F-40BC-45BB-8D87-3B6C239B521B}" displayName="Actions" onclick="javascript:return scForm.postEvent(this,event,'forms:addaction')">
+        <li id="{1B8ED61B-5B36-4C49-9736-2C4A87795D71}" unicid="9DF123C1C78245829E04B42DD90DFC8E">
+          <parameters>&amp;lt;engagementstate&amp;gt;89bb6400-a3a9-4789-ad15-26c26024c1da&amp;lt;/engagementstate&amp;gt;&amp;lt;enrollwhen&amp;gt;Always&amp;lt;/enrollwhen&amp;gt;&amp;lt;__actionsubtitle&amp;gt;{B8249271-2721-4A1F-BBFA-9F52D5A9B5F2}&amp;lt;/__actionsubtitle&amp;gt;</parameters>
+        </li>
+      </g>
+    </li>
+- ID: af08c32b-f101-44a4-baae-677383e8eb02
+  Hint: Check Actions
+  Value: |
+    <?xml version="1.0" encoding="utf-16"?>
+    <li xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <g id="{10FE9225-5E6C-4896-9CD2-880D6D48C4CC}" displayName="Check Actions">
+        <li id="{2D5B5061-747A-4477-BD41-E746EAFEB231}" unicid="89F18F7C96F4469A9470057CE421A115">
+          <parameters />
+        </li>
+      </g>
+    </li>
+- ID: faeacd39-b059-4f46-bec4-74ba468a97b8
+  Hint: Show Footer
+  Value: 0
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 0f2414bd-a95d-419c-a238-a6637a3fab76
+      Hint: Introduction
+      Value: |
+        
+        
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160328T053307Z
+    - ID: 6739fa82-a9b4-40f1-aefe-3d67ae3e8dfc
+      Hint: Title Tag
+      Value: H1
+    - ID: 86d6a401-5a20-49c9-a2f8-0312398ee946
+      Hint: Title
+      Value: Notify When Back In Stock
+    - ID: 95968a5a-db52-4f50-b471-c6c7da81f7e8
+      Hint: Footer
+      Value: |
+        
+        
+    - ID: 9c4c1994-5140-49d3-bad7-db997816f816
+      Hint: Success Page
+      Value: "<link id=\"{00000000-0000-0000-0000-000000000000}\" />"
+    - ID: b71296b6-32b9-4703-a8cb-fb7437271103
+      Hint: Name
+      Value: Signup

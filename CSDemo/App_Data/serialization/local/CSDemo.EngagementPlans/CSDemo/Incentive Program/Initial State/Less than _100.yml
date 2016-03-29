@@ -12,7 +12,7 @@ SharedFields:
     <ruleset>
       <rule uid="{84351DB0-5A9C-420D-B219-9F811C599165}">
         <conditions>
-          <condition id="{9FC0402C-3105-4A88-91D3-71ED6802E094}" uid="0DF69C618D0B4F0C961A8401DB8D3290" operatorid="{E362A3A4-E230-4A40-A7C4-FC42767E908F}" value="100" Amount="100.00" />
+          <condition id="{9B1A61F1-8716-41F0-9FC7-3C3757EE5E6D}" uid="16C70ED01F704C9C82A6B9820FDE751E" OutcomeDefinition="{9016E456-95CB-42E9-AD58-997D6D77AE83}" operatorid="{E362A3A4-E230-4A40-A7C4-FC42767E908F}" value="5" />
         </conditions>
       </rule>
     </ruleset>

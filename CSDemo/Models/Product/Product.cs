@@ -19,6 +19,12 @@ using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Sitecore.Diagnostics;
 using System.Net;
+using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
+using Sitecore.Commerce.Connect.CommerceServer.Inventory;
+using Sitecore.Commerce.Contacts;
+using Sitecore.Commerce.Multishop;
+using Sitecore.Commerce.Services.Inventory;
+using Sitecore.Configuration;
 
 #endregion
 
@@ -68,8 +74,11 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.Description)]
         public virtual string Description { get; set; }
 
-        [SitecoreField(Fields.OnSale)]
-        public virtual bool IsOnSale { get; set; }
+        public bool IsOnSale { get
+            {
+                return SalePrice > 0;
+            }
+        }
 
         [SitecoreInfo(SitecoreInfoType.Url)]
         public virtual string Url { get; set; }
@@ -118,8 +127,6 @@ namespace CSDemo.Models.Product
                 var syncClient = new WebClient();
 
                 var response = syncClient.DownloadString(url);
-
- //               var responseTest = "{\"success\": true, \"messages\": [], \"result\": [\"AW099-15\",\"AW013-08\",\"AW140-13\"]}";
 
                 var result = JsonConvert.DeserializeObject<ComplementaryProductResult>(response);
                 if (!result.IsSuccessful)
@@ -192,6 +199,49 @@ namespace CSDemo.Models.Product
 
             }
         }
+
+
+        public static void VisitorSignupForStockNotification([NotNull] string shopName, NotificationSigneupInput model, string location)
+        {
+            Assert.ArgumentNotNull(shopName, "shopName");
+            Assert.ArgumentNotNull(model, "model");
+            Assert.ArgumentNotNullOrEmpty(model.ProductId, "model.ProductId");
+            Assert.ArgumentNotNullOrEmpty(model.Email, "model.Email");
+
+            var contactFactory = new ContactFactory();
+            var visitorId = contactFactory.GetContact();
+            var builder = new CommerceInventoryProductBuilder();
+            CommerceInventoryProduct inventoryProduct = (CommerceInventoryProduct)builder.CreateInventoryProduct(model.ProductId);
+            if (string.IsNullOrEmpty(model.VariantId))
+            {
+                (inventoryProduct).VariantId = model.VariantId;
+            }
+
+            if (string.IsNullOrEmpty(inventoryProduct.CatalogName))
+            {
+                (inventoryProduct).CatalogName = model.CatalogName;
+            }
+
+            DateTime interestDate;
+            var isDate = DateTime.TryParse(model.InterestDate, out interestDate);
+            var request = new VisitorSignUpForStockNotificationRequest(shopName, visitorId, model.Email, inventoryProduct) { Location = location };
+            if (isDate)
+            {
+                request.InterestDate = interestDate;
+            }
+
+            var inventoryManager = new InventoryServiceProvider();
+            var result = inventoryManager.VisitorSignUpForStockNotification(request);
+            if (!result.Success)
+            {
+                foreach(var message in result.SystemMessages)
+                {
+                    Log.Error(message.Message, message);
+                }
+            }
+        }
+
+
         #endregion
 
         #region Fields
@@ -206,7 +256,6 @@ namespace CSDemo.Models.Product
             public const string ProductId = "ProductId";
             public const string Images = "Images";
             public const string CatalogName = "CatalogName";
-            public const string OnSale = "OnSale";
             public const string IsNew = "IsNew";
             public const string ParentCategories = "ParentCategories";
             public const string DateOfIntroduction = "IntroductionDate";

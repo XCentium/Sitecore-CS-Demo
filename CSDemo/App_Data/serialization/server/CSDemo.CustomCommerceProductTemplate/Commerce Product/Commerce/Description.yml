@@ -1,5 +1,5 @@
 ﻿---
-ID: 3890224c-d4a8-4a68-add6-43eec9cc90bb
+ID: b84ed3be-747b-41ce-8dba-806dfc40bc29
 Parent: 616cad27-50c7-424b-b907-4b929cd9fc29
 Template: 455a3e98-a627-4b40-8035-e683a0331ac7
 Path: /sitecore/templates/Commerce/Catalog/Commerce Product/Commerce/Description
@@ -8,19 +8,11 @@ SharedFields:
 - ID: 21828437-ea4b-40a1-8c61-4ce60ea41db6
   Hint: Validate Button
   Type: tree list
-  Value: |
-    {45CC2667-D8EA-431E-BADA-C9764A44B42B}
-    {2F21F38C-F4AE-4738-B12D-CBBFD617A025}
-    {4FD31A4E-D927-4FFA-BCF4-FD10E1622F0B}
-    {EAC4A266-619A-4D8E-B74C-37EC063A4834}
+  Value: {A13E7C26-9F94-408F-A4A8-F8F47127612B}
 - ID: 337e20e1-999a-4eea-85ad-b58a03ae75cc
   Hint: Quick Action Bar
   Type: tree list
-  Value: |
-    {45CC2667-D8EA-431E-BADA-C9764A44B42B}
-    {2F21F38C-F4AE-4738-B12D-CBBFD617A025}
-    {4FD31A4E-D927-4FFA-BCF4-FD10E1622F0B}
-    {EAC4A266-619A-4D8E-B74C-37EC063A4834}
+  Value: {A13E7C26-9F94-408F-A4A8-F8F47127612B}
 - ID: 39847666-389d-409b-95bd-f2016f11eed5
   Hint: Unversioned
   Value: 1
@@ -36,11 +28,7 @@ SharedFields:
 - ID: 9c903e29-650d-4af2-b9bd-526d5c14a1a5
   Hint: Validator Bar
   Type: tree list
-  Value: |
-    {45CC2667-D8EA-431E-BADA-C9764A44B42B}
-    {2F21F38C-F4AE-4738-B12D-CBBFD617A025}
-    {4FD31A4E-D927-4FFA-BCF4-FD10E1622F0B}
-    {EAC4A266-619A-4D8E-B74C-37EC063A4834}
+  Value: {A13E7C26-9F94-408F-A4A8-F8F47127612B}
 - ID: a0f35a32-14b5-4147-9851-7e0bbdc17efc
   Hint: Assign To All Product Types
   Value: 1
@@ -49,7 +37,7 @@ SharedFields:
   Value: Single-Line Text
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
-  Value: 23
+  Value: 24
 - ID: be351a73-fcb0-4213-93fa-c302d8ab4f51
   Hint: Shared
   Value: 0
@@ -73,10 +61,10 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160223T020727Z
+      Value: 20160323T070353Z
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
-      Value: sitecore\admin
+      Value: default\Anonymous
 - Language: en
   Fields:
   - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
@@ -90,7 +78,10 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160223T020727Z
+      Value: 20160323T070353Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: default\Anonymous
 - Language: fr-FR
   Fields:
   - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
@@ -104,10 +95,10 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160223T020727Z
+      Value: 20160323T070353Z
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
-      Value: sitecore\admin
+      Value: default\Anonymous
 - Language: ja-JP
   Fields:
   - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
@@ -121,7 +112,7 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160223T020727Z
+      Value: 20160323T070353Z
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
-      Value: sitecore\admin
+      Value: default\Anonymous

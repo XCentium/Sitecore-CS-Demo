@@ -25,22 +25,22 @@ SharedFields:
           <p:d />
         </r>
         <r uid="{AF6A3953-C35E-4517-B345-AC7F3003C6E2}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:ds="{FEEE5CCA-B864-4AE6-81F0-F30F7C76BBC4}" s:id="{8040BB2A-3983-4156-A3BA-A37A8FE5F6E8}" s:par="" s:ph="page-jumbotron">
-          <rls p:before="*[1=1]">
-            <ruleset p:before="*[1=1]">
-              <rule uid="{73D61D55-F927-426A-8F8B-0545F0F98B91}" p:before="*[1=1]" s:name="Campaign 1">
-                <conditions p:before="*[1=1]">
-                  <condition uid="33FC935BFE63459F8B2B8E65D3607BA2" p:before="*[1=1]" s:id="{D379525C-4DE6-4738-89ED-60CC0B8F91E5}" s:CampaignId="{1C1A2338-741F-4A2A-9BAE-C2CEA5C9DA04}" />
+          <rls>
+            <ruleset>
+              <rule uid="{73D61D55-F927-426A-8F8B-0545F0F98B91}" s:name="Campaign 1">
+                <conditions>
+                  <condition uid="33FC935BFE63459F8B2B8E65D3607BA2" s:id="{D379525C-4DE6-4738-89ED-60CC0B8F91E5}" s:CampaignId="{1C1A2338-741F-4A2A-9BAE-C2CEA5C9DA04}" />
                 </conditions>
-                <actions p:before="*[1=1]">
-                  <action uid="6E0182CCFED44186BDE11FD4C9BA297E" p:before="*[1=1]" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{711BF888-CBDB-489D-85FB-CF8BAEBFE375}" />
+                <actions>
+                  <action uid="6E0182CCFED44186BDE11FD4C9BA297E" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{711BF888-CBDB-489D-85FB-CF8BAEBFE375}" />
                 </actions>
               </rule>
-              <rule uid="{00000000-0000-0000-0000-000000000000}" p:before="*[1=1]" s:name="Default">
-                <conditions p:before="*[1=1]">
-                  <condition uid="6AFE113D86EC41A4821E1E3E41C762D0" p:before="*[1=1]" s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+              <rule uid="{00000000-0000-0000-0000-000000000000}" s:name="Default">
+                <conditions>
+                  <condition uid="6AFE113D86EC41A4821E1E3E41C762D0" s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
                 </conditions>
-                <actions p:before="*[1=1]">
-                  <action uid="35D45B620E31439D996C846E04A93700" p:before="*[1=1]" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{FEEE5CCA-B864-4AE6-81F0-F30F7C76BBC4}" />
+                <actions>
+                  <action uid="35D45B620E31439D996C846E04A93700" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{FEEE5CCA-B864-4AE6-81F0-F30F7C76BBC4}" />
                 </actions>
               </rule>
             </ruleset>
@@ -50,22 +50,38 @@ SharedFields:
         <r uid="{D88FBB9E-6A2F-487D-9A0B-D24B401E4E5F}" p:after="r[@uid='{6729DA82-1F38-4D16-9957-E29D38D34488}']" s:id="{1616599D-7D76-4ABD-957B-7DCAC84C01B2}" s:ph="page-body" />
         <r uid="{89440489-11CE-45B1-8411-08E14ECF5604}" p:after="r[@uid='{D88FBB9E-6A2F-487D-9A0B-D24B401E4E5F}']" s:id="{839E8618-D080-4802-A0E8-BE682C3AF542}" s:ph="page-body" />
         <r uid="{A385C37F-E0C8-4638-A692-2A78D53281E9}" p:after="r[@uid='{89440489-11CE-45B1-8411-08E14ECF5604}']" s:id="{27FCD6DB-011A-4A6E-B04A-0AEB168B78F9}" s:ph="page-body">
-          <rls p:before="*[1=1]">
-            <ruleset p:before="*[1=1]">
-              <rule uid="{521DD000-2E50-4534-B165-9D56BB064642}" p:before="*[1=1]" s:name="Bargain">
-                <conditions p:before="*[1=1]">
-                  <condition uid="021A46F9B162413A8F8A9639F86D781C" p:before="*[1=1]" s:id="{E00DB4F0-B206-4544-AD90-25D201CFB62C}" s:ProfileName="Score" s:PatternName="Climbers" />
+          <rls>
+            <ruleset>
+              <rule uid="{E7310019-0853-4D93-8B7D-2F2433CF9545}" s:name="Campers">
+                <conditions>
+                  <condition uid="151116A86FC04F4981E736A1C13744FB" s:id="{6426B5B4-83E9-4E24-BA97-43293A10B47D}" s:ProfileName="Score" s:PatternName="Campers" />
                 </conditions>
-                <actions p:before="*[1=1]">
-                  <action uid="5F947340D80544339727F162F68109B7" p:before="*[1=1]" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{3CCF2551-53D6-4018-B599-9B36DFC3D5EE}" />
+                <actions>
+                  <action uid="3313ECB9C995499291C353A33D152D79" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{56B6A07F-A6FD-47E8-A5F9-3BC3422B35A5}" />
                 </actions>
               </rule>
-              <rule uid="{00000000-0000-0000-0000-000000000000}" p:before="*[1=1]" s:name="Default">
-                <conditions p:before="*[1=1]">
-                  <condition uid="B449D9298E6441EB80135B2F2D498B77" p:before="*[1=1]" s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+              <rule uid="{B749E881-002E-4C04-A6E8-9BED97A451B5}" s:name="Climbers">
+                <conditions>
+                  <condition uid="3CFDEE977835466A8AB7551AEAD65642" s:id="{6426B5B4-83E9-4E24-BA97-43293A10B47D}" s:ProfileName="Score" s:PatternName="Climbers" />
                 </conditions>
-                <actions p:before="*[1=1]">
-                  <action uid="71B50328D61B42198D8E99EF32ACEB9E" p:before="*[1=1]" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{56B6A07F-A6FD-47E8-A5F9-3BC3422B35A5}" />
+                <actions>
+                  <action uid="03EECFBC50AC4E34B8A918379ADE9920" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{3CCF2551-53D6-4018-B599-9B36DFC3D5EE}" />
+                </actions>
+              </rule>
+              <rule uid="{521DD000-2E50-4534-B165-9D56BB064642}" s:name="Bargain Hunters">
+                <conditions>
+                  <condition uid="65CC4BEC52474AD69546D18455AA1826" s:id="{6426B5B4-83E9-4E24-BA97-43293A10B47D}" s:ProfileName="Score" s:PatternName="BargainHunters" />
+                </conditions>
+                <actions>
+                  <action uid="5F947340D80544339727F162F68109B7" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{AEA9A1B0-8FD3-4C16-9612-866F4FB31BCD}" />
+                </actions>
+              </rule>
+              <rule uid="{00000000-0000-0000-0000-000000000000}" s:name="Default">
+                <conditions>
+                  <condition uid="B449D9298E6441EB80135B2F2D498B77" s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                </conditions>
+                <actions>
+                  <action uid="71B50328D61B42198D8E99EF32ACEB9E" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{56B6A07F-A6FD-47E8-A5F9-3BC3422B35A5}" />
                 </actions>
               </rule>
             </ruleset>
