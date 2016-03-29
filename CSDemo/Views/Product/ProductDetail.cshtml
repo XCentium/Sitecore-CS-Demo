@@ -148,7 +148,7 @@
                                         <li><a href="#"><i class="fa fa-envelope"></i>Email to friend</a></li>
                                     </ul>
                                 </form>
-                                @if (!isInStock)
+                                @if (!isInStock && User.Identity.IsAuthenticated)
                                 {
                                     clickCMD = "out-of-stock";
                                     @Html.Partial("~/Views/Product/VisitorStockNotificationSignup.cshtml", Model)

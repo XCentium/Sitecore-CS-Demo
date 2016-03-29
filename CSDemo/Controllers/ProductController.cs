@@ -199,9 +199,9 @@ namespace CSDemo.Controllers
                     ProductId = model.ProductId
                 };
                 Product.VisitorSignupForStockNotification(Context.Site.Name, inputModel, model.LocationName ?? string.Empty);
-                return Redirect(model.Url + "?msg=error");
+                return Redirect(model.Url + "?msg=success");
             }
-            return Redirect(model.Url + "?msg=success");
+            return Redirect(model.Url + "?msg=error");
         }
 
         #region Private Helpers
