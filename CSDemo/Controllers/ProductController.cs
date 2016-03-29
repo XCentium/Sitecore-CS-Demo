@@ -171,6 +171,20 @@ namespace CSDemo.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult VisitorSignupForStockNotification(Product model)
+        {
+            NotificationSigneupInput inputModel = new NotificationSigneupInput()
+            {
+                CatalogName = model.CatalogName,
+                Email = model.VisitorSignupForStockNotificationEmail,
+                ProductId = model.ProductId
+            }; 
+            Product.VisitorSignupForStockNotification(model.CatalogName, inputModel, string.Empty);
+            ViewBag.SuccessMessage = "Thank you! ";
+            return Redirect(model.Url);
+        }
+
         #region Private Helpers
 
         private static IEnumerable<Product> GetRecentlyViewedProducts()

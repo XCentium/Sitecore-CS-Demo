@@ -2,8 +2,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
+using System.Web.Mvc;
 using CSDemo.Contracts;
 using CSDemo.Contracts.Product;
 using Glass.Mapper.Sc;
@@ -194,6 +196,9 @@ namespace CSDemo.Models.Product
 
             }
         }
+
+        [DataType(DataType.EmailAddress)]
+        public string VisitorSignupForStockNotificationEmail { get; set; }
 
 
         public static void VisitorSignupForStockNotification([NotNull] string shopName, NotificationSigneupInput model, string location)

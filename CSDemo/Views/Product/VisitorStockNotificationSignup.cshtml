@@ -1,0 +1,47 @@
+﻿@using Sitecore.Mvc
+@using Sitecore.Data
+@using Sitecore.Data.Items
+@using System.Collections.Generic
+@using System.Linq
+@using Sitecore.Mvc.Extensions
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Product.Product>
+@if (Model != null)
+{
+    <!-- ==========================
+    NOTIFY BACK IN STOCK - START
+    =========================== -->
+    using (@Html.BeginForm("VisitorSignupForStockNotification", "Product", FormMethod.Post, new {}))
+    {
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(x => x.ProductId)
+        @Html.HiddenFor(x => x.CatalogName)
+        @Html.HiddenFor(x => x.Url)
+        <div class="stock-notify-form-group">
+            <a href="#" class="collapsed notify-me__link" data-toggle="collapse" data-target="#notify-collapse">
+                <span class="notify-me__closed-text">Notify me when back in stock</span>
+                <span class="notify-me__opened-text">Cancel</span>
+            </a>
+            <div id="notify-collapse" class="collapse form-inline notify-me__form">
+                <fieldset>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.VisitorSignupForStockNotificationEmail, "", new {@placeholder = "Email Address"})
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-xs">Sign Up</button>
+                    </div>
+                </fieldset>
+                @if (@ViewBag.SuccessMessage != "")
+                {
+                    <p class="notify-me__signed-up">@ViewBag.successMessage We'll notify you as soon as this item is back in stock!</p>
+                }
+                else
+                {
+                    <p class="notify-me__signed-up">We'll notify you as soon as this item is back in stock!</p>
+                }
+            </div>
+        </div>
+    }
+    <!-- ==========================
+    NOTIFY BACK IN STOCK - END
+    =========================== -->
+}

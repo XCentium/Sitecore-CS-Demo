@@ -586,6 +586,7 @@
     <Content Include="Views\Product\SpecialtySelectedForYou.cshtml" />
     <Content Include="Views\Product\ComplementaryProducts.cshtml" />
     <None Include="Properties\PublishProfiles\xccommerce113demo.pubxml" />
+    <Content Include="Views\Product\VisitorStockNotificationSignup.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
