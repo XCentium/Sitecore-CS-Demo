@@ -85,67 +85,70 @@
                                         @*<li><span>Tags</span></li>*@
                                     </ul>
                                     <p>@Editable(Model, x => x.Description)</p>
-                                    <div class="product-form clearfix">
-                                        <div class="row row-no-padding">
-                                            <div class="col-md-3 col-sm-4">
-                                                <div class="product-quantity clearfix">
-                                                    <a class="btn btn-default" id="qty-minus">-</a>
-                                                    <input type="text" class="form-control" id="Quantity" value="1" />
-                                                    <a class="btn btn-default" id="qty-plus">+</a>
-                                                </div>
-                                            </div>
-                                            @if (Model.VariantSize != null)
-                                            {
+                                    @if (isInStock)
+                                    {
+                                        <div class="product-form clearfix">
+                                            <div class="row row-no-padding">
                                                 <div class="col-md-3 col-sm-4">
-                                                    <div class="product-size">
-                                                        <div class="form-inline">
-                                                            <div class="form-group">
-                                                                <label>Size:</label>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <select name="ProductSize" id="ProductSize" data-objid="#ProductSize" data-num="@Model.VariantProdId" onchange="DoProductSizeChange('#ProductSize', '@Model.VariantProdId')" class="form-control ProductSize">
-                                                                    @foreach (var size in Model.VariantSize.VariantSizeLines)
-                                                                    {
-                                                                        <option value="@size.Value">@size.Size</option>
-                                                                    }
-                                                                </select>
-                                                            </div>
-                                                        </div>
+                                                    <div class="product-quantity clearfix">
+                                                        <a class="btn btn-default" id="qty-minus">-</a>
+                                                        <input type="text" class="form-control" id="Quantity" value="1" />
+                                                        <a class="btn btn-default" id="qty-plus">+</a>
                                                     </div>
                                                 </div>
-                                            }
-                                            @if (Model.VariantColors != null)
-                                            {
-                                                <div class="col-md-3 col-sm-4">
-                                                    <div class="product-color">
-                                                        <div class="form-inline">
-                                                            <div class="form-group">
-                                                                <label>Color:</label>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                @foreach (var variantColor in Model.VariantColors)
-                                                                {
-                                                                    <select name="@variantColor.Name" id="@string.Concat(variantColor.Name, Model.VariantProdId)" style="display: @variantColor.Display" data-num="@Model.VariantProdId" class="@string.Concat("ProductColor", Model.VariantProdId) ProductColor form-control">
-                                                                        @foreach (var color in variantColor.VariantColorLines)
+                                                @if (Model.VariantSize != null)
+                                                {
+                                                    <div class="col-md-3 col-sm-4">
+                                                        <div class="product-size">
+                                                            <div class="form-inline">
+                                                                <div class="form-group">
+                                                                    <label>Size:</label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <select name="ProductSize" id="ProductSize" data-objid="#ProductSize" data-num="@Model.VariantProdId" onchange="DoProductSizeChange('#ProductSize', '@Model.VariantProdId')" class="form-control ProductSize">
+                                                                        @foreach (var size in Model.VariantSize.VariantSizeLines)
                                                                         {
-                                                                            <option value="@color.Value">@color.Color</option>
+                                                                            <option value="@size.Value">@size.Size</option>
                                                                         }
                                                                     </select>
-                                                                }
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                }
+                                                @if (Model.VariantColors != null)
+                                                {
+                                                    <div class="col-md-3 col-sm-4">
+                                                        <div class="product-color">
+                                                            <div class="form-inline">
+                                                                <div class="form-group">
+                                                                    <label>Color:</label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    @foreach (var variantColor in Model.VariantColors)
+                                                                    {
+                                                                        <select name="@variantColor.Name" id="@string.Concat(variantColor.Name, Model.VariantProdId)" style="display: @variantColor.Display" data-num="@Model.VariantProdId" class="@string.Concat("ProductColor", Model.VariantProdId) ProductColor form-control">
+                                                                            @foreach (var color in variantColor.VariantColorLines)
+                                                                            {
+                                                                                <option value="@color.Value">@color.Color</option>
+                                                                            }
+                                                                        </select>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                @if (!isInStock)
+                                                {
+                                                    clickCMD = "out-of-stock";
+                                                }
+                                                <div class="col-md-3 col-sm-12">
+                                                    <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary @clickCMD"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                 </div>
-                                            }
-                                            @if (!isInStock)
-                                            {
-                                                clickCMD = "out-of-stock";
-                                            }
-                                            <div class="col-md-3 col-sm-12">
-                                                <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary @clickCMD"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                             </div>
                                         </div>
-                                    </div>
+                                    }
                                     <ul class="list-inline product-links">
                                         <li><a href="#"><i class="fa fa-heart"></i>Add to wishlist</a></li>
                                         <li><a href="#"><i class="fa fa-exchange"></i>Compare</a></li>
