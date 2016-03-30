@@ -28,13 +28,12 @@
                                     
                                 </h3>
                                 <div class="product-rating">
-                                    <i class="fa fa-star@(featuredProduct.Rating>0 ? string.Empty:"-o" )"></i>
-                                    <i class="fa fa-star@(featuredProduct.Rating>1 ? string.Empty:"-o" )"></i>
-                                    <i class="fa fa-star@(featuredProduct.Rating>2 ? string.Empty:"-o" )"></i>
-                                    <i class="fa fa-star@(featuredProduct.Rating>3 ? string.Empty:"-o" )"></i>
-                                    <i class="fa fa-star@(featuredProduct.Rating>4 ? string.Empty:"-o" )"></i>
+                                    <i class="fa fa-star@(featuredProduct.Rating > 0 ? string.Empty : "-o")"></i>
+                                    <i class="fa fa-star@(featuredProduct.Rating > 1 ? string.Empty : "-o")"></i>
+                                    <i class="fa fa-star@(featuredProduct.Rating > 2 ? string.Empty : "-o")"></i>
+                                    <i class="fa fa-star@(featuredProduct.Rating > 3 ? string.Empty : "-o")"></i>
+                                    <i class="fa fa-star@(featuredProduct.Rating > 4 ? string.Empty : "-o")"></i>
                                 </div>
- 
                                 <span class="price">
                                     <ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>
                                 </span>
