@@ -231,6 +231,7 @@ namespace CSDemo.Controllers
             {
                 var result =
                     searchContext.GetQueryable<SearchResultItem>()
+                        .Where(x => x.Language == Context.Language.Name)
                         .FirstOrDefault(
                             t => string.Equals(t.Name, id, StringComparison.CurrentCultureIgnoreCase));
                 if (result != null)
