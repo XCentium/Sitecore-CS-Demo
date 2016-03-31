@@ -2,7 +2,7 @@
 
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
 #endregion
 
 namespace CSDemo.Models.Cart
@@ -13,8 +13,6 @@ namespace CSDemo.Models.Cart
         public List<CartItem> CartItems = new List<CartItem>();
 
         public int Total { get; set; }
-
-        public Decimal Discount { get; set; }
 
         public Decimal Shipping { get; set; }
 
@@ -31,6 +29,14 @@ namespace CSDemo.Models.Cart
             get { return this.Shipping + this.LineTotal +this.Tax - this.Discount; }
             set { grandTotal = value; }
         }
+
+        private Decimal discount;
+
+        public Decimal Discount
+        {
+            get { return this.GetDiscount(); }
+            set { discount = value; }
+        }
         
 
 
@@ -42,6 +48,20 @@ namespace CSDemo.Models.Cart
             this.Tax = 0.00m;
             this.GrandTotal = 0.00m;
 
+        }
+
+        public Decimal GetDiscount()
+        {
+            var discount = 0.00m;
+
+            if (CartItems.Count > 0)
+            {
+                var cartToTal = CartItems.Sum(x => (x.UnitPrice * x.Quantity));
+
+                return cartToTal - LineTotal;
+            }
+
+            return discount;
         }
     }
 }
