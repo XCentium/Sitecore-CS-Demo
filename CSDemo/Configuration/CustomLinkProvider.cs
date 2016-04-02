@@ -29,6 +29,7 @@ namespace CSDemo.SitecorePipelines
 
         private string GetCategoryUrl(Item categoryItem, UrlOptions options)
         {
+            if(Context.Database == null) return base.GetItemUrl(categoryItem, options);
             var categoriesListingPage = Context.Database.GetItem(Constants.Pages.CategoriesListingPageId);
             if (categoriesListingPage == null) return base.GetItemUrl(categoryItem, options);
             return

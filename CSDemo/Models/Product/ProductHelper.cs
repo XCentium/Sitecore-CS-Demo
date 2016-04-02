@@ -721,5 +721,17 @@ namespace CSDemo.Models.Product
             }
             return null;
         }
+
+        public static bool Contains(this List<string> source, string value)
+        {
+            foreach (var t in source)
+            {
+                if (string.Equals(t, value, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

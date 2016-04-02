@@ -2,12 +2,12 @@
 ID: cb2364db-f3ed-46d2-aac4-cfe3a280e7dd
 Parent: d025ebcf-75b2-4f72-9f03-89aee5edb5ac
 Template: 455a3e98-a627-4b40-8035-e683a0331ac7
-Path: /sitecore/templates/Commerce/Catalog/CommerceSearchSettings/Commerce Search/Tags
+Path: /sitecore/templates/Commerce/Catalog/CommerceSearchSettings/Commerce Search/Product Tags
 DB: master
 SharedFields:
 - ID: 1eb8ae32-e190-44a6-968d-ed904c794ebf
   Hint: Source
-  Value: StartSearchLocation={E95DAA23-11D6-4C06-BEED-53823DAA948D}&Filter=+_templatename:Tag
+  Value: StartSearchLocation={E95DAA23-11D6-4C06-BEED-53823DAA948D}&Filter=+_templatename:Product Tag
 - ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
   Hint: Type
   Value: Multilist with Search

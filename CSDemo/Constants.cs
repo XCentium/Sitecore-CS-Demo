@@ -67,6 +67,8 @@ namespace CSDemo
             public const string CategoryBaseTemplateId = "{4C4FD207-A9F7-443D-B32A-50AA33523661}";
             public const string CategoriesAliasItemId = "{9FB913A0-E51D-426B-9AC3-F99FD71BA08C}";
             public const string PurchaseOutcomeId = "{9016E456-95CB-42E9-AD58-997D6D77AE83}";
+            public const string ProductTagsFieldId = "{CB2364DB-F3ED-46D2-AAC4-CFE3A280E7DD}";
+            public const string ProductTagNameFieldId = "{B5620C00-330B-479E-9B54-57857040E1E0}";
         }
 
         public struct Marketing

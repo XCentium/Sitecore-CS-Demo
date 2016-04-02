@@ -2,7 +2,7 @@
 ID: 3c937b2d-ea5e-4cb0-8fbd-1799bfa30475
 Parent: a2a77e3b-eac4-4906-becd-712100d52105
 Template: ab86861a-6030-46c5-b394-e8f99e8b87db
-Path: /sitecore/templates/CSDemo/Components/Tagging/Tag
+Path: /sitecore/templates/CSDemo/Components/Tagging/Product Tag
 DB: master
 SharedFields:
 - ID: 06d5295c-ed2f-4a54-9bf2-26228d113318

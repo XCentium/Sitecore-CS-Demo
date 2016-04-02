@@ -2,7 +2,7 @@
 ID: b5620c00-330b-479e-9b54-57857040e1e0
 Parent: d86c5baf-5c5f-4684-be04-a97b05057dc6
 Template: 455a3e98-a627-4b40-8035-e683a0331ac7
-Path: /sitecore/templates/CSDemo/Components/Tagging/Tag/Tagging/Tag Name
+Path: /sitecore/templates/CSDemo/Components/Tagging/Product Tag/Product Tag/Tag Name
 DB: master
 SharedFields:
 - ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32

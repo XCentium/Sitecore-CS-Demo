@@ -21,6 +21,7 @@ using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Sitecore.Diagnostics;
 using System.Net;
+using CSDemo.Models.Tagging;
 using Sitecore.Analytics;
 using Sitecore.Analytics.Automation.Data;
 using Sitecore.Analytics.Automation.MarketingAutomation;
@@ -194,6 +195,9 @@ namespace CSDemo.Models.Product
             }
         }
 
+        [SitecoreField(Fields.ProductTags)]
+        public IEnumerable<ProductTag> ProductTags { get; set; }
+
         public StockInformation StockInformation { get; set; }
 
         public string CurrencyPrice
@@ -303,6 +307,7 @@ namespace CSDemo.Models.Product
             public const string FullDescription = "Full Description";
             public const string RelationshipList = "Relationship List";
             public const string DisplayName = "__Display name";
+            public const string ProductTags = "Product Tags";
         }
 
         #endregion

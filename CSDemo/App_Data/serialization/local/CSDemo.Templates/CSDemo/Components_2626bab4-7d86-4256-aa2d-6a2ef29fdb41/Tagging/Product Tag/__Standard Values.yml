@@ -2,7 +2,7 @@
 ID: f3f88545-5730-4847-9002-b70a924bf6d4
 Parent: 3c937b2d-ea5e-4cb0-8fbd-1799bfa30475
 Template: 3c937b2d-ea5e-4cb0-8fbd-1799bfa30475
-Path: /sitecore/templates/CSDemo/Components/Tagging/Tag/__Standard Values
+Path: /sitecore/templates/CSDemo/Components/Tagging/Product Tag/__Standard Values
 DB: master
 SharedFields:
 - ID: c9283d9e-7c29-4419-9c28-5a5c8ff53e84

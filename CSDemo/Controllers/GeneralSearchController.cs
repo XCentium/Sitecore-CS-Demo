@@ -19,6 +19,8 @@ using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 using Sitecore.SecurityModel;
 using System;
+using CSDemo.Models.Tagging;
+using Sitecore.ContentSearch.Linq.Utilities;
 
 #endregion
 
@@ -278,28 +280,22 @@ namespace CSDemo.Controllers
             Assert.ArgumentNotNullOrEmpty(catalogName, "catalogName");
             var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
             var searchIndex = searchManager.GetIndex(catalogName);
-
             using (var context = searchIndex.CreateSearchContext())
             {
-                // TODO: add tags clause
-                var searchResults = context.GetQueryable<CommerceProductSearchResultItem>()
-                    .Where(item => item.Content.Contains(keyword))
+                IQueryable<CustomCommerceSearchResultItem> searchResults = context.GetQueryable<CustomCommerceSearchResultItem>()
+                    .Where(item => item.Content.Contains(keyword) || item.ProductTags.Contains(keyword))
                     .Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product)
-                    // .Where(i => i.GetItem() != null && i.GetItem().GlassCast<Commerce>().)
                     .Where(item => item.CatalogName == catalogName)
                     .Where(item => item.Language == Sitecore.Context.Language.Name)
-                    .Select(p => new CommerceProductSearchResultItem()
+                    .Select(p => new CustomCommerceSearchResultItem()
                     {
                         ItemId = p.ItemId,
                         Uri = p.Uri
                     });
-
-                searchResults = searchManager.AddSearchOptionsToQuery<CommerceProductSearchResultItem>(searchResults,
+                searchResults = searchManager.AddSearchOptionsToQuery<CustomCommerceSearchResultItem>(searchResults,
                     searchOptions);
-
-                var results = searchResults.GetResults();
+                SearchResults<CustomCommerceSearchResultItem> results = searchResults.GetResults();
                 var response = SearchResponse.CreateFromSearchResultsItems(searchOptions, results);
-
                 return response;
             }
         }
