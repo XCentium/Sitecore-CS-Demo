@@ -553,6 +553,7 @@
     <None Include="Properties\PublishProfiles\Castle Local.pubxml" />
     <None Include="Properties\PublishProfiles\csDemo.pubxml" />
     <None Include="Properties\PublishProfiles\DebuLocal.pubxml" />
+    <None Include="Properties\PublishProfiles\sean.debug.deployment.pubxml" />
     <None Include="Properties\PublishProfiles\Release Test.pubxml" />
     <None Include="Properties\PublishProfiles\sean.release.deployment.pubxml" />
     <None Include="Properties\PublishProfiles\XcCommerce112Demo.pubxml" />
