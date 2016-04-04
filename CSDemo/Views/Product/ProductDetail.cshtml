@@ -7,7 +7,7 @@
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Product.Product>
 @if (Model != null)
 {
-    int pos = 1;
+
     // CSDEMO#99
     string stockLabel = Model.StockInformation != null && Model.StockInformation.Count > 0 ? string.Format("{0:#,###0} In Stock", Convert.ToInt32(Model.StockInformation.Count)) : "Out Of Stock";
     bool isInStock = Model.StockInformation != null && Model.StockInformation.Count > 0;
@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-xs-4">
                             <div class="product-carousel-wrapper">
-                                <div id="product-carousel">
+                                <div class="product-carousel">
                                     @if (Model.Images != null)
                                     {
                                         foreach (var image in Model.Images)
@@ -35,6 +35,47 @@
                                     }
                                 </div>
                             </div>
+                            @if (Model.ProductVariants != null)
+                            {
+                                foreach (var prodVariant in Model.ProductVariants)
+                                {
+                                    if (prodVariant.Variant_Images.Count() > 0)
+                                    {
+
+                                        <div class="product-carousel-wrapper variant_img_@prodVariant.VariantId">
+                                            <div class="variant_images variant_img_@prodVariant.VariantId" style="position:absolute">
+                                                <div class="product-carousel">
+                                                    @foreach (var image in prodVariant.Variant_Images)
+                                                    {
+                                                        <div class="item">
+                                                            @RenderImage(image, x => x, new { Width = 538, Height = 538, AS = 1, @class = "img-responsive" }, isEditable: false)
+                                                        </div>
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="product-carousel-wrapper variant_img_@prodVariant.VariantId">
+                                            <div class="variant_images variant_img_@prodVariant.VariantId" style="position:absolute">
+                                                <div class="product-carousel">
+                                                    @foreach (var image in Model.Images)
+                                                    {
+                                                        <div class="item">
+                                                            @RenderImage(image, x => x, new { Width = 538, Height = 538, AS = 1, @class = "img-responsive" }, isEditable: false)
+                                                        </div>
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                }
+                            }
+
                         </div>
                         <div class="col-xs-8">
                             <div class="product-body">
@@ -63,7 +104,7 @@
                                     @if (Model.IsOnSale && Model.SalePrice > 0)
                                     {
                                         <span class="price">
-                                            <del><span id="@string.Concat("productAmount", Model.VariantProdId)" class="amount">@Editable(Model, x => x.ListPrice)</span></del>
+                                            <del><span id="@string.Concat("productVariantAmount", Model.VariantProdId)" class="amount">@Editable(Model, x => x.ListPrice)</span></del>
                                         </span>
                                         <span class="price">
                                             <ins><span id="@string.Concat("productAmount", Model.VariantProdId)" class="amount">@Editable(Model, x => x.SalePrice.ToString("C"))</span></ins>
@@ -78,9 +119,20 @@
                                     <ul class="list-unstyled product-info">
                                         <li><span>ID</span>@Editable(Model, x => x.ProductId)</li>
                                         @*CSDEMO#99*@
-                                        <li>
+                                        <li class="variants_in_stock">
                                             <span>Availability</span>@stockLabel
                                         </li>
+
+                                        @if (Model.ProductVariants != null)
+                                        {
+                                            foreach (var prodVariant in Model.ProductVariants)
+                                            {
+                                                <li class="variants_in_stock variants_in_stock_@prodVariant.VariantId" style="display:none">
+                                                    <span>Availability</span>@prodVariant.StockLabel 
+                                                </li>
+                                            }
+                                        }
+
                                         <li><span>Brand</span>@Editable(Model, x => x.Brand)</li>
                                         @*<li><span>Tags</span></li>*@
                                     </ul>
@@ -144,7 +196,16 @@
                                                     clickCMD = "out-of-stock";
                                                 }
                                                 <div class="col-md-3 col-sm-12">
-                                                    <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary @clickCMD"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary variant_btn @clickCMD" ><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    @if (Model.ProductVariants != null)
+                                                    {
+                                                        foreach (var prodVariant in Model.ProductVariants)
+                                                        {
+                                                            clickCMD = "out-of-stock";
+                                                            if (prodVariant.StockQuantity > 0) { clickCMD = "add-to-cart"; }
+                                                            <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary variant_btn variant_btn_@prodVariant.VariantId @clickCMD" style="display:none"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                        }
+                                                    }
                                                 </div>
                                             </div>
                                         </div>

@@ -20,15 +20,25 @@ namespace CSDemo.Models.Cart
 
         public Decimal LineTotal { get; set; }
 
+        private Decimal productsTotal;
+        public Decimal ProductsTotal { 
+            
+            get
+            {
+                return this.discount + this.LineTotal;
+            }
+            
+            set
+            {
+                productsTotal = value;
+            } 
+        }
+
         public Decimal Tax { get; set; }
 
         private Decimal grandTotal;
 
-        public Decimal GrandTotal
-        {
-            get { return this.Shipping + this.LineTotal +this.Tax - this.Discount; }
-            set { grandTotal = value; }
-        }
+        public Decimal GrandTotal { get; set; }
 
         private Decimal discount;
 

@@ -8,6 +8,12 @@ using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using Glass.Mapper.Sc.Fields;
 using Sitecore.Data.Items;
+using System.Linq;
+using Glass.Mapper.Sc;
+using Glass.Mapper.Sc.Configuration;
+using Glass.Mapper.Sc.Configuration.Attributes;
+using Glass.Mapper.Sc.Fields;
+using Sitecore.Commerce.Entities.Inventory;
 
 #endregion
 
@@ -28,7 +34,19 @@ namespace CSDemo.Models.Product
         public virtual string ListPrice { get; set; }
 
         [SitecoreField(Fields.Variant_Images)]
-        public IEnumerable<Item> Variant_Images { get; set; }
+        public IEnumerable<Image> Variant_Images { get; set; }
+
+        //public virtual IEnumerable<Image> Images { 
+            
+        //    get
+        //    {
+        //        if (this.Variant_Images == null) { return null; }
+
+        //        return this.Variant_Images.Select(x => x.GlassCast<Image>());
+
+        //    }
+        
+        //}
 
         [SitecoreField(Fields.ProductSize)]
         public virtual string ProductSize { get; set; }
@@ -36,6 +54,9 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.ProductColor)]
         public virtual string ProductColor { get; set; }
 
+        public virtual StockInformation StockInformation { get; set; }
+        public virtual string StockLabel { get; set; }
+        public virtual int StockQuantity { get; set; }
 
         #endregion
         #region Fields

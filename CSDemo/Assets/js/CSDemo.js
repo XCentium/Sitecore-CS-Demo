@@ -831,7 +831,6 @@
 
         var idToShow = "#" + objText + "ProductColor" + num;
 
-
         // hide all ProductColor with class   ProductColor + num
         $(classToHide).hide();
 
@@ -852,35 +851,55 @@
         var priceID = "#productAmount" + num;
         var vals = objValue.split('|');
 
+        console.log(num);
+        console.log(objValue);
+
         // set variant
         $(variantID).val(vals[0]);
 
         // set price
         $(priceID).text(vals[1]);
 
+        // Image Carousel Class
+        var imgClass = '.variant_img_' + vals[0];
+        $('.variant_images').hide();
+        $('.product-carousel-wrapper').hide();
+        $(imgClass).css({position: 'static'});
+        $(imgClass).show();
+
+        // Stock
+        var stockClass = '.variants_in_stock_' + vals[0];
+        $('.variants_in_stock').hide();
+        $(stockClass).show();
+
+        // variant_btn
+        var btnClass = '.variant_btn_' + vals[0];
+        $('.variant_btn').hide();
+        $(btnClass).show();
+
         // set images
-        var images = vals[2];
-        if (images.length > 5) {
-            var imagesArr = images.split(",");
+        //var images = vals[2];
+        //if (images.length > 5) {
+        //    var imagesArr = images.split(",");
 
-            var firstImage = '' + imagesArr + '';
+        //    var firstImage = '' + imagesArr + '';
 
-            var outputs = "";
-            for (var x = 0; x < imagesArr.length; x++) {
-                outputs = outputs + '<div class="item"><img src="' + imagesArr[x] + '" class="img-responsive" alt="product image"></div>';
+        //    var outputs = "";
+        //    for (var x = 0; x < imagesArr.length; x++) {
+        //        outputs = outputs + '<div class="item"><img src="' + imagesArr[x] + '" class="img-responsive" alt="product image"></div>';
 
-                //if ($("#product-carousel .item").length > 1) {
-                //    $("#product-carousel").owlCarousel({
-                //        items: 1,
-                //        loop: true,
-                //        animateOut: 'fadeOut',
-                //        animateIn: 'fadeIn'
-                //    });
-                //}
-            }
+        //        //if ($("#product-carousel .item").length > 1) {
+        //        //    $("#product-carousel").owlCarousel({
+        //        //        items: 1,
+        //        //        loop: true,
+        //        //        animateOut: 'fadeOut',
+        //        //        animateIn: 'fadeIn'
+        //        //    });
+        //        //}
+        //    }
 
             // $("#product-carousel").html(outputs);
-        }
+       // }
         // console.log(images);
     }
 

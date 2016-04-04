@@ -351,9 +351,9 @@ namespace CSDemo.Models.Checkout.Cart
             return cart ?? new CommerceCart();
         }
 
-        public ShoppingCart GetMiniCart()
+        public ShoppingCart GetMiniCart(bool cartFromCommServer = false)
         {
-            var cart = GetCustomerCart();
+            var cart = cartFromCommServer== true? GetCart(GetVisitorID(), true) : GetCustomerCart();
             var shoppingCartTotal = cart.Total as CommerceTotal;
             var shoppingCart = new ShoppingCart();
             if (cart != null)
@@ -362,6 +362,12 @@ namespace CSDemo.Models.Checkout.Cart
                     ? 0
                     : (cart.Total as CommerceTotal).Subtotal;
                 shoppingCart.Total = cart.LineItemCount;
+
+                var commerceTotal = (CommerceTotal)cart.Total;
+                shoppingCart.Shipping = commerceTotal.ShippingTotal;
+                shoppingCart.Tax = cart.Total.TaxTotal.Amount;
+                shoppingCart.GrandTotal = cart.Total.Amount;
+                
                 var cartItems = new List<CartItem>();
                 if (cart.LineItemCount > 0)
                 {
