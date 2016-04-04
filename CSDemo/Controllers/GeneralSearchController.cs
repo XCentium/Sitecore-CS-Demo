@@ -19,7 +19,6 @@ using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 using Sitecore.SecurityModel;
 using System;
-using CSDemo.Models.Tagging;
 using Sitecore.ContentSearch.Linq.Utilities;
 
 #endregion

@@ -21,7 +21,6 @@ using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Sitecore.Diagnostics;
 using System.Net;
-using CSDemo.Models.Tagging;
 using Sitecore.Analytics;
 using Sitecore.Analytics.Automation.Data;
 using Sitecore.Analytics.Automation.MarketingAutomation;

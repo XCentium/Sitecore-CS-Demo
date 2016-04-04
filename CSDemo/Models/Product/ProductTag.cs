@@ -1,7 +1,7 @@
-﻿using CSDemo.Contracts.Tagging;
+﻿using CSDemo.Contracts.Product;
 using Glass.Mapper.Sc.Configuration.Attributes;
 
-namespace CSDemo.Models.Tagging
+namespace CSDemo.Models.Product
 {
     [SitecoreType(AutoMap = true)]
     public class ProductTag : IProductTag

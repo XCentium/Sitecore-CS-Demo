@@ -1,4 +1,4 @@
-namespace CSDemo.Contracts.Tagging
+namespace CSDemo.Contracts.Product
 {
     public interface IProductTag
     {

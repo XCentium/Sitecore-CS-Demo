@@ -7,7 +7,7 @@ using Sitecore.Data;
 using Sitecore.Data.Fields;
 using Sitecore.Diagnostics;
 
-namespace CSDemo.Models.Tagging
+namespace CSDemo.Configuration
 {
     public class CommerceProductTags : BaseCommerceComputedField
     {
