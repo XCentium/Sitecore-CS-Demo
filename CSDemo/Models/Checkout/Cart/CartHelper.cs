@@ -364,7 +364,8 @@ namespace CSDemo.Models.Checkout.Cart
                 shoppingCart.Total = cart.LineItemCount;
 
                 var commerceTotal = (CommerceTotal)cart.Total;
-                shoppingCart.Shipping = commerceTotal.ShippingTotal;
+                if(commerceTotal != null)
+                    shoppingCart.Shipping = commerceTotal.ShippingTotal;
                 shoppingCart.Tax = cart.Total.TaxTotal.Amount;
                 shoppingCart.GrandTotal = cart.Total.Amount;
                 
