@@ -234,7 +234,7 @@ namespace CSDemo.Models.Product
         private static void BuildUIVariants(Product product)
         {
             var cultureInfo = Context.Culture;
-            if (product.ProductVariants.Count() > 0)
+            if (product.ProductVariants != null || product.ProductVariants.Count() > 0)
             {
                 var variantBox = new VariantBox();
                 var variantBoxLines = new List<VariantBoxLine>();
@@ -699,9 +699,8 @@ namespace CSDemo.Models.Product
                     product.ProductVariants = theVariants;
                 }
 
-                
 
-                BuildUIVariants(product);
+                if (productItem.HasChildren) { BuildUIVariants(product); }
 
 
 
