@@ -1,0 +1,30 @@
+﻿---
+ID: 98698a26-fa7e-40e4-b723-1a732b66caf3
+Parent: 6654572d-700a-42c9-921b-d8342a6a085e
+Template: 8015bb44-6d50-4c56-980b-435a77aa5b09
+Path: /sitecore/system/Social/Applications/CSDemo/Facebook Connector
+DB: master
+SharedFields:
+- ID: 379d5d91-c5bc-4da9-920e-a001765b7abd
+  Hint: Application Secret
+  Value: 1dcde90d8e45e96ab3f574c7dd3e9cfe
+- ID: aed4d0d5-8642-43d1-9485-64387919baa6
+  Hint: Application ID
+  Value: 212741042434809
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 50
+- ID: d0ebf5c0-e9b9-4615-a761-d68cd8108341
+  Hint: Network
+  Value: {D7429409-D6DA-46CD-91DD-8702781AE3C4}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160404T184957Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
