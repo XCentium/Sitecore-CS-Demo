@@ -154,6 +154,9 @@
       <HintPath>..\Lib\Sitecore\Sitecore.Mvc.Analytics.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Sitecore.Social.Client.Mvc">
+      <HintPath>..\Lib\Sitecore\Sitecore.Social.Client.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -551,6 +554,7 @@
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <Content Include="Areas\Social\Views\Connector\Login.cshtml" />
     <None Include="Properties\PublishProfiles\Castle Local.pubxml" />
     <None Include="Properties\PublishProfiles\csDemo.pubxml" />
     <None Include="Properties\PublishProfiles\DebuLocal.pubxml" />
