@@ -12,7 +12,25 @@
         LoadShippingFormData();
         LoadReviewFormData();
         LoadOrderConfirmationData();
+        AdjustVariantCarousel();
     });
+
+    function AdjustVariantCarousel() {
+
+        if ($(".product-crousel-parent").length > 0) {
+
+            // do something here
+
+            $('.variant_images').hide();
+            $('.variant_img_default').show();
+            $(".product-crousel-parent").attr("style", "visibility: visible")
+
+            // set first elenment as selected
+            if ($(".ProductColor").length > 0) {
+                $(".ProductColor option:first").attr('selected', 'selected').trigger('change');
+            }
+        }
+    }
 
     function CheckIfCommerceActionsAllowed() {
 
@@ -863,8 +881,8 @@
         // Image Carousel Class
         var imgClass = '.variant_img_' + vals[0];
         $('.variant_images').hide();
-        $('.product-carousel-wrapper').hide();
-        $(imgClass).css({position: 'static'});
+        // $('.product-carousel-wrapper').hide();
+        // $(imgClass).css({position: 'static'});
         $(imgClass).show();
 
         // Stock
@@ -877,30 +895,6 @@
         $('.variant_btn').hide();
         $(btnClass).show();
 
-        // set images
-        //var images = vals[2];
-        //if (images.length > 5) {
-        //    var imagesArr = images.split(",");
-
-        //    var firstImage = '' + imagesArr + '';
-
-        //    var outputs = "";
-        //    for (var x = 0; x < imagesArr.length; x++) {
-        //        outputs = outputs + '<div class="item"><img src="' + imagesArr[x] + '" class="img-responsive" alt="product image"></div>';
-
-        //        //if ($("#product-carousel .item").length > 1) {
-        //        //    $("#product-carousel").owlCarousel({
-        //        //        items: 1,
-        //        //        loop: true,
-        //        //        animateOut: 'fadeOut',
-        //        //        animateIn: 'fadeIn'
-        //        //    });
-        //        //}
-        //    }
-
-            // $("#product-carousel").html(outputs);
-       // }
-        // console.log(images);
     }
 
     //======== THANKYOU ========

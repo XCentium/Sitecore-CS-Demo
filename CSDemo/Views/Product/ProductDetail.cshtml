@@ -21,29 +21,18 @@
             {
                 <article class=" product-item product-single">
                     <div class="row">
-                        <div class="col-xs-4">
-                            <div class="product-carousel-wrapper">
-                                <div class="product-carousel">
-                                    @if (Model.Images != null)
-                                    {
-                                        foreach (var image in Model.Images)
-                                        {
-                                            <div class="item">
-                                                @RenderImage(image, x => x, new { Width = 538, Height = 538, AS = 1, @class = "img-responsive" }, isEditable: false)
-                                            </div>
-                                        }
-                                    }
-                                </div>
-                            </div>
+                        <div class="col-xs-4 product-crousel-parent" style="visibility:hidden">
                             @if (Model.ProductVariants != null)
                             {
+                                var default_variant_img = "variant_img_default";
+
                                 foreach (var prodVariant in Model.ProductVariants)
                                 {
                                     if (prodVariant.Variant_Images.Count() > 0)
                                     {
 
                                         <div class="product-carousel-wrapper variant_img_@prodVariant.VariantId">
-                                            <div class="variant_images variant_img_@prodVariant.VariantId" style="position:absolute">
+                                            <div class="variant_images @default_variant_img variant_img_@prodVariant.VariantId">
                                                 <div class="product-carousel">
                                                     @foreach (var image in prodVariant.Variant_Images)
                                                     {
@@ -59,7 +48,7 @@
                                     else
                                     {
                                         <div class="product-carousel-wrapper variant_img_@prodVariant.VariantId">
-                                            <div class="variant_images variant_img_@prodVariant.VariantId" style="position:absolute">
+                                            <div class="variant_images @default_variant_img variant_img_@prodVariant.VariantId">
                                                 <div class="product-carousel">
                                                     @foreach (var image in Model.Images)
                                                     {
@@ -73,7 +62,27 @@
                                         </div>
                                     }
 
+                                    default_variant_img = "";
                                 }
+                            }
+                            else
+                            {
+                                <div class="product-carousel-wrapper">
+                                    <div class="variant_images variant_img_default">
+                                        <div class="product-carousel">
+                                            @if (Model.Images != null)
+                                            {
+                                                foreach (var image in Model.Images)
+                                                {
+                                                    <div class="item">
+                                                        @RenderImage(image, x => x, new { Width = 538, Height = 538, AS = 1, @class = "img-responsive" }, isEditable: false)
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
                             }
 
                         </div>
@@ -128,7 +137,7 @@
                                             foreach (var prodVariant in Model.ProductVariants)
                                             {
                                                 <li class="variants_in_stock variants_in_stock_@prodVariant.VariantId" style="display:none">
-                                                    <span>Availability</span>@prodVariant.StockLabel 
+                                                    <span>Availability</span>@prodVariant.StockLabel
                                                 </li>
                                             }
                                         }
@@ -196,7 +205,7 @@
                                                     clickCMD = "out-of-stock";
                                                 }
                                                 <div class="col-md-3 col-sm-12">
-                                                    <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary variant_btn @clickCMD" ><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary variant_btn @clickCMD"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                     @if (Model.ProductVariants != null)
                                                     {
                                                         foreach (var prodVariant in Model.ProductVariants)
