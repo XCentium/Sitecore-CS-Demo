@@ -555,6 +555,7 @@
       <IsTransformFile>True</IsTransformFile>
     </None>
     <Content Include="Areas\Social\Views\Connector\Login.cshtml" />
+    <Content Include="App_Config\Include\zCSDemo\CSDemo.Social.config" />
     <None Include="Properties\PublishProfiles\Castle Local.pubxml" />
     <None Include="Properties\PublishProfiles\csDemo.pubxml" />
     <None Include="Properties\PublishProfiles\DebuLocal.pubxml" />
