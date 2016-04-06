@@ -12,7 +12,7 @@ SharedFields:
     <r xmlns:p="p" xmlns:s="s" p:p="1">
       <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
         <r uid="{7C8FCD32-25B5-4AB7-BF22-D10E07BFD45B}" p:after="r[@uid='{E5A6C541-E277-499D-9CB9-DFF8CE125A23}']" s:id="{DB927E2D-F0C2-42DA-BC48-3F532BF29596}" s:ph="page-body" />
-        <r uid="{282C41FC-0534-443A-B973-1E6BFCF51665}" p:after="*[1=2]" s:ds="" s:id="{A58672D4-0B34-41B2-9CCF-5A48C275FD40}" s:par="Application&amp;Callback URL" s:ph="/page-body/page-social-login-fb" />
+        <r uid="{282C41FC-0534-443A-B973-1E6BFCF51665}" p:after="*[1=2]" s:ds="" s:id="{A58672D4-0B34-41B2-9CCF-5A48C275FD40}" s:par="Application=%7B98698A26-FA7E-40E4-B723-1A732B66CAF3%7D&amp;Callback URL" s:ph="/page-body/page-social-login-fb" />
       </d>
     </r>
 Languages:
