@@ -352,33 +352,16 @@ namespace CSDemo.Models.Checkout.Cart
             return cart ?? new CommerceCart();
         }
 
-       
-
+        /// <summary>
+        /// CCC
+        /// </summary>
+        /// <param name="cartFromCommServer"></param>
+        /// <returns></returns>
         public ShoppingCart GetMiniCart(bool cartFromCommServer = false)
         {
             var cart = cartFromCommServer == true ? GetCart(GetVisitorID(), true) : GetCustomerCart();
             var shoppingCartTotal = cart.Total as CommerceTotal;
             var shoppingCart = new ShoppingCart();
-<<<<<<< Updated upstream
-            if (cart != null)
-            {
-                shoppingCart.LineTotal = cart.Total as CommerceTotal == null
-                    ? 0
-                    : (cart.Total as CommerceTotal).Subtotal;
-                shoppingCart.Total = cart.LineItemCount;
-
-                var commerceTotal = (CommerceTotal)cart.Total;
-                if(commerceTotal != null)
-                    shoppingCart.Shipping = commerceTotal.ShippingTotal;
-                if (cart.Total != null)
-                {
-                    shoppingCart.Tax = cart.Total.TaxTotal.Amount;
-                    shoppingCart.GrandTotal = cart.Total.Amount;
-                }
-                
-                var cartItems = new List<CartItem>();
-                if (cart.LineItemCount > 0)
-=======
             if (cart == null || shoppingCartTotal == null) return shoppingCart;
 
             shoppingCart.LineTotal = cart.Total as CommerceTotal == null
@@ -395,9 +378,8 @@ namespace CSDemo.Models.Checkout.Cart
             if (cart.LineItemCount > 0)
             {
                 foreach (CustomCommerceCartLine cartLine in cart.Lines)
->>>>>>> Stashed changes
                 {
-                    
+
                     var cartItem = new CartItem();
                     var product = cartLine.Product as CommerceCartProduct;
                     cartItem.ProductName = product.DisplayName;
@@ -442,6 +424,7 @@ namespace CSDemo.Models.Checkout.Cart
 
             return shoppingCart;
         }
+
 
         /// <summary>
         ///     CCC
