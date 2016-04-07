@@ -15,7 +15,7 @@
     var tax = "0.00";
     var grandtotal = "0.00";
     var total = "0.00";
-    
+
     if (shoppingCart != null && shoppingCart.Total > 0)
     {
 
@@ -29,30 +29,16 @@
             grandtotal = String.Format("{0:0.00}", shoppingCart.GrandTotal);
             total = String.Format("{0:0.00}", shoppingCart.ProductsTotal);
 
-            //lineTotal = String.Format("{0:0.00}", shoppingCart.LineTotal);
-            //discount = String.Format("{0:0.00}", shoppingCart.Discount);
-            //shipping = String.Format("{0:0.00}", commerceTotal.ShippingTotal);
-            //tax = String.Format("{0:0.00}", cart.Total.TaxTotal.Amount);
-            //grandtotal = String.Format("{0:0.00}", cart.Total.Amount);
-            //total = String.Format("{0:0.00}", shoppingCart.LineTotal + shoppingCart.Discount);
         }
         catch (Exception ex)
         {
-            
-            
+
+
         }
-        
-    }
-        //var commerceTotal = (CommerceTotal)cart.Total;
-
-        //var _Subtotal = commerceTotal.Subtotal;
-        //var _TaxTotal = cart.Total.TaxTotal.Amount;
-        //var _Total = cart.Total.Amount;
-        //var _TotalAmount = cart.Total.Amount;
-        //var _Discount = commerceTotal.OrderLevelDiscountAmount;
-        //var _ShippingTotal = commerceTotal.ShippingTotal;
 
     }
+
+}
 
 <!-- ==========================
     MY ACCOUNT - START
@@ -137,7 +123,7 @@
                             //var tax = String.Format("{0:0.00}", shoppingCart.Tax);
                             //var grandtotal = String.Format("{0:0.00}", shoppingCart.GrandTotal);
                             //var total = String.Format("{0:0.00}", shoppingCart.LineTotal + shoppingCart.Discount);
-                            
+
                             <div class="products-order checkout shopping-cart">
                                 <div class="table-responsive">
                                     <table class="table table-products">
@@ -169,14 +155,37 @@
                                     </table>
                                 </div>
 
-                                <ul class="list-unstyled order-total">
-                                    <li>Total products<span>$@total</span></li>
-                                    <li>Discount<span>- $@discount</span></li>
-                                    @*<li>Subtotal<span class="total">$@lineTotal</span></li>*@
-                                    <li>Shipping<span class="total">$@shipping</span></li>
-                                    <li>Tax<span class="total">$@tax</span></li>                                 
-                                    <li>Grandtotal<span class="total">$@grandtotal</span></li>
-                                </ul>
+                                @*<ul class="list-unstyled order-total">
+                                        <li>Total products<span>$@total</span></li>
+                                        <li>Discount<span>- $@discount</span></li>
+                                        <li>Subtotal<span class="total">$@lineTotal</span></li>
+                                        <li>Shipping<span class="total">$@shipping</span></li>
+                                        <li>Tax<span class="total">$@tax</span></li>
+                                        <li>Grandtotal<span class="total">$@grandtotal</span></li>
+                                    </ul>*@
+                            </div>
+                            <div class="box">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h5>Enter your promo code if you have one.</h5>
+                                        <div class="input-group">
+                                            <input type="text" name="promocode" id="promocode" class="form-control" placeholder="Promo code" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-primary ApplyPromo" type="button">Apply Coupon</button>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="call-xs-12">
+                                        <ul class="list-unstyled order-total">
+                                            <li>Total products<span>$@total</span></li>
+                                            <li>Discount<span>- $@discount</span></li>
+                                            <li>Shipping<span class="total">$@shipping</span></li>
+                                            <li>Tax<span class="total">$@tax</span></li>
+                                            <li>Grandtotal<span class="total">$@grandtotal</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                             <div class="clearfix">
                                 <div class="checkbox pull-left">

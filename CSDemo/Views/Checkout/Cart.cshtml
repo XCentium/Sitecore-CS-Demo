@@ -7,7 +7,36 @@
 
     var cartHelper = new CartHelper();
     CSDemo.Models.Cart.ShoppingCart shoppingCart = cartHelper.GetMiniCart();
- 
+
+
+    var lineTotal = "0.00";
+    var discount = "0.00";
+    var shipping = "0.00";
+    var tax = "0.00";
+    var grandtotal = "0.00";
+    var total = "0.00";
+
+    if (shoppingCart != null && shoppingCart.Total > 0)
+    {
+
+        try
+        {
+
+            lineTotal = String.Format("{0:0.00}", shoppingCart.LineTotal);
+            discount = String.Format("{0:0.00}", shoppingCart.Discount);
+            shipping = String.Format("{0:0.00}", shoppingCart.Shipping);
+            tax = String.Format("{0:0.00}", shoppingCart.Tax);
+            grandtotal = String.Format("{0:0.00}", shoppingCart.GrandTotal);
+            total = String.Format("{0:0.00}", shoppingCart.ProductsTotal);
+
+        }
+        catch (Exception ex)
+        {
+
+
+        }
+
+    }
  }
 
 <!-- ==========================
@@ -16,9 +45,9 @@
 @if (shoppingCart != null && shoppingCart.Total > 0)
 {
 
-    var lineTotal = String.Format("{0:0.00}", shoppingCart.LineTotal);
-    var discount = String.Format("{0:0.00}", shoppingCart.Discount);
-    var total = String.Format("{0:0.00}", shoppingCart.LineTotal + shoppingCart.Discount);
+    //var lineTotal = String.Format("{0:0.00}", shoppingCart.LineTotal);
+    //var discount = String.Format("{0:0.00}", shoppingCart.Discount);
+    //var total = String.Format("{0:0.00}", shoppingCart.LineTotal + shoppingCart.Discount);
     <section class="content account">
         <div class="container">
             <div class="row">
@@ -78,7 +107,9 @@
                                         <ul class="list-unstyled order-total">
                                             <li>Total products<span>$@total</span></li>
                                             <li>Discount<span>- $@discount</span></li>
-                                            <li>Subtotal<span class="total">$@lineTotal</span></li>
+                                            <li>Shipping<span class="total">$@shipping</span></li>
+                                            <li>Tax<span class="total">$@tax</span></li>
+                                            <li>Grandtotal<span class="total">$@grandtotal</span></li>
                                         </ul>
                                     </div>
                                 </div>

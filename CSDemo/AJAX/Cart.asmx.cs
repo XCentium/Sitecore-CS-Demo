@@ -139,6 +139,15 @@ namespace CSDemo.AJAX
             return ret;
         }
 
+        [WebMethod(EnableSession = true)]
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public bool ApplyPromoCode(string promoCode)
+        {
+            if(string.IsNullOrEmpty(promoCode.Trim())) return false;
+            return CartHelper.ApplyPromoCode(promoCode);
+        }
+
+
         public CartHelper CartHelper { get; set; }
         public string ActionAllowed { get; set; }
         public Cart()
