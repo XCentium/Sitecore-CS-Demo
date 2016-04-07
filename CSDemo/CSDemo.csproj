@@ -84,6 +84,9 @@
       <HintPath>..\Lib\Sitecore\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\Lib\Social\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="Rainbow, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Rainbow.Core.1.1.0\lib\net45\Rainbow.dll</HintPath>
       <Private>True</Private>
@@ -154,9 +157,18 @@
       <HintPath>..\Lib\Sitecore\Sitecore.Mvc.Analytics.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Sitecore.Social, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Sitecore\Sitecore.Social.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Social.Client.Mvc">
       <HintPath>..\Lib\Sitecore\Sitecore.Social.Client.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Social.Infrastructure, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Sitecore\Sitecore.Social.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Social.NetworkProviders, Version=8.1.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -231,6 +243,7 @@
     <Compile Include="Configuration\Facets\ILastOrderTotal.cs" />
     <Compile Include="Configuration\Facets\LastOrderTotal.cs" />
     <Compile Include="Configuration\ItemResolver.cs" />
+    <Compile Include="Configuration\Social\CustomMatchUser.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchInfo.cs" />
     <Compile Include="Contracts\IComponents.cs" />
