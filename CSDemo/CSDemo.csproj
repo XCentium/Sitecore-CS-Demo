@@ -270,6 +270,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\GeneralSearchController.cs" />
     <Compile Include="Models\Account\AccountHelper.cs" />
+    <Compile Include="Models\Account\Address.cs" />
     <Compile Include="Models\Account\LoginModel.cs" />
     <Compile Include="Models\Account\Order.cs" />
     <Compile Include="Models\Account\OrderAddress.cs" />
@@ -612,6 +613,9 @@
     <Content Include="Views\Product\ComplementaryProducts.cshtml" />
     <None Include="Properties\PublishProfiles\xccommerce113demo.pubxml" />
     <Content Include="Views\Product\VisitorStockNotificationSignup.cshtml" />
+    <Content Include="Views\Account\AddAddress.cshtml" />
+    <Content Include="Views\Account\AddressDetail.cshtml" />
+    <Content Include="Views\Account\Addresses.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

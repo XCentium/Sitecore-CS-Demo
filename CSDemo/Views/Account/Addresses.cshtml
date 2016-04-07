@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CSDemo.Models.Account.Address>
+
+<!-- ==========================
+    MY ACCOUNT - START
+=========================== -->
+<section class="content account">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <aside class="sidebar">
+
+                    <!-- WIDGET:CATEGORIES - START -->
+                    <div class="widget widget-navigation">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Account Dashboard</a></li>
+                            <li><a href="#">Personal Infromation</a></li>
+                            <li class="active"><a href="~/Account/Addresses">My Address</a></li>
+                            <li><a href="~/account/orders">My Orders</a></li>
+                            <li><a href="#">Warranty Claims</a></li>
+                            <li><a href="#">Wishlist</a></li>
+                            <li><a href="~/categories">Back to Shop</a></li>                        
+                        </ul>
+                    </div>
+                    <!-- WIDGET:CATEGORIES - END -->
+
+                </aside>
+            </div>
+            <div class="col-sm-9">
+                <article class="account-content">
+                    <h3>My Addresses</h3>
+                    <div class="table-responsive border">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Company</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Country</th>
+                                <th>Phone</th>
+                                <th></th>
+                            </tr>
+                            @if (Model != null)
+                            {
+                                foreach (var addr in Model)
+                                {
+                                    <tr>
+                                        <td>@addr.Company</td>
+                                        <td>@addr.FirstName @addr.LastName</td>
+                                        <td>@addr.Address1</td>
+                                        <td>@addr.Country</td>
+                                        <td>@addr.Phone</td>
+                                        <td><a href="~/Account/AddressDetail?id=@addr.Id&cmd=DEL" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a><a href="~/Account/AddressDetail?id=@addr.Id&cmd=DEL" class="btn btn-primary btn-sm"><i class="fa fa-times"></i></a></td>
+                                    </tr>
+                                }
+                            }
+
+                        </table>
+                    </div>
+                    <a href="~/Account/AddAddress" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add New Address</a>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========================
+    MY ACCOUNT - END
+=========================== -->
+

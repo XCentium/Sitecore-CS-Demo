@@ -130,6 +130,21 @@ namespace CSDemo
             public const string VariantColorNameFormat = "{0}{1}";
             public const string TrackingFieldId = "{B0A67B2A-8B07-4E0B-8809-69F751709806}";
             public const string AlsoBoughtProductsURL = "http://xcp13n.xcentium.net/api/data/relatedproducts/csdemo/{0}";
+            public const string AdventureWorksRootPath = "/sitecore/Commerce/Catalog Management/Catalogs/Adventure Works Catalog/Departments";
+        }
+
+        public struct Cart
+        {
+            public const string AnonUserActionDenied = "Action DENIED! Only Visitors or Signed in Customers Allowed";
+            public const string BasketErrors = "_Basket_Errors";
+            public const string CookieName = "_minicart";
+            public const string VisitorID = "VisitorId";
+            public const string VisitorTrackingCookieName = "_visitor";
+            public const string VisitorIdKeyName = "visitorId";
+            public const string CartNotInCache = "CartCacheHelper::GetCart - Cart for customerId {0} does not exist in the cache!";
+            public const string CartInvalidInCache = "CartCacheHelper::InvalidateCartCache - Cart for customer id {0} is not in the cache!";
+            public const string CartAlreadyInCache = "CartCacheHelper::AddCartToCache - Cart for customer id {0} is already in the cache!";
+            public const string ErrorInBasket = "Error in Basket";
         }
 
     }

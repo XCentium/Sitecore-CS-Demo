@@ -63,7 +63,6 @@
         ShowActionMessage("Action DENIED! To this user type.");
     }
 
-
     $('.out-of-stock').click(function () {
 
         ShowActionMessage("This Product is Currently Out of Stock!");
@@ -919,5 +918,39 @@
         }
 
     }
+
+
+    $('.ApplyPromo').click(function () {
+
+        var promocode = $('#promocode').val();
+
+        var data = "promoCode:'" + promocode + "'";
+
+        $.ajax({
+            type: "POST",
+            url: "/AJAX/cart.asmx/ApplyPromoCode",
+            data: "{" + data + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+                console.log(result.d)
+                var ShoppingCart = result.d;
+
+                // modalAddToCart
+                ShowActionMessage("Promocode Applied");
+
+            },
+            error: function (error) {
+                ShowActionMessage("ERROR!! Promocode NOT Applied");
+                console.log(error)
+
+            },
+
+        });
+
+
+    });
+
 
 })(window, jQuery);

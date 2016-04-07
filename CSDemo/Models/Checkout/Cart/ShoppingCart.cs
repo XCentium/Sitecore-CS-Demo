@@ -25,7 +25,7 @@ namespace CSDemo.Models.Cart
             
             get
             {
-                return this.discount + this.LineTotal;
+                return this.GetDiscount() + this.LineTotal;
             }
             
             set
@@ -34,11 +34,26 @@ namespace CSDemo.Models.Cart
             } 
         }
 
+
         public Decimal Tax { get; set; }
 
         private Decimal grandTotal;
 
-        public Decimal GrandTotal { get; set; }
+        public Decimal GrandTotal {
+
+            get
+            {
+                if (this.grandTotal > 0) { return this.grandTotal; }
+                return this.LineTotal + this.Tax - this.Shipping; 
+            }
+
+
+            set
+            {
+                grandTotal = value;
+            }
+        
+        }
 
         private Decimal discount;
 

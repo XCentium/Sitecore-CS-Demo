@@ -13,6 +13,8 @@ using Sitecore.Analytics.Model.Entities;
 using Sitecore.SecurityModel;
 using Sitecore.Data.Items;
 using System.IO;
+using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
+using Sitecore.Diagnostics;
 
 
 namespace CSDemo.Models.Account
@@ -149,13 +151,13 @@ namespace CSDemo.Models.Account
             
         }
 
-        public virtual CommerceUser GetUser(string userName)
+        public virtual CommerceUser GetUser(string userName, bool asReadOnly = true)
         {
             var request = new GetUserRequest(userName);
 
             var result = this._customerServiceProvider.GetUser(request);
 
-            CommerceUser usr = UpdateUserCustomerInfo(userName, result.CommerceUser);
+            CommerceUser usr = UpdateUserCustomerInfo(userName, result.CommerceUser, asReadOnly);
 
             return result.CommerceUser;
         }
@@ -165,7 +167,7 @@ namespace CSDemo.Models.Account
         /// <param name="userName"></param>
         /// <param name="commerceUser"></param>
         /// <returns></returns>
-        private CommerceUser UpdateUserCustomerInfo(string userName, CommerceUser commerceUser)
+        private CommerceUser UpdateUserCustomerInfo(string userName, CommerceUser commerceUser, bool asReadOnly = true)
         {
             commerceUser.ExternalId = GetCommerceUserID(userName);
 
@@ -174,7 +176,10 @@ namespace CSDemo.Models.Account
                 if (commerceUser.Customers == null || commerceUser.Customers.Count == 0)
                 {
                     var customers = new List<string>() { commerceUser.ExternalId };
-                    commerceUser.Customers = customers.AsReadOnly();
+                    if (asReadOnly == true) {
+                        commerceUser.Customers = customers.AsReadOnly();
+                    }
+                    
                 }
             }
 
@@ -260,5 +265,110 @@ namespace CSDemo.Models.Account
 
         }
 
+
+        public virtual bool AddCustomerAddress(Address customerAddress)
+        {
+
+
+            CommerceUser commerceUser = this.GetUser(Sitecore.Context.User.Name,false);
+
+            if (commerceUser.UserName != null)
+            {
+
+                var user = new CommerceCustomer { ExternalId = commerceUser.ExternalId };
+                var party = new CommerceParty
+                {
+                    ExternalId = customerAddress.Id,
+                    Name = customerAddress.AddressName,
+                    Address1 = customerAddress.Address1,
+                    Address2 = customerAddress.Address2,
+                    PhoneNumber = customerAddress.Phone,
+                    FaxNumber = customerAddress.Fax,
+                    City = customerAddress.City,
+                    Country = customerAddress.Country,
+                    State = customerAddress.State,
+                    ZipPostalCode = customerAddress.Zip,
+                    PartyId = customerAddress.PartyId,
+                    IsPrimary = customerAddress.IsMain
+                };
+
+                if (string.IsNullOrEmpty(party.ExternalId))
+                {
+                    party.ExternalId = Guid.NewGuid().ToString("B");
+                }
+
+                var parties = new List<Sitecore.Commerce.Entities.Party> { party };
+                Assert.ArgumentNotNull(user, "user");
+                var request = new AddPartiesRequest(user, parties);
+                var customerServiceProvider = new Sitecore.Commerce.Services.Customers.CustomerServiceProvider();
+                // var result = this._customerServiceProvider.AddParties(request);
+                var result = customerServiceProvider.AddParties(request);
+                if (!result.Success)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+
+        internal IEnumerable<Address> GetCustomerAddresses()
+        {
+
+            var addresses = new List<Address>();
+
+            CommerceUser commerceUser = this.GetUser(Sitecore.Context.User.Name);
+
+            if (commerceUser.UserName != null)
+            {
+                var customer = new CommerceCustomer { ExternalId = commerceUser.ExternalId };
+                var request = new GetPartiesRequest(customer);
+                try
+                {
+
+                    var result = this._customerServiceProvider.GetParties(request);
+                    if (request != null || result != null)
+                    {
+                        var partyList = result.Success && result.Parties != null ? (result.Parties).Cast<CommerceParty>() : new List<CommerceParty>();
+                        if (partyList != null)
+                        {
+                            foreach (var party in partyList)
+                            {
+
+                                addresses.Add(new Address
+                                {
+                                    AddressName = party.Name,
+                                    Id = party.ExternalId,
+                                    FirstName = party.FirstName,
+                                    LastName = party.LastName,
+                                    Company = party.Company,
+                                    Address1 = party.Address1,
+                                    Address2 = party.Address2,
+                                    City = party.City,
+                                    State = party.State,
+                                    Zip = party.ZipPostalCode,
+                                    Country = party.Country,
+                                    PartyId = party.PartyId,
+                                    CountryCode = party.CountryCode,
+                                    Phone = party.PhoneNumber,
+                                    Fax = party.FaxNumber,
+                                    Email = party.Email,
+                                    IsMain = party.IsPrimary
+
+                                });
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex.Message,this);
+                }
+            }
+
+
+            return addresses;
+        }
     }
 }
