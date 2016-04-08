@@ -15,6 +15,7 @@ using Sitecore.Data.Items;
 using System.IO;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Diagnostics;
+using System.Collections.ObjectModel;
 
 
 namespace CSDemo.Models.Account
@@ -151,13 +152,13 @@ namespace CSDemo.Models.Account
             
         }
 
-        public virtual CommerceUser GetUser(string userName, bool asReadOnly = true)
+        public virtual CommerceUser GetUser(string userName)
         {
             var request = new GetUserRequest(userName);
 
             var result = this._customerServiceProvider.GetUser(request);
 
-            CommerceUser usr = UpdateUserCustomerInfo(userName, result.CommerceUser, asReadOnly);
+            CommerceUser usr = UpdateUserCustomerInfo(userName, result.CommerceUser);
 
             return result.CommerceUser;
         }
@@ -167,7 +168,7 @@ namespace CSDemo.Models.Account
         /// <param name="userName"></param>
         /// <param name="commerceUser"></param>
         /// <returns></returns>
-        private CommerceUser UpdateUserCustomerInfo(string userName, CommerceUser commerceUser, bool asReadOnly = true)
+        private CommerceUser UpdateUserCustomerInfo(string userName, CommerceUser commerceUser)
         {
             commerceUser.ExternalId = GetCommerceUserID(userName);
 
@@ -176,10 +177,7 @@ namespace CSDemo.Models.Account
                 if (commerceUser.Customers == null || commerceUser.Customers.Count == 0)
                 {
                     var customers = new List<string>() { commerceUser.ExternalId };
-                    if (asReadOnly == true) {
-                        commerceUser.Customers = customers.AsReadOnly();
-                    }
-                    
+                    commerceUser.Customers = customers.AsReadOnly();                  
                 }
             }
 
@@ -224,13 +222,32 @@ namespace CSDemo.Models.Account
         /// </summary>
         /// <param name="id">The customer to retrieve</param>
         /// <returns>The requested customer</returns>
-        public virtual CommerceCustomer GetCustomer(string id)
+        public virtual CommerceCustomer GetCustomer(string userExternalId)
         {
-            var request = new GetCustomerRequest(id);
+            var request = new GetCustomerRequest(userExternalId);
 
             var result = this._customerServiceProvider.GetCustomer(request);
 
-            return result.CommerceCustomer;
+            if (result.Success)
+            {
+                //if (result.CommerceCustomer.Name == null)
+                //{
+                //    result.CommerceCustomer.Name = userExternalId;
+                //    result.CommerceCustomer.ExternalId = userExternalId;
+                //    var newRequest = new UpdateCustomerRequest(result.CommerceCustomer);
+                //    var newResult = this._customerServiceProvider.UpdateCustomer(newRequest);
+                //    if (newResult.Success)
+                //    {
+                //        return newResult.CommerceCustomer;
+                //    }
+                //    throw new ApplicationException(newResult.SystemMessages.Any() ? newResult.SystemMessages[0].Message : "Error");
+                //}
+
+                return result.CommerceCustomer;
+            }
+
+            throw new ApplicationException(result.SystemMessages.Any()? result.SystemMessages[0].Message: "Error" );
+            
         }
 
         /// <summary>
@@ -270,16 +287,20 @@ namespace CSDemo.Models.Account
         {
 
 
-            CommerceUser commerceUser = this.GetUser(Sitecore.Context.User.Name,false);
+            CommerceUser commerceUser = this.GetUser(Sitecore.Context.User.Name);
 
             if (commerceUser.UserName != null)
             {
+                var user = Sitecore.Security.Accounts.User.FromName(Sitecore.Context.User.Name, true);
+                Sitecore.Security.UserProfile profile = user.Profile;
 
-                var user = new CommerceCustomer { ExternalId = commerceUser.ExternalId };
+                var created = DateTime.Now;
+
+                var customer = new CommerceCustomer { ExternalId = commerceUser.ExternalId };
                 var party = new CommerceParty
                 {
-                    ExternalId = customerAddress.Id,
-                    Name = customerAddress.AddressName,
+                    ExternalId = Guid.NewGuid().ToString("B"),
+                    Name = customerAddress.AddressName + DateTime.Now.ToShortTimeString(),
                     Address1 = customerAddress.Address1,
                     Address2 = customerAddress.Address2,
                     PhoneNumber = customerAddress.Phone,
@@ -292,24 +313,63 @@ namespace CSDemo.Models.Account
                     IsPrimary = customerAddress.IsMain
                 };
 
-                if (string.IsNullOrEmpty(party.ExternalId))
+                try
                 {
-                    party.ExternalId = Guid.NewGuid().ToString("B");
+
+                    var newCustomerName = string.Format("{0}.{1}.{2}.{3}", customerAddress.Company.Trim(), customerAddress.LastName.Trim(), customerAddress.FirstName.Trim(), created);
+
+                    CommerceCustomer newCustomer = CreateCustomer(customer, newCustomerName, party, party, Sitecore.Context.User.LocalName);
+
+                }
+                catch (Exception)
+                {
+
+                    return false;
+                    throw;
+
+
                 }
 
-                var parties = new List<Sitecore.Commerce.Entities.Party> { party };
-                Assert.ArgumentNotNull(user, "user");
-                var request = new AddPartiesRequest(user, parties);
-                var customerServiceProvider = new Sitecore.Commerce.Services.Customers.CustomerServiceProvider();
-                // var result = this._customerServiceProvider.AddParties(request);
-                var result = customerServiceProvider.AddParties(request);
-                if (!result.Success)
-                {
-                    return false;
-                }
+                //  ----------------------
+                //var parties = new List<Sitecore.Commerce.Entities.Party> { party };
+                //Assert.ArgumentNotNull(customer, "user");
+                //var request = new AddPartiesRequest(customer, parties);
+                //var result = this._customerServiceProvider.AddParties(request);
+                //if (!result.Success)
+                //{
+                //    return false;
+                //}
             }
 
             return true;
+        }
+
+        private CommerceCustomer CreateCustomer(CommerceCustomer emptyCustomer, string newCustomerName, CommerceParty BillToParty, CommerceParty ShipToParty, string loggedInUserName)
+        {
+            var cust = new CustomerServiceProvider();
+            var customer = new CommerceCustomer 
+            {
+                ExternalId = emptyCustomer.ExternalId,
+                Name = newCustomerName,
+                IsDisabled = false,
+                Shops = new ReadOnlyCollection<string>(new string [1]{Sitecore.Context.Site.Name})
+            };
+
+            customer.Users = new ReadOnlyCollection<string>(new string[1] { loggedInUserName });
+
+            var request = new CreateCustomerRequest(customer);
+            var result = cust.CreateCustomer(request);
+
+            if (result.Success)
+            {
+                var parties = new List<Sitecore.Commerce.Entities.Party> { BillToParty, ShipToParty };
+                var addPartiesRequest = new AddPartiesRequest(result.CommerceCustomer, parties);
+                var addPartiesResult = cust.AddParties(addPartiesRequest);
+                return result.CommerceCustomer;
+            }
+
+            throw new ApplicationException(result.SystemMessages.Any()? result.SystemMessages[0].Message: "Error");
+
         }
 
 
@@ -322,7 +382,9 @@ namespace CSDemo.Models.Account
 
             if (commerceUser.UserName != null)
             {
-                var customer = new CommerceCustomer { ExternalId = commerceUser.ExternalId };
+ 
+                var customer = GetCustomer(commerceUser.ExternalId);
+
                 var request = new GetPartiesRequest(customer);
                 try
                 {
