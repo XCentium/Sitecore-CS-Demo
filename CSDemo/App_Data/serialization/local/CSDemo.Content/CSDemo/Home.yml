@@ -24,8 +24,7 @@ SharedFields:
         <r uid="{546A314C-A42E-4C0F-892F-C6796486247C}">
           <p:d />
         </r>
-        <r uid="{2D6892EE-0FB3-4FD4-9573-3DFC3F5F375D}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:id="{A58672D4-0B34-41B2-9CCF-5A48C275FD40}" s:ph="/page-body/page-social-login" />
-        <r uid="{AF6A3953-C35E-4517-B345-AC7F3003C6E2}" p:after="r[@uid='{2D6892EE-0FB3-4FD4-9573-3DFC3F5F375D}']" s:ds="{FEEE5CCA-B864-4AE6-81F0-F30F7C76BBC4}" s:id="{8040BB2A-3983-4156-A3BA-A37A8FE5F6E8}" s:par="" s:ph="page-jumbotron">
+        <r uid="{AF6A3953-C35E-4517-B345-AC7F3003C6E2}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:ds="{FEEE5CCA-B864-4AE6-81F0-F30F7C76BBC4}" s:id="{8040BB2A-3983-4156-A3BA-A37A8FE5F6E8}" s:par="" s:ph="page-jumbotron">
           <rls>
             <ruleset>
               <rule uid="{73D61D55-F927-426A-8F8B-0545F0F98B91}" s:name="Campaign 1">

@@ -69,6 +69,8 @@ namespace CSDemo
             public const string PurchaseOutcomeId = "{9016E456-95CB-42E9-AD58-997D6D77AE83}";
             public const string ProductTagsFieldId = "{CB2364DB-F3ED-46D2-AAC4-CFE3A280E7DD}";
             public const string ProductTagNameFieldId = "{B5620C00-330B-479E-9B54-57857040E1E0}";
+
+            public const string DefaultSocialDomainForCommerce = "CommerceUsers";
         }
 
         public struct Marketing

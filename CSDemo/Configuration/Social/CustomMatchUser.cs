@@ -35,7 +35,7 @@ namespace CSDemo.Configuration.Social
             }
             var fullName = Context.Domain.GetFullName(args.Username);
             var splitter = fullName.Split('\\');
-            var commerceUserFullName = $"CommerceUsers\\{splitter[1]}";
+            var commerceUserFullName = $"{Constants.Commerce.DefaultSocialDomainForCommerce}\\{splitter[1]}";
             args.Result = CreateSitecoreUser(commerceUserFullName, args.Email, args.AccountBasicData.FullName);
         }
 
