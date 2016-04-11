@@ -1,0 +1,73 @@
+﻿---
+ID: 81d73f67-a482-459f-b5f8-2feb7e4fe13a
+Parent: 64096593-42bd-4f6c-abc1-fe0e1d6286b5
+Template: daf085e8-602e-43a6-8299-038ff171349f
+Path: /sitecore/media library/Rio Grande/Social/signin_fb
+DB: master
+SharedFields:
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: -/media/14576f6af92242faa0ca5e2ddff3380f.ashx?h=16&thn=1&w=16
+- ID: 22eac599-f13b-4607-a89d-c091763a467d
+  Hint: Width
+  Value: 243
+- ID: 40e50ed9-ba07-4702-992e-a912738d32dc
+  Hint: Blob
+  BlobID: f1d7ca63-f0e8-409e-acc2-611950303bcb
+  Value: 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
+- ID: 6954b7c7-2487-423f-8600-436cb3b6dc0e
+  Hint: Size
+  Value: 3128
+- ID: 6f47a0a5-9c94-4b48-abeb-42d38def6054
+  Hint: Mime Type
+  Value: image/jpeg
+- ID: c06867fe-9a43-4c7d-b739-48780492d06f
+  Hint: Extension
+  Value: jpg
+- ID: cb09946f-3218-4823-87d2-d5007c199a96
+  Hint: Dimensions
+  Value: 243 x 42
+- ID: de2ca9e4-c117-4c8a-a139-1ff4b199d15a
+  Hint: Height
+  Value: 42
+Languages:
+- Language: de-DE
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160405T225415Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160405T225414Z
+    - ID: 65885c44-8fcd-4a7f-94f1-ee63703fe193
+      Hint: Alt
+      Value: signin_fb
+- Language: fr-FR
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160405T225415Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: ja-JP
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160405T225415Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

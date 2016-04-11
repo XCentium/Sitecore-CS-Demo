@@ -1,0 +1,21 @@
+﻿---
+ID: fde16cd7-f3ce-4f37-8f35-7f90d901f7c6
+Parent: e405df50-bbcf-4a97-8d8a-361e8576f18b
+Template: e619e625-3af2-463b-9204-92cb08205b93
+Path: /sitecore/content/Rio Grande/Components/Products/BargainHunters
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160319T001413Z
+    - ID: 7aa7edb7-dfbd-4117-a31a-ad9128c9c84b
+      Hint: Products
+      Type: Multilist with Search
+      Value: |
+        {AFF77E47-1C57-4283-BC7A-49459D7C2AE5}
+        {E43C60D0-0F86-4881-A129-B7A6BE795076}
+        {385C56B5-881A-49F4-85E0-D82DC1FCA792}

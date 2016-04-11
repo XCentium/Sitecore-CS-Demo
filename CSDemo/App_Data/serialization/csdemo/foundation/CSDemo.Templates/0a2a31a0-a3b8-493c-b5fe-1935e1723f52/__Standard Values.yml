@@ -1,0 +1,20 @@
+﻿---
+ID: 08b41753-d6bf-44e0-b8dc-a6c7beff0656
+Parent: 0a2a31a0-a3b8-493c-b5fe-1935e1723f52
+Template: 0a2a31a0-a3b8-493c-b5fe-1935e1723f52
+Path: /sitecore/templates/CSDemo/Components/Navigation/Mega Menu Navigation Item/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T210421Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 7c445b60-6911-46b6-966a-736a76c7f549
+      Hint: Title
+      Value: $name

@@ -1,0 +1,18 @@
+﻿---
+ID: 682873f1-cfb1-453f-9cd8-ec017fa5b407
+Parent: dfe6e26a-54ec-483b-8594-d6ac854b6e26
+Template: 99f8905d-4a87-4eb8-9f8b-a9bebfb3add6
+Path: /sitecore/layout/Renderings/CSDemo/Product/Featured Stores
+DB: master
+SharedFields:
+- ID: 51b435bc-f7b9-478a-9c51-52916af96ff5
+  Hint: Path
+  Value: /Views/Product/FeaturedStores.cshtml
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160226T185848Z

@@ -1,0 +1,20 @@
+﻿---
+ID: 6fc55689-5ef7-42f4-9b0c-f6c2f0d8e142
+Parent: dca03088-6ee6-40e3-81b5-4d74b5783d19
+Template: 338f84ba-3cdf-466e-8fb2-54ca845715d5
+Path: /sitecore/content/Rio Grande/Components/Navigation/Home
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T184338Z
+    - ID: 525e09fb-d3cd-4cdb-b78c-1929bf4588d8
+      Hint: Link
+      Value: "<link text=\"\" linktype=\"internal\" class=\"\" title=\"\" target=\"\" querystring=\"\" id=\"{49B9F3E2-65CC-48F5-9A96-35EFD0C752D8}\" />"
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

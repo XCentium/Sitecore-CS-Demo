@@ -1,0 +1,17 @@
+﻿---
+ID: 389bb7d3-ebac-40aa-ad41-6a69ea1bc03b
+Parent: 9bfe1059-299a-4b91-9844-7c72b842d149
+Template: adb6ca4f-03ef-4f47-b9ac-9ce2ba53ff97
+Path: /sitecore/content/Rio Grande/Components/Tags/2016
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160317T002357Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Anonymous

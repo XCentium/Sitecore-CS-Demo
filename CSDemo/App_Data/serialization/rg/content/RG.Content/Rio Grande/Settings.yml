@@ -1,0 +1,14 @@
+﻿---
+ID: 06e57105-139f-44bd-b7fa-c00a391c6886
+Parent: 280eb5ee-86be-444a-ab98-e81bf4ec9705
+Template: a21b890e-c798-469c-8727-0f2c525787f3
+Path: /sitecore/content/Rio Grande/Settings
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T161000Z

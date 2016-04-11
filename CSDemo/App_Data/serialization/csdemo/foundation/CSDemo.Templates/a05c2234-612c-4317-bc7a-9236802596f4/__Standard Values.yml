@@ -1,0 +1,17 @@
+﻿---
+ID: 9567a1f9-90a6-41f8-843d-175a1d7b3692
+Parent: a05c2234-612c-4317-bc7a-9236802596f4
+Template: a05c2234-612c-4317-bc7a-9236802596f4
+Path: /sitecore/templates/CSDemo/Components/Product/Featured Products/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160301T182207Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

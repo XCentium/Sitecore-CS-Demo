@@ -1,0 +1,22 @@
+﻿---
+ID: dca03088-6ee6-40e3-81b5-4d74b5783d19
+Parent: f3962e64-6cc9-4d94-b5bd-358d09e6a101
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+Path: /sitecore/content/Rio Grande/Components/Navigation
+DB: master
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Type: TreelistEx
+  Value: {338F84BA-3CDF-466E-8FB2-54CA845715D5}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T003206Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\devlific

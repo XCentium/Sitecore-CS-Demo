@@ -1,0 +1,20 @@
+﻿---
+ID: 733a799a-0c3e-4be9-9121-5bc6c3f6d169
+Parent: dca03088-6ee6-40e3-81b5-4d74b5783d19
+Template: 338f84ba-3cdf-466e-8fb2-54ca845715d5
+Path: /sitecore/content/Rio Grande/Components/Navigation/Popular
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T210541Z
+    - ID: 525e09fb-d3cd-4cdb-b78c-1929bf4588d8
+      Hint: Link
+      Value: "<link text=\"Popular\" linktype=\"external\" url=\"#\" anchor=\"\" target=\"\" />"
+    - ID: eb2b469b-8798-46df-aa28-f89727a6dd10
+      Hint: Mega Menu Image
+      Value: "<image mediaid=\"{AF341CF5-11ED-4410-A830-236787951590}\" />"

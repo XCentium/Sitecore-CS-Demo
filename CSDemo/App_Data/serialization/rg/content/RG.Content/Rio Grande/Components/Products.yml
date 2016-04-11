@@ -1,0 +1,22 @@
+﻿---
+ID: e405df50-bbcf-4a97-8d8a-361e8576f18b
+Parent: f3962e64-6cc9-4d94-b5bd-358d09e6a101
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+Path: /sitecore/content/Rio Grande/Components/Products
+DB: master
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Type: TreelistEx
+  Value: {E619E625-3AF2-463B-9204-92CB08205B93}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160318T232503Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

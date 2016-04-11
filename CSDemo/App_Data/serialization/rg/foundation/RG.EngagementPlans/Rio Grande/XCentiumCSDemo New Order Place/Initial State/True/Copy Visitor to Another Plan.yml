@@ -1,0 +1,37 @@
+﻿---
+ID: 43624fa7-ab4f-4159-ae12-0346d49484e6
+Parent: 460f7cad-ec50-4f51-94cf-ec2d152ed6e2
+Template: 8c5ead00-5f68-4310-ab0c-84f283b5ee0a
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/Rio Grande/XCentiumCSDemo New Order Placed/Initial State/True/Copy Visitor to Another Plan
+DB: master
+SharedFields:
+- ID: 1507131d-cee3-49e9-af32-de5403a37b49
+  Hint: Parameters
+  Value: AutomationActionDescription=Initial State&AutomationStateItemId=d97e26ae-6f08-4edd-97c1-315f781df637&AutomationStateDesignerId=
+- ID: 3f72bc07-de92-483e-a724-d430769d9ba4
+  Hint: Designer ID
+  Value: 1974f2db-e7f2-4d40-996c-4fb0a0ae8cf8
+- ID: 7642ed71-348b-4b88-8634-cc7b28949472
+  Hint: Origin ID
+  Value: 3da5a471-b155-44b6-99cc-be531e9fea60
+- ID: 8728a037-47d3-4180-b754-87926eda7ae8
+  Hint: Editor
+  Value: /sitecore/shell/default.aspx?xmlcontrol=CopyVisitorToAnotherPlan
+- ID: a291a22b-99e2-46bb-a27b-8ec744275396
+  Hint: Type
+  Value: Sitecore.Analytics.Automation.AutomationActions.CopyContactToAnotherPlanAction,Sitecore.Analytics.Automation
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 0
+Languages:
+- Language: en
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Copy Visitor to Another Plan
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160312T025506Z

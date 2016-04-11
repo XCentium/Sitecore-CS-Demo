@@ -1,0 +1,25 @@
+﻿---
+ID: 07d3fcba-ae8f-4bd8-95da-2c1baa7a7386
+Parent: d03c7288-63ff-42dd-bf04-d7ee861e8053
+Template: 6d36df55-60e5-4591-899c-efccaf83579a
+Path: /sitecore/content/Rio Grande/Components/Marquee/Alternate Carousel/Alternate Slide 1
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160316T203924Z
+    - ID: 35d787ae-0f1f-412a-a570-d5a79018ebb8
+      Hint: Image
+      Value: "<image mediaid=\"{73FDA8C0-7DB4-457B-9083-00E7D127C457}\" />"
+    - ID: 8ef3659b-8284-4484-9b7e-6fff97496411
+      Hint: Content
+      Value: |
+        <h1 class="border animation top-to-bottom">Alternate version, triggered by Facebook Campaign</h1>
+        <div class="container">
+        <em class="fa fa-paper-plane animation top-to-bottom delay-1 slow"></em>
+        <h1 class="animation top-to-bottom slow">Backpacks on Sale</h1>
+        </div>
