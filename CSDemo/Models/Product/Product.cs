@@ -200,7 +200,7 @@ namespace CSDemo.Models.Product
         public StockInformation StockInformation { get; set; }
 
         [SitecoreField(Fields.UnitOfMeasure)]
-        public UnitOfMeasure UnitOfMeasure { get; set; }
+        public virtual UnitOfMeasure UnitOfMeasure { get; set; }
 
         public string CurrencyPrice
         {
