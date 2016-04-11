@@ -455,7 +455,9 @@
     <Content Include="Views\Product\FeaturedProducts.cshtml" />
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Config\Include\Rainbow.config" />
@@ -555,15 +557,15 @@
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.DebuLocal.config">
-      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
     <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.foxsean.ca.config">
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
     <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Release.config">
+      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.VM.config">
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
