@@ -1,0 +1,27 @@
+﻿---
+ID: 30bece73-9cbb-46d0-bdec-3939c9cec394
+Parent: b14a8c47-012c-4fdf-a725-3a6ac0562041
+Template: 6d36df55-60e5-4591-899c-efccaf83579a
+Path: /sitecore/content/Rio Grande/Components/Marquee/Carousel/Slide 1
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160226T215339Z
+    - ID: 35d787ae-0f1f-412a-a570-d5a79018ebb8
+      Hint: Image
+      Value: "<image mediaid=\"{7C33EED5-54F2-4799-B65B-55A45044841E}\" />"
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 8ef3659b-8284-4484-9b7e-6fff97496411
+      Hint: Content
+      Value: |
+        <div class="container">
+        <em class="fa fa-paper-plane animation top-to-bottom delay-1 slow"></em>
+        <h1 class="animation top-to-bottom slow">XCMarket</h1>
+        </div>

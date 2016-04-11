@@ -1,0 +1,19 @@
+﻿---
+ID: 03e2304c-ef41-43e5-9e83-ee8d6a40901a
+Parent: bc6494f9-7910-4269-9f08-1db89cd40bde
+Template: 0771b0a2-5bcf-4f87-91de-13474618b6bf
+Path: /sitecore/system/Marketing Control Panel/Profiles/Rio Grande/Pattern Cards
+DB: master
+BranchID: 07624a03-bb2f-45d8-abe1-15e2b1705ff3
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 1100
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160411T190218Z

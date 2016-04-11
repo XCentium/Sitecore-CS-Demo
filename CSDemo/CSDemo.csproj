@@ -356,6 +356,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AJAX\Cart.asmx" />
+    <Content Include="App_Config\Include\zRioGrande\RioGrande.Main.config">
+      <TransformOnBuild>true</TransformOnBuild>
+    </Content>
     <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\bootstrap.min.css" />
     <Content Include="Assets\css\color-switcher.css" />
@@ -458,7 +461,9 @@
     <Content Include="Views\Product\FeaturedProducts.cshtml" />
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Config\Include\Rainbow.config" />
@@ -516,10 +521,6 @@
   <ItemGroup>
     <Content Include="App_Config\Include\zCSDemo\CSDemo.LinkOveride.config" />
     <Content Include="App_Config\Include\zCSDemo\CSDemo.GeneralSearch.config" />
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.Debug.config">
-      <DependentUpon>CSDemo.Main.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
     <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
     <Content Include="Assets\fonts\fontawesome-webfont.eot" />
     <Content Include="Assets\fonts\fontawesome-webfont.ttf" />
@@ -554,19 +555,11 @@
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Debug.config">
-      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.DebuLocal.config">
-      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.foxsean.ca.config">
-      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
     <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Release.config">
+      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.VM.config">
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
@@ -576,6 +569,49 @@
     </None>
     <Content Include="Areas\Social\Views\Connector\Login.cshtml" />
     <Content Include="App_Config\Include\zCSDemo\CSDemo.Social.config" />
+    <Content Include="App_Config\Include\zRioGrande\RioGrander.Serialization.config">
+      <TransformOnBuild>true</TransformOnBuild>
+    </Content>
+    <None Include="App_Config\Include\zRioGrande\RioGrande.Main.csDemo.config">
+      <DependentUpon>RioGrande.Main.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zRioGrande\RioGrande.Main.DebuLocal.config">
+      <DependentUpon>RioGrande.Main.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zRioGrande\RioGrande.Main.Release.config">
+      <DependentUpon>RioGrande.Main.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zRioGrande\RioGrande.Main.Debug.config">
+      <DependentUpon>RioGrande.Main.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zRioGrande\RioGrande.Main.VM.config">
+      <DependentUpon>RioGrande.Main.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zRioGrande\RioGrande.Main.XcCommerce112Demo.config">
+      <DependentUpon>RioGrande.Main.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zRioGrande\RioGrander.Serialization.csDemo.config">
+      <DependentUpon>RioGrander.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zRioGrande\RioGrander.Serialization.Debug.config">
+      <DependentUpon>RioGrander.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zRioGrande\RioGrander.Serialization.VM.config">
+      <DependentUpon>RioGrander.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zRioGrande\RioGrander.Serialization.XcCommerce112Demo.config">
+      <DependentUpon>RioGrander.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
     <None Include="Properties\PublishProfiles\Castle Local.pubxml" />
     <None Include="Properties\PublishProfiles\csDemo.pubxml" />
     <None Include="Properties\PublishProfiles\DebuLocal.pubxml" />

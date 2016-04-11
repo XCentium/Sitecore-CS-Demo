@@ -1,0 +1,20 @@
+﻿---
+ID: 5bf47278-d39c-4f9c-b502-63d7f0e3ef13
+Parent: 9248ebc7-687f-4e57-b065-fbf653df324c
+Template: 3c937b2d-ea5e-4cb0-8fbd-1799bfa30475
+Path: /sitecore/content/Rio Grande/Components/Tags/2016/03/30/19/54/Barney
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160330T195430Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\customer88
+    - ID: b5620c00-330b-479e-9b54-57857040e1e0
+      Hint: Tag Name
+      Value: Barney

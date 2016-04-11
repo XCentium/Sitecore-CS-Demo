@@ -1,0 +1,17 @@
+﻿---
+ID: be89f8be-ceed-46d5-8308-e37340a21c31
+Parent: d03c7288-63ff-42dd-bf04-d7ee861e8053
+Template: 6d36df55-60e5-4591-899c-efccaf83579a
+Path: /sitecore/content/Rio Grande/Components/Marquee/Alternate Carousel/Alternate Slide 2
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160316T204017Z
+    - ID: 35d787ae-0f1f-412a-a570-d5a79018ebb8
+      Hint: Image
+      Value: "<image mediaid=\"{1CD42A06-BDC0-4BB9-A60A-E813295A41C7}\" />"

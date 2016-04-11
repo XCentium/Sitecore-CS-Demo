@@ -1,0 +1,33 @@
+﻿---
+ID: 83bea660-0d1d-4b00-894a-e69ae18bfe52
+Parent: 0da649ba-6a2a-444c-9e77-8357b42bae7f
+Template: b3d2832f-2fbf-4466-9d95-d3a0c6476362
+Path: /sitecore/content/Rio Grande/Home/500
+DB: master
+SharedFields:
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: apps/32x32/notes (1).png
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 300
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160224T221711Z
+    - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
+      Hint: Page Title
+      Value: 500
+    - ID: 55a55b4d-d866-4df7-9821-46e9f9cf3ee3
+      Hint: Title
+      Value: Oh boy...
+    - ID: e982e4f8-0f07-41c1-8456-825a33e1a64a
+      Hint: Content
+      Value: <p>Looks like something hit a snag. A trained team of monkeys has been dispatched to troubleshoot.&nbsp;</p>
+    - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
+      Hint: Meta Description
+      Value: 500 Page

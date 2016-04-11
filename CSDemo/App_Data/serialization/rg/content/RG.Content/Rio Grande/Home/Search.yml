@@ -1,0 +1,20 @@
+﻿---
+ID: 1bbb978c-2e61-4303-b0bb-aaf16d669406
+Parent: 0da649ba-6a2a-444c-9e77-8357b42bae7f
+Template: 81a752a2-d7df-484f-82bb-1857cf636982
+Path: /sitecore/content/Rio Grande/Home/Search
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160224T211900Z
+    - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
+      Hint: Page Title
+      Value: Search
+    - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
+      Hint: Meta Description
+      Value: Search Page
