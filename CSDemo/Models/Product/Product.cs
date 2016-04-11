@@ -199,6 +199,9 @@ namespace CSDemo.Models.Product
 
         public StockInformation StockInformation { get; set; }
 
+        [SitecoreField(Fields.UnitOfMeasure)]
+        public UnitOfMeasure UnitOfMeasure { get; set; }
+
         public string CurrencyPrice
         {
             get
@@ -306,6 +309,7 @@ namespace CSDemo.Models.Product
             public const string FullDescription = "Full Description";
             public const string RelationshipList = "Relationship List";
             public const string DisplayName = "__Display name";
+            public const string UnitOfMeasure = "Unit Of Measure";
             public const string ProductTags = "Product Tags";
         }
 

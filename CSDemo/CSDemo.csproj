@@ -315,6 +315,7 @@
     <Compile Include="Models\GeneralSearch\SearchInput.cs" />
     <Compile Include="Models\Product\ProductMenulistViewModel.cs" />
     <Compile Include="Models\Product\ProductVariant.cs" />
+    <Compile Include="Models\Product\UnitOfMeasure.cs" />
     <Compile Include="Models\Product\VariantBox.cs" />
     <Compile Include="Models\Product\VariantBoxLine.cs" />
     <Compile Include="Models\Product\VariantColor.cs" />
