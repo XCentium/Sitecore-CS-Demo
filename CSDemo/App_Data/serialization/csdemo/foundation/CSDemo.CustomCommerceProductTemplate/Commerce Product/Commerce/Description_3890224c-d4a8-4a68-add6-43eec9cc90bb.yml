@@ -1,0 +1,17 @@
+﻿---
+ID: 3890224c-d4a8-4a68-add6-43eec9cc90bb
+Parent: 616cad27-50c7-424b-b907-4b929cd9fc29
+Template: 455a3e98-a627-4b40-8035-e683a0331ac7
+Path: /sitecore/templates/Commerce/Catalog/Commerce Product/Commerce/Description
+DB: master
+SharedFields:
+- ID: be351a73-fcb0-4213-93fa-c302d8ab4f51
+  Hint: Shared
+  Value: 0
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Value: 20160411T213459:635960072990836630Z

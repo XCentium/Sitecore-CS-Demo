@@ -4,15 +4,18 @@ using System.Linq;
 using System.Web;
 using CSDemo.Contracts.Product;
 using Glass.Mapper.Sc.Configuration.Attributes;
+using Sitecore.Data.Items;
 
 namespace CSDemo.Models.Product
 {
-    [SitecoreType(TemplateId = "{6DE0426C-E5D4-4E7B-879D-2B88DA56771A}", AutoMap = true)]
+    [SitecoreType(AutoMap = true)]
     public class UnitOfMeasure : IUnitOfMeasure
     {
+        public virtual Guid ID { get; set; }
+
         public virtual string Type { get; set; }
 
-        [SitecoreChildren(InferType = true)]
-        public virtual IEnumerable<UnitOfMeasureEnumeration> Enumerations { get; set; }
+        [SitecoreChildren]
+        public virtual IEnumerable<Item> Enumerations { get; set; }
     }
 }

@@ -1,0 +1,21 @@
+﻿---
+ID: 33519b28-c0f0-494a-97ae-fcadff87b106
+Parent: 403fa399-538f-47da-a08b-bf071596cdb9
+Template: 9339907a-b401-4367-98c8-f63d5562d994
+Path: /sitecore/content/CSDemo/Components/Units Of Measure/Feet/Three Quarters
+DB: master
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 300
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160411T214838Z
+    - ID: f30d82f8-eb68-42f2-be35-05ae64a1edb3
+      Hint: Value
+      Value: 3/4

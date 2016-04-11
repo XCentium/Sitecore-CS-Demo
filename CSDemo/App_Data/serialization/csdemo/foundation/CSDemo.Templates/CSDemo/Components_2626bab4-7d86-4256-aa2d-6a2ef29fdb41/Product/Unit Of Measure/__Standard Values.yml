@@ -4,11 +4,19 @@ Parent: 6de0426c-e5d4-4e7b-879d-2b88da56771a
 Template: 6de0426c-e5d4-4e7b-879d-2b88da56771a
 Path: /sitecore/templates/CSDemo/Components/Product/Unit Of Measure/__Standard Values
 DB: master
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Type: TreelistEx
+  Value: {9339907A-B401-4367-98C8-F63D5562D994}
 Languages:
 - Language: en
   Versions:
   - Version: 1
     Fields:
+    - ID: 1bef1f1c-28b6-4868-afa3-1ee24e941d50
+      Hint: Type
+      Value: $name
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
       Value: 20160411T165901Z
