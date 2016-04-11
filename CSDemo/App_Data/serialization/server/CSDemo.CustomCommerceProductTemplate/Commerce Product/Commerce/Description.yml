@@ -37,10 +37,10 @@ SharedFields:
   Value: Single-Line Text
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
-  Value: 24
+  Value: 15
 - ID: be351a73-fcb0-4213-93fa-c302d8ab4f51
   Hint: Shared
-  Value: 0
+  Value: 
 - ID: d8a78e27-f87f-409b-a4df-d69335dd466f
   Hint: Base Property
   Value: 1

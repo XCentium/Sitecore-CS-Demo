@@ -1,0 +1,14 @@
+﻿---
+ID: a32f95de-bf3e-4db6-8ef9-3002ae38791e
+Parent: 0d03863d-d1f6-4299-a675-e9f707f1119f
+Template: 8c5ead00-5f68-4310-ab0c-84f283b5ee0a
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CSDemo/XCentiumCSDemo Abandoned Carts/Initial State/Has email/Send Social Message
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160408T202003Z

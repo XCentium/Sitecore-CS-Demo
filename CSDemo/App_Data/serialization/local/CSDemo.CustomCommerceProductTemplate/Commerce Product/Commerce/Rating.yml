@@ -1,5 +1,5 @@
 ﻿---
-ID: e6adfd22-75ae-4315-8073-ee8b0e89f0ea
+ID: 0a17d49b-90b3-4a3d-9a05-b1a788574d7c
 Parent: 616cad27-50c7-424b-b907-4b929cd9fc29
 Template: 455a3e98-a627-4b40-8035-e683a0331ac7
 Path: /sitecore/templates/Commerce/Catalog/Commerce Product/Commerce/Rating
@@ -40,7 +40,7 @@ SharedFields:
   Value: 77
 - ID: be351a73-fcb0-4213-93fa-c302d8ab4f51
   Hint: Shared
-  Value: 0
+  Value: 
 - ID: d8a78e27-f87f-409b-a4df-d69335dd466f
   Hint: Base Property
   Value: 0
@@ -49,22 +49,8 @@ SharedFields:
   Value: 1
 Languages:
 - Language: de-DE
-  Fields:
-  - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
-    Hint: Title
-    Value: Bewertung
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
-    Hint: __Display name
-    Value: Bewertung
   Versions:
   - Version: 1
-    Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
-      Hint: __Created
-      Value: 20160323T070354Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
-      Hint: __Created by
-      Value: default\Anonymous
 - Language: en
   Fields:
   - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
@@ -78,27 +64,13 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160323T070354Z
+      Value: 20160409T035042Z
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
       Value: default\Anonymous
 - Language: fr-FR
-  Fields:
-  - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
-    Hint: Title
-    Value: Classement
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
-    Hint: __Display name
-    Value: Classement
   Versions:
   - Version: 1
-    Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
-      Hint: __Created
-      Value: 20160323T070354Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
-      Hint: __Created by
-      Value: default\Anonymous
 - Language: ja-JP
   Fields:
   - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
@@ -112,7 +84,7 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160323T070354Z
+      Value: 20160409T035043Z
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
       Value: default\Anonymous

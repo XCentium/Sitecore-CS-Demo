@@ -153,10 +153,33 @@
                                                 <div class="col-md-3 col-sm-4">
                                                     <div class="product-quantity clearfix">
                                                         <a class="btn btn-default" id="qty-minus">-</a>
-                                                        <input type="text" class="form-control" id="Quantity" value="1" />
+                                                        <input type="text" class="form-control" id="Quantity" value="1"/>
                                                         <a class="btn btn-default" id="qty-plus">+</a>
                                                     </div>
                                                 </div>
+                                                @if (Model.UnitOfMeasure != null)
+                                                {
+                                                    <div class="col-md-3 col-sm-4">
+                                                        <div class="product-size">
+                                                            <div class="form-inline">
+                                                                <div class="form-group">
+                                                                    <label>Size:</label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <select name="ProductSize" id="ProductSize" data-objid="#ProductSize"
+                                                                            data-num="@Model.VariantProdId"
+                                                                            onchange="DoProductSizeChange('#ProductSize', '@Model.VariantProdId')" 
+                                                                            class="form-control ProductSize">
+                                                                        @foreach (var e in Model.UnitOfMeasure.Enumerations)
+                                                                        {
+                                                                            <option value="@e.Value">@e.Value</option>
+                                                                        }
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
                                                 @if (Model.VariantSize != null)
                                                 {
                                                     <div class="col-md-3 col-sm-4">
