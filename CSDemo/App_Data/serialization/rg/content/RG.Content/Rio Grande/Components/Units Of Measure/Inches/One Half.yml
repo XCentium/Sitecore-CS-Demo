@@ -1,13 +1,13 @@
 ﻿---
-ID: 33519b28-c0f0-494a-97ae-fcadff87b106
-Parent: 403fa399-538f-47da-a08b-bf071596cdb9
+ID: d6c826bd-6fe3-4000-b820-8eaaddfc9308
+Parent: 316382bc-c5c6-42cb-8197-7e6d2b6d9a2a
 Template: 9339907a-b401-4367-98c8-f63d5562d994
-Path: /sitecore/content/CSDemo/Components/Units Of Measure/Feet/Three Quarters
+Path: /sitecore/content/Rio Grande/Components/Units Of Measure/Inches/One Half
 DB: master
 SharedFields:
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
-  Value: 300
+  Value: 200
 Languages:
 - Language: en
   Versions:
@@ -15,7 +15,7 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160411T214838Z
+      Value: 20160411T215028Z
     - ID: f30d82f8-eb68-42f2-be35-05ae64a1edb3
       Hint: Value
-      Value: 3/4
+      Value: 1/2

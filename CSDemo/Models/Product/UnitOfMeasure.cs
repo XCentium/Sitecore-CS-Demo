@@ -16,6 +16,6 @@ namespace CSDemo.Models.Product
         public virtual string Type { get; set; }
 
         [SitecoreChildren]
-        public virtual IEnumerable<Item> Enumerations { get; set; }
+        public virtual IEnumerable<UnitOfMeasureEnumeration> Units { get; set; }
     }
 }

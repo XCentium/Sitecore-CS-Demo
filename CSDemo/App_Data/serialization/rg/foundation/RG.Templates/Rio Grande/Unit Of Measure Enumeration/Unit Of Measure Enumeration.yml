@@ -1,8 +1,8 @@
 ﻿---
-ID: 2f1dd735-042a-417b-a260-548c1e8d28f0
+ID: 083318a7-ac1e-46c4-88a6-e59e7224ddf2
 Parent: 9339907a-b401-4367-98c8-f63d5562d994
-Template: 9339907a-b401-4367-98c8-f63d5562d994
-Path: /sitecore/templates/CSDemo/Components/Product/Unit Of Measure Enumeration/__Standard Values
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Rio Grande/Unit Of Measure Enumeration/Unit Of Measure Enumeration
 DB: master
 Languages:
 - Language: en
@@ -11,7 +11,7 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160411T165910Z
+      Value: 20160411T070515Z
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
       Value: sitecore\admin

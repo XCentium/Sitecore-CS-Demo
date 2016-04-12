@@ -150,13 +150,44 @@
                                     {
                                         <div class="product-form clearfix">
                                             <div class="row row-no-padding">
-                                                <div class="col-md-3 col-sm-4">
-                                                    <div class="product-quantity clearfix">
-                                                        <a class="btn btn-default" id="qty-minus">-</a>
-                                                        <input type="text" class="form-control" id="Quantity" value="1"/>
-                                                        <a class="btn btn-default" id="qty-plus">+</a>
+                                                @if (Model.UnitOfMeasure != null)
+                                                {
+                                                    var uomLabel = Model.UnitOfMeasure.Type ?? "Unit Of Measure";
+                                                    <div class="col-md-3 col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Order in @uomLabel :</label>
+                                                        </div>
+                                                        <div class="product-quantity clearfix">
+                                                            <a class="btn btn-default" id="qty-minus">-</a>
+                                                            <input type="text" class="form-control" id="Quantity" value="1" />
+                                                            <a class="btn btn-default" id="qty-plus">+</a>
+                                                        </div>
+                                                        <div>
+                                                            <select name="ProductSize"
+                                                                    id="ProductSize"
+                                                                    data-objid="#ProductSize"
+                                                                    data-num="@Model.VariantProdId"
+                                                                    @*onchange="DoProductSizeChange('#ProductSize', '@Model.VariantProdId')"*@
+                                                                    class="form-control" style="width: 100px">
+                                                                @foreach (var uom in Model.UnitOfMeasure.Units)
+                                                                {
+                                                                    <option value="@uom.Value">@uom.Value</option>
+                                                                }
+                                                            </select>
+
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="col-md-3 col-sm-4">
+                                                        <div class="product-quantity clearfix">
+                                                            <a class="btn btn-default" id="qty-minus">-</a>
+                                                            <input type="text" class="form-control" id="Quantity" value="1" />
+                                                            <a class="btn btn-default" id="qty-plus">+</a>
+                                                        </div>
+                                                    </div>
+                                                }
                                                 @if (Model.VariantSize != null)
                                                 {
                                                     <div class="col-md-3 col-sm-4">
@@ -211,8 +242,11 @@
                                                         foreach (var prodVariant in Model.ProductVariants)
                                                         {
                                                             clickCMD = "out-of-stock";
-                                                            if (prodVariant.StockQuantity > 0) { clickCMD = "add-to-cart"; }
-                                                            <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary variant_btn variant_btn_@prodVariant.VariantId @clickCMD" style="display:none"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                            if (prodVariant.StockQuantity > 0)
+                                                            {
+                                                                clickCMD = "add-to-cart";
+                                                            }
+                                                            <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary variant_btn variant_btn_@prodVariant.VariantId @clickCMD" style="display: none"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                         }
                                                     }
                                                 </div>
