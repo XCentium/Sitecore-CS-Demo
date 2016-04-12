@@ -273,12 +273,18 @@
                             <a href="#description" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="true">Description</a>
                         </li>
                         <li role="presentation" class="">
+                            <a href="#moreinfo" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">More Info</a>
+                        </li>
+                        <li role="presentation" class="">
                             <a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">Reviews</a>
                         </li>
                     </ul>
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="description">
                             @Editable(Model, x => x.FullDescription)
+                        </div>
+                        <div role="tabpanel" class="tab-pane in" id="moreinfo">
+                            @Editable(Model, x => x.MoreInfo)
                         </div>
                         <div role="tabpanel" class="tab-pane in" id="reviews">
                             <div class="comments-reviews">

@@ -39,97 +39,9 @@ namespace CSDemo.Models.Product
     [SitecoreType(AutoMap = true)]
     public class Product : IProduct, IEditableBase
     {
-        #region Properties
-
-        [SitecoreId]
-        public virtual Guid ID { get; set; }
-
-        [SitecoreInfo(SitecoreInfoType.Path)]
-        public virtual string Path { get; set; }
-
-        //[SitecoreInfo(SitecoreInfoType.DisplayName)]
-        [SitecoreField(Fields.DisplayName)]
-        public virtual string Title { get; set; }
-
-        [SitecoreInfo(SitecoreInfoType.Name)]
-        public virtual string ProductId { get; set; }
-
-        [SitecoreField(Fields.DateOfIntroduction)]
-        public virtual DateTime DateOfIntroduction { get; set; }
-
-        [SitecoreField(Fields.FullDescription)]
-        public virtual string FullDescription { get; set; }
-
-        [SitecoreField(Fields.Size)]
-        public virtual string Size { get; set; }
-
-        [SitecoreField(Fields.Images)]
-        public virtual IEnumerable<Image> Images { get; set; }
-
-        [SitecoreField(Fields.CatalogName)]
-        public virtual string CatalogName { get; set; }
-
-        [SitecoreField(Fields.Price)]
-        public virtual decimal Price { get; set; }
-
-        public virtual decimal SalePrice { get; set; }
-
-        [SitecoreField(Fields.DefinitionName)]
-        public virtual string DefinitionName { get; set; }
-
-        [SitecoreField(Fields.Description)]
-        public virtual string Description { get; set; }
-
-        public bool IsOnSale
-        {
-            get
-            {
-                return SalePrice > 0;
-            }
-        }
-
-        [SitecoreInfo(SitecoreInfoType.Url)]
-        public virtual string Url { get; set; }
-
-        [SitecoreField(Fields.IsNew)]
-        public virtual bool IsNew { get; set; }
-
-        [SitecoreField(Fields.ParentCategories)]
-        public IEnumerable<Item> Categories { get; set; }
-
-        [SitecoreField(Fields.Rating)]
-        public virtual decimal Rating { get; set; }
-
-        [SitecoreField(Fields.SortFields)]
-        public IEnumerable<Item> SortFields { get; set; }
-
-        [SitecoreField(Fields.ItemsPerPage)]
-        public virtual string ItemsPerPage { get; set; }
-
-        [SitecoreField(Fields.Variants)]
-        public virtual string Variants { get; set; }
-
-        [SitecoreField(Fields.Brand)]
-        public virtual string Brand { get; set; }
-
-        public virtual string FirstImage
-        {
-
-            get
-            {
-
-                return this.Images.ElementAt(0).Src;
-            }
-
-        }
-
-        public virtual string DefaultVariant { get; set; }
+        #region Calculated Properties
 
         public IEnumerable<ProductVariant> ProductVariants { get; set; }
-
-        public virtual VariantBox VariantBox { get; set; }
-
-        public virtual VariantSize VariantSize { get; set; }
 
         public IEnumerable<VariantColor> VariantColors { get; set; }
 
@@ -194,13 +106,7 @@ namespace CSDemo.Models.Product
             }
         }
 
-        [SitecoreField(Fields.ProductTags)]
-        public IEnumerable<ProductTag> ProductTags { get; set; }
-
         public StockInformation StockInformation { get; set; }
-
-        [SitecoreField(Fields.UnitOfMeasure)]
-        public virtual UnitOfMeasure UnitOfMeasure { get; set; }
 
         public string CurrencyPrice
         {
@@ -286,7 +192,108 @@ namespace CSDemo.Models.Product
 
         #endregion
 
-        #region Fields
+        #region AutoMapped Properties
+
+        [SitecoreId]
+        public virtual Guid ID { get; set; }
+
+        [SitecoreInfo(SitecoreInfoType.Path)]
+        public virtual string Path { get; set; }
+
+        //[SitecoreInfo(SitecoreInfoType.DisplayName)]
+        [SitecoreField(Fields.DisplayName)]
+        public virtual string Title { get; set; }
+
+        [SitecoreInfo(SitecoreInfoType.Name)]
+        public virtual string ProductId { get; set; }
+
+        [SitecoreField(Fields.DateOfIntroduction)]
+        public virtual DateTime DateOfIntroduction { get; set; }
+
+        [SitecoreField(Fields.FullDescription)]
+        public virtual string FullDescription { get; set; }
+
+        [SitecoreField(Fields.MoreInfo)]
+        public virtual string MoreInfo { get; set; }
+
+        [SitecoreField(Fields.Size)]
+        public virtual string Size { get; set; }
+
+        [SitecoreField(Fields.Images)]
+        public virtual IEnumerable<Image> Images { get; set; }
+
+        [SitecoreField(Fields.CatalogName)]
+        public virtual string CatalogName { get; set; }
+
+        [SitecoreField(Fields.Price)]
+        public virtual decimal Price { get; set; }
+
+        public virtual decimal SalePrice { get; set; }
+
+        [SitecoreField(Fields.DefinitionName)]
+        public virtual string DefinitionName { get; set; }
+
+        [SitecoreField(Fields.Description)]
+        public virtual string Description { get; set; }
+
+        public bool IsOnSale
+        {
+            get
+            {
+                return SalePrice > 0;
+            }
+        }
+
+        [SitecoreInfo(SitecoreInfoType.Url)]
+        public virtual string Url { get; set; }
+
+        [SitecoreField(Fields.IsNew)]
+        public virtual bool IsNew { get; set; }
+
+        [SitecoreField(Fields.ParentCategories)]
+        public IEnumerable<Item> Categories { get; set; }
+
+        [SitecoreField(Fields.Rating)]
+        public virtual decimal Rating { get; set; }
+
+        [SitecoreField(Fields.SortFields)]
+        public IEnumerable<Item> SortFields { get; set; }
+
+        [SitecoreField(Fields.ItemsPerPage)]
+        public virtual string ItemsPerPage { get; set; }
+
+        [SitecoreField(Fields.Variants)]
+        public virtual string Variants { get; set; }
+
+        [SitecoreField(Fields.Brand)]
+        public virtual string Brand { get; set; }
+
+        public virtual string FirstImage
+        {
+
+            get
+            {
+
+                return this.Images.ElementAt(0).Src;
+            }
+
+        }
+
+        public virtual string DefaultVariant { get; set; }
+
+        public virtual VariantBox VariantBox { get; set; }
+
+        public virtual VariantSize VariantSize { get; set; }
+
+        [SitecoreField(Fields.UnitOfMeasure)]
+        public virtual UnitOfMeasure UnitOfMeasure { get; set; }
+
+        [SitecoreField(Fields.ProductTags)]
+        public virtual IEnumerable<ProductTag> ProductTags { get; set; }
+
+        #endregion
+
+        #region Fieldname Mappings
 
         public struct Fields
         {
@@ -307,6 +314,7 @@ namespace CSDemo.Models.Product
             public const string Brand = "Brand";
             public const string ListPrice = "ListPrice";
             public const string FullDescription = "Full Description";
+            public const string MoreInfo = "More Info";
             public const string RelationshipList = "Relationship List";
             public const string DisplayName = "__Display name";
             public const string UnitOfMeasure = "Unit Of Measure";
