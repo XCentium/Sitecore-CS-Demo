@@ -1,8 +1,8 @@
 ﻿---
 ID: 6de0426c-e5d4-4e7b-879d-2b88da56771a
-Parent: f0fd3dce-3929-4aed-b717-bf8b5257125d
+Parent: 1721f64f-1032-48a0-ba14-de6bc898bdea
 Template: ab86861a-6030-46c5-b394-e8f99e8b87db
-Path: /sitecore/templates/Rio Grande/Unit Of Measure
+Path: /sitecore/templates/Rio Grande/Components/Unit Of Meausre/Unit Of Measure
 DB: master
 SharedFields:
 - ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
