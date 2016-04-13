@@ -17,6 +17,7 @@ namespace CSDemo.Contracts.Product
         string ProductId { get; set; }
         DateTime DateOfIntroduction { get; set; }
         string FullDescription { get; set; }
+        string MoreInfo { get; set; }
         string Size { get; set; }
         IEnumerable<Image> Images { get; set; }
         string CatalogName { get; set; }

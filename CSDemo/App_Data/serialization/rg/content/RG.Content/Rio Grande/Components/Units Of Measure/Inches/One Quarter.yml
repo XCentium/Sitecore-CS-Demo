@@ -1,0 +1,17 @@
+﻿---
+ID: 2c996419-4c13-45ec-b0a1-f449bfc6d23e
+Parent: 316382bc-c5c6-42cb-8197-7e6d2b6d9a2a
+Template: 9339907a-b401-4367-98c8-f63d5562d994
+Path: /sitecore/content/Rio Grande/Components/Units Of Measure/Inches/One Quarter
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160411T215014Z
+    - ID: f30d82f8-eb68-42f2-be35-05ae64a1edb3
+      Hint: Value
+      Value: 1/4

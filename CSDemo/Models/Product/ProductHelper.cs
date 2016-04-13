@@ -9,7 +9,6 @@ using Glass.Mapper.Sc;
 using Sitecore;
 using Sitecore.Analytics;
 using Sitecore.Analytics.Data;
-using Sitecore.Analytics.Tracking;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines;
 using Sitecore.Commerce.Entities.Carts;
@@ -21,6 +20,7 @@ using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Links;
+using Convert = System.Convert;
 
 #endregion
 
@@ -180,7 +180,7 @@ namespace CSDemo.Models.Product
                 {
                     var catChildren = catItem.GetChildren().Select(x => x.GlassCast<Product>()).ToList();
                     model.TotalItems = catChildren.Count();
-                    model.TotalPages = (long)Math.Ceiling((double)model.TotalItems / model.PageSize);
+                    model.TotalPages = (long) Math.Ceiling((double) model.TotalItems/model.PageSize);
                     // do sorting
                     if (!string.IsNullOrEmpty(model.OrderBy))
                     {
@@ -207,7 +207,7 @@ namespace CSDemo.Models.Product
                     }
                     // do paging
                     category.Products = catChildren
-                        .Skip(model.PageSize * (model.CurrentPage - 1))
+                        .Skip(model.PageSize*(model.CurrentPage - 1))
                         .Take(model.PageSize);
                     // Process ProductVariants
                     foreach (var product in category.Products)
@@ -251,9 +251,6 @@ namespace CSDemo.Models.Product
                     variantBoxLine.Price =
                         decimal.Parse(productVariant.ListPrice)
                             .ToString(Constants.Products.CurrencyDecimalFormat, cultureInfo);
-
-
-
                     //if (productVariant.Variant_Images != null && productVariant.Variant_Images.Count() > 0)
                     //{
                     //    variantBoxLine.Images =
@@ -423,7 +420,9 @@ namespace CSDemo.Models.Product
                 {
                     var queryable = context.GetQueryable<SearchResultItem>()
                         .Where(x => x.Language == Context.Language.Name);
-                    return queryable.Where(x => x.Parent == ID.Parse(parentID) && x.TemplateName == "GeneralCategory").ToList();
+                    return
+                        queryable.Where(x => x.Parent == ID.Parse(parentID) && x.TemplateName == "GeneralCategory")
+                            .ToList();
                 }
             }
             catch (Exception ex)
@@ -453,7 +452,6 @@ namespace CSDemo.Models.Product
                             x =>
                                 string.Equals(x.Name, itemName, StringComparison.CurrentCultureIgnoreCase) &&
                                 x.TemplateName == "GeneralCategory").ItemId.ToString();
-
                 }
             }
             catch (Exception ex)
@@ -461,7 +459,6 @@ namespace CSDemo.Models.Product
                 Log.Error(ex.StackTrace, ex);
             }
             return string.Empty;
-
             //                                 (x.TemplateName == "GeneralCategory")).ToString();
             //try
             //{
@@ -635,7 +632,7 @@ namespace CSDemo.Models.Product
                 orderLine.UnitPrice = line.Product.Price.Amount.ToString(Constants.Products.CurrencyFormat);
                 orderLine.Quantity = line.Quantity;
                 orderLine.SubTotal =
-                    (line.Product.Price.Amount * line.Quantity).ToString(Constants.Products.CurrencyFormat);
+                    (line.Product.Price.Amount*line.Quantity).ToString(Constants.Products.CurrencyFormat);
                 var product = line.Product as CommerceCartProduct;
                 orderLine.ProductName = product.DisplayName;
                 var sItem = GetItemByProductID(product.ProductId);
@@ -684,51 +681,54 @@ namespace CSDemo.Models.Product
             {
                 var productItem = productResult.GetItem();
                 product = productItem.GlassCast<Product>();
-                var ProductVariants = productItem.GetChildren().Select(x => x.GlassCast<ProductVariant>()).ToList();
-
+                var productVariants = productItem.GetChildren().Select(x => x.GlassCast<ProductVariant>()).ToList();
                 // Update Images and stockInfo in ProductVariant
-                if (ProductVariants.Count() > 0)
+                if (productVariants.Any())
                 {
-                    List<ProductVariant> theVariants = new List<ProductVariant>();
-
-                    for (var i = 0; i < ProductVariants.Count(); i++)
+                    var theVariants = new List<ProductVariant>();
+                    for (var i = 0; i < productVariants.Count(); i++)
                     {
-                        ProductVariants[i] = UpdateVariantProperties(ProductVariants[i], product, cartHelper);
-                        theVariants.Add(ProductVariants[i]);
+                        productVariants[i] = UpdateVariantProperties(productVariants[i], product, cartHelper);
+                        theVariants.Add(productVariants[i]);
                     }
                     product.ProductVariants = theVariants;
                 }
-
-
-                if (productItem.HasChildren) { BuildUIVariants(product); }
-
-
-
+                if (productItem.HasChildren)
+                {
+                    BuildUIVariants(product);
+                }
                 // CSDEMO#99
                 if (!string.IsNullOrEmpty(product.DefaultVariant))
                 {
-                    product.StockInformation = cartHelper.GetProductStockInformation(product.ProductId, product.CatalogName, product.DefaultVariant);
+                    product.StockInformation = cartHelper.GetProductStockInformation(product.ProductId,
+                        product.CatalogName, product.DefaultVariant);
                 }
                 else
                 {
-                    product.StockInformation = cartHelper.GetProductStockInformation(product.ProductId, product.CatalogName);
+                    product.StockInformation = cartHelper.GetProductStockInformation(product.ProductId,
+                        product.CatalogName);
                 }
             }
             return product;
         }
 
-        private static ProductVariant UpdateVariantProperties(ProductVariant productVariant, Product product, CartHelper cartHelper)
+        private static ProductVariant UpdateVariantProperties(ProductVariant productVariant, Product product,
+            CartHelper cartHelper)
         {
-            if (productVariant.Variant_Images == null || productVariant.Variant_Images.Count() == 0) { productVariant.Variant_Images = product.Images.Select(x => x); }
-
-            productVariant.StockInformation = cartHelper.GetProductStockInformation(product.ProductId, product.CatalogName, productVariant.VariantId);
-
+            if (productVariant.Variant_Images == null || productVariant.Variant_Images.Count() == 0)
+            {
+                productVariant.Variant_Images = product.Images.Select(x => x);
+            }
+            productVariant.StockInformation = cartHelper.GetProductStockInformation(product.ProductId,
+                product.CatalogName, productVariant.VariantId);
             if (productVariant.StockInformation != null)
             {
-                productVariant.StockLabel = productVariant.StockInformation != null && productVariant.StockInformation.Count > 0 ? string.Format("{0:#,###0} In Stock", System.Convert.ToInt32(productVariant.StockInformation.Count)) : "Out Of Stock";
-                productVariant.StockQuantity = System.Convert.ToInt32(productVariant.StockInformation.Count);
+                productVariant.StockLabel = productVariant.StockInformation != null &&
+                                            productVariant.StockInformation.Count > 0
+                    ? string.Format("{0:#,###0} In Stock", Convert.ToInt32(productVariant.StockInformation.Count))
+                    : "Out Of Stock";
+                productVariant.StockQuantity = Convert.ToInt32(productVariant.StockInformation.Count);
             }
-
             return productVariant;
         }
 
@@ -738,8 +738,7 @@ namespace CSDemo.Models.Product
         /// <returns></returns>
         internal static SearchResultItem GetItemByName(string productID)
         {
-            //
-            var index = ContentSearchManager.GetIndex(Constants.WebIndex);
+            var index = ContentSearchManager.GetIndex($"sitecore_{Sitecore.Context.Database}_index");
             try
             {
                 var culture = Context.Language.CultureInfo;

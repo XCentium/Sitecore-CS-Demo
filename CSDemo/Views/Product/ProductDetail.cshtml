@@ -153,33 +153,10 @@
                                                 <div class="col-md-3 col-sm-4">
                                                     <div class="product-quantity clearfix">
                                                         <a class="btn btn-default" id="qty-minus">-</a>
-                                                        <input type="text" class="form-control" id="Quantity" value="1"/>
+                                                        <input type="text" class="form-control" id="Quantity" value="1" />
                                                         <a class="btn btn-default" id="qty-plus">+</a>
                                                     </div>
                                                 </div>
-                                                @if (Model.UnitOfMeasure != null)
-                                                {
-                                                    @*<div class="col-md-3 col-sm-4">
-                                                        <div class="product-size">
-                                                            <div class="form-inline">
-                                                                <div class="form-group">
-                                                                    <label>Size:</label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <select name="ProductSize" id="ProductSize" data-objid="#ProductSize"
-                                                                            data-num="@Model.VariantProdId"
-                                                                            onchange="DoProductSizeChange('#ProductSize', '@Model.VariantProdId')" 
-                                                                            class="form-control ProductSize">
-                                                                        @foreach (var e in Model.UnitOfMeasure.Enumerations)
-                                                                        {
-                                                                            <option value="@e.Value">@e.Value</option>
-                                                                        }
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>*@
-                                                }
                                                 @if (Model.VariantSize != null)
                                                 {
                                                     <div class="col-md-3 col-sm-4">
@@ -234,8 +211,11 @@
                                                         foreach (var prodVariant in Model.ProductVariants)
                                                         {
                                                             clickCMD = "out-of-stock";
-                                                            if (prodVariant.StockQuantity > 0) { clickCMD = "add-to-cart"; }
-                                                            <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary variant_btn variant_btn_@prodVariant.VariantId @clickCMD" style="display:none"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                            if (prodVariant.StockQuantity > 0)
+                                                            {
+                                                                clickCMD = "add-to-cart";
+                                                            }
+                                                            <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary variant_btn variant_btn_@prodVariant.VariantId @clickCMD" style="display: none"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                         }
                                                     }
                                                 </div>
@@ -262,12 +242,18 @@
                             <a href="#description" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="true">Description</a>
                         </li>
                         <li role="presentation" class="">
+                            <a href="#moreinfo" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">More Info</a>
+                        </li>
+                        <li role="presentation" class="">
                             <a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">Reviews</a>
                         </li>
                     </ul>
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="description">
                             @Editable(Model, x => x.FullDescription)
+                        </div>
+                        <div role="tabpanel" class="tab-pane in" id="moreinfo">
+                            @Editable(Model, x => x.MoreInfo)
                         </div>
                         <div role="tabpanel" class="tab-pane in" id="reviews">
                             <div class="comments-reviews">

@@ -293,6 +293,8 @@
     <Compile Include="Models\Product\Category.cs" />
     <Compile Include="Contracts\Product\IFeaturedCategories.cs" />
     <Compile Include="Contracts\Product\IPersonalizedProducts.cs" />
+    <Compile Include="Contracts\Product\IUnitOfMeasure.cs" />
+    <Compile Include="Contracts\Product\IUnitOfMeasureEnumeration.cs" />
     <Compile Include="Models\Product\NotificationSigneupInput.cs" />
     <Compile Include="Models\Product\PaginationViewModel.cs" />
     <Compile Include="Models\Product\PersonalizedProducts.cs" />
@@ -316,6 +318,7 @@
     <Compile Include="Models\Product\ProductMenulistViewModel.cs" />
     <Compile Include="Models\Product\ProductVariant.cs" />
     <Compile Include="Models\Product\UnitOfMeasure.cs" />
+    <Compile Include="Models\Product\UnitOfMeasureEnumeration.cs" />
     <Compile Include="Models\Product\VariantBox.cs" />
     <Compile Include="Models\Product\VariantBoxLine.cs" />
     <Compile Include="Models\Product\VariantColor.cs" />
