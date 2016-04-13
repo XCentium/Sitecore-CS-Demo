@@ -8,7 +8,8 @@ namespace CSDemo.Configuration
     {
         public static string GetSiteSettingInfo(string suffix)
         {
-            var catalogName = Settings.GetSetting($"Site_{Context.Site}_{suffix}");
+            var setting = $"Site_{Context.Site.Name}_{suffix}";
+            var catalogName = Settings.GetSetting(setting);
             return catalogName.IsEmptyOrNull() ? Settings.GetSetting($"Site_XCentiumCSDemo_{suffix}") : catalogName;
         }
     }
