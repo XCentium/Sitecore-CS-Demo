@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CSDemo.Configuration;
 using CSDemo.Models.Account;
 using CSDemo.Models.Checkout.Cart;
 using Glass.Mapper.Sc;
@@ -170,7 +171,7 @@ namespace CSDemo.Models.Product
             var categoryProductVM = new CategoryProductViewModel();
             categoryProductVM.PaginationViewModel = model;
             var category = new Category();
-            categoryProductVM.CategoryMenulist = GetCategoryMenuList(Constants.Products.CategoriesParentId);
+            categoryProductVM.CategoryMenulist = GetCategoryMenuList(ConfigurationHelper.GetSiteSettingInfo("CategoryParent"));
             var searchedItem = GetSearchResultItemById(model.CategoryID);
             if (searchedItem != null)
             {

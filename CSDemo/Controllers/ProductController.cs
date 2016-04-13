@@ -118,7 +118,7 @@ namespace CSDemo.Controllers
                 model.Category = categoryName;
                 if (!string.IsNullOrEmpty(categoryName))
                 {
-                    var categoryID = ProductHelper.GetItemIDFromName(categoryName, Constants.Products.CategoriesParentId);
+                    var categoryID = ProductHelper.GetItemIDFromName(categoryName, ConfigurationHelper.GetSiteSettingInfo("CategoryParent"));
 
                     if (!string.IsNullOrEmpty(categoryID))
                     {
