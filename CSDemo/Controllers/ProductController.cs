@@ -215,7 +215,7 @@ namespace CSDemo.Controllers
                 var ids = cookie.Value.Split(',').ToList();
                 foreach (var id in ids.AsEnumerable().Reverse())
                 {
-                    var item = Context.Database.GetItem(ConfigurationHelper.GetSiteSettingInfo("CatalogListing"));
+                    var item = Context.Database.GetItem(ConfigurationHelper.GetSiteSettingInfo("Wildcard"));
                     SearchForProduct(item, id, products);
                     if (products.Count > _maxNumberOfProductsToShow) break;
                 }
