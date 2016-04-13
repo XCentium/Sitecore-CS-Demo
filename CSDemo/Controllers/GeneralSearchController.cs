@@ -19,6 +19,7 @@ using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 using Sitecore.SecurityModel;
 using System;
+using CSDemo.Configuration;
 using Sitecore.ContentSearch.Linq.Utilities;
 
 #endregion
@@ -139,7 +140,7 @@ namespace CSDemo.Controllers
                 SearchQuery = searchKeyword ?? string.Empty,
                 RequiredFacets = searchManager.GetFacetFieldsForItem(_context.GetCurrentItem<Item>()),
                 SortFields = searchManager.GetSortFieldsForItem(_context.GetCurrentItem<Item>()),
-                CatalogName = Constants.Commerce.CatalogName,
+                CatalogName = ConfigurationHelper.GetSiteSettingInfo("Catalog"),
                 ItemsPerPage = pageSize
             };
 

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CSDemo.Configuration;
 using Sitecore;
 using Sitecore.Data;
 using Sitecore.Data.Items;
@@ -30,7 +31,7 @@ namespace CSDemo.SitecorePipelines
         private string GetCategoryUrl(Item categoryItem, UrlOptions options)
         {
             if(Context.Database == null) return base.GetItemUrl(categoryItem, options);
-            var categoriesListingPage = Context.Database.GetItem(Constants.Pages.CategoriesListingPageId);
+            var categoriesListingPage = Context.Database.GetItem(ConfigurationHelper.GetSiteSettingInfo("CategoryListing"));
             if (categoriesListingPage == null) return base.GetItemUrl(categoryItem, options);
             return
                 $"{LinkManager.GetItemUrl(categoriesListingPage)}/{(options.LowercaseUrls ? categoryItem.Name.ToLower() : categoryItem.Name)}";

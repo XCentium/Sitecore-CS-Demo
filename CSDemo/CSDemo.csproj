@@ -242,6 +242,7 @@
     <Compile Include="Configuration\Conditions\ContactEmailCheck.cs" />
     <Compile Include="Configuration\Conditions\LastPurchaseAmountCheck.cs" />
     <Compile Include="Configuration\Conditions\ReturnedVisitorAfterPurchase.cs" />
+    <Compile Include="Configuration\ConfigurationHelper.cs" />
     <Compile Include="Configuration\Facets\ILastOrderTotal.cs" />
     <Compile Include="Configuration\Facets\LastOrderTotal.cs" />
     <Compile Include="Configuration\ItemResolver.cs" />
@@ -307,7 +308,6 @@
     <Compile Include="Models\Marquee\CarouselItem.cs" />
     <Compile Include="Models\Page\Metadata.cs" />
     <Compile Include="Models\Product\GeneralCategory.cs" />
-    <Compile Include="Models\Components.cs" />
     <Compile Include="Models\GeneralSearch\SearchInfo.cs" />
     <Compile Include="Contracts\Product\IGeneralCategory.cs" />
     <Compile Include="Contracts\Product\Parameters\ICategorylistingConfig.cs" />
@@ -325,8 +325,6 @@
     <Compile Include="Models\Product\VariantColorLine.cs" />
     <Compile Include="Models\Product\VariantSize.cs" />
     <Compile Include="Models\Product\VariantSizeLine.cs" />
-    <Compile Include="Models\Settings.cs" />
-    <Compile Include="Models\Site.cs" />
     <Compile Include="Models\GeneralSearch\CustomCommerceSearchResultItem.cs" />
     <Compile Include="Configuration\CommerceProductTags.cs" />
     <Compile Include="Models\Product\ProductTag.cs" />
