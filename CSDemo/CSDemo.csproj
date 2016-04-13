@@ -357,6 +357,7 @@
     <Content Include="App_Config\Include\zRioGrande\RioGrande.Main.config">
       <TransformOnBuild>true</TransformOnBuild>
     </Content>
+    <Content Include="App_Config\Include\zRioGrande\RioGrander.Serialization.config" />
     <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\bootstrap.min.css" />
     <Content Include="Assets\css\color-switcher.css" />
@@ -567,9 +568,6 @@
     </None>
     <Content Include="Areas\Social\Views\Connector\Login.cshtml" />
     <Content Include="App_Config\Include\zCSDemo\CSDemo.Social.config" />
-    <Content Include="App_Config\Include\zRioGrande\RioGrander.Serialization.config">
-      <TransformOnBuild>true</TransformOnBuild>
-    </Content>
     <None Include="App_Config\Include\zRioGrande\RioGrande.Main.csDemo.config">
       <DependentUpon>RioGrande.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
@@ -594,22 +592,18 @@
       <DependentUpon>RioGrande.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="App_Config\Include\zRioGrande\RioGrander.Serialization.csDemo.config">
+    <Content Include="App_Config\Include\zRioGrande\RioGrander.Serialization.csDemo.config">
       <DependentUpon>RioGrander.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zRioGrande\RioGrander.Serialization.Debug.config">
+    </Content>
+    <Content Include="App_Config\Include\zRioGrande\RioGrander.Serialization.Debug.config">
       <DependentUpon>RioGrander.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zRioGrande\RioGrander.Serialization.VM.config">
+    </Content>
+    <Content Include="App_Config\Include\zRioGrande\RioGrander.Serialization.VM.config">
       <DependentUpon>RioGrander.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zRioGrande\RioGrander.Serialization.XcCommerce112Demo.config">
+    </Content>
+    <Content Include="App_Config\Include\zRioGrande\RioGrander.Serialization.XcCommerce112Demo.config">
       <DependentUpon>RioGrander.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
+    </Content>
     <None Include="Properties\PublishProfiles\Castle Local.pubxml" />
     <None Include="Properties\PublishProfiles\csDemo.pubxml" />
     <None Include="Properties\PublishProfiles\DebuLocal.pubxml" />
