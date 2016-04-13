@@ -1,7 +1,7 @@
 ﻿---
 ID: 0da649ba-6a2a-444c-9e77-8357b42bae7f
 Parent: 280eb5ee-86be-444a-ab98-e81bf4ec9705
-Template: 27707ef4-ea14-439a-ba20-dbd16605ae04
+Template: 5e43056e-fa56-4b9d-bc72-b9874ddb3742
 Path: /sitecore/content/Rio Grande/Home
 DB: master
 SharedFields:
@@ -97,6 +97,83 @@ Languages:
   Versions:
   - Version: 1
     Fields:
+    - ID: 04bf00db-f5fb-41f7-8ab7-22408372a981
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s" p:p="1">
+          <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r uid="{546A314C-A42E-4C0F-892F-C6796486247C}">
+              <p:d />
+            </r>
+            <r uid="{AF6A3953-C35E-4517-B345-AC7F3003C6E2}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:ds="{B14A8C47-012C-4FDF-A725-3A6AC0562041}" s:id="{8040BB2A-3983-4156-A3BA-A37A8FE5F6E8}" s:par="" s:ph="page-jumbotron">
+              <rls>
+                <ruleset>
+                  <rule uid="{73D61D55-F927-426A-8F8B-0545F0F98B91}" s:name="Campaign 1">
+                    <conditions>
+                      <condition uid="33FC935BFE63459F8B2B8E65D3607BA2" s:id="{D379525C-4DE6-4738-89ED-60CC0B8F91E5}" s:CampaignId="{0BFFAF94-F523-452A-9F2A-1FA3292D4647}" />
+                    </conditions>
+                    <actions>
+                      <action uid="6E0182CCFED44186BDE11FD4C9BA297E" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{711BF888-CBDB-489D-85FB-CF8BAEBFE375}" />
+                    </actions>
+                  </rule>
+                  <rule uid="{00000000-0000-0000-0000-000000000000}" s:name="Default">
+                    <conditions>
+                      <condition uid="6AFE113D86EC41A4821E1E3E41C762D0" s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                    </conditions>
+                    <actions>
+                      <action uid="35D45B620E31439D996C846E04A93700" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{FEEE5CCA-B864-4AE6-81F0-F30F7C76BBC4}" />
+                    </actions>
+                  </rule>
+                </ruleset>
+              </rls>
+            </r>
+            <r uid="{6729DA82-1F38-4D16-9957-E29D38D34488}" p:after="r[@uid='{AF6A3953-C35E-4517-B345-AC7F3003C6E2}']" s:id="{AB9DF062-ECC5-4FE2-A63B-93971BB0C388}" s:ph="page-body" />
+            <r uid="{D88FBB9E-6A2F-487D-9A0B-D24B401E4E5F}" p:after="r[@uid='{6729DA82-1F38-4D16-9957-E29D38D34488}']" s:id="{1616599D-7D76-4ABD-957B-7DCAC84C01B2}" s:ph="page-body" />
+            <r uid="{89440489-11CE-45B1-8411-08E14ECF5604}" p:after="r[@uid='{D88FBB9E-6A2F-487D-9A0B-D24B401E4E5F}']" s:id="{839E8618-D080-4802-A0E8-BE682C3AF542}" s:ph="page-body" />
+            <r uid="{A385C37F-E0C8-4638-A692-2A78D53281E9}" p:after="r[@uid='{89440489-11CE-45B1-8411-08E14ECF5604}']" s:id="{27FCD6DB-011A-4A6E-B04A-0AEB168B78F9}" s:ph="page-body">
+              <rls>
+                <ruleset>
+                  <rule uid="{E7310019-0853-4D93-8B7D-2F2433CF9545}" s:name="Campers">
+                    <conditions>
+                      <condition uid="151116A86FC04F4981E736A1C13744FB" s:id="{6426B5B4-83E9-4E24-BA97-43293A10B47D}" s:ProfileName="Score" s:PatternName="Campers" />
+                    </conditions>
+                    <actions>
+                      <action uid="3313ECB9C995499291C353A33D152D79" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{56B6A07F-A6FD-47E8-A5F9-3BC3422B35A5}" />
+                    </actions>
+                  </rule>
+                  <rule uid="{B749E881-002E-4C04-A6E8-9BED97A451B5}" s:name="Climbers">
+                    <conditions>
+                      <condition uid="3CFDEE977835466A8AB7551AEAD65642" s:id="{6426B5B4-83E9-4E24-BA97-43293A10B47D}" s:ProfileName="Score" s:PatternName="Climbers" />
+                    </conditions>
+                    <actions>
+                      <action uid="03EECFBC50AC4E34B8A918379ADE9920" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{3CCF2551-53D6-4018-B599-9B36DFC3D5EE}" />
+                    </actions>
+                  </rule>
+                  <rule uid="{521DD000-2E50-4534-B165-9D56BB064642}" s:name="Bargain Hunters">
+                    <conditions>
+                      <condition uid="65CC4BEC52474AD69546D18455AA1826" s:id="{6426B5B4-83E9-4E24-BA97-43293A10B47D}" s:ProfileName="Score" s:PatternName="BargainHunters" />
+                    </conditions>
+                    <actions>
+                      <action uid="5F947340D80544339727F162F68109B7" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{AEA9A1B0-8FD3-4C16-9612-866F4FB31BCD}" />
+                    </actions>
+                  </rule>
+                  <rule uid="{00000000-0000-0000-0000-000000000000}" s:name="Default">
+                    <conditions>
+                      <condition uid="B449D9298E6441EB80135B2F2D498B77" s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                    </conditions>
+                    <actions>
+                      <action uid="71B50328D61B42198D8E99EF32ACEB9E" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{56B6A07F-A6FD-47E8-A5F9-3BC3422B35A5}" />
+                      <action uid="54BCFF32855E41FFA75F6683AFD23807" s:id="{25F351A1-712D-45F8-857D-8AD95BB2ACE9}" />
+                    </actions>
+                  </rule>
+                </ruleset>
+              </rls>
+            </r>
+            <r uid="{058BE054-541E-48C4-816B-0D9046151821}" p:after="r[@uid='{A385C37F-E0C8-4638-A692-2A78D53281E9}']" s:id="{682873F1-CFB1-453F-9CD8-EC017FA5B407}" s:ph="page-body" />
+            <r uid="{5013CE56-12ED-4A23-9954-57E836599555}" p:after="r[@uid='{058BE054-541E-48C4-816B-0D9046151821}']" s:id="{65242443-EA23-474C-902E-E09305E67CD6}" s:ph="page-body" />
+          </d>
+        </r>
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
       Value: 20160216T160952Z
@@ -110,29 +187,6 @@ Languages:
         {09D7B89B-EE98-43B4-B937-9055009A3186}
         {8D17ADAE-D20E-48D9-80E9-416E0277AF24}
         {30468911-5184-439B-B278-2539FFA378AF}
-    - ID: c1f479fe-39e3-4851-bdbf-3ac347a44c2d
-      Hint: Categories
-      Type: Multilist with Search
-      Value: |
-        {833102C4-765F-4FA5-8DBD-A7F785D41659}
-        {560ECC9F-77C4-4247-97C4-4D4FB5EBF136}
-        {D3D058E0-54C1-430D-A25C-5707786183AB}
-    - ID: d0e11335-c8db-46f8-8130-3b82fbdae1da
-      Hint: Categories
-      Type: Multilist with Search
-      Value: 
-    - ID: f7a94e99-fb47-4133-9355-3f65e9071fb0
-      Hint: Products
-      Type: Multilist with Search
-      Value: |
-        {894B16BA-5C4A-4DC3-A882-5890CB1BF466}
-        {14A9FC87-EBB4-4589-A41A-AB20D73C4ADD}
-        {05A5B780-29F8-45B1-A62B-C040E85E93AC}
-        {48958F76-3E68-41D5-B87D-C13B9883FFC0}
-        {DE817F3A-7348-497B-A84B-C676D8F7A8DF}
-        {5875F0D3-DD4A-4060-82F4-DA5AF7D3EEAA}
-        {E5DD0E83-EFA0-42F7-959C-39E81973F6ED}
-        {E82C179B-A210-4971-83E5-BE49EC83D8B0}
     - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
       Hint: Meta Description
       Value: Home Page

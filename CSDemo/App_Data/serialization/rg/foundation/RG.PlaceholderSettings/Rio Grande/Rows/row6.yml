@@ -1,0 +1,27 @@
+﻿---
+ID: 0a62c38a-74b6-49ff-8f53-be189d848753
+Parent: c8750ea1-a308-400e-816f-4d49be00c383
+Template: 5c547d4e-7111-4995-95b0-6b561751bf2e
+Path: /sitecore/layout/Placeholder Settings/Rio Grande/Rows/row6
+DB: master
+SharedFields:
+- ID: 7256bdab-1fd2-49dd-b205-cb4873d2917c
+  Hint: Placeholder Key
+  Value: row6
+- ID: e391b526-d0c5-439d-803e-17512eae6222
+  Hint: Allowed Controls
+  Type: TreelistEx
+  Value: |
+    {119957CB-7F4A-44D9-8C56-68DE46337DA0}
+    {E3B5297C-27C3-4854-BF00-C07A4BD41127}
+    {F95EC01D-3CA7-4909-B344-ECABD2266956}
+    {68A499FD-22A5-4333-BE54-DFC7A007791D}
+    {7D6D8042-BC94-4B7B-A52B-B93D20E76D05}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160217T085610Z

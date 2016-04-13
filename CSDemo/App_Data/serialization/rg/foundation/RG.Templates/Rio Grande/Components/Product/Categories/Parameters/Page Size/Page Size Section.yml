@@ -1,0 +1,17 @@
+﻿---
+ID: 3f85b046-2146-448b-8b10-0d663e64f56c
+Parent: 8cd4d38a-d0a4-44d5-b891-7ae034545451
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Rio Grande/Components/Product/Categories/Parameters/Page Size/Page Size Section
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160315T005137Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

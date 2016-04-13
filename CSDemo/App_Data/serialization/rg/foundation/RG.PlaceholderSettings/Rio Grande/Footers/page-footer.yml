@@ -1,0 +1,22 @@
+﻿---
+ID: dcda5d5d-4812-404b-bfab-eff31635ebc6
+Parent: 824d7f8f-3c97-499c-9979-3cc0c8356c7b
+Template: 5c547d4e-7111-4995-95b0-6b561751bf2e
+Path: /sitecore/layout/Placeholder Settings/Rio Grande/Footers/page-footer
+DB: master
+SharedFields:
+- ID: 7256bdab-1fd2-49dd-b205-cb4873d2917c
+  Hint: Placeholder Key
+  Value: page-footer
+- ID: e391b526-d0c5-439d-803e-17512eae6222
+  Hint: Allowed Controls
+  Type: TreelistEx
+  Value: {5B018176-BF32-4BB1-91FA-63044B6FFE4B}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T183627Z

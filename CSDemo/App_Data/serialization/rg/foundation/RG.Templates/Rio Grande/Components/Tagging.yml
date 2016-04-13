@@ -1,0 +1,17 @@
+﻿---
+ID: 0e437a4d-b17a-4c17-b074-c9be699b0ff4
+Parent: 1c0f7c2f-faa7-4790-a181-10c7903dbafb
+Template: 0437fee2-44c9-46a6-abe9-28858d9fee8c
+Path: /sitecore/templates/Rio Grande/Components/Tagging
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160315T205046Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

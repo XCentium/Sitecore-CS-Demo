@@ -1,0 +1,21 @@
+﻿---
+ID: 054d8c60-5856-4dbb-9545-6ac4838b3eb5
+Parent: 733a799a-0c3e-4be9-9121-5bc6c3f6d169
+Template: 0a2a31a0-a3b8-493c-b5fe-1935e1723f52
+Path: /sitecore/content/Rio Grande/Components/Navigation/Popular/Silver
+DB: master
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 100
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T212059Z
+    - ID: 7c445b60-6911-46b6-966a-736a76c7f549
+      Hint: Title
+      Value: Climbing

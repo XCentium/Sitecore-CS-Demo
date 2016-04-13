@@ -1,0 +1,18 @@
+﻿---
+ID: b1725047-b449-4916-9c3a-20f4e88bb6ee
+Parent: c8750ea1-a308-400e-816f-4d49be00c383
+Template: 5c547d4e-7111-4995-95b0-6b561751bf2e
+Path: /sitecore/layout/Placeholder Settings/Rio Grande/Rows/rowfooter
+DB: master
+SharedFields:
+- ID: 7256bdab-1fd2-49dd-b205-cb4873d2917c
+  Hint: Placeholder Key
+  Value: rowfooter
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T181707Z

@@ -1,0 +1,36 @@
+﻿---
+ID: 922c651a-1de5-4d38-a4ee-69969a425af6
+Parent: 81af7fa9-4b9b-47ac-81fc-11c359fffcc4
+Template: b3d2832f-2fbf-4466-9d95-d3a0c6476362
+Path: /sitecore/templates/Rio Grande/Pages/Generic Page/__Standard Values
+DB: master
+SharedFields:
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{22DD9E70-D79C-4A77-BC90-FCCFB1B574F5}">
+        <r id="{027AF0D5-BC10-42A4-B796-577FB651D073}" ph="page-header" uid="{786ECE31-95BE-42A4-BD3B-7FC824D276EF}" />
+        <r id="{78AD0B43-99B6-4DF0-9F35-82A469106E3E}" ph="page-body" uid="{63223E3A-7BE4-4C4F-A69F-29C0F4CD44EA}" />
+        <r id="{5B018176-BF32-4BB1-91FA-63044B6FFE4B}" ph="page-footer" uid="{E5A6C541-E277-499D-9CB9-DFF8CE125A23}" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 04bf00db-f5fb-41f7-8ab7-22408372a981
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s" p:p="1">
+          <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r uid="{63223E3A-7BE4-4C4F-A69F-29C0F4CD44EA}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:id="{78AD0B43-99B6-4DF0-9F35-82A469106E3E}" s:ph="page-body" />
+            <r uid="{E5A6C541-E277-499D-9CB9-DFF8CE125A23}" p:after="r[@uid='{63223E3A-7BE4-4C4F-A69F-29C0F4CD44EA}']" />
+          </d>
+        </r>
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T060244Z
