@@ -12,5 +12,10 @@ namespace CSDemo.Configuration
             var catalogName = Settings.GetSetting(setting);
             return catalogName.IsEmptyOrNull() ? Settings.GetSetting($"Site_XCentiumCSDemo_{suffix}") : catalogName;
         }
+
+        public static string GetSitePrefix()
+        {
+            return $"/sitecore/content/{Sitecore.Context.Site.Name}/";
+        }
     }
 }

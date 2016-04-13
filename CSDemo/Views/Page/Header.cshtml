@@ -1,4 +1,5 @@
-﻿@using Sitecore.Mvc
+﻿@using CSDemo.Configuration
+@using Sitecore.Mvc
 
 <div class="top-header hidden-xs">
     <div class="container">
@@ -46,7 +47,7 @@
                 <!-- ==========================
                 NAVIGATION WITH MEGA MENU - START
                 =========================== -->
-                @Html.Sitecore().Rendering("/sitecore/layout/Renderings/CSDemo/Navigation/Main Navigation", new { Datasource = "/sitecore/content/CSDemo/Components/Navigation" })
+                @Html.Sitecore().Rendering("/sitecore/layout/Renderings/CSDemo/Navigation/Main Navigation", new { Datasource = string.Format("{0}Components/Navigation", ConfigurationHelper.GetSitePrefix()) })
                 <!-- ==========================
                 NAVIGATION WITH MEGA MENU - END
                 =========================== --> 
@@ -64,7 +65,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search"></i></a>
                     <ul class="dropdown-menu">
                         <li>
-                            @Html.Sitecore().Rendering("/sitecore/layout/Renderings/CSDemo/Search/Search Input", new {Datasource = "/sitecore/content/CSDemo/Home/Search"})
+                            @Html.Sitecore().Rendering("/sitecore/layout/Renderings/CSDemo/Search/Search Input", new {Datasource = string.Format("{0}Home/Search", ConfigurationHelper.GetSitePrefix())})
                         </li>
                     </ul>
                 </li>
