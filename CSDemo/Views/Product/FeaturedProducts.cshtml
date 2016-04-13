@@ -62,10 +62,13 @@
                                     <li class="clearfix">
                                         @using (BeginEditFrame(featuredProduct, "Edit Featured Product", x => x.Images, x => x.Title, x => x.Rating, x => x.Price))
                                         {
-                                        <a href="@featuredProduct.Url">
-                                            @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { Width = 60, Height = 80, AS = 1, @class = "img-responsive" }, isEditable: false)
-                                            <h3>@featuredProduct.Title</h3>
-                                        </a>
+                                            <a href="@featuredProduct.Url">
+                                                @if (featuredProduct.Images != null && featuredProduct.Images.Any())
+                                                {
+                                                    @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { Width = 60, Height = 80, AS = 1, @class = "img-responsive" }, isEditable: false)
+                                                }
+                                                <h3>@featuredProduct.Title</h3>
+                                            </a>
                                         <div class="product-rating">
                                             <i class="fa fa-star@(featuredProduct.Rating>0 ? string.Empty:"-o" )"></i>
                                             <i class="fa fa-star@(featuredProduct.Rating>1 ? string.Empty:"-o" )"></i>
@@ -94,7 +97,10 @@
                                     @using (BeginEditFrame(featuredProduct, "Edit Featured Product", x => x.Images, x => x.Title, x => x.Rating, x => x.Price))
                                     {
                                     <a href="@featuredProduct.Url">
-                                        @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { Width = 60, Height = 80, AS = 1, @class = "img-responsive" }, isEditable: false)
+                                        @if (featuredProduct.Images != null && featuredProduct.Images.Any())
+                                        {
+                                            @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { Width = 60, Height = 80, AS = 1, @class = "img-responsive" }, isEditable: false)
+                                        }
                                         <h3>@featuredProduct.Title</h3>
                                     </a>
                                     <div class="product-rating">
