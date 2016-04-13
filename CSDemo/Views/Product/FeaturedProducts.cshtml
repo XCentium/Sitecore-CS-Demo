@@ -23,7 +23,10 @@
                             {
                                 <a href="@featuredProduct.Url">
                                     <article class="product-item">
-                                        @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { Width = 200, Height = 300, AS = 1, @class = "img-responsive" }, isEditable: false)
+                                        @if (featuredProduct.Images != null && featuredProduct.Images.Any())
+                                        {
+                                            @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { Width = 200, Height = 300, AS = 1, @class = "img-responsive" }, isEditable: false)
+                                        }
                                         <h3>
                                             @featuredProduct.Title
                                         </h3>

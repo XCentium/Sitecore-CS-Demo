@@ -107,6 +107,13 @@ Languages:
     - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
       Hint: Page Title
       Value: Home
+    - ID: 4daee112-4db5-4a3b-902d-93413c8d50c6
+      Hint: Products
+      Type: Multilist with Search
+      Value: |
+        {09D7B89B-EE98-43B4-B937-9055009A3186}
+        {8D17ADAE-D20E-48D9-80E9-416E0277AF24}
+        {30468911-5184-439B-B278-2539FFA378AF}
     - ID: c1f479fe-39e3-4851-bdbf-3ac347a44c2d
       Hint: Categories
       Type: Multilist with Search
@@ -114,6 +121,10 @@ Languages:
         {833102C4-765F-4FA5-8DBD-A7F785D41659}
         {560ECC9F-77C4-4247-97C4-4D4FB5EBF136}
         {D3D058E0-54C1-430D-A25C-5707786183AB}
+    - ID: d0e11335-c8db-46f8-8130-3b82fbdae1da
+      Hint: Categories
+      Type: Multilist with Search
+      Value: 
     - ID: f7a94e99-fb47-4133-9355-3f65e9071fb0
       Hint: Products
       Type: Multilist with Search

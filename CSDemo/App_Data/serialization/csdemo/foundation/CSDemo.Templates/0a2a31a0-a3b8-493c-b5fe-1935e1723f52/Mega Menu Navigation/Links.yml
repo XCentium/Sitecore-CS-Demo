@@ -7,7 +7,7 @@ DB: master
 SharedFields:
 - ID: 1eb8ae32-e190-44a6-968d-ed904c794ebf
   Hint: Source
-  Value: StartSearchLocation={4441D0B5-1080-4550-A91A-4C2C8245C986}&Filter=_path:{2C1225CC-24C0-496B-AEB7-7BEF84C0252A}|parsedlanguage:english|commercesearchitemtype:GeneralCategory
+  Value: StartSearchLocation={08BFB57F-DAC9-4B11-90C5-5D19647899EF}&Filter=_path:{2C1225CC-24C0-496B-AEB7-7BEF84C0252A}|parsedlanguage:english|commercesearchitemtype:GeneralCategory
 - ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
   Hint: Type
   Value: Multilist with Search
