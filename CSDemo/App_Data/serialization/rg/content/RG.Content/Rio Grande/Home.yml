@@ -32,7 +32,7 @@ SharedFields:
                   <condition uid="33FC935BFE63459F8B2B8E65D3607BA2" s:id="{D379525C-4DE6-4738-89ED-60CC0B8F91E5}" s:CampaignId="{0BFFAF94-F523-452A-9F2A-1FA3292D4647}" />
                 </conditions>
                 <actions>
-                  <action uid="6E0182CCFED44186BDE11FD4C9BA297E" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{711BF888-CBDB-489D-85FB-CF8BAEBFE375}" />
+                  <action uid="6E0182CCFED44186BDE11FD4C9BA297E" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{D03C7288-63FF-42DD-BF04-D7EE861E8053}" />
                 </actions>
               </rule>
               <rule uid="{00000000-0000-0000-0000-000000000000}" s:name="Default">
@@ -40,7 +40,7 @@ SharedFields:
                   <condition uid="6AFE113D86EC41A4821E1E3E41C762D0" s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
                 </conditions>
                 <actions>
-                  <action uid="35D45B620E31439D996C846E04A93700" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{FEEE5CCA-B864-4AE6-81F0-F30F7C76BBC4}" />
+                  <action uid="35D45B620E31439D996C846E04A93700" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{B14A8C47-012C-4FDF-A725-3A6AC0562041}" />
                 </actions>
               </rule>
             </ruleset>
