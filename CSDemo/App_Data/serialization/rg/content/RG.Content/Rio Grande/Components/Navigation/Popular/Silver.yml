@@ -16,6 +16,12 @@ Languages:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
       Value: 20160304T212059Z
+    - ID: 28100e2e-3cf3-4ee9-b446-b7f7f0780484
+      Hint: Links
+      Type: Multilist with Search
+      Value: |
+        {8721D796-FB68-4CAB-9088-3B63FBE4491F}
+        {02EECA79-5361-4370-B87B-52A909438CAA}
     - ID: 7c445b60-6911-46b6-966a-736a76c7f549
       Hint: Title
-      Value: Climbing
+      Value: Silver

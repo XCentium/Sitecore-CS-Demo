@@ -16,6 +16,12 @@ Languages:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
       Value: 20160304T234955Z
+    - ID: 28100e2e-3cf3-4ee9-b446-b7f7f0780484
+      Hint: Links
+      Type: Multilist with Search
+      Value: |
+        {53DEE26F-8594-4A43-8471-EF63C5BDC80C}
+        {1E8223D1-4B1B-4912-A7D3-FF233446D21E}
     - ID: 7c445b60-6911-46b6-966a-736a76c7f549
       Hint: Title
-      Value: Clothing
+      Value: Gold
