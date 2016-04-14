@@ -48,12 +48,12 @@
                                                 panelCollapse = "collapse in";
                                                 current = true;
                                             }
-                                            
+
                                             var catProducts = cat.ProductMenulistViewModel;
 
-                                            <li class="panel">                                                
+                                            <li class="panel">
                                                 <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name<span>[@cat.ProductsCount]</span></a>
-                                                <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">                                              
+                                                <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">
                                                     <li><a href="@cat.Url"><span class="fa fa-arrow-right"></span></a></li>
                                                     @foreach (CSDemo.Models.Product.ProductMenulistViewModel catProduct in catProducts)
                                                     {
@@ -136,21 +136,22 @@
 
                                             <!-- CATEGORY - START -->
                                     <div class="col-xs-4">
-                                            <div class="category">
-                                                <a href="@product.Url">
-                                                    @foreach (var image in product.Images)
-                                                    {
-                                                        count++;
-                                                        @RenderImage(image, x => x, new { mw = 310, @class = "img-responsive " }, isEditable: false);
-                                                                                                                                                                                                                  if (count == 1) { break; }
-                                                    }
-                                                    <div class="category-mask"></div>
-                                                    <h3 class="category-title">@product.Title <span>Collection</span></h3>
-                                                </a>
-                                            </div>
+                                        <div class="category">
+                                            <a href="@product.Url">
+                                                @foreach (var image in product.Images)
+                                                {
+                                                    count++;
+                                                    @RenderImage(image, x => x, new { mw = 310, @class = "img-responsive " }, isEditable: false);
+                                                                                                                                                    
+                                                    if (count == 1) { break; }
+                                                }
+                                                <div class="category-mask"></div>
+                                                <h3 class="category-title">@product.Title <span>Collection</span></h3>
+                                            </a>
+                                        </div>
                                     </div>
             <!-- CATEGORY - END -->
-                                        continue;
+                                                continue;
                                 }
 
 
@@ -162,12 +163,31 @@
                                                 <div class="product-overlay">
                                                     <div class="product-mask"></div>
                                                     <a href="@product.Url" class="product-permalink"></a>
-                                                    @foreach (var image in product.Images)
-                                                    {
-                                                        count++;
-                                                        @RenderImage(image, x => x, new { Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive product-image-" + count }, isEditable: false);
-                                                       if (count == 2) { break; }
-                                                    }
+                                                        @if (product.Images == null && product.Images.Any())
+                                                        {
+                                                            foreach (var image in product.Images)
+                                                            {
+                                                                count++;
+                                                                @RenderImage(image, x => x, new { Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive product-image-" + count }, isEditable: false);
+                                                                                                                                                                                                                          if (count == 2) { break; }
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            if (!string.IsNullOrEmpty(product.Image1) || !string.IsNullOrEmpty(product.Image2))
+                                                            {
+
+                                                                var altImages = product.AltImages();
+                                                                foreach (var src in altImages)
+                                                                {
+                                                                    count++;
+                                                                    <img src="@src" style="width:420px;height:287px;background-color:#ffffff" class="img-responsive product-image-@count" />
+                                                                    if (count == 2) { break; }
+                                                                }
+                                                            }
+                                                        }
+
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-sm-9">
@@ -195,46 +215,6 @@
                                                         <ins><span id="@string.Concat("productAmount", product.VariantProdId)" class="amount">@product.ListPrice</span></ins>
                                                     </span>
                                                     <p>@product.Description</p>
-                                                    <form name="@product.ProductId" id="@product.ProductId">
-                                                        <input type="hidden" id="Quantity" name="Quantity" value="1" />
-                                                        <input type="hidden" id="ProductId" name="ProductId" value="@product.ProductId" />
-                                                        <input type="hidden" id="CatalogName" name="CatalogName" value="@product.CatalogName" />
-                                                        <input type="hidden" name="VariantId" id="@string.Concat("VariantID", product.VariantProdId)" value="@product.DefaultVariant" />
-
-                                                        @if (product.VariantSize != null)
-                                                        {
-                                                            <div class="form-group">
-                                                                <select name="ProductSize" id="@string.Concat("ProductSize", product.VariantProdId)" data-objid="@string.Concat("#ProductSize", product.VariantProdId)" data-num="@product.VariantProdId" class="form-control ProductSize">
-                                                                    @foreach (var size in product.VariantSize.VariantSizeLines)
-                                                                    {
-                                                                        <option value="@size.Value">@size.Size</option>
-                                                                    }
-                                                                </select>
-                                                            </div>
-                                                        }
-
-                                                        @if (product.VariantColors != null)
-                                                        {
-
-                                                            <div class="form-group">
-                                                                @foreach (var variantColor in product.VariantColors)
-                                                                {
-                                                                    <select name="@variantColor.Name" id="@string.Concat(variantColor.Name, product.VariantProdId)" style="display:@variantColor.Display" data-num="@product.VariantProdId" class="@string.Concat("ProductColor", product.VariantProdId) ProductColor form-control">
-                                                                        @foreach (var color in variantColor.VariantColorLines)
-                                                                        {
-                                                                            <option value="@color.Value">@color.Color</option>
-                                                                        }
-                                                                    </select>
-                                                                }
-                                                            </div>
-                                                        }
-                                                        <div class="buttons">
-                                                            <a href="" class="btn btn-primary btn-sm"><i class="fa fa-exchange"></i></a>
-                                                            <a href="javascript:void(0)" data-formid="@product.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(product.ID).ToString()" class="btn btn-primary btn-sm @clickCMD"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                            <a href="" class="btn btn-primary btn-sm"><i class="fa fa-heart"></i></a>
-                                                        </div>
-                                                    </form>
-
                                                 </div>
                                             </div>
                                         </div>
