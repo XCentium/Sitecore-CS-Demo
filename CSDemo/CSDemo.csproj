@@ -556,6 +556,10 @@
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Ola.debug.config">
+      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
     <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Release.config">
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
@@ -618,11 +622,7 @@
       <DependentUpon>RioGrander.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="App_Config\Include\zRioGrande\RioGrander.Serialization.sean.debug.deployment.config">
-      <DependentUpon>RioGrander.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zRioGrande\RioGrander.Serialization.sean.release.deployment.config">
+    <None Include="App_Config\Include\zRioGrande\RioGrander.Serialization.Ola.debug.config">
       <DependentUpon>RioGrander.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
