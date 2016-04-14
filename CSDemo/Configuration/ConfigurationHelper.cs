@@ -9,13 +9,18 @@ namespace CSDemo.Configuration
         public static string GetSiteSettingInfo(string suffix)
         {
             var setting = $"Site_{Context.Site.Name}_{suffix}";
-            var catalogName = Settings.GetSetting(setting);
-            return catalogName.IsEmptyOrNull() ? Settings.GetSetting($"Site_XCentiumCSDemo_{suffix}") : catalogName;
+            var settingValue = Settings.GetSetting(setting);
+            return settingValue.IsEmptyOrNull() ? Settings.GetSetting($"Site_XCentiumCSDemo_{suffix}") : settingValue;
         }
 
         public static string GetSitePrefix()
         {
-            return $"/sitecore/content/{Sitecore.Context.Site.Name}/";
+            return $"/sitecore/content/{Context.Site.Name}/";
+        }
+
+        public static string GetSearchIndex()
+        {
+            return $"sitecore_{Context.Database.Name.ToLower()}_index";
         }
     }
 }
