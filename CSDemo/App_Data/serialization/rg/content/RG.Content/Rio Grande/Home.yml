@@ -110,6 +110,12 @@ Languages:
         {09D7B89B-EE98-43B4-B937-9055009A3186}
         {8D17ADAE-D20E-48D9-80E9-416E0277AF24}
         {30468911-5184-439B-B278-2539FFA378AF}
+    - ID: d0e11335-c8db-46f8-8130-3b82fbdae1da
+      Hint: Categories
+      Type: Multilist with Search
+      Value: |
+        {59E8345D-4D52-4FC7-8549-B4BC14FBE57C}
+        {2248D5CC-A0DE-4A46-AA40-CD0F14596AC8}
     - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
       Hint: Meta Description
       Value: Home Page
