@@ -322,10 +322,7 @@
                 </div>
             }
             @Html.Partial("~/Views/Product/RelatedProducts.cshtml", Model.RelatedProducts)
-            @if (Model.AlsoBoughtProducts != null && Model.AlsoBoughtProducts.Count() > 0)
-            {
-                @Html.Partial("~/Views/Product/ComplementaryProducts.cshtml", Model.AlsoBoughtProducts)
-            }
+            @Html.Partial("~/Views/Product/ComplementaryProducts.cshtml", Model.AlsoBoughtProducts)
         </div>
     </section>
 }
