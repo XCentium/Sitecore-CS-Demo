@@ -190,6 +190,17 @@ namespace CSDemo.Models.Product
             manager.EnrollInEngagementPlan(engagementPlan.ID, engagementPlan.Children.First().ID);
         }
 
+        public List<string> AltImages()
+        {
+            var altImages = new List<string>();
+
+            if (!string.IsNullOrEmpty(this.Image1)) { altImages.Add(this.Image1); }
+            if (!string.IsNullOrEmpty(this.Image2)) { altImages.Add(this.Image2); }
+            if (!string.IsNullOrEmpty(this.Image3)) { altImages.Add(this.Image3); }
+
+            return altImages;
+        }
+
         #endregion
 
         #region AutoMapped Properties
@@ -291,6 +302,15 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.ProductTags)]
         public virtual IEnumerable<ProductTag> ProductTags { get; set; }
 
+        [SitecoreField(Fields.Image1)]
+        public virtual string Image1 { get; set; }
+
+        [SitecoreField(Fields.Image2)]
+        public virtual string Image2 { get; set; }
+
+        [SitecoreField(Fields.Image3)]
+        public virtual string Image3 { get; set; }
+
         #endregion
 
         #region Fieldname Mappings
@@ -319,6 +339,9 @@ namespace CSDemo.Models.Product
             public const string DisplayName = "__Display name";
             public const string UnitOfMeasure = "Unit Of Measure";
             public const string ProductTags = "Product Tags";
+            public const string Image1 = "Image1";
+            public const string Image2 = "Image2";
+            public const string Image3 = "Image3";
         }
 
         #endregion

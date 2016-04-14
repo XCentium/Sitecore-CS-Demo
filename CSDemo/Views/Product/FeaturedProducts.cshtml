@@ -27,6 +27,14 @@
                                         {
                                             @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { Width = 200, Height = 300, AS = 1, @class = "img-responsive" }, isEditable: false)
                                         }
+                                        else
+                                        {
+                                            if (!string.IsNullOrEmpty(featuredProduct.Image1))
+                                            {
+                                                <img src="@featuredProduct.Image1" class="img-responsive" style="width:200px;height:300px" />
+                                            }
+                                        }
+                                        
                                         <h3>
                                             @featuredProduct.Title
                                         </h3>
@@ -67,6 +75,13 @@
                                                 {
                                                     @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { Width = 60, Height = 80, AS = 1, @class = "img-responsive" }, isEditable: false)
                                                 }
+                                                else
+                                                {
+                                                    if (!string.IsNullOrEmpty(featuredProduct.Image1))
+                                                    {
+                                                        <img src="@featuredProduct.Image1" class="img-responsive" style="width:60px;height:80px" />
+                                                    }
+                                                }
                                                 <h3>@featuredProduct.Title</h3>
                                             </a>
                                         <div class="product-rating">
@@ -100,6 +115,13 @@
                                         @if (featuredProduct.Images != null && featuredProduct.Images.Any())
                                         {
                                             @RenderImage(featuredProduct.Images.ElementAt(0), x => x, new { Width = 60, Height = 80, AS = 1, @class = "img-responsive" }, isEditable: false)
+                                        }
+                                        else
+                                        {
+                                            if (!string.IsNullOrEmpty(featuredProduct.Image1))
+                                            {
+                                                <img src="@featuredProduct.Image1" class="img-responsive" style="width:60px;height:80px" />
+                                            }
                                         }
                                         <h3>@featuredProduct.Title</h3>
                                     </a>
