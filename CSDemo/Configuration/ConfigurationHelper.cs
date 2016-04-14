@@ -15,7 +15,12 @@ namespace CSDemo.Configuration
 
         public static string GetSitePrefix()
         {
-            return $"/sitecore/content/{Sitecore.Context.Site.Name}/";
+            return $"/sitecore/content/{Context.Site.Name}/";
+        }
+
+        public static string GetSearchIndex()
+        {
+            return $"sitecore_{Context.Database.Name.ToLower()}_index";
         }
     }
 }

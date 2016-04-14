@@ -143,7 +143,7 @@ namespace CSDemo.Models.Product
         /// <returns></returns>
         public static SearchResultItem GetSearchResultItemById(string itemID)
         {
-            var index = ContentSearchManager.GetIndex(Constants.WebIndex);
+            var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
             try
             {
                 var culture = Context.Language.CultureInfo;
@@ -413,7 +413,7 @@ namespace CSDemo.Models.Product
         /// <returns></returns>
         private static List<SearchResultItem> GetCategoryMenuListByParentID(string parentID)
         {
-            var index = ContentSearchManager.GetIndex(Constants.WebIndex);
+            var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
             try
             {
                 var culture = Context.Language.CultureInfo;
@@ -440,7 +440,7 @@ namespace CSDemo.Models.Product
         /// <returns></returns>
         internal static string GetItemIDFromName(string itemName, string parentID)
         {
-            var index = ContentSearchManager.GetIndex(Constants.WebIndex);
+            var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
             try
             {
                 var culture = Context.Language.CultureInfo;
@@ -488,7 +488,7 @@ namespace CSDemo.Models.Product
         /// <returns></returns>
         internal static SearchResultItem GetItemByProductID(string productID)
         {
-            var index = ContentSearchManager.GetIndex(Constants.WebIndex);
+            var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
             try
             {
                 var culture = Context.Language.CultureInfo;
