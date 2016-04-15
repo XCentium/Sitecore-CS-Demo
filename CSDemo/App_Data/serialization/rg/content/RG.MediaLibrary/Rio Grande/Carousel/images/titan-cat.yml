@@ -1,0 +1,86 @@
+﻿---
+ID: 11ad64ac-8da1-49db-a72a-e4d290a028cc
+Parent: d30c3e44-b4a1-423e-bce8-aea8c2ab76a5
+Template: daf085e8-602e-43a6-8299-038ff171349f
+Path: /sitecore/media library/Rio Grande/Carousel/images/titan-cat
+DB: master
+SharedFields:
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: -/media/11ad64ac8da149dba72ae4d290a028cc.ashx?h=16&thn=1&w=16
+- ID: 22eac599-f13b-4607-a89d-c091763a467d
+  Hint: Width
+  Value: 125
+- ID: 40e50ed9-ba07-4702-992e-a912738d32dc
+  Hint: Blob
+  BlobID: 2dd99504-7e53-4392-bab5-837e709a86d6
+  Value: 
+- ID: 6954b7c7-2487-423f-8600-436cb3b6dc0e
+  Hint: Size
+  Value: 10241
+- ID: 6f47a0a5-9c94-4b48-abeb-42d38def6054
+  Hint: Mime Type
+  Value: image/jpeg
+- ID: c06867fe-9a43-4c7d-b739-48780492d06f
+  Hint: Extension
+  Value: jpg
+- ID: cb09946f-3218-4823-87d2-d5007c199a96
+  Hint: Dimensions
+  Value: 125 x 124
+- ID: de2ca9e4-c117-4c8a-a139-1ff4b199d15a
+  Hint: Height
+  Value: 124
+Languages:
+- Language: de-DE
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160415T173652Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160415T173652Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
+- Language: es-MX
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160415T173652Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
+    - ID: 65885c44-8fcd-4a7f-94f1-ee63703fe193
+      Hint: Alt
+      Value: titan-cat
+- Language: fr-FR
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160415T173652Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
+- Language: ja-JP
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160415T173652Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
