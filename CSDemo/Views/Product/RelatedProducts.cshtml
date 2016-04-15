@@ -19,8 +19,14 @@
                                     <div class="product-overlay">
                                         <div class="product-mask"></div>
                                         <a href="@product.Url" class="product-permalink"></a>
-                                        @RenderImage(product.Images.ElementAt(0), x => x, new { AS = 1, W = 200, H = 300, @class = "img-responsive" }, isEditable: false)
-
+                                        @if (product.Images != null && product.Images.Any())
+                                        {
+                                            @RenderImage(product.Images.ElementAt(0), x => x, new {AS = 1, W = 200, H = 300, @class = "img-responsive"}, isEditable: false)
+                                        }
+                                        else if(product.Image1 != null)
+                                        {
+                                            <img src="@product.Image1" class="img-responsive" style="width: 200px; height: 300px;"/>
+                                        }
                                         @*@*Per Vasiliy, leave out for now*@
                                         @*<div class="product-quickview">
                                                 <a href="@product.Url" class="btn btn-quickview" data-toggle="modal" data-target="#product-quickview">View Product</a>

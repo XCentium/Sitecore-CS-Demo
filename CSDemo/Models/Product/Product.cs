@@ -311,6 +311,31 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.Image3)]
         public virtual string Image3 { get; set; }
 
+        [SitecoreField(Fields.MetalType)]
+        public virtual string MetalType { get; set; }
+
+        [SitecoreField(Fields.KaratPurity)]
+        public virtual string KaratPurity { get; set; }
+
+        public virtual string Width { get; set; }
+
+        public virtual string Style { get; set; }
+
+        [SitecoreField(Fields.MetalColor)]
+        public virtual string MetalColor { get; set; }
+
+        [SitecoreField(Fields.InsideDimension)]
+        public virtual string InsideDimension { get; set; }
+
+        [SitecoreField(Fields.FabricationMethod)]
+        public virtual string FabricationMethod { get; set; }
+
+        [SitecoreField(Fields.ShippingWeight)]
+        public virtual string ShippingWeight { get; set; }
+
+        [SitecoreField(Fields.CountryOfOrigin)]
+        public virtual string CountryOfOrigin { get; set; }
+
         #endregion
 
         #region Fieldname Mappings
@@ -342,6 +367,14 @@ namespace CSDemo.Models.Product
             public const string Image1 = "Image1";
             public const string Image2 = "Image2";
             public const string Image3 = "Image3";
+
+            public const string MetalType = "Metal Type";
+            public const string KaratPurity = "KaratPurity";
+            public const string MetalColor = "Metal Color";
+            public const string InsideDimension = "Inside Dimension";
+            public const string FabricationMethod = "Fabrication Method";
+            public const string ShippingWeight = "Shipping Weight";
+            public const string CountryOfOrigin = "Country Of Origin";
         }
 
         #endregion
