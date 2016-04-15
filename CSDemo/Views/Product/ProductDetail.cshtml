@@ -132,7 +132,7 @@
                                 <div class="product-carousel-wrapper">
                                     <div class="variant_images variant_img_default">
                                         <div class="product-carousel">
-                                            @if (Model.Images != null)
+                                            @if (Model.Images != null && Model.Images.Any())
                                             {
                                                 foreach (var image in Model.Images)
                                                 {

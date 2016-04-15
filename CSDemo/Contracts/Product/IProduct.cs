@@ -36,5 +36,9 @@ namespace CSDemo.Contracts.Product
         string Brand { get; set; }
         IEnumerable<Item> SortFields { get; set; }
         IEnumerable<Models.Product.Product> AlsoBoughtProducts { get;}
+        string Image1 { get; set; }
+        string Image2 { get; set; }
+        string Image3 { get; set; }
+        List<string> AltImages();
     }
 }
