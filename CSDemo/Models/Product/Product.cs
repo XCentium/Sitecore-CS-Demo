@@ -45,6 +45,9 @@ namespace CSDemo.Models.Product
 
         public IEnumerable<VariantColor> VariantColors { get; set; }
 
+        [SitecoreField(Fields.UnitOfMeasure)]
+        public virtual IEnumerable<UnitOfMeasure> Units { get; set; }
+
         public IEnumerable<Product> AlsoBoughtProducts
         {
             get
