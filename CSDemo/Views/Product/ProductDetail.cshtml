@@ -212,54 +212,54 @@
                                         //Add additional rio specific properties
                                         <div class="row row-no-padding">
                                             <div class="col-md-3 col-sm-4">
-                                                <table class="table" style="background-color: #fff">
+                                                <table class="rio-meta-table">
                                                     <tbody>
-                                                        @if (!Model.MetalType.IsNullOrEmpty())
+                                                        @if (!string.IsNullOrEmpty(Model.MetalType))
                                                         {
                                                             <tr>
-                                                                <th scope="row" style="background-color: #fff">Metal Type</th>
+                                                                <th>Metal Type</th>
                                                                 <td>@Model.MetalType</td>
                                                             </tr>
                                                         }
-                                                        @if (!Model.MetalColor.IsNullOrEmpty())
+                                                        @if (!string.IsNullOrEmpty(Model.MetalColor))
                                                         {
                                                             <tr>
-                                                                <th scope="row" style="background-color: #fff">Metal Color</th>
+                                                                <th>Metal Color</th>
                                                                 <td>@Model.MetalColor</td>
                                                             </tr>
                                                         }
-                                                        @if (!Model.KaratPurity.IsNullOrEmpty())
+                                                        @if (!string.IsNullOrEmpty(Model.KaratPurity))
                                                         {
                                                             <tr>
-                                                                <th scope="row" style="background-color: #fff">Karat Purity</th>
+                                                                <th>Karat Purity</th>
                                                                 <td>@Model.KaratPurity</td>
                                                             </tr>
                                                         }
-                                                        @if (!Model.InsideDimension.IsNullOrEmpty())
+                                                        @if (!string.IsNullOrEmpty(Model.InsideDimension))
                                                         {
                                                             <tr>
-                                                                <th scope="row" style="background-color: #fff">Inside Dimension</th>
+                                                                <th>Inside Dimension</th>
                                                                 <td>@Model.InsideDimension</td>
                                                             </tr>
                                                         }
-                                                        @if (!Model.FabricationMethod.IsNullOrEmpty())
+                                                        @if (!string.IsNullOrEmpty(Model.FabricationMethod))
                                                         {
                                                             <tr>
-                                                                <th scope="row" style="background-color: #fff">Fabrication Method</th>
+                                                                <th>Fabrication Method</th>
                                                                 <td>@Model.FabricationMethod</td>
                                                             </tr>
                                                         }
-                                                        @if (!Model.ShippingWeight.IsNullOrEmpty())
+                                                        @if (!string.IsNullOrEmpty(Model.ShippingWeight))
                                                         {
                                                             <tr>
-                                                                <th scope="row" style="background-color: #fff">Shipping Weight</th>
+                                                                <th>Shipping Weight</th>
                                                                 <td>@Model.ShippingWeight</td>
                                                             </tr>
                                                         }
-                                                        @if (!Model.CountryOfOrigin.IsNullOrEmpty())
+                                                        @if (!string.IsNullOrEmpty(Model.CountryOfOrigin))
                                                         {
                                                             <tr>
-                                                                <th scope="row" style="background-color: #fff">Country Of Origin</th>
+                                                                <th>Country Of Origin</th>
                                                                 <td>@Model.CountryOfOrigin</td>
                                                             </tr>
                                                         }
