@@ -3,43 +3,41 @@
 @using Sitecore.Data.Items
 @using System.Collections.Generic
 @using System.Linq
+@using Glass.Mapper
 @using Sitecore.Mvc.Extensions
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Product.Product>
 @if (Model != null)
 {
-
     // CSDEMO#99
     string stockLabel = Model.StockInformation != null && Model.StockInformation.Count > 0 ? string.Format("{0:#,###0} In Stock", Convert.ToInt32(Model.StockInformation.Count)) : "Out Of Stock";
     bool isInStock = Model.StockInformation != null && Model.StockInformation.Count > 0;
-
     // out-of-stock
     var clickCMD = "add-to-cart";
-
     <section class="content products">
         <div class="container">
-            @using (BeginEditFrame(Model, "Edit Product", 
-                x => x.Images, 
-                x => x.Title, 
-                x => x.ProductId, 
-                x => x.CatalogName, 
-                x => x.VariantProdId, 
-                x => x.DefaultVariant, 
-                x => x.IsNew, 
-                x => x.IsOnSale, 
-                x => x.Rating, 
-                x => x.ListPrice, 
-                x => x.Brand, 
-                x => x.Description, 
-                x => x.VariantSize, 
-                x => x.VariantColors, 
-                x => x.FullDescription, 
-                x => x.DateOfIntroduction, 
-                x => x.Size, x => x.Price, 
-                x => x.DefinitionName, 
-                x => x.Categories, 
-                x => x.SortFields, 
-                x => x.ItemsPerPage, 
-                x => x.Variants))
+            @using (BeginEditFrame(Model, "Edit Product",
+                    x => x.Images,
+                    x => x.Title,
+                    x => x.ProductId,
+                    x => x.CatalogName,
+                    x => x.VariantProdId,
+                    x => x.DefaultVariant,
+                    x => x.IsNew,
+                    x => x.IsOnSale,
+                    x => x.Rating,
+                    x => x.ListPrice,
+                    x => x.Brand,
+                    x => x.Description,
+                    x => x.VariantSize,
+                    x => x.VariantColors,
+                    x => x.FullDescription,
+                    x => x.DateOfIntroduction,
+                    x => x.Size, x => x.Price,
+                    x => x.DefinitionName,
+                    x => x.Categories,
+                    x => x.SortFields,
+                    x => x.ItemsPerPage,
+                    x => x.Variants))
             {
                 <article class=" product-item product-single">
                     <div class="row">
@@ -47,26 +45,21 @@
                             @if (Model.ProductVariants != null)
                             {
                                 var default_variant_img = "variant_img_default";
-
                                 foreach (var prodVariant in Model.ProductVariants)
                                 {
                                     if (prodVariant.Variant_Images.Count() > 0)
                                     {
-
                                         <div class="product-carousel-wrapper variant_img_@prodVariant.VariantId">
                                             <div class="variant_images @default_variant_img variant_img_@prodVariant.VariantId">
                                                 <div class="product-carousel">
                                                     @if (prodVariant.Variant_Images != null && prodVariant.Variant_Images.Any())
                                                     {
-
-
                                                         foreach (var image in prodVariant.Variant_Images)
                                                         {
                                                             <div class="item">
                                                                 @RenderImage(image, x => x, new { Width = 538, Height = 538, AS = 1, @class = "img-responsive" }, isEditable: false)
                                                             </div>
                                                         }
-
                                                     }
                                                     else
                                                     {
@@ -81,7 +74,6 @@
                                                             }
                                                         }
                                                     }
-
                                                 </div>
                                             </div>
                                         </div>
@@ -93,8 +85,6 @@
                                                 <div class="product-carousel">
                                                     @if (Model.Images != null && Model.Images.Any())
                                                     {
-
-
                                                         foreach (var image in Model.Images)
                                                         {
                                                             <div class="item">
@@ -115,12 +105,10 @@
                                                             }
                                                         }
                                                     }
-
                                                 </div>
                                             </div>
                                         </div>
                                     }
-
                                     default_variant_img = "";
                                 }
                             }
@@ -154,9 +142,7 @@
                                         </div>
                                     </div>
                                 </div>
-
                             }
-
                         </div>
                         <div class="col-xs-8">
                             <div class="product-body">
@@ -203,7 +189,6 @@
                                         <li class="variants_in_stock">
                                             <span>Availability</span>@stockLabel
                                         </li>
-
                                         @if (Model.ProductVariants != null)
                                         {
                                             foreach (var prodVariant in Model.ProductVariants)
@@ -213,10 +198,76 @@
                                                 </li>
                                             }
                                         }
-
                                         <li><span>Brand</span>@Editable(Model, x => x.Brand)</li>
-                                        @*<li><span>Tags</span></li>*@
                                     </ul>
+                                    @*public const string MetalType = "Metal Type";
+                                        public const string KaratPurity = "KaratPurity";
+                                        public const string MetalColor = "Metal Color";
+                                        public const string InsideDimension = "Inside Dimension";
+                                        public const string FabricationMethod = "Fabrication Method";
+                                        public const string ShippingWeight = "Shipping Weight";
+                                        public const string CountryOfOrigin = "Country Of Origin";*@
+                                    @if (Model.CatalogName.StartsWith("Rio"))
+                                    {
+                                        //Add additional rio specific properties
+                                        <div class="row row-no-padding">
+                                            <div class="col-md-3 col-sm-4">
+                                                <table class="table" style="background-color: #fff">
+                                                    <tbody>
+                                                        @if (!Model.MetalType.IsNullOrEmpty())
+                                                        {
+                                                            <tr>
+                                                                <th scope="row" style="background-color: #fff">Metal Type</th>
+                                                                <td>@Model.MetalType</td>
+                                                            </tr>
+                                                        }
+                                                        @if (!Model.MetalColor.IsNullOrEmpty())
+                                                        {
+                                                            <tr>
+                                                                <th scope="row" style="background-color: #fff">Metal Color</th>
+                                                                <td>@Model.MetalColor</td>
+                                                            </tr>
+                                                        }
+                                                        @if (!Model.KaratPurity.IsNullOrEmpty())
+                                                        {
+                                                            <tr>
+                                                                <th scope="row" style="background-color: #fff">Karat Purity</th>
+                                                                <td>@Model.KaratPurity</td>
+                                                            </tr>
+                                                        }
+                                                        @if (!Model.InsideDimension.IsNullOrEmpty())
+                                                        {
+                                                            <tr>
+                                                                <th scope="row" style="background-color: #fff">Inside Dimension</th>
+                                                                <td>@Model.InsideDimension</td>
+                                                            </tr>
+                                                        }
+                                                        @if (!Model.FabricationMethod.IsNullOrEmpty())
+                                                        {
+                                                            <tr>
+                                                                <th scope="row" style="background-color: #fff">Fabrication Method</th>
+                                                                <td>@Model.FabricationMethod</td>
+                                                            </tr>
+                                                        }
+                                                        @if (!Model.ShippingWeight.IsNullOrEmpty())
+                                                        {
+                                                            <tr>
+                                                                <th scope="row" style="background-color: #fff">Shipping Weight</th>
+                                                                <td>@Model.ShippingWeight</td>
+                                                            </tr>
+                                                        }
+                                                        @if (!Model.CountryOfOrigin.IsNullOrEmpty())
+                                                        {
+                                                            <tr>
+                                                                <th scope="row" style="background-color: #fff">Country Of Origin</th>
+                                                                <td>@Model.CountryOfOrigin</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    }
                                     <p>@Editable(Model, x => x.Description)</p>
                                     @if (isInStock)
                                     {
