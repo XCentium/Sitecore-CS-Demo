@@ -8,11 +8,15 @@ SharedFields:
 - ID: 21828437-ea4b-40a1-8c61-4ce60ea41db6
   Hint: Validate Button
   Type: tree list
-  Value: {0FF9EE5D-5842-4CA8-B2D9-2793203E968D}
+  Value: |
+    {0FF9EE5D-5842-4CA8-B2D9-2793203E968D}
+    {71FC777B-5BD7-47B1-A99A-1334698986C8}
 - ID: 337e20e1-999a-4eea-85ad-b58a03ae75cc
   Hint: Quick Action Bar
   Type: tree list
-  Value: {0FF9EE5D-5842-4CA8-B2D9-2793203E968D}
+  Value: |
+    {0FF9EE5D-5842-4CA8-B2D9-2793203E968D}
+    {71FC777B-5BD7-47B1-A99A-1334698986C8}
 - ID: 39847666-389d-409b-95bd-f2016f11eed5
   Hint: Unversioned
   Value: 1
@@ -28,7 +32,9 @@ SharedFields:
 - ID: 9c903e29-650d-4af2-b9bd-526d5c14a1a5
   Hint: Validator Bar
   Type: tree list
-  Value: {0FF9EE5D-5842-4CA8-B2D9-2793203E968D}
+  Value: |
+    {0FF9EE5D-5842-4CA8-B2D9-2793203E968D}
+    {71FC777B-5BD7-47B1-A99A-1334698986C8}
 - ID: a0f35a32-14b5-4147-9851-7e0bbdc17efc
   Hint: Assign To All Product Types
   Value: 1
@@ -37,7 +43,7 @@ SharedFields:
   Value: Checkbox
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
-  Value: 71
+  Value: 80
 - ID: be351a73-fcb0-4213-93fa-c302d8ab4f51
   Hint: Shared
   Value: 1
