@@ -31,7 +31,7 @@ JUMBOTRON - START
             {
                 using (BeginEditFrame(slide, "Edit Hero Slide", x => x.Content, x => x.Image))
                 {
-                    <div class="item slide-1" style="background-image: url(@slide.Image.Src)">
+                    <div class="item slide-1" style="background: url(@slide.Image.Src) center no-repeat">
                         <div class="slide-mask"></div>
                         <div class="slide-body">
                             <div class="container">
@@ -48,7 +48,7 @@ JUMBOTRON - START
         <div id="homepage-1-carousel" class="nav-inside owl-animation">
             @foreach (var slide in Model.Where(t => t != null))
             {
-                <div class="item slide-1" style="background-image: url(@slide.Image.Src)">
+                <div class="item slide-1" style="background: url(@slide.Image.Src) center no-repeat">
                     <div class="slide-mask"></div>
                     <div class="slide-body">
                         <div class="container">
