@@ -47,30 +47,45 @@
                                 var default_variant_img = "variant_img_default";
                                 foreach (var prodVariant in Model.ProductVariants)
                                 {
-                                    if (prodVariant.Variant_Images.Count() > 0)
+                                    var variantAltImages = prodVariant.AltImages();
+                                    if (prodVariant.Variant_Images.Count() > 0 || variantAltImages.Count > 0)
                                     {
+
                                         <div class="product-carousel-wrapper variant_img_@prodVariant.VariantId">
                                             <div class="variant_images @default_variant_img variant_img_@prodVariant.VariantId">
                                                 <div class="product-carousel">
-                                                    @if (prodVariant.Variant_Images != null && prodVariant.Variant_Images.Any())
+                                                    @if (variantAltImages != null && variantAltImages.Count > 0)
                                                     {
-                                                        foreach (var image in prodVariant.Variant_Images)
+                                                        foreach (var src in variantAltImages)
                                                         {
                                                             <div class="item">
-                                                                @RenderImage(image, x => x, new { Width = 538, Height = 538, AS = 1, @class = "img-responsive" }, isEditable: false)
+                                                                <img src="@src" class="img-responsive" style="width:538px;height:538px" />
                                                             </div>
                                                         }
                                                     }
                                                     else
                                                     {
-                                                        if (!string.IsNullOrEmpty(Model.Image1) || !string.IsNullOrEmpty(Model.Image2))
+
+                                                        if (prodVariant.Variant_Images != null && prodVariant.Variant_Images.Any())
                                                         {
-                                                            var altImages = Model.AltImages();
-                                                            foreach (var src in altImages)
+                                                            foreach (var image in prodVariant.Variant_Images)
                                                             {
                                                                 <div class="item">
-                                                                    <img src="@src" class="img-responsive" style="width:538px;height:538px" />
+                                                                    @RenderImage(image, x => x, new { Width = 538, Height = 538, AS = 1, @class = "img-responsive" }, isEditable: false)
                                                                 </div>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            if (!string.IsNullOrEmpty(Model.Image1) || !string.IsNullOrEmpty(Model.Image2))
+                                                            {
+                                                                var altImages = Model.AltImages();
+                                                                foreach (var src in altImages)
+                                                                {
+                                                                    <div class="item">
+                                                                        <img src="@src" class="img-responsive" style="width:538px;height:538px" />
+                                                                    </div>
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -300,7 +315,7 @@
                                                         </div>
                                                     </div>
                                                 }
-                                                @if (Model.VariantColors != null)
+                                                @if (Model.VariantColors != null && Model.VariantColors.Any())
                                                 {
                                                     <div class="col-md-3 col-sm-4">
                                                         <div class="product-color">
