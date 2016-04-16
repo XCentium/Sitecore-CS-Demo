@@ -60,12 +60,12 @@
 
     function ShowDisallowedMessage() {
 
-        ShowActionMessage("Action DENIED! To this user type.");
+        ShowActionMessageFixed("Action DENIED! To this user type.");
     }
 
     $('.out-of-stock').click(function () {
 
-        ShowActionMessage("This Product is Currently Out of Stock!");
+        ShowActionMessageFixed("This Product is Currently Out of Stock!");
     });
 
     $('.add-to-cart').click(function () {
@@ -101,7 +101,7 @@
                     LoadCart();
 
                 } else {
-                    ShowActionMessage(result.d);
+                    // ShowActionMessage(result.d);
                 }
 
             },
@@ -138,7 +138,7 @@
                 var ShoppingCart = result.d;
 
                 // modalAddToCart
-                ShowActionMessage("Removed from Cart");
+                ShowActionMessageReload("Removed from Cart");
 
                 // ShowCartUpdate(ShoppingCart);
                 LoadCart();
@@ -287,15 +287,34 @@
         }
     }
 
-    function ShowActionMessage(message) {
+    function ActionMessageFixed(message) {
         // alertmessage
         $('#alertmessage').html(message);
         $('#modalAddToCart').modal('show');
+    }
+
+
+    function ShowActionMessage(message) {
+        // alertmessage
+        ActionMessageFixed(message);
         window.setTimeout(function () {
             $('#modalAddToCart').modal('hide');
         }, 1750);
     }
 
+    function ShowActionMessageFixed(message) {
+        // alertmessage
+        ActionMessageFixed(message);
+    }
+
+    function ShowActionMessageReload(message) {
+        // alertmessage
+        ActionMessageFixed(message);
+        window.setTimeout(function () {
+            $('#modalAddToCart').modal('hide');
+            window.location.reload(1);
+        }, 1750);
+    }
 
 
     $('.SubmitCheckout').click(function () {
@@ -698,7 +717,7 @@
 
             } else {
 
-                ShowActionMessage("Please indicate that you accept the Terms and Conditions");
+                ShowActionMessageFixed("Please indicate that you accept the Terms and Conditions");
 
                 return false;
 
@@ -938,11 +957,11 @@
                 var ShoppingCart = result.d;
 
                 // modalAddToCart
-                ShowActionMessage("Promocode Applied");
+                ShowActionMessageReload("Promocode Applied");
 
             },
             error: function (error) {
-                ShowActionMessage("ERROR!! Promocode NOT Applied");
+                ShowActionMessageFixed("ERROR!! Promocode NOT Applied");
                 console.log(error)
 
             },
