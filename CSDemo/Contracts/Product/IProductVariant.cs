@@ -25,6 +25,10 @@ namespace CSDemo.Contracts.Product
         string StockLabel { get; set; }
         int StockQuantity { get; set; }
 
+        string Image1 { get; set; }
+        string Image2 { get; set; }
+        string Image3 { get; set; }
+        List<string> AltImages();
         #endregion 
     }
 }

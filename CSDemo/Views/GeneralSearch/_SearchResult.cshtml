@@ -10,13 +10,27 @@
                     @{
                         var count = 0;
                     }
-                    @foreach (var image in Model.Images)
-                    {
-                        count++;
-                        @RenderImage(image, x => x, new { Width = 360, Height = 351, AS=1, BC="ffffff", @class= "img-responsive product-image-"+count }, isEditable: false);
-                        if (count == 2)
+                    @if (Model.Images != null && Model.Images.Any()) { 
+                    
+                        foreach (var image in Model.Images)
                         {
-                            break;
+                            count++;
+                            @RenderImage(image, x => x, new { Width = 360, Height = 351, AS=1, BC="ffffff", @class= "img-responsive product-image-"+count }, isEditable: false);
+                                                                                                                                                                               if (count == 2) { break; }
+                        }
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(Model.Image1) || !string.IsNullOrEmpty(Model.Image2))
+                        {
+
+                            var altImages = Model.AltImages();
+                            foreach (var src in altImages)
+                            {
+                                count++;
+                                <img src="@src" style="width:360px;height:351px;background-color:#ffffff" class="img-responsive product-image-@count" />
+                                if (count == 2) { break; }
+                            }
                         }
                     }
                 </div>
