@@ -8,11 +8,15 @@ SharedFields:
 - ID: 21828437-ea4b-40a1-8c61-4ce60ea41db6
   Hint: Validate Button
   Type: tree list
-  Value: {A13E7C26-9F94-408F-A4A8-F8F47127612B}
+  Value: |
+    {A13E7C26-9F94-408F-A4A8-F8F47127612B}
+    {C79D95EE-59F0-439E-8105-A35FD6D3D9F8}
 - ID: 337e20e1-999a-4eea-85ad-b58a03ae75cc
   Hint: Quick Action Bar
   Type: tree list
-  Value: {A13E7C26-9F94-408F-A4A8-F8F47127612B}
+  Value: |
+    {A13E7C26-9F94-408F-A4A8-F8F47127612B}
+    {C79D95EE-59F0-439E-8105-A35FD6D3D9F8}
 - ID: 39847666-389d-409b-95bd-f2016f11eed5
   Hint: Unversioned
   Value: 1
@@ -28,7 +32,9 @@ SharedFields:
 - ID: 9c903e29-650d-4af2-b9bd-526d5c14a1a5
   Hint: Validator Bar
   Type: tree list
-  Value: {A13E7C26-9F94-408F-A4A8-F8F47127612B}
+  Value: |
+    {A13E7C26-9F94-408F-A4A8-F8F47127612B}
+    {C79D95EE-59F0-439E-8105-A35FD6D3D9F8}
 - ID: a0f35a32-14b5-4147-9851-7e0bbdc17efc
   Hint: Assign To All Product Types
   Value: 1

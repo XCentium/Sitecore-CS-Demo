@@ -21,6 +21,21 @@ namespace CSDemo.Models.Product
 {
     public class ProductVariant : IProductVariant
     {
+
+        #region Calculated Properties
+        public List<string> AltImages()
+        {
+            var altImages = new List<string>();
+
+            if (!string.IsNullOrEmpty(this.Image1)) { altImages.Add(this.Image1); }
+            if (!string.IsNullOrEmpty(this.Image2)) { altImages.Add(this.Image2); }
+            if (!string.IsNullOrEmpty(this.Image3)) { altImages.Add(this.Image3); }
+
+            return altImages;
+        }
+
+        #endregion
+
         #region Properties
         [SitecoreId]
         public virtual Guid ID { get; set; }
@@ -58,6 +73,14 @@ namespace CSDemo.Models.Product
         public virtual string StockLabel { get; set; }
         public virtual int StockQuantity { get; set; }
 
+        [SitecoreField(Fields.Image1)]
+        public virtual string Image1 { get; set; }
+
+        [SitecoreField(Fields.Image2)]
+        public virtual string Image2 { get; set; }
+
+        [SitecoreField(Fields.Image3)]
+        public virtual string Image3 { get; set; }
         #endregion
         #region Fields
         public struct Fields
@@ -67,6 +90,9 @@ namespace CSDemo.Models.Product
             public const string Variant_Images = "Variant_Images";
             public const string ProductSize = "ProductSize";
             public const string ProductColor = "ProductColor";
+            public const string Image1 = "Variant_Image1";
+            public const string Image2 = "Variant_Image2";
+            public const string Image3 = "Variant_Image3";
         }
         #endregion 
 

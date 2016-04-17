@@ -168,15 +168,13 @@
                                                             foreach (var image in product.Images)
                                                             {
                                                                 count++;
-                                                                @RenderImage(image, x => x, new { Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive product-image-" + count }, isEditable: false);
-                                                                                                                                                                                                                          if (count == 2) { break; }
+                                                                @RenderImage(image, x => x, new { Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive product-image-" + count }, isEditable: false);                                                                                                                                                                                                                        if (count == 2) { break; }
                                                             }
                                                         }
                                                         else
                                                         {
                                                             if (!string.IsNullOrEmpty(product.Image1) || !string.IsNullOrEmpty(product.Image2))
                                                             {
-
                                                                 var altImages = product.AltImages();
                                                                 foreach (var src in altImages)
                                                                 {

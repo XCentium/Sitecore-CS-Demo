@@ -383,19 +383,31 @@ namespace CSDemo.Models.Checkout.Cart
                     var cartItem = new CartItem();
                     var product = cartLine.Product as CommerceCartProduct;
                     cartItem.ProductName = product.DisplayName;
-                    // NOTE: use search when Lucene search is completed
-                    // Get categoty root
-                    var rootItem = Context.Database.GetItem(Constants.Products.AdventureWorksRootPath);
-                    if (rootItem != null)
+
+                    var productSItemSearch = ProductHelper.GetItemByName(product.ProductId);
+                    if (productSItemSearch != null)
                     {
-                        var children = rootItem.Axes.GetDescendants();
-                        var item =
-                            children.AsQueryable()
-                                .FirstOrDefault(x => x.Name.Equals(product.ProductId));
+                        var item = productSItemSearch.GetItem();
                         if (item != null)
                         {
                             cartItem.ProductID = item.ID.ToString();
-                            cartItem.ImageUrl = ProductHelper.GetFirstImageFromProductItem(item);
+
+                            cartItem.ImageUrl = (!string.IsNullOrEmpty(item["Image1"])) ? item["Image1"] : ProductHelper.GetFirstImageFromProductItem(item);
+
+                            // If it is a variant and there is an image for the variant, lets use that.
+                            if (!string.IsNullOrEmpty(product.ProductVariantId) && product.ProductVariantId != "-1")
+                            {
+                                var variantItem = item.Axes.GetDescendants()
+                                    .AsQueryable()
+                                    .FirstOrDefault(x => x.Name.Equals(product.ProductVariantId));
+
+                                if (variantItem != null)
+                                {
+                                    cartItem.ImageUrl = (!string.IsNullOrEmpty(variantItem["Variant_Image1"])) ? variantItem["Variant_Image1"] : cartItem.ImageUrl;
+                                }
+                            }
+
+
                             cartItem.Category = item.Parent.Name;
                         }
                         else
@@ -403,6 +415,8 @@ namespace CSDemo.Models.Checkout.Cart
                             cartItem.ImageUrl = string.Empty;
                         }
                     }
+
+
                     cartItem.CSProductId = product.ProductId;
                     cartItem.Quantity = (int)cartLine.Quantity;
                     cartItem.UnitPrice = product.Price.Amount;
@@ -720,6 +734,7 @@ namespace CSDemo.Models.Checkout.Cart
                 var cart = RemoveFromCart(externalCartLineId);
                 ClearCartFromCache();
                 AddCartToCache(cart);
+//                UpdateCartInCache(cart);
                 return true;
             }
             catch (Exception ex)
