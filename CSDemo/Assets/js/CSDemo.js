@@ -972,4 +972,18 @@
     });
 
 
+    // =========== Units Of Measure =============
+    if ($('#UOM').length === 1) {
+        $(".unit-of-measure .measures").each(function (index, element) {
+            $(element).hide();
+        });
+        $("select#" + $('#UOM').val()).show();
+        $("select#" + $('#UOM').val()).on("change", function() {
+            $(".unit-of-measure .measures").each(function (index, element) {
+                $(element).hide();
+            });
+            $("select#" + $('#UOM').val()).show();
+        });
+    }
+
 })(window, jQuery);
