@@ -12,6 +12,7 @@ namespace CSDemo.Models.Product
     public class UnitOfMeasure : IUnitOfMeasure
     {
         public virtual Guid ID { get; set; }
+        public virtual string Name { get; set; }
 
         public virtual string Type { get; set; }
 
