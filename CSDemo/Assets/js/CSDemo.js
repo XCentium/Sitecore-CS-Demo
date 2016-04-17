@@ -978,7 +978,7 @@
             $(element).hide();
         });
         $("select#" + $('#UOM').val()).show();
-        $("select#" + $('#UOM').val()).on("change", function() {
+        $("select#UOM").change(function () {
             $(".unit-of-measure .measures").each(function (index, element) {
                 $(element).hide();
             });
