@@ -3388,6 +3388,8 @@ footer.navbar a:hover {
 	position:relative;
 	background-size:cover;
 	height:400px;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
 .jumbotron-full-height .owl-carousel,
@@ -3509,7 +3511,7 @@ footer.navbar a:hover {
 #homepage-1-carousel .slide-1 {
 	text-align:center;
 	/*background-image:url(../images/slide-1.jpg);*/
-	background-position-y:-230px;
+	/*background-position-y:-230px;*/
 }
 
 #homepage-1-carousel .slide-1 .slide-mask {
