@@ -1,10 +1,4 @@
-﻿@using Sitecore.Mvc
-@using Sitecore.Data
-@using Sitecore.Data.Items
-@using System.Collections.Generic
-@using System.Linq
-@using Castle.Core.Internal
-@using Sitecore.Mvc.Extensions
+﻿@using Castle.Core.Internal
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Product.Product>
 @{
     var result = !Request.QueryString["msg"].IsNullOrEmpty() ? Request.QueryString["msg"] : string.Empty;

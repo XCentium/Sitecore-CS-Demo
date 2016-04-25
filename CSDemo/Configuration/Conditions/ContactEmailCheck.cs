@@ -1,7 +1,5 @@
-﻿using CSDemo.Configuration.Facets;
-using Sitecore.Analytics.Automation.Rules.Workflows;
+﻿using Sitecore.Analytics.Automation.Rules.Workflows;
 using Sitecore.Analytics.Model.Entities;
-using Sitecore.Analytics.Tracking;
 using Sitecore.Rules;
 using Sitecore.Rules.Conditions;
 

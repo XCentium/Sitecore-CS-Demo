@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿#region
+
+using System.Linq;
 using Sitecore;
 using Sitecore.Data.ItemResolvers;
 using Sitecore.Data.Items;
@@ -8,7 +10,8 @@ using Sitecore.Globalization;
 using Sitecore.IO;
 using Sitecore.Pipelines.HttpRequest;
 using Sitecore.SecurityModel;
-using Sitecore.Sites;
+using Sitecore.Sites; 
+#endregion
 
 namespace CSDemo.Configuration
 {
@@ -20,7 +23,7 @@ namespace CSDemo.Configuration
         /// <summary>
         /// Item path resolver.
         /// </summary>
-        private ItemPathResolver pathResolver;
+        private ItemPathResolver _pathResolver;
 
         /// <summary>
         /// Gets or sets item path resolver.
@@ -30,15 +33,15 @@ namespace CSDemo.Configuration
         {
             get
             {
-                if (this.pathResolver == null)
+                if (this._pathResolver == null)
                 {
-                    this.pathResolver = new ContentItemPathResolver();
+                    this._pathResolver = new ContentItemPathResolver();
                 }
-                return this.pathResolver;
+                return this._pathResolver;
             }
             set
             {
-                this.pathResolver = value;
+                this._pathResolver = value;
             }
         }
 

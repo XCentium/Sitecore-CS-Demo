@@ -5,16 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Script.Services;
 using System.Web.Services;
-using CSDemo.Models.Cart;
 using CSDemo.Models.Checkout.Cart;
 using Sitecore.Analytics.Data.Items;
 using Sitecore.Analytics;
-using Sitecore.Analytics.Outcome.Extensions;
-using Sitecore.Analytics.Outcome.Model;
-using Sitecore.Data;
 using Sitecore.Diagnostics;
-using Sitecore.Analytics.Model.Framework;
-using CSDemo.Configuration.Facets;
 
 #endregion
 
@@ -27,17 +21,17 @@ namespace CSDemo.AJAX
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [ScriptService]
     [System.ComponentModel.ToolboxItem(false)]
-    public class Cart : System.Web.Services.WebService
+    public class Cart : WebService
     {
         [WebMethod(EnableSession = true)]
-        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public ShoppingCart LoadCart()
         {
             return CartHelper.GetMiniCart();
         }
 
         [WebMethod(EnableSession = true)]
-        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string CheckIfCommerceActionsAllowed()
         {
             if (!string.IsNullOrEmpty(ActionAllowed)) { return ActionAllowed; }
@@ -46,32 +40,27 @@ namespace CSDemo.AJAX
         }
 
         [WebMethod(EnableSession = true)]
-        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
-        public string AddProductToCart(string Quantity, string ProductId, string CatalogName, string VariantId, string contextItemId)
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string AddProductToCart(string quantity, string productId, string catalogName, string variantId, string contextItemId)
         {
-            var ret = string.Empty;
-            ret = CartHelper.AddProductToCart(Quantity, ProductId, CatalogName, VariantId);
+            var ret = CartHelper.AddProductToCart(quantity, productId, catalogName, variantId);
             RegisterGoal(Constants.Marketing.AddToCartGoalId, contextItemId);
             return ret;
         }
 
         [WebMethod(EnableSession = true)]
-        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string SubmitOrder(string contextItemId, string orderTotal)
         {
-            string ret;
-            ret = CartHelper.SubmitCart();
+            string ret = CartHelper.SubmitCart();
             RegisterGoal(Constants.Marketing.SubmitOrderGoalId, contextItemId);
-            //RegisterOutcome(new ID(Constants.Marketing.PurchaseOutcomeDefinitionId));
-          
-            // SavePurchaseAmount(orderTotal); // Throwing error, so commented out
             return ret;
         }
 
 
         
         [WebMethod(EnableSession = true)]
-        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public bool ApplyShippingAndBillingToCart(string firstname, string lastname, string email, string company,
             string address, string addressline1, string city, string country, string fax, string phone, string zip,
             string firstname2, string lastname2, string email2, string company2, string address2, string addressline12,
@@ -85,14 +74,14 @@ namespace CSDemo.AJAX
         }
 
         [WebMethod(EnableSession = true)]
-        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public bool ApplyShippingMethodToCart(string shippingMethodId)
         {
             return CartHelper.AddShippingMethodToCart(shippingMethodId);
         }
 
         [WebMethod(EnableSession = true)]
-        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public bool ApplyPaymentMethodToCart(string paymentExternalID, string nameoncard, string creditcard,
             string expmonth, string expyear, string ccv)
         {
@@ -101,20 +90,20 @@ namespace CSDemo.AJAX
 
 
         [WebMethod(EnableSession = true)]
-        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
-        public bool RemoveFromCart(string externalID)
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public bool RemoveFromCart(string externalId)
         {
-            return CartHelper.RemoveItemFromCart(externalID);
+            return CartHelper.RemoveItemFromCart(externalId);
         }
 
         public struct CurrentCartItem
         {
-            public string ExternalID { get; set; }
+            public string ExternalId { get; set; }
             public string Quantity { get; set; }
         }
 
         [WebMethod(EnableSession = true)]
-        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public bool UpdateCartList(List<CurrentCartItem> currentCartItems)
         {
             // check if user is logged in and not commerce customer, if true, return false
@@ -132,7 +121,7 @@ namespace CSDemo.AJAX
 
                 if (q.All(Char.IsDigit))
                 {
-                    ret = CartHelper.UpdateCartItem(c.ExternalID, q);
+                    ret = CartHelper.UpdateCartItem(c.ExternalId, q);
                 }
             }
 
@@ -140,7 +129,7 @@ namespace CSDemo.AJAX
         }
 
         [WebMethod(EnableSession = true)]
-        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public bool ApplyPromoCode(string promoCode)
         {
             if(string.IsNullOrEmpty(promoCode.Trim())) return false;
@@ -152,24 +141,14 @@ namespace CSDemo.AJAX
         public string ActionAllowed { get; set; }
         public Cart()
         {
-            this.CartHelper = new CartHelper();
+            CartHelper = new CartHelper();
 
-            this.ActionAllowed = this.CartHelper.CustomerOrAnonymous();
+            ActionAllowed = CartHelper.CustomerOrAnonymous();
         }
 
 
 
         #region Private Helpers
-
-        private void SavePurchaseAmount(string orderTotal)
-        {
-            decimal amount = 0;
-            if (string.IsNullOrWhiteSpace(orderTotal) || Tracker.Current.Contact == null || !decimal.TryParse(orderTotal, out amount)) return;
-            var lastOrderTotalFacet = Tracker.Current.Contact.GetFacet<ILastOrderTotal>(LastOrderTotal._FACET_NAME);
-            if (lastOrderTotalFacet == null) return;
-            lastOrderTotalFacet.Updated = DateTime.Now.ToUniversalTime();
-            lastOrderTotalFacet.Amount = amount;
-        }
 
         private void RegisterGoal(string goalId, string itemId)
         {
@@ -211,18 +190,6 @@ namespace CSDemo.AJAX
             }
         }
 
-        private void RegisterOutcome(ID outcomeDefinitionId)
-        {
-            try
-            {
-                var outcome = new ContactOutcome(ID.NewID, outcomeDefinitionId, new ID(Tracker.Current.Contact.ContactId));
-                Tracker.Current.RegisterContactOutcome(outcome);
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Unable to register a goal with ID " + outcomeDefinitionId, ex);
-            }
-        }
 
         #endregion
     }

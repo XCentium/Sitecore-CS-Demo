@@ -1,5 +1,4 @@
 using Glass.Mapper.Sc.Fields;
-using Sitecore.Syndication;
 
 namespace CSDemo.Contracts.Navigation
 {

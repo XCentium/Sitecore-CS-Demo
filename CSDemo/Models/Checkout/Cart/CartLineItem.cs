@@ -1,4 +1,4 @@
-﻿namespace CSDemo.Models.Cart
+﻿namespace CSDemo.Models.Checkout.Cart
 {
     public class CartLineItem
     {

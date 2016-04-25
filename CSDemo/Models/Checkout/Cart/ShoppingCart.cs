@@ -3,9 +3,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 #endregion
 
-namespace CSDemo.Models.Cart
+namespace CSDemo.Models.Checkout.Cart
 {
     [Serializable]
     public class ShoppingCart
@@ -20,7 +21,7 @@ namespace CSDemo.Models.Cart
 
         public Decimal LineTotal { get; set; }
 
-        private Decimal productsTotal;
+        private Decimal _productsTotal;
         public Decimal ProductsTotal { 
             
             get
@@ -30,37 +31,41 @@ namespace CSDemo.Models.Cart
             
             set
             {
-                productsTotal = value;
+                _productsTotal = value;
             } 
         }
 
 
         public Decimal Tax { get; set; }
 
-        private Decimal grandTotal;
+        private Decimal _grandTotal;
 
         public Decimal GrandTotal {
 
             get
             {
-                if (this.grandTotal > 0) { return this.grandTotal; }
+                if (this._grandTotal > 0)
+                {
+                    return (this._grandTotal > (this.LineTotal + this.Tax - this.Shipping)) ? this.LineTotal + this.Tax - this.Shipping : this._grandTotal; 
+                    
+                }
                 return this.LineTotal + this.Tax - this.Shipping; 
             }
 
 
             set
             {
-                grandTotal = value;
+                _grandTotal = value;
             }
         
         }
 
-        private Decimal discount;
+        private Decimal _discount;
 
         public Decimal Discount
         {
             get { return this.GetDiscount(); }
-            set { discount = value; }
+            set { _discount = value; }
         }
         
 

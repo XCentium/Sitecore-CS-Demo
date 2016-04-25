@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CSDemo
+﻿namespace CSDemo
 {
     public class Constants
     {
@@ -64,12 +59,14 @@ namespace CSDemo
 
             public const string ProductBaseTemplateId = "{225F8638-2611-4841-9B89-19A5440A1DA1}";
             public const string CategoryBaseTemplateId = "{4C4FD207-A9F7-443D-B32A-50AA33523661}";
-            // public const string CategoriesAliasItemId = "{9FB913A0-E51D-426B-9AC3-F99FD71BA08C}";
             public const string PurchaseOutcomeId = "{9016E456-95CB-42E9-AD58-997D6D77AE83}";
             public const string ProductTagsFieldId = "{CB2364DB-F3ED-46D2-AAC4-CFE3A280E7DD}";
             public const string ProductTagNameFieldId = "{B5620C00-330B-479E-9B54-57857040E1E0}";
 
             public const string DefaultSocialDomainForCommerce = "CommerceUsers";
+
+            public const string CommerceCustomerId = "scommerce_customer_id";
+            public const string CommerceUserId = "user_id";
         }
 
         public struct Marketing
@@ -80,11 +77,17 @@ namespace CSDemo
             public const string StockNotificationEngagementPlanId = "{B8249271-2721-4A1F-BBFA-9F52D5A9B5F2}";
         }
 
-        public struct Pages
+        public struct Account
         {
-            // public const string ProductDetailPageId = "{94377B9C-75CE-4D60-AB6F-4CF627E0A8EC}";
-            // public const string CategoriesListingPageId = "{3C5BBD6A-528F-4807-BAF0-20F238F16C0A}";
+            public const string CustomerPhotoPath = "/sitecore/media library/CSDemo/Customers/";
+            public const string FacetEmail = "Emails";
+            public const string PersonalEmail = "Personal Email";
+            public const string FacetPersonal = "Personal";
+            public const string FacetPicture = "Picture";
+            public const string JobTitle = "Customer";
+
         }
+
 
         public struct Sitecore
         {
@@ -101,9 +104,16 @@ namespace CSDemo
 
         }
 
+        public struct Page
+        {
+            public const string MetaDescription = "Meta Description";
+            public const string PageTitle = "Page Title";
+
+        }
+
         public struct Products
         {
-            public const string IDSeparator = "|";
+            public const string IdSeparator = "|";
             public const string ParameterKey = "Product Categories";
             public const string PageSize = "PageSize";
             public const string ImagesField = "Images";
@@ -119,7 +129,7 @@ namespace CSDemo
             public const string OrderByPriceDesc = "Price: high to low";
             public const string BillingAddress = "Billing";
             public const string ShippingAddress = "Shipping";
-            public const string VariantIDFormat = "_{0}";
+            public const string VariantIdFormat = "_{0}";
             public const string CurrencyFormat = "C2";
             public const string CurrencyDecimalFormat = "c";
             public const string DateFormat = "MMMM dd, yyyy hh:mm";
@@ -129,8 +139,10 @@ namespace CSDemo
             public const string VariantColorDisplayNone = "None";
             public const string VariantColorLineFormat = "{0}|{1}|{2}";
             public const string VariantColorNameFormat = "{0}{1}";
+            public const string VariantImage1 = "Image1";
+            public const string VariantFirstImage = "Variant_Image1";
             public const string TrackingFieldId = "{B0A67B2A-8B07-4E0B-8809-69F751709806}";
-            public const string AlsoBoughtProductsURL = "http://xcp13n.xcentium.net/api/data/relatedproducts/csdemo/{0}";
+            public const string AlsoBoughtProductsUrl = "http://xcp13n.xcentium.net/api/data/relatedproducts/csdemo/{0}";
             public const string AdventureWorksRootPath = "/sitecore/Commerce/Catalog Management/Catalogs/Adventure Works Catalog/Departments";
         }
 

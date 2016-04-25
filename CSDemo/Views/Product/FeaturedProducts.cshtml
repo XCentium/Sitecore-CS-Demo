@@ -1,7 +1,4 @@
-﻿@using Sitecore.Links;
-@using Sitecore.Mvc;
-@using Sitecore.Resources.Media;
-@using System.Linq;
+﻿@using System.Linq;
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<CSDemo.Models.Product.Product>>
 @if (Model != null)
 {
@@ -14,7 +11,7 @@
                 <!-- ==========================
                     FEATURED PRODUCT HERO'S
                 =========================== -->
-                @if (Model.Count() > 0)
+                @if (Model.Any())
                 {
                     foreach (var featuredProduct in Model.Take(2).ToList())
                     {

@@ -1,4 +1,6 @@
-﻿using CSDemo.Models.Checkout.Cart;
+﻿#region 
+
+using CSDemo.Models.Checkout.Cart;
 using Sitecore.Analytics;
 using Sitecore.Commerce.Entities.Customers;
 using Sitecore.Commerce.Services.Customers;
@@ -7,8 +9,6 @@ using Sitecore.Security.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Analytics.Model.Entities;
 using Sitecore.SecurityModel;
 using Sitecore.Data.Items;
@@ -17,6 +17,7 @@ using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Diagnostics;
 using System.Collections.ObjectModel;
 
+#endregion
 
 namespace CSDemo.Models.Account
 {
@@ -36,9 +37,16 @@ namespace CSDemo.Models.Account
             this._customerServiceProvider = customerServiceProvider;
         }
 
+        /// <summary>
+        /// Log a Commerceuser in
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <param name="persistent"></param>
+        /// <returns></returns>
         public virtual bool Login(string userName, string password, bool persistent)
         {
-            string anonymousUserId = CartHelper.GetVisitorID();
+            string anonymousUserId = CartHelper.GetVisitorId();
 
             var isLoggedIn = AuthenticationManager.Login(userName, password, persistent);
 
@@ -52,13 +60,16 @@ namespace CSDemo.Models.Account
             return isLoggedIn;
         }
 
+        /// <summary>
+        /// Update a user profile in Sitecore
+        /// </summary>
         private void UpdateContactProfile()
         {
             if (Sitecore.Context.User.IsAuthenticated){
 
                 Tracker.Current.Session.Identify(Sitecore.Context.User.Name);
 
-                if (!string.IsNullOrEmpty(GetCommerceUserID(Sitecore.Context.User.Name)))
+                if (!string.IsNullOrEmpty(GetCommerceUserId(Sitecore.Context.User.Name)))
                 {
                     var user = Sitecore.Context.User;
                     Sitecore.Security.UserProfile profile = user.Profile;
@@ -74,23 +85,24 @@ namespace CSDemo.Models.Account
                         if (Sitecore.Analytics.Tracker.Current.Contact != null)
                         {
                             // Update email information Faucet
-                            var emailFacet = Tracker.Current.Contact.GetFacet<IContactEmailAddresses>("Emails");
+                            var emailFacet = Tracker.Current.Contact.GetFacet<IContactEmailAddresses>(Constants.Account.FacetEmail);
+
                             //Check if an work email address already exists for the contact
-                            if (!emailFacet.Entries.Contains("Personal Email"))
+                            if (!emailFacet.Entries.Contains(Constants.Account.PersonalEmail))
                             {
-                                IEmailAddress email = emailFacet.Entries.Create("Personal Email");
+                                IEmailAddress email = emailFacet.Entries.Create(Constants.Account.PersonalEmail);
                                 email.SmtpAddress = customer.Email.Trim();
 
                             }
                             else
                             {
-                                IEmailAddress email = emailFacet.Entries["Personal Email"];
+                                IEmailAddress email = emailFacet.Entries[Constants.Account.PersonalEmail];
                                 email.SmtpAddress = customer.Email.Trim();
                             }
-                            emailFacet.Preferred = "Personal Email";
+                            emailFacet.Preferred = Constants.Account.PersonalEmail;
 
                             // Update personal information Faucet
-                            var personalFacet = Tracker.Current.Contact.GetFacet<IContactPersonalInfo>("Personal");
+                            var personalFacet = Tracker.Current.Contact.GetFacet<IContactPersonalInfo>(Constants.Account.FacetPersonal);
 
                             if (!string.IsNullOrEmpty(customer.FirstName) && !string.IsNullOrEmpty(customer.LastName))
                             {
@@ -99,7 +111,7 @@ namespace CSDemo.Models.Account
                                 //personalFacet.MiddleName = "Middle_Name";
                                 personalFacet.Surname = customer.LastName;
                                 //personalFacet.Gender = "Gender";
-                                personalFacet.JobTitle = "Customer";
+                                personalFacet.JobTitle = Constants.Account.JobTitle;
                                 //personalFacet.BirthDate = new DateTime(1983, 01, 01);
 
                                 using (new SecurityDisabler())
@@ -128,8 +140,8 @@ namespace CSDemo.Models.Account
 
                             }
 
-                            var pictureFacet = Tracker.Current.Contact.GetFacet<IContactPicture>("Picture");
-                            string photoPath = "/sitecore/media library/CSDemo/Customers/" + user.LocalName;
+                            var pictureFacet = Tracker.Current.Contact.GetFacet<IContactPicture>(Constants.Account.FacetPicture);
+                            string photoPath = Constants.Account.CustomerPhotoPath + user.LocalName;
                             MediaItem photoItem = Sitecore.Context.Database.GetItem(photoPath);
 
                             if (photoItem != null)
@@ -152,6 +164,11 @@ namespace CSDemo.Models.Account
             
         }
 
+        /// <summary>
+        /// Get Commerce user
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public virtual CommerceUser GetUser(string userName)
         {
             var request = new GetUserRequest(userName);
@@ -162,6 +179,7 @@ namespace CSDemo.Models.Account
 
             return result.CommerceUser;
         }
+
         /// <summary>
         /// Add essential customer properties to the CommerceUser
         /// </summary>
@@ -170,7 +188,7 @@ namespace CSDemo.Models.Account
         /// <returns></returns>
         private CommerceUser UpdateUserCustomerInfo(string userName, CommerceUser commerceUser)
         {
-            commerceUser.ExternalId = GetCommerceUserID(userName);
+            commerceUser.ExternalId = GetCommerceUserId(userName);
 
             if (!string.IsNullOrEmpty(commerceUser.ExternalId))
             {
@@ -184,27 +202,27 @@ namespace CSDemo.Models.Account
             return commerceUser;
         }
 
-        internal string GetCommerceUserID(string userName)
+        /// <summary>
+        /// Get CommerceuserID of a customer
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        internal string GetCommerceUserId(string userName)
         {
-            // get sitecore account for the user
-            //var user = UserManager.GetUsers().FirstOrDefault(usr => usr.Profile.Name.Equals(userName));
-
-            
-            string commerceUserID = string.Empty;
-
+  
             var user = Sitecore.Security.Accounts.User.FromName(userName, true);
             Sitecore.Security.UserProfile profile = user.Profile;
-            commerceUserID = user.Profile.GetCustomProperty("scommerce_customer_id");
-            if (string.IsNullOrEmpty(commerceUserID))
+            var commerceUserId = user.Profile.GetCustomProperty(Constants.Commerce.CommerceCustomerId);
+            if (string.IsNullOrEmpty(commerceUserId))
             {
-                commerceUserID = profile["user_id"];
-                if (!string.IsNullOrEmpty(commerceUserID))
+                commerceUserId = profile[Constants.Commerce.CommerceUserId];
+                if (!string.IsNullOrEmpty(commerceUserId))
                 {
                     // Create custom profile for scommerce_customer_id
                     // reload the profile
                     using (new Sitecore.Security.Accounts.UserSwitcher(user))
                     {
-                        user.Profile.SetCustomProperty("scommerce_customer_id", commerceUserID);
+                        user.Profile.SetCustomProperty(Constants.Commerce.CommerceCustomerId, commerceUserId);
                         user.Profile.Save();
                         user.Profile.Reload();
                     }
@@ -212,7 +230,7 @@ namespace CSDemo.Models.Account
             }                
                 
    
-            return commerceUserID;
+            return commerceUserId;
 
         }
 
@@ -220,7 +238,7 @@ namespace CSDemo.Models.Account
         /// <summary>
         /// Gets a customer based on an id
         /// </summary>
-        /// <param name="id">The customer to retrieve</param>
+        /// <param name="userExternalId">The customer to retrieve</param>
         /// <returns>The requested customer</returns>
         public virtual CommerceCustomer GetCustomer(string userExternalId)
         {
@@ -230,19 +248,6 @@ namespace CSDemo.Models.Account
 
             if (result.Success)
             {
-                //if (result.CommerceCustomer.Name == null)
-                //{
-                //    result.CommerceCustomer.Name = userExternalId;
-                //    result.CommerceCustomer.ExternalId = userExternalId;
-                //    var newRequest = new UpdateCustomerRequest(result.CommerceCustomer);
-                //    var newResult = this._customerServiceProvider.UpdateCustomer(newRequest);
-                //    if (newResult.Success)
-                //    {
-                //        return newResult.CommerceCustomer;
-                //    }
-                //    throw new ApplicationException(newResult.SystemMessages.Any() ? newResult.SystemMessages[0].Message : "Error");
-                //}
-
                 return result.CommerceCustomer;
             }
 
@@ -260,6 +265,11 @@ namespace CSDemo.Models.Account
             AuthenticationManager.Logout();
         }
 
+        /// <summary>
+        /// Get Account Name
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         internal string GetAccountName(string userName)
         {
             // if email 
@@ -282,7 +292,11 @@ namespace CSDemo.Models.Account
 
         }
 
-
+        /// <summary>
+        /// Add Customer Address
+        /// </summary>
+        /// <param name="customerAddress"></param>
+        /// <returns></returns>
         public virtual bool AddCustomerAddress(Address customerAddress)
         {
 
@@ -327,24 +341,23 @@ namespace CSDemo.Models.Account
                     return false;
                     throw;
 
-
                 }
 
-                //  ----------------------
-                //var parties = new List<Sitecore.Commerce.Entities.Party> { party };
-                //Assert.ArgumentNotNull(customer, "user");
-                //var request = new AddPartiesRequest(customer, parties);
-                //var result = this._customerServiceProvider.AddParties(request);
-                //if (!result.Success)
-                //{
-                //    return false;
-                //}
             }
 
             return true;
         }
 
-        private CommerceCustomer CreateCustomer(CommerceCustomer emptyCustomer, string newCustomerName, CommerceParty BillToParty, CommerceParty ShipToParty, string loggedInUserName)
+        /// <summary>
+        /// Create a new customer
+        /// </summary>
+        /// <param name="emptyCustomer"></param>
+        /// <param name="newCustomerName"></param>
+        /// <param name="billToParty"></param>
+        /// <param name="shipToParty"></param>
+        /// <param name="loggedInUserName"></param>
+        /// <returns></returns>
+        private CommerceCustomer CreateCustomer(CommerceCustomer emptyCustomer, string newCustomerName, CommerceParty billToParty, CommerceParty shipToParty, string loggedInUserName)
         {
             var cust = new CustomerServiceProvider();
             var customer = new CommerceCustomer 
@@ -362,7 +375,7 @@ namespace CSDemo.Models.Account
 
             if (result.Success)
             {
-                var parties = new List<Sitecore.Commerce.Entities.Party> { BillToParty, ShipToParty };
+                var parties = new List<Sitecore.Commerce.Entities.Party> { billToParty, shipToParty };
                 var addPartiesRequest = new AddPartiesRequest(result.CommerceCustomer, parties);
                 var addPartiesResult = cust.AddParties(addPartiesRequest);
                 return result.CommerceCustomer;
@@ -372,7 +385,10 @@ namespace CSDemo.Models.Account
 
         }
 
-
+        /// <summary>
+        /// Get a customer's address
+        /// </summary>
+        /// <returns></returns>
         internal IEnumerable<Address> GetCustomerAddresses()
         {
 
@@ -428,7 +444,6 @@ namespace CSDemo.Models.Account
                     Log.Error(ex.Message,this);
                 }
             }
-
 
             return addresses;
         }

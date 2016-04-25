@@ -1,17 +1,11 @@
-﻿using CSDemo.Configuration.Conditions;
-using CSDemo.Models.Account;
-using Sitecore.Analytics;
-using Sitecore.Analytics.Automation.Rules.Workflows;
-using Sitecore.Analytics.Data;
+﻿using Sitecore.Analytics.Automation.Rules.Workflows;
 using Sitecore.Analytics.Tracking;
 using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.Analytics.Models;
 using Sitecore.Rules;
 using Sitecore.Rules.Conditions;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace CSDemo.Configuration.Conditions
 {

@@ -1,12 +1,11 @@
 ﻿@using Sitecore.Mvc;
-@using CSDemo.Models.Cart;
 @using CSDemo.Models.Checkout.Cart
 
 
 @{
 
     var cartHelper = new CartHelper();
-    CSDemo.Models.Cart.ShoppingCart shoppingCart = cartHelper.GetMiniCart();
+    ShoppingCart shoppingCart = cartHelper.GetMiniCart();
 
 
     var lineTotal = "0.00";
@@ -70,17 +69,17 @@
                                         </thead>
                                         <tbody>
 
-                                            @foreach (CSDemo.Models.Cart.CartItem cartItem in shoppingCart.CartItems)
+                                            @foreach (CartItem cartItem in shoppingCart.CartItems)
                                             {
                                                 var unitPrice = String.Format("{0:0.00}", cartItem.UnitPrice);
                                                 var subTotal = String.Format("{0:0.00}", cartItem.SubTotal);
                                                 <tr>
                                                     <td class="col-xs-1"><img src="@cartItem.ImageUrl" alt="" class="img-responsive"></td>
-                                                    <td class="col-xs-4 col-md-5"><h4><a href="/categories/@cartItem.Category/@cartItem.CSProductId">@cartItem.ProductName</a><small></small></h4></td>
+                                                    <td class="col-xs-4 col-md-5"><h4><a href="/categories/@cartItem.Category/@cartItem.CsProductId">@cartItem.ProductName</a><small></small></h4></td>
                                                     <td class="col-xs-2 text-center"><span>$@unitPrice</span></td>
-                                                    <td class="col-xs-2 col-md-1"><div class="form-group"><input type="text" name="quantity" class="form-control" value="@cartItem.Quantity"><input type="hidden" name="externalID" class="form-control" value="@cartItem.ExternalID"></div></td>
+                                                    <td class="col-xs-2 col-md-1"><div class="form-group"><input type="text" name="quantity" class="form-control" value="@cartItem.Quantity"><input type="hidden" name="externalID" class="form-control" value="@cartItem.ExternalId"></div></td>
                                                     <td class="col-xs-2 text-center"><span><b>$@subTotal</b></span></td>
-                                                    <td class="col-xs-1 text-center"><a href="javascript:void(0)" data-externalid="@cartItem.ExternalID" class="btn btn-primary RemoveProduct"><i class="fa fa-times"></i></a></td>
+                                                    <td class="col-xs-1 text-center"><a href="javascript:void(0)" data-externalid="@cartItem.ExternalId" class="btn btn-primary RemoveProduct"><i class="fa fa-times"></i></a></td>
                                                 </tr>
                                             }
 

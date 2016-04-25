@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Sitecore.Commerce.Entities.Carts;
+﻿using System.Collections.Generic;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 
 namespace CSDemo.Models.Account

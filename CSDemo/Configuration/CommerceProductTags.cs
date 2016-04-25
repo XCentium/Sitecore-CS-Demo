@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#region
+		
+using System.Collections.Generic;
 using System.Linq;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Search.ComputedFields;
@@ -6,6 +8,8 @@ using Sitecore.ContentSearch;
 using Sitecore.Data;
 using Sitecore.Data.Fields;
 using Sitecore.Diagnostics;
+ 
+#endregion
 
 namespace CSDemo.Configuration
 {

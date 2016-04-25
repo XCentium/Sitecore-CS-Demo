@@ -1,13 +1,12 @@
-﻿using CSDemo.Models.Page;
+﻿#region 
+
+using CSDemo.Models.Page;
 using Glass.Mapper.Sc;
 using Sitecore.Data.Items;
 using Sitecore.Mvc.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
+#endregion
 namespace CSDemo.Controllers
 {
     public class PageController : SitecoreController

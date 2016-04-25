@@ -1,7 +1,4 @@
-﻿@using Sitecore.Links;
-@using Sitecore.Mvc;
-@using Sitecore.Resources.Media;
-@using System.Linq;
+﻿@using System.Linq;
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<CSDemo.Models.Product.Product>>
 @if (Model != null && Model.Any())
 {
@@ -27,10 +24,6 @@
                                         {
                                             <img src="@product.Image1" class="img-responsive" style="width: 200px; height: 300px;"/>
                                         }
-                                        @*@*Per Vasiliy, leave out for now*@
-                                        @*<div class="product-quickview">
-                                                <a href="@product.Url" class="btn btn-quickview" data-toggle="modal" data-target="#product-quickview">View Product</a>
-                                            </div>*@
                                     </div>
                                 </div>
                                 <div class="col-sm-9">
@@ -38,7 +31,7 @@
                                         <h3>
                                             <a href="@product.Url">@product.Title</a>
                                         </h3>
-                                        @*Per Vasiliy, add for now*@
+                                        
                                         <div class="product-rating">
                                             <i class="fa fa-star@(product.Rating>0 ? string.Empty:"-o" )"></i>
                                             <i class="fa fa-star@(product.Rating>1 ? string.Empty:"-o" )"></i>
@@ -47,9 +40,6 @@
                                             <i class="fa fa-star@(product.Rating>4 ? string.Empty:"-o" )"></i>
                                         </div>
                                         <span class="price">
-                                            @*Per Vasiliy, leave out for now*@
-                                            @*<ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>*@
-
                                             <ins><span class="amount">@product.Price.ToString("C")</span></ins>
                                         </span>
                                         <br /><br />

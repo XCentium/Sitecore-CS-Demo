@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using CSDemo.Contracts.Navigation;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
-using Glass.Mapper.Sc.Fields;
 using Sitecore.Data.Items;
 
 #endregion
 
-namespace CSDemo.Models.Navigation
+namespace CSDemo.Models.Page.Navigation
 {
     [SitecoreType(AutoMap = true)]
     public class MegaMenuNavigationItem : IMegaMenuNavigationItem

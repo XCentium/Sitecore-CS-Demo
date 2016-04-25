@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using CSDemo.Models.Product;
-using Sitecore.Data.Items;
 
 namespace CSDemo.Contracts.Product
 {

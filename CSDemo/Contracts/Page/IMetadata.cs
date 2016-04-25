@@ -1,8 +1,3 @@
-#region
-
-using XCore.Framework.ItemMapper;
-
-#endregion
 
 namespace CSDemo.Contracts.Page
 {

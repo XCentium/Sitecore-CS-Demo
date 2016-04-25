@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+		
+using System;
 using System.Web.Security;
 using Ninject;
 using Sitecore;
@@ -9,7 +11,8 @@ using Sitecore.SecurityModel;
 using Sitecore.Social.Connector.Pipelines.MatchUser;
 using Sitecore.Social.Infrastructure;
 using Sitecore.Social.Infrastructure.Logging;
-
+ 
+	#endregion
 namespace CSDemo.Configuration.Social
 {
     /// <summary>

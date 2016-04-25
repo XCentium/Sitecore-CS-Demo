@@ -1,9 +1,9 @@
 ﻿#region
 
-using CSDemo.Models.Cart;
 using Sitecore;
 using Sitecore.Mvc.Controllers;
 using System.Web.Mvc;
+using CSDemo.Models.Checkout.Cart;
 
 #endregion
 

@@ -2,8 +2,6 @@
 
 using CSDemo.Contracts.Page;
 using Glass.Mapper.Sc.Configuration.Attributes;
-using XCore.Framework.ItemMapper;
-using XCore.Framework.ItemMapper.Configuration.Attributes;
 
 #endregion
 
@@ -14,9 +12,9 @@ namespace CSDemo.Models.Page
     {
         #region Members
 
-        public const string MetaDescriptionFieldName = "Meta Description";
+        public const string MetaDescriptionFieldName = Constants.Page.MetaDescription;
 
-        public const string PageTitleFieldName = "Page Title";
+        public const string PageTitleFieldName = Constants.Page.PageTitle;
 
         #endregion
 

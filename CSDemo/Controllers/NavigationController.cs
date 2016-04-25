@@ -1,12 +1,10 @@
 ﻿#region
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using CSDemo.Models.Navigation;
+using CSDemo.Models.Page.Navigation;
 using Glass.Mapper.Sc;
-using Sitecore.Data.Items;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Extensions;
 using Sitecore.Mvc.Presentation;

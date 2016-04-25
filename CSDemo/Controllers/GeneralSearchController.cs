@@ -20,7 +20,6 @@ using Sitecore.Mvc.Presentation;
 using Sitecore.SecurityModel;
 using System;
 using CSDemo.Configuration;
-using Sitecore.ContentSearch.Linq.Utilities;
 
 #endregion
 

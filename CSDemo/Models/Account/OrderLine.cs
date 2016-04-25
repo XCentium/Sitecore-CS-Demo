@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CSDemo.Models.Account
+﻿namespace CSDemo.Models.Account
 {
     public class OrderLine
     {

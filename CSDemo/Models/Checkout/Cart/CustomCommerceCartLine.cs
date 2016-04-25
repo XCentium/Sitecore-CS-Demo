@@ -7,7 +7,7 @@ using Sitecore.Data;
 
 #endregion
 
-namespace CSDemo.Models.Cart
+namespace CSDemo.Models.Checkout.Cart
 {
     public class CustomCommerceCartLine : CommerceCartLine
     {
@@ -68,10 +68,10 @@ namespace CSDemo.Models.Cart
 
                     foreach (var id in imageIds)
                     {
-                        var ProductImageItem = Sitecore.Context.Database.GetItem(id);
+                        var productImageItem = Sitecore.Context.Database.GetItem(id);
 
-                        var ImageUrl = "/~/media/" + ProductImageItem.ID.ToShortID() + ".ashx";
-                        this._images.Add(ImageUrl);
+                        var imageUrl = "/~/media/" + productImageItem.ID.ToShortID() + ".ashx";
+                        this._images.Add(imageUrl);
                     }
                 }
 

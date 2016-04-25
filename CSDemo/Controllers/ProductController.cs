@@ -9,27 +9,14 @@ using CSDemo.Models;
 using CSDemo.Models.Product;
 using Glass.Mapper.Sc;
 using Sitecore;
-using Sitecore.Analytics;
-using Sitecore.Analytics.Data.DataAccess.VisitorCache;
-using Sitecore.Commerce.Connect.CommerceServer.Catalog.Fields;
-using Sitecore.Commerce.Connect.CommerceServer.Controls;
 using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.SearchTypes;
-using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Extensions;
 using Sitecore.Mvc.Presentation;
-using Sitecore.Sites;
 using Sitecore.Web;
-using XCore.Framework;
-
-using Sitecore.Analytics;
-using Sitecore.Analytics.Automation;
-using Sitecore.Analytics.Automation.Data;
-using Sitecore.Analytics.Automation.MarketingAutomation;
-using Sitecore.Commerce.Contacts;
 
 #endregion
 
@@ -118,9 +105,9 @@ namespace CSDemo.Controllers
                 model.Category = categoryName;
                 if (!string.IsNullOrEmpty(categoryName))
                 {
-                    var categoryID = ProductHelper.GetItemIDFromName(categoryName, ConfigurationHelper.GetSiteSettingInfo("CategoryParent"));
+                    var categoryId = ProductHelper.GetItemIdFromName(categoryName, ConfigurationHelper.GetSiteSettingInfo("CategoryParent"));
 
-                    if (!string.IsNullOrEmpty(categoryID))
+                    if (!string.IsNullOrEmpty(categoryId))
                     {
                         var rc = RenderingContext.CurrentOrNull;
 
@@ -140,7 +127,7 @@ namespace CSDemo.Controllers
 
                         }
 
-                        model.CategoryID = categoryID;
+                        model.CategoryId = categoryId;
                         model.CurrentPage = 1;
                         model.OrderBy = string.Empty;
 

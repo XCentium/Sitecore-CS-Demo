@@ -4,7 +4,6 @@ using CSDemo.Contracts.Product;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using Glass.Mapper.Sc.Fields;
-using Sitecore.Data.Items;
 using CSDemo.Contracts;
 
 namespace CSDemo.Models.Product

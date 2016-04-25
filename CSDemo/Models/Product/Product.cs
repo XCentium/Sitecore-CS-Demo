@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
-using System.Web.Mvc;
 using CSDemo.Contracts;
 using CSDemo.Contracts.Product;
 using Glass.Mapper.Sc;
@@ -17,7 +16,6 @@ using Sitecore.Commerce.Connect.CommerceServer.Catalog.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Commerce.Entities.Inventory;
 using Sitecore.Data;
-using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Sitecore.Diagnostics;
 using System.Net;
@@ -27,10 +25,7 @@ using Sitecore.Analytics.Automation.MarketingAutomation;
 using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Inventory;
 using Sitecore.Commerce.Contacts;
-using Sitecore.Commerce.Multishop;
-using Sitecore.Commerce.Services;
 using Sitecore.Commerce.Services.Inventory;
-using Sitecore.Configuration;
 
 #endregion
 
@@ -56,7 +51,7 @@ namespace CSDemo.Models.Product
 
                 try
                 {
-                    var url = string.Format(Constants.Products.AlsoBoughtProductsURL, this.ProductId);
+                    var url = string.Format(Constants.Products.AlsoBoughtProductsUrl, this.ProductId);
 
                     var syncClient = new WebClient();
 
@@ -82,7 +77,7 @@ namespace CSDemo.Models.Product
                 if (result.ProductIds == null || !result.ProductIds.Any()) yield return null;
                 foreach (var productId in result.ProductIds)
                 {
-                    var productResult = ProductHelper.GetItemByProductID(productId);
+                    var productResult = ProductHelper.GetItemByProductId(productId);
                     if (productResult != null)
                     {
                         var productItem = productResult.GetItem();
@@ -136,7 +131,7 @@ namespace CSDemo.Models.Product
             get
             {
                 if (ProductId == null) return string.Empty;
-                return string.Format(Constants.Products.VariantIDFormat, ProductId.Replace(Constants.Common.Dash, Constants.Common.Underscore));
+                return string.Format(Constants.Products.VariantIdFormat, ProductId.Replace(Constants.Common.Dash, Constants.Common.Underscore));
 
             }
         }

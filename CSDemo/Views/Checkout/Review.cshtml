@@ -1,5 +1,4 @@
 ﻿@using Sitecore.Mvc;
-@using CSDemo.Models.Cart;
 @using CSDemo.Models.Checkout.Cart
 @using Sitecore.Commerce.Connect.CommerceServer.Orders.Models
 
@@ -7,7 +6,7 @@
 
 
     var cartHelper = new CartHelper();
-    CSDemo.Models.Cart.ShoppingCart shoppingCart = cartHelper.GetMiniCart(true);
+    ShoppingCart shoppingCart = cartHelper.GetMiniCart(true);
 
     var lineTotal = "0.00";
     var discount = "0.00";
@@ -138,13 +137,13 @@
                                         </thead>
                                         <tbody>
 
-                                            @foreach (CSDemo.Models.Cart.CartItem cartItem in shoppingCart.CartItems)
+                                            @foreach (CartItem cartItem in shoppingCart.CartItems)
                                             {
                                                 var unitPrice = String.Format("{0:0.00}", cartItem.UnitPrice);
                                                 var subTotal = String.Format("{0:0.00}", cartItem.SubTotal);
                                                 <tr>
                                                     <td class="col-xs-1"><img src="@cartItem.ImageUrl" alt="" class="img-responsive"></td>
-                                                    <td class="col-xs-4 col-md-5"><h4><a href="/category/@cartItem.Category/@cartItem.CSProductId">@cartItem.ProductName</a><small></small></h4></td>
+                                                    <td class="col-xs-4 col-md-5"><h4><a href="/category/@cartItem.Category/@cartItem.CsProductId">@cartItem.ProductName</a><small></small></h4></td>
                                                     <td class="col-xs-2 text-center"><span>$@unitPrice</span></td>
                                                     <td class="col-xs-2 col-md-1 text-center"><span><b>@cartItem.Quantity</b></span></td>
                                                     <td class="col-xs-2 text-center"><span><b>$@subTotal</b></span></td>

@@ -1,18 +1,12 @@
-﻿@using Sitecore.Mvc
-@using Sitecore.Data
-@using Sitecore.Data.Items
-@using System.Collections.Generic
-@using System.Linq
-@using Glass.Mapper
-@using Sitecore.Mvc.Extensions
+﻿@using System.Linq
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Product.Product>
 @if (Model != null)
 {
-    // CSDEMO#99
+
     string stockLabel = Model.StockInformation != null && Model.StockInformation.Count > 0 ? string.Format("{0:#,###0} In Stock", Convert.ToInt32(Model.StockInformation.Count)) : "Out Of Stock";
     bool isInStock = Model.StockInformation != null && Model.StockInformation.Count > 0;
     // out-of-stock
-    var clickCMD = "add-to-cart";
+    var clickCmd = "add-to-cart";
     <section class="content products">
         <div class="container">
             @using (BeginEditFrame(Model, "Edit Product",
@@ -44,15 +38,15 @@
                         <div class="col-xs-4 product-crousel-parent" style="visibility:hidden">
                             @if (Model.ProductVariants != null)
                             {
-                                var default_variant_img = "variant_img_default";
+                                var defaultVariantImg = "variant_img_default";
                                 foreach (var prodVariant in Model.ProductVariants)
                                 {
                                     var variantAltImages = prodVariant.AltImages();
-                                    if (prodVariant.Variant_Images.Count() > 0 || variantAltImages.Count > 0)
+                                    if (prodVariant.Images.Any() || variantAltImages.Count > 0)
                                     {
 
                                         <div class="product-carousel-wrapper variant_img_@prodVariant.VariantId">
-                                            <div class="variant_images @default_variant_img variant_img_@prodVariant.VariantId">
+                                            <div class="variant_images @defaultVariantImg variant_img_@prodVariant.VariantId">
                                                 <div class="product-carousel">
                                                     @if (variantAltImages != null && variantAltImages.Count > 0)
                                                     {
@@ -66,9 +60,9 @@
                                                     else
                                                     {
 
-                                                        if (prodVariant.Variant_Images != null && prodVariant.Variant_Images.Any())
+                                                        if (prodVariant.Images != null && prodVariant.Images.Any())
                                                         {
-                                                            foreach (var image in prodVariant.Variant_Images)
+                                                            foreach (var image in prodVariant.Images)
                                                             {
                                                                 <div class="item">
                                                                     @RenderImage(image, x => x, new { Width = 538, Height = 538, AS = 1, @class = "img-responsive" }, isEditable: false)
@@ -96,7 +90,7 @@
                                     else
                                     {
                                         <div class="product-carousel-wrapper variant_img_@prodVariant.VariantId">
-                                            <div class="variant_images @default_variant_img variant_img_@prodVariant.VariantId">
+                                            <div class="variant_images @defaultVariantImg variant_img_@prodVariant.VariantId">
                                                 <div class="product-carousel">
                                                     @if (Model.Images != null && Model.Images.Any())
                                                     {
@@ -124,7 +118,7 @@
                                             </div>
                                         </div>
                                     }
-                                    default_variant_img = "";
+                                    defaultVariantImg = "";
                                 }
                             }
                             else
@@ -215,16 +209,10 @@
                                         }
                                         <li><span>Brand</span>@Editable(Model, x => x.Brand)</li>
                                     </ul>
-                                    @*public const string MetalType = "Metal Type";
-                                        public const string KaratPurity = "KaratPurity";
-                                        public const string MetalColor = "Metal Color";
-                                        public const string InsideDimension = "Inside Dimension";
-                                        public const string FabricationMethod = "Fabrication Method";
-                                        public const string ShippingWeight = "Shipping Weight";
-                                        public const string CountryOfOrigin = "Country Of Origin";*@
+
                                     @if (Model.CatalogName.StartsWith("Rio"))
                                     {
-                                        //Add additional rio specific properties
+                                        
                                         <div class="row row-no-padding">
                                             <div class="col-md-3 col-sm-4">
                                                 <table class="rio-meta-table">
@@ -336,8 +324,7 @@
                                                                     <label>Size:</label>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <select name="ProductSize" id="ProductSize" data-objid="#ProductSize" data-num="@Model.VariantProdId" onchange="
-DoProductSizeChange('#ProductSize', '@Model.VariantProdId')" class="form-control ProductSize">
+                                                                    <select name="ProductSize" id="ProductSize" data-objid="#ProductSize" data-num="@Model.VariantProdId" class="form-control ProductSize">
                                                                         @foreach (var size in Model.VariantSize.VariantSizeLines)
                                                                         {
                                                                             <option value="@size.Value">@size.Size</option>
@@ -373,20 +360,20 @@ DoProductSizeChange('#ProductSize', '@Model.VariantProdId')" class="form-control
                                                 }
                                                 @if (!isInStock)
                                                 {
-                                                    clickCMD = "out-of-stock";
+                                                    clickCmd = "out-of-stock";
                                                 }
                                                 <div class="col-md-3 col-sm-12">
-                                                    <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary variant_btn @clickCMD"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary variant_btn @clickCmd"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                     @if (Model.ProductVariants != null)
                                                     {
                                                         foreach (var prodVariant in Model.ProductVariants)
                                                         {
-                                                            clickCMD = "out-of-stock";
+                                                            clickCmd = "out-of-stock";
                                                             if (prodVariant.StockQuantity > 0)
                                                             {
-                                                                clickCMD = "add-to-cart";
+                                                                clickCmd = "add-to-cart";
                                                             }
-                                                            <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary variant_btn variant_btn_@prodVariant.VariantId @clickCMD" style="display: none"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                            <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary variant_btn variant_btn_@prodVariant.VariantId @clickCmd" style="display: none"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                         }
                                                     }
                                                 </div>

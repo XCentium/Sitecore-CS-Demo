@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using CSDemo.Models.Account;
-using CSDemo.Models.Cart;
 using CSDemo.Models.Product;
 using Sitecore;
 using Sitecore.Analytics;
@@ -23,10 +22,8 @@ using Sitecore.Commerce.Services.Customers;
 using Sitecore.Commerce.Services.Inventory;
 using Sitecore.Commerce.Services.Orders;
 using Sitecore.Commerce.Services.Prices;
-using Sitecore.Data;
 using AddPartiesRequest = Sitecore.Commerce.Services.Carts.AddPartiesRequest;
 using UpdatePartiesRequest = Sitecore.Commerce.Services.Carts.UpdatePartiesRequest;
-using Sitecore.Commerce.Entities.Customers;
 
 namespace CSDemo.Models.Checkout.Cart
 {
@@ -46,20 +43,22 @@ namespace CSDemo.Models.Checkout.Cart
             {
                 Tracker.StartTracking();
             }
-            ShopName = Context.Site.Name; // Constants.DefaultSiteName; //
+            ShopName = Context.Site.Name; // Constants.DefaultSiteName; 
             DefaultCartName = CommerceConstants.CartSettings.DefaultCartName;
             _accountService = new AccountHelper(this, new CustomerServiceProvider());
         }
 
-        public string AddProductToCart(string Quantity, string ProductId, string CatalogName, string VariantId)
+        public string AddProductToCart(string quantity, string productId, string catalogName, string variantId)
         {
             var ret = string.Empty;
             // Create cart object
-            var cartLineItem = new CartLineItem();
-            cartLineItem.Quantity = uint.Parse(Quantity);
-            cartLineItem.ProductId = ProductId;
-            cartLineItem.CatalogName = CatalogName;
-            cartLineItem.VariantId = VariantId;
+            var cartLineItem = new CartLineItem
+            {
+                Quantity = uint.Parse(quantity),
+                ProductId = productId,
+                CatalogName = catalogName,
+                VariantId = variantId
+            };
             var cart = AddToCart(cartLineItem);
             if (cart == null || cart.Properties[Constants.Cart.BasketErrors] != null)
             {
@@ -74,12 +73,14 @@ namespace CSDemo.Models.Checkout.Cart
             // create cartitem
             var cartItem = new CommerceCartLine(cartLine.CatalogName, cartLine.ProductId,
                 cartLine.VariantId == "-1" ? null : cartLine.VariantId, cartLine.Quantity);
+
             // update stock in formation
             // push cart to commerce server
             UpdateStockInformation(cartItem, cartLine.CatalogName);
+
             // get userID
-            var visitorID = GetVisitorID();
-            var request = new AddCartLinesRequest(GetCart(visitorID, false), new[] { cartItem });
+            var visitorId = GetVisitorId();
+            var request = new AddCartLinesRequest(GetCart(visitorId, false), new[] { cartItem });
             var info = CartRequestInformation.Get(request);
             if (info == null)
             {
@@ -90,15 +91,17 @@ namespace CSDemo.Models.Checkout.Cart
                 info.Refresh = true;
             }
             var cartResult = _serviceProvider.AddCartLines(request);
+
             // add cart to cache
             var cart = cartResult.Cart as CommerceCart;
             UpdateCartInCache(cart);
-            // return cart
+
+
             return cartResult.Cart as CommerceCart;
         }
 
         /// <summary>
-        ///     CCC
+        ///     AddCart To Cache
         /// </summary>
         /// <param name="cart"></param>
         private void AddCartToCache(CommerceCart cart)
@@ -118,7 +121,7 @@ namespace CSDemo.Models.Checkout.Cart
         }
 
         /// <summary>
-        ///     CCC
+        ///     Create Customer Cart Cookie
         /// </summary>
         /// <param name="customerId"></param>
         private void CreateCustomerCartCookie(string customerId)
@@ -131,30 +134,39 @@ namespace CSDemo.Models.Checkout.Cart
             HttpContext.Current.Response.Cookies.Add(cartCookie);
         }
 
+
+        /// <summary>
+        /// Clear Cart From Cache
+        /// </summary>
         private void ClearCartFromCache()
         {
-            var id = Guid.Parse(GetVisitorID()).ToString("D");
+            var id = Guid.Parse(GetVisitorId()).ToString("D");
             ClearUserCartFromCache(id);
         }
 
-        private void ClearUserCartFromCache(string Userid)
+
+        /// <summary>
+        /// Clear UserCart From Cache
+        /// </summary>
+        /// <param name="userid"></param>
+        private void ClearUserCartFromCache(string userid)
         {
             var cacheProvider = GetCacheProvider();
             if (
                 !cacheProvider.Contains(CommerceConstants.KnownCachePrefixes.Sitecore,
-                    CommerceConstants.KnownCacheNames.CommerceCartCache, Userid))
+                    CommerceConstants.KnownCacheNames.CommerceCartCache, userid))
             {
                 var msg = string.Format(CultureInfo.InvariantCulture,
-                    Constants.Cart.CartInvalidInCache, Userid);
+                    Constants.Cart.CartInvalidInCache, userid);
                 CommerceTrace.Current.Write(msg);
             }
             cacheProvider.RemoveData(CommerceConstants.KnownCachePrefixes.Sitecore,
-                CommerceConstants.KnownCacheNames.CommerceCartCache, Userid);
-            DeleteCustomerCartCookie(Userid);
+                CommerceConstants.KnownCacheNames.CommerceCartCache, userid);
+            DeleteCustomerCartCookie(userid);
         }
 
         /// <summary>
-        ///     CCC
+        ///     Delete Customer Cart Cookie
         /// </summary>
         /// <param name="id"></param>
         private bool DeleteCustomerCartCookie(string id)
@@ -175,7 +187,7 @@ namespace CSDemo.Models.Checkout.Cart
         }
 
         /// <summary>
-        ///     CCC
+        ///     Get Cache Provider
         /// </summary>
         /// <returns></returns>
         private ICacheProvider GetCacheProvider()
@@ -184,6 +196,13 @@ namespace CSDemo.Models.Checkout.Cart
             return cacheProvider;
         }
 
+
+        /// <summary>
+        /// Get cart from Commerce server
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="refreshCart"></param>
+        /// <returns></returns>
         private CommerceCart GetCart(string userName, bool refreshCart = false)
         {
             var request = new LoadCartByNameRequest(ShopName, DefaultCartName, userName);
@@ -201,7 +220,7 @@ namespace CSDemo.Models.Checkout.Cart
         }
 
         /// <summary>
-        ///     CCC
+        ///     Get a commerceuser cart From Cache
         /// </summary>
         /// <param name="customerId"></param>
         /// <returns></returns>
@@ -221,8 +240,8 @@ namespace CSDemo.Models.Checkout.Cart
         }
 
         /// <summary>
-        /// CSDEMO#99
-        /// </summary>
+        /// Get Product Stock Information
+        ///  </summary>
         /// <param name="productId"></param>
         /// <param name="catalogName"></param>
         /// <returns></returns>
@@ -235,15 +254,17 @@ namespace CSDemo.Models.Checkout.Cart
             var products = new List<InventoryProduct>();
             products.Add(commerceInventoryProduct);
 
-            //var products = new List<InventoryProduct>
-            //{
-            //    new CommerceInventoryProduct {ProductId = productId, CatalogName = catalogName}
-            //};
             var stockInfoRequest = new GetStockInformationRequest(ShopName, products, StockDetailsLevel.All);
             var stockInfoResult = _inventoryServiceProvider.GetStockInformation(stockInfoRequest);
             return stockInfoResult.StockInformation.FirstOrDefault();
         }
 
+
+        /// <summary>
+        /// Update Stock Information
+        /// </summary>
+        /// <param name="cartLine"></param>
+        /// <param name="catalogName"></param>
         private void UpdateStockInformation(CommerceCartLine cartLine, string catalogName)
         {
             var products = new List<InventoryProduct>
@@ -292,21 +313,25 @@ namespace CSDemo.Models.Checkout.Cart
             cartLine.Product.ShippingDate = orderableInfo.ShippingDate;
         }
 
-        /// <summary>
-        ///     CCC
-        ///     If visitor is logged in, use the commerce ID else use randomly generated guid and store in cookie
+        /// <summary> 
+        ///  If visitor is logged in, use the commerce ID else use randomly generated guid and store in cookie
         /// </summary>
         /// <returns></returns>
-        public string GetVisitorID()
+        public string GetVisitorId()
         {
             if (Tracker.Current != null && Context.User.IsAuthenticated)
             {
-                return GetLoggedInUserID();
+                return GetLoggedInUserId();
             }
-            return GetAnonymousUserID();
+            return GetAnonymousUserId();
         }
 
-        public string GetLoggedInUserID()
+
+        /// <summary>
+        /// Get LoggedIn UserId
+        /// </summary>
+        /// <returns></returns>
+        public string GetLoggedInUserId()
         {
             if (Tracker.Current != null && Context.User.IsAuthenticated)
             {
@@ -317,10 +342,15 @@ namespace CSDemo.Models.Checkout.Cart
                     return commerceUser.Customers.FirstOrDefault();
                 }
             }
-            return GetAnonymousUserID();
+            return GetAnonymousUserId();
         }
 
-        public string GetAnonymousUserID()
+
+        /// <summary>
+        /// Get Anonymous UserId
+        /// </summary>
+        /// <returns></returns>
+        public string GetAnonymousUserId()
         {
             var VisitorTrackingCookieName = Constants.Cart.VisitorTrackingCookieName;
             var VisitorIdKeyName = Constants.Cart.VisitorIdKeyName;
@@ -336,14 +366,19 @@ namespace CSDemo.Models.Checkout.Cart
             return visitorCookie.Values[VisitorIdKeyName];
         }
 
+
+        /// <summary>
+        /// Get Customer Cart
+        /// </summary>
+        /// <returns></returns>
         public CommerceCart GetCustomerCart()
         {
             // Get visitor's cart from cache
-            var cart = GetFromCacheCart(GetVisitorID());
-            if (cart == null && CustomerHasCookie(GetVisitorID()))
+            var cart = GetFromCacheCart(GetVisitorId());
+            if (cart == null && CustomerHasCookie(GetVisitorId()))
             {
                 // cart exists, but cart cache is empty; lets get it and add it
-                cart = GetCart(GetVisitorID(), true);
+                cart = GetCart(GetVisitorId(), true);
                 if (cart != null)
                 {
                     AddCartToCache(cart);
@@ -353,13 +388,13 @@ namespace CSDemo.Models.Checkout.Cart
         }
 
         /// <summary>
-        /// CCC
+        /// Get Mini Cart
         /// </summary>
         /// <param name="cartFromCommServer"></param>
         /// <returns></returns>
         public ShoppingCart GetMiniCart(bool cartFromCommServer = false)
         {
-            var cart = cartFromCommServer == true ? GetCart(GetVisitorID(), true) : GetCustomerCart();
+            var cart = cartFromCommServer == true ? GetCart(GetVisitorId(), true) : GetCustomerCart();
             var shoppingCartTotal = cart.Total as CommerceTotal;
             var shoppingCart = new ShoppingCart();
             if (cart == null || shoppingCartTotal == null) return shoppingCart;
@@ -390,9 +425,9 @@ namespace CSDemo.Models.Checkout.Cart
                         var item = productSItemSearch.GetItem();
                         if (item != null)
                         {
-                            cartItem.ProductID = item.ID.ToString();
+                            cartItem.ProductId = item.ID.ToString();
 
-                            cartItem.ImageUrl = (!string.IsNullOrEmpty(item["Image1"])) ? item["Image1"] : ProductHelper.GetFirstImageFromProductItem(item);
+                            cartItem.ImageUrl = (!string.IsNullOrEmpty(item[Constants.Products.VariantImage1])) ? item[Constants.Products.VariantImage1] : ProductHelper.GetFirstImageFromProductItem(item);
 
                             // If it is a variant and there is an image for the variant, lets use that.
                             if (!string.IsNullOrEmpty(product.ProductVariantId) && product.ProductVariantId != "-1")
@@ -403,7 +438,7 @@ namespace CSDemo.Models.Checkout.Cart
 
                                 if (variantItem != null)
                                 {
-                                    cartItem.ImageUrl = (!string.IsNullOrEmpty(variantItem["Variant_Image1"])) ? variantItem["Variant_Image1"] : cartItem.ImageUrl;
+                                    cartItem.ImageUrl = (!string.IsNullOrEmpty(variantItem[Constants.Products.VariantFirstImage])) ? variantItem[Constants.Products.VariantFirstImage] : cartItem.ImageUrl;
                                 }
                             }
 
@@ -416,12 +451,11 @@ namespace CSDemo.Models.Checkout.Cart
                         }
                     }
 
-
-                    cartItem.CSProductId = product.ProductId;
+                    cartItem.CsProductId = product.ProductId;
                     cartItem.Quantity = (int)cartLine.Quantity;
                     cartItem.UnitPrice = product.Price.Amount;
                     cartItem.SubTotal = cartLine.Total.Amount;
-                    cartItem.ExternalID = cartLine.ExternalCartLineId;
+                    cartItem.ExternalId = cartLine.ExternalCartLineId;
 
                     if (string.IsNullOrEmpty(cartItem.ImageUrl))
                     {
@@ -430,6 +464,7 @@ namespace CSDemo.Models.Checkout.Cart
                             cartItem.ImageUrl = cartLine.Images[0];
                         }
                     }
+
                     //var images = cartLine.
                     cartItems.Add(cartItem);
                 }
@@ -441,7 +476,7 @@ namespace CSDemo.Models.Checkout.Cart
 
 
         /// <summary>
-        ///     CCC
+        ///   Check if a Customer Has Cookie
         /// </summary>
         /// <param name="customerId"></param>
         /// <returns></returns>
@@ -452,6 +487,32 @@ namespace CSDemo.Models.Checkout.Cart
             return cartCookie != null && cartCookie.Values[Constants.Cart.VisitorID] == customerId;
         }
 
+        /// <summary>
+        /// Apply Shipping and Billing to Cart
+        /// </summary>
+        /// <param name="firstname"></param>
+        /// <param name="lastname"></param>
+        /// <param name="email"></param>
+        /// <param name="company"></param>
+        /// <param name="address"></param>
+        /// <param name="addressline1"></param>
+        /// <param name="city"></param>
+        /// <param name="country"></param>
+        /// <param name="fax"></param>
+        /// <param name="phone"></param>
+        /// <param name="zip"></param>
+        /// <param name="firstname2"></param>
+        /// <param name="lastname2"></param>
+        /// <param name="email2"></param>
+        /// <param name="company2"></param>
+        /// <param name="address2"></param>
+        /// <param name="addressline12"></param>
+        /// <param name="city2"></param>
+        /// <param name="country2"></param>
+        /// <param name="fax2"></param>
+        /// <param name="phone2"></param>
+        /// <param name="zip2"></param>
+        /// <returns></returns>
         internal bool ApplyShippingAndBillingToCart(string firstname, string lastname, string email, string company,
             string address, string addressline1, string city, string country, string fax, string phone, string zip,
             string firstname2, string lastname2, string email2, string company2, string address2, string addressline12,
@@ -499,13 +560,14 @@ namespace CSDemo.Models.Checkout.Cart
             shipping.FaxNumber = fax2;
             shipping.Country = country2;
             updatedCart = UpdatePartiesInCart(updatedCart, new List<CommerceParty> { billing, shipping });
+
             // clear cart cache and add updated cart to cache
             UpdateCartInCache(updatedCart);
             return true;
         }
 
         /// <summary>
-        ///     Update a changed cart in cache
+        ///  Update an updated cart in cache
         /// </summary>
         /// <param name="updatedCart"></param>
         private void UpdateCartInCache(CommerceCart updatedCart)
@@ -523,6 +585,12 @@ namespace CSDemo.Models.Checkout.Cart
             }
         }
 
+        /// <summary>
+        /// Update Parties In Cart
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="parties"></param>
+        /// <returns></returns>
         private CommerceCart UpdatePartiesInCart(CommerceCart cart, List<CommerceParty> parties)
         {
             if (!parties.Any())
@@ -535,7 +603,7 @@ namespace CSDemo.Models.Checkout.Cart
         }
 
         /// <summary>
-        ///     CCC
+        ///   Check For Party Info in Cart
         /// </summary>
         /// <param name="cart"></param>
         /// <returns></returns>
@@ -563,6 +631,12 @@ namespace CSDemo.Models.Checkout.Cart
             return updatedCart;
         }
 
+        /// <summary>
+        /// Add Party to Cart
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="party"></param>
+        /// <returns></returns>
         public CommerceCart AddPartyToCart([NotNull] CommerceCart cart, [NotNull] CommerceParty party)
         {
             var request = new AddPartiesRequest(cart, new List<Party> { party });
@@ -570,10 +644,16 @@ namespace CSDemo.Models.Checkout.Cart
             return result.Cart as CommerceCart;
         }
 
+        /// <summary>
+        /// Add Shipping Method to Cart
+        /// </summary>
+        /// <param name="shippingMethodId"></param>
+        /// <returns></returns>
         internal bool AddShippingMethodToCart(string shippingMethodId)
         {
             var cart = GetCustomerCart();
             var updatedCart = cart;
+
             // if shippingMethodId is not empty, get Shipping Party, if shipping party is not empty, apply shippingMethodId to cart, refresh cart cache
             if (!string.IsNullOrEmpty(shippingMethodId))
             {
@@ -584,12 +664,13 @@ namespace CSDemo.Models.Checkout.Cart
                     updatedCart = AddShippingMethodInfoToCart(cart, shipping, shippingMethodId);
                 }
             }
+
             UpdateCartInCache(updatedCart);
             return true;
         }
 
         /// <summary>
-        ///     CCC
+        ///   Add Shipping Method Info to Cart
         /// </summary>
         /// <param name="cart"></param>
         /// <param name="shipping"></param>
@@ -620,23 +701,35 @@ namespace CSDemo.Models.Checkout.Cart
             return result.Cart as CommerceCart;
         }
 
-        internal bool ApplyPaymentMethodToCart(string paymentExternalID, string nameoncard, string creditcard,
+        /// <summary>
+        /// Apply PaymentMethod to Cart
+        /// </summary>
+        /// <param name="paymentExternalId"></param>
+        /// <param name="nameoncard"></param>
+        /// <param name="creditcard"></param>
+        /// <param name="expmonth"></param>
+        /// <param name="expyear"></param>
+        /// <param name="ccv"></param>
+        /// <returns></returns>
+        internal bool ApplyPaymentMethodToCart(string paymentExternalId, string nameoncard, string creditcard,
             string expmonth, string expyear, string ccv)
         {
             var cart = GetCustomerCart();
             var updatedCart = cart;
+
             // remove all payment info on cart
             updatedCart = RemovePaymentInfoFromCart(cart, cart.Payment.ToList());
+
             // add payment info to cart
             // get billing, if billing is not null 
-            if (!string.IsNullOrEmpty(paymentExternalID))
+            if (!string.IsNullOrEmpty(paymentExternalId))
             {
                 var billing = updatedCart.Parties.Cast<CommerceParty>().FirstOrDefault(party => party.Name == Constants.Products.BillingAddress);
                 if (billing != null)
                 {
                     var paymentInfo = new CommerceCreditCardPaymentInfo();
-                    paymentInfo.ExternalId = paymentExternalID;
-                    paymentInfo.PaymentMethodID = paymentExternalID;
+                    paymentInfo.ExternalId = paymentExternalId;
+                    paymentInfo.PaymentMethodID = paymentExternalId;
                     paymentInfo.CustomerNameOnPayment = nameoncard;
                     paymentInfo.CreditCardNumber = creditcard;
                     paymentInfo.ExpirationMonth = int.Parse(expmonth);
@@ -645,10 +738,19 @@ namespace CSDemo.Models.Checkout.Cart
                     updatedCart = AddPaymentInfoToCart(updatedCart, paymentInfo, billing, true);
                 }
             }
+
             UpdateCartInCache(updatedCart);
             return true;
         }
 
+        /// <summary>
+        /// Add Payment Info to Cart
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="info"></param>
+        /// <param name="party"></param>
+        /// <param name="refresh"></param>
+        /// <returns></returns>
         private CommerceCart AddPaymentInfoToCart(CommerceCart cart, CommerceCreditCardPaymentInfo info,
             CommerceParty party, bool refresh)
         {
@@ -669,6 +771,12 @@ namespace CSDemo.Models.Checkout.Cart
             return paymentResult.Cart as CommerceCart;
         }
 
+        /// <summary>
+        /// Remove Payment Info From Cart
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="list"></param>
+        /// <returns></returns>
         private CommerceCart RemovePaymentInfoFromCart(CommerceCart cart, List<PaymentInfo> list)
         {
             var removePaymentRequest = new RemovePaymentInfoRequest(cart, list);
@@ -686,14 +794,20 @@ namespace CSDemo.Models.Checkout.Cart
             ;
         }
 
+        /// <summary>
+        /// Submit Cart to Commerce Server
+        /// </summary>
+        /// <returns></returns>
         internal string SubmitCart()
         {
             var ret = string.Empty;
             var cart = GetCustomerCart();
+
             // check for cart errors 
             if (cart.Properties[Constants.Cart.BasketErrors] == null)
             {
                 var submitResult = SubmitOrder(cart);
+
                 // check for submit order errors
                 if (submitResult.CartWithErrors == null)
                 {
@@ -710,6 +824,11 @@ namespace CSDemo.Models.Checkout.Cart
             return ret;
         }
 
+        /// <summary>
+        /// Submit Order
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <returns></returns>
         private SubmitVisitorOrderResult SubmitOrder(CommerceCart cart)
         {
             var submitRequest = new SubmitVisitorOrderRequest(cart);
@@ -727,6 +846,11 @@ namespace CSDemo.Models.Checkout.Cart
             return submitResult;
         }
 
+        /// <summary>
+        /// Remove item from Commerce Server Cart
+        /// </summary>
+        /// <param name="externalCartLineId"></param>
+        /// <returns></returns>
         internal bool RemoveItemFromCart(string externalCartLineId)
         {
             try
@@ -734,7 +858,7 @@ namespace CSDemo.Models.Checkout.Cart
                 var cart = RemoveFromCart(externalCartLineId);
                 ClearCartFromCache();
                 AddCartToCache(cart);
-//                UpdateCartInCache(cart);
+
                 return true;
             }
             catch (Exception ex)
@@ -745,7 +869,7 @@ namespace CSDemo.Models.Checkout.Cart
         }
 
         /// <summary>
-        ///     CCC
+        ///   Remove Item From Cart
         /// </summary>
         /// <param name="externalCartLineId"></param>
         /// <returns></returns>
@@ -772,12 +896,12 @@ namespace CSDemo.Models.Checkout.Cart
         }
 
         /// <summary>
-        ///     CCC
+        ///   Update Cart Item
         /// </summary>
-        /// <param name="externalID"></param>
+        /// <param name="externalId"></param>
         /// <param name="quantity"></param>
         /// <returns></returns>
-        internal bool UpdateCartItem(string externalID, string quantity)
+        internal bool UpdateCartItem(string externalId, string quantity)
         {
             try
             {
@@ -785,7 +909,7 @@ namespace CSDemo.Models.Checkout.Cart
                 // get the current cart quantity
                 // if current new quantity is greater tnan current, Add new-current to cart
                 // if less remove the item and add new
-                var cart = ChangeCartItemQuantity(externalID, quantity);
+                var cart = ChangeCartItemQuantity(externalId, quantity);
                 ClearCartFromCache();
                 AddCartToCache(cart);
                 return true;
@@ -798,7 +922,7 @@ namespace CSDemo.Models.Checkout.Cart
         }
 
         /// <summary>
-        ///     CCC
+        ///   Change Cart Item Quantity
         /// </summary>
         /// <param name="externalCartLineId"></param>
         /// <param name="q"></param>
@@ -832,9 +956,14 @@ namespace CSDemo.Models.Checkout.Cart
             return cartResult.Cart as CommerceCart;
         }
 
+        /// <summary>
+        /// Merge anonymous user cart after login
+        /// </summary>
+        /// <param name="anonymousUserId"></param>
+        /// <returns></returns>
         public CommerceCart MergeCarts(string anonymousUserId)
         {
-            var userId = GetLoggedInUserID();
+            var userId = GetLoggedInUserId();
             var currentCart = GetCart(userId);
             if (userId != anonymousUserId)
             {
@@ -850,6 +979,13 @@ namespace CSDemo.Models.Checkout.Cart
             return currentCart;
         }
 
+
+        /// <summary>
+        /// Merge two carts
+        /// </summary>
+        /// <param name="userCart"></param>
+        /// <param name="anonymousCart"></param>
+        /// <returns></returns>
         private CommerceCart MergeCarts(CommerceCart userCart, CommerceCart anonymousCart)
         {
             if ((userCart.ShopName == anonymousCart.ShopName) && (userCart.ExternalId != anonymousCart.ExternalId))
@@ -874,7 +1010,7 @@ namespace CSDemo.Models.Checkout.Cart
         }
 
         /// <summary>
-        ///     Only Anonymous and customers allowed
+        ///  Only Anonymous and customers allowed
         /// </summary>
         /// <returns></returns>
         internal string CustomerOrAnonymous()
@@ -882,7 +1018,7 @@ namespace CSDemo.Models.Checkout.Cart
             var ret = string.Empty;
             if (Context.User.IsAuthenticated)
             {
-                var uid = _accountService.GetCommerceUserID(Context.User.Name);
+                var uid = _accountService.GetCommerceUserId(Context.User.Name);
                 if (string.IsNullOrEmpty(uid))
                 {
                     return Constants.Cart.AnonUserActionDenied;
@@ -891,23 +1027,40 @@ namespace CSDemo.Models.Checkout.Cart
             return ret;
         }
 
-        public GetVisitorOrdersResult GetOrders(string customerID, string shopName)
+        /// <summary>
+        /// Get Customer Orders
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <param name="shopName"></param>
+        /// <returns></returns>
+        public GetVisitorOrdersResult GetOrders(string customerId, string shopName)
         {
-            var submitRequest = new GetVisitorOrdersRequest(customerID, shopName);
+            var submitRequest = new GetVisitorOrdersRequest(customerId, shopName);
             var provider = new CommerceOrderServiceProvider();
             var submitResult = provider.GetVisitorOrders(submitRequest);
             return submitResult;
         }
 
-        public GetVisitorOrderResult GetOrderHead(string orderID, string customerID, string shopName)
+        /// <summary>
+        /// Get Visitor Order Result
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <param name="customerId"></param>
+        /// <param name="shopName"></param>
+        /// <returns></returns>
+        public GetVisitorOrderResult GetOrderHead(string orderId, string customerId, string shopName)
         {
-            var submitRequest = new GetVisitorOrderRequest(orderID, customerID, shopName);
+            var submitRequest = new GetVisitorOrderRequest(orderId, customerId, shopName);
             var provider = new CommerceOrderServiceProvider();
             var submitResult = provider.GetVisitorOrder(submitRequest);
             return submitResult;
         }
 
-
+        /// <summary>
+        /// Apply Promo/Coupon Code
+        /// </summary>
+        /// <param name="promoCode"></param>
+        /// <returns></returns>
         internal bool ApplyPromoCode(string promoCode)
         {
             AddPromoCodeResult result = new AddPromoCodeResult { Success = false };

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿#region
+
 using System.Web.Mvc;
 using CSDemo.Models.Account;
 using Sitecore.Mvc.Controllers;
 using CSDemo.Models.Product;
 using CSDemo.Models.Checkout.Cart;
-using Sitecore.Commerce.Entities.Customers;
-using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
-using Sitecore.Commerce.Services.Customers;
 
+#endregion
 namespace CSDemo.Controllers
 {
     public class AccountController : SitecoreController
@@ -43,7 +39,7 @@ namespace CSDemo.Controllers
 
                 var userName = usr.GetAccountName(model.Email);
 
-                var uid = usr.GetCommerceUserID(userName);
+                var uid = usr.GetCommerceUserId(userName);
                 if (string.IsNullOrEmpty(uid))
                 {
                     return this.Redirect("/account/signin?msg=Only Commerce Customers Allowed to Signin");
@@ -105,7 +101,7 @@ namespace CSDemo.Controllers
                     var model = ProductHelper.GetCustomerOrderDetail(orderID, cartHelper);
 
                     // Only show the order detail if the viewer is the rightful owner
-                    if (model.UserID == cartHelper.GetVisitorID())
+                    if (model.UserID == cartHelper.GetVisitorId())
                     {
                         return View(model);
                     }

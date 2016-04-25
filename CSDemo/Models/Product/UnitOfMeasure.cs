@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using CSDemo.Contracts.Product;
 using Glass.Mapper.Sc.Configuration.Attributes;
-using Sitecore.Data.Items;
 
 namespace CSDemo.Models.Product
 {

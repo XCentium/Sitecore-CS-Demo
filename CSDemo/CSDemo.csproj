@@ -192,22 +192,6 @@
       <HintPath>..\packages\Unicorn.Core.3.1.2\lib\net45\Unicorn.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="XCore.CodeGenerator">
-      <HintPath>..\Lib\XCore2.0\XCore.CodeGenerator.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="XCore.Framework">
-      <HintPath>..\Lib\XCore2.0\XCore.Framework.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="XCore.SitecoreExtensions">
-      <HintPath>..\Lib\XCore2.0\XCore.SitecoreExtensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="XCore.Utilities">
-      <HintPath>..\Lib\XCore2.0\XCore.Utilities.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -249,10 +233,7 @@
     <Compile Include="Configuration\Social\CustomMatchUser.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Contracts\GeneralSearch\ISearchInfo.cs" />
-    <Compile Include="Contracts\IComponents.cs" />
     <Compile Include="Contracts\IEditableBase.cs" />
-    <Compile Include="Contracts\ISettings.cs" />
-    <Compile Include="Contracts\ISite.cs" />
     <Compile Include="Contracts\Marquee\ICarouselItem.cs" />
     <Compile Include="Contracts\Navigation\IMegaMenuNavigationItem.cs" />
     <Compile Include="Contracts\Navigation\INavigationItem.cs" />
@@ -310,7 +291,6 @@
     <Compile Include="Models\Product\GeneralCategory.cs" />
     <Compile Include="Models\GeneralSearch\SearchInfo.cs" />
     <Compile Include="Contracts\Product\IGeneralCategory.cs" />
-    <Compile Include="Contracts\Product\Parameters\ICategorylistingConfig.cs" />
     <Compile Include="Models\Product\GetProductPricesRequest.cs" />
     <Compile Include="Models\Product\Product.cs" />
     <Compile Include="Models\GeneralSearch\Search.cs" />
@@ -329,28 +309,7 @@
     <Compile Include="Configuration\CommerceProductTags.cs" />
     <Compile Include="Models\Product\ProductTag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sitecore modules\Web\XCore\CodeGen\CodeGenerationRoot.aspx.cs">
-      <DependentUpon>CodeGenerationRoot.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="sitecore modules\Web\XCore\CodeGen\CodeGenerationRoot.aspx.designer.cs">
-      <DependentUpon>CodeGenerationRoot.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="sitecore modules\Web\XCore\CodeGen\GenerateCode.aspx.cs">
-      <DependentUpon>GenerateCode.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="sitecore modules\Web\XCore\CodeGen\GenerateCode.aspx.designer.cs">
-      <DependentUpon>GenerateCode.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Configuration\CustomLinkProvider.cs" />
-    <Compile Include="sitecore modules\Web\XCore\CodeGen\TagGenerator.aspx.cs">
-      <DependentUpon>TagGenerator.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="sitecore modules\Web\XCore\CodeGen\TagGenerator.aspx.designer.cs">
-      <DependentUpon>TagGenerator.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AJAX\Cart.asmx" />
@@ -455,9 +414,6 @@
     <Content Include="Assets\js\SmoothScroll.js" />
     <Content Include="Assets\js\twitterFetcher_min.js" />
     <Content Include="favicon.ico" />
-    <Content Include="sitecore modules\Web\XCore\CodeGen\CodeGenerationRoot.aspx" />
-    <Content Include="sitecore modules\Web\XCore\CodeGen\GenerateCode.aspx" />
-    <Content Include="sitecore modules\Web\XCore\CodeGen\TagGenerator.aspx" />
     <Content Include="Views\GeneralSearch\SearchResults.cshtml" />
     <Content Include="Views\Product\FeaturedProducts.cshtml" />
     <Content Include="Views\web.config" />

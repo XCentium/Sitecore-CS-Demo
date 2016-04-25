@@ -2,18 +2,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using CSDemo.Contracts;
 using CSDemo.Contracts.Product;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
-using Glass.Mapper.Sc.Fields;
 using Sitecore.Data.Items;
-using CSDemo.Models.Product;
 
 #endregion
 
-namespace CSDemo.Models
+namespace CSDemo.Models.Product
 {
 
 

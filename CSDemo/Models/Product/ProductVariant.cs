@@ -2,14 +2,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using CSDemo.Contracts.Product;
-using Glass.Mapper.Sc.Configuration;
-using Glass.Mapper.Sc.Configuration.Attributes;
-using Glass.Mapper.Sc.Fields;
-using Sitecore.Data.Items;
-using System.Linq;
-using Glass.Mapper.Sc;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using Glass.Mapper.Sc.Fields;
@@ -48,20 +41,9 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.ListPrice)]
         public virtual string ListPrice { get; set; }
 
-        [SitecoreField(Fields.Variant_Images)]
-        public IEnumerable<Image> Variant_Images { get; set; }
+        [SitecoreField(Fields.VariantImages)]
+        public IEnumerable<Image> Images { get; set; }
 
-        //public virtual IEnumerable<Image> Images { 
-            
-        //    get
-        //    {
-        //        if (this.Variant_Images == null) { return null; }
-
-        //        return this.Variant_Images.Select(x => x.GlassCast<Image>());
-
-        //    }
-        
-        //}
 
         [SitecoreField(Fields.ProductSize)]
         public virtual string ProductSize { get; set; }
@@ -87,7 +69,7 @@ namespace CSDemo.Models.Product
         {
             public const string VariantId = "VariantId";
             public const string ListPrice = "ListPrice";
-            public const string Variant_Images = "Variant_Images";
+            public const string VariantImages = "Variant_Images";
             public const string ProductSize = "ProductSize";
             public const string ProductColor = "ProductColor";
             public const string Image1 = "Variant_Image1";

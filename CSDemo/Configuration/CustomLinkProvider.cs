@@ -1,11 +1,10 @@
 ﻿using System.Linq;
-using CSDemo.Configuration;
 using Sitecore;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Links;
 
-namespace CSDemo.SitecorePipelines
+namespace CSDemo.Configuration
 {
     public class CustomLinkProvider : LinkProvider
     {

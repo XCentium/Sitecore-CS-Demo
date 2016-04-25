@@ -1,10 +1,4 @@
-﻿
-using Sitecore.Data.Items;
-using Sitecore.Mvc.Presentation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Sitecore.Mvc.Presentation;
 
 namespace CSDemo.Models.Product
 {
@@ -16,19 +10,15 @@ namespace CSDemo.Models.Product
 
         public string Name { get; set; }
 
-        public string ItemID { get; set; }
+        public string ItemId { get; set; }
 
         public CategoriesViewModel()
         {
             this.Image = string.Empty;
             this.Url = string.Empty;
             this.Name = string.Empty;
-            this.ItemID = string.Empty;
+            this.ItemId = string.Empty;
         }
 
-        public override void Initialize(Rendering rendering)
-        {
-            base.Initialize(rendering);
-        }
     }
 }

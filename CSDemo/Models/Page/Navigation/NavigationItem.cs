@@ -5,14 +5,10 @@ using CSDemo.Contracts.Navigation;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using Glass.Mapper.Sc.Fields;
-using Sitecore.Data.Fields;
-using Sitecore.Data.Items;
-using XCore.Framework.ItemMapper;
-using XCore.Framework.ItemMapper.Configuration.Attributes;
 
 #endregion
 
-namespace CSDemo.Models.Navigation
+namespace CSDemo.Models.Page.Navigation
 {
     [SitecoreType(AutoMap = true)]
     public class NavigationItem : INavigationItem

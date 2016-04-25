@@ -9,19 +9,7 @@ using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 using System.Linq;
 using Sitecore.Diagnostics;
-using Sitecore.DynamicSerialization;
 using Sitecore.Mvc.Extensions;
-using Sitecore.Resources.Media;
-using XCore.Framework;
-using CSDemo.Contracts.Product;
-using Sitecore.Analytics;
-using Sitecore.Analytics.Data;
-using Sitecore.Analytics.Core;
-using Sitecore.Analytics.Tracking;
-using Sitecore.Data;
-using Sitecore.Globalization;
-using System;
-using CSDemo.Models.Product;
 
 #endregion
 
