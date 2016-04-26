@@ -46,7 +46,7 @@ namespace CSDemo.Controllers
 
         public ActionResult Header()
         {
-            return View("~/Views/Page/Header.cshtml");
+            return View();
         }
     }
 }
