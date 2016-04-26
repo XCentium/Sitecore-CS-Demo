@@ -46,10 +46,12 @@ namespace CSDemo.Controllers
 
         public ActionResult Header()
         {
+
             var homeItem = _context.GetHomeItem<Item>();
             if (homeItem == null) return View("~/Views/Page/Header.cshtml",null);
             var rootModel = homeItem.Parent.GlassCast<Root>();
             return View("~/Views/Page/Header.cshtml", rootModel);
+
         }
     }
 }
