@@ -1,76 +1,85 @@
-﻿<div class="top-header hidden-xs">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-5">
-                <ul class="list-inline contacts">
-                    <li><i class="fa fa-envelope"></i> help@xcentium.com</li>
-                    <li><i class="fa fa-phone"></i> 555 555 5555</li>
-                </ul>
-            </div>
-            <div class="col-sm-7 text-right">
-                <ul class="list-inline links">
-                    @if (Sitecore.Context.User.IsAuthenticated)
-                    {
-                        <li>Welcome [@Sitecore.Context.User.Profile.FullName] <a href="~/Account">My account</a></li>
-                    }
-                    <li><a href="~/cart">Cart</a></li>
-                    <li><a href="~/checkout">Checkout</a></li>
-                    @if (Sitecore.Context.User.IsAuthenticated)
-                    {
-                        <li><a href="/account/signoff">Logout</a></li>
-                    }
-                    else
-                    {
-                        <li><a href="/account/signin">Login</a></li>
-                    }
-                </ul>
-                <ul class="list-inline languages hidden-sm">
-                    <li><a href="#"><img src="/assets/images/flags/cz.png" alt="cs_CZ"></a></li>
-                    <li><a href="#"><img src="/assets/images/flags/us.png" alt="en_US"></a></li>
-                    <li><a href="#"><img src="/assets/images/flags/de.png" alt="de_DE"></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<header class="navbar navbar-default navbar-static-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a href="/" class="navbar-brand"><span>RioGrande</span>Demo</a>
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></button>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <!-- ==========================
-                NAVIGATION WITH MEGA MENU - START
-                =========================== -->
-                @Html.Sitecore().Rendering("/sitecore/layout/Renderings/CSDemo/Navigation/Main Navigation", new { Datasource = "/sitecore/content/Rio Grande/Components/Navigation" })
-                <!-- ==========================
-                NAVIGATION WITH MEGA MENU - END
-                =========================== --> 
-                <!-- ==========================
-                CART AND SEARCH NAVIGATION - START
-                =========================== -->
-                <li class="dropdown navbar-cart hidden-xs">
-                    <a href="~/cart" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="300" data-close-others="true"><i class="fa fa-shopping-cart"><span id="cartTotal"></span></i></a>
-                    <ul id="cart-items-list" class="dropdown-menu">
-                        <!-- CART ITEM - START -->
-                        <!-- CART ITEM - END -->
-                    </ul>
-                </li>
-                <li class="dropdown navbar-search hidden-xs">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search"></i></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            @Html.Sitecore().Rendering("/sitecore/layout/Renderings/CSDemo/Search/Search Input", new { Datasource = "/sitecore/content/Rio Grande/Home/Search"})
-                        </li>
-                    </ul>
-                </li>
-                <!-- ==========================
-                CART AND SEARCH NAVIGATION - END
-                =========================== -->
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Page.Root>
+@if (Model != null && !string.IsNullOrWhiteSpace(Model.Path))
+{
 
-            </ul>
+    using (BeginEditFrame(Model.Path))
+    {
+
+        <div class="top-header hidden-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <ul class="list-inline contacts">
+                            <li><i class="fa fa-envelope"></i> @Model.Email</li>
+                            <li><i class="fa fa-phone"></i> @Model.PhoneNumber</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-7 text-right">
+                        <ul class="list-inline links">
+                            @if (Sitecore.Context.User.IsAuthenticated)
+                            {
+                                <li>Welcome [@Sitecore.Context.User.Profile.FullName] <a href="~/Account">My account</a></li>
+                            }
+                            <li><a href="~/cart">Cart</a></li>
+                            <li><a href="~/checkout">Checkout</a></li>
+                            @if (Sitecore.Context.User.IsAuthenticated)
+                            {
+                                <li><a href="/account/signoff">Logout</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/account/signin">Login</a></li>
+                            }
+                        </ul>
+                        <ul class="list-inline languages hidden-sm">
+                            <li><a href="#"><img src="/assets/images/flags/cz.png" alt="cs_CZ"></a></li>
+                            <li><a href="#"><img src="/assets/images/flags/us.png" alt="en_US"></a></li>
+                            <li><a href="#"><img src="/assets/images/flags/de.png" alt="de_DE"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</header>
+        <header class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="/" class="navbar-brand"><span>@Model.PreTitle</span>@Model.Title</a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- ==========================
+                        NAVIGATION WITH MEGA MENU - START
+                        =========================== -->
+                        @Html.Sitecore().Rendering("/sitecore/layout/Renderings/CSDemo/Navigation/Main Navigation", new { Datasource = string.Format("/sitecore/content/{0}/Components/Navigation", Model.Name) })
+                        <!-- ==========================
+                        NAVIGATION WITH MEGA MENU - END
+                        =========================== -->
+                        <!-- ==========================
+                        CART AND SEARCH NAVIGATION - START
+                        =========================== -->
+                        <li class="dropdown navbar-cart hidden-xs">
+                            <a href="~/cart" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="300" data-close-others="true"><i class="fa fa-shopping-cart"><span id="cartTotal"></span></i></a>
+                            <ul id="cart-items-list" class="dropdown-menu">
+                                <!-- CART ITEM - START -->
+                                <!-- CART ITEM - END -->
+                            </ul>
+                        </li>
+                        <li class="dropdown navbar-search hidden-xs">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search"></i></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    @Html.Sitecore().Rendering("/sitecore/layout/Renderings/CSDemo/Search/Search Input", new { Datasource = string.Format("/sitecore/content/{0}/Home/Search", Model.Name) })
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- ==========================
+                        CART AND SEARCH NAVIGATION - END
+                        =========================== -->
+
+                    </ul>
+                </div>
+            </div>
+        </header>
+    }
+}

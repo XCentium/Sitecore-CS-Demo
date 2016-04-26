@@ -7,6 +7,7 @@ using CSDemo.Contracts.Product;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using Sitecore.Data.Items;
+using Glass.Mapper.Sc.Fields;
 
 #endregion
 
@@ -62,7 +63,7 @@ namespace CSDemo.Models.Product
         public virtual string ListPrice { get; set; }
 
         [SitecoreField(Fields.Images)]
-        public IEnumerable<Item> Images { get; set; }
+        public IEnumerable<Image> Images { get; set; }
 
         public IEnumerable<CSDemo.Models.Product.Product> Products { get; set; }
 

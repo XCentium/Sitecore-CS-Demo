@@ -90,7 +90,7 @@
                                         <label>Sort by:</label>
                                     </div>
                                     <div class="form-group">
-                                        @*//TODO: this select control is throwing an error after the upgrade*@
+                                        
                                         <select name="OrderBy" id="OrderBy" class="form-control">
                                             <option @(Model.PaginationViewModel.OrderBy == string.Empty ? " selected " : string.Empty) value="">Default</option>
                                             <option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByBrand ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByBrand">@CSDemo.Constants.Products.OrderByBrand</option>

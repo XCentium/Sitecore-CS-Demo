@@ -14,8 +14,16 @@
                     @using (BeginEditFrame(category, "Edit Category", x => x.Images, x => x.Name))
                     {
                         <div class="category">
-                            <a href="@category.Url"> 
-                                <img src="@ProductHelper.GetFirstImageFromItems(category.Images)" class="img-responsive" alt="@category.Name Collection" style="max-height:310px">
+                            <a href="@category.Url">
+                                @if (category.Images != null && category.Images.Any())
+                                {                               
+                                    @RenderImage(category.Images.ElementAt(0), x => x, new {mh = 310, @class = "img-responsive "}, isEditable: false)
+                                }
+                                else
+                                {
+                                    <img src="~/Assets/images/products/comingsoon.png" class="img-responsive" alt="@category.Name Collection" style="max-height: 310px">
+                                }
+                                
                                 <div class="category-mask"></div>
                                 <h3 class="category-title">@category.Name <span>Collection</span></h3>
                             </a>

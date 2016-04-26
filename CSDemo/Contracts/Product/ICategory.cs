@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using Sitecore.Data.Items;
+using Glass.Mapper.Sc.Fields;
 
 #endregion
 
@@ -27,7 +28,7 @@ namespace CSDemo.Contracts.Product
         string ParentCategories { get; set; }
         string Description { get; set; }
         string ListPrice { get; set; }
-        IEnumerable<Item> Images { get; set; }
+        IEnumerable<Image> Images { get; set; }
         string Name { get; set; }
         string Url { get; set; }
         #endregion 

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using CSDemo.Configuration;
-using CSDemo.Models;
 using CSDemo.Models.Product;
 using Glass.Mapper.Sc;
 using Sitecore;
@@ -28,7 +27,7 @@ namespace CSDemo.Controllers
         {
             var products = new List<Product>();
             products.AddRange(GetRecentlyViewedProducts());
-            if (products.Count == _maxNumberOfProductsToShow) return View(products);
+            if (products.Count == MaxNumberOfProductsToShow) return View(products);
             try
             {
                 var item = RenderingContext.Current.Rendering.Item;
@@ -37,7 +36,7 @@ namespace CSDemo.Controllers
                 {
                     foreach (var product in featuredProduct.Products)
                     {
-                        if (products.Count < _maxNumberOfProductsToShow)
+                        if (products.Count < MaxNumberOfProductsToShow)
                         {
                             if (!products.Exists(t => t.ID == product.ID))
                                 products.Add(product);
@@ -148,17 +147,17 @@ namespace CSDemo.Controllers
 
         public ActionResult ProductDetail()
         {
-            var categoryID = WebUtil.GetUrlName(1);
-            var productID = WebUtil.GetUrlName(0).Replace(Constants.Common.Space, Constants.Common.Dash);
+            var categoryId = WebUtil.GetUrlName(1);
+            var productId = WebUtil.GetUrlName(0).Replace(Constants.Common.Space, Constants.Common.Dash);
 
-            if (productID.IsEmptyOrNull())
+            if (productId.IsEmptyOrNull())
             {
                 return View();
             }
 
-            Cookie.SaveFeaturedProductCookie(productID);
+            Cookie.SaveFeaturedProductCookie(productId);
 
-            Product model = ProductHelper.GetProductByNameAndCategory(productID, categoryID);
+            Product model = ProductHelper.GetProductByNameAndCategory(productId, categoryId);
             model.ProfileProduct(_context);
 
             if (model.StockInformation?.Location != null)
@@ -200,7 +199,7 @@ namespace CSDemo.Controllers
                 {
                     var item = Context.Database.GetItem(ConfigurationHelper.GetSiteSettingInfo("Wildcard"));
                     SearchForProduct(item, id, products);
-                    if (products.Count > _maxNumberOfProductsToShow) break;
+                    if (products.Count > MaxNumberOfProductsToShow) break;
                 }
             }
             return products;
@@ -232,7 +231,7 @@ namespace CSDemo.Controllers
         #region Fields
 
         private readonly ISitecoreContext _context;
-        private const int _maxNumberOfProductsToShow = 10;
+        private const int MaxNumberOfProductsToShow = 10;
 
         #endregion
 

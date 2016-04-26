@@ -20,7 +20,7 @@
                         <a href="@product.Url">
                             @if (product.Images != null && product.Images.Any())
                             {
-                                @RenderImage(product.Images.ElementAt(0), t => t, new { @class = "img-responsive" })
+                                @RenderImage(product.Images.ElementAt(0), t => t, new { mh = 310, @class = "img-responsive" })
                             }
                             else if (product.Image1 != null)
                             {

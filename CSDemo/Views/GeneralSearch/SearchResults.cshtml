@@ -112,21 +112,8 @@
                     </div>
                     if (Model.TotalPageCount > 1)
                     {
-                        var active = "";
-                        var thePage = 0;
-
                         var left = (Model.CurrentPageNumber > 1) ? Model.CurrentPageNumber - 1 : 1;
                         var right = (Model.CurrentPageNumber < Model.TotalPageCount) ? Model.CurrentPageNumber + 1 : Model.TotalPageCount;
-
-                        /*
-                              [Bind(Prefix = Constants.QueryStrings.SearchQuery)] string query,
-            [Bind(Prefix = Constants.QueryStrings.Facets)] string facetValues,
-            [Bind(Prefix = Constants.QueryStrings.Sort)] string sortField = "Title",
-            [Bind(Prefix = Constants.QueryStrings.PageSize)] int pageSize = 2,
-            [Bind(Prefix = Constants.QueryStrings.SortDirection)] CommerceConstants.SortDirection sortDirection =
-                CommerceConstants.SortDirection.Desc,
-            [Bind(Prefix = Constants.QueryStrings.Paging)] int pageNumber = 1)
-                         */
 
                         var leftUrl = string.Format("q={0}&pn={1}",Model.Query, left);
                         if (Model.PageSize > 0)
@@ -145,8 +132,8 @@
                                 <li><a val="@left" href="~/search?@leftUrl"><i class="fa fa-angle-double-left"></i></a></li>
                                 @for (int i = 0; i < Model.TotalPageCount; i++)
                                 {
-                                    thePage = i + 1;
-                                    active = (Model.CurrentPageNumber == thePage) ? " class=active" : "";
+                                    var thePage = i + 1;
+                                    var active = (Model.CurrentPageNumber == thePage) ? " class=active" : "";
 
                                     var currentpageUrl = string.Format("q={0}&pn={1}", Model.Query, thePage);
                                     if (Model.PageSize > 0)

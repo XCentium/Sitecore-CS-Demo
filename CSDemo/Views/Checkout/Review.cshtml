@@ -116,13 +116,6 @@
                         @if (shoppingCart != null && shoppingCart.Total > 0)
                         {
 
-                            //var lineTotal = String.Format("{0:0.00}", shoppingCart.LineTotal);
-                            //var discount = String.Format("{0:0.00}", shoppingCart.Discount);
-                            //var shipping = String.Format("{0:0.00}", shoppingCart.Shipping);
-                            //var tax = String.Format("{0:0.00}", shoppingCart.Tax);
-                            //var grandtotal = String.Format("{0:0.00}", shoppingCart.GrandTotal);
-                            //var total = String.Format("{0:0.00}", shoppingCart.LineTotal + shoppingCart.Discount);
-
                             <div class="products-order checkout shopping-cart">
                                 <div class="table-responsive">
                                     <table class="table table-products">
@@ -143,7 +136,7 @@
                                                 var subTotal = String.Format("{0:0.00}", cartItem.SubTotal);
                                                 <tr>
                                                     <td class="col-xs-1"><img src="@cartItem.ImageUrl" alt="" class="img-responsive"></td>
-                                                    <td class="col-xs-4 col-md-5"><h4><a href="/category/@cartItem.Category/@cartItem.CsProductId">@cartItem.ProductName</a><small></small></h4></td>
+                                                    <td class="col-xs-4 col-md-5"><h4><a href="/categories/@cartItem.Category/@cartItem.CsProductId">@cartItem.ProductName</a><small></small></h4></td>
                                                     <td class="col-xs-2 text-center"><span>$@unitPrice</span></td>
                                                     <td class="col-xs-2 col-md-1 text-center"><span><b>@cartItem.Quantity</b></span></td>
                                                     <td class="col-xs-2 text-center"><span><b>$@subTotal</b></span></td>
@@ -153,18 +146,10 @@
                                         </tbody>
                                     </table>
                                 </div>
-
-                                @*<ul class="list-unstyled order-total">
-                                        <li>Total products<span>$@total</span></li>
-                                        <li>Discount<span>- $@discount</span></li>
-                                        <li>Subtotal<span class="total">$@lineTotal</span></li>
-                                        <li>Shipping<span class="total">$@shipping</span></li>
-                                        <li>Tax<span class="total">$@tax</span></li>
-                                        <li>Grandtotal<span class="total">$@grandtotal</span></li>
-                                    </ul>*@
                             </div>
-                            <div class="box">
-                                <div class="row">
+
+                            <div class="products-order checkout shopping-cart">
+
                                     <div class="col-sm-6">
                                         <h5>Enter your promo code if you have one.</h5>
                                         <div class="input-group">
@@ -184,7 +169,7 @@
                                             <li>Grandtotal<span class="total">$@grandtotal</span></li>
                                         </ul>
                                     </div>
-                                </div>
+ 
                             </div>
                             <div class="clearfix">
                                 <div class="checkbox pull-left">

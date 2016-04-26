@@ -29,9 +29,11 @@ namespace CSDemo.Models.Product
 {
     public static class ProductHelper
     {
-        /// <summary>
-        ///     CSDEMO#115
-        /// </summary>
+      /// <summary>
+      /// Profile Product
+      /// </summary>
+      /// <param name="model"></param>
+      /// <param name="context"></param>
         public static void ProfileProduct(this Product model, ISitecoreContext context)
         {
             var productItem = context.Database.GetItem(new ID(model.ID));
@@ -238,8 +240,9 @@ namespace CSDemo.Models.Product
                             Color = !string.IsNullOrEmpty(productVariant.ProductColor)
                                 ? productVariant.ProductColor.Trim()
                                 : string.Empty,
-                            Price = decimal.Parse(productVariant.ListPrice)
+                            Price = !string.IsNullOrEmpty(productVariant.ListPrice)? decimal.Parse(productVariant.ListPrice)
                                 .ToString(Constants.Products.CurrencyDecimalFormat, cultureInfo)
+                                : "0.00"
                         };
 
                         variantBoxLines.Add(variantBoxLine);
@@ -666,7 +669,8 @@ namespace CSDemo.Models.Product
                 {
                     BuildUiVariants(product);
                 }
-                // CSDEMO#99
+                
+
                 if (!string.IsNullOrEmpty(product.DefaultVariant))
                 {
                     product.StockInformation = cartHelper.GetProductStockInformation(product.ProductId,

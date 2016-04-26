@@ -12,3 +12,18 @@ Languages:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
       Value: 20160216T160920Z
+    - ID: 39fd34cc-0daf-49fe-b103-70f7bf36a65f
+      Hint: Phone Number
+      Value: 555 123 1234
+    - ID: 6488fe35-2e12-4396-a26d-7180d3701450
+      Hint: email
+      Value: info@xcentium.com
+    - ID: 8254f343-7298-4618-9167-f850519e7e5d
+      Hint: Tagline
+      Value: XCentium Demo Site
+    - ID: 96a811ba-4aab-4005-a75f-aa2a242941e2
+      Hint: PreTitle
+      Value: XC
+    - ID: fb1f3432-d97f-4168-83e9-da4fafa53065
+      Hint: Title
+      Value: Demo

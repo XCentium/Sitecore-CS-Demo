@@ -40,13 +40,16 @@ namespace CSDemo.Controllers
         {
             var contextItem = _context.GetCurrentItem<Item>();
             if (contextItem == null) return View();
-            var articleModel = contextItem.GlassCast<Metadata>();
-            return View(articleModel);
+            var metadataModel = contextItem.GlassCast<Metadata>();
+            return View(metadataModel);
         }
 
         public ActionResult Header()
         {
-            return View("~/Views/Page/Header.cshtml");
+            var homeItem = _context.GetHomeItem<Item>();
+            if (homeItem == null) return View("~/Views/Page/Header.cshtml",null);
+            var rootModel = homeItem.Parent.GlassCast<Root>();
+            return View("~/Views/Page/Header.cshtml", rootModel);
         }
     }
 }

@@ -238,6 +238,7 @@
     <Compile Include="Contracts\Navigation\IMegaMenuNavigationItem.cs" />
     <Compile Include="Contracts\Navigation\INavigationItem.cs" />
     <Compile Include="Contracts\Page\IArticle.cs" />
+    <Compile Include="Contracts\Page\IRoot.cs" />
     <Compile Include="Contracts\Page\IMetadata.cs" />
     <Compile Include="Contracts\Product\IFeaturedProducts.cs" />
     <Compile Include="Contracts\Product\ICategory.cs" />
@@ -262,6 +263,7 @@
     <Compile Include="Models\Account\OrderLine.cs" />
     <Compile Include="Models\Account\OrdersViewModel.cs" />
     <Compile Include="Models\Checkout\Cart\CartHelper.cs" />
+    <Compile Include="Models\Page\Root.cs" />
     <Compile Include="Models\Page\Navigation\MegaMenuNavigationItem.cs" />
     <Compile Include="Models\Page\Navigation\NavigationItem.cs" />
     <Compile Include="Models\Page\Article.cs" />
@@ -382,6 +384,7 @@
     <Content Include="Assets\images\map.jpg" />
     <Content Include="Assets\images\megamenu.png" />
     <Content Include="Assets\images\pattern.png" />
+    <Content Include="Assets\images\products\comingsoon.png" />
     <Content Include="Assets\images\products\product-1.jpg" />
     <Content Include="Assets\images\products\product-1b.jpg" />
     <Content Include="Assets\images\products\product-2.jpg" />

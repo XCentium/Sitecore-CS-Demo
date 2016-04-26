@@ -194,7 +194,7 @@
                                     }
                                     <ul class="list-unstyled product-info">
                                         <li><span>ID</span>@Editable(Model, x => x.ProductId)</li>
-                                        @*CSDEMO#99*@
+                                        
                                         <li class="variants_in_stock">
                                             <span>Availability</span>@stockLabel
                                         </li>
@@ -276,8 +276,8 @@
                                     {
                                         <div class="product-form clearfix">
                                             <div class="row row-no-padding">
-                                                <div class="col-md-4 col-sm-4">
-                                                    <label>Quantity</label>
+                                                <div class="col-md-3 col-sm-4">
+                                                    
                                                     <div class="product-quantity clearfix">
                                                         <a class="btn btn-default" id="qty-minus">-</a>
                                                         <input type="text" class="form-control" id="Quantity" value="1"/>
@@ -317,7 +317,7 @@
                                                 </div>
                                                 @if (Model.VariantSize != null)
                                                 {
-                                                    <div class="col-md-4 col-sm-4">
+                                                    <div class="col-md-3 col-sm-4">
                                                         <div class="product-size">
                                                             <div class="form-inline">
                                                                 <div class="form-group">
@@ -399,9 +399,12 @@
                         <li role="presentation" class="active">
                             <a href="#description" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="true">Description</a>
                         </li>
-                        <li role="presentation" class="">
-                            <a href="#moreinfo" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">More Info</a>
-                        </li>
+                        @if (Model.MoreInfo.Trim().Length > 0)
+                        {
+                            <li role="presentation" class="">
+                                <a href="#moreinfo" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">More Info</a>
+                            </li>
+                        }
                         <li role="presentation" class="">
                             <a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">Reviews</a>
                         </li>
@@ -410,9 +413,12 @@
                         <div role="tabpanel" class="tab-pane active" id="description">
                             @Editable(Model, x => x.FullDescription)
                         </div>
-                        <div role="tabpanel" class="tab-pane in" id="moreinfo">
-                            @Editable(Model, x => x.MoreInfo)
-                        </div>
+                        @if (Model.MoreInfo.Trim().Length > 0)
+                        {
+                            <div role="tabpanel" class="tab-pane in" id="moreinfo">
+                                @Editable(Model, x => x.MoreInfo)
+                            </div>
+                        }
                         <div role="tabpanel" class="tab-pane in" id="reviews">
                             <div class="comments-reviews">
                                 <!-- Begin: Intense Debate Scripting (comments service) -->
