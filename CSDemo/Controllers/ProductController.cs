@@ -156,15 +156,11 @@ namespace CSDemo.Controllers
                 return View();
             }
 
-            // CSDEMO#49 Save featured products
             Cookie.SaveFeaturedProductCookie(productID);
 
             Product model = ProductHelper.GetProductByNameAndCategory(productID, categoryID);
-
-            // CSDEMO#115
             model.ProfileProduct(_context);
 
-            // CSDEMO#116
             if (model.StockInformation?.Location != null)
             {
                 model.LocationName = model.StockInformation.Location.Name;

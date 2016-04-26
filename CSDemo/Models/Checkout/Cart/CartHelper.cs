@@ -43,7 +43,7 @@ namespace CSDemo.Models.Checkout.Cart
             {
                 Tracker.StartTracking();
             }
-            ShopName = Context.Site.Name; // Constants.DefaultSiteName; 
+            ShopName = Context.Site.Name;
             DefaultCartName = CommerceConstants.CartSettings.DefaultCartName;
             _accountService = new AccountHelper(this, new CustomerServiceProvider());
         }
@@ -464,8 +464,6 @@ namespace CSDemo.Models.Checkout.Cart
                             cartItem.ImageUrl = cartLine.Images[0];
                         }
                     }
-
-                    //var images = cartLine.
                     cartItems.Add(cartItem);
                 }
                 shoppingCart.CartItems = cartItems;
