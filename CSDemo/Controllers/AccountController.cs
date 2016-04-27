@@ -42,7 +42,7 @@ namespace CSDemo.Controllers
                 var uid = usr.GetCommerceUserId(userName);
                 if (string.IsNullOrEmpty(uid))
                 {
-                    return this.Redirect("/account/signin?msg=Only Commerce Customers Allowed to Signin");
+                    return this.Redirect(Constants.Account.SigninMsg1);
                 }
 
                 if (usr.Login(userName, model.Password, model.RememberMe))
@@ -51,7 +51,7 @@ namespace CSDemo.Controllers
                 }
 
             }
-            return this.Redirect("/account/signin?msg=Incorrect Username or Password");
+            return this.Redirect(Constants.Account.SigninMsg2);
         }
 
         public ActionResult SignOff()
@@ -62,7 +62,7 @@ namespace CSDemo.Controllers
                 AccountHelper usr = new AccountHelper();
                 usr.Logout();
             }
-            return this.Redirect("/account/signin");
+            return this.Redirect(Constants.Account.SigninLink);
         }
 
 
@@ -72,7 +72,7 @@ namespace CSDemo.Controllers
             {
                 return View();
             }
-            return this.Redirect("/account/signin");
+            return this.Redirect(Constants.Account.SigninLink);
 
 
         }
@@ -85,7 +85,7 @@ namespace CSDemo.Controllers
 
                 return View(model);
             }
-            return this.Redirect("/account/signin");
+            return this.Redirect(Constants.Account.SigninLink);
 
         }
 
@@ -109,14 +109,14 @@ namespace CSDemo.Controllers
 
                 return View();
             }
-            return this.Redirect("/account/signin");
+            return this.Redirect(Constants.Account.SigninLink);
 
         }
 
 
         public ActionResult AddAddress()
         {
-            if (!Sitecore.Context.User.IsAuthenticated) { return this.Redirect("/account/signin"); }
+            if (!Sitecore.Context.User.IsAuthenticated) { return this.Redirect(Constants.Account.SigninLink); }
             var model = new Address();
 
             return View(model);
@@ -126,7 +126,7 @@ namespace CSDemo.Controllers
         [HttpPost]
         public ActionResult AddAddress(Address model)
         {
-            if (!Sitecore.Context.User.IsAuthenticated) { return this.Redirect("/account/signin"); }
+            if (!Sitecore.Context.User.IsAuthenticated) { return this.Redirect(Constants.Account.SigninLink); }
 
             if (ModelState.IsValid)
             {
@@ -136,7 +136,7 @@ namespace CSDemo.Controllers
 
                 var result = acc.AddCustomerAddress(model);
 
-                if (result == true) { return this.Redirect("/account/Addresses"); }
+                if (result == true) { return this.Redirect(Constants.Account.AddressLink); }
 
             }
 
@@ -151,7 +151,7 @@ namespace CSDemo.Controllers
 
         public ActionResult Addresses()
         {
-            if (!Sitecore.Context.User.IsAuthenticated) { return this.Redirect("/account/signin"); }
+            if (!Sitecore.Context.User.IsAuthenticated) { return this.Redirect(Constants.Account.SigninLink); }
 
             var model = new AccountHelper().GetCustomerAddresses();
 

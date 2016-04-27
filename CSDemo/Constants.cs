@@ -85,6 +85,11 @@
             public const string FacetPersonal = "Personal";
             public const string FacetPicture = "Picture";
             public const string JobTitle = "Customer";
+            public const string SigninLink = "/account/signin";
+            public const string AddressLink = "/account/Addresses";
+            public const string SigninMsg1 = "/account/signin?msg=Only Commerce Customers Allowed to Signin";
+            public const string SigninMsg2 = "/account/signin?msg=Incorrect Username or Password";
+
 
         }
 
