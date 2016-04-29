@@ -491,6 +491,7 @@
     <Content Include="App_Config\Include\zCSDemo\CSDemo.Serialization.config">
       <TransformOnBuild>true</TransformOnBuild>
     </Content>
+    <Content Include="App_Config\Include\CommerceServer.Core.config" />
     <None Include="App_Config\Include\zCSDemo\CSDemo.Main.csDemo.config">
       <DependentUpon>CSDemo.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
