@@ -26,12 +26,14 @@ using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Inventory;
 using Sitecore.Commerce.Contacts;
 using Sitecore.Commerce.Services.Inventory;
+using CSDemo.Models.Checkout.Cart;
+using System.Runtime.Serialization;
 
 #endregion
 
 namespace CSDemo.Models.Product
 {
-    [SitecoreType(AutoMap = true)]
+    [SitecoreType(AutoMap = true), DataContract]
     public class Product : IProduct, IEditableBase
     {
         #region Calculated Properties
@@ -210,13 +212,13 @@ namespace CSDemo.Models.Product
         public virtual string Path { get; set; }
 
         //[SitecoreInfo(SitecoreInfoType.DisplayName)]
-        [SitecoreField(Fields.DisplayName)]
+        [SitecoreField(Fields.DisplayName), DataMember]
         public virtual string Title { get; set; }
 
-        [SitecoreInfo(SitecoreInfoType.Name)]
+        [SitecoreInfo(SitecoreInfoType.Name), DataMember]
         public virtual string ProductId { get; set; }
 
-        [SitecoreField(Fields.DateOfIntroduction)]
+        [SitecoreField(Fields.DateOfIntroduction), DataMember]
         public virtual DateTime DateOfIntroduction { get; set; }
 
         [SitecoreField(Fields.FullDescription)]
@@ -225,26 +227,28 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.MoreInfo)]
         public virtual string MoreInfo { get; set; }
 
-        [SitecoreField(Fields.Size)]
+        [SitecoreField(Fields.Size), DataMember]
         public virtual string Size { get; set; }
 
-        [SitecoreField(Fields.Images)]
+        [SitecoreField(Fields.Images), DataMember]
         public virtual IEnumerable<Image> Images { get; set; }
 
-        [SitecoreField(Fields.CatalogName)]
+        [SitecoreField(Fields.CatalogName), DataMember]
         public virtual string CatalogName { get; set; }
 
-        [SitecoreField(Fields.Price)]
+        [SitecoreField(Fields.Price), DataMember]
         public virtual decimal Price { get; set; }
 
+        [DataMember]
         public virtual decimal SalePrice { get; set; }
 
-        [SitecoreField(Fields.DefinitionName)]
+        [SitecoreField(Fields.DefinitionName), DataMember]
         public virtual string DefinitionName { get; set; }
 
-        [SitecoreField(Fields.Description)]
+        [SitecoreField(Fields.Description), DataMember]
         public virtual string Description { get; set; }
 
+        [DataMember]
         public bool IsOnSale
         {
             get
@@ -253,16 +257,16 @@ namespace CSDemo.Models.Product
             }
         }
 
-        [SitecoreInfo(SitecoreInfoType.Url)]
+        [SitecoreInfo(SitecoreInfoType.Url), DataMember]
         public virtual string Url { get; set; }
 
-        [SitecoreField(Fields.IsNew)]
+        [SitecoreField(Fields.IsNew), DataMember]
         public virtual bool IsNew { get; set; }
 
-        [SitecoreField(Fields.ParentCategories)]
+        [SitecoreField(Fields.ParentCategories), DataMember]
         public IEnumerable<Item> Categories { get; set; }
 
-        [SitecoreField(Fields.Rating)]
+        [SitecoreField(Fields.Rating), DataMember]
         public virtual decimal Rating { get; set; }
 
         [SitecoreField(Fields.SortFields)]
@@ -271,10 +275,10 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.ItemsPerPage)]
         public virtual string ItemsPerPage { get; set; }
 
-        [SitecoreField(Fields.Variants)]
+        [SitecoreField(Fields.Variants), DataMember]
         public virtual string Variants { get; set; }
 
-        [SitecoreField(Fields.Brand)]
+        [SitecoreField(Fields.Brand), DataMember]
         public virtual string Brand { get; set; }
 
         public virtual string FirstImage
@@ -290,8 +294,10 @@ namespace CSDemo.Models.Product
 
         public virtual string DefaultVariant { get; set; }
 
+        [DataMember]
         public virtual VariantBox VariantBox { get; set; }
 
+        [DataMember]
         public virtual VariantSize VariantSize { get; set; }
 
         [SitecoreField(Fields.UnitOfMeasure)]
@@ -358,6 +364,52 @@ namespace CSDemo.Models.Product
             public const string Image1 = "Image1";
             public const string Image2 = "Image2";
             public const string Image3 = "Image3";
+        }
+
+        #endregion
+
+        #region Helpers
+
+        public static Product GetProduct(string productId)
+        {
+                var product = new Product();
+                var cartHelper = new CartHelper();
+                var productResult = ProductHelper.GetItemByName(productId);
+                if (productResult != null)
+                {
+                    var productItem = productResult.GetItem();
+                    product = productItem.GlassCast<Product>();
+                    var productVariants = productItem.GetChildren().Select(x => x.GlassCast<ProductVariant>()).ToList();
+                    // Update Images and stockInfo in ProductVariant
+                    if (productVariants.Any())
+                    {
+                        var theVariants = new List<ProductVariant>();
+                        for (var i = 0; i < productVariants.Count(); i++)
+                        {
+                            productVariants[i] = ProductHelper.UpdateVariantProperties(productVariants[i], product, cartHelper);
+                            theVariants.Add(productVariants[i]);
+                        }
+                        product.ProductVariants = theVariants;
+                    }
+                    if (productItem.HasChildren)
+                    {
+                        ProductHelper.BuildUiVariants(product);
+                    }
+
+
+                    if (!string.IsNullOrEmpty(product.DefaultVariant))
+                    {
+                        product.StockInformation = cartHelper.GetProductStockInformation(product.ProductId,
+                            product.CatalogName, product.DefaultVariant);
+                    }
+                    else
+                    {
+                        product.StockInformation = cartHelper.GetProductStockInformation(product.ProductId,
+                            product.CatalogName);
+                    }
+                }
+                return product;
+           
         }
 
         #endregion

@@ -3,7 +3,7 @@
 
     //
     var commerceActionAllowed = false;  // This variable will determine if the user can perform commerce actions
-
+    window.ProductComparisonCookieName = "ComparisonProducts";
     $(document).ready(function () {
 
         checkIfCommerceActionsAllowed();
@@ -13,7 +13,159 @@
         loadReviewFormData();
         loadOrderConfirmationData();
         adjustVariantCarousel();
+        setProductComparison();
     });
+
+    function removeProductForComparison(productId, action) {
+        var savedProducts = getComparisonProductIds();
+            savedProducts = jQuery.grep(savedProducts, function (value) {
+                return value != productId;
+            });
+            Cookies.set(window.ProductComparisonCookieName, JSON.stringify(savedProducts));
+    }
+
+    function addProductForComparison(productId) {
+        var savedProducts = getComparisonProductIds();
+        savedProducts.push(productId);
+        Cookies.set(window.ProductComparisonCookieName, JSON.stringify(savedProducts));
+    }
+
+    function removelAllComparisonProducts() {
+        Cookies.remove(window.ProductComparisonCookieName);
+    }
+
+    function getComparisonProductIds() {
+        var savedProducts = [];
+        var cookieProducts = Cookies.get(window.ProductComparisonCookieName);
+        if (cookieProducts) {
+            savedProducts = JSON.parse(cookieProducts);
+        }
+        return savedProducts;
+    }
+
+    function validateComparisonControls() {
+        var checkedIds = getComparisonProductIds();
+        if (checkedIds.length === 3) {
+            $('.unit-compare>input:not(:checked)').attr('disabled', 'disabled');
+        } else {
+            $('.unit-compare>input:not(:checked)').removeAttr('disabled');
+        }
+    }
+
+    function toggleComparisonClearControl() {
+        var checkedIds = getComparisonProductIds();
+        if (checkedIds.length) {
+            $(".clear-comparison-control").show();
+        } else {
+            $(".clear-comparison-control").hide();
+        }
+    }
+
+    function setComparisonCheckboxes() {
+        var checkedIds = getComparisonProductIds();
+
+        toggleComparisonClearControl();
+        
+
+        var comparisonCheckboxes = $('.unit-compare>input');
+        for (var i = 0; i < comparisonCheckboxes.length; i++) {
+            var comparisonCheckbox = comparisonCheckboxes[i];
+            if (!comparisonCheckbox) continue;
+            if ($.inArray($(comparisonCheckbox).attr("id").replace("chk-", ""), checkedIds) !== -1) {
+                $(comparisonCheckbox).prop("checked", true);
+            } else {
+                $(comparisonCheckbox).prop("checked", false);
+            }
+        }
+
+        validateComparisonControls();
+    }
+
+    function setProductComparison() {
+        if (!$(".unit-compare").length) return;
+
+        setComparisonCheckboxes();
+
+        $(".clear-comparison-control").click(function () {
+            removelAllComparisonProducts();
+            setComparisonCheckboxes();
+        });
+
+        $(".unit-compare input").click(function () {
+            var productId = $(this).attr("id").replace("chk-", "");
+            if ($(this).prop('checked') == true) {
+                addProductForComparison(productId);
+            } else {
+                removeProductForComparison(productId);
+            }
+            validateComparisonControls();
+            toggleComparisonClearControl();
+        })
+
+        $(".unit-compare a.compare-trigger").click(function () {
+            var checkedIds = getComparisonProductIds();
+            
+            if (checkedIds.length < 2) {
+                showActionMessageReload("Please select up to three products.");
+            } else {
+                populateComparisonView(checkedIds);
+            }
+        });
+    }
+
+    function buildProductView(product) {
+        var productHtml = "<div>";
+        productHtml += "<h3>" + product.Title + "</h3>";
+        productHtml +="<a href=\""+product.Url+"\">";
+        for(var i=0; i<product.Images.length; i++){
+            var img = product.Images[i];
+            productHtml += "<img class=\"img-responsive product-image-"+i+"\" src=\""+img.Src+"?h=287&w=420&as=1&bc=ffffff\" />";
+        }
+        productHtml += "</a>";
+        productHtml +="<table>";
+        if (product.Price) {
+            productHtml +="<tr><td>Price:</td><td>$"+product.Price+"</td></tr>";
+        }
+        if (product.ProductId) {
+            productHtml += "<tr><td>ID:</td><td>" + product.ProductId + "</td></tr>";
+        }
+        if (product.CatalogName) {
+            productHtml += "<tr><td>Catalog:</td><td>" + product.CatalogName + "</td></tr>";
+        }
+        if (product.Description) {
+            productHtml += "<tr><td>Description:</td><td>" + product.Description + "</td></tr>";
+        }
+
+        if (product.DefinitionName) {
+            productHtml += "<tr><td>Type:</td><td>" + product.DefinitionName + "</td></tr>";
+        }
+
+        productHtml +="</table>";
+        
+        productHtml += "</div>";
+        return productHtml;
+    }
+
+    function populateComparisonView(productIds) {
+        $.ajax({
+            type: "POST",
+            data: { "productIds": productIds },
+            url: "/api/sitecore/product/getproducts",
+            success: function (products) {
+                if (!products) return;
+                var productViewHtml = "";
+                for (var i = 0; i < products.length; i++){
+                    var product = products[i];
+                    var productView = buildProductView(product);
+                    productViewHtml += productView;
+                }
+                showActionMessageFixed(productViewHtml);
+            },
+            error: function (error) {
+                showActionMessageReload("Error doing product comparison. Please try again later.");
+            }
+        });
+    }
 
     function adjustVariantCarousel() {
 

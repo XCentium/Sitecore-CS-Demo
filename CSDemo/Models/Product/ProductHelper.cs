@@ -215,7 +215,7 @@ namespace CSDemo.Models.Product
         /// <summary>
         /// </summary>
         /// <param name="product"></param>
-        private static void BuildUiVariants(Product product)
+        internal static void BuildUiVariants(Product product)
         {
             var cultureInfo = Context.Culture;
             bool any = false;
@@ -685,7 +685,7 @@ namespace CSDemo.Models.Product
             return product;
         }
 
-        private static ProductVariant UpdateVariantProperties(ProductVariant productVariant, Product product,
+        internal static ProductVariant UpdateVariantProperties(ProductVariant productVariant, Product product,
             CartHelper cartHelper)
         {
             if (productVariant.Images == null || !productVariant.Images.Any())

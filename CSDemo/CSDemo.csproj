@@ -172,6 +172,7 @@
       <HintPath>..\Lib\Sitecore\Sitecore.Social.NetworkProviders.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -631,6 +632,7 @@
     <Content Include="Views\Account\AddAddress.cshtml" />
     <Content Include="Views\Account\AddressDetail.cshtml" />
     <Content Include="Views\Account\Addresses.cshtml" />
+    <Content Include="Views\Product\_ComparisonControl.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

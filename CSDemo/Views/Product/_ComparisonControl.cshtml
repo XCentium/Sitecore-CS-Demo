@@ -1,0 +1,10 @@
+﻿@model CSDemo.Models.Product.Product
+<div class="unit-compare">
+    <input type="checkbox" name="compare[]" id="chk-@Model.ProductId" />
+        <a href="#" id="a-compare-@Model.ProductId" class="compare-trigger" title="Launch product comparison">
+            Compare
+        </a>
+        <span class="clear-comparison-control">
+            (<a href="#" class="clear-comparison-products">clear</a>)
+        </span>
+</div>

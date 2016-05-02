@@ -199,6 +199,7 @@
                                                         <ins><span id="@string.Concat("productAmount", product.VariantProdId)" class="amount">@product.ListPrice</span></ins>
                                                     </span>
                                                     <p>@product.Description</p>
+                                                    @Html.Partial("~/Views/Product/_ComparisonControl.cshtml", product)
                                                 </div>
                                             </div>
                                         </div>

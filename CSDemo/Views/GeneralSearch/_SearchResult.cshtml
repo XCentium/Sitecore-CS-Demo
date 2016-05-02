@@ -58,6 +58,7 @@
                         <i class="fa fa-star@(Model.Rating>3 ? string.Empty:"-o" )"></i>
                         <i class="fa fa-star@(Model.Rating>4 ? string.Empty:"-o" )"></i>
                     </div>
+                    @Html.Partial("~/Views/Product/_ComparisonControl.cshtml", Model)
                 </div>
             </div>
         </div>

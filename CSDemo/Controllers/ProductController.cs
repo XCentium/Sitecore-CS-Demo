@@ -16,6 +16,7 @@ using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Extensions;
 using Sitecore.Mvc.Presentation;
 using Sitecore.Web;
+using Newtonsoft.Json;
 
 #endregion
 
@@ -185,6 +186,32 @@ namespace CSDemo.Controllers
             }
             return Redirect(model.Url + "?msg=error");
         }
+
+        #region Web Services
+
+        public ActionResult GetProduct(string productId)
+        {
+            if (string.IsNullOrWhiteSpace(productId)) return null;
+            var product = Product.GetProduct(productId);
+
+            var result = JsonConvert.SerializeObject(product);
+            return Content(result, "application/json");
+        }
+
+        public ActionResult GetProducts(string[] productIds)
+        {
+            var products = new List<Product>();
+            foreach(var productId in productIds)
+            {
+                var product = Product.GetProduct(productId);
+                products.Add(product);
+            }
+
+            var result = JsonConvert.SerializeObject(products);
+            return Content(result, "application/json");
+        }
+
+        #endregion
 
         #region Private Helpers
 

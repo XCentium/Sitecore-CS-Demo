@@ -46,7 +46,7 @@ SharedFields:
   Value: Single-Line Text
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
-  Value: 26
+  Value: 24
 - ID: be351a73-fcb0-4213-93fa-c302d8ab4f51
   Hint: Shared
   Value: 0
@@ -58,8 +58,22 @@ SharedFields:
   Value: 1
 Languages:
 - Language: de-DE
+  Fields:
+  - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
+    Hint: Title
+    Value: Beschreibung
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Beschreibung
   Versions:
   - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160502T172933Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: default\Anonymous
 - Language: en
   Fields:
   - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
@@ -75,8 +89,22 @@ Languages:
       Hint: __Created
       Value: 20160411T213459:635960072990836630Z
 - Language: fr-FR
+  Fields:
+  - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
+    Hint: Title
+    Value: Description
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Description
   Versions:
   - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160502T172933Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: default\Anonymous
 - Language: ja-JP
   Fields:
   - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
