@@ -113,35 +113,87 @@
         });
     }
 
-    function buildProductView(product) {
+    function buildProductView(products) {
         var productHtml = "<div>";
-        productHtml += "<h3>" + product.Title + "</h3>";
-        productHtml +="<a href=\""+product.Url+"\">";
-        for(var i=0; i<product.Images.length; i++){
-            var img = product.Images[i];
-            productHtml += "<img class=\"img-responsive product-image-"+i+"\" src=\""+img.Src+"?h=287&w=420&as=1&bc=ffffff\" />";
-        }
-        productHtml += "</a>";
-        productHtml +="<table>";
-        if (product.Price) {
-            productHtml +="<tr><td>Price:</td><td>$"+product.Price+"</td></tr>";
-        }
-        if (product.ProductId) {
-            productHtml += "<tr><td>ID:</td><td>" + product.ProductId + "</td></tr>";
-        }
-        if (product.CatalogName) {
-            productHtml += "<tr><td>Catalog:</td><td>" + product.CatalogName + "</td></tr>";
-        }
-        if (product.Description) {
-            productHtml += "<tr><td>Description:</td><td>" + product.Description + "</td></tr>";
+        productHtml +=
+        '<section class="content account">' +
+        '<div class="container">' +
+        	'<div class="account-content compare">' +
+                '<div class="table-responsive">' +
+                    '<table id="table-compare" class="table">' +
+                        '<thead>' +
+                        '<tr>' +
+                            '<th></th>';
+        for (var i = 0; i < products.length; i++) {
+            productHtml += '<th class="accept"><i class="fa fa-arrows btn btn-primary hidden-xs"></i><i class="fa fa-times btn btn-primary"></i></th>';
         }
 
-        if (product.DefinitionName) {
-            productHtml += "<tr><td>Type:</td><td>" + product.DefinitionName + "</td></tr>";
+        productHtml +=
+                '</tr>' +
+                '</thead>' +
+                '<tbody>' +
+                '<tr>' +
+                    '<td class="title">Product</td>';
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            productHtml += '<td>' +
+                '<div class="product-overlay"><div class="product-mask"></div>';
+                //'<div class="product-compare-carousel-'+i+'">';
+            for (var d = 0; d < product.Images.length; d++) {
+                var img = product.Images[d];
+                productHtml += '<img src="' + img.Src + '?w=112&h=150&as=1&bc=ffffff" class="img-responsive" alt="">';
+            }
+            productHtml += '</div>' +
+                '<a href="' + product.Url + '">' + product.Title + '</a>' +
+                '</td>';
         }
+        // Brand 
+        productHtml += '<tr>' +
+                            '<td class="title">Brand</td>';
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            productHtml += '<td>' + product.Brand + '</td>';
+        }
+        productHtml += '</tr>';
+        // Price
+        productHtml += '<tr>' +
+                            '<td class="title">Price</td>';
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            productHtml += '<td>$' + product.Price.toFixed(2); + '</td>';
+        }
+        productHtml += '</tr>';
+        // Rating
+        productHtml += '<tr>' +
+                            '<td class="title">Rating</td>';
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            productHtml += '<td>' +
+                                '<div class="product-rating">' +
+                                    '<i class="fa fa-star' + (product.Rating > 0 ? '' : '-o') + '"></i>' +
+                                    '<i class="fa fa-star' + (product.Rating > 1 ? '' : '-o') + '"></i>' +
+                                    '<i class="fa fa-star' + (product.Rating > 2 ? '' : '-o') + '"></i>' +
+                                    '<i class="fa fa-star' + (product.Rating > 3 ? '' : '-o') + '"></i>' +
+                                    '<i class="fa fa-star' + (product.Rating > 4 ? '' : '-o') + '"></i>' +
+                                '</div>' +
+                '</td>';
+        }
+        productHtml += '</tr>';
 
-        productHtml +="</table>";
-        
+        productHtml += '<tr>' +
+                            '<td class="title"></td>';
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            productHtml += '<td><a class="btn btn-primary">Add to Cart</a></td>';
+        }
+        productHtml += '</tr>' +
+                        '</tbody>' +
+                    '</table>' +
+                '</div>' +
+            '</div>' +
+        '</div>' +
+        '</section>';
+
         productHtml += "</div>";
         return productHtml;
     }
@@ -153,13 +205,19 @@
             url: "/api/sitecore/product/getproducts",
             success: function (products) {
                 if (!products) return;
-                var productViewHtml = "";
-                for (var i = 0; i < products.length; i++){
-                    var product = products[i];
-                    var productView = buildProductView(product);
-                    productViewHtml += productView;
-                }
+                var productViewHtml = buildProductView(products);
                 showActionMessageFixed(productViewHtml);
+                $(".product-compare-carousel-0, .product-compare-carousel-1, .product-compare-carousel-2").owlCarousel({
+                        items: 1,
+                        loop: true,
+                        animateOut: 'fadeOut',
+                        animateIn: 'fadeIn'
+                });
+
+                $('#table-compare').dragtable({
+                    dragHandle: '.fa-arrows',
+                    dragaccept: '.accept'
+                });
             },
             error: function (error) {
                 showActionMessageReload("Error doing product comparison. Please try again later.");
