@@ -15,6 +15,40 @@
         setProductComparison();
     });
 
+    function setProductComparison() {
+        if (!$(".unit-compare").length) return;
+
+        setComparisonCheckboxes();
+
+        $(".clear-comparison-control").click(function () {
+            removelAllComparisonProducts();
+            setComparisonCheckboxes();
+        });
+
+        $(".unit-compare input").click(function () {
+            var productId = $(this).attr("id").replace("chk-", "");
+            if ($(this).prop('checked') == true) {
+                addProductForComparison(productId);
+            } else {
+                removeProductForComparison(productId);
+            }
+            validateComparisonControls();
+            toggleComparisonClearControl();
+        })
+
+        $(".unit-compare a.compare-trigger").click(function () {
+            var checkedIds = getComparisonProductIds();
+
+            if (checkedIds.length < 2) {
+                showActionMessageReload("Please select up to three products.");
+            } else {
+                populateComparisonView(checkedIds);
+            }
+        });
+    }
+
+    // #region Product Comparison Helpers
+
     function removeProductForComparison(productId) {
         var savedProducts = getComparisonProductIds();
             savedProducts = jQuery.grep(savedProducts, function (value) {
@@ -51,6 +85,8 @@
         }
     }
 
+    
+
     function toggleComparisonClearControl() {
         var checkedIds = getComparisonProductIds();
         if (checkedIds.length) {
@@ -80,38 +116,6 @@
         validateComparisonControls();
     }
 
-    function setProductComparison() {
-        if (!$(".unit-compare").length) return;
-
-        setComparisonCheckboxes();
-
-        $(".clear-comparison-control").click(function () {
-            removelAllComparisonProducts();
-            setComparisonCheckboxes();
-        });
-
-        $(".unit-compare input").click(function () {
-            var productId = $(this).attr("id").replace("chk-", "");
-            if ($(this).prop('checked') == true) {
-                addProductForComparison(productId);
-            } else {
-                removeProductForComparison(productId);
-            }
-            validateComparisonControls();
-            toggleComparisonClearControl();
-        })
-
-        $(".unit-compare a.compare-trigger").click(function () {
-            var checkedIds = getComparisonProductIds();
-            
-            if (checkedIds.length < 2) {
-                showActionMessageReload("Please select up to three products.");
-            } else {
-                populateComparisonView(checkedIds);
-            }
-        });
-    }
-
     function buildProductView(products) {
         var productHtml = "<div>";
         productHtml +=
@@ -138,10 +142,15 @@
             var product = products[i];
             productHtml += '<td class="product-' + product.ProductId + '">' +
                 '<div class="product-overlay"><div class="product-mask"></div>';
-                //'<div class="product-compare-carousel-'+i+'">';
             for (var d = 0; d < 1; d++) {
                 var img = product.Images[d];
-                productHtml += '<img src="' + img.Src + '?w=112&h=150&as=1&bc=ffffff" class="img-responsive product-image-'+(d+1)+'" alt="" style="display:inline">';
+                if (product.IsNew) {
+                    productHtml += '<span class="label label-info">new</span>';
+                }
+                if (product.IsOnSale) {
+                    productHtml += '<span class="label label-danger">sale</span>';
+                }
+                productHtml += '<img src="' + img.Src + '?w=112&h=150&as=1&bc=ffffff" class="img-responsive product-image-' + (d + 1) + '" alt="" style="display:inline">';
             }
             productHtml += '</div>' +
                 '<a href="' + product.Url + '">' + product.Title + '</a>' +
@@ -155,12 +164,26 @@
             productHtml += '<td class="product-' + product.ProductId + '">' + product.Brand + '</td>';
         }
         productHtml += '</tr>';
+        // Description 
+        productHtml += '<tr>' +
+                            '<td class="title">Description</td>';
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            productHtml += '<td class="product-' + product.ProductId + '">' + product.Description + '</td>';
+        }
+        productHtml += '</tr>';
         // Price
         productHtml += '<tr>' +
                             '<td class="title">Price</td>';
         for (var i = 0; i < products.length; i++) {
             var product = products[i];
-            productHtml += '<td class="product-' + product.ProductId + '">$' + product.Price.toFixed(2) + '</td>';
+            if (product.SalePrice !== 0) {
+                productHtml += '<td class="product-' + product.ProductId + '"><span class="price"><del><span class="amount">$' + product.Price.toFixed(2) + '</span></del></span></td>';
+                productHtml += '<td class="product-' + product.ProductId + '"><span class="price"><ins><span class="amount">$' + product.Price.toFixed(2) + '</span></ins></span></td>';
+            } else {
+                productHtml += '<td class="product-' + product.ProductId + '"><span class="price"><ins><span class="amount">$' + product.Price.toFixed(2) + '</span></ins></span></td>';
+            }
+            
         }
         productHtml += '</tr>';
         // Rating
@@ -184,7 +207,8 @@
                             '<td class="title"></td>';
         for (var i = 0; i < products.length; i++) {
             var product = products[i];
-            productHtml += '<td class="product-' + product.ProductId + '"><a class="btn btn-primary">Add to Cart</a></td>';
+            var variantId = product.VariantBox && product.VariantBox.VariantBoxLines ? product.VariantBox.VariantBoxLines[0].VariantID : 0;
+            productHtml += '<td class="product-' + product.ProductId + '"><a data-variantid="' + variantId + '" data-catalog="' + product.CatalogName + '" data-formid="' + product.ProductId + '" class="btn btn-primary variant_btn variant_btn_' + variantId + ' add-to-cart">Add to Cart</a></td>';
         }
         productHtml += '</tr>' +
                         '</tbody>' +
@@ -198,6 +222,16 @@
         return productHtml;
     }
 
+    function setCompareAddToCart() {
+        $(".compare a.add-to-cart").click(function () {
+            var productId = $(this).attr("data-formid");
+            var variantId = $(this).attr("data-variantid");
+            var catalogName = $(this).attr("data-catalog");
+            var contextItemId = $("#itemid").val();
+            addItemToCart(1, productId, catalogName, variantId, contextItemId);
+        });
+    }
+
 
     function populateComparisonView(productIds) {
         $.ajax({
@@ -208,7 +242,7 @@
                 if (!products) return;
                 var productViewHtml = buildProductView(products);
                 showActionMessageFixedClean(productViewHtml);
-                
+                setCompareAddToCart();
                 $('#table-compare').dragtable({
                     dragHandle: '.fa-arrows',
                     dragaccept: '.accept'
@@ -224,7 +258,7 @@
                         $("#alertmessage").html("");
                         $("#modalAddToCart").modal("hide");
                         setComparisonCheckboxes();
-                    }
+                    } 
                 });
             },
             error: function (error) {
@@ -233,7 +267,7 @@
         });
     }
 
-
+    // #endregion 
     
 
     function adjustVariantCarousel() {
@@ -295,6 +329,29 @@
 
     });
 
+    function addItemToCart(quantity, productId, catalogName, variantId, contextItemId) {
+        $.ajax({
+            type: "POST",
+            url: "/AJAX/cart.asmx/AddProductToCart",
+            data: "{quantity:'" + quantity + "', productId:'" + productId + "', catalogName:'" + catalogName + "', variantId:'" + variantId + "', contextItemId:'" + contextItemId + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+                if (result.d == "") {
+
+                    showActionMessage("Product Added to Cart");
+                    loadCart();
+
+                }
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+
+        });
+    }
 
     function addProductToCart(formId, contextItemId) {
 
@@ -308,27 +365,7 @@
         var catalogName = form.CatalogName.value;
         var variantId = form.VariantId.value;
 
-        $.ajax({
-            type: "POST",
-            url: "/AJAX/cart.asmx/AddProductToCart",
-            data: "{quantity:'" + quantity + "', productId:'" + productId + "', catalogName:'" + catalogName + "', variantId:'" + variantId + "', contextItemId:'" + contextItemId + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (result) {
-
-                if (result.d == "") {
-
-                    showActionMessage("Added to Cart");
-                    loadCart();
-
-                }
-
-            },
-            error: function (error) {
-                console.log(error);
-            }
-
-        });
+        addItemToCart(quantity, productId, catalogName, variantId, contextItemId);
     }
 
 
@@ -507,7 +544,7 @@
 
     function showActionMessage(message) {
         // alertmessage
-        actionMessageFixed(message);
+        actionMessageFixed("<h3>" + message + "</h3><br /><br />");
         window.setTimeout(function () {
             $("#modalAddToCart").modal("hide");
         }, 1750);

@@ -102,6 +102,6 @@
     </div> <!-- PAGE - END -->
     @Html.Partial("~/Views/Page/Layouts/Scripts.cshtml")
 
-
+    @Html.Hidden("itemid", @Sitecore.Context.Item.ID.ToString())
 </body>
 </html>

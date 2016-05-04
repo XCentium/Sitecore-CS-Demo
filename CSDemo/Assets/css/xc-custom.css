@@ -346,3 +346,14 @@ header.navbar li.navbar-cart .dropdown-menu > li {
     font-weight: bold;
     margin: 0;
 }
+
+.unit-compare{
+    padding: 10px;
+    font-weight: bold;
+}
+
+.compare .price ins{
+    font-weight:bold;
+    text-decoration:none;
+    color:#454545;
+}
