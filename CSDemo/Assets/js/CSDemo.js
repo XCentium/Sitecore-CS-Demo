@@ -1,5 +1,4 @@
-﻿
-(function (window, $, undefined) {
+﻿(function (window, $, undefined) {
 
     //
     var commerceActionAllowed = false;  // This variable will determine if the user can perform commerce actions
@@ -16,7 +15,7 @@
         setProductComparison();
     });
 
-    function removeProductForComparison(productId, action) {
+    function removeProductForComparison(productId) {
         var savedProducts = getComparisonProductIds();
             savedProducts = jQuery.grep(savedProducts, function (value) {
                 return value != productId;
@@ -117,7 +116,7 @@
         var productHtml = "<div>";
         productHtml +=
         '<section class="content account">' +
-        '<div class="container">' +
+        '<div class="">' +
         	'<div class="account-content compare">' +
                 '<div class="table-responsive">' +
                     '<table id="table-compare" class="table">' +
@@ -125,7 +124,8 @@
                         '<tr>' +
                             '<th></th>';
         for (var i = 0; i < products.length; i++) {
-            productHtml += '<th class="accept"><i class="fa fa-arrows btn btn-primary hidden-xs"></i><i class="fa fa-times btn btn-primary"></i></th>';
+            var product = products[i];
+            productHtml += '<th class="accept product-'+product.ProductId+'"><i class="fa fa-arrows btn btn-primary hidden-xs"></i><i data-productid="' + product.ProductId + '" class="remove-item-compare fa fa-times btn btn-primary"></i></th>';
         }
 
         productHtml +=
@@ -136,12 +136,12 @@
                     '<td class="title">Product</td>';
         for (var i = 0; i < products.length; i++) {
             var product = products[i];
-            productHtml += '<td>' +
+            productHtml += '<td class="product-' + product.ProductId + '">' +
                 '<div class="product-overlay"><div class="product-mask"></div>';
                 //'<div class="product-compare-carousel-'+i+'">';
-            for (var d = 0; d < product.Images.length; d++) {
+            for (var d = 0; d < 1; d++) {
                 var img = product.Images[d];
-                productHtml += '<img src="' + img.Src + '?w=112&h=150&as=1&bc=ffffff" class="img-responsive" alt="">';
+                productHtml += '<img src="' + img.Src + '?w=112&h=150&as=1&bc=ffffff" class="img-responsive product-image-'+(d+1)+'" alt="" style="display:inline">';
             }
             productHtml += '</div>' +
                 '<a href="' + product.Url + '">' + product.Title + '</a>' +
@@ -152,7 +152,7 @@
                             '<td class="title">Brand</td>';
         for (var i = 0; i < products.length; i++) {
             var product = products[i];
-            productHtml += '<td>' + product.Brand + '</td>';
+            productHtml += '<td class="product-' + product.ProductId + '">' + product.Brand + '</td>';
         }
         productHtml += '</tr>';
         // Price
@@ -160,7 +160,7 @@
                             '<td class="title">Price</td>';
         for (var i = 0; i < products.length; i++) {
             var product = products[i];
-            productHtml += '<td>$' + product.Price.toFixed(2); + '</td>';
+            productHtml += '<td class="product-' + product.ProductId + '">$' + product.Price.toFixed(2) + '</td>';
         }
         productHtml += '</tr>';
         // Rating
@@ -168,7 +168,7 @@
                             '<td class="title">Rating</td>';
         for (var i = 0; i < products.length; i++) {
             var product = products[i];
-            productHtml += '<td>' +
+            productHtml += '<td class="product-' + product.ProductId + '">' +
                                 '<div class="product-rating">' +
                                     '<i class="fa fa-star' + (product.Rating > 0 ? '' : '-o') + '"></i>' +
                                     '<i class="fa fa-star' + (product.Rating > 1 ? '' : '-o') + '"></i>' +
@@ -184,7 +184,7 @@
                             '<td class="title"></td>';
         for (var i = 0; i < products.length; i++) {
             var product = products[i];
-            productHtml += '<td><a class="btn btn-primary">Add to Cart</a></td>';
+            productHtml += '<td class="product-' + product.ProductId + '"><a class="btn btn-primary">Add to Cart</a></td>';
         }
         productHtml += '</tr>' +
                         '</tbody>' +
@@ -198,6 +198,7 @@
         return productHtml;
     }
 
+
     function populateComparisonView(productIds) {
         $.ajax({
             type: "POST",
@@ -206,17 +207,24 @@
             success: function (products) {
                 if (!products) return;
                 var productViewHtml = buildProductView(products);
-                showActionMessageFixed(productViewHtml);
-                $(".product-compare-carousel-0, .product-compare-carousel-1, .product-compare-carousel-2").owlCarousel({
-                        items: 1,
-                        loop: true,
-                        animateOut: 'fadeOut',
-                        animateIn: 'fadeIn'
-                });
-
+                showActionMessageFixedClean(productViewHtml);
+                
                 $('#table-compare').dragtable({
                     dragHandle: '.fa-arrows',
                     dragaccept: '.accept'
+                });
+
+                $(".remove-item-compare").click(function () {
+                    console.log("removing item");
+                    var productId = $(this).attr("data-productid");
+                    removeProductForComparison(productId);
+                    $(".product-" + productId).remove();
+                    var savedProducts = getComparisonProductIds();
+                    if (!savedProducts || savedProducts.length===0)  {
+                        $("#alertmessage").html("");
+                        $("#modalAddToCart").modal("hide");
+                        setComparisonCheckboxes();
+                    }
                 });
             },
             error: function (error) {
@@ -224,6 +232,9 @@
             }
         });
     }
+
+
+    
 
     function adjustVariantCarousel() {
 
@@ -504,16 +515,21 @@
 
     function showActionMessageFixed(message) {
         // alertmessage
+        actionMessageFixed("<h3>" + message + "</h3><br /><br />");
+    }
+
+    function showActionMessageFixedClean(message) {
+        // alertmessage
         actionMessageFixed(message);
     }
 
     function showActionMessageReload(message) {
         // alertmessage
-        actionMessageFixed(message);
+        actionMessageFixed("<h3>" + message + "</h3><br /><br />");
         window.setTimeout(function () {
             $("#modalAddToCart").modal("hide");
             window.location.reload(1);
-        }, 1750);
+        }, 2000);
     }
 
 
