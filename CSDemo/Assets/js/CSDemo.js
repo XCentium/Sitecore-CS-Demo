@@ -234,12 +234,16 @@
 
 
     function populateComparisonView(productIds) {
+        var data = "{ productIds:" + JSON.stringify(productIds) + "}";
         $.ajax({
             type: "POST",
-            data: { "productIds": productIds },
-            url: "/api/sitecore/product/getproducts",
-            success: function (products) {
-                if (!products) return;
+            data: data,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            url: "/AJAX/cart.asmx/GetProducts",
+            success: function (result) {
+                if (!result) return;
+                var products = JSON.parse(result.d);
                 var productViewHtml = buildProductView(products);
                 showActionMessageFixedClean(productViewHtml);
                 setCompareAddToCart();
