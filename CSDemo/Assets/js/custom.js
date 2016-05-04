@@ -1,12 +1,6 @@
 
 (function (window, $, undefined) {
 
-    /*------------------------------
-     * Copyright 2016 Pixelized
-     * http://www.pixelized.cz
-     *
-     * umarket theme v1.1
-    ------------------------------*/
 
     /*------------------------------
 	    WINDOW SCROLL

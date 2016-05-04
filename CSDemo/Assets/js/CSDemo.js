@@ -1,5 +1,4 @@
-﻿
-(function (window, $, undefined) {
+﻿(function (window, $, undefined) {
 
     //
     var commerceActionAllowed = false;  // This variable will determine if the user can perform commerce actions
@@ -16,7 +15,41 @@
         setProductComparison();
     });
 
-    function removeProductForComparison(productId, action) {
+    function setProductComparison() {
+        if (!$(".unit-compare").length) return;
+
+        setComparisonCheckboxes();
+
+        $(".clear-comparison-control").click(function () {
+            removelAllComparisonProducts();
+            setComparisonCheckboxes();
+        });
+
+        $(".unit-compare input").click(function () {
+            var productId = $(this).attr("id").replace("chk-", "");
+            if ($(this).prop('checked') == true) {
+                addProductForComparison(productId);
+            } else {
+                removeProductForComparison(productId);
+            }
+            validateComparisonControls();
+            toggleComparisonClearControl();
+        })
+
+        $(".unit-compare a.compare-trigger").click(function () {
+            var checkedIds = getComparisonProductIds();
+
+            if (checkedIds.length < 2) {
+                showActionMessageReload("Please select up to three products.");
+            } else {
+                populateComparisonView(checkedIds);
+            }
+        });
+    }
+
+    // #region Product Comparison Helpers
+
+    function removeProductForComparison(productId) {
         var savedProducts = getComparisonProductIds();
             savedProducts = jQuery.grep(savedProducts, function (value) {
                 return value != productId;
@@ -52,6 +85,8 @@
         }
     }
 
+    
+
     function toggleComparisonClearControl() {
         var checkedIds = getComparisonProductIds();
         if (checkedIds.length) {
@@ -81,70 +116,122 @@
         validateComparisonControls();
     }
 
-    function setProductComparison() {
-        if (!$(".unit-compare").length) return;
-
-        setComparisonCheckboxes();
-
-        $(".clear-comparison-control").click(function () {
-            removelAllComparisonProducts();
-            setComparisonCheckboxes();
-        });
-
-        $(".unit-compare input").click(function () {
-            var productId = $(this).attr("id").replace("chk-", "");
-            if ($(this).prop('checked') == true) {
-                addProductForComparison(productId);
-            } else {
-                removeProductForComparison(productId);
-            }
-            validateComparisonControls();
-            toggleComparisonClearControl();
-        })
-
-        $(".unit-compare a.compare-trigger").click(function () {
-            var checkedIds = getComparisonProductIds();
-            
-            if (checkedIds.length < 2) {
-                showActionMessageReload("Please select up to three products.");
-            } else {
-                populateComparisonView(checkedIds);
-            }
-        });
-    }
-
-    function buildProductView(product) {
+    function buildProductView(products) {
         var productHtml = "<div>";
-        productHtml += "<h3>" + product.Title + "</h3>";
-        productHtml +="<a href=\""+product.Url+"\">";
-        for(var i=0; i<product.Images.length; i++){
-            var img = product.Images[i];
-            productHtml += "<img class=\"img-responsive product-image-"+i+"\" src=\""+img.Src+"?h=287&w=420&as=1&bc=ffffff\" />";
-        }
-        productHtml += "</a>";
-        productHtml +="<table>";
-        if (product.Price) {
-            productHtml +="<tr><td>Price:</td><td>$"+product.Price+"</td></tr>";
-        }
-        if (product.ProductId) {
-            productHtml += "<tr><td>ID:</td><td>" + product.ProductId + "</td></tr>";
-        }
-        if (product.CatalogName) {
-            productHtml += "<tr><td>Catalog:</td><td>" + product.CatalogName + "</td></tr>";
-        }
-        if (product.Description) {
-            productHtml += "<tr><td>Description:</td><td>" + product.Description + "</td></tr>";
+        productHtml +=
+        '<section class="content account">' +
+        '<div class="">' +
+        	'<div class="account-content compare">' +
+                '<div class="table-responsive">' +
+                    '<table id="table-compare" class="table">' +
+                        '<thead>' +
+                        '<tr>' +
+                            '<th></th>';
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            productHtml += '<th class="accept product-'+product.ProductId+'"><i class="fa fa-arrows btn btn-primary hidden-xs"></i><i data-productid="' + product.ProductId + '" class="remove-item-compare fa fa-times btn btn-primary"></i></th>';
         }
 
-        if (product.DefinitionName) {
-            productHtml += "<tr><td>Type:</td><td>" + product.DefinitionName + "</td></tr>";
+        productHtml +=
+                '</tr>' +
+                '</thead>' +
+                '<tbody>' +
+                '<tr>' +
+                    '<td class="title">Product</td>';
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            productHtml += '<td class="product-' + product.ProductId + '">' +
+                '<div class="product-overlay"><div class="product-mask"></div>';
+            for (var d = 0; d < 1; d++) {
+                var img = product.Images[d];
+                if (product.IsNew) {
+                    productHtml += '<span class="label label-info">new</span>';
+                }
+                if (product.IsOnSale) {
+                    productHtml += '<span class="label label-danger">sale</span>';
+                }
+                productHtml += '<img src="' + img.Src + '?w=112&h=150&as=1&bc=ffffff" class="img-responsive product-image-' + (d + 1) + '" alt="" style="display:inline">';
+            }
+            productHtml += '</div>' +
+                '<a href="' + product.Url + '">' + product.Title + '</a>' +
+                '</td>';
         }
+        // Brand 
+        productHtml += '<tr>' +
+                            '<td class="title">Brand</td>';
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            productHtml += '<td class="product-' + product.ProductId + '">' + product.Brand + '</td>';
+        }
+        productHtml += '</tr>';
+        // Description 
+        productHtml += '<tr>' +
+                            '<td class="title">Description</td>';
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            productHtml += '<td class="product-' + product.ProductId + '">' + product.Description + '</td>';
+        }
+        productHtml += '</tr>';
+        // Price
+        productHtml += '<tr>' +
+                            '<td class="title">Price</td>';
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            if (product.SalePrice !== 0) {
+                productHtml += '<td class="product-' + product.ProductId + '"><span class="price"><del><span class="amount">$' + product.Price.toFixed(2) + '</span></del></span></td>';
+                productHtml += '<td class="product-' + product.ProductId + '"><span class="price"><ins><span class="amount">$' + product.Price.toFixed(2) + '</span></ins></span></td>';
+            } else {
+                productHtml += '<td class="product-' + product.ProductId + '"><span class="price"><ins><span class="amount">$' + product.Price.toFixed(2) + '</span></ins></span></td>';
+            }
+            
+        }
+        productHtml += '</tr>';
+        // Rating
+        productHtml += '<tr>' +
+                            '<td class="title">Rating</td>';
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            productHtml += '<td class="product-' + product.ProductId + '">' +
+                                '<div class="product-rating">' +
+                                    '<i class="fa fa-star' + (product.Rating > 0 ? '' : '-o') + '"></i>' +
+                                    '<i class="fa fa-star' + (product.Rating > 1 ? '' : '-o') + '"></i>' +
+                                    '<i class="fa fa-star' + (product.Rating > 2 ? '' : '-o') + '"></i>' +
+                                    '<i class="fa fa-star' + (product.Rating > 3 ? '' : '-o') + '"></i>' +
+                                    '<i class="fa fa-star' + (product.Rating > 4 ? '' : '-o') + '"></i>' +
+                                '</div>' +
+                '</td>';
+        }
+        productHtml += '</tr>';
 
-        productHtml +="</table>";
-        
+        productHtml += '<tr>' +
+                            '<td class="title"></td>';
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            var variantId = product.VariantBox && product.VariantBox.VariantBoxLines ? product.VariantBox.VariantBoxLines[0].VariantID : 0;
+            productHtml += '<td class="product-' + product.ProductId + '"><a data-variantid="' + variantId + '" data-catalog="' + product.CatalogName + '" data-formid="' + product.ProductId + '" class="btn btn-primary variant_btn variant_btn_' + variantId + ' add-to-cart">Add to Cart</a></td>';
+        }
+        productHtml += '</tr>' +
+                        '</tbody>' +
+                    '</table>' +
+                '</div>' +
+            '</div>' +
+        '</div>' +
+        '</section>';
+
         productHtml += "</div>";
         return productHtml;
     }
+
+    function setCompareAddToCart() {
+        $(".compare a.add-to-cart").click(function () {
+            var productId = $(this).attr("data-formid");
+            var variantId = $(this).attr("data-variantid");
+            var catalogName = $(this).attr("data-catalog");
+            var contextItemId = $("#itemid").val();
+            addItemToCart(1, productId, catalogName, variantId, contextItemId);
+        });
+    }
+
 
     function populateComparisonView(productIds) {
         $.ajax({
@@ -153,19 +240,35 @@
             url: "/api/sitecore/product/getproducts",
             success: function (products) {
                 if (!products) return;
-                var productViewHtml = "";
-                for (var i = 0; i < products.length; i++){
-                    var product = products[i];
-                    var productView = buildProductView(product);
-                    productViewHtml += productView;
-                }
-                showActionMessageFixed(productViewHtml);
+                var productViewHtml = buildProductView(products);
+                showActionMessageFixedClean(productViewHtml);
+                setCompareAddToCart();
+                $('#table-compare').dragtable({
+                    dragHandle: '.fa-arrows',
+                    dragaccept: '.accept'
+                });
+
+                $(".remove-item-compare").click(function () {
+                    console.log("removing item");
+                    var productId = $(this).attr("data-productid");
+                    removeProductForComparison(productId);
+                    $(".product-" + productId).remove();
+                    var savedProducts = getComparisonProductIds();
+                    if (!savedProducts || savedProducts.length===0)  {
+                        $("#alertmessage").html("");
+                        $("#modalAddToCart").modal("hide");
+                        setComparisonCheckboxes();
+                    } 
+                });
             },
             error: function (error) {
                 showActionMessageReload("Error doing product comparison. Please try again later.");
             }
         });
     }
+
+    // #endregion 
+    
 
     function adjustVariantCarousel() {
 
@@ -226,6 +329,29 @@
 
     });
 
+    function addItemToCart(quantity, productId, catalogName, variantId, contextItemId) {
+        $.ajax({
+            type: "POST",
+            url: "/AJAX/cart.asmx/AddProductToCart",
+            data: "{quantity:'" + quantity + "', productId:'" + productId + "', catalogName:'" + catalogName + "', variantId:'" + variantId + "', contextItemId:'" + contextItemId + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+                if (result.d == "") {
+
+                    showActionMessage("Product Added to Cart");
+                    loadCart();
+
+                }
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+
+        });
+    }
 
     function addProductToCart(formId, contextItemId) {
 
@@ -239,27 +365,7 @@
         var catalogName = form.CatalogName.value;
         var variantId = form.VariantId.value;
 
-        $.ajax({
-            type: "POST",
-            url: "/AJAX/cart.asmx/AddProductToCart",
-            data: "{quantity:'" + quantity + "', productId:'" + productId + "', catalogName:'" + catalogName + "', variantId:'" + variantId + "', contextItemId:'" + contextItemId + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (result) {
-
-                if (result.d == "") {
-
-                    showActionMessage("Added to Cart");
-                    loadCart();
-
-                }
-
-            },
-            error: function (error) {
-                console.log(error);
-            }
-
-        });
+        addItemToCart(quantity, productId, catalogName, variantId, contextItemId);
     }
 
 
@@ -438,7 +544,7 @@
 
     function showActionMessage(message) {
         // alertmessage
-        actionMessageFixed(message);
+        actionMessageFixed("<h3>" + message + "</h3><br /><br />");
         window.setTimeout(function () {
             $("#modalAddToCart").modal("hide");
         }, 1750);
@@ -446,16 +552,21 @@
 
     function showActionMessageFixed(message) {
         // alertmessage
+        actionMessageFixed("<h3>" + message + "</h3><br /><br />");
+    }
+
+    function showActionMessageFixedClean(message) {
+        // alertmessage
         actionMessageFixed(message);
     }
 
     function showActionMessageReload(message) {
         // alertmessage
-        actionMessageFixed(message);
+        actionMessageFixed("<h3>" + message + "</h3><br /><br />");
         window.setTimeout(function () {
             $("#modalAddToCart").modal("hide");
             window.location.reload(1);
-        }, 1750);
+        }, 2000);
     }
 
 

@@ -383,3 +383,15 @@ ul.variantcolorlist {
     .variantcolorselected {
         border: 1px solid orangered;
     }
+
+.unit-compare{
+    padding: 10px;
+    font-weight: bold;
+}
+
+.compare .price ins{
+    font-weight:bold;
+    text-decoration:none;
+    color:#454545;
+}
+
