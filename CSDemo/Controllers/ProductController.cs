@@ -17,6 +17,7 @@ using Sitecore.Mvc.Extensions;
 using Sitecore.Mvc.Presentation;
 using Sitecore.Web;
 using Newtonsoft.Json;
+using CSDemo.Models.Account;
 
 #endregion
 
@@ -72,23 +73,12 @@ namespace CSDemo.Controllers
 
         public ActionResult Categories()
         {
+                           
             var model = new List<Category>();
 
-            var rc = RenderingContext.CurrentOrNull;
-
-            if (rc != null)
+            if (!string.IsNullOrEmpty(_userCatalogIds))
             {
-                var rcParams = rc.Rendering.Parameters;
-
-                var categoryIDs = rcParams[Constants.Products.ParameterKey];
-
-                if (categoryIDs != null)
-                {
-                    if (!string.IsNullOrEmpty(categoryIDs))
-                    {
-                        model = ProductHelper.GetCategories(categoryIDs);
-                    }
-                }
+                model = ProductHelper.GetCatalogCategories(_userCatalogIds);
             }
 
             return View(model);
@@ -102,10 +92,15 @@ namespace CSDemo.Controllers
             {
                 model = new PaginationViewModel();
                 var categoryName = WebUtil.GetUrlName(0);
+
+                var cid = Request.QueryString[Constants.Products.CategoryId];
+
                 model.Category = categoryName;
+                model.UserCatalogIds = _userCatalogIds;
                 if (!string.IsNullOrEmpty(categoryName))
                 {
-                    var categoryId = ProductHelper.GetItemIdFromName(categoryName, ConfigurationHelper.GetSiteSettingInfo("CategoryParent"));
+
+                    var categoryId = (!string.IsNullOrEmpty(cid)) ? cid : ProductHelper.GetItemIdsFromName(categoryName, _userCatalogIds);
 
                     if (!string.IsNullOrEmpty(categoryId))
                     {
@@ -182,9 +177,9 @@ namespace CSDemo.Controllers
                     ProductId = model.ProductId
                 };
                 Product.VisitorSignupForStockNotification(Context.Site.Name, inputModel, model.LocationName ?? string.Empty);
-                return Redirect(model.Url + "?msg=success");
+                return Redirect(model.Url + Constants.Products.NotificationSuccess);
             }
-            return Redirect(model.Url + "?msg=error");
+            return Redirect(model.Url + Constants.Products.NotificationError);
         }
 
         #region Private Helpers
@@ -233,6 +228,8 @@ namespace CSDemo.Controllers
 
         private readonly ISitecoreContext _context;
         private const int MaxNumberOfProductsToShow = 10;
+        private readonly AccountHelper _usr = new AccountHelper();
+        private readonly string _userCatalogIds;
 
         #endregion
 
@@ -246,6 +243,7 @@ namespace CSDemo.Controllers
         public ProductController()
             : this(new SitecoreContext())
         {
+            _userCatalogIds = _usr.GetCurrentCustomerCatalogIds();
         }
 
         #endregion

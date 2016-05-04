@@ -1,4 +1,6 @@
 ﻿
+using Sitecore.Data.Items;
+
 namespace CSDemo.Contracts.Page
 {
     public interface IRoot
@@ -13,6 +15,7 @@ namespace CSDemo.Contracts.Page
         string PhoneNumber { get; set; }
         string Name { get; set; }
         string Url { get; set; }
+        Item Catalog { get; set; }
         #endregion
 
         #endregion

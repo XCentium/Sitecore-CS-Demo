@@ -67,6 +67,7 @@
 
             public const string CommerceCustomerId = "scommerce_customer_id";
             public const string CommerceUserId = "user_id";
+            public const string CommerceUserCatalogSetId = "user_catalog_set";
         }
 
         public struct Marketing
@@ -89,6 +90,13 @@
             public const string AddressLink = "/account/Addresses";
             public const string SigninMsg1 = "/account/signin?msg=Only Commerce Customers Allowed to Signin";
             public const string SigninMsg2 = "/account/signin?msg=Incorrect Username or Password";
+            public const string SigninLinkItem = "/account/signin";
+            public const string AddressLinkItem = "/account/Addresses";
+            public const string SigninErrorMsg1 = "Only Commerce Customers Allowed to Signin";
+            public const string SigninErrorMsg2 = "Incorrect Username or Password";
+            public const string CustomerPhotoPathItem = "{7ED0157A-CDBB-4B56-B39B-70ABCC1112CB}";
+            public const string CatalogSetField = "IncludedCatalogs";
+            public const string Error = "Error";
 
 
         }
@@ -106,6 +114,8 @@
             public const string Space = " ";
             public const string Comma = ",";
             public const string Empty = "";
+            public const char PipeSeparator = '|';
+            public const string PipeStringSeparator = "|";
 
         }
 
@@ -149,6 +159,11 @@
             public const string TrackingFieldId = "{B0A67B2A-8B07-4E0B-8809-69F751709806}";
             public const string AlsoBoughtProductsUrl = "http://xcp13n.xcentium.net/api/data/relatedproducts/csdemo/{0}";
             public const string AdventureWorksRootPath = "/sitecore/Commerce/Catalog Management/Catalogs/Adventure Works Catalog/Departments";
+            public const string CatalogsRootPath = "/sitecore/Commerce/Catalog Management/Catalogs";
+            public const string GeneralCategoryTemplateName = "GeneralCategory";
+            public const string CategoryId = "cid";
+            public const string NotificationSuccess = "?msg=success";
+            public const string NotificationError = "?msg=error";
         }
 
         public struct Cart

@@ -25,32 +25,36 @@
 
                                         @foreach (var cat in Model.CategoryMenulist)
                                         {
+                                            var cid = Model.CategoryMenulist.Count(c => c.Name == cat.Name) > 1 ? string.Format("?cid={0}", cat.ID.ToString()) : string.Empty;
 
                                             currentCat++;
 
                                             var listClass = "class=collapsed";
                                             var ariaExpand = "false";
                                             var panelCollapse = "collapse";
-
-                                            if (cat.Name.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase))
+                                            if (!String.IsNullOrEmpty(cat.Name))
                                             {
-                                                listClass = " ";
-                                                ariaExpand = "true";
-                                                panelCollapse = "collapse in";
+
+                                                if (cat.Name.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase))
+                                                {
+                                                    listClass = " ";
+                                                    ariaExpand = "true";
+                                                    panelCollapse = "collapse in";
+                                                }
+
+                                                var catProducts = cat.ProductMenulistViewModel;
+
+                                                <li class="panel">
+                                                    <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name<span>[@cat.ProductsCount]</span></a>
+                                                    <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">
+                                                        <li><a href="@cat.Url@cid"><span class="fa fa-arrow-right"></span></a></li>
+                                                        @foreach (CSDemo.Models.Product.ProductMenulistViewModel catProduct in catProducts)
+                                                        {
+                                                            <li><a href="@catProduct.Url">@catProduct.Name</a></li>
+                                                        }
+                                                    </ul>
+                                                </li>
                                             }
-
-                                            var catProducts = cat.ProductMenulistViewModel;
-
-                                            <li class="panel">
-                                                <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name<span>[@cat.ProductsCount]</span></a>
-                                                <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">
-                                                    <li><a href="@cat.Url"><span class="fa fa-arrow-right"></span></a></li>
-                                                    @foreach (CSDemo.Models.Product.ProductMenulistViewModel catProduct in catProducts)
-                                                    {
-                                                        <li><a href="@catProduct.Url">@catProduct.Name</a></li>
-                                                    }
-                                                </ul>
-                                            </li>
                                         }
                                     </ul>
                                 </div>
@@ -90,7 +94,7 @@
                                         <label>Sort by:</label>
                                     </div>
                                     <div class="form-group">
-                                        
+
                                         <select name="OrderBy" id="OrderBy" class="form-control">
                                             <option @(Model.PaginationViewModel.OrderBy == string.Empty ? " selected " : string.Empty) value="">Default</option>
                                             <option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByBrand ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByBrand">@CSDemo.Constants.Products.OrderByBrand</option>
@@ -128,8 +132,8 @@
                                                 @foreach (var image in product.Images)
                                                 {
                                                     count++;
-                                                    @RenderImage(image, x => x, new { mw = 310, @class = "img-responsive " }, isEditable: false);                                                                                                                                              
-                                                    if (count == 1) { break; }
+                                                    @RenderImage(image, x => x, new { mw = 310, @class = "img-responsive " }, isEditable: false);
+                                                                                                                                                if (count == 1) { break; }
                                                 }
                                                 <div class="category-mask"></div>
                                                 <h3 class="category-title">@product.Title <span>Collection</span></h3>
