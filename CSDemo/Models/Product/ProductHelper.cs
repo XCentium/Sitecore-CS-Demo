@@ -22,6 +22,7 @@ using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Links;
 using Convert = System.Convert;
+using CSDemo.Models.Page;
 
 #endregion
 
@@ -151,10 +152,11 @@ namespace CSDemo.Models.Product
         internal static CategoryProductViewModel GetCategoryProducts(PaginationViewModel model)
         {
             var cartHelper = new CartHelper();
-            var categoryProductVm = new CategoryProductViewModel();
-            categoryProductVm.PaginationViewModel = model;
+            var categoryProductVm = new CategoryProductViewModel {PaginationViewModel = model};
+
             var category = new Category();
-            categoryProductVm.CategoryMenulist = GetCategoryMenuList(ConfigurationHelper.GetSiteSettingInfo("CategoryParent"));
+            categoryProductVm.CategoryMenulist = GetCategoryMenuList(model.UserCatalogIds);
+
             var searchedItem = GetSearchResultItemById(model.CategoryId);
             if (searchedItem != null)
             {
@@ -165,6 +167,7 @@ namespace CSDemo.Models.Product
                     var catChildren = catItem.GetChildren().Select(x => x.GlassCast<Product>()).ToList();
                     model.TotalItems = catChildren.Count();
                     model.TotalPages = (long) Math.Ceiling((double) model.TotalItems/model.PageSize);
+
                     // do sorting
                     if (!string.IsNullOrEmpty(model.OrderBy))
                     {
@@ -189,10 +192,12 @@ namespace CSDemo.Models.Product
                                 break;
                         }
                     }
+
                     // do paging
                     category.Products = catChildren
                         .Skip(model.PageSize*(model.CurrentPage - 1))
                         .Take(model.PageSize);
+
                     // Process ProductVariants
                     foreach (var product in category.Products)
                     {
@@ -348,37 +353,47 @@ namespace CSDemo.Models.Product
 
         /// <summary>
         /// </summary>
-        /// <param name="parentID"></param>
+        /// <param name="parentIds"></param>
         /// <returns></returns>
-        private static IEnumerable<CategoryMenulistViewModel> GetCategoryMenuList(string parentID)
+        private static IEnumerable<CategoryMenulistViewModel> GetCategoryMenuList(string parentIds)
         {
             var categoryMenulistViewModel = new List<CategoryMenulistViewModel>();
-            var categories = GetCategoryMenuListByParentId(parentID);
-            if (categories != null)
+            if (!string.IsNullOrEmpty(parentIds))
             {
-                foreach (var category in categories)
+                var parentIdArr = parentIds.Split(Constants.Common.PipeSeparator);
+                foreach (var parentId in parentIdArr)
                 {
-                    var c = new CategoryMenulistViewModel();
-                    c.ID = category.ItemId.ToString();
-                    c.Name = category.Name;
-                    c.Url = LinkManager.GetItemUrl(category.GetItem());
-                    var categoryChildern = category.GetItem().GetChildren();
-                    c.ProductsCount = categoryChildern.Count();
-                    var pList = new List<ProductMenulistViewModel>();
-                    foreach (Item categoryChild in categoryChildern)
+             
+                    var categories = GetCategoryMenuListByParentId(parentId);
+                    if (categories != null)
                     {
-                        if (categoryChild.TemplateID.ToString() != Constants.Products.CategoriesTemplateId)
+                        foreach (var category in categories)
                         {
-                            var p = new ProductMenulistViewModel();
-                            p.Name = categoryChild.DisplayName;
-                            p.Url = LinkManager.GetItemUrl(categoryChild);
-                            pList.Add(p);
+                            var c = new CategoryMenulistViewModel();
+                            c.ID = category.ID.ToString();
+                            c.Name = category.Name;
+                            c.Url = LinkManager.GetItemUrl(category);
+                            var categoryChildern = category.GetChildren();
+                            c.ProductsCount = categoryChildern.Count();
+                            var pList = new List<ProductMenulistViewModel>();
+                            foreach (Item categoryChild in categoryChildern)
+                            {
+                                if (categoryChild.TemplateID.ToString() != Constants.Products.CategoriesTemplateId)
+                                {
+                                    var p = new ProductMenulistViewModel();
+                                    p.Name = categoryChild.DisplayName;
+                                    p.Url = LinkManager.GetItemUrl(categoryChild);
+                                    pList.Add(p);
+                                }
+                            }
+                            c.ProductMenulistViewModel = pList;
+                            categoryMenulistViewModel.Add(c);
                         }
                     }
-                    c.ProductMenulistViewModel = pList;
-                    categoryMenulistViewModel.Add(c);
+
                 }
             }
+
             categoryMenulistViewModel = categoryMenulistViewModel.OrderBy(i => i.Name).ToList();
             return categoryMenulistViewModel;
         }
@@ -387,19 +402,24 @@ namespace CSDemo.Models.Product
         /// </summary>
         /// <param name="parentId"></param>
         /// <returns></returns>
-        private static List<SearchResultItem> GetCategoryMenuListByParentId(string parentId)
+        private static List<Item> GetCategoryMenuListByParentId(string parentId)
         {
-            var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
+
+            var catParentItem = Context.Database.GetItem(new ID(parentId));
+
             try
             {
-                var culture = Context.Language.CultureInfo;
-                using (var context = index.CreateSearchContext())
+                if (catParentItem != null)
                 {
-                    var queryable = context.GetQueryable<SearchResultItem>()
-                        .Where(x => x.Language == Context.Language.Name);
-                    return
-                        queryable.Where(x => x.Parent == ID.Parse(parentId) && x.TemplateName == "GeneralCategory")
+                    var catItem =
+                        catParentItem.Axes.GetDescendants()
+                            .Where(
+                                x =>
+                                    x.TemplateName.Equals(Constants.Products.GeneralCategoryTemplateName,
+                                        StringComparison.InvariantCultureIgnoreCase))
                             .ToList();
+
+                    return catItem;
                 }
             }
             catch (Exception ex)
@@ -741,6 +761,110 @@ namespace CSDemo.Models.Product
                 }
             }
             return false;
+        }
+
+
+        /// <summary>
+        /// Gets the Site's selected root catalogID that was set on the catalog field of the site item.
+        /// </summary>
+        /// <returns></returns>
+        internal static string GetSiteRootCatalogId()
+        {
+
+           // Fetch the start item from Site definition
+
+            var rootItem = Sitecore.Context.Database.GetItem(Sitecore.Context.Site.ContentStartPath);
+
+            if (rootItem == null) return string.Empty;
+            var rootModel = rootItem.GlassCast<Root>();
+            return rootModel.Catalog != null ? rootModel.Catalog.ID.ToString() : string.Empty;
+
+        }
+
+
+        /// <summary>
+        /// Returns a catalog item based on the catalog name
+        /// </summary>
+        /// <param name="catalogName"></param>
+        /// <returns></returns>
+        internal static Item GetCatalogItemByName(string catalogName)
+        {
+            var catalogRoot = Sitecore.Context.Database.GetItem(Constants.Products.CatalogsRootPath);
+
+            if (catalogRoot != null)
+            {
+                return catalogRoot.Axes.GetDescendants().FirstOrDefault(x => x.Name.Equals(catalogName,StringComparison.InvariantCultureIgnoreCase));
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Returns the catalog to display to the current user
+        /// </summary>
+        /// <param name="catalogIds"></param>
+        /// <returns></returns>
+        internal static List<Category> GetCatalogCategories(string catalogIds)
+        {
+
+            var catalogCategories = new List<Category>();
+            var catalogs = catalogIds.Split(Constants.Common.PipeSeparator);
+            foreach (var catalogId in catalogs)
+            {
+                var catalog = Sitecore.Context.Database.GetItem(new ID(catalogId));
+                if (catalog != null)
+                {
+                    var categories =
+                        catalog.GetChildren()
+                        .Where(x => x.TemplateName.Equals(Constants.Products.GeneralCategoryTemplateName,StringComparison.InvariantCultureIgnoreCase));
+
+                    catalogCategories.AddRange(categories.Select(c => c.GlassCast<Category>()));
+                }
+            }
+            return catalogCategories;
+        }
+
+        /// <summary>
+        /// Get CategoryProducts item IDS from a given name and assigned catalog
+        /// </summary>
+        /// <param name="categoryName"></param>
+        /// <param name="catalogIds"></param>
+        /// <returns></returns>
+        internal static string GetItemIdsFromName(string categoryName, string catalogIds)
+        {
+                        
+            // get the catalog ids for this user
+            // loop through the ids and get ids of children items with the given name
+
+             var categoryChildIds = new List<string>();
+
+            if (!string.IsNullOrEmpty(catalogIds))
+            {
+
+                var catalogs = catalogIds.Split(Constants.Common.PipeSeparator);
+
+                foreach (var catalogId in catalogs)
+                {
+                    var catalog = Sitecore.Context.Database.GetItem(new ID(catalogId));
+                    if (catalog != null)
+                    {
+                        var childitems =
+                            catalog.Axes.GetDescendants()
+                                .Where(n => n.Name.Equals(categoryName,StringComparison.CurrentCultureIgnoreCase))
+                                .ToList();
+
+                        if (childitems.Any())
+                        {
+                            categoryChildIds.AddRange(childitems.Select(i=>i.ID.ToString()));
+                        }
+
+                    }
+                }
+
+                return categoryChildIds.Aggregate((current, next) => current + Constants.Common.PipeStringSeparator + next);
+            }
+
+            return string.Empty;
         }
     }
 }

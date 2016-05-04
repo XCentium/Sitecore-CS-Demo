@@ -10,5 +10,7 @@
         public int TotalItems { get; set; }
         public long TotalPages { get; set; }
 
+        public string UserCatalogIds { get; set; }
+
     }
 }

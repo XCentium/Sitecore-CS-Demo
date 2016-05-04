@@ -65,7 +65,7 @@ namespace CSDemo.Controllers
             return this.Redirect(Constants.Account.SigninLink);
         }
 
-
+ 
         public ActionResult Account()
         {
             if (Sitecore.Context.User.IsAuthenticated)

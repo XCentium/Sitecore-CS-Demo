@@ -9,12 +9,13 @@
         <div class="row row-no-padding">
             @foreach (Category category in Model)
             {
+                var cid = Model.Count(c => c.Name == category.Name) > 1 ? string.Format("?cid={0}", category.ID.ToString()) : string.Empty;
             <!-- CATEGORY - START -->
                 <div class="col-xs-4">
                     @using (BeginEditFrame(category, "Edit Category", x => x.Images, x => x.Name))
                     {
                         <div class="category">
-                            <a href="@category.Url">
+                            <a href="@category.Url@cid">
                                 @if (category.Images != null && category.Images.Any())
                                 {                               
                                     @RenderImage(category.Images.ElementAt(0), x => x, new {mh = 310, @class = "img-responsive "}, isEditable: false)

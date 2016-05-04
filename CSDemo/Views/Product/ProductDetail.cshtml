@@ -344,15 +344,17 @@
                                                                     <label>Color:</label>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    @foreach (var variantColor in Model.VariantColors)
-                                                                    {
-                                                                        <select name="@variantColor.Name" id="@string.Concat(variantColor.Name, Model.VariantProdId)" style="display: @variantColor.Display" data-num="@Model.VariantProdId" class="@string.Concat("ProductColor", Model.VariantProdId) ProductColor form-control">
-                                                                            @foreach (var color in variantColor.VariantColorLines)
-                                                                            {
-                                                                                <option value="@color.Value">@color.Color</option>
-                                                                            }
-                                                                        </select>
-                                                                    }
+                                                                    
+                                                                        @foreach (var variantColor in Model.VariantColors)
+                                                                        {
+                                                                            <ul id="ul_@string.Concat(variantColor.Name, Model.VariantProdId)" style="display: @variantColor.Display" data-num="@Model.VariantProdId" class="variantcolorlist @string.Concat("ProductColor", Model.VariantProdId) ProductColor">
+                                                                                @foreach (var color in variantColor.VariantColorLines)
+                                                                                {
+                                                                                    <li><a href="#" data-num="@Model.VariantProdId" data-vname="@variantColor.Name" data-val="@color.Value" class="variantcolorrectangle" style="background-color: @color.Color">&nbsp;</a></li>
+                                                                                }
+                                                                            </ul>
+                                                                        }
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>

@@ -16,6 +16,7 @@ using System.IO;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Diagnostics;
 using System.Collections.ObjectModel;
+using CSDemo.Models.Product;
 
 #endregion
 
@@ -210,7 +211,7 @@ namespace CSDemo.Models.Account
         internal string GetCommerceUserId(string userName)
         {
   
-            var user = Sitecore.Security.Accounts.User.FromName(userName, true);
+            var user = User.FromName(userName, true);
             Sitecore.Security.UserProfile profile = user.Profile;
             var commerceUserId = user.Profile.GetCustomProperty(Constants.Commerce.CommerceCustomerId);
             if (string.IsNullOrEmpty(commerceUserId))
@@ -234,6 +235,59 @@ namespace CSDemo.Models.Account
 
         }
 
+        /// <summary>
+        /// Returns the catalogIDs that should be used to load the current user's product.
+        /// </summary>
+        /// <returns></returns>
+        internal string GetCurrentCustomerCatalogIds()
+        {
+            if (Sitecore.Context.User.IsAuthenticated)
+            {
+                string userName = Sitecore.Context.User.Name;
+                var user = User.FromName(userName, true);
+                Sitecore.Security.UserProfile profile = user.Profile;
+            
+                var commerceCatalogSet = profile[Constants.Commerce.CommerceUserId];
+
+                if (!string.IsNullOrEmpty(commerceCatalogSet))
+                {
+                    return GetCatalogIdsFromCatalogSet(commerceCatalogSet); 
+                }
+
+            }
+
+           return ProductHelper.GetSiteRootCatalogId();
+
+        }
+
+        private string GetCatalogIdsFromCatalogSet(string commerceCatalogSet)
+        {
+            if (!string.IsNullOrEmpty(commerceCatalogSet))
+            {
+
+                var commerceCatalogSetItem = Sitecore.Context.Database.GetItem(commerceCatalogSet);
+                if (commerceCatalogSetItem != null)
+                {
+                    var commerceCatalogNames = commerceCatalogSetItem[Constants.Account.CatalogSetField];
+
+                    if (!string.IsNullOrEmpty(commerceCatalogNames))
+                    {
+                        var catalogIds = new List<string>();
+                        string[] catalogNames = commerceCatalogNames.Split(Constants.Common.PipeSeparator);
+
+                        foreach (var catalogName in catalogNames)
+                        {
+                            var catalogItem = ProductHelper.GetCatalogItemByName(catalogName);
+                            if (catalogItem != null) catalogIds.Add(catalogItem.ID.ToString());
+                        }
+
+                        return catalogIds.Aggregate((current, next) => current + Constants.Common.PipeStringSeparator + next);
+                    }
+                }
+               
+            }
+            return string.Empty;
+        }
 
         /// <summary>
         /// Gets a customer based on an id
@@ -251,8 +305,8 @@ namespace CSDemo.Models.Account
                 return result.CommerceCustomer;
             }
 
-            throw new ApplicationException(result.SystemMessages.Any()? result.SystemMessages[0].Message: "Error" );
-            
+            throw new ApplicationException(result.SystemMessages.Any() ? result.SystemMessages[0].Message : Constants.Account.Error);
+
         }
 
         /// <summary>
@@ -381,7 +435,7 @@ namespace CSDemo.Models.Account
                 return result.CommerceCustomer;
             }
 
-            throw new ApplicationException(result.SystemMessages.Any()? result.SystemMessages[0].Message: "Error");
+            throw new ApplicationException(result.SystemMessages.Any() ? result.SystemMessages[0].Message : Constants.Account.Error);
 
         }
 

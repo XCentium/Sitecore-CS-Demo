@@ -4,6 +4,7 @@ using CSDemo.Contracts.Page;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using System;
+using Sitecore.Data.Items;
 
 #endregion
 
@@ -42,6 +43,10 @@ namespace CSDemo.Models.Page
         [SitecoreInfo(SitecoreInfoType.Path)]
         public virtual string Path { get; set; }
 
+
+        [SitecoreField(Fields.Catalog)]
+        public virtual Item Catalog { get; set; }
+
         #endregion
 
 
@@ -53,6 +58,7 @@ namespace CSDemo.Models.Page
             public const string PreTitle = "PreTitle";
             public const string Tagline = "Tagline";
             public const string PhoneNumber = "Phone Number";
+            public const string Catalog = "Catalog";
         }
         #endregion
     }

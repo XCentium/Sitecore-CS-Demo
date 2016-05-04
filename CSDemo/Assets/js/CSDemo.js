@@ -990,6 +990,18 @@
 
     });
 
+    
+    $(".variantcolorrectangle").click(function () {
+
+        $(this).parent().parent().find('li').removeClass("variantcolorselected");
+
+        $(this).parent().addClass("variantcolorselected");
+
+        if ($(this).data("val") && $(this).data("num")) { doProductColorChange($(this).data("val"), $(this).data("num")); }
+
+        event.preventDefault();
+    });
+
 
     function doProductSizeChange(objId, num) {
 
@@ -1001,11 +1013,16 @@
 
         var idToShow = "#" + objText + "ProductColor" + num;
 
+        var ulToShow = "#ul_" + objText + "ProductColor" + num;
+
         // hide all ProductColor with class   ProductColor + num
         $(classToHide).hide();
 
         // show only ProductColor with ID ProductColor + num + Obj.Value
         $(idToShow).show();
+
+        // show only ProductColor with ID ProductColor + num + Obj.Value
+        $(ulToShow).show();
 
         // Set first value of item to show as selected
         $(idToShow + " option:selected").prop("selected", false);
