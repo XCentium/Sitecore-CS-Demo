@@ -634,6 +634,7 @@
     <Content Include="Views\Account\Addresses.cshtml" />
     <Content Include="Views\Product\_ComparisonControl.cshtml" />
     <Content Include="Views\Product\ProductDetailNoAvailability.cshtml" />
+    <Content Include="Views\Checkout\ReviewNoHeaderFooter.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
