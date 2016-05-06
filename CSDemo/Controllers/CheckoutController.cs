@@ -48,6 +48,13 @@ namespace CSDemo.Controllers
             return View();
         }
 
+        #region Testing
 
+        public ActionResult ReviewNoHeaderFooter()
+        {
+            return View();
+        }
+
+        #endregion
     }
 }

@@ -143,25 +143,8 @@ namespace CSDemo.Controllers
 
         public ActionResult ProductDetail()
         {
-            var categoryId = WebUtil.GetUrlName(1);
-            var productId = WebUtil.GetUrlName(0).Replace(Constants.Common.Space, Constants.Common.Dash);
-
-            if (productId.IsEmptyOrNull())
-            {
-                return View();
-            }
-
-            Cookie.SaveFeaturedProductCookie(productId);
-
-            Product model = ProductHelper.GetProductByNameAndCategory(productId, categoryId);
-            model.ProfileProduct(_context);
-
-            if (model.StockInformation?.Location != null)
-            {
-                model.LocationName = model.StockInformation.Location.Name;
-            }
-
-            return View(model);
+            var product = GetProduct();
+            return View(product);
         }
 
         [HttpPost]
@@ -182,28 +165,12 @@ namespace CSDemo.Controllers
             return Redirect(model.Url + Constants.Products.NotificationError);
         }
 
-        #region Web Services
-
-        public ActionResult GetProduct(string productId)
+        #region Testing
+    
+        public ActionResult ProductDetailNoAvailability()
         {
-            if (string.IsNullOrWhiteSpace(productId)) return null;
-            var product = Product.GetProduct(productId);
-
-            var result = JsonConvert.SerializeObject(product);
-            return Content(result, "application/json");
-        }
-
-        public ActionResult GetProducts(string[] productIds)
-        {
-            var products = new List<Product>();
-            foreach(var productId in productIds)
-            {
-                var product = Product.GetProduct(productId);
-                products.Add(product);
-            }
-
-            var result = JsonConvert.SerializeObject(products);
-            return Content(result, "application/json");
+            var product = GetProduct();
+            return View(product);
         }
 
         #endregion
@@ -246,6 +213,28 @@ namespace CSDemo.Controllers
                         products.Add(product);
                 }
             }
+        }
+
+        private Product GetProduct()
+        {
+            var categoryId = WebUtil.GetUrlName(1);
+            var productId = WebUtil.GetUrlName(0).Replace(Constants.Common.Space, Constants.Common.Dash);
+
+            if (productId.IsEmptyOrNull())
+            {
+                return null;
+            }
+
+            Cookie.SaveFeaturedProductCookie(productId);
+
+            Product model = ProductHelper.GetProductByNameAndCategory(productId, categoryId);
+            model.ProfileProduct(_context);
+
+            if (model.StockInformation?.Location != null)
+            {
+                model.LocationName = model.StockInformation.Location.Name;
+            }
+            return model;
         }
 
         #endregion

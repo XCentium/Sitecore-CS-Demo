@@ -9,6 +9,9 @@ using CSDemo.Models.Checkout.Cart;
 using Sitecore.Analytics.Data.Items;
 using Sitecore.Analytics;
 using Sitecore.Diagnostics;
+using System.Web.Mvc;
+using CSDemo.Models.Product;
+using Newtonsoft.Json;
 
 #endregion
 
@@ -146,6 +149,31 @@ namespace CSDemo.AJAX
             ActionAllowed = CartHelper.CustomerOrAnonymous();
         }
 
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string GetProduct(string productId)
+        {
+            if (string.IsNullOrWhiteSpace(productId)) return null;
+            var product = Product.GetProduct(productId);
+
+            var result = JsonConvert.SerializeObject(product);
+            return result;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string GetProducts(string[] productIds)
+        {
+            var products = new List<Product>();
+            foreach(var productId in productIds)
+            {
+                var product = Product.GetProduct(productId);
+                products.Add(product);
+            }
+
+            var result = JsonConvert.SerializeObject(products);
+            return result;
+        }
 
 
         #region Private Helpers
