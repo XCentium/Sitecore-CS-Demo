@@ -1,0 +1,14 @@
+﻿---
+ID: c0cb29ba-d118-4946-b6a6-bd15472d7815
+Parent: 7e2afbab-fdbd-404f-b177-f01f35d53f83
+Template: adb6ca4f-03ef-4f47-b9ac-9ce2ba53ff97
+Path: /sitecore/content/CSDemo/Home/Blog/2016/05/06
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160506T043148Z

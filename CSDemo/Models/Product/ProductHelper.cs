@@ -850,7 +850,7 @@ namespace CSDemo.Models.Product
                     {
                         var childitems =
                             catalog.Axes.GetDescendants()
-                                .Where(n => n.Name.Equals(categoryName,StringComparison.CurrentCultureIgnoreCase))
+                                .Where(n => n.Name.Equals(categoryName,StringComparison.InvariantCultureIgnoreCase))
                                 .ToList();
 
                         if (childitems.Any())
@@ -861,7 +861,7 @@ namespace CSDemo.Models.Product
                     }
                 }
 
-                return categoryChildIds.Aggregate((current, next) => current + Constants.Common.PipeStringSeparator + next);
+                return (categoryChildIds.Count<1) ? String.Empty : categoryChildIds.Aggregate((current, next) => current + Constants.Common.PipeStringSeparator + next);
             }
 
             return string.Empty;

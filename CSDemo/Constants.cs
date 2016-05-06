@@ -88,13 +88,9 @@
             public const string JobTitle = "Customer";
             public const string SigninLink = "/account/signin";
             public const string AddressLink = "/account/Addresses";
-            public const string SigninMsg1 = "/account/signin?msg=Only Commerce Customers Allowed to Signin";
-            public const string SigninMsg2 = "/account/signin?msg=Incorrect Username or Password";
-            public const string SigninLinkItem = "/account/signin";
             public const string AddressLinkItem = "/account/Addresses";
-            public const string SigninErrorMsg1 = "Only Commerce Customers Allowed to Signin";
-            public const string SigninErrorMsg2 = "Incorrect Username or Password";
-            public const string CustomerPhotoPathItem = "{7ED0157A-CDBB-4B56-B39B-70ABCC1112CB}";
+            public const string SigninErrorMsg1 = "?msg=Only Commerce Customers Allowed to Signin";
+            public const string SigninErrorMsg2 = "?msg=Incorrect Username or Password";
             public const string CatalogSetField = "IncludedCatalogs";
             public const string Error = "Error";
 
@@ -111,6 +107,7 @@
         {
             public const string Dash = "-";
             public const string Underscore = "_";
+            public const string Fslash = "/";
             public const string Space = " ";
             public const string Comma = ",";
             public const string Empty = "";

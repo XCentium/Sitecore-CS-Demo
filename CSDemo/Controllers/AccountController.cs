@@ -22,7 +22,7 @@ namespace CSDemo.Controllers
             // If already logged in, redirect to homepage
             if (Sitecore.Context.User.IsAuthenticated)
             {
-                return this.Redirect("/");
+                return this.Redirect(Constants.Common.Fslash);
             }
             return View();
         }
@@ -42,16 +42,16 @@ namespace CSDemo.Controllers
                 var uid = usr.GetCommerceUserId(userName);
                 if (string.IsNullOrEmpty(uid))
                 {
-                    return this.Redirect(Constants.Account.SigninMsg1);
+                    return this.Redirect(string.Format("{0}{1}", Sitecore.Context.Site.LoginPage, Constants.Account.SigninErrorMsg1));
                 }
 
                 if (usr.Login(userName, model.Password, model.RememberMe))
                 {
-                    return this.Redirect("/");
+                    return this.Redirect(Constants.Common.Fslash);
                 }
 
             }
-            return this.Redirect(Constants.Account.SigninMsg2);
+            return this.Redirect(string.Format("{0}{1}", Sitecore.Context.Site.LoginPage, Constants.Account.SigninErrorMsg2));
         }
 
         public ActionResult SignOff()
@@ -62,7 +62,7 @@ namespace CSDemo.Controllers
                 AccountHelper usr = new AccountHelper();
                 usr.Logout();
             }
-            return this.Redirect(Constants.Account.SigninLink);
+            return this.Redirect(Sitecore.Context.Site.LoginPage);
         }
 
  
@@ -72,7 +72,7 @@ namespace CSDemo.Controllers
             {
                 return View();
             }
-            return this.Redirect(Constants.Account.SigninLink);
+            return this.Redirect(Sitecore.Context.Site.LoginPage);
 
 
         }
@@ -85,7 +85,7 @@ namespace CSDemo.Controllers
 
                 return View(model);
             }
-            return this.Redirect(Constants.Account.SigninLink);
+            return this.Redirect(Sitecore.Context.Site.LoginPage);
 
         }
 
@@ -109,14 +109,14 @@ namespace CSDemo.Controllers
 
                 return View();
             }
-            return this.Redirect(Constants.Account.SigninLink);
+            return this.Redirect(Sitecore.Context.Site.LoginPage);
 
         }
 
 
         public ActionResult AddAddress()
         {
-            if (!Sitecore.Context.User.IsAuthenticated) { return this.Redirect(Constants.Account.SigninLink); }
+            if (!Sitecore.Context.User.IsAuthenticated) { return this.Redirect(Sitecore.Context.Site.LoginPage); }
             var model = new Address();
 
             return View(model);
@@ -126,7 +126,7 @@ namespace CSDemo.Controllers
         [HttpPost]
         public ActionResult AddAddress(Address model)
         {
-            if (!Sitecore.Context.User.IsAuthenticated) { return this.Redirect(Constants.Account.SigninLink); }
+            if (!Sitecore.Context.User.IsAuthenticated) { return this.Redirect(Sitecore.Context.Site.LoginPage); }
 
             if (ModelState.IsValid)
             {
@@ -151,7 +151,7 @@ namespace CSDemo.Controllers
 
         public ActionResult Addresses()
         {
-            if (!Sitecore.Context.User.IsAuthenticated) { return this.Redirect(Constants.Account.SigninLink); }
+            if (!Sitecore.Context.User.IsAuthenticated) { return this.Redirect(Sitecore.Context.Site.LoginPage); }
 
             var model = new AccountHelper().GetCustomerAddresses();
 

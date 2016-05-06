@@ -246,10 +246,10 @@ namespace CSDemo.Models.Account
                 string userName = Sitecore.Context.User.Name;
                 var user = User.FromName(userName, true);
                 Sitecore.Security.UserProfile profile = user.Profile;
-            
-                var commerceCatalogSet = profile[Constants.Commerce.CommerceUserId];
 
-                if (!string.IsNullOrEmpty(commerceCatalogSet))
+                var commerceCatalogSet = profile[Constants.Commerce.CommerceUserCatalogSetId];
+
+                if (!string.IsNullOrEmpty(commerceCatalogSet) && commerceCatalogSet.Contains(Constants.Common.Dash))
                 {
                     return GetCatalogIdsFromCatalogSet(commerceCatalogSet); 
                 }

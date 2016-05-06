@@ -1,0 +1,53 @@
+﻿---
+ID: f6c45542-2cbb-4298-91e3-970e8680f20d
+Parent: c0cb29ba-d118-4946-b6a6-bd15472d7815
+Template: 753a2294-c879-47b7-b90b-da4d9f51c62f
+Path: /sitecore/content/CSDemo/Home/Blog/2016/05/06/Testing Blog 1
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160506T043148Z
+    - ID: 2779a63d-dd7f-4e0f-96c0-4066f90b6a8d
+      Hint: Summary
+      Value: |
+        Testing 1 summary 
+        Testing 1 summary 
+        Testing 1 summary 
+        Testing 1 summary 
+        Testing 1 summary 
+        Testing 1 summary 
+        Testing 1 summary 
+        Testing 1 summary 
+        Testing 1 summary 
+        Testing 1 summary 
+        Testing 1 summary 
+        Testing 1 summary 
+        
+    - ID: 9608e520-ef16-49fc-bd92-75cc101e5fec
+      Hint: Publish Date
+      Value: 20160506T043148Z
+    - ID: 9821df39-a4bc-476b-baef-2a2922c7a8c3
+      Hint: Title
+      Value: Testing Blog 1
+    - ID: f148b76b-8bc2-4a5b-89f1-9e5e42ed7f85
+      Hint: Body
+      Value: |
+        <p>Testing 1 Body </p>
+        <p></p>
+        <p>Testing 1 Body </p>
+        <p></p>
+        <p>Testing 1 Body </p>
+        <p></p>
+        <p>Testing 1 Body </p>
+        <p></p>
+        <p>Testing 1 Body </p>
+        <p></p>
+        <p>Testing 1 Body </p>
+        <p></p>
+        <p>Testing 1 Body </p>
+        <p></p>

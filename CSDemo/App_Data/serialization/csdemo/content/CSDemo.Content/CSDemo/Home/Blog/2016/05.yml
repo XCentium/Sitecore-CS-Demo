@@ -1,0 +1,14 @@
+﻿---
+ID: 7e2afbab-fdbd-404f-b177-f01f35d53f83
+Parent: 1b2e7325-ce26-4401-9c99-e0de84e2f3b6
+Template: adb6ca4f-03ef-4f47-b9ac-9ce2ba53ff97
+Path: /sitecore/content/CSDemo/Home/Blog/2016/05
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160506T043148Z
