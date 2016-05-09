@@ -12,7 +12,6 @@
             @using (BeginEditFrame(Model, "Edit Product",
                                 x => x.Images,
                                 x => x.Title,
-                                x => x.ProductId,
                                 x => x.CatalogName,
                                 x => x.VariantProdId,
                                 x => x.DefaultVariant,
@@ -193,7 +192,7 @@
                                         </span>
                                     }
                                     <ul class="list-unstyled product-info">
-                                        <li><span>ID</span>@Editable(Model, x => x.ProductId)</li>
+                                        <li><span>ID</span>@Model.ProductId</li>
                                         
                                         <li class="variants_in_stock">
                                             <span>Availability</span>@stockLabel

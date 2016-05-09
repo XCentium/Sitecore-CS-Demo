@@ -12,25 +12,12 @@ JUMBOTRON - START
 <section class="content jumbotron">
     @if (IsInEditingMode)
     {
-        //THIS SHOWS UP FINE IF UNCOMMENTED
-        @*<div id="carousel" class="nav-inside">
-                @foreach (var slide in Model)
-                {
-                    using (BeginEditFrame(slide, "Edit Metadata", x => x.Content, x => x.Image))
-                    {
-                        <div class="slide-body" style="background-color:black">
-                            @Editable(slide, x => x.Content)
-                        </div>
-
-                        @Editable(slide, x => x.Image)
-                    }
-                }
-            </div>*@
         <div id="div-carousel" class="nav-inside">
             @foreach (var slide in Model.Where(t => t != null))
             {
-                using (BeginEditFrame(slide, "Edit Hero Slide", x => x.Content, x => x.Image))
-                {
+                if (slide.Image == null) { continue; }
+                    using (BeginEditFrame(slide, "Edit Hero Slide", x => x.Content, x => x.Image))
+                    {
                     <div class="item slide-1" style="background-image: url(@slide.Image.Src)">
                         <div class="slide-mask"></div>
                         <div class="slide-body">
