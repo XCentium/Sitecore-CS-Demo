@@ -188,6 +188,22 @@ namespace CSDemo.AJAX
             return true;
         }
 
+            
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public bool ClearSessionTimeOutCookies()
+        {
+            if (!Sitecore.Context.User.IsAuthenticated)
+            {
+                var userHelper = new AccountHelper();
+                userHelper.ClearUserCatalogCookies();
+
+            }
+
+            return true;
+        }
+
+
         #region Private Helpers
 
         private void RegisterGoal(string goalId, string itemId)

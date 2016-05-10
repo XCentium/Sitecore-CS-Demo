@@ -181,7 +181,7 @@ namespace CSDemo.Controllers
         private static IEnumerable<Product> GetRecentlyViewedProducts()
         {
             var products = new List<Product>();
-            var cookie = Cookie.Get("featuredProducts");
+            var cookie = Cookie.Get(Constants.Products.FeaturedProducts);
             if (cookie != null && !cookie.Value.IsEmptyOrNull())
             {
                 var ids = cookie.Value.Split(',').ToList();

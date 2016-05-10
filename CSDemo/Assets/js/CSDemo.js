@@ -18,7 +18,7 @@
         adjustVariantCarousel();
         setProductComparison();
         displayPersonalizedCoupon();
-
+        console.log(document.cookie);
     });
 
     function displayPersonalizedCoupon() {
@@ -34,6 +34,7 @@
                     var message = "<h2>" + couponMessages[1] + "</h2>";
                     message += "<p>" + couponMessages[0] + "</p>";
                     showActionMessageFixed(message);
+                    Cookies.set("ShowCoupon", "false");
                 }
             }
 
@@ -41,6 +42,8 @@
     }
 
     function isUserLoggedInCommerceUser() {
+
+        clearSessionTimeOutCookies();
 
         var userLoggedInAsCommerceUser = Cookies.get("CommerceUserLoggedIn");
 
@@ -67,7 +70,7 @@
 
                         options += "<br/><input type='buton' class='btn btn-primary' value='Submit' onclick='postcatalogSelection(this.form.catalogName.value);' />";
                         options += "</form><br/><br/>";
-                        options += "<script>function postcatalogSelection(catalogName){ jQuery.post('/AJAX/cart.asmx/SetUserCatalogChoice', {catalogName: catalogName}); alert('345'); jQuery('#modalAddToCart').modal('hide'); window.location.reload(1);}</script>";
+                        options += "<script>function postcatalogSelection(catalogName){ jQuery.post('/AJAX/cart.asmx/SetUserCatalogChoice', {catalogName: catalogName}); jQuery('#modalAddToCart').modal('hide'); window.location.reload(1);}</script>";
                         showActionMessageFixedClean(options);
                     }
                 }
@@ -76,13 +79,30 @@
  
         }
 
-
-        console.log(document.cookie);
-
     }
 
+
+   function clearSessionTimeOutCookies()
+    {
+        
+       $.ajax({
+           type: "POST",
+           url: "/AJAX/cart.asmx/ClearSessionTimeOutCookies",
+           contentType: "application/json; charset=utf-8",
+           dataType: "json",
+           success: function (result) {
+
+           },
+           error: function (error) {
+               console.log(error);
+
+           }
+
+       });
+    }
+
+
     $(".set-user-catalog-choice").click(function () {
-        alert(233);
         if ($(this).data("catalogname")) { setUserCatalogChoice($(this).data("catalogname")); }
         event.preventDefault();
     });
@@ -97,8 +117,6 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (result) {
-
-                alert(222);
 
             },
             error: function (error) {

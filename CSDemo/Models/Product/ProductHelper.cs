@@ -886,14 +886,14 @@ namespace CSDemo.Models.Product
         {
             if (Sitecore.Context.User.IsAuthenticated && Sitecore.Context.User.Name.ToLower().Contains(Constants.Commerce.CommerceUserDomain.ToLower()))
             {
-                var showCouponCookie = Cookie.Get("ShowCoupon");
+                var showCouponCookie = Cookie.Get(Constants.Commerce.ShowCoupon);
                 if (showCouponCookie == null)
                 {
-                    Cookie.Set("ShowCoupon", "true");
+                    Cookie.Set(Constants.Commerce.ShowCoupon, Constants.Common.True);
                     var couponMessage = string.Format("{0}|{1}", personalizedProducts.CouponCode,
                         personalizedProducts.CouponCodeDescription);
 
-                    Cookie.Set("CouponMessage", couponMessage);
+                    Cookie.Set(Constants.Commerce.CouponMessage, couponMessage);
                 }
             }
         }

@@ -11,7 +11,7 @@ namespace CSDemo.Models.Product
         {
             if (!value.IsEmptyOrNull())
             {
-                var cookie = Get("FeaturedProducts");
+                var cookie = Get(Constants.Products.FeaturedProducts);
                 if (cookie != null)
                 {
                     var ids = cookie.Value.Split(',').ToList();
@@ -25,7 +25,7 @@ namespace CSDemo.Models.Product
                 }
                 else
                 {
-                    HttpCookie newCookie = new HttpCookie("FeaturedProducts")
+                    HttpCookie newCookie = new HttpCookie(Constants.Products.FeaturedProducts)
                     {
                         Expires = DateTime.Now.AddDays(365),
                         Value = value

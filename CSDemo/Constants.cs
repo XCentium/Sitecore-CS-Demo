@@ -69,6 +69,13 @@
             public const string CommerceCustomerId = "scommerce_customer_id";
             public const string CommerceUserId = "user_id";
             public const string CommerceUserCatalogSetId = "user_catalog_set";
+
+            public const string CommerceUserLoggedIn = "CommerceUserLoggedIn";
+            public const string UserCatalogOptions = "UserCatalogOptions";
+            public const string UserSelectedCatalogId = "UserSelectedCatalogId";
+            public const string ShowCoupon = "ShowCoupon";
+            public const string CouponMessage = "CouponMessage";
+
         }
 
         public struct Marketing
@@ -114,6 +121,7 @@
             public const string Empty = "";
             public const char PipeSeparator = '|';
             public const string PipeStringSeparator = "|";
+            public const string True = "true";
 
         }
 
@@ -162,6 +170,7 @@
             public const string CategoryId = "cid";
             public const string NotificationSuccess = "?msg=success";
             public const string NotificationError = "?msg=error";
+            public const string FeaturedProducts = "FeaturedProducts";
         }
 
         public struct Cart

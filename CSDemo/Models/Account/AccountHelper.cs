@@ -69,18 +69,18 @@ namespace CSDemo.Models.Account
         private void SetUserCatalogCookie()
         {
 
-            Cookie.Set("CommerceUserLoggedIn", "true");
+            Cookie.Set(Constants.Commerce.CommerceUserLoggedIn, Constants.Common.True);
 
             var catalogOptions = GetLoggedInCustomerCatalogOptions();
 
             if (!string.IsNullOrEmpty(catalogOptions))
             {
-                Cookie.Set("UserCatalogOptions", catalogOptions);
+                Cookie.Set(Constants.Commerce.UserCatalogOptions, catalogOptions);
 
                 // if more than one set the cookie options
                 if (catalogOptions.Contains(Constants.Common.PipeStringSeparator))
                 {
-                    Cookie.Set("UserSelectedCatalogId", "");
+                    Cookie.Set(Constants.Commerce.UserSelectedCatalogId, "");
                 }
                 else
                 {
@@ -98,7 +98,7 @@ namespace CSDemo.Models.Account
             var catalogItem = ProductHelper.GetCatalogItemByName(catalogName);
             if (catalogItem != null)
             {
-                Cookie.Set("UserSelectedCatalogId", catalogItem.ID.ToString());
+                Cookie.Set(Constants.Commerce.UserSelectedCatalogId, catalogItem.ID.ToString());
             }
         }
 
@@ -329,22 +329,30 @@ namespace CSDemo.Models.Account
         {
             if (Sitecore.Context.User.IsAuthenticated)
             {
-                var cataLogId = Cookie.Get("UserSelectedCatalogId").Value;
-
-                if (cataLogId != null && !string.IsNullOrEmpty(cataLogId))
+                try
                 {
-                    return cataLogId;
+                    var cataLogId = Cookie.Get(Constants.Commerce.UserSelectedCatalogId).Value;
+
+                    if (cataLogId != null && !string.IsNullOrEmpty(cataLogId))
+                    {
+                        return cataLogId;
+                    }
+
+                    string userName = Sitecore.Context.User.Name;
+                    var user = User.FromName(userName, true);
+                    Sitecore.Security.UserProfile profile = user.Profile;
+
+                    var commerceCatalogSet = profile[Constants.Commerce.CommerceUserCatalogSetId];
+
+                    if (!string.IsNullOrEmpty(commerceCatalogSet) && commerceCatalogSet.Contains(Constants.Common.Dash))
+                    {
+                        return GetCatalogIdsFromCatalogSet(commerceCatalogSet);
+                    }
                 }
-
-                string userName = Sitecore.Context.User.Name;
-                var user = User.FromName(userName, true);
-                Sitecore.Security.UserProfile profile = user.Profile;
-
-                var commerceCatalogSet = profile[Constants.Commerce.CommerceUserCatalogSetId];
-
-                if (!string.IsNullOrEmpty(commerceCatalogSet) && commerceCatalogSet.Contains(Constants.Common.Dash))
+                catch (Exception ex)
                 {
-                    return GetCatalogIdsFromCatalogSet(commerceCatalogSet); 
+                    
+                    Log.Error("CatalogId Error",ex,this);
                 }
 
             }
@@ -416,13 +424,13 @@ namespace CSDemo.Models.Account
             ClearUserCatalogCookies();
         }
 
-        private void ClearUserCatalogCookies()
+        public void ClearUserCatalogCookies()
         {
-            Cookie.Del("CommerceUserLoggedIn");
-            Cookie.Del("UserCatalogOptions");
-            Cookie.Del("UserSelectedCatalogId");
-            Cookie.Del("ShowCoupon");
-            Cookie.Del("CouponMessage");
+            Cookie.Del(Constants.Commerce.CommerceUserLoggedIn);
+            Cookie.Del(Constants.Commerce.UserCatalogOptions);
+            Cookie.Del(Constants.Commerce.UserSelectedCatalogId);
+            Cookie.Del(Constants.Commerce.ShowCoupon);
+            Cookie.Del(Constants.Commerce.CouponMessage);
         }
 
         /// <summary>
