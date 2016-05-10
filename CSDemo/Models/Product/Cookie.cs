@@ -39,5 +39,39 @@ namespace CSDemo.Models.Product
         {
             return string.IsNullOrWhiteSpace(cookieName) ? null : HttpContext.Current.Request.Cookies[cookieName];
         }
+
+
+        /// <summary>
+        /// Create a new Cookie
+        /// </summary>
+        /// <param name="cookieName">Cookie Name</param>
+        /// <param name="cookieExpirationInDays">Expiration Days</param>
+        /// <param name="cookieValue">Cookie value as a string</param>
+        public static void Set(string cookieName, string cookieValue, int cookieExpirationInDays = 365)
+        {
+
+            var cookie = HttpContext.Current.Request.Cookies[cookieName] ?? new HttpCookie(cookieName);
+            cookie.Value = cookieValue;
+            cookie.Expires = DateTime.Now.AddDays(cookieExpirationInDays);
+
+            //   cookie.Values[cookieName] = cookieValue;
+            HttpContext.Current.Response.Cookies.Set(cookie);
+        }
+
+
+
+        internal static void Del(string cookieName)
+        {
+            var cartCookie = HttpContext.Current.Request.Cookies[cookieName];
+            if (cartCookie != null)
+            {
+                // Render cookie invalid
+                HttpContext.Current.Response.Cookies.Remove(cookieName);
+                cartCookie.Expires = DateTime.Now.AddDays(-10);
+                cartCookie.Values[cookieName] = null;
+                cartCookie.Value = null;
+                HttpContext.Current.Response.SetCookie(cartCookie);
+            }
+        }
     }
 }

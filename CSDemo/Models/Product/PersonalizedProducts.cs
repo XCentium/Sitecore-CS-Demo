@@ -8,5 +8,8 @@ namespace CSDemo.Models.Product
     public class PersonalizedProducts : IPersonalizedProducts
     {
         public virtual IEnumerable<Product> Products { get; set; }
+
+        public virtual string CouponCode { get; set; }
+        public virtual string CouponCodeDescription { get; set; }
     }
 }

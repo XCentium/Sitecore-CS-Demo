@@ -12,6 +12,7 @@ using Sitecore.Diagnostics;
 using System.Web.Mvc;
 using CSDemo.Models.Product;
 using Newtonsoft.Json;
+using CSDemo.Models.Account;
 
 #endregion
 
@@ -175,6 +176,17 @@ namespace CSDemo.AJAX
             return result;
         }
 
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public bool SetUserCatalogChoice(string catalogName)
+        {
+
+            var userHelper = new AccountHelper();
+
+            userHelper.SetUserCatalogChoice(catalogName);
+
+            return true;
+        }
 
         #region Private Helpers
 

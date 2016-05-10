@@ -64,6 +64,7 @@
             public const string ProductTagNameFieldId = "{B5620C00-330B-479E-9B54-57857040E1E0}";
 
             public const string DefaultSocialDomainForCommerce = "CommerceUsers";
+            public const string CommerceUserDomain = "CommerceUser";
 
             public const string CommerceCustomerId = "scommerce_customer_id";
             public const string CommerceUserId = "user_id";
@@ -107,7 +108,7 @@
         {
             public const string Dash = "-";
             public const string Underscore = "_";
-            public const string Fslash = "/";
+            public const string ForwardSlash = "/";
             public const string Space = " ";
             public const string Comma = ",";
             public const string Empty = "";

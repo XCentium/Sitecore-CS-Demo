@@ -2,9 +2,13 @@
 
     //
     var commerceActionAllowed = false;  // This variable will determine if the user can perform commerce actions
+   
+
     window.ProductComparisonCookieName = "ComparisonProducts";
     $(document).ready(function () {
 
+        isUserLoggedInCommerceUser();
+        
         checkIfCommerceActionsAllowed();
         loadCheckoutFormData();
         loadPaymentFormData();
@@ -13,38 +17,131 @@
         loadOrderConfirmationData();
         adjustVariantCarousel();
         setProductComparison();
+        displayPersonalizedCoupon();
+
     });
+
+    function displayPersonalizedCoupon() {
+
+        var showCoupon = Cookies.get("ShowCoupon");
+        if (typeof showCoupon != 'undefined' && showCoupon === "true") {
+
+            var couponMessage = Cookies.get("CouponMessage");
+            if (typeof couponMessage != 'undefined' && couponMessage !== "|") {
+                if (couponMessage != null) {
+
+                    var couponMessages = couponMessage.split('|');
+                    var message = "<h2>" + couponMessages[1] + "</h2>";
+                    message += "<p>" + couponMessages[0] + "</p>";
+                    showActionMessageFixed(message);
+                }
+            }
+
+        }
+    }
+
+    function isUserLoggedInCommerceUser() {
+
+        var userLoggedInAsCommerceUser = Cookies.get("CommerceUserLoggedIn");
+
+        if (typeof userLoggedInAsCommerceUser != 'undefined' && userLoggedInAsCommerceUser === "true") {
+            
+            var selectedCatalog = Cookies.get("UserSelectedCatalogId");
+            if (typeof selectedCatalog != 'undefined' && selectedCatalog === "") {
+
+                var catalogOptions = Cookies.get("UserCatalogOptions");
+                if (typeof catalogOptions != 'undefined' && catalogOptions !== "") {
+
+                    if (catalogOptions != null) {
+  
+                        var catalogNames = catalogOptions.split('|');
+
+                        var options = "<form name='catalogSelection'  id='catalogSelection' method='post' action='/AJAX/cart.asmx/SetUserCatalogChoice' ><h2>Select a Catalog</h2>";
+                        for (var i = 0; i < catalogNames.length; i++) {
+                            options += "<input type='radio' name='catalogName' value='" +
+                                catalogNames[i] +
+                                "'/> " +
+                                catalogNames[i] +
+                                "<br />";
+                        }
+
+                        options += "<br/><input type='buton' class='btn btn-primary' value='Submit' onclick='postcatalogSelection(this.form.catalogName.value);' />";
+                        options += "</form><br/><br/>";
+                        options += "<script>function postcatalogSelection(catalogName){ jQuery.post('/AJAX/cart.asmx/SetUserCatalogChoice', {catalogName: catalogName}); alert('345'); jQuery('#modalAddToCart').modal('hide'); window.location.reload(1);}</script>";
+                        showActionMessageFixedClean(options);
+                    }
+                }
+
+            }
+ 
+        }
+
+
+        console.log(document.cookie);
+
+    }
+
+    $(".set-user-catalog-choice").click(function () {
+        alert(233);
+        if ($(this).data("catalogname")) { setUserCatalogChoice($(this).data("catalogname")); }
+        event.preventDefault();
+    });
+
+
+    function setUserCatalogChoice(catalogName) {
+        
+        $.ajax({
+            type: "POST",
+            url: "/AJAX/cart.asmx/SetUserCatalogChoice",
+            data: '{ "catalogName" : ' + catalogName + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+                alert(222);
+
+            },
+            error: function (error) {
+                console.log(error);
+
+            }
+
+        });
+    }
 
     function setProductComparison() {
         if (!$(".unit-compare").length) return;
 
         setComparisonCheckboxes();
 
-        $(".clear-comparison-control").click(function () {
-            removelAllComparisonProducts();
-            setComparisonCheckboxes();
-        });
+        $(".clear-comparison-control")
+            .click(function() {
+                removelAllComparisonProducts();
+                setComparisonCheckboxes();
+            });
 
-        $(".unit-compare input").click(function () {
-            var productId = $(this).attr("id").replace("chk-", "");
-            if ($(this).prop('checked') == true) {
-                addProductForComparison(productId);
-            } else {
-                removeProductForComparison(productId);
-            }
-            validateComparisonControls();
-            toggleComparisonClearControl();
-        })
+        $(".unit-compare input")
+            .click(function() {
+                var productId = $(this).attr("id").replace("chk-", "");
+                if ($(this).prop('checked') == true) {
+                    addProductForComparison(productId);
+                } else {
+                    removeProductForComparison(productId);
+                }
+                validateComparisonControls();
+                toggleComparisonClearControl();
+            });
 
-        $(".unit-compare a.compare-trigger").click(function () {
-            var checkedIds = getComparisonProductIds();
+        $(".unit-compare a.compare-trigger")
+            .click(function() {
+                var checkedIds = getComparisonProductIds();
 
-            if (checkedIds.length < 2) {
-                showActionMessageReload("Please select up to three products.");
-            } else {
-                populateComparisonView(checkedIds);
-            }
-        });
+                if (checkedIds.length < 2) {
+                    showActionMessageReload("Please select up to three products.");
+                } else {
+                    populateComparisonView(checkedIds);
+                }
+            });
     }
 
     // #region Product Comparison Helpers
@@ -405,7 +502,7 @@
             error: function (error) {
                 console.log(error);
 
-            },
+            }
 
         });
     }

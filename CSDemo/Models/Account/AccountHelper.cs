@@ -58,7 +58,48 @@ namespace CSDemo.Models.Account
                 CartHelper.MergeCarts(anonymousUserId);
             }
 
+            SetUserCatalogCookie();
+
             return isLoggedIn;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void SetUserCatalogCookie()
+        {
+
+            Cookie.Set("CommerceUserLoggedIn", "true");
+
+            var catalogOptions = GetLoggedInCustomerCatalogOptions();
+
+            if (!string.IsNullOrEmpty(catalogOptions))
+            {
+                Cookie.Set("UserCatalogOptions", catalogOptions);
+
+                // if more than one set the cookie options
+                if (catalogOptions.Contains(Constants.Common.PipeStringSeparator))
+                {
+                    Cookie.Set("UserSelectedCatalogId", "");
+                }
+                else
+                {
+                    // if it is just one catalog, get the ID and set the cookie
+                    SetUserCatalogChoice(catalogOptions);
+
+                }
+            }
+        }
+
+
+        internal void SetUserCatalogChoice(string catalogName)
+        {
+            // if it is just one catalog, get the ID and set the cookie
+            var catalogItem = ProductHelper.GetCatalogItemByName(catalogName);
+            if (catalogItem != null)
+            {
+                Cookie.Set("UserSelectedCatalogId", catalogItem.ID.ToString());
+            }
         }
 
         /// <summary>
@@ -235,6 +276,51 @@ namespace CSDemo.Models.Account
 
         }
 
+        internal string GetLoggedInCustomerCatalogOptions()
+        {
+
+            if (Sitecore.Context.User.IsAuthenticated)
+            {
+                string userName = Sitecore.Context.User.Name;
+                var user = User.FromName(userName, true);
+                Sitecore.Security.UserProfile profile = user.Profile;
+
+                var commerceCatalogSet = profile[Constants.Commerce.CommerceUserCatalogSetId];
+
+  //              commerceCatalogSet = "{22222222-2222-2222-2222-222222222222}";
+
+                if (!string.IsNullOrEmpty(commerceCatalogSet) && commerceCatalogSet.Contains(Constants.Common.Dash))
+                {
+                    return GetCatalogNamesFromCatalogSet(commerceCatalogSet);
+                }
+
+            }
+
+
+            return String.Empty;
+        }
+
+
+        private string GetCatalogNamesFromCatalogSet(string commerceCatalogSet)
+        {
+            if (!string.IsNullOrEmpty(commerceCatalogSet))
+            {
+
+                var commerceCatalogSetItem = Sitecore.Context.Database.GetItem(commerceCatalogSet);
+                if (commerceCatalogSetItem != null)
+                {
+                    var commerceCatalogNames = commerceCatalogSetItem[Constants.Account.CatalogSetField];
+
+                    if (!string.IsNullOrEmpty(commerceCatalogNames))
+                    {
+                       return commerceCatalogNames;
+                    }
+                }
+
+            }
+            return string.Empty;
+        }
+
         /// <summary>
         /// Returns the catalogIDs that should be used to load the current user's product.
         /// </summary>
@@ -243,6 +329,13 @@ namespace CSDemo.Models.Account
         {
             if (Sitecore.Context.User.IsAuthenticated)
             {
+                var cataLogId = Cookie.Get("UserSelectedCatalogId").Value;
+
+                if (cataLogId != null && !string.IsNullOrEmpty(cataLogId))
+                {
+                    return cataLogId;
+                }
+
                 string userName = Sitecore.Context.User.Name;
                 var user = User.FromName(userName, true);
                 Sitecore.Security.UserProfile profile = user.Profile;
@@ -289,6 +382,9 @@ namespace CSDemo.Models.Account
             return string.Empty;
         }
 
+
+
+
         /// <summary>
         /// Gets a customer based on an id
         /// </summary>
@@ -317,6 +413,16 @@ namespace CSDemo.Models.Account
             Tracker.Current.EndVisit(true);
             System.Web.HttpContext.Current.Session.Abandon();
             AuthenticationManager.Logout();
+            ClearUserCatalogCookies();
+        }
+
+        private void ClearUserCatalogCookies()
+        {
+            Cookie.Del("CommerceUserLoggedIn");
+            Cookie.Del("UserCatalogOptions");
+            Cookie.Del("UserSelectedCatalogId");
+            Cookie.Del("ShowCoupon");
+            Cookie.Del("CouponMessage");
         }
 
         /// <summary>
@@ -501,5 +607,6 @@ namespace CSDemo.Models.Account
 
             return addresses;
         }
+
     }
 }

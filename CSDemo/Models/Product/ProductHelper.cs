@@ -30,11 +30,11 @@ namespace CSDemo.Models.Product
 {
     public static class ProductHelper
     {
-      /// <summary>
-      /// Profile Product
-      /// </summary>
-      /// <param name="model"></param>
-      /// <param name="context"></param>
+        /// <summary>
+        /// Profile Product
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="context"></param>
         public static void ProfileProduct(this Product model, ISitecoreContext context)
         {
             var productItem = context.Database.GetItem(new ID(model.ID));
@@ -245,9 +245,11 @@ namespace CSDemo.Models.Product
                             Color = !string.IsNullOrEmpty(productVariant.ProductColor)
                                 ? productVariant.ProductColor.Trim()
                                 : string.Empty,
-                            Price = !string.IsNullOrEmpty(productVariant.ListPrice)? decimal.Parse(productVariant.ListPrice)
-                                .ToString(Constants.Products.CurrencyDecimalFormat, cultureInfo)
-                                : "0.00"
+                            Price =
+                                !string.IsNullOrEmpty(productVariant.ListPrice)
+                                    ? decimal.Parse(productVariant.ListPrice)
+                                        .ToString(Constants.Products.CurrencyDecimalFormat, cultureInfo)
+                                    : "0.00"
                         };
 
                         variantBoxLines.Add(variantBoxLine);
@@ -363,7 +365,7 @@ namespace CSDemo.Models.Product
                 var parentIdArr = parentIds.Split(Constants.Common.PipeSeparator);
                 foreach (var parentId in parentIdArr)
                 {
-             
+
                     var categories = GetCategoryMenuListByParentId(parentId);
                     if (categories != null)
                     {
@@ -515,7 +517,8 @@ namespace CSDemo.Models.Product
                         orderDetail.OrderID = commerceOrderHead.OrderID;
                         orderDetail.OrderStatus = commerceOrderHead.Status;
                         orderDetail.UserID = commerceOrderHead.UserId;
-                        orderDetail.TotalPrice = commerceOrderHead.Total.Amount.ToString(Constants.Products.CurrencyFormat);
+                        orderDetail.TotalPrice =
+                            commerceOrderHead.Total.Amount.ToString(Constants.Products.CurrencyFormat);
                         orderDetail.NumberofItems = commerceOrderHead.LineItemCount;
                         orderDetail.ExternalID = commerceOrderHead.ExternalId;
                     }
@@ -689,7 +692,7 @@ namespace CSDemo.Models.Product
                 {
                     BuildUiVariants(product);
                 }
-                
+
 
                 if (!string.IsNullOrEmpty(product.DefaultVariant))
                 {
@@ -771,7 +774,7 @@ namespace CSDemo.Models.Product
         internal static string GetSiteRootCatalogId()
         {
 
-           // Fetch the start item from Site definition
+            // Fetch the start item from Site definition
 
             var rootItem = Sitecore.Context.Database.GetItem(Sitecore.Context.Site.ContentStartPath);
 
@@ -793,7 +796,9 @@ namespace CSDemo.Models.Product
 
             if (catalogRoot != null)
             {
-                return catalogRoot.Axes.GetDescendants().FirstOrDefault(x => x.Name.Equals(catalogName,StringComparison.InvariantCultureIgnoreCase));
+                return
+                    catalogRoot.Axes.GetDescendants()
+                        .FirstOrDefault(x => x.Name.Equals(catalogName, StringComparison.InvariantCultureIgnoreCase));
             }
 
             return null;
@@ -816,7 +821,10 @@ namespace CSDemo.Models.Product
                 {
                     var categories =
                         catalog.GetChildren()
-                        .Where(x => x.TemplateName.Equals(Constants.Products.GeneralCategoryTemplateName,StringComparison.InvariantCultureIgnoreCase));
+                            .Where(
+                                x =>
+                                    x.TemplateName.Equals(Constants.Products.GeneralCategoryTemplateName,
+                                        StringComparison.InvariantCultureIgnoreCase));
 
                     catalogCategories.AddRange(categories.Select(c => c.GlassCast<Category>()));
                 }
@@ -832,11 +840,11 @@ namespace CSDemo.Models.Product
         /// <returns></returns>
         internal static string GetItemIdsFromName(string categoryName, string catalogIds)
         {
-                        
+
             // get the catalog ids for this user
             // loop through the ids and get ids of children items with the given name
 
-             var categoryChildIds = new List<string>();
+            var categoryChildIds = new List<string>();
 
             if (!string.IsNullOrEmpty(catalogIds))
             {
@@ -850,21 +858,44 @@ namespace CSDemo.Models.Product
                     {
                         var childitems =
                             catalog.Axes.GetDescendants()
-                                .Where(n => n.Name.Equals(categoryName,StringComparison.InvariantCultureIgnoreCase))
+                                .Where(n => n.Name.Equals(categoryName, StringComparison.InvariantCultureIgnoreCase))
                                 .ToList();
 
                         if (childitems.Any())
                         {
-                            categoryChildIds.AddRange(childitems.Select(i=>i.ID.ToString()));
+                            categoryChildIds.AddRange(childitems.Select(i => i.ID.ToString()));
                         }
 
                     }
                 }
 
-                return (categoryChildIds.Count<1) ? String.Empty : categoryChildIds.Aggregate((current, next) => current + Constants.Common.PipeStringSeparator + next);
+                return (categoryChildIds.Count < 1)
+                    ? String.Empty
+                    : categoryChildIds.Aggregate(
+                        (current, next) => current + Constants.Common.PipeStringSeparator + next);
             }
 
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Set cookie to show coupon only if user is a logged in commerce user
+        /// </summary>
+        /// <param name="personalizedProducts"></param>
+        internal static void SetPersonalizedCoupon(PersonalizedProducts personalizedProducts)
+        {
+            if (Sitecore.Context.User.IsAuthenticated && Sitecore.Context.User.Name.ToLower().Contains(Constants.Commerce.CommerceUserDomain.ToLower()))
+            {
+                var showCouponCookie = Cookie.Get("ShowCoupon");
+                if (showCouponCookie == null)
+                {
+                    Cookie.Set("ShowCoupon", "true");
+                    var couponMessage = string.Format("{0}|{1}", personalizedProducts.CouponCode,
+                        personalizedProducts.CouponCodeDescription);
+
+                    Cookie.Set("CouponMessage", couponMessage);
+                }
+            }
         }
     }
 }

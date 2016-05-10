@@ -22,7 +22,7 @@ namespace CSDemo.Controllers
             // If already logged in, redirect to homepage
             if (Sitecore.Context.User.IsAuthenticated)
             {
-                return this.Redirect(Constants.Common.Fslash);
+                return this.Redirect(Constants.Common.ForwardSlash);
             }
             return View();
         }
@@ -40,6 +40,7 @@ namespace CSDemo.Controllers
                 var userName = usr.GetAccountName(model.Email);
 
                 var uid = usr.GetCommerceUserId(userName);
+
                 if (string.IsNullOrEmpty(uid))
                 {
                     return this.Redirect(string.Format("{0}{1}", Sitecore.Context.Site.LoginPage, Constants.Account.SigninErrorMsg1));
@@ -47,7 +48,7 @@ namespace CSDemo.Controllers
 
                 if (usr.Login(userName, model.Password, model.RememberMe))
                 {
-                    return this.Redirect(Constants.Common.Fslash);
+                    return this.Redirect(Constants.Common.ForwardSlash);
                 }
 
             }

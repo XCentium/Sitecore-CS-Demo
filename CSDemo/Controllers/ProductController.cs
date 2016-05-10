@@ -68,12 +68,13 @@ namespace CSDemo.Controllers
             var parentItem = _context.Database.GetItem(datasource);
             if (parentItem == null) return View(empty);
             var personalizedProducts = parentItem.GlassCast<PersonalizedProducts>();
+            if (!string.IsNullOrEmpty(personalizedProducts.CouponCode)){ProductHelper.SetPersonalizedCoupon(personalizedProducts);}
             return personalizedProducts?.Products != null ? View(personalizedProducts.Products) : View(empty);
         }
 
         public ActionResult Categories()
         {
-                           
+{}
             var model = new List<Category>();
 
             if (!string.IsNullOrEmpty(_userCatalogIds))
