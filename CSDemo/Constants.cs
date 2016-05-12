@@ -56,6 +56,7 @@
             public static string[] DefaultPriceTypeIds = new string[2] { "List", "Adjusted" };
 
             public const string Departments = "Departments";
+            public const string CategoryDepartments = "categories/departments";
 
             public const string ProductBaseTemplateId = "{225F8638-2611-4841-9B89-19A5440A1DA1}";
             public const string CategoryBaseTemplateId = "{4C4FD207-A9F7-443D-B32A-50AA33523661}";

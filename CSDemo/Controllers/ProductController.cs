@@ -74,12 +74,19 @@ namespace CSDemo.Controllers
 
         public ActionResult Categories()
         {
-{}
+
             var model = new List<Category>();
 
             if (!string.IsNullOrEmpty(_userCatalogIds))
             {
                 model = ProductHelper.GetCatalogCategories(_userCatalogIds);
+            }
+
+            var department = model.FirstOrDefault(x => x.Name.ToLower().Equals(Constants.Commerce.Departments.ToLower()));
+
+            if (department != null)
+            {
+                return Redirect(Constants.Commerce.CategoryDepartments);
             }
 
             return View(model);

@@ -374,6 +374,7 @@ ul.variantcolorlist {
     width: 1em;
     padding: .2em .8em;
     text-decoration: none;
+    border: 1px solid #ffffff;
 }
 
     .variantcolorlist a:hover {
