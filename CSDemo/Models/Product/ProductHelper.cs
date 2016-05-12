@@ -794,11 +794,15 @@ namespace CSDemo.Models.Product
         {
             var catalogRoot = Sitecore.Context.Database.GetItem(Constants.Products.CatalogsRootPath);
 
-            if (catalogRoot != null)
+            if (catalogRoot == null || !catalogRoot.HasChildren) return null;
+
+            var catalogs = catalogRoot.GetChildren();
+
+            if (catalogs != null && catalogs.Any())
             {
-                return
-                    catalogRoot.Axes.GetDescendants()
-                        .FirstOrDefault(x => x.Name.Equals(catalogName, StringComparison.InvariantCultureIgnoreCase));
+                var catalog = catalogs.FirstOrDefault(c => c.Name.ToLower().Equals(catalogName.ToLower()));
+
+                return catalog;
             }
 
             return null;
