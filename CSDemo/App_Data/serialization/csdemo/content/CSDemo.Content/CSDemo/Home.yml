@@ -24,7 +24,7 @@ SharedFields:
         <r uid="{546A314C-A42E-4C0F-892F-C6796486247C}">
           <p:d />
         </r>
-        <r uid="{AF6A3953-C35E-4517-B345-AC7F3003C6E2}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:ds="{FEEE5CCA-B864-4AE6-81F0-F30F7C76BBC4}" s:id="{8040BB2A-3983-4156-A3BA-A37A8FE5F6E8}" s:par="" s:ph="page-jumbotron">
+        <r uid="{AF6A3953-C35E-4517-B345-AC7F3003C6E2}" p:before="r[@uid='{6729DA82-1F38-4D16-9957-E29D38D34488}']" s:ds="{FEEE5CCA-B864-4AE6-81F0-F30F7C76BBC4}" s:id="{8040BB2A-3983-4156-A3BA-A37A8FE5F6E8}" s:par="" s:ph="page-jumbotron">
           <rls>
             <ruleset>
               <rule uid="{73D61D55-F927-426A-8F8B-0545F0F98B91}" s:name="Campaign 1">
@@ -46,10 +46,10 @@ SharedFields:
             </ruleset>
           </rls>
         </r>
-        <r uid="{6729DA82-1F38-4D16-9957-E29D38D34488}" p:after="r[@uid='{AF6A3953-C35E-4517-B345-AC7F3003C6E2}']" s:id="{AB9DF062-ECC5-4FE2-A63B-93971BB0C388}" s:ph="page-body" />
-        <r uid="{D88FBB9E-6A2F-487D-9A0B-D24B401E4E5F}" p:after="r[@uid='{6729DA82-1F38-4D16-9957-E29D38D34488}']" s:id="{1616599D-7D76-4ABD-957B-7DCAC84C01B2}" s:ph="page-body" />
-        <r uid="{89440489-11CE-45B1-8411-08E14ECF5604}" p:after="r[@uid='{D88FBB9E-6A2F-487D-9A0B-D24B401E4E5F}']" s:id="{839E8618-D080-4802-A0E8-BE682C3AF542}" s:ph="page-body" />
-        <r uid="{A385C37F-E0C8-4638-A692-2A78D53281E9}" p:after="r[@uid='{89440489-11CE-45B1-8411-08E14ECF5604}']" s:id="{27FCD6DB-011A-4A6E-B04A-0AEB168B78F9}" s:ph="page-body">
+        <r uid="{6729DA82-1F38-4D16-9957-E29D38D34488}" p:before="r[@uid='{D88FBB9E-6A2F-487D-9A0B-D24B401E4E5F}']" s:id="{AB9DF062-ECC5-4FE2-A63B-93971BB0C388}" s:ph="page-body" />
+        <r uid="{D88FBB9E-6A2F-487D-9A0B-D24B401E4E5F}" p:before="r[@uid='{89440489-11CE-45B1-8411-08E14ECF5604}']" s:id="{1616599D-7D76-4ABD-957B-7DCAC84C01B2}" s:ph="page-body" />
+        <r uid="{89440489-11CE-45B1-8411-08E14ECF5604}" p:before="r[@uid='{A385C37F-E0C8-4638-A692-2A78D53281E9}']" s:id="{839E8618-D080-4802-A0E8-BE682C3AF542}" s:ph="page-body" />
+        <r uid="{A385C37F-E0C8-4638-A692-2A78D53281E9}" p:before="r[@uid='{058BE054-541E-48C4-816B-0D9046151821}']" s:id="{27FCD6DB-011A-4A6E-B04A-0AEB168B78F9}" s:ph="page-body">
           <rls>
             <ruleset>
               <rule uid="{E7310019-0853-4D93-8B7D-2F2433CF9545}" s:name="Campers">
@@ -87,8 +87,8 @@ SharedFields:
             </ruleset>
           </rls>
         </r>
-        <r uid="{058BE054-541E-48C4-816B-0D9046151821}" p:after="r[@uid='{A385C37F-E0C8-4638-A692-2A78D53281E9}']" s:id="{682873F1-CFB1-453F-9CD8-EC017FA5B407}" s:ph="page-body" />
-        <r uid="{5013CE56-12ED-4A23-9954-57E836599555}" p:after="r[@uid='{058BE054-541E-48C4-816B-0D9046151821}']" s:id="{65242443-EA23-474C-902E-E09305E67CD6}" s:ph="page-body" />
+        <r uid="{058BE054-541E-48C4-816B-0D9046151821}" p:before="r[@uid='{5013CE56-12ED-4A23-9954-57E836599555}']" s:ds="{960B18B8-0011-4352-A8AB-BBC9FFC2C561}" s:id="{CD0E1B2B-4D8F-4053-9F70-13E10D11F534}" s:par="" s:ph="page-body" />
+        <r uid="{5013CE56-12ED-4A23-9954-57E836599555}" p:before="r[@uid='{E5A6C541-E277-499D-9CB9-DFF8CE125A23}']" s:id="{65242443-EA23-474C-902E-E09305E67CD6}" s:ph="page-body" />
       </d>
     </r>
 Languages:

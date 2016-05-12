@@ -255,6 +255,7 @@
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\GeneralSearchController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Models\Account\AccountHelper.cs" />
     <Compile Include="Models\Account\Address.cs" />
     <Compile Include="Models\Account\LoginModel.cs" />
@@ -311,6 +312,8 @@
     <Compile Include="Models\GeneralSearch\CustomCommerceSearchResultItem.cs" />
     <Compile Include="Configuration\CommerceProductTags.cs" />
     <Compile Include="Models\Product\ProductTag.cs" />
+    <Compile Include="Models\Store\LocationInformation.cs" />
+    <Compile Include="Models\Store\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\CustomLinkProvider.cs" />
   </ItemGroup>
@@ -420,6 +423,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Views\GeneralSearch\SearchResults.cshtml" />
     <Content Include="Views\Product\FeaturedProducts.cshtml" />
+    <Content Include="Views\Store\ClosestLocations.cshtml" />
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Web.config">
