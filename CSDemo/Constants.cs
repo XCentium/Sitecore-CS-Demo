@@ -132,6 +132,11 @@
 
         }
 
+        public struct Store
+        {
+            public const string GoogleLocationMatrixApiUrl = "https://maps.googleapis.com/maps/api/distancematrix/json";
+        }
+
         public struct Products
         {
             public const string IdSeparator = "|";
