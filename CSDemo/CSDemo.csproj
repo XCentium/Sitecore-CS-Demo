@@ -121,10 +121,6 @@
       <HintPath>..\Lib\Sitecore\Sitecore.Analytics.Outcome.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.CES.GeoIp">
-      <HintPath>..\Lib\Sitecore\Sitecore.CES.GeoIp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Sitecore.Commerce">
       <HintPath>..\Lib\Sitecore\Sitecore.Commerce.dll</HintPath>
       <Private>False</Private>

@@ -2,7 +2,6 @@
 using Glass.Mapper.Sc;
 using Sitecore.Analytics;
 using Sitecore.Analytics.Lookups;
-using Sitecore.CES.GeoIp;
 using Sitecore.Mvc.Presentation;
 using System;
 using System.Collections.Generic;
