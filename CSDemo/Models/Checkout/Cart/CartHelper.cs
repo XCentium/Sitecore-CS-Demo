@@ -394,6 +394,9 @@ namespace CSDemo.Models.Checkout.Cart
         /// <returns></returns>
         public ShoppingCart GetMiniCart(bool cartFromCommServer = false)
         {
+            if (Sitecore.Context.IsLoggedIn &&
+                !Context.User.Name.ToLower().Contains(Constants.Commerce.CommerceUserDomain)) return null;
+
             var cart = cartFromCommServer == true ? GetCart(GetVisitorId(), true) : GetCustomerCart();
             var shoppingCartTotal = cart.Total as CommerceTotal;
             var shoppingCart = new ShoppingCart();

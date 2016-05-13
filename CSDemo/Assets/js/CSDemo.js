@@ -7,6 +7,7 @@
     window.ProductComparisonCookieName = "ComparisonProducts";
     $(document).ready(function () {
 
+        displayPersonalizedCoupon();
         isUserLoggedInCommerceUser();
         
         checkIfCommerceActionsAllowed();
@@ -17,7 +18,7 @@
         loadOrderConfirmationData();
         adjustVariantCarousel();
         setProductComparison();
-        displayPersonalizedCoupon();
+
         console.log(document.cookie);
     });
 
