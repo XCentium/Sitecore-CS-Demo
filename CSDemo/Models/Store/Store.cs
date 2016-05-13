@@ -23,7 +23,7 @@ namespace CSDemo.Models.Store
         public static IEnumerable<Store> SortByProximity(LocationInformation origin, IEnumerable<Store> destinations)
         {
             var response = string.Empty;
-
+            Log.Info("Sorting started", this);
             try
             {
                 var url = string.Format(Constants.Store.GoogleLocationMatrixApiUrl);
@@ -33,7 +33,7 @@ namespace CSDemo.Models.Store
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message, ex);
+                Log.Error("Unable to get coors from Google: "+ex.Message, ex);
             }
 
             if (string.IsNullOrEmpty(response)) return null;
@@ -44,6 +44,7 @@ namespace CSDemo.Models.Store
                 Log.Error("Unable to calculate distance to stores.", result);
                  return null;
             }
+            Log.Info("Pulling result object from Google response", this);
             var distances = new Dictionary<Store, int>();
             foreach (var row in result.rows)
             {

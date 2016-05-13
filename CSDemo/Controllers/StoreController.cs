@@ -2,6 +2,7 @@
 using Glass.Mapper.Sc;
 using Sitecore.Analytics;
 using Sitecore.Analytics.Lookups;
+using Sitecore.Diagnostics;
 using Sitecore.Mvc.Presentation;
 using System;
 using System.Collections.Generic;
@@ -35,18 +36,22 @@ namespace CSDemo.Controllers
 
         public ActionResult ClosestLocations()
         {
+            Log.Info("getting closest locations", this);
             var storeFolderItem = RenderingContext.Current.Rendering.Item;
             if (storeFolderItem == null) return null;
             var stores = storeFolderItem.Children.Select(c => c.GlassCast<Store>());
             const int numberOfStroresToShow = 4;
-            if (Tracker.Current == null || Tracker.Current.Interaction == null || Tracker.Current.Interaction.GeoData == null || Tracker.Current.Interaction.GeoData.Latitude== null || Tracker.Current.Interaction.GeoData.Longitude==null)
+            Log.Info("Geo Client IP is " + Tracker.Current.Interaction.Ip, this);
+            if (Tracker.Current == null || Tracker.Current.Interaction == null || Tracker.Current.Interaction.GeoData == null 
+                || Tracker.Current.Interaction.GeoData.Latitude== 0 || Tracker.Current.Interaction.GeoData.Longitude==0)
             {
+                Log.Info("can't get client coors", this);
                 if (stores.Count() > numberOfStroresToShow)
                     stores = stores.Take(4);
                 return View(stores);
             }
 
-
+            Log.Info("coors found", this);
             var origin = new LocationInformation
             {
                 Latitude = Tracker.Current.Interaction.GeoData.Latitude,
