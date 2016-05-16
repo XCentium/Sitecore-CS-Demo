@@ -2,13 +2,19 @@
 ID: f6c45542-2cbb-4298-91e3-970e8680f20d
 Parent: c0cb29ba-d118-4946-b6a6-bd15472d7815
 Template: 753a2294-c879-47b7-b90b-da4d9f51c62f
-Path: /sitecore/content/CSDemo/Home/Blog/2016/05/06/Testing Blog 1
+Path: /sitecore/content/CSDemo/Home/Blogs/2016/05/06/Testing Blog 1
 DB: master
 Languages:
 - Language: en
   Versions:
   - Version: 1
     Fields:
+    - ID: 06b84f39-cf71-446a-81aa-30e76febe4a5
+      Hint: Author
+      Value: {8EC66142-B1DA-4D76-BA9B-7E9288FF9C89}
+    - ID: 0e02704d-0afd-4102-8d99-9241a8b03c89
+      Hint: Category
+      Value: {10B1A855-EB39-493D-A89A-B3800341A39E}
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
       Value: 20160506T043148Z
@@ -51,3 +57,6 @@ Languages:
         <p></p>
         <p>Testing 1 Body </p>
         <p></p>
+    - ID: fe842158-1c63-48ac-91cd-85bf89f473c9
+      Hint: Tags
+      Value: {04C0138F-9C62-4AAF-B0A3-D1B6B17A8179}

@@ -2,7 +2,7 @@
 ID: e1b20e29-46c7-43ca-9be0-5a030e65a483
 Parent: 49b9f3e2-65cc-48f5-9a96-35efd0c752d8
 Template: 2607aab7-a4cd-4c34-ae0e-3518bc14f3df
-Path: /sitecore/content/CSDemo/Home/Blog
+Path: /sitecore/content/CSDemo/Home/Blogs
 DB: master
 Languages:
 - Language: en
@@ -14,7 +14,7 @@ Languages:
       Value: 20160506T042931Z
     - ID: 522642cf-7b22-4879-b75c-8295a849be76
       Hint: Blog Name
-      Value: Blog
+      Value: Blogs
     - ID: 8da365f3-8504-42d8-9407-99a48d6ec424
       Hint: Blog Settings
       Value: {AF8AF659-289F-4081-846C-388234ECC71A}

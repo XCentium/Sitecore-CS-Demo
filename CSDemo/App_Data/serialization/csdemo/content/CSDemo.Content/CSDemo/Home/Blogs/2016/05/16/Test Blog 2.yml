@@ -1,0 +1,35 @@
+﻿---
+ID: dda83d93-d476-4f82-90cd-74692d64cd85
+Parent: 16cab04b-e9e1-4df0-80c1-eee9e585fd9b
+Template: 753a2294-c879-47b7-b90b-da4d9f51c62f
+Path: /sitecore/content/CSDemo/Home/Blogs/2016/05/16/Test Blog 2
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 06b84f39-cf71-446a-81aa-30e76febe4a5
+      Hint: Author
+      Value: {8EC66142-B1DA-4D76-BA9B-7E9288FF9C89}
+    - ID: 0e02704d-0afd-4102-8d99-9241a8b03c89
+      Hint: Category
+      Value: {23B8A643-0AD3-41A9-8E1F-A98C14C661EB}
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160516T003737Z
+    - ID: 2779a63d-dd7f-4e0f-96c0-4066f90b6a8d
+      Hint: Summary
+      Value: Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2
+    - ID: 9608e520-ef16-49fc-bd92-75cc101e5fec
+      Hint: Publish Date
+      Value: 20160516T003737Z
+    - ID: 9821df39-a4bc-476b-baef-2a2922c7a8c3
+      Hint: Title
+      Value: Test Blog 2
+    - ID: f148b76b-8bc2-4a5b-89f1-9e5e42ed7f85
+      Hint: Body
+      Value: Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2 Test Blog 2
+    - ID: fe842158-1c63-48ac-91cd-85bf89f473c9
+      Hint: Tags
+      Value: {04C0138F-9C62-4AAF-B0A3-D1B6B17A8179}

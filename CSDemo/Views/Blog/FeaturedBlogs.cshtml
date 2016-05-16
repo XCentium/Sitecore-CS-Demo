@@ -1,4 +1,37 @@
-﻿<!-- ==========================
+﻿@using CSDemo.Models.Blog
+@using System.Linq;
+@using CSDemo.Models.Page
+@using Sitecore.Data.Items
+@using Glass.Mapper.Sc
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<CSDemo.Models.Blog.Blog>>
+
+@{
+    
+    Item homeItem = Sitecore.Context.Database.GetItem(Sitecore.Context.Site.StartPath);
+    if (homeItem == null)
+    {
+        return;
+    }
+    
+    HomePage homePage = homeItem.GlassCast<HomePage>();
+    
+    if(homePage == null)
+    {
+        return;
+    }
+
+    var featuredBlogs = homePage.FeaturedBlogs.ToList();
+
+    
+    if (!featuredBlogs.Any())
+    {
+        return;
+    }
+    
+    
+    int ctr = 0;
+}
+<!-- ==========================
     RECENT BLOG POSTS - START
 =========================== -->
 <section class="content recent-blog-posts">
@@ -8,48 +41,31 @@
             <p>Ut feugiat mauris eget magna egestas porta. Curabitur sagittis sagittis neque rutrum congue.</p>
         </div>
         <div class="row">
+            @foreach (var blog in featuredBlogs)
+            {
 
-            <!-- BLOG POST - START -->
-            <div class="col-xs-6 col-sm-3">
-                <article class="post">
-                    <img src="assets/images/blog/blog-1.jpg" class="img-responsive" alt="">
-                    <h3><a href="single-post.html">How to pickup shoes</a></h3>
-                    <span class="date">01/12/2015</span>
-                </article>
-            </div>
-            <!-- BLOG POST - END -->
-            <!-- BLOG POST - START -->
-            <div class="col-xs-6 col-sm-3">
-                <article class="post">
-                    <img src="assets/images/blog/blog-2.jpg" class="img-responsive" alt="">
-                    <h3><a href="single-post.html">Fine mens gloves</a></h3>
-                    <span class="date">24/11/2015</span>
-                </article>
-            </div>
-            <!-- BLOG POST - END -->
-            <!-- BLOG POST - START -->
-            <div class="col-xs-6 col-sm-3">
-                <article class="post">
-                    <img src="assets/images/blog/blog-3.jpg" class="img-responsive" alt="">
-                    <h3><a href="single-post.html">Sunglasses for a beach</a></h3>
-                    <span class="date">10/11/2015</span>
-                </article>
-            </div>
-            <!-- BLOG POST - END -->
-            <!-- BLOG POST - START -->
-            <div class="col-xs-6 col-sm-3">
-                <article class="post">
-                    <img src="assets/images/blog/blog-4.jpg" class="img-responsive" alt="">
-                    <h3><a href="single-post.html">Pyjamas for a good night</a></h3>
-                    <span class="date">19/10/2015</span>
-                </article>
-            </div>
-            <!-- BLOG POST - END -->
+                <!-- BLOG POST - START -->
+                using (BeginEditFrame(blog, "Edit Featured Blogs", x => x.Title, x => x.PublishDate, x => x.Thumb))
+                {
+                    <div class="col-xs-6 col-sm-3">
+                        <article class="post">
+                            @RenderImage(blog, t => t.Thumb, new { mh = 310, @class = "img-responsive" }, true)
+                            <h3>
+                                <a href="@blog.Url">@Editable(blog, x => x.Title)</a>
+                            </h3>
+                            <span class="date">@blog.PublishDate.ToString("dddd, d, yyyy")</span>
+                        </article>
+                    </div>
 
+                    ctr++;
+                    if (ctr > 3) { break; }
+
+                }
+                <!-- BLOG POST - END -->
+            }
         </div>
     </div>
 </section>
 <!-- ==========================
     RECENT BLOG POSTS - END
 =========================== -->
-

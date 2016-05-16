@@ -1,8 +1,8 @@
 ﻿---
-ID: c0cb29ba-d118-4946-b6a6-bd15472d7815
+ID: 16cab04b-e9e1-4df0-80c1-eee9e585fd9b
 Parent: 7e2afbab-fdbd-404f-b177-f01f35d53f83
 Template: adb6ca4f-03ef-4f47-b9ac-9ce2ba53ff97
-Path: /sitecore/content/CSDemo/Home/Blog/2016/05/06
+Path: /sitecore/content/CSDemo/Home/Blogs/2016/05/16
 DB: master
 Languages:
 - Language: en
@@ -11,4 +11,4 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160506T043148Z
+      Value: 20160516T003737Z
