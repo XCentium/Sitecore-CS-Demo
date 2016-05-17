@@ -1,5 +1,6 @@
 ﻿using CSDemo.Models.Store;
 using Glass.Mapper.Sc;
+using Newtonsoft.Json;
 using Sitecore.Analytics;
 using Sitecore.Analytics.Lookups;
 using Sitecore.Diagnostics;
@@ -60,8 +61,9 @@ namespace CSDemo.Controllers
                 Longitude = Tracker.Current.Interaction.GeoData.Longitude
             };
             var distances = Store.SortByProximity(origin, stores);
-            if (distances == null || !distances.Any()) return null;
             
+            if (distances == null || !distances.Any()) return null;
+
             if (distances.Count() > numberOfStroresToShow)
                 distances = distances.Take(4);
             return View(distances);

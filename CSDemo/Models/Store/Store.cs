@@ -52,17 +52,18 @@ namespace CSDemo.Models.Store
             {
                 if (row == null) continue;
                 var elements = row.elements;
-                foreach(var element in elements)
+                foreach (var element in elements)
                 {
                     if (element == null) continue;
                     var count = 0;
                     foreach (var estimate in element)
                     {
                         count++;
-                        if (estimate == null) continue;
-                        var distance = estimate.distance.value;
+                        if (estimate == null || estimate.Name != "distance") continue;
+                        var distance = estimate.First;
+                        if (distance == null) continue;
                         var destination = destinations.Skip(count - 1).Take(1).FirstOrDefault();
-                        distances.Add(destination, (int)distance);
+                        distances.Add(destination, (int)distance.value);
                     }
                 }
             }
