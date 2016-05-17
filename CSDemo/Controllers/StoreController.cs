@@ -41,7 +41,7 @@ namespace CSDemo.Controllers
             if (storeFolderItem == null) return null;
             var stores = storeFolderItem.Children.Select(c => c.GlassCast<Store>());
             const int numberOfStroresToShow = 4;
-            Log.Info("Geo Client IP is " + Tracker.Current.Interaction.Ip, this);
+            Log.Info("Geo Client IP is " + string.Join(".", Tracker.Current.Interaction.Ip), this);
             if (Tracker.Current == null || Tracker.Current.Interaction == null || Tracker.Current.Interaction.GeoData == null 
                 || Tracker.Current.Interaction.GeoData.Latitude== 0 || Tracker.Current.Interaction.GeoData.Longitude==0)
             {
