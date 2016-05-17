@@ -52,6 +52,8 @@ namespace CSDemo.Controllers
             }
 
             Log.Info("coors found", this);
+            Log.Info("lat: " + Tracker.Current.Interaction.GeoData.Latitude, this);
+            Log.Info("long: " + Tracker.Current.Interaction.GeoData.Longitude, this);
             var origin = new LocationInformation
             {
                 Latitude = Tracker.Current.Interaction.GeoData.Latitude,

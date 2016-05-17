@@ -29,7 +29,9 @@ namespace CSDemo.Models.Store
                 var url = string.Format(Constants.Store.GoogleLocationMatrixApiUrl);
                 var query = $"origins={origin.Latitude},{origin.Longitude}&destinations={string.Join("|", destinations.Select(d=> !string.IsNullOrWhiteSpace(d.Latitude.ToString()) && !string.IsNullOrWhiteSpace(d.Longitude.ToString()) ? $"{d.Latitude},{d.Longitude}": $"{d.Street} {d.City} {d.State} {d.Zip}"))}";
                 var syncClient = new WebClient();
+                Log.Info($"{url}?{query}", syncClient);
                 response = syncClient.DownloadString($"{url}?{query}");
+                Log.Info("Google response: "+response, syncClient);
             }
             catch (Exception ex)
             {
