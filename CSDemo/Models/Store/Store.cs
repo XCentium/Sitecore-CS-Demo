@@ -27,19 +27,19 @@ namespace CSDemo.Models.Store
             try
             {
                 var url = string.Format(Constants.Store.GoogleLocationMatrixApiUrl);
-                var query = $"origins={origin.Latitude},{origin.Longitude}&destinations={string.Join("|", destinations.Select(d=> !string.IsNullOrWhiteSpace(d.Latitude.ToString()) && !string.IsNullOrWhiteSpace(d.Longitude.ToString()) ? $"{d.Latitude},{d.Longitude}": $"{d.Street} {d.City} {d.State} {d.Zip}"))}";
+                var query = $"origins={origin.Latitude},{origin.Longitude}&destinations={string.Join("|", destinations.Select(d => !string.IsNullOrWhiteSpace(d.Latitude.ToString()) && !string.IsNullOrWhiteSpace(d.Longitude.ToString()) ? $"{d.Latitude},{d.Longitude}" : $"{d.Street} {d.City} {d.State} {d.Zip}"))}";
                 var syncClient = new WebClient();
                 Log.Info($"{url}?{query}", syncClient);
                 response = syncClient.DownloadString($"{url}?{query}");
-                Log.Info("Google response: "+response, syncClient);
+                Log.Info("Google response: " + response, syncClient);
             }
             catch (Exception ex)
             {
-                Log.Error("Unable to get coors from Google: "+ex.Message, ex);
+                Log.Error("Unable to get coors from Google: " + ex.Message, ex);
             }
 
             if (string.IsNullOrEmpty(response)) return null;
-
+            
             var result = JsonConvert.DeserializeObject<dynamic>(response);
             if (result==null || result.status!="OK")
             {
@@ -52,17 +52,17 @@ namespace CSDemo.Models.Store
             {
                 if (row == null) continue;
                 var elements = row.elements;
+                var count = 0;
                 foreach (var element in elements)
                 {
+                    count++;
                     if (element == null) continue;
-                    var count = 0;
                     foreach (var estimate in element)
                     {
-                        count++;
                         if (estimate == null || estimate.Name != "distance") continue;
                         var distance = estimate.First;
                         if (distance == null) continue;
-                        var destination = destinations.Skip(count - 1).Take(1).FirstOrDefault();
+                        var destination = destinations.Skip(count - 1).First();
                         distances.Add(destination, (int)distance.value);
                     }
                 }
