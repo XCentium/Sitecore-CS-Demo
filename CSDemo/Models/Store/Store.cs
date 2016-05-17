@@ -50,14 +50,20 @@ namespace CSDemo.Models.Store
             var distances = new Dictionary<Store, int>();
             foreach (var row in result.rows)
             {
+                if (row == null) continue;
                 var elements = row.elements;
-                var count = 0;
                 foreach(var element in elements)
                 {
-                    count++;
-                    var distance = element.distance;
-                    var destination = destinations.Skip(count - 1).Take(1).FirstOrDefault();
-                    distances.Add(destination, distance.Value);
+                    if (element == null) continue;
+                    var count = 0;
+                    foreach (var estimate in element)
+                    {
+                        count++;
+                        if (estimate == null) continue;
+                        var distance = estimate.distance.value;
+                        var destination = destinations.Skip(count - 1).Take(1).FirstOrDefault();
+                        distances.Add(destination, (int)distance);
+                    }
                 }
             }
             return distances.OrderByDescending(i=>i.Value).Select(i=>i.Key);
