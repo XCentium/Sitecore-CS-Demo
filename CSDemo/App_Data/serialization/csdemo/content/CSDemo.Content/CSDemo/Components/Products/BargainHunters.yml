@@ -13,7 +13,7 @@ Languages:
       Hint: __Created
       Value: 20160319T001413Z
     - ID: 6ad435a4-d499-4f83-9dd1-fb350322bbd1
-      Hint: Coupon Code Description
+      Hint: CouponCodeDescription
       Value: This coupon code will be good for you, SAVE 15% Today!
     - ID: 7aa7edb7-dfbd-4117-a31a-ad9128c9c84b
       Hint: Products
@@ -23,5 +23,5 @@ Languages:
         {E43C60D0-0F86-4881-A129-B7A6BE795076}
         {385C56B5-881A-49F4-85E0-D82DC1FCA792}
     - ID: c1ac14a6-3ece-432d-8e0c-a6732525f0cf
-      Hint: Coupon Code
+      Hint: CouponCode
       Value: BARGAINHUNTER15

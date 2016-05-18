@@ -35,6 +35,7 @@ namespace CSDemo.Models.Store
             if (string.IsNullOrEmpty(response)) return null;
             
             var result = JsonConvert.DeserializeObject<dynamic>(response);
+
             if (result==null || result.status!="OK")
             {
                 Log.Error("Unable to calculate distance to stores.", result);

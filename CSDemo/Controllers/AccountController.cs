@@ -75,7 +75,6 @@ namespace CSDemo.Controllers
             }
             return this.Redirect(Sitecore.Context.Site.LoginPage);
 
-
         }
 
         public ActionResult Orders()
@@ -94,12 +93,12 @@ namespace CSDemo.Controllers
         {
             if (Sitecore.Context.User.IsAuthenticated)
             {
-                var orderID = Sitecore.Web.WebUtil.GetUrlName(0);
+                var orderId = Sitecore.Web.WebUtil.GetUrlName(0);
 
-                if (!string.IsNullOrEmpty(orderID))
+                if (!string.IsNullOrEmpty(orderId))
                 {
                     var cartHelper = new CartHelper();
-                    var model = ProductHelper.GetCustomerOrderDetail(orderID, cartHelper);
+                    var model = ProductHelper.GetCustomerOrderDetail(orderId, cartHelper);
 
                     // Only show the order detail if the viewer is the rightful owner
                     if (model.UserID == cartHelper.GetVisitorId())

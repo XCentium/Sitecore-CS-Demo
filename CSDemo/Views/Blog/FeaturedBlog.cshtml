@@ -1,12 +1,36 @@
-﻿@using System.Diagnostics
+﻿@using CSDemo.Models.Blog
 @using System.Linq;
-@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<CSDemo.Models.Blog.Blog>>
-@if (Model == null || !Model.Any())
-{
-    return;   
-}
-@{    int ctr = 0;}
+@using CSDemo.Models.Page
+@using Sitecore.Data.Items
+@using Glass.Mapper.Sc
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<ienumerable<CSDemo.Models.Blog.Blog>>
 
+@{
+
+    Item homeItem = Sitecore.Context.Database.GetItem(Sitecore.Context.Site.StartPath);
+    if (homeItem == null)
+    {
+        return;
+    }
+
+    HomePage homePage = homeItem.GlassCast<HomePage>();
+
+    if(homePage == null)
+    {
+        return;
+    }
+
+    var featuredBlogs = homePage.FeaturedBlogs.ToList();
+
+
+    if (!featuredBlogs.Any())
+    {
+        return;
+    }
+
+
+    int ctr = 0;
+}
 <!-- ==========================
     RECENT BLOG POSTS - START
 =========================== -->
@@ -14,10 +38,10 @@
     <div class="container">
         <div class="section-title">
             <h2>Latest from blog</h2>
-            <p>Ut feugiat mauris eget magna egestas porta. Curabitur sagittis sagittis neque rutrum congue.xxxxxxxx</p>
+            <p>Ut feugiat mauris eget magna egestas porta. Curabitur sagittis sagittis neque rutrum congue.</p>
         </div>
         <div class="row">
-            @foreach (var blog in Model)
+            @foreach (var blog in featuredBlogs)
             {
 
                 <!-- BLOG POST - START -->

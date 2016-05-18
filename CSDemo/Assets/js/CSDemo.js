@@ -19,6 +19,8 @@
         adjustVariantCarousel();
         setProductComparison();
 
+        catalogChoiceClick();
+
         console.log(document.cookie);
     });
 
@@ -60,18 +62,15 @@
   
                         var catalogNames = catalogOptions.split('|');
 
-                        var options = "<form name='catalogSelection'  id='catalogSelection' method='post' action='/AJAX/cart.asmx/SetUserCatalogChoice' ><h2>Select a Catalog</h2>";
+                        var options = "<form name='catalogSelection'  id='catalogSelection' method='post' action='/Account/SetUserCatalog' ><h2>Select a Catalog</h2>";
                         for (var i = 0; i < catalogNames.length; i++) {
-                            options += "<input type='radio' name='catalogName' value='" +
+                            options += "<input type='radio' class='catalogChoice' name='catalogName' value='" +
                                 catalogNames[i] +
                                 "'/> " +
                                 catalogNames[i] +
                                 "<br />";
                         }
-
-                        options += "<br/><input type='buton' class='btn btn-primary' value='Submit' onclick='postcatalogSelection(this.form.catalogName.value);' />";
                         options += "</form><br/><br/>";
-                        options += "<script>function postcatalogSelection(catalogName){ jQuery.post('/AJAX/cart.asmx/SetUserCatalogChoice', {catalogName: catalogName}); jQuery('#modalAddToCart').modal('hide'); window.location.reload(1);}</script>";
                         showActionMessageFixedClean(options);
                     }
                 }
@@ -102,23 +101,24 @@
        });
     }
 
+   function catalogChoiceClick() {
 
-    $(".set-user-catalog-choice").click(function () {
-        if ($(this).data("catalogname")) { setUserCatalogChoice($(this).data("catalogname")); }
-        event.preventDefault();
-    });
-
-
+       $(".catalogChoice").click(function () {
+           
+           setUserCatalogChoice($(this).val());
+       });
+   }
+    
     function setUserCatalogChoice(catalogName) {
-        
+
         $.ajax({
             type: "POST",
             url: "/AJAX/cart.asmx/SetUserCatalogChoice",
-            data: '{ "catalogName" : ' + catalogName + "}",
+            data: '{ "catalogName" : ' + JSON.stringify(catalogName) + "}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (result) {
-
+                window.location.reload(1);
             },
             error: function (error) {
                 console.log(error);

@@ -193,5 +193,16 @@
             public const string ErrorInBasket = "Error in Basket";
         }
 
+
+        public struct Blog
+        {
+            public const string Category = "category";
+            public const string Tag = "tag";
+            public const string BlogTemplate = "Blog Post";
+            public const string TagsPath = "/sitecore/content/Data/Blogs/Tags";
+            public const string AuthorsPath = "/sitecore/content/Data/Blogs/Authors";
+            public const string CategoriesPath = "/sitecore/content/Data/Blogs/Categories";
+        }
+
     }
 }
