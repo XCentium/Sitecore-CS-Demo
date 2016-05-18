@@ -199,9 +199,9 @@
             public const string Category = "category";
             public const string Tag = "tag";
             public const string BlogTemplate = "Blog Post";
-            public const string TagsPath = "/sitecore/content/Data/Blog/Tags";
-            public const string AuthorsPath = "/sitecore/content/Data/Blog/Authors";
-            public const string CategoriesPath = "/sitecore/content/Data/Blog/Categories";
+            public const string TagsPath = "/sitecore/content/Data/Blogs/Tags";
+            public const string AuthorsPath = "/sitecore/content/Data/Blogs/Authors";
+            public const string CategoriesPath = "/sitecore/content/Data/Blogs/Categories";
         }
 
     }
