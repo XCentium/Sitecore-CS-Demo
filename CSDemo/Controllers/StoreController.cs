@@ -37,24 +37,18 @@ namespace CSDemo.Controllers
 
         public ActionResult ClosestLocations()
         {
-            Log.Info("getting closest locations", this);
             var storeFolderItem = RenderingContext.Current.Rendering.Item;
             if (storeFolderItem == null) return null;
             var stores = storeFolderItem.Children.Select(c => c.GlassCast<Store>());
             const int numberOfStroresToShow = 4;
-            Log.Info("Geo Client IP is " + string.Join(".", Tracker.Current.Interaction.Ip), this);
             if (Tracker.Current == null || Tracker.Current.Interaction == null || Tracker.Current.Interaction.GeoData == null 
                 || Tracker.Current.Interaction.GeoData.Latitude== 0 || Tracker.Current.Interaction.GeoData.Longitude==0)
             {
-                Log.Info("can't get client coors", this);
                 if (stores.Count() > numberOfStroresToShow)
                     stores = stores.Take(4);
                 return View(stores);
             }
 
-            Log.Info("coors found", this);
-            Log.Info("lat: " + Tracker.Current.Interaction.GeoData.Latitude, this);
-            Log.Info("long: " + Tracker.Current.Interaction.GeoData.Longitude, this);
             var origin = new LocationInformation
             {
                 Latitude = Tracker.Current.Interaction.GeoData.Latitude,
