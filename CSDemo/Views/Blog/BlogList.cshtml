@@ -1,0 +1,140 @@
+﻿@using System.Linq;
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Blog.BlogListViewModel>
+@if (Model == null)
+{
+    return;
+}
+
+
+<!-- ==========================
+    BLOG - START
+=========================== -->
+<section class="content blog">
+    <div class="container">
+        <h2 class="hidden">Blog</h2>
+        <div class="row">
+            <div class="col-sm-9">
+
+                @foreach (var blog in Model.Blogs)
+                {
+                    var firstAuthor = blog.Author.FirstOrDefault();
+                    var author = firstAuthor != null ? firstAuthor.FullName : "Author";
+                    <!-- POST - START -->
+                    <article class="post">
+                        <div class="post-left">
+                            <div class="author">
+                                @if (blog.Author.FirstOrDefault() != null)
+                                {
+                                    @RenderImage(blog.Author.FirstOrDefault(), t => t.ProfileImage, new {mh = 100, @class = "img-responsive  img-circle"}, true)
+                                }
+                                else
+                                {
+                                    <img src="/assets/images/avatar/avatar_01.jpg" class="img-responsive img-circle" alt="">
+                                }
+                                <span>Posted by</span>
+                                <span class="name">@author</span>
+                            </div>
+                        </div>
+                        <h3><a href="@blog.Url">@Editable(blog, x => x.Title)</a>
+                        </h3>
+                        <div class="meta">
+                            <div class="date">@blog.PublishDate.ToString("dddd, d, yyyy")</div>
+                            <div class="date visible-xs-inline-block">@author</div>
+                            @if (blog.Category.Any())
+                            {
+                                foreach (var category in blog.Category)
+                                {
+                                    <div class="category">@category.CategoryName</div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="category">Uncategorized</div>
+                            }
+                        </div>
+                        <div class="attachment">
+                            @RenderImage(blog, t => t.Main, new {@class = "img-responsive" }, true)
+                        </div>
+                        @blog.Summary
+                        <div class="post-bottom clearfix">
+                            @if (blog.Tags.Any())
+                            {
+                                <div class="tags">
+                                    @foreach (var tag in blog.Tags)
+                                    {
+                                        <span class="label"><i class="fa fa-tag"></i><a href="~/blogs/tag/@tag.TagName">@tag.TagName</a></span>
+                                    }
+                                </div>
+                            }
+                            <a href="@blog.Url" class="btn btn-primary">Read More</a>
+                        </div>
+                    </article>
+                    <!-- POST - END -->
+                }   
+                @*<ul class="pagination">
+                    <li><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                    <li><a href="#">1</a></li>
+                    <li class="active"><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                </ul>*@
+            </div>
+            <div class="col-sm-3">
+                <aside class="sidebar right">
+
+                    <!-- WIDGET:SEARCH - START -->
+                    <div class="widget widget-search">
+                        <h3>Search</h3>
+                        <div class="widget-body">
+                            <form>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- WIDGET:SEARCH - START -->
+                    <!-- WIDGET:POST CATEGORIES - START -->
+                    <div class="widget widget-post-categories">
+                        <h3>Categories</h3>
+                        <div class="widget-body">
+                            @if (Model.Categories != null && Model.Categories.Any())
+                            {
+                                <ul class="list-unstyled">
+                                    @foreach (var category in Model.Categories)
+                                    {
+                                        <li><a href="/blogs/category/@category.CategoryName">@category.CategoryName<span class="badge">@category.TotalBlogs</span></a></li>
+                                    }
+                                </ul>
+                            }
+                        </div>
+                    </div>
+                    <!-- WIDGET:POST CATEGORIES - START -->
+                    <!-- WIDGET:TAGS - START -->
+                    <div class="widget widget-tags">
+                        <h3>Tags</h3>
+                        <div class="widget-body">
+                            @if (Model.Tags != null && Model.Tags.Any())
+                            {
+                                <div class="tags">
+                                    @foreach(var tag in Model.Tags)
+                                    {
+                                        <span class="label"><i class="fa fa-tag"></i><a href="~/blogs/tag/@tag.TagName">@tag.TagName</a></span>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <!-- WIDGET:TAGS - START -->
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========================
+    BLOG - END
+=========================== -->

@@ -193,6 +193,15 @@
       <HintPath>..\packages\Unicorn.Core.3.1.2\lib\net45\Unicorn.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="XBlogGlobal">
+      <HintPath>..\Lib\Sitecore\XBlogGlobal.dll</HintPath>
+    </Reference>
+    <Reference Include="XBlogHelper">
+      <HintPath>..\Lib\Sitecore\XBlogHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="XBlogMVC">
+      <HintPath>..\Lib\Sitecore\XBlogMVC.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -255,6 +264,7 @@
     <Compile Include="Contracts\Product\IProductVariant.cs" />
     <Compile Include="Contracts\Product\ITag.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\MarqueeController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
@@ -273,7 +283,11 @@
     <Compile Include="Models\Blog\Blog.cs" />
     <Compile Include="Models\Blog\BlogAuthor.cs" />
     <Compile Include="Models\Blog\BlogCategory.cs" />
+    <Compile Include="Models\Blog\BlogHelper.cs" />
+    <Compile Include="Models\Blog\BlogListViewModel.cs" />
     <Compile Include="Models\Blog\BlogTag.cs" />
+    <Compile Include="Models\Blog\BlogExtraViewModel.cs" />
+    <Compile Include="Models\Blog\BlogViewModel.cs" />
     <Compile Include="Models\Blog\FeaturedBlogs.cs" />
     <Compile Include="Models\Checkout\Cart\CartHelper.cs" />
     <Compile Include="Models\Page\HomePage.cs" />
@@ -432,7 +446,20 @@
     <Content Include="Assets\js\owl.carousel.min.js" />
     <Content Include="Assets\js\SmoothScroll.js" />
     <Content Include="Assets\js\twitterFetcher_min.js" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Views\Blog\FeaturedBlogs.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Views\GeneralSearch\SearchResults.cshtml" />
     <Content Include="Views\Product\FeaturedProducts.cshtml" />
     <Content Include="Views\Store\ClosestLocations.cshtml" />
@@ -603,6 +630,9 @@
       <DependentUpon>RioGrander.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Properties\PublishProfiles\Castle Local.pubxml" />
     <None Include="Properties\PublishProfiles\csDemo.pubxml" />
     <None Include="Properties\PublishProfiles\DebuLocal.pubxml" />
@@ -618,7 +648,6 @@
     <Content Include="Views\GeneralSearch\SearchInput.cshtml" />
     <Content Include="Views\GeneralSearch\_SearchResult.cshtml" />
     <Content Include="Views\Marquee\Carousel.cshtml" />
-    <Content Include="Views\Blog\FeaturedBlogs.cshtml" />
     <Content Include="Views\Product\FeaturedCategories.cshtml" />
     <Content Include="Views\Product\FeaturedServices.cshtml" />
     <Content Include="Views\Product\FeaturedStores.cshtml" />
@@ -651,6 +680,9 @@
     <Content Include="Views\Product\_ComparisonControl.cshtml" />
     <Content Include="Views\Product\ProductDetailNoAvailability.cshtml" />
     <Content Include="Views\Checkout\ReviewNoHeaderFooter.cshtml" />
+    <Content Include="Views\Blog\BlogPost.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Blog\BlogList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -13,7 +13,7 @@ Languages:
       Hint: __Created
       Value: 20160318T234334Z
     - ID: 6ad435a4-d499-4f83-9dd1-fb350322bbd1
-      Hint: Coupon Code Description
+      Hint: CouponCodeDescription
       Value: This coupon code will be good for you, SAVE 17% Today!
     - ID: 7aa7edb7-dfbd-4117-a31a-ad9128c9c84b
       Hint: Products
@@ -23,5 +23,5 @@ Languages:
         {86759495-F028-4163-BF37-D4E15BAFA78B}
         {AFF77E47-1C57-4283-BC7A-49459D7C2AE5}
     - ID: c1ac14a6-3ece-432d-8e0c-a6732525f0cf
-      Hint: Coupon Code
+      Hint: CouponCode
       Value: CLIMBER17

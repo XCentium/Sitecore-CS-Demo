@@ -12,6 +12,21 @@ namespace CSDemo.Models.Blog
     public class BlogCategory : IBlogCategory
     {
 
+        private int myVar;
+
+        public int TotalBlogs
+        {
+            get
+            {
+                int blogCount = BlogHelper.GetBlogCountByCategory(this.CategoryName);
+
+                return blogCount; 
+                
+            }
+
+        }
+        
+
         #region Properties
         [SitecoreId]
         public virtual Guid ID { get; set; }

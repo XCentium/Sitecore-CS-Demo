@@ -60,16 +60,16 @@
   
                         var catalogNames = catalogOptions.split('|');
 
-                        var options = "<form name='catalogSelection'  id='catalogSelection' method='post' action='/AJAX/cart.asmx/SetUserCatalogChoice' ><h2>Select a Catalog</h2>";
+                        var options = "<form name='catalogSelection'  id='catalogSelection' method='post' action='/Account/SetUserCatalog' ><h2>Select a Catalog</h2>";
                         for (var i = 0; i < catalogNames.length; i++) {
-                            options += "<input type='radio' name='catalogName' value='" +
+                            options += "<input type='radio' onclick='this.form.submit.disabled=false' name='catalogName' value='" +
                                 catalogNames[i] +
                                 "'/> " +
                                 catalogNames[i] +
                                 "<br />";
                         }
 
-                        options += "<br/><input type='buton' class='btn btn-primary' value='Submit' onclick='postcatalogSelection(this.form.catalogName.value);' />";
+                        options += "<br/><input type='button' class='btn btn-primary' name='submit' value='Submit' onclick='postcatalogSelection(this.form.catalogName.value);' disabled='disabled' />";
                         options += "</form><br/><br/>";
                         options += "<script>function postcatalogSelection(catalogName){ jQuery.post('/AJAX/cart.asmx/SetUserCatalogChoice', {catalogName: catalogName}); jQuery('#modalAddToCart').modal('hide'); window.location.reload(1);}</script>";
                         showActionMessageFixedClean(options);
