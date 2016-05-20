@@ -38,7 +38,7 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.RuntimeSearchFacets)]
         public IEnumerable<Item> RuntimeSearchFacets { get; set; }
         [SitecoreField(Fields.ChildCategories)]
-        public IEnumerable<Item> ChildCategories { get; set; }
+        public List<Category> ChildCategories { get; set; }
         [SitecoreField(Fields.RelationshipList)]
         public virtual string RelationshipList { get; set; }
         [SitecoreField(Fields.DefinitionName)]
@@ -92,8 +92,11 @@ namespace CSDemo.Models.Product
             public const string Images = "Images";
             public const string DisplayName = "__Display name";
         }
-        #endregion 
+        #endregion
 
-
+        public Category()
+        {
+            ChildCategories = new List<Category>();
+        }
     }
 }

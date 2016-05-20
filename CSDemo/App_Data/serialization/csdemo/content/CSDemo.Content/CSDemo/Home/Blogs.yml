@@ -1,9 +1,14 @@
 ﻿---
-ID: e1b20e29-46c7-43ca-9be0-5a030e65a483
+ID: 58015ab2-e58a-4879-81dd-46efc4b7fe91
 Parent: 49b9f3e2-65cc-48f5-9a96-35efd0c752d8
-Template: 2607aab7-a4cd-4c34-ae0e-3518bc14f3df
+Template: 2f002842-aa9d-435f-96c6-a2b7e7db531f
 Path: /sitecore/content/CSDemo/Home/Blogs
 DB: master
+SharedFields:
+- ID: a0cb3965-8884-4c7a-8815-b6b2e5ced162
+  Hint: __Editors
+  Type: TreelistEx
+  Value: {59F53BBB-D1F5-4E38-8EBA-0D73109BB59B}
 Languages:
 - Language: en
   Versions:
@@ -11,10 +16,13 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160506T042931Z
+      Value: 20160506T045750Z
     - ID: 522642cf-7b22-4879-b75c-8295a849be76
       Hint: Blog Name
       Value: Blogs
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
     - ID: 8da365f3-8504-42d8-9407-99a48d6ec424
       Hint: Blog Settings
-      Value: {AF8AF659-289F-4081-846C-388234ECC71A}
+      Value: {016430CC-6C65-4FE5-8B22-883F0AAD9AF7}

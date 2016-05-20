@@ -8,6 +8,7 @@ using Glass.Mapper.Sc;
 using Sitecore.Data.Items;
 using Sitecore.Mvc.Controllers;
 using CSDemo.Models.Blog;
+using Sitecore.Mvc.Presentation;
 using Sitecore.Web;
 
 namespace CSDemo.Controllers
@@ -113,11 +114,12 @@ namespace CSDemo.Controllers
         {
             var model = new List<Blog>();
 
-            Item homeItem = Sitecore.Context.Database.GetItem(Sitecore.Context.Site.StartPath);
+            var renderingItem = RenderingContext.Current.Rendering.Item; // csdemo >> home
 
-            if (homeItem != null)
+
+            if (renderingItem != null)
             {
-                HomePage homePage = homeItem.GlassCast<HomePage>();
+                HomePage homePage = renderingItem.GlassCast<HomePage>();
 
                 if (homePage != null)
                 {

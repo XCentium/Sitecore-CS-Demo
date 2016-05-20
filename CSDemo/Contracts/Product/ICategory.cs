@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using Sitecore.Data.Items;
 using Glass.Mapper.Sc.Fields;
+using CSDemo.Models.Product;
 
 #endregion
 
@@ -16,7 +17,7 @@ namespace CSDemo.Contracts.Product
         string Brand { get; set; }
         IEnumerable<Item> ChildProducts { get; set; }
         IEnumerable<Item> RuntimeSearchFacets { get; set; }
-        IEnumerable<Item> ChildCategories { get; set; }
+        List<Category> ChildCategories { get; set; }
         string RelationshipList { get; set; }
         string DefinitionName { get; set; }
         string ToolsIcon { get; set; }

@@ -82,11 +82,14 @@ namespace CSDemo.Controllers
                 model = ProductHelper.GetCatalogCategories(_userCatalogIds);
             }
 
-            var department = model.FirstOrDefault(x => x.Name.ToLower().Equals(Constants.Commerce.Departments.ToLower()));
+           // var department = model.FirstOrDefault(x => x.Name.ToLower().Contains(Constants.Commerce.Departments.ToLower()));
+            var department = model.FirstOrDefault(x => x.Name.ToLower().Contains(Constants.Commerce.Departments.ToLower()));
 
-            if (department != null)
+            if (department != null && department.ChildCategories != null && department.ChildCategories.Any())
             {
-                return Redirect(Constants.Commerce.CategoryDepartments);
+                // return Redirect(Constants.Commerce.CategoryDepartments);
+                return View(department.ChildCategories);
+
             }
 
             return View(model);
@@ -142,6 +145,7 @@ namespace CSDemo.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    model.UserCatalogIds = _userCatalogIds;
                     categoryProduct = ProductHelper.GetCategoryProducts(model);
                 }
             }

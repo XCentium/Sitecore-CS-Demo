@@ -17,6 +17,16 @@ namespace CSDemo.Controllers
             return View();
         }
 
+        public ActionResult Reviewx()
+        {
+            return View();
+        }
+
+        public ActionResult Reviewy()
+        {
+            return View();
+        }
+
         public ActionResult AddToCart([CanBeNull] CartItem model)
         {
 

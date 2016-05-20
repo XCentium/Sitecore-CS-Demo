@@ -7,7 +7,7 @@ DB: master
 SharedFields:
 - ID: 1eb8ae32-e190-44a6-968d-ed904c794ebf
   Hint: Source
-  Value: StartSearchLocation={E1B20E29-46C7-43CA-9BE0-5A030E65A483}&Filter=+_templatename:Blog Post
+  Value: StartSearchLocation={58015AB2-E58A-4879-81DD-46EFC4B7FE91}&Filter=+_templatename:Blog Post
 - ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
   Hint: Type
   Value: Multilist with Search

@@ -1,0 +1,44 @@
+﻿---
+ID: 0b5799ee-2301-489a-8cbf-a1c0d5963c06
+Parent: ae799d20-618c-428d-a014-0f4ffd79c7c2
+Template: fee031c4-e8e3-49cb-b7b6-3e9afa33d5be
+Path: /sitecore/content/CSDemo/Home/Blogs/2016/05/16/Casual Wear Suggestions
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 06b84f39-cf71-446a-81aa-30e76febe4a5
+      Hint: Author
+      Value: {C31FF10A-17EB-42E6-9CBB-316B9EFED5E1}
+    - ID: 0e02704d-0afd-4102-8d99-9241a8b03c89
+      Hint: Category
+      Value: {0D63FE64-2210-4DD4-BDC3-BC611E405DC7}
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160516T061320Z
+    - ID: 2779a63d-dd7f-4e0f-96c0-4066f90b6a8d
+      Hint: Summary
+      Value: Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions
+    - ID: 39e1df71-9e59-4dca-a4c1-ec588bc554ec
+      Hint: Thumb
+      Value: "<image mediaid=\"{0814D52B-9536-4E97-B7FE-17908DEF3579}\" />"
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
+    - ID: 9608e520-ef16-49fc-bd92-75cc101e5fec
+      Hint: Publish Date
+      Value: 20160516T061320Z
+    - ID: 9821df39-a4bc-476b-baef-2a2922c7a8c3
+      Hint: Title
+      Value: Casual Wear Suggestions
+    - ID: da2c062a-087b-488b-8505-c5e4f52d6e4b
+      Hint: Main
+      Value: "<image mediaid=\"{0814D52B-9536-4E97-B7FE-17908DEF3579}\" />"
+    - ID: f148b76b-8bc2-4a5b-89f1-9e5e42ed7f85
+      Hint: Body
+      Value: Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions Casual Wear Suggestions
+    - ID: fe842158-1c63-48ac-91cd-85bf89f473c9
+      Hint: Tags
+      Value: {76A1A750-64CD-442A-86E8-373BE1BBE24B}

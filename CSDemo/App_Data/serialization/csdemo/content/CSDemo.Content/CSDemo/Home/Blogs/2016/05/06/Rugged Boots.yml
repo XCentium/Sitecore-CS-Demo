@@ -1,0 +1,49 @@
+﻿---
+ID: 2af5c658-2b3a-4055-a846-e2a0c426316e
+Parent: 3de2b158-d086-49a1-b470-31b61539f240
+Template: fee031c4-e8e3-49cb-b7b6-3e9afa33d5be
+Path: /sitecore/content/CSDemo/Home/Blogs/2016/05/06/Rugged Boots
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 06b84f39-cf71-446a-81aa-30e76febe4a5
+      Hint: Author
+      Value: {C31FF10A-17EB-42E6-9CBB-316B9EFED5E1}
+    - ID: 0e02704d-0afd-4102-8d99-9241a8b03c89
+      Hint: Category
+      Value: {91E05D24-2C26-4055-9499-C9D467632076}
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160506T051136Z
+    - ID: 2779a63d-dd7f-4e0f-96c0-4066f90b6a8d
+      Hint: Summary
+      Value: |
+        Rugged boots blog summary 
+        Rugged boots blog summary
+        Rugged boots blog summary
+        Rugged boots blog summary
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
+    - ID: 9608e520-ef16-49fc-bd92-75cc101e5fec
+      Hint: Publish Date
+      Value: 20160506T051136Z
+    - ID: 9821df39-a4bc-476b-baef-2a2922c7a8c3
+      Hint: Title
+      Value: Boots Are Back!
+    - ID: f148b76b-8bc2-4a5b-89f1-9e5e42ed7f85
+      Hint: Body
+      Value: |
+        <p>Rugged boots blog body</p>
+        <p>Rugged boots blog body</p>
+        <p>Rugged boots blog body</p>
+        <p>Rugged boots blog body</p>
+        <p>Rugged boots blog body</p>
+        <p>Rugged boots blog body</p>
+        <p></p>
+    - ID: fe842158-1c63-48ac-91cd-85bf89f473c9
+      Hint: Tags
+      Value: {01054250-CC43-4504-A2C6-CDDC915A7ADB}

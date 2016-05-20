@@ -116,10 +116,10 @@ Languages:
       Hint: Featured Blogs
       Type: Multilist with Search
       Value: |
-        {DDA83D93-D476-4F82-90CD-74692D64CD85}
-        {45FEBEBC-383E-4C03-80BC-4308F982DBD7}
-        {F6C45542-2CBB-4298-91E3-970E8680F20D}
-        {92C81DE3-0093-4131-A6B1-FBFFA52A61F2}
+        {2AF5C658-2B3A-4055-A846-E2A0C426316E}
+        {A86BD4A2-8524-4F11-B3C1-03D585E27464}
+        {0B5799EE-2301-489A-8CBF-A1C0D5963C06}
+        {E5B1A258-6FBA-4E67-80F9-C9AC14BA6738}
     - ID: c1f479fe-39e3-4851-bdbf-3ac347a44c2d
       Hint: Categories
       Type: Multilist with Search

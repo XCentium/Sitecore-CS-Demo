@@ -823,17 +823,48 @@ namespace CSDemo.Models.Product
                 var catalog = Sitecore.Context.Database.GetItem(new ID(catalogId));
                 if (catalog != null)
                 {
-                    var categories =
-                        catalog.GetChildren()
-                            .Where(
-                                x =>
-                                    x.TemplateName.Equals(Constants.Products.GeneralCategoryTemplateName,
-                                        StringComparison.InvariantCultureIgnoreCase));
+                    var categories = GetGeneralCategoryChildren(catalog).ToList();
 
-                    catalogCategories.AddRange(categories.Select(c => c.GlassCast<Category>()));
+                    if (categories.Any())
+                    {
+
+                        foreach (var catItem in categories)
+                        {
+                            var category = catItem.GlassCast<Category>();
+
+                            if (catItem.HasChildren)
+                            {
+                                var childCategories = GetGeneralCategoryChildren(catItem).ToList();
+                                if (childCategories.Any())
+                                {
+                                    try
+                                    {
+                                        category.ChildCategories.AddRange(
+                                            childCategories.Select(c => c.GlassCast<Category>()));
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Log.Error(ex.StackTrace, ex);
+                                        
+                                    }
+                                }
+                                catalogCategories.Add(category);
+                            }
+
+                        }
+                    }
                 }
             }
             return catalogCategories;
+        }
+
+        private static IEnumerable<Item> GetGeneralCategoryChildren(Item categoryItem)
+        {
+            return categoryItem.GetChildren()
+                .Where(
+                    x =>
+                        x.TemplateName.Equals(Constants.Products.GeneralCategoryTemplateName,
+                            StringComparison.InvariantCultureIgnoreCase));
         }
 
         /// <summary>

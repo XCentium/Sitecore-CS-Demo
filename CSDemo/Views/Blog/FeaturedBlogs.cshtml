@@ -19,10 +19,8 @@
         <div class="row">
             @foreach (var blog in Model)
             {
-
                 <!-- BLOG POST - START -->
-                using (BeginEditFrame(blog, "Edit Featured Blogs", x => x.Title, x => x.PublishDate, x => x.Thumb))
-                {
+
                     <div class="col-xs-6 col-sm-3">
                         <article class="post">
                             @RenderImage(blog, t => t.Thumb, new { mh = 310, @class = "img-responsive" }, true)
@@ -36,7 +34,6 @@
                     ctr++;
                     if (ctr > 3) { break; }
 
-                }
                 <!-- BLOG POST - END -->
             }
         </div>

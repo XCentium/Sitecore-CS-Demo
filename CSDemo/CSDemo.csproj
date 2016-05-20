@@ -683,6 +683,8 @@
     <Content Include="Views\Blog\BlogPost.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Blog\BlogList.cshtml" />
+    <Content Include="Views\Checkout\Reviewx.cshtml" />
+    <Content Include="Views\Checkout\Reviewy.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

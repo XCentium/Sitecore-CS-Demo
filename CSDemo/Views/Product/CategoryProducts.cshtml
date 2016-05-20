@@ -125,22 +125,32 @@
                                 if (product.DefinitionName == "GeneralCategory")
                                 {
 
-                                            <!-- CATEGORY - START -->
-                                    <div class="col-xs-4">
-                                        <div class="category">
-                                            <a href="@product.Url">
-                                                @foreach (var image in product.Images)
-                                                {
-                                                    count++;
-                                                    @RenderImage(image, x => x, new { mw = 310, @class = "img-responsive " }, isEditable: false);
+                                    <!-- PRODUCT - START -->
+                                    <div class="col-sm-4 col-xs-6">
+                                        <article class="product-item">
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <div class="product-overlay">
+                                                        <div class="product-mask"></div>
+                                                        <a href="@product.Url" class="product-permalink"></a>
+                                                        @foreach (var image in product.Images)
+                                                        {
+                                                            count++;
+                                                            @RenderImage(image, x => x, new { Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive " }, isEditable: false);
+
                                                                                                                                                 if (count == 1) { break; }
-                                                }
-                                                <div class="category-mask"></div>
-                                                <h3 class="category-title">@product.Title <span>Collection</span></h3>
-                                            </a>
-                                        </div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <div class="product-body" style="height: 146px">
+                                                        <h3>@product.Title <span>Collection</span></h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
                                     </div>
-                                        <!-- CATEGORY - END -->
+                    <!-- PRODUCT - END -->
                                                 continue;
                                 }
 

@@ -1,6 +1,6 @@
 ﻿---
-ID: 7e2afbab-fdbd-404f-b177-f01f35d53f83
-Parent: 1b2e7325-ce26-4401-9c99-e0de84e2f3b6
+ID: 614efb97-dd0e-43c0-8a1a-3a6f9d5dca5c
+Parent: 396da88c-95dc-460a-8a9f-537a4226fe21
 Template: adb6ca4f-03ef-4f47-b9ac-9ce2ba53ff97
 Path: /sitecore/content/CSDemo/Home/Blogs/2016/05
 DB: master
@@ -11,4 +11,4 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160506T043148Z
+      Value: 20160520T181727Z

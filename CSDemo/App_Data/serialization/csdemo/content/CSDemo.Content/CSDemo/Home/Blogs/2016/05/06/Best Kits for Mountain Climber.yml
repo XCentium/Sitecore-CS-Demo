@@ -1,0 +1,38 @@
+﻿---
+ID: e5b1a258-6fba-4e67-80f9-c9ac14ba6738
+Parent: 3de2b158-d086-49a1-b470-31b61539f240
+Template: fee031c4-e8e3-49cb-b7b6-3e9afa33d5be
+Path: /sitecore/content/CSDemo/Home/Blogs/2016/05/06/Best Kits for Mountain Climbers
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 06b84f39-cf71-446a-81aa-30e76febe4a5
+      Hint: Author
+      Value: {C8AA60E8-F51B-461B-BEC2-BE189049BB7C}
+    - ID: 0e02704d-0afd-4102-8d99-9241a8b03c89
+      Hint: Category
+      Value: {9A9E7235-3A5E-4577-AD11-A99B81C3DE4E}
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160506T052151Z
+    - ID: 2779a63d-dd7f-4e0f-96c0-4066f90b6a8d
+      Hint: Summary
+      Value: Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary Summary
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
+    - ID: 9608e520-ef16-49fc-bd92-75cc101e5fec
+      Hint: Publish Date
+      Value: 20160506T052151Z
+    - ID: 9821df39-a4bc-476b-baef-2a2922c7a8c3
+      Hint: Title
+      Value: Best Kits for Mountain Climbers
+    - ID: f148b76b-8bc2-4a5b-89f1-9e5e42ed7f85
+      Hint: Body
+      Value: Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body Body
+    - ID: fe842158-1c63-48ac-91cd-85bf89f473c9
+      Hint: Tags
+      Value: {EECB2F99-8DD6-4611-863F-D8410FBA46FE}|{D31C4FA9-8E11-4ED7-9606-54E07D258640}|{76A1A750-64CD-442A-86E8-373BE1BBE24B}|{01054250-CC43-4504-A2C6-CDDC915A7ADB}
