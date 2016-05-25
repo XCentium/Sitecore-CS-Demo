@@ -53,7 +53,7 @@
                     <div class="attachment">
                         @RenderImage(Model.Blog, t => t.Main, new { @class = "img-responsive" }, true)
                     </div>
-                    @Model.Blog.Body
+                    @Html.Raw(Model.Blog.Body)
                     <div class="post-bottom clearfix">
                         @if (Model.Blog.Tags.Any())
                         {
