@@ -140,7 +140,6 @@
             public const string VariantFirstImage = "Variant_Image1";
             public const string TrackingFieldId = "{B0A67B2A-8B07-4E0B-8809-69F751709806}";
             public const string AlsoBoughtProductsUrl = "http://xcp13n.xcentium.net/api/data/relatedproducts/csdemo/{0}";
-            public const string GeoTargetedProductsUrl = "http://TBD.net/api/data/geotargetedproducts/csdemo/{0}";
             public const string AdventureWorksRootPath = "/sitecore/Commerce/Catalog Management/Catalogs/Adventure Works Catalog/Departments";
             public const string CatalogsRootPath = "/sitecore/Commerce/Catalog Management/Catalogs";
             public const string GeneralCategoryTemplateName = "GeneralCategory";
