@@ -19,7 +19,7 @@ SharedFields:
   Value: /sitecore/shell/~/xaml/Sitecore.Shell.Applications.MarketingAutomation.Dialogs.ActionEditors.SendEmailMessage.aspx
 - ID: a291a22b-99e2-46bb-a27b-8ec744275396
   Hint: Type
-  Value: Sitecore.Automation.MarketingAutomation.AutomationActions.SendEmailMessageAction,Sitecore.Analytics.Automation
+  Value: CSDemo.Configuration.Social.CustomFacebookMessaging, CSDemo
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
   Value: 0

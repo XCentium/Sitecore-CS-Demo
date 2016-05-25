@@ -1,0 +1,48 @@
+﻿---
+ID: a9a16202-6d08-4e7c-9449-a566e7a85d7d
+Parent: fe5331cb-a759-44aa-bdd9-d6457177634c
+Template: 6e5b63d6-2401-4a52-8b4d-cfef5e4e9752
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CSDemo/Social Interaction Engagement
+DB: master
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: {689E2994-4656-4C58-9112-7826CB46EE69}
+- ID: c36d22d2-94fc-46ac-91db-2cf322c66895
+  Hint: Flow designer items
+  Value: |
+    <flowDesignerItems>
+      <connectors>
+        <connector itemId="b6f9641f-97ae-47f4-8d82-fe71efe9d9e7" originId="00000000-0000-0000-0000-000000000000" designerId="4a2c5098-2098-4139-827f-d00b1d23cbea" name="New item" description="Description" startItemId="aa4a21b0-b522-45c2-8c40-c9f08bb87f7f" endItemId="0743e16f-4cf0-4b98-8f09-de39cde2b9ae" points="16,16 16,20" />
+        <connector itemId="0b2e2100-0de9-4831-9393-d8f31294514a" originId="00000000-0000-0000-0000-000000000000" designerId="9a27acf0-7166-4573-88d9-1c6591911b1b" name="New item" description="Description" startItemId="0743e16f-4cf0-4b98-8f09-de39cde2b9ae" endItemId="d17c5e86-290e-40a3-977f-d8068d9b1b47" points="21,23 27,23" />
+        <connector itemId="7722d368-416b-4208-b069-b99346257c02" originId="00000000-0000-0000-0000-000000000000" designerId="12970f30-e252-48d1-bcc9-eab3ce59c40b" name="New item" description="Description" startItemId="0743e16f-4cf0-4b98-8f09-de39cde2b9ae" endItemId="00d8e4ed-0852-48c8-9db5-7dd4c13861d0" points="16,26 16,30" />
+        <connector itemId="4acfcb30-adb0-4c27-8ab2-791872e6e3cf" originId="00000000-0000-0000-0000-000000000000" designerId="dca77a45-3179-4d3f-961a-e032c2b548e3" name="New item" description="Description" startItemId="00d8e4ed-0852-48c8-9db5-7dd4c13861d0" endItemId="99e8aedd-d6b9-4682-9d27-f200658bec7f" points="21,33 27,33" />
+      </connectors>
+      <disconnectedItems />
+      <flowRenderedItemsValues>
+        <flowRenderedItemValues itemId="aa4a21b0-b522-45c2-8c40-c9f08bb87f7f" x="10" y="10" width="12" height="6" zIndex="17" backgroundColor="#FF00344E" foregroundColor="#FFFFFFFF" iconUri="/temp/iconcache/software/32x32/shape_square.png" showIcon="true" fieldEditorValues="&lt;fields itemId=&quot;{AA4A21B0-B522-45C2-8C40-C9F08BB87F7F}&quot;&gt;&#xD;&#xA;  &lt;field id=&quot;{B5E02AD9-D56F-4C41-A065-A133DB87BDEB}&quot; value=&quot;Initiate State&quot; name=&quot;__Display name&quot; /&gt;&#xD;&#xA;  &lt;field id=&quot;{06F2D72A-1924-4B9A-BA1E-186CE4E57EFD}&quot; value=&quot;&quot; name=&quot;Description&quot; /&gt;&#xD;&#xA;&lt;/fields&gt;" />
+        <flowRenderedItemValues itemId="0743e16f-4cf0-4b98-8f09-de39cde2b9ae" x="11" y="20" width="10" height="6" zIndex="18" backgroundColor="#FF00767E" foregroundColor="#FFFFFFFF" iconUri="/temp/iconcache/software/32x32/shape_rhomb.png" showIcon="false" fieldEditorValues="&lt;fields itemId=&quot;{8FA723DE-7C46-4A3B-803D-73F7ECC09398}&quot;&gt;&#xD;&#xA;  &lt;field id=&quot;{06F2D72A-1924-4B9A-BA1E-186CE4E57EFD}&quot; name=&quot;Description&quot; value=&quot;&quot; /&gt;&#xD;&#xA;  &lt;field id=&quot;{E13DCD09-D9BB-43C9-8D7D-438C79D714CA}&quot; name=&quot;Evaluate&quot; value=&quot;{B81C1F4C-8B83-44D9-902F-448463DBCCBC}&quot; /&gt;&#xD;&#xA;  &lt;field id=&quot;{21F3482B-BB14-4555-BA5D-AF20D400D5B9}&quot; name=&quot;Rule&quot; value=&quot;&amp;lt;ruleset&amp;gt;&amp;#xD;&amp;#xA;  &amp;lt;rule uid=&amp;quot;{93213F66-1332-43F7-AEB7-10C85CD50571}&amp;quot;&amp;gt;&amp;#xD;&amp;#xA;    &amp;lt;conditions&amp;gt;&amp;#xD;&amp;#xA;      &amp;lt;condition id=&amp;quot;{4888ABBB-F17D-4485-B14B-842413F88732}&amp;quot; uid=&amp;quot;0EBEAE39A70141C0819A44DEBFC60710&amp;quot; /&amp;gt;&amp;#xD;&amp;#xA;    &amp;lt;/conditions&amp;gt;&amp;#xD;&amp;#xA;  &amp;lt;/rule&amp;gt;&amp;#xD;&amp;#xA;&amp;lt;/ruleset&amp;gt;&quot; /&gt;&#xD;&#xA;  &lt;field id=&quot;{B5E02AD9-D56F-4C41-A065-A133DB87BDEB}&quot; name=&quot;__Display name&quot; value=&quot;Has Facebook Goal Been Triggered?&quot; /&gt;&#xD;&#xA;&lt;/fields&gt;" />
+        <flowRenderedItemValues itemId="cfdad64e-0ed2-4022-817d-bc196971e149" x="10" y="10" width="8" height="4" zIndex="0" backgroundColor="#FF00344E" foregroundColor="#FFFFFFFF" iconUri="/temp/iconcache/imaging/32x32/line_straight_blue_h.png" showIcon="true" fieldEditorValues="&lt;fields itemId=&quot;{CFDAD64E-0ED2-4022-817D-BC196971E149}&quot;&gt;&#xD;&#xA;  &lt;field id=&quot;{B5E02AD9-D56F-4C41-A065-A133DB87BDEB}&quot; value=&quot;Send Social Message&quot; name=&quot;__Display name&quot; /&gt;&#xD;&#xA;  &lt;field id=&quot;{A291A22B-99E2-46BB-A27B-8EC744275396}&quot; value=&quot;CSDemo.Configuration.Social.CustomFacebookMessaging, CSDemo&quot; name=&quot;Type&quot; /&gt;&#xD;&#xA;  &lt;field id=&quot;{1507131D-CEE3-49E9-AF32-DE5403A37B49}&quot; value=&quot;MessageId=38C277F8-EA04-415D-9AA8-F9C797166BED&quot; name=&quot;Parameters&quot; /&gt;&#xD;&#xA;&lt;/fields&gt;" />
+        <flowRenderedItemValues itemId="00d8e4ed-0852-48c8-9db5-7dd4c13861d0" x="11" y="30" width="10" height="6" zIndex="15" backgroundColor="#FF00767E" foregroundColor="#FFFFFFFF" iconUri="/temp/iconcache/software/32x32/shape_rhomb.png" showIcon="false" fieldEditorValues="&lt;fields itemId=&quot;{CDDF84D0-AD93-4376-BE2A-2A111C1AF87F}&quot;&gt;&#xD;&#xA;  &lt;field id=&quot;{B5E02AD9-D56F-4C41-A065-A133DB87BDEB}&quot; value=&quot;Always True&quot; name=&quot;__Display name&quot; /&gt;&#xD;&#xA;  &lt;field id=&quot;{E13DCD09-D9BB-43C9-8D7D-438C79D714CA}&quot; value=&quot;{B81C1F4C-8B83-44D9-902F-448463DBCCBC}&quot; name=&quot;Evaluate&quot; /&gt;&#xD;&#xA;  &lt;field id=&quot;{21F3482B-BB14-4555-BA5D-AF20D400D5B9}&quot; value=&quot;&amp;lt;ruleset&amp;gt;&amp;#xD;&amp;#xA;  &amp;lt;rule uid=&amp;quot;{CB4D4EC4-5C69-4285-9A55-E7D1DF866716}&amp;quot;&amp;gt;&amp;#xD;&amp;#xA;    &amp;lt;conditions&amp;gt;&amp;#xD;&amp;#xA;      &amp;lt;condition id=&amp;quot;{4888ABBB-F17D-4485-B14B-842413F88732}&amp;quot; uid=&amp;quot;340C3017B4344A90B1C2658207018740&amp;quot; /&amp;gt;&amp;#xD;&amp;#xA;    &amp;lt;/conditions&amp;gt;&amp;#xD;&amp;#xA;  &amp;lt;/rule&amp;gt;&amp;#xD;&amp;#xA;&amp;lt;/ruleset&amp;gt;&quot; name=&quot;Rule&quot; /&gt;&#xD;&#xA;&lt;/fields&gt;" />
+        <flowRenderedItemValues itemId="99e8aedd-d6b9-4682-9d27-f200658bec7f" x="27" y="30" width="12" height="6" zIndex="16" backgroundColor="#FF00344E" foregroundColor="#FFFFFFFF" iconUri="/temp/iconcache/software/32x32/shape_square.png" showIcon="false" fieldEditorValues="&lt;fields itemId=&quot;{BEAF1C31-D4D6-43A1-94A8-3B88971D464C}&quot;&gt;&#xD;&#xA;  &lt;field id=&quot;{B5E02AD9-D56F-4C41-A065-A133DB87BDEB}&quot; value=&quot;Social Message Not Sent&quot; name=&quot;__Display name&quot; /&gt;&#xD;&#xA;&lt;/fields&gt;" />
+        <flowRenderedItemValues itemId="d17c5e86-290e-40a3-977f-d8068d9b1b47" x="27" y="20" width="12" height="6" zIndex="10" backgroundColor="#FF00344E" foregroundColor="#FFFFFFFF" iconUri="/temp/iconcache/software/32x32/shape_square.png" showIcon="false" fieldEditorValues="&lt;fields itemId=&quot;{181E38BB-D8DB-4807-A036-4FE940854A57}&quot;&gt;&#xD;&#xA;  &lt;field id=&quot;{B5E02AD9-D56F-4C41-A065-A133DB87BDEB}&quot; value=&quot;Social Message Was Sent&quot; name=&quot;__Display name&quot; /&gt;&#xD;&#xA;&lt;/fields&gt;" />
+        <flowRenderedItemValues itemId="4a2c5098-2098-4139-827f-d00b1d23cbea" x="16" y="16" width="10" height="10" zIndex="6" backgroundColor="#00FFFFFF" foregroundColor="#FFFFFFFF" iconUri="" showIcon="false" fieldEditorValues="" />
+        <flowRenderedItemValues itemId="9a27acf0-7166-4573-88d9-1c6591911b1b" x="21" y="23" width="10" height="10" zIndex="8" backgroundColor="#00FFFFFF" foregroundColor="#FFFFFFFF" iconUri="" showIcon="false" fieldEditorValues="" />
+        <flowRenderedItemValues itemId="12970f30-e252-48d1-bcc9-eab3ce59c40b" x="16" y="26" width="10" height="10" zIndex="12" backgroundColor="#00FFFFFF" foregroundColor="#FFFFFFFF" iconUri="" showIcon="false" fieldEditorValues="" />
+        <flowRenderedItemValues itemId="dca77a45-3179-4d3f-961a-e032c2b548e3" x="21" y="33" width="10" height="10" zIndex="14" backgroundColor="#00FFFFFF" foregroundColor="#FFFFFFFF" iconUri="" showIcon="false" fieldEditorValues="" />
+      </flowRenderedItemsValues>
+    </flowDesignerItems>
+- ID: ca9b9f52-4fb0-4f87-a79f-24dea62cda65
+  Hint: __Default workflow
+  Value: {689E2994-4656-4C58-9112-7826CB46EE69}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160505T051039Z
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: {EDCBB550-BED3-490F-82B8-7B2F14CCD26E}
