@@ -72,6 +72,16 @@ namespace CSDemo.Controllers
             return personalizedProducts?.Products != null ? View(personalizedProducts.Products) : View(empty);
         }
 
+        public ActionResult GeoTargetedProducts()
+        {
+            var empty = new List<Product>();
+            var product = GetProduct();
+            if (product == null) return View(empty);
+            var geoTargetedProducts = product.GeoTargetedProducts;
+            empty.AddRange(geoTargetedProducts);
+            return View(empty);
+        }
+
         public ActionResult Categories()
         {
 

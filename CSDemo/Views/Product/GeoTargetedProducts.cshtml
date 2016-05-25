@@ -1,0 +1,43 @@
+﻿@using System.Linq;
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<CSDemo.Models.Product.Product>>
+@if (Model == null && !Model.Any())
+{
+    return;
+}
+<!-- ==========================
+    PRODUCTS - START
+=========================== -->
+<section class="content categories">
+    <div class="row row-no-padding">
+        <div style="text-align: center"><h2>Specialty Selected For You</h2></div>
+        <!-- PRODUCT - START -->
+        @foreach (var product in Model.ToList())
+        {
+            <div class="col-xs-4">
+                @using (BeginEditFrame(product, "Edit Metadata", x => x.Images, x => x.Title))
+                {
+                    <div class="category">
+                        <a href="@product.Url">
+                            @if (product.Images != null && product.Images.Any())
+                            {
+                                @RenderImage(product.Images.ElementAt(0), t => t, new { mh = 310, @class = "img-responsive" })
+                            }
+                            else if (product.Image1 != null)
+                            {
+                                <img src="@product.Image1" class="img-responsive" style="width: 200px; height: 300px;" />
+                            }
+
+                            <div class="category-mask"></div>
+                            <h3 class="category-title">@Editable(product, x => x.Title)</h3>                           
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+        <!-- PRODUCT - END -->
+    </div>
+
+</section>
+<!-- ==========================
+    PRODUCTS - END
+=========================== -->

@@ -686,6 +686,7 @@
     <Content Include="Views\Blog\BlogList.cshtml" />
     <Content Include="Views\Checkout\Reviewx.cshtml" />
     <Content Include="Views\Checkout\Reviewy.cshtml" />
+    <Content Include="Views\Product\GeoTargetedProducts.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
