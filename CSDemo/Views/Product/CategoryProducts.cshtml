@@ -117,7 +117,7 @@
 
                         @foreach (CSDemo.Models.Product.Product product in Model.Category.Products)
                         {
-                            if (!string.IsNullOrEmpty(product.ListPrice.Trim()))
+                            if (!string.IsNullOrEmpty(product.ListPrice.Trim()) && product.Title!="Add Initials") //TODO: demo fix, hiding initials product
                             {
 
                                 int count = 0;
