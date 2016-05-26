@@ -10,27 +10,27 @@
     <section class="content products">
         <div class="container">
             @using (BeginEditFrame(Model, "Edit Product",
-                                x => x.Images,
-                                x => x.Title,
-                                x => x.CatalogName,
-                                x => x.VariantProdId,
-                                x => x.DefaultVariant,
-                                x => x.IsNew,
-                                x => x.IsOnSale,
-                                x => x.Rating,
-                                x => x.ListPrice,
-                                x => x.Brand,
-                                x => x.Description,
-                                x => x.VariantSize,
-                                x => x.VariantColors,
-                                x => x.FullDescription,
-                                x => x.DateOfIntroduction,
-                                x => x.Size, x => x.Price,
-                                x => x.DefinitionName,
-                                x => x.Categories,
-                                x => x.SortFields,
-                                x => x.ItemsPerPage,
-                                x => x.Variants))
+                                    x => x.Images,
+                                    x => x.Title,
+                                    x => x.CatalogName,
+                                    x => x.VariantProdId,
+                                    x => x.DefaultVariant,
+                                    x => x.IsNew,
+                                    x => x.IsOnSale,
+                                    x => x.Rating,
+                                    x => x.ListPrice,
+                                    x => x.Brand,
+                                    x => x.Description,
+                                    x => x.VariantSize,
+                                    x => x.VariantColors,
+                                    x => x.FullDescription,
+                                    x => x.DateOfIntroduction,
+                                    x => x.Size, x => x.Price,
+                                    x => x.DefinitionName,
+                                    x => x.Categories,
+                                    x => x.SortFields,
+                                    x => x.ItemsPerPage,
+                                    x => x.Variants))
             {
                 <article class=" product-item product-single">
                     <div class="row">
@@ -193,7 +193,7 @@
                                     }
                                     <ul class="list-unstyled product-info">
                                         <li><span>ID</span>@Model.ProductId</li>
-                                        
+
                                         <li class="variants_in_stock">
                                             <span>Availability</span>@stockLabel
                                         </li>
@@ -211,7 +211,7 @@
 
                                     @if (Model.CatalogName.StartsWith("Rio"))
                                     {
-                                        
+
                                         <div class="row row-no-padding">
                                             <div class="col-md-3 col-sm-4">
                                                 <table class="rio-meta-table">
@@ -276,10 +276,10 @@
                                         <div class="product-form clearfix">
                                             <div class="row row-no-padding">
                                                 <div class="col-md-3 col-sm-4">
-                                                    
+
                                                     <div class="product-quantity clearfix">
                                                         <a class="btn btn-default" id="qty-minus">-</a>
-                                                        <input type="text" class="form-control" id="Quantity" value="1"/>
+                                                        <input type="text" class="form-control" id="Quantity" value="1" />
                                                         <a class="btn btn-default" id="qty-plus">+</a>
                                                     </div>
                                                     @if (Model.Units != null && Model.Units.Any())
@@ -343,17 +343,17 @@
                                                                     <label>Color:</label>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    
-                                                                        @foreach (var variantColor in Model.VariantColors)
-                                                                        {
-                                                                            <ul id="ul_@string.Concat(variantColor.Name, Model.VariantProdId)" style="display: @variantColor.Display" data-num="@Model.VariantProdId" class="variantcolorlist @string.Concat("ProductColor", Model.VariantProdId) ProductColor">
-                                                                                @foreach (var color in variantColor.VariantColorLines)
-                                                                                {
-                                                                                    <li><a href="#" data-num="@Model.VariantProdId" data-vname="@variantColor.Name" data-val="@color.Value" class="variantcolorrectangle" style="background-color: @color.Color.Replace(" ","")">&nbsp;</a></li>
-                                                                                }
-                                                                            </ul>
-                                                                        }
-                                                                    
+
+                                                                    @foreach (var variantColor in Model.VariantColors)
+                                                                    {
+                                                                        <ul id="ul_@string.Concat(variantColor.Name, Model.VariantProdId)" style="display: @variantColor.Display" data-num="@Model.VariantProdId" class="variantcolorlist @string.Concat("ProductColor", Model.VariantProdId) ProductColor">
+                                                                            @foreach (var color in variantColor.VariantColorLines)
+                                                                            {
+                                                                                <li><a href="#" data-num="@Model.VariantProdId" data-vname="@variantColor.Name" data-val="@color.Value" class="variantcolorrectangle" style="background-color: @color.Color.Replace(" ","")">&nbsp;</a></li>
+                                                                            }
+                                                                        </ul>
+                                                                    }
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -442,6 +442,8 @@
             @Html.Partial("~/Views/Product/RelatedProducts.cshtml", Model.RelatedProducts)
 
             @Html.Partial("~/Views/Product/ComplementaryProducts.cshtml", Model.AlsoBoughtProducts)
+
+            @Html.Partial("~/Views/Product/GeoTargetedProducts.cshtml", Model)
         </div>
     </section>
 }
