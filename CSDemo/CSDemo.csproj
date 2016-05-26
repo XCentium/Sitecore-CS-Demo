@@ -121,6 +121,10 @@
       <HintPath>..\Lib\Sitecore\Sitecore.Analytics.Outcome.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Sitecore.Cintel">
+      <HintPath>..\Lib\Sitecore\Sitecore.Cintel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Sitecore.Commerce">
       <HintPath>..\Lib\Sitecore\Sitecore.Commerce.dll</HintPath>
       <Private>False</Private>
@@ -239,6 +243,7 @@
     <Compile Include="Configuration\ConfigurationHelper.cs" />
     <Compile Include="Configuration\Facets\ILastOrderTotal.cs" />
     <Compile Include="Configuration\Facets\LastOrderTotal.cs" />
+    <Compile Include="Configuration\FixFindBestPatternMatchAndApplyToProfileInfo.cs" />
     <Compile Include="Configuration\ItemResolver.cs" />
     <Compile Include="Configuration\Social\CustomSocialGoalTrigger.cs" />
     <Compile Include="Configuration\Social\CustomMatchUser.cs" />
@@ -454,6 +459,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="App_Config\Include\zCSDemo\CSDemo.PatternMatchFix.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
