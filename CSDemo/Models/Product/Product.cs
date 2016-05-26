@@ -111,26 +111,25 @@ namespace CSDemo.Models.Product
             get
             {
                 List<Product> geoTargetedProducts = new List<Product>();
-                var contextProductItem = Context.Database.GetItem(new ID(ID));
-                if (contextProductItem == null) return geoTargetedProducts;
                 var productIds = new List<string>();
                 try
                 {
-                    var url = string.Format(Constants.Products.GeoTargetedProductsUrl, contextProductItem.Name); // Friendly name of Product
+                    var url = string.Format(Constants.Products.GeoTargetedProductsUrl, Tracker.Current.Interaction.GeoData.PostalCode); // Friendly name of Product
                     var webClient = new WebClient();
 
                     //TBD - Uncomment
-                    //var response = webClient.DownloadString(url);
-                    //if (response.IsNullOrEmpty()) return geoTargetedProducts;
-                    //var splitter = response.Split(',');
-                    //productIds.AddRange(splitter);
+                    var response = webClient.DownloadString(url);
+                    if (string.IsNullOrEmpty(response)) return geoTargetedProducts;
+                    var splitter = response.Split(',');
+                    productIds.AddRange(splitter);
 
                     //TBD - Remove
-                    var sampleProducts = new List<string>()
-                    {
-                        "AW140-13", "AW151-13", "AW175-13", "AW325-13", "AW074-04", "AW078-04"
-                    };
-                    productIds.AddRange(sampleProducts);
+                    //var sampleProducts = new List<string>()
+                    //{
+                    //    "AW140-13", "AW151-13", "AW175-13", "AW325-13", "AW074-04", "AW078-04"
+                    //};
+                    //productIds.AddRange(sampleProducts);
+
                     geoTargetedProducts.AddRange(productIds.Select(GetProduct).Where(product => product != null));
                 }
                 catch (Exception ex)
@@ -139,7 +138,7 @@ namespace CSDemo.Models.Product
                 }
                 return geoTargetedProducts;
             }
-        }
+        } 
 
         public StockInformation StockInformation { get; set; }
 
