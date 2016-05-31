@@ -39,7 +39,7 @@ Languages:
     Value: Has the customer made a purchase for less than a given amount?
   - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
     Hint: __Display name
-    Value: Less than $100?
+    Value: Less than $5?
   Versions:
   - Version: 1
     Fields:

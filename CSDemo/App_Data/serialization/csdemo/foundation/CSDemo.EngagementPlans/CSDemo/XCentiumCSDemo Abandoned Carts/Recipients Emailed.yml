@@ -7,7 +7,7 @@ DB: master
 SharedFields:
 - ID: 07ce07cb-078c-415e-8f92-96690babd6c7
   Hint: Time interval
-  Value: 2880
+  Value: 2
 - ID: 3f72bc07-de92-483e-a724-d430769d9ba4
   Hint: Designer ID
   Value: be2ef1c6-dade-4d33-ad55-1f3f7fe68b10
