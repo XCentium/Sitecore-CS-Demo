@@ -460,6 +460,23 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Config\Include\zCSDemo\CSDemo.PatternMatchFix.config" />
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.Debug.config">
+      <DependentUpon>CSDemo.Main.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.DEV Local.config">
+      <DependentUpon>CSDemo.Main.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Debug.config">
+      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.DEV Local.config">
+      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="Properties\PublishProfiles\DEV Local.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -551,10 +568,6 @@
       <DependentUpon>CSDemo.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.foxsean.ca.config">
-      <DependentUpon>CSDemo.Main.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
     <None Include="App_Config\Include\zCSDemo\CSDemo.Main.Release.config">
       <DependentUpon>CSDemo.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
@@ -572,14 +585,6 @@
       <IsTransformFile>True</IsTransformFile>
     </None>
     <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Release.config">
-      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.sean.debug.deployment.config">
-      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.sean.release.deployment.config">
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
@@ -643,9 +648,7 @@
     <None Include="Properties\PublishProfiles\Castle Local.pubxml" />
     <None Include="Properties\PublishProfiles\csDemo.pubxml" />
     <None Include="Properties\PublishProfiles\DebuLocal.pubxml" />
-    <None Include="Properties\PublishProfiles\sean.debug.deployment.pubxml" />
     <None Include="Properties\PublishProfiles\Release Test.pubxml" />
-    <None Include="Properties\PublishProfiles\sean.release.deployment.pubxml" />
     <None Include="Properties\PublishProfiles\XcCommerce112Demo.pubxml" />
     <Content Include="Views\Checkout\Cart.cshtml" />
     <Content Include="Views\Checkout\Checkout.cshtml" />
