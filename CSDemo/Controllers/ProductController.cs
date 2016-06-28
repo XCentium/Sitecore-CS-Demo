@@ -19,6 +19,7 @@ using Sitecore.Web;
 using Newtonsoft.Json;
 using CSDemo.Models.Account;
 using CSDemo.Models.Checkout.Cart;
+using Sitecore.Analytics;
 
 #endregion
 
@@ -75,7 +76,7 @@ namespace CSDemo.Controllers
 
         public ActionResult GeoTargetedProducts()
         {
-            var geoTargetedProducts = GetProduct().GeoTargetedProducts;
+            var geoTargetedProducts = Product.GetGeoTargetedProducts(Tracker.Current.Interaction.GeoData.AreaCode);
             return View(geoTargetedProducts);
         }
 

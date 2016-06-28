@@ -52,7 +52,7 @@ namespace CSDemo.Controllers
             {
                 Log.Error(ex.Message, ex);
             }
-            return items.Where(i=>i.Image!= null).ToList();
+            return items.Where(i=>i!=null && i.Image!= null).ToList();
         }
 
         #endregion

@@ -106,40 +106,6 @@ namespace CSDemo.Models.Product
             }
         }
 
-        public IEnumerable<Product> GeoTargetedProducts
-        {
-            get
-            {
-                List<Product> geoTargetedProducts = new List<Product>();
-                var productIds = new List<string>();
-                try
-                {
-                    var url = string.Format(Constants.Products.GeoTargetedProductsUrl, Tracker.Current.Interaction.GeoData.PostalCode); // Friendly name of Product
-                    var webClient = new WebClient();
-
-                    //TBD - Uncomment
-                    var response = webClient.DownloadString(url);
-                    if (string.IsNullOrEmpty(response)) return geoTargetedProducts;
-                    var splitter = response.Split(',');
-                    productIds.AddRange(splitter);
-
-                    //TBD - Remove
-                    //var sampleProducts = new List<string>()
-                    //{
-                    //    "AW140-13", "AW151-13", "AW175-13", "AW325-13", "AW074-04", "AW078-04"
-                    //};
-                    //productIds.AddRange(sampleProducts);
-
-                    geoTargetedProducts.AddRange(productIds.Select(GetProduct).Where(product => product != null));
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(ex.Message, ex);
-                }
-                return geoTargetedProducts;
-            }
-        } 
-
         public StockInformation StockInformation { get; set; }
 
         public string CurrencyPrice
@@ -406,46 +372,96 @@ namespace CSDemo.Models.Product
 
         public static Product GetProduct(string productId)
         {
-                var product = new Product();
-                var cartHelper = new CartHelper();
-                var productResult = ProductHelper.GetItemByName(productId);
+            var product = new Product();
+            var cartHelper = new CartHelper();
+            var productResult = ProductHelper.GetItemByName(productId);
+            if (productResult != null)
+            {
+                var productItem = productResult.GetItem();
+                product = productItem.GlassCast<Product>();
+                var productVariants = productItem.GetChildren().Select(x => x.GlassCast<ProductVariant>()).ToList();
+                // Update Images and stockInfo in ProductVariant
+                if (productVariants.Any())
+                {
+                    var theVariants = new List<ProductVariant>();
+                    for (var i = 0; i < productVariants.Count(); i++)
+                    {
+                        productVariants[i] = ProductHelper.UpdateVariantProperties(productVariants[i], product, cartHelper);
+                        theVariants.Add(productVariants[i]);
+                    }
+                    product.ProductVariants = theVariants;
+                }
+                if (productItem.HasChildren)
+                {
+                    ProductHelper.BuildUiVariants(product);
+                }
+
+
+                if (!string.IsNullOrEmpty(product.DefaultVariant))
+                {
+                    product.StockInformation = cartHelper.GetProductStockInformation(product.ProductId,
+                        product.CatalogName, product.DefaultVariant);
+                }
+                else
+                {
+                    product.StockInformation = cartHelper.GetProductStockInformation(product.ProductId,
+                        product.CatalogName);
+                }
+            }
+            return product;
+
+        }
+
+
+        public static IEnumerable<Product> GetGeoTargetedProducts(string zipCode)
+        {
+            if (zipCode == "N/A")
+            {
+                zipCode = "90292";
+                Log.Warn("Using default sample zip 90292.", zipCode);
+            }
+            Log.Info($"The zip code is set to {zipCode}.", zipCode);
+            if (string.IsNullOrWhiteSpace(zipCode)) yield return null;
+            var response = string.Empty;
+
+            try
+            {
+                var url = string.Format(Constants.Products.GeoTargetedProductsUrl, zipCode);
+
+                var syncClient = new WebClient();
+
+                response = syncClient.DownloadString(url);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+            }
+
+            if (string.IsNullOrEmpty(response)) yield return null;
+
+            var result = JsonConvert.DeserializeObject<ComplementaryProductResult>(response);
+            if (!result.IsSuccessful)
+            {
+                if (result.Messages == null) yield return null;
+                foreach (var message in result.Messages)
+                {
+                    Log.Warn(message, result);
+                }
+                yield return null;
+            }
+            if (result.ProductIds == null || !result.ProductIds.Any()) yield return null;
+            foreach (var productId in result.ProductIds)
+            {
+                var productResult = ProductHelper.GetItemByProductId(productId);
                 if (productResult != null)
                 {
                     var productItem = productResult.GetItem();
-                    product = productItem.GlassCast<Product>();
-                    var productVariants = productItem.GetChildren().Select(x => x.GlassCast<ProductVariant>()).ToList();
-                    // Update Images and stockInfo in ProductVariant
-                    if (productVariants.Any())
-                    {
-                        var theVariants = new List<ProductVariant>();
-                        for (var i = 0; i < productVariants.Count(); i++)
-                        {
-                            productVariants[i] = ProductHelper.UpdateVariantProperties(productVariants[i], product, cartHelper);
-                            theVariants.Add(productVariants[i]);
-                        }
-                        product.ProductVariants = theVariants;
-                    }
-                    if (productItem.HasChildren)
-                    {
-                        ProductHelper.BuildUiVariants(product);
-                    }
-
-
-                    if (!string.IsNullOrEmpty(product.DefaultVariant))
-                    {
-                        product.StockInformation = cartHelper.GetProductStockInformation(product.ProductId,
-                            product.CatalogName, product.DefaultVariant);
-                    }
-                    else
-                    {
-                        product.StockInformation = cartHelper.GetProductStockInformation(product.ProductId,
-                            product.CatalogName);
-                    }
+                    yield return productItem.GlassCast<Product>();
                 }
-                return product;
-           
-        }
 
+
+            }
+        }
         #endregion
     }
 }

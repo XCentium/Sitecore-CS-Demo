@@ -48,7 +48,8 @@ SharedFields:
         </r>
         <r uid="{6729DA82-1F38-4D16-9957-E29D38D34488}" p:before="r[@uid='{D88FBB9E-6A2F-487D-9A0B-D24B401E4E5F}']" s:id="{AB9DF062-ECC5-4FE2-A63B-93971BB0C388}" s:ph="page-body" />
         <r uid="{D88FBB9E-6A2F-487D-9A0B-D24B401E4E5F}" p:before="r[@uid='{89440489-11CE-45B1-8411-08E14ECF5604}']" s:id="{1616599D-7D76-4ABD-957B-7DCAC84C01B2}" s:ph="page-body" />
-        <r uid="{89440489-11CE-45B1-8411-08E14ECF5604}" p:before="r[@uid='{A385C37F-E0C8-4638-A692-2A78D53281E9}']" s:id="{839E8618-D080-4802-A0E8-BE682C3AF542}" s:ph="page-body" />
+        <r uid="{89440489-11CE-45B1-8411-08E14ECF5604}" p:before="r[@uid='{9BFB9E21-9C2C-430E-83A5-527BB38E8526}']" s:id="{839E8618-D080-4802-A0E8-BE682C3AF542}" s:ph="page-body" />
+        <r uid="{9BFB9E21-9C2C-430E-83A5-527BB38E8526}" p:before="r[@uid='{A385C37F-E0C8-4638-A692-2A78D53281E9}']" s:ds="" s:id="{553BE773-4964-432F-809E-80CA4B868185}" s:par="" s:ph="psge-body" />
         <r uid="{A385C37F-E0C8-4638-A692-2A78D53281E9}" p:before="r[@uid='{058BE054-541E-48C4-816B-0D9046151821}']" s:id="{27FCD6DB-011A-4A6E-B04A-0AEB168B78F9}" s:ph="page-body">
           <rls>
             <ruleset>
@@ -106,6 +107,15 @@ Languages:
   Versions:
   - Version: 1
     Fields:
+    - ID: 04bf00db-f5fb-41f7-8ab7-22408372a981
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s" p:p="1">
+          <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r uid="{9BFB9E21-9C2C-430E-83A5-527BB38E8526}" s:ph="page-body" />
+          </d>
+        </r>
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
       Value: 20160216T160952Z
