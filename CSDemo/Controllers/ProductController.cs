@@ -18,6 +18,8 @@ using Sitecore.Mvc.Presentation;
 using Sitecore.Web;
 using Newtonsoft.Json;
 using CSDemo.Models.Account;
+using CSDemo.Models.Checkout.Cart;
+using Sitecore.Analytics;
 
 #endregion
 
@@ -74,12 +76,8 @@ namespace CSDemo.Controllers
 
         public ActionResult GeoTargetedProducts()
         {
-            var empty = new List<Product>();
-            var product = GetProduct();
-            if (product == null) return View(empty);
-            var geoTargetedProducts = product.GeoTargetedProducts;
-            empty.AddRange(geoTargetedProducts);
-            return View(empty);
+            var geoTargetedProducts = Product.GetGeoTargetedProducts(Tracker.Current.Interaction.GeoData.AreaCode);
+            return View(geoTargetedProducts);
         }
 
         public ActionResult Categories()

@@ -67,7 +67,7 @@ namespace CSDemo.Models.Product
 
         public IEnumerable<CSDemo.Models.Product.Product> Products { get; set; }
 
-        public int TestInt { get; set; }
+        public int TestInt2 { get; set; }
 
         [SitecoreInfo(SitecoreInfoType.Url)]
         public virtual string Url { get; set; }
