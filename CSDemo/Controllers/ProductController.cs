@@ -76,7 +76,7 @@ namespace CSDemo.Controllers
 
         public ActionResult GeoTargetedProducts()
         {
-            var geoTargetedProducts = Product.GetGeoTargetedProducts(Tracker.Current.Interaction.GeoData.AreaCode);
+            var geoTargetedProducts = Product.GetGeoTargetedProducts(Tracker.Current.Interaction.GeoData.PostalCode);
             return View(geoTargetedProducts);
         }
 
