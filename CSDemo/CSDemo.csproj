@@ -59,15 +59,9 @@
       <HintPath>..\Lib\CommerceServer\CommerceServer.Core.Orders.CrossTier.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="CommerceServer.Core.Profiles, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\CommerceServer\CommerceServer.Core.Profiles.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="CommerceServer.Core.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\CommerceServer\CommerceServer.Core.Runtime.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Glass.Mapper, Version=4.0.7.56, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Glass.Mapper.Sc.4.0.7.56\lib\net45\Glass.Mapper.dll</HintPath>
@@ -292,9 +286,6 @@
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Models\Account\AccountHelper.cs" />
     <Compile Include="Models\Account\Address.cs" />
-    <Compile Include="Models\Account\CustomerPipelineProcessor.cs" />
-    <Compile Include="Models\Account\GetCustomer.cs" />
-    <Compile Include="Models\Account\GetParties.cs" />
     <Compile Include="Models\Account\GetUser.cs" />
     <Compile Include="Models\Account\LoginModel.cs" />
     <Compile Include="Models\Account\Order.cs" />
@@ -302,9 +293,6 @@
     <Compile Include="Models\Account\OrderDetailViewModel.cs" />
     <Compile Include="Models\Account\OrderLine.cs" />
     <Compile Include="Models\Account\OrdersViewModel.cs" />
-    <Compile Include="Models\Account\TranslateCommerceAddressProfileToEntityRequest.cs" />
-    <Compile Include="Models\Account\TranslateEntityToCommerceAddressProfile.cs" />
-    <Compile Include="Models\Account\TranslateEntityToCommerceAddressProfileRequest.cs" />
     <Compile Include="Models\Blog\Blog.cs" />
     <Compile Include="Models\Blog\BlogAuthor.cs" />
     <Compile Include="Models\Blog\BlogCategory.cs" />
@@ -364,7 +352,9 @@
     <Compile Include="Models\GeneralSearch\CustomCommerceSearchResultItem.cs" />
     <Compile Include="Configuration\CommerceProductTags.cs" />
     <Compile Include="Models\Product\ProductTag.cs" />
-    <Compile Include="Models\ProfileExtensions.cs" />
+    <Compile Include="Models\ProfileExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\Store\LocationInformation.cs" />
     <Compile Include="Models\Store\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
