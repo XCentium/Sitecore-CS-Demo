@@ -1,13 +1,11 @@
 ﻿#region
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
 using CSDemo.Configuration;
+using CSDemo.Models.Account;
 using CSDemo.Models.Product;
 using Glass.Mapper.Sc;
 using Sitecore;
+using Sitecore.Analytics;
 using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data.Items;
@@ -16,10 +14,10 @@ using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Extensions;
 using Sitecore.Mvc.Presentation;
 using Sitecore.Web;
-using Newtonsoft.Json;
-using CSDemo.Models.Account;
-using CSDemo.Models.Checkout.Cart;
-using Sitecore.Analytics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 
 #endregion
 
@@ -76,7 +74,11 @@ namespace CSDemo.Controllers
 
         public ActionResult GeoTargetedProducts()
         {
+
             var geoTargetedProducts = Product.GetGeoTargetedProducts(Tracker.Current.Interaction.GeoData.AreaCode);
+
+            //           var geoTargetedProducts = Product.GetGeoTargetedProducts(Tracker.Current.Interaction.GeoData.PostalCode);
+
             return View(geoTargetedProducts);
         }
 
@@ -90,7 +92,7 @@ namespace CSDemo.Controllers
                 model = ProductHelper.GetCatalogCategories(_userCatalogIds);
             }
 
-           // var department = model.FirstOrDefault(x => x.Name.ToLower().Contains(Constants.Commerce.Departments.ToLower()));
+            // var department = model.FirstOrDefault(x => x.Name.ToLower().Contains(Constants.Commerce.Departments.ToLower()));
             var department = model.FirstOrDefault(x => x.Name.ToLower().Contains(Constants.Commerce.Departments.ToLower()));
 
             if (department != null && department.ChildCategories != null && department.ChildCategories.Any())
@@ -186,7 +188,7 @@ namespace CSDemo.Controllers
         }
 
         #region Testing
-    
+
         public ActionResult ProductDetailNoAvailability()
         {
             var product = GetProduct();

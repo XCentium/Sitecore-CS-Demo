@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CSDemo.Models.Account.Address>
+﻿@model List<CSDemo.Models.Address>
 
 <!-- ==========================
     MY ACCOUNT - START
@@ -43,12 +43,12 @@
                                 foreach (var addr in Model)
                                 {
                                     <tr>
-                                        <td>@addr.Company</td>
+                                        <td>@addr.AddressName</td>
                                         <td>@addr.FirstName @addr.LastName</td>
-                                        <td>@addr.Address1</td>
-                                        <td>@addr.Country</td>
-                                        <td>@addr.Phone</td>
-                                        <td><a href="~/Account/AddressDetail?id=@addr.Id&cmd=DEL" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a><a href="~/Account/AddressDetail?id=@addr.Id&cmd=DEL" class="btn btn-primary btn-sm"><i class="fa fa-times"></i></a></td>
+                                        <td>@addr.AddressLine1</td>
+                                        <td>@addr.City</td>
+                                        <td>@addr.TelephoneNumber</td>
+                                        <td><a href="~/Account/AddressDetail?id=@addr.AddressID&cmd=DEL" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a><a href="~/Account/AddressDetail?id=@addr.AddressID&cmd=DEL" class="btn btn-primary btn-sm"><i class="fa fa-times"></i></a></td>
                                     </tr>
                                 }
                             }

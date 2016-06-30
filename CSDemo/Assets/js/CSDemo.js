@@ -450,6 +450,7 @@
     });
 
     function addItemToCart(quantity, productId, catalogName, variantId, contextItemId) {
+
         $.ajax({
             type: "POST",
             url: "/AJAX/cart.asmx/AddProductToCart",
@@ -502,15 +503,17 @@
     function removeProductFromCart(externalId) {
         if (commerceActionAllowed === false) { showDisallowedMessage(); return false; }
 
-        $.ajax({
+       var data = '{ "externalId" : ' + JSON.stringify(externalId) + "}";
+
+       $.ajax({
             type: "POST",
             url: "/AJAX/cart.asmx/RemoveFromCart",
-            data: '{ "externalID" : ' + JSON.stringify(externalId) + "}",
+            data: data,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (result) {
 
-                console.log(result.d);
+                console.log(result.d7);
 
                 // modalAddToCart
                 showActionMessageReload("Removed from Cart");
@@ -526,6 +529,7 @@
         });
     }
 
+
     function showCartUpdate(shoppingCart) {
 
         // Show total update
@@ -540,15 +544,25 @@
 
             for (var i = 0; i < cartItems.length; i++) {
 
-                $("#cart-items-list").append('<li><div class="row"><div class="col-sm-3"><img src="' + cartItems[i].ImageUrl + '" class="img-responsive" alt=""></div><div class="col-sm-9"><h4><a href="/categories/' + cartItems[i].Category + "/" + cartItems[i].CSProductId + '">' + cartItems[i].ProductName + "</a></h4><p>" + cartItems[i].Quantity + "x - $" + cartItems[i].UnitPrice + '</p><a href="javascript:void(0)" onClick="RemoveProductFromCart(\'' + cartItems[i].ExternalID + '\')" class="remove"><i class="fa fa-times-circle"></i></a></div></div></li>');
+                $("#cart-items-list").append('<li><div class="row"><div class="col-sm-3"><img src="' + cartItems[i].ImageUrl + '" class="img-responsive" alt=""></div><div class="col-sm-9"><h4><a href="/categories/' + cartItems[i].Category + "/" + cartItems[i].CSProductId + '">' + cartItems[i].ProductName + "</a></h4><p>" + cartItems[i].Quantity + "x - $" + cartItems[i].UnitPrice + '</p><a href="javascript:void(0)" data-externalid="' + cartItems[i].ExternalId + '" class="remove RemoveMiniCartItem"><i class="fa fa-times-circle"></i></a></div></div></li>');
             }
 
             $("#cart-items-list").append('<li><div class="row"><div class="col-sm-6"><a href="/cart" class="btn btn-primary btn-block">View Cart</a></div><div class="col-sm-6"><a href="/checkout" class="btn btn-primary btn-block">Checkout</a></div></div></li>');
 
+            setDeleteMinicartItem();
         }
 
 
     }
+
+    function setDeleteMinicartItem() {
+        $(".RemoveMiniCartItem").click(function () {
+            var externalId = $(this).data("externalid");
+            removeProductFromCart(externalId);
+        });
+    }
+
+
 
     function loadCart() {
 
@@ -1363,5 +1377,43 @@
             $("select#" + $("#UOM").val()).show();
         });
     }
+
+
+    $(".customer-addr-data").click(function () {
+       
+        var formdat = $(this).data("formdata").split("|");
+
+        console.log(formdat);
+
+        if ($(this).data("select") === "billing") {
+           
+            $("#firstname").val(formdat[0]);
+            $("#lastname").val(formdat[1]);
+            $("#address").val(formdat[2]);
+            $("#addressline1").val(formdat[3]);
+            $("#city").val(formdat[4]);
+            $("#country").val(formdat[5]);
+            $("#zip").val(formdat[6]);
+            $("#phone").val(formdat[7]);
+
+            $("#email").focus();
+        }
+
+
+        if ($(this).data("select") === "shipping") {
+       
+            $("#firstname2").val(formdat[0]);
+            $("#lastname2").val(formdat[1]);
+            $("#address2").val(formdat[2]);
+            $("#addressline12").val(formdat[3]);
+            $("#city2").val(formdat[4]);
+            $("#country2").val(formdat[5]);
+            $("#zip2").val(formdat[6]);
+            $("#phone2").val(formdat[7]);
+            $("#email2").focus();
+        }
+
+        showActionMessageFixed("Loaded! Please add email and other mandatory data");
+    });
 
 })(window, jQuery);

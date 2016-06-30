@@ -1,22 +1,23 @@
-﻿#region 
+﻿#region
 
 using CSDemo.Models.Checkout.Cart;
+using CSDemo.Models.Product;
 using Sitecore.Analytics;
+using Sitecore.Analytics.Model.Entities;
+using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities.Customers;
 using Sitecore.Commerce.Services.Customers;
+using Sitecore.Data.Items;
+using Sitecore.Diagnostics;
 using Sitecore.Security.Accounts;
 using Sitecore.Security.Authentication;
+using Sitecore.SecurityModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Sitecore.Analytics.Model.Entities;
-using Sitecore.SecurityModel;
-using Sitecore.Data.Items;
-using System.IO;
-using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
-using Sitecore.Diagnostics;
 using System.Collections.ObjectModel;
-using CSDemo.Models.Product;
+using System.IO;
+using System.Linq;
+
 
 #endregion
 
@@ -26,6 +27,8 @@ namespace CSDemo.Models.Account
     {
         public CartHelper CartHelper { get; set; }
         private readonly CustomerServiceProvider _customerServiceProvider;
+
+
         public AccountHelper()
         {
             CartHelper = new CartHelper();
@@ -54,7 +57,7 @@ namespace CSDemo.Models.Account
             if (isLoggedIn)
             {
                 UpdateContactProfile();
-                
+
                 CartHelper.MergeCarts(anonymousUserId);
             }
 
@@ -107,7 +110,8 @@ namespace CSDemo.Models.Account
         /// </summary>
         private void UpdateContactProfile()
         {
-            if (Sitecore.Context.User.IsAuthenticated){
+            if (Sitecore.Context.User.IsAuthenticated)
+            {
 
                 Tracker.Current.Session.Identify(Sitecore.Context.User.Name);
 
@@ -190,7 +194,8 @@ namespace CSDemo.Models.Account
                             {
                                 var stream = photoItem.GetMediaStream();
                                 var memoryStream = new MemoryStream();
-                                if (stream != null) { 
+                                if (stream != null)
+                                {
                                     stream.CopyTo(memoryStream);
                                     pictureFacet.Picture = memoryStream.ToArray();
                                     pictureFacet.MimeType = photoItem.MimeType;
@@ -203,7 +208,7 @@ namespace CSDemo.Models.Account
                 }
 
             }
-            
+
         }
 
         /// <summary>
@@ -217,10 +222,15 @@ namespace CSDemo.Models.Account
 
             var result = this._customerServiceProvider.GetUser(request);
 
+            var user = GetCustomer(GetCommerceUserId(userName)) as UserObject;
+
+
             CommerceUser usr = UpdateUserCustomerInfo(userName, result.CommerceUser);
 
             return result.CommerceUser;
         }
+
+
 
         /// <summary>
         /// Add essential customer properties to the CommerceUser
@@ -237,7 +247,7 @@ namespace CSDemo.Models.Account
                 if (commerceUser.Customers == null || commerceUser.Customers.Count == 0)
                 {
                     var customers = new List<string>() { commerceUser.ExternalId };
-                    commerceUser.Customers = customers.AsReadOnly();                  
+                    commerceUser.Customers = customers.AsReadOnly();
                 }
             }
 
@@ -251,7 +261,7 @@ namespace CSDemo.Models.Account
         /// <returns></returns>
         internal string GetCommerceUserId(string userName)
         {
-  
+
             var user = User.FromName(userName, true);
             Sitecore.Security.UserProfile profile = user.Profile;
             var commerceUserId = user.Profile.GetCustomProperty(Constants.Commerce.CommerceCustomerId);
@@ -269,9 +279,9 @@ namespace CSDemo.Models.Account
                         user.Profile.Reload();
                     }
                 }
-            }                
-                
-   
+            }
+
+
             return commerceUserId;
 
         }
@@ -287,7 +297,7 @@ namespace CSDemo.Models.Account
 
                 var commerceCatalogSet = profile[Constants.Commerce.CommerceUserCatalogSetId];
 
-  //              commerceCatalogSet = "{22222222-2222-2222-2222-222222222222}";
+                //              commerceCatalogSet = "{22222222-2222-2222-2222-222222222222}";
 
                 if (!string.IsNullOrEmpty(commerceCatalogSet) && commerceCatalogSet.Contains(Constants.Common.Dash))
                 {
@@ -313,7 +323,7 @@ namespace CSDemo.Models.Account
 
                     if (!string.IsNullOrEmpty(commerceCatalogNames))
                     {
-                       return commerceCatalogNames;
+                        return commerceCatalogNames;
                     }
                 }
 
@@ -351,13 +361,13 @@ namespace CSDemo.Models.Account
                 }
                 catch (Exception ex)
                 {
-                    
-                    Log.Error("CatalogId Error",ex,this);
+
+                    Log.Error("CatalogId Error", ex, this);
                 }
 
             }
 
-           return ProductHelper.GetSiteRootCatalogId();
+            return ProductHelper.GetSiteRootCatalogId();
 
         }
 
@@ -385,7 +395,7 @@ namespace CSDemo.Models.Account
                         return catalogIds.Aggregate((current, next) => current + Constants.Common.PipeStringSeparator + next);
                     }
                 }
-               
+
             }
             return string.Empty;
         }
@@ -528,12 +538,12 @@ namespace CSDemo.Models.Account
         private CommerceCustomer CreateCustomer(CommerceCustomer emptyCustomer, string newCustomerName, CommerceParty billToParty, CommerceParty shipToParty, string loggedInUserName)
         {
             var cust = new CustomerServiceProvider();
-            var customer = new CommerceCustomer 
+            var customer = new CommerceCustomer
             {
                 ExternalId = emptyCustomer.ExternalId,
                 Name = newCustomerName,
                 IsDisabled = false,
-                Shops = new ReadOnlyCollection<string>(new string [1]{Sitecore.Context.Site.Name})
+                Shops = new ReadOnlyCollection<string>(new string[1] { Sitecore.Context.Site.Name })
             };
 
             customer.Users = new ReadOnlyCollection<string>(new string[1] { loggedInUserName });
@@ -566,7 +576,7 @@ namespace CSDemo.Models.Account
 
             if (commerceUser.UserName != null)
             {
- 
+
                 var customer = GetCustomer(commerceUser.ExternalId);
 
                 var request = new GetPartiesRequest(customer);
@@ -609,12 +619,26 @@ namespace CSDemo.Models.Account
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex.Message,this);
+                    Log.Error(ex.Message, this);
                 }
             }
 
             return addresses;
         }
 
+
+        public static List<Models.Address> GetUserAddresses()
+        {
+            var user = Sitecore.Context.User;
+            var commerceProfile = user.GetCommerceProfileModel();
+            if (commerceProfile != null && commerceProfile.AddressList != null)
+            {
+                return CSDemo.Models.Address.GetMultiple(commerceProfile.AddressList.InnerList());
+            }
+            else
+            {
+                return new List<CSDemo.Models.Address>() { new CSDemo.Models.Address() };
+            }
+        }
     }
 }

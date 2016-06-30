@@ -32,9 +32,6 @@ SharedFields:
         <flowRenderedItemValues itemId="dca77a45-3179-4d3f-961a-e032c2b548e3" x="21" y="33" width="10" height="10" zIndex="14" backgroundColor="#00FFFFFF" foregroundColor="#FFFFFFFF" iconUri="" showIcon="false" fieldEditorValues="" />
       </flowRenderedItemsValues>
     </flowDesignerItems>
-- ID: ca9b9f52-4fb0-4f87-a79f-24dea62cda65
-  Hint: __Default workflow
-  Value: {689E2994-4656-4C58-9112-7826CB46EE69}
 Languages:
 - Language: en
   Versions:

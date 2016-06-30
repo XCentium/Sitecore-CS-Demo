@@ -47,6 +47,13 @@
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CommerceMessageManager">
+      <HintPath>..\Lib\CommerceServer\CommerceMessageManager.dll</HintPath>
+    </Reference>
+    <Reference Include="CommerceServer.Core.Catalog, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\CommerceServer\CommerceServer.Core.Catalog.dll</HintPath>
+    </Reference>
     <Reference Include="CommerceServer.Core.CrossTier, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\CommerceServer\CommerceServer.Core.CrossTier.dll</HintPath>
@@ -56,6 +63,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\CommerceServer\CommerceServer.Core.Orders.CrossTier.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="CommerceServer.Core.Profiles, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\CommerceServer\CommerceServer.Core.Profiles.dll</HintPath>
+    </Reference>
+    <Reference Include="CommerceServer.Core.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\CommerceServer\CommerceServer.Core.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Glass.Mapper, Version=4.0.7.56, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Glass.Mapper.Sc.4.0.7.56\lib\net45\Glass.Mapper.dll</HintPath>
@@ -280,12 +295,19 @@
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Models\Account\AccountHelper.cs" />
     <Compile Include="Models\Account\Address.cs" />
+    <Compile Include="Models\Account\CustomerPipelineProcessor.cs" />
+    <Compile Include="Models\Account\GetCustomer.cs" />
+    <Compile Include="Models\Account\GetParties.cs" />
+    <Compile Include="Models\Account\GetUser.cs" />
     <Compile Include="Models\Account\LoginModel.cs" />
     <Compile Include="Models\Account\Order.cs" />
     <Compile Include="Models\Account\OrderAddress.cs" />
     <Compile Include="Models\Account\OrderDetailViewModel.cs" />
     <Compile Include="Models\Account\OrderLine.cs" />
     <Compile Include="Models\Account\OrdersViewModel.cs" />
+    <Compile Include="Models\Account\TranslateCommerceAddressProfileToEntityRequest.cs" />
+    <Compile Include="Models\Account\TranslateEntityToCommerceAddressProfile.cs" />
+    <Compile Include="Models\Account\TranslateEntityToCommerceAddressProfileRequest.cs" />
     <Compile Include="Models\Blog\Blog.cs" />
     <Compile Include="Models\Blog\BlogAuthor.cs" />
     <Compile Include="Models\Blog\BlogCategory.cs" />
@@ -296,6 +318,7 @@
     <Compile Include="Models\Blog\BlogViewModel.cs" />
     <Compile Include="Models\Blog\FeaturedBlogs.cs" />
     <Compile Include="Models\Checkout\Cart\CartHelper.cs" />
+    <Compile Include="Models\CommerceModels.cs" />
     <Compile Include="Models\Page\HomePage.cs" />
     <Compile Include="Models\Page\Root.cs" />
     <Compile Include="Models\Page\Navigation\MegaMenuNavigationItem.cs" />
@@ -344,6 +367,7 @@
     <Compile Include="Models\GeneralSearch\CustomCommerceSearchResultItem.cs" />
     <Compile Include="Configuration\CommerceProductTags.cs" />
     <Compile Include="Models\Product\ProductTag.cs" />
+    <Compile Include="Models\ProfileExtensions.cs" />
     <Compile Include="Models\Store\LocationInformation.cs" />
     <Compile Include="Models\Store\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -460,6 +484,23 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Config\Include\zCSDemo\CSDemo.PatternMatchFix.config" />
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.Debug.config">
+      <DependentUpon>CSDemo.Main.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.DEV Local.config">
+      <DependentUpon>CSDemo.Main.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Debug.config">
+      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.DEV Local.config">
+      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="Properties\PublishProfiles\DEV Local.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -551,10 +592,6 @@
       <DependentUpon>CSDemo.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.foxsean.ca.config">
-      <DependentUpon>CSDemo.Main.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
     <None Include="App_Config\Include\zCSDemo\CSDemo.Main.Release.config">
       <DependentUpon>CSDemo.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
@@ -572,14 +609,6 @@
       <IsTransformFile>True</IsTransformFile>
     </None>
     <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Release.config">
-      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.sean.debug.deployment.config">
-      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.sean.release.deployment.config">
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
@@ -643,9 +672,7 @@
     <None Include="Properties\PublishProfiles\Castle Local.pubxml" />
     <None Include="Properties\PublishProfiles\csDemo.pubxml" />
     <None Include="Properties\PublishProfiles\DebuLocal.pubxml" />
-    <None Include="Properties\PublishProfiles\sean.debug.deployment.pubxml" />
     <None Include="Properties\PublishProfiles\Release Test.pubxml" />
-    <None Include="Properties\PublishProfiles\sean.release.deployment.pubxml" />
     <None Include="Properties\PublishProfiles\XcCommerce112Demo.pubxml" />
     <Content Include="Views\Checkout\Cart.cshtml" />
     <Content Include="Views\Checkout\Checkout.cshtml" />

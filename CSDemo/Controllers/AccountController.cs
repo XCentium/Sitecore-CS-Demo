@@ -1,10 +1,12 @@
 ﻿#region
 
-using System.Web.Mvc;
 using CSDemo.Models.Account;
-using Sitecore.Mvc.Controllers;
-using CSDemo.Models.Product;
 using CSDemo.Models.Checkout.Cart;
+using CSDemo.Models.Product;
+using Sitecore.Mvc.Controllers;
+using System.Linq;
+using System.Web.Mvc;
+using Address = CSDemo.Models.Address;
 
 #endregion
 namespace CSDemo.Controllers
@@ -66,7 +68,7 @@ namespace CSDemo.Controllers
             return this.Redirect(Sitecore.Context.Site.LoginPage);
         }
 
- 
+
         public ActionResult Account()
         {
             if (Sitecore.Context.User.IsAuthenticated)
@@ -117,14 +119,14 @@ namespace CSDemo.Controllers
         public ActionResult AddAddress()
         {
             if (!Sitecore.Context.User.IsAuthenticated) { return this.Redirect(Sitecore.Context.Site.LoginPage); }
-            var model = new Address();
+            var model = new CSDemo.Models.Account.Address();
 
             return View(model);
         }
 
 
         [HttpPost]
-        public ActionResult AddAddress(Address model)
+        public ActionResult AddAddress(CSDemo.Models.Account.Address model)
         {
             if (!Sitecore.Context.User.IsAuthenticated) { return this.Redirect(Sitecore.Context.Site.LoginPage); }
 
@@ -145,15 +147,32 @@ namespace CSDemo.Controllers
 
         public ActionResult AddressDetail()
         {
+            Address model;
 
-            return View();
+            var id = Request.QueryString["id"];
+
+            if (!string.IsNullOrEmpty(id))
+            {
+                model = AccountHelper.GetUserAddresses().FirstOrDefault(x => x.AddressID == id);
+            }
+            else
+            {
+                model = new Address();
+            }
+
+
+            return View(model);
         }
 
         public ActionResult Addresses()
         {
             if (!Sitecore.Context.User.IsAuthenticated) { return this.Redirect(Sitecore.Context.Site.LoginPage); }
 
-            var model = new AccountHelper().GetCustomerAddresses();
+            //var model = new AccountHelper().GetCustomerAddresses();
+
+
+            var model = AccountHelper.GetUserAddresses();
+
 
             return View(model);
 

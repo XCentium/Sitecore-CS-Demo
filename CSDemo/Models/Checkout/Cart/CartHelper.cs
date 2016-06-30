@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Web;
-using CSDemo.Models.Account;
+﻿using CSDemo.Models.Account;
 using CSDemo.Models.Product;
 using Sitecore;
 using Sitecore.Analytics;
@@ -22,6 +17,11 @@ using Sitecore.Commerce.Services.Customers;
 using Sitecore.Commerce.Services.Inventory;
 using Sitecore.Commerce.Services.Orders;
 using Sitecore.Commerce.Services.Prices;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Web;
 using AddPartiesRequest = Sitecore.Commerce.Services.Carts.AddPartiesRequest;
 using UpdatePartiesRequest = Sitecore.Commerce.Services.Carts.UpdatePartiesRequest;
 
@@ -247,6 +247,17 @@ namespace CSDemo.Models.Checkout.Cart
         /// <returns></returns>
         internal StockInformation GetProductStockInformation(string productId, string catalogName, string variantId = "")
         {
+            if (productId.Contains("("))
+            {
+                var virtualProductId = productId;
+                productId = GetRealDataFromVirtual(virtualProductId, 0);
+                catalogName = GetRealDataFromVirtual(virtualProductId, 1);
+
+                if (variantId.Contains("("))
+                {
+                    variantId = GetRealDataFromVirtual(variantId, 0);
+                }
+            }
             var commerceInventoryProduct = new CommerceInventoryProduct();
             commerceInventoryProduct.ProductId = productId;
             commerceInventoryProduct.CatalogName = catalogName;
@@ -257,6 +268,20 @@ namespace CSDemo.Models.Checkout.Cart
             var stockInfoRequest = new GetStockInformationRequest(ShopName, products, StockDetailsLevel.All);
             var stockInfoResult = _inventoryServiceProvider.GetStockInformation(stockInfoRequest);
             return stockInfoResult.StockInformation.FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Get real Ids and catalog name from virtual ids
+        /// </summary>
+        /// <param name="virtualCatalogId"></param>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        private string GetRealDataFromVirtual(string virtualCatalogId, int position)
+        {
+            var virtualData = virtualCatalogId.Replace(")", String.Empty).Split('(');
+
+            return virtualData[position];
+
         }
 
 

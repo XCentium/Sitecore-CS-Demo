@@ -122,14 +122,6 @@ Languages:
     - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
       Hint: Page Title
       Value: Home
-    - ID: 895715b6-12af-41dc-98d7-ef648973b2cd
-      Hint: Featured Blogs
-      Type: Multilist with Search
-      Value: |
-        {2AF5C658-2B3A-4055-A846-E2A0C426316E}
-        {A86BD4A2-8524-4F11-B3C1-03D585E27464}
-        {0B5799EE-2301-489A-8CBF-A1C0D5963C06}
-        {E5B1A258-6FBA-4E67-80F9-C9AC14BA6738}
     - ID: c1f479fe-39e3-4851-bdbf-3ac347a44c2d
       Hint: Categories
       Type: Multilist with Search

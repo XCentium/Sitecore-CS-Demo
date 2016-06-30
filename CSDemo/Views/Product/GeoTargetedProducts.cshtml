@@ -1,6 +1,7 @@
 ﻿@using System.Linq;
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<CSDemo.Models.Product.Product>>
-@if (Model == null)
+
+@if (Model == null || Model.First() == null)
 {
     return;
 }
