@@ -50,14 +50,9 @@
     <Reference Include="CommerceMessageManager">
       <HintPath>..\Lib\CommerceServer\CommerceMessageManager.dll</HintPath>
     </Reference>
-    <Reference Include="CommerceServer.Core.Catalog, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\CommerceServer\CommerceServer.Core.Catalog.dll</HintPath>
-    </Reference>
     <Reference Include="CommerceServer.Core.CrossTier, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\CommerceServer\CommerceServer.Core.CrossTier.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="CommerceServer.Core.Orders.CrossTier, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -67,10 +62,12 @@
     <Reference Include="CommerceServer.Core.Profiles, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\CommerceServer\CommerceServer.Core.Profiles.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="CommerceServer.Core.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\CommerceServer\CommerceServer.Core.Runtime.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Glass.Mapper, Version=4.0.7.56, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Glass.Mapper.Sc.4.0.7.56\lib\net45\Glass.Mapper.dll</HintPath>

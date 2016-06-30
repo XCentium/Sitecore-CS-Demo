@@ -222,8 +222,6 @@ namespace CSDemo.Models.Account
 
             var result = this._customerServiceProvider.GetUser(request);
 
-            var user = GetCustomer(GetCommerceUserId(userName)) as UserObject;
-
 
             CommerceUser usr = UpdateUserCustomerInfo(userName, result.CommerceUser);
 
@@ -637,7 +635,7 @@ namespace CSDemo.Models.Account
             }
             else
             {
-                return new List<CSDemo.Models.Address>() { new CSDemo.Models.Address() };
+                return new List<CSDemo.Models.Address>();  //{ new CSDemo.Models.Address() };
             }
         }
     }
