@@ -14,7 +14,7 @@ Languages:
       Value: 20160226T215339Z
     - ID: 35d787ae-0f1f-412a-a570-d5a79018ebb8
       Hint: Image
-      Value: "<image mediaid=\"{A4088D35-B3FD-424A-BC5A-92CF118CD13D}\" />"
+      Value: "<image mediaid=\"{7C33EED5-54F2-4799-B65B-55A45044841E}\" />"
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
       Value: sitecore\admin
@@ -24,5 +24,4 @@ Languages:
         <div class="container">
         <em class="fa fa-paper-plane animation top-to-bottom delay-1 slow"></em>
         <h1 class="animation top-to-bottom slow">XCMarket</h1>
-        <p class="animation bottom-to-top slow">30+ HTML Pages &bull; Simple Design &bull; Components </p>
         </div>

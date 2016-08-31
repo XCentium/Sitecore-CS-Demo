@@ -4,6 +4,11 @@ Parent: 6015bd47-0474-4cd3-9f64-237cab99bde7
 Template: 24216566-bd19-4eb9-b421-1cb7a97060e7
 Path: /sitecore/content/CSDemo/Components
 DB: master
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Type: TreelistEx
+  Value: {A87A00B1-E6DB-45AB-8B54-636FEC3B5523}
 Languages:
 - Language: en
   Versions:

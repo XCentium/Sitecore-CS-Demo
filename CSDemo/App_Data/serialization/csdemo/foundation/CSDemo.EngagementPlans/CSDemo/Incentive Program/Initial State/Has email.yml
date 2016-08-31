@@ -10,9 +10,9 @@ SharedFields:
   Type: Rules
   Value: |
     <ruleset>
-      <rule uid="{8FA663E4-7CD7-4710-8C38-1FB82A7E5157}">
+      <rule uid="{A62429CC-91B3-4D54-92D4-78C893312878}">
         <conditions>
-          <condition id="{10DC9B65-3C17-43BA-ABD1-5A5A0DE7FE7F}" uid="DA7DB77DA0A74B018A31E2FBB0F82BD8" />
+          <condition id="{E079AD82-993F-4C82-A140-613A9128E217}" uid="F6334A825B68443F989C0737315BE465" />
         </conditions>
       </rule>
     </ruleset>

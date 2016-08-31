@@ -1,13 +1,16 @@
 ﻿---
-ID: 65242443-ea23-474c-902e-e09305e67cd6
+ID: 6aa3bbed-0499-4a7f-92ea-71d3ca54cbd0
 Parent: 41b8ff25-175c-4651-a3f6-26a9445dbc10
-Template: 99f8905d-4a87-4eb8-9f8b-a9bebfb3add6
+Template: 2a3e91a0-7987-44b5-ab34-35c2d9de83b9
 Path: /sitecore/layout/Renderings/CSDemo/Blog/Featured Blogs
 DB: master
 SharedFields:
-- ID: 51b435bc-f7b9-478a-9c51-52916af96ff5
-  Hint: Path
-  Value: /Views/Blog/FeaturedBlogs.cshtml
+- ID: ded9e431-3604-4921-a4b3-a6ec7636a5b6
+  Hint: Controller Action
+  Value: FeaturedBlogs
+- ID: e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7
+  Hint: Controller
+  Value: Blog
 Languages:
 - Language: en
   Versions:
@@ -15,4 +18,4 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160226T185848Z
+      Value: 20160518T005613Z

@@ -12,6 +12,9 @@ Languages:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
       Value: 20160318T234334Z
+    - ID: 6ad435a4-d499-4f83-9dd1-fb350322bbd1
+      Hint: CouponCodeDescription
+      Value: This couponcode willsave you 15% today on climbing products
     - ID: 7aa7edb7-dfbd-4117-a31a-ad9128c9c84b
       Hint: Products
       Type: Multilist with Search
@@ -19,3 +22,6 @@ Languages:
         {1C051BC7-0399-458F-8ACB-BFBE2338AB75}
         {86759495-F028-4163-BF37-D4E15BAFA78B}
         {AFF77E47-1C57-4283-BC7A-49459D7C2AE5}
+    - ID: c1ac14a6-3ece-432d-8e0c-a6732525f0cf
+      Hint: CouponCode
+      Value: CLIMB-2016

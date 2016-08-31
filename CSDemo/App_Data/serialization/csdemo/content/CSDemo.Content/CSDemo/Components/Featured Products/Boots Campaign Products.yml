@@ -1,0 +1,31 @@
+﻿---
+ID: e31fa257-da38-4bac-b6d9-da72665fecd6
+Parent: 932fdf4b-d32e-4841-85ea-cfc1ed492022
+Template: a05c2234-612c-4317-bc7a-9236802596f4
+Path: /sitecore/content/CSDemo/Components/Featured Products/Boots Campaign Products
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160831T184147Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
+    - ID: f7a94e99-fb47-4133-9355-3f65e9071fb0
+      Hint: Products
+      Type: Multilist with Search
+      Value: |
+        {48958F76-3E68-41D5-B87D-C13B9883FFC0}
+        {FD006CCF-B254-48EC-A7C5-0D7EEB327069}
+        {14A9FC87-EBB4-4589-A41A-AB20D73C4ADD}
+        {77A17B17-AFD4-4FD5-86AD-77FC2A9D91BA}
+        {B57979F7-C349-4BA8-B1F3-E7E4DD59B535}
+        {43019395-B006-4250-AF9E-5B73F531A691}
+        {38AA53D6-712C-47C6-A7F9-111E711EF263}
+        {9A7EE953-8B9E-4413-93B7-17026BBAA521}
+        {271BCA61-5DFF-4CE7-BC23-8C8A975098BB}
+        {B334FEAB-1051-40A7-990C-61913A7C842A}

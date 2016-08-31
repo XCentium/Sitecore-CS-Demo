@@ -14,8 +14,11 @@ SharedFields:
   Value: |
     <r xmlns:p="p" xmlns:s="s" p:p="1">
       <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-        <r uid="{8C8742B7-07ED-4D0A-B605-96794EBC5CAE}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:ds="" s:id="{36E85C00-E039-465F-AD67-1A36A985DCE4}" s:par="" s:ph="page-body" />
-        <r uid="{63223E3A-7BE4-4C4F-A69F-29C0F4CD44EA}" p:after="r[@uid='{E5A6C541-E277-499D-9CB9-DFF8CE125A23}']" />
+        <p uid="{26F398F5-777E-4CD0-8114-236A9FF2E2B9}">
+          <p:d />
+        </p>
+        <r uid="{8C8742B7-07ED-4D0A-B605-96794EBC5CAE}" p:before="r[@uid='{E5A6C541-E277-499D-9CB9-DFF8CE125A23}']" s:ds="" s:id="{36E85C00-E039-465F-AD67-1A36A985DCE4}" s:par="" s:ph="page-body" />
+        <r uid="{63223E3A-7BE4-4C4F-A69F-29C0F4CD44EA}" p:before="*[1=2]" />
       </d>
     </r>
 Languages:
@@ -29,6 +32,9 @@ Languages:
     - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
       Hint: Page Title
       Value: Checkout
+    - ID: 55a55b4d-d866-4df7-9821-46e9f9cf3ee3
+      Hint: Title
+      Value: 
     - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
       Hint: Meta Description
       Value: Checkout Page

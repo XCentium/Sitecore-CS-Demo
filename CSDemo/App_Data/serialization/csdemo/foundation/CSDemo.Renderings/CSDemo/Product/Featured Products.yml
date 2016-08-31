@@ -5,6 +5,9 @@ Template: 2a3e91a0-7987-44b5-ab34-35c2d9de83b9
 Path: /sitecore/layout/Renderings/CSDemo/Product/Featured Products
 DB: master
 SharedFields:
+- ID: 94069f66-609c-48b0-8281-521c30fb269d
+  Hint: Open Properties after Add
+  Value: 1
 - ID: ded9e431-3604-4921-a4b3-a6ec7636a5b6
   Hint: Controller Action
   Value: FeaturedProducts
