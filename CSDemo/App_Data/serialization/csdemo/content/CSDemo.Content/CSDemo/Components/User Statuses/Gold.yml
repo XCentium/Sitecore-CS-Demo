@@ -1,0 +1,17 @@
+﻿---
+ID: e07aa9cf-4797-4b55-8c34-f5c9e1a89759
+Parent: 206efdd8-a567-4f13-9fd7-b661afdfc7f4
+Template: 3936f488-9a41-4d9f-940f-895b81014522
+Path: /sitecore/content/CSDemo/Components/User Statuses/Gold
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160831T191258Z
+    - ID: d61d3d94-869d-4968-90c0-89e916af76f3
+      Hint: Spending Amount
+      Value: 100

@@ -189,7 +189,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
+    <Reference Include="System.Core">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
@@ -293,6 +295,7 @@
     <Compile Include="Models\Account\OrderDetailViewModel.cs" />
     <Compile Include="Models\Account\OrderLine.cs" />
     <Compile Include="Models\Account\OrdersViewModel.cs" />
+    <Compile Include="Models\Account\UserStatus.cs" />
     <Compile Include="Models\Blog\Blog.cs" />
     <Compile Include="Models\Blog\BlogAuthor.cs" />
     <Compile Include="Models\Blog\BlogCategory.cs" />

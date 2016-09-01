@@ -1,14 +1,16 @@
 ﻿@using System.Security.Cryptography
 @using Sitecore.Mvc;
 @using CSDemo.Models.Checkout.Cart
-
+@using CSDemo.Models.Account
 
 @{
 
     var cartHelper = new CartHelper();
     ShoppingCart shoppingCart = cartHelper.GetMiniCart();
 
-
+    var nextStatus = UserStatus.GetNextStatus(shoppingCart.ProductsTotal);
+    var currentStatus = UserStatus.GetStatus(Sitecore.Context.User);
+    var reachedStatus = UserStatus.GetStatus(shoppingCart.ProductsTotal);
     var lineTotal = "0.00";
     var discount = "0.00";
     var shipping = "0.00";
@@ -123,7 +125,22 @@
                                     </table>
                                 </div>
                             </div>
+@if (shoppingCart.ProductsTotal > 0)
+{
+                            <div class="cart-upsell">
+                                @if (reachedStatus != null && reachedStatus.Amount != 0 && (currentStatus==null || reachedStatus.Name!= currentStatus.Name))
+                                {
+                                <p class="highlight">Congratulations! You've qualified for our @reachedStatus.Name status! After completing this purchase you will be able to enjoy all the benefits of the membership.</p>
+                                }
 
+
+                                @if (nextStatus != null && nextStatus.Amount != 0)
+                                {
+                                    <p>You are $@(nextStatus.Amount - shoppingCart.ProductsTotal) away from becoming a @nextStatus.Name member, which gives you extra discounts coupons in the mail and free shipping on all orders. <br /><br /><a class="btn btn-inverse" href="/categories" title="Continue Shopping">Get More</a></p>
+                                }
+                                
+                            </div>
+}
                             <div class="clearfix">
                                 @if (shoppingCart == null || shoppingCart.Total < 0)
                                 {

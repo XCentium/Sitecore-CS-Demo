@@ -2,7 +2,7 @@
 ID: 895715b6-12af-41dc-98d7-ef648973b2cd
 Parent: e3257359-01d7-4956-9a11-77c513d19a01
 Template: 455a3e98-a627-4b40-8035-e683a0331ac7
-Path: /sitecore/templates/CSDemo/Blogs/Featured Blogs/Featured Blogs Section/Featured Blogs
+Path: /sitecore/templates/CSDemo/Components/Blogs/Featured Blogs/Featured Blogs Section/Featured Blogs
 DB: master
 SharedFields:
 - ID: 1eb8ae32-e190-44a6-968d-ed904c794ebf

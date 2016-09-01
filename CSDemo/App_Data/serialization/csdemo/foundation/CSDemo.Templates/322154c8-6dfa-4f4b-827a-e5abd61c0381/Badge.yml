@@ -1,0 +1,27 @@
+﻿---
+ID: f8f5c80a-4c82-45b4-a601-60d61d88ca1d
+Parent: 322154c8-6dfa-4f4b-827a-e5abd61c0381
+Template: 455a3e98-a627-4b40-8035-e683a0331ac7
+Path: /sitecore/templates/CSDemo/Components/Tagging/User Status/Status/Badge
+DB: master
+SharedFields:
+- ID: 1eb8ae32-e190-44a6-968d-ed904c794ebf
+  Hint: Source
+  Value: /sitecore/media library/CSDemo/User Badges
+- ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
+  Hint: Type
+  Value: Image
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 200
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160831T203818Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
