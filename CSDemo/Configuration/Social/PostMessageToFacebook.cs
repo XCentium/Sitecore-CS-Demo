@@ -131,7 +131,7 @@ namespace CSDemo.Configuration.Social
                 Log.Error("Facebook Post Error: Facebook network is null.", this);
                 return null;
             }
-            var firstname = fbNetwork.Fields["first_name"].ToString();
+            var firstname = fbNetwork.Fields["first_name"].Value;
             
 
             return firstname;
