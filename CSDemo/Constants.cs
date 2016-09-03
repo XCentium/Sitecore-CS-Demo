@@ -172,5 +172,10 @@
             public const string AuthorsPath = "/sitecore/content/Data/Blogs/Authors";
             public const string CategoriesPath = "/sitecore/content/Data/Blogs/Categories";
         }
+
+        public struct Social
+        {
+            public const string FacebookAppConfigItemId = "{98698A26-FA7E-40E4-B723-1A732B66CAF3}";
+        }
     }
 }

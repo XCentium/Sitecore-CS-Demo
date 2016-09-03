@@ -37,6 +37,7 @@ namespace CSDemo.Configuration.Social
                 return;
             }
             var fullName = Context.Domain.GetFullName(args.Username);
+           
             var splitter = fullName.Split('\\');
             var commerceUserFullName = $"{Constants.Commerce.DefaultSocialDomainForCommerce}\\{splitter[1]}";
             args.Result = CreateSitecoreUser(commerceUserFullName, args.Email, args.AccountBasicData.FullName);
@@ -78,7 +79,7 @@ namespace CSDemo.Configuration.Social
                 using (new SecurityDisabler())
                 {
                     profileItemId =
-                        Client.CoreDatabase.GetItem("/sitecore/system/Settings/Security/Profiles/User").ID.ToString();
+                        Client.CoreDatabase.GetItem("/sitecore/system/Settings/Security/Profiles/Commerce User").ID.ToString();
                 }
                 user.Profile.Initialize(user.Name, true);
                 user.Profile.ProfileItemId = profileItemId;

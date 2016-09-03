@@ -63,6 +63,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\CommerceServer\CommerceServer.Core.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Facebook">
+      <HintPath>..\Lib\Social\Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="FacebookAPI">
+      <HintPath>..\Lib\Social\FacebookAPI.dll</HintPath>
+    </Reference>
     <Reference Include="Glass.Mapper, Version=4.0.7.56, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Glass.Mapper.Sc.4.0.7.56\lib\net45\Glass.Mapper.dll</HintPath>
       <Private>True</Private>
@@ -174,6 +180,18 @@
     <Reference Include="Sitecore.Social.Client.Mvc">
       <HintPath>..\Lib\Sitecore\Sitecore.Social.Client.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Social.Domain, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Bin\Sitecore.Social.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Social.Facebook">
+      <HintPath>..\Lib\Social\Sitecore.Social.Facebook.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sitecore.Social.Facebook.Api">
+      <HintPath>..\Lib\Social\Sitecore.Social.Facebook.Api.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Sitecore.Social.Infrastructure, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Sitecore\Sitecore.Social.Infrastructure.dll</HintPath>
@@ -255,6 +273,7 @@
     <Compile Include="Configuration\ItemResolver.cs" />
     <Compile Include="Configuration\Social\CustomSocialGoalTrigger.cs" />
     <Compile Include="Configuration\Social\CustomMatchUser.cs" />
+    <Compile Include="Configuration\Social\PostMessageToFacebook.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Contracts\Blog\IBlog.cs" />
     <Compile Include="Contracts\Blog\IBlogAuthor.cs" />
@@ -723,7 +742,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\Social\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

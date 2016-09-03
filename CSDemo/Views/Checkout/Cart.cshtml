@@ -136,7 +136,12 @@
 
                                 @if (nextStatus != null && nextStatus.Amount != 0)
                                 {
-                                    <p>You are $@(nextStatus.Amount - shoppingCart.ProductsTotal) away from becoming a @nextStatus.Name member, which gives you extra discounts coupons in the mail and free shipping on all orders. <br /><br /><a class="btn btn-inverse" href="/categories" title="Continue Shopping">Get More</a></p>
+                                    <p><img style="float:right; margin:5px" src="@nextStatus.Badge.Src?w=30" alt="@nextStatus.Badge.Alt" title="@nextStatus.Name Member" />
+                                        You are $@(nextStatus.Amount - shoppingCart.ProductsTotal) away from becoming a @nextStatus.Name member, which gives you extra discounts coupons in the mail and free shipping on all orders.
+                                        <br /><br /><a class="btn btn-inverse" href="/categories" title="Continue Shopping">Get More</a>
+                                     </p>
+                                   
+                               
                                 }
                                 
                             </div>
