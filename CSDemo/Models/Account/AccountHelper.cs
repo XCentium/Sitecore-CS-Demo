@@ -108,7 +108,7 @@ namespace CSDemo.Models.Account
         /// <summary>
         /// Update a user profile in Sitecore
         /// </summary>
-        private void UpdateContactProfile()
+        internal void UpdateContactProfile()
         {
             if (Sitecore.Context.User.IsAuthenticated)
             {
@@ -210,6 +210,107 @@ namespace CSDemo.Models.Account
             }
 
         }
+
+        internal void UpdateContactProfile(User user)
+        {
+            if (user == null) return;
+            Tracker.Current.Session.Identify(user.Name);
+
+            if (!string.IsNullOrEmpty(GetCommerceUserId(user.Name)))
+            {
+
+                Sitecore.Security.UserProfile profile = user.Profile;
+
+                var userName = user.LocalName;
+                string userDomain = user.GetDomainName();
+
+                CommerceUser customer = GetUser(user.Name);
+
+                if (customer.UserName != null)
+                {
+
+                    if (Sitecore.Analytics.Tracker.Current.Contact != null)
+                    {
+                        // Update email information Faucet
+                        var emailFacet = Tracker.Current.Contact.GetFacet<IContactEmailAddresses>(Constants.Account.FacetEmail);
+
+                        //Check if an work email address already exists for the contact
+                        if (!emailFacet.Entries.Contains(Constants.Account.PersonalEmail))
+                        {
+                            IEmailAddress email = emailFacet.Entries.Create(Constants.Account.PersonalEmail);
+                            email.SmtpAddress = customer.Email.Trim();
+
+                        }
+                        else
+                        {
+                            IEmailAddress email = emailFacet.Entries[Constants.Account.PersonalEmail];
+                            email.SmtpAddress = customer.Email.Trim();
+                        }
+                        emailFacet.Preferred = Constants.Account.PersonalEmail;
+
+                        // Update personal information Faucet
+                        var personalFacet = Tracker.Current.Contact.GetFacet<IContactPersonalInfo>(Constants.Account.FacetPersonal);
+
+                        if (!string.IsNullOrEmpty(customer.FirstName) && !string.IsNullOrEmpty(customer.LastName))
+                        {
+                            //personalFacet.Title = "Name_Title";
+                            personalFacet.FirstName = customer.FirstName;
+                            //personalFacet.MiddleName = "Middle_Name";
+                            personalFacet.Surname = customer.LastName;
+                            //personalFacet.Gender = "Gender";
+                            personalFacet.JobTitle = Constants.Account.JobTitle;
+                            //personalFacet.BirthDate = new DateTime(1983, 01, 01);
+
+                            using (new SecurityDisabler())
+                            {
+                                profile.FullName = string.Format("{0} {1}", customer.FirstName, customer.LastName).Trim();
+                            }
+                            profile.Save();
+
+                        }
+                        else
+                        {
+                            if (!string.IsNullOrEmpty(profile.FullName.Trim()) && profile.FullName.Trim().Contains(" "))
+                            {
+                                string[] names = profile.FullName.Trim().Split(' ');
+                                personalFacet.FirstName = names[0];
+                                personalFacet.Surname = names[1];
+                            }
+                            else
+                            {
+                                personalFacet.FirstName = user.LocalName;
+                                personalFacet.Surname = "";
+                                profile.FullName = userName;
+                                profile.Save();
+                                user.Profile.Reload();
+                            }
+
+                        }
+
+                        var pictureFacet = Tracker.Current.Contact.GetFacet<IContactPicture>(Constants.Account.FacetPicture);
+                        string photoPath = Constants.Account.CustomerPhotoPath + user.LocalName;
+                        MediaItem photoItem = Sitecore.Context.Database.GetItem(photoPath);
+
+                        if (photoItem != null)
+                        {
+                            var stream = photoItem.GetMediaStream();
+                            var memoryStream = new MemoryStream();
+                            if (stream != null)
+                            {
+                                stream.CopyTo(memoryStream);
+                                pictureFacet.Picture = memoryStream.ToArray();
+                                pictureFacet.MimeType = photoItem.MimeType;
+                            }
+                        }
+
+                    }
+                }
+
+            }
+
+        }
+
+        
 
         /// <summary>
         /// Get Commerce user

@@ -273,7 +273,7 @@
     <Compile Include="Configuration\FixFindBestPatternMatchAndApplyToProfileInfo.cs" />
     <Compile Include="Configuration\ItemResolver.cs" />
     <Compile Include="Configuration\Social\CustomSocialGoalTrigger.cs" />
-    <Compile Include="Configuration\Social\CustomMatchUser.cs" />
+    <Compile Include="Configuration\Social\CreateUser.cs" />
     <Compile Include="Configuration\Social\PostMessageToFacebook.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Contracts\Blog\IBlog.cs" />

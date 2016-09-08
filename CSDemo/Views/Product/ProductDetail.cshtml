@@ -389,9 +389,15 @@
                                         <li><a href="#"><i class="fa fa-envelope"></i>Email to friend</a></li>
                                     </ul>
                                 </form>
-                                @if (!isInStock && User.Identity.IsAuthenticated)
+                                @if (!isInStock) { 
+                                if (User.Identity.IsAuthenticated)
                                 {
                                     @Html.Partial("~/Views/Product/VisitorStockNotificationSignup.cshtml", Model)
+                                    }
+                                    else
+                                    {
+                                        <p><a style="font-weight:bold; color:#E87169" href="/account/signin">Login</a> to sign up for notifications. We'll let you know when it's back in stock!</p>
+                                    }
                                 }
                             </div>
                         </div>

@@ -70,29 +70,30 @@ namespace CSDemo.Configuration.Social
                 return AutomationActionResult.Continue;
             }
             dynamic messagePost = new ExpandoObject();
-            //messagePost.picture = "https://www.cmsbestpractices.com/rockies.png";
-            //messagePost.link = "http://csdemo.xcentium.net/categories/boots/aw078-04";
-            //messagePost.name = "We've got your boots!";
-            //messagePost.caption = _catalogName;
-            //messagePost.description = "Lightweight Nubuck leather/nylon, water-resistant boots, polyurethane soles.";
-            //messagePost.message = $"Hey {firstname}, the Rockies are back in stock! This pair seems to go quickly, get them before they are gone again.";
 
             var firstName = GetContactFirsName(contact);
             if (string.IsNullOrWhiteSpace(firstName))
                 firstName = "there";
 
+            //var fbAuthClient = new FacebookOAuthClient() { AppId = appId, AppSecret = appSecret };
+            //dynamic accessToken = fbAuthClient.GetApplicationAccessToken();
+            //if (string.IsNullOrWhiteSpace((string)accessToken["access_token"]))
+            //{
+            //    Log.Error("Facebook Post Error: Unable to get application access token.", this);
+            //    return AutomationActionResult.Continue;
+            //}
+            var fb = new FacebookClient(appId, appSecret); //FacebookClient((string)accessToken["access_token"]); 
+
             var defaultDomain = "http://csdemo.xcentium.net";
             foreach (var product in products)
             {
                 messagePost.picture = defaultDomain + product.FirstImage.Replace("/sitecore/shell", string.Empty);
-                messagePost.link = defaultDomain + LinkManager.GetItemUrl(Factory.GetDatabase("master").GetItem(product.Url), 
-                    new UrlOptions { Site = Factory.GetSite("XCentiumCSDemo") });
+                messagePost.link = defaultDomain + product.Url.Replace("/sitecore/shell/csdemo/home", string.Empty);
                 messagePost.name = $"We've got your {product.Title}!";
                 messagePost.caption = _catalogName;
                 messagePost.description = product.Description;
                 messagePost.message = $"Hey {firstName}, the {product.Title} are back in stock! This pair seems to go quickly, get them before they are gone again.";
-
-                var fb = new FacebookClient(appId, appSecret);
+                
                 var userId = contact.Identifiers.Identifier
                     .Replace($"{Constants.Commerce.DefaultSocialDomainForCommerce}\\", string.Empty)
                     .Replace("_facebook", string.Empty);
@@ -176,26 +177,6 @@ namespace CSDemo.Configuration.Social
             provider.UpdateProductsBackInStock(context, new List<Sitecore.Commerce.Entities.Inventory.StockNotificationRequest>());
             AutomationStateManager.Create(contact).SaveChanges(AutomationManager.Provider);
             return products;
-            //var notificationRequests = provider.GetBackInStockProducts(provider.GetProductNotifications(context), context);
-            //if (notificationRequests == null)
-            //{
-            //    Log.Error("Facebook Post Error: Unable to get notificationRequests.", this);
-            //    return null;
-            //}
-
-            //var productIds = new List<string>();
-            //foreach (var notificationRequest in notificationRequests)
-            //{
-            //    productIds.Add(notificationRequest.Product.ProductId);
-            //}
-
-            //var products = productIds.Select(i => Product.GetProduct(i));
-            //if (products == null || !products.Any())
-            //{
-            //    Log.Error("Facebook Post Error: Unable to get products.", this);
-            //    return null;
-            //}
-            //return products.First();
         }
     }
 

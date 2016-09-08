@@ -1,5 +1,5 @@
 ﻿#region
-		
+
 using System;
 using System.Web.Security;
 using Ninject;
@@ -11,8 +11,9 @@ using Sitecore.SecurityModel;
 using Sitecore.Social.Connector.Pipelines.MatchUser;
 using Sitecore.Social.Infrastructure;
 using Sitecore.Social.Infrastructure.Logging;
- 
-	#endregion
+using CSDemo.Models.Account;
+
+#endregion
 namespace CSDemo.Configuration.Social
 {
     /// <summary>
@@ -40,7 +41,9 @@ namespace CSDemo.Configuration.Social
            
             var splitter = fullName.Split('\\');
             var commerceUserFullName = $"{Constants.Commerce.DefaultSocialDomainForCommerce}\\{splitter[1]}";
-            args.Result = CreateSitecoreUser(commerceUserFullName, args.Email, args.AccountBasicData.FullName);
+            var user = EnsureSitecoreUser(commerceUserFullName, args.Email, args.AccountBasicData.FullName);
+            args.Result = user;
+            (new AccountHelper()).UpdateContactProfile(user);
         }
 
         /// <summary>
@@ -58,7 +61,7 @@ namespace CSDemo.Configuration.Social
         /// <returns>
         ///     The <see cref="T:Sitecore.Security.Accounts.User" />.
         /// </returns>
-        private User CreateSitecoreUser(string domainUser, string email, string fullName)
+        private User EnsureSitecoreUser(string domainUser, string email, string fullName)
         {
             var length = 128;
             var numberOfNonAlphanumericCharacters = 20;

@@ -21,7 +21,6 @@ namespace CSDemo.Contracts.Product
         string CurrencyPrice { get; }
         string ListPrice { get; }
         string VariantProdId { get; }
-        string VisitorSignupForStockNotificationEmail { get; set; }
         string LocationName { get; set; }
         Guid ID { get; set; }
         string Path { get; set; }
