@@ -8,8 +8,10 @@ using Sitecore.Commerce.Automation.MarketingAutomation;
 using Sitecore.Configuration;
 using Sitecore.Data;
 using Sitecore.Diagnostics;
+using Sitecore.Links;
+using Sitecore.Sites;
 using Sitecore.Social.Connector.Facets.Contact.SocialProfile;
-using Sitecore.Social.Domain.Model;
+
 using Sitecore.Social.Facebook.Api.Builders;
 using Sitecore.Social.Facebook.Api.Model;
 using Sitecore.Social.Facebook.MessagePosting.Providers;
@@ -61,8 +63,8 @@ namespace CSDemo.Configuration.Social
             var appId = fbConfigItem["Application ID"];
             var appSecret = fbConfigItem["Application Secret"];
 
-            var product = GetBackInStockProduct(contact, context.AutomationStateContext);
-            if (product == null)
+            var products = GetBackInStockProducts(contact, context.AutomationStateContext);
+            if (products == null || !products.Any())
             {
                 Log.Error("Facebook Post Error: Unable to get product info.", this);
                 return AutomationActionResult.Continue;
@@ -77,30 +79,34 @@ namespace CSDemo.Configuration.Social
 
             var firstName = GetContactFirsName(contact);
             if (string.IsNullOrWhiteSpace(firstName))
-                firstName = "Vasiliy";
+                firstName = "there";
 
-            messagePost.picture = product.Image1;
-            messagePost.link = product.Url; 
-            messagePost.name = $"We've got your {product.Title}!";
-            messagePost.caption = _catalogName;
-            messagePost.description = product.Description;
-            messagePost.message = $"Hey {firstName}, the Rockies are back in stock! This pair seems to go quickly, get them before they are gone again.";
-
-            var fb = new FacebookClient(appId, appSecret);
-            var userId = contact.Identifiers.Identifier
-                .Replace($"{Constants.Commerce.DefaultSocialDomainForCommerce}\\", string.Empty)
-                .Replace("_facebook", string.Empty);
-            var userFeedPath = $"/{userId}/feed";
-
-            try
+            var defaultDomain = "http://csdemo.xcentium.net";
+            foreach (var product in products)
             {
-                dynamic result = fb.Post(userFeedPath, messagePost);
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Facebook Post Error: Unable to post message to facebook. "+ ex.Message , this);
-            }
+                messagePost.picture = defaultDomain + product.FirstImage.Replace("/sitecore/shell", string.Empty);
+                messagePost.link = defaultDomain + LinkManager.GetItemUrl(Factory.GetDatabase("master").GetItem(product.Url), 
+                    new UrlOptions { Site = Factory.GetSite("XCentiumCSDemo") });
+                messagePost.name = $"We've got your {product.Title}!";
+                messagePost.caption = _catalogName;
+                messagePost.description = product.Description;
+                messagePost.message = $"Hey {firstName}, the {product.Title} are back in stock! This pair seems to go quickly, get them before they are gone again.";
 
+                var fb = new FacebookClient(appId, appSecret);
+                var userId = contact.Identifiers.Identifier
+                    .Replace($"{Constants.Commerce.DefaultSocialDomainForCommerce}\\", string.Empty)
+                    .Replace("_facebook", string.Empty);
+                var userFeedPath = $"/{userId}/feed";
+
+                try
+                {
+                    dynamic result = fb.Post(userFeedPath, messagePost);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Facebook Post Error: Unable to post message to facebook. " + ex.Message, this);
+                }
+            }
             return AutomationActionResult.Continue;
         }
 
@@ -137,7 +143,7 @@ namespace CSDemo.Configuration.Social
             return firstname;
         }
 
-        private Product GetBackInStockProduct(Contact contact, AutomationStateContext context)
+        private IEnumerable<Product> GetBackInStockProducts(Contact contact, AutomationStateContext context)
         {
             var provider = (InventoryAutomationProvider)Factory.CreateObject("inventoryAutomationProvider", true);
             if (provider == null)
@@ -146,26 +152,50 @@ namespace CSDemo.Configuration.Social
                 return null;
             }
 
-            var notificationRequests = provider.GetBackInStockProducts(provider.GetProductNotifications(context), context);
-            if (notificationRequests == null)
+            var notificationRequests = provider.GetProductsBackInStock(context);
+            if (notificationRequests == null || !notificationRequests.Any())
             {
-                Log.Error("Facebook Post Error: Unable to get notificationRequests.", this);
+                Log.Info("Facebook Post Info: contact is not signed up for any product notifications.", this);
                 return null;
             }
-
-            var productIds = new List<string>();
-            foreach (var notificationRequest in notificationRequests)
+            var cartHelper = new CartHelper("XCentiumCSDemo");
+            string productId = string.Empty;
+            var products = new List<Product>();
+            foreach (var notification in notificationRequests)
             {
-                productIds.Add(notificationRequest.Product.ProductId);
+                var stockInfo = cartHelper.GetProductStockInformation(notification.Product.ProductId, Settings.GetSetting("Site_XCentiumCSDemo_Catalog", "Adventure Works Catalog"));
+                if (stockInfo != null && stockInfo.Status != null && stockInfo.Status.Name == "InStock")
+                {
+                    productId = stockInfo.Product.ProductId;
+                    var product = Product.GetProduct(productId);
+                    if (product == null || string.IsNullOrWhiteSpace(product.Title)) continue;
+                    products.Add(product);
+                }
             }
 
-            var products = productIds.Select(i => Product.GetProduct(i));
-            if (products == null || !products.Any())
-            {
-                Log.Error("Facebook Post Error: Unable to get products.", this);
-                return null;
-            }
-            return products.First();
+            provider.UpdateProductsBackInStock(context, new List<Sitecore.Commerce.Entities.Inventory.StockNotificationRequest>());
+            AutomationStateManager.Create(contact).SaveChanges(AutomationManager.Provider);
+            return products;
+            //var notificationRequests = provider.GetBackInStockProducts(provider.GetProductNotifications(context), context);
+            //if (notificationRequests == null)
+            //{
+            //    Log.Error("Facebook Post Error: Unable to get notificationRequests.", this);
+            //    return null;
+            //}
+
+            //var productIds = new List<string>();
+            //foreach (var notificationRequest in notificationRequests)
+            //{
+            //    productIds.Add(notificationRequest.Product.ProductId);
+            //}
+
+            //var products = productIds.Select(i => Product.GetProduct(i));
+            //if (products == null || !products.Any())
+            //{
+            //    Log.Error("Facebook Post Error: Unable to get products.", this);
+            //    return null;
+            //}
+            //return products.First();
         }
     }
 

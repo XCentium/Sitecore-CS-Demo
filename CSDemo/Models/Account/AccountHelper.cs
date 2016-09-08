@@ -335,11 +335,12 @@ namespace CSDemo.Models.Account
         /// <returns></returns>
         internal string GetCurrentCustomerCatalogIds()
         {
-            if (Sitecore.Context.User.IsAuthenticated)
+            if (Sitecore.Context.User.IsAuthenticated && Sitecore.Context.Database.Name!="core")
             {
                 try
                 {
-                    var cataLogId = Cookie.Get(Constants.Commerce.UserSelectedCatalogId).Value;
+
+                    var cataLogId = Cookie.Get(Constants.Commerce.UserSelectedCatalogId)!=null ? Cookie.Get(Constants.Commerce.UserSelectedCatalogId).Value : null;
 
                     if (cataLogId != null && !string.IsNullOrEmpty(cataLogId))
                     {
