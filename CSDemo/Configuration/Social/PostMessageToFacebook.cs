@@ -69,7 +69,7 @@ namespace CSDemo.Configuration.Social
                 Log.Error("Facebook Post Error: Unable to get product info.", this);
                 return AutomationActionResult.Continue;
             }
-            dynamic messagePost = new ExpandoObject();
+            
 
             var firstName = GetContactFirsName(contact);
             if (string.IsNullOrWhiteSpace(firstName))
@@ -87,6 +87,7 @@ namespace CSDemo.Configuration.Social
             var defaultDomain = "http://csdemo.xcentium.net";
             foreach (var product in products)
             {
+                dynamic messagePost = new ExpandoObject();
                 messagePost.picture = defaultDomain + product.FirstImage.Replace("/sitecore/shell", string.Empty);
                 messagePost.link = defaultDomain + product.Url.Replace("/sitecore/shell/csdemo/home", string.Empty);
                 messagePost.name = $"We've got your {product.Title}!";
@@ -97,11 +98,15 @@ namespace CSDemo.Configuration.Social
                 var userId = contact.Identifiers.Identifier
                     .Replace($"{Constants.Commerce.DefaultSocialDomainForCommerce}\\", string.Empty)
                     .Replace("_facebook", string.Empty);
-                var userFeedPath = $"/{userId}/feed";
+
+
+                dynamic notificationPost = new ExpandoObject();
+                notificationPost.template = $"We've got your {product.Title}! Check your wall!";
 
                 try
                 {
-                    dynamic result = fb.Post(userFeedPath, messagePost);
+                    dynamic result = fb.Post($"/{userId}/feed", messagePost);
+                    dynamic notificationResult = fb.Post($"/{userId}/notifications", notificationPost);
                 }
                 catch (Exception ex)
                 {
