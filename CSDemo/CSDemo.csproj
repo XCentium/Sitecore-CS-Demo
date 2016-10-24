@@ -363,6 +363,7 @@
     <Compile Include="Models\GeneralSearch\Search.cs" />
     <Compile Include="Models\GeneralSearch\SearchInput.cs" />
     <Compile Include="Models\Product\ProductMenulistViewModel.cs" />
+    <Compile Include="Models\Product\ProductMini.cs" />
     <Compile Include="Models\Product\ProductVariant.cs" />
     <Compile Include="Models\Product\UnitOfMeasure.cs" />
     <Compile Include="Models\Product\UnitOfMeasureEnumeration.cs" />
@@ -392,6 +393,7 @@
       <TransformOnBuild>true</TransformOnBuild>
     </Content>
     <Content Include="Assets\css\animate.css" />
+    <Content Include="Assets\css\bootcomplete.css" />
     <Content Include="Assets\css\bootstrap.min.css" />
     <Content Include="Assets\css\color-switcher.css" />
     <Content Include="Assets\css\color\blue.css" />
@@ -448,6 +450,7 @@
     <Content Include="Assets\images\default-avatar.png" />
     <Content Include="Assets\images\flags\cz.png" />
     <Content Include="Assets\images\flags\de.png" />
+    <Content Include="Assets\images\flags\fr.png" />
     <Content Include="Assets\images\flags\us.png" />
     <Content Include="Assets\images\lookbook-1.png" />
     <Content Include="Assets\images\lookbook-2.png" />
@@ -478,6 +481,7 @@
     <Content Include="Assets\js\color-switcher.js" />
     <Content Include="Assets\js\CSDemo.js" />
     <Content Include="Assets\js\custom.js" />
+    <Content Include="Assets\js\jquery.bootcomplete.js" />
     <Content Include="Assets\js\jquery.card.js" />
     <Content Include="Assets\js\jquery.cookie.js" />
     <Content Include="Assets\js\jquery.dragtable.js" />
@@ -486,6 +490,7 @@
     <Content Include="Assets\js\owl.carousel.min.js" />
     <Content Include="Assets\js\SmoothScroll.js" />
     <Content Include="Assets\js\twitterFetcher_min.js" />
+    <Content Include="Assets\js\typeahead.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
@@ -494,6 +499,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Config\Include\zCSDemo\CSDemo.PatternMatchFix.config" />
+    <Content Include="App_Config\ConnectionStrings.config" />
     <None Include="App_Config\Include\zCSDemo\CSDemo.Main.Debug.config">
       <DependentUpon>CSDemo.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
@@ -514,6 +520,17 @@
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <Content Include="App_Config\Include\zOceanside\Oceanside.Main.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Config\Include\zOceanside\RioGrande.Main.csDemo.config">
+      <DependentUpon>Oceanside.Main.config</DependentUpon>
+    </Content>
+    <Content Include="App_Config\Include\zOceanside\Oceanside.Main.Debug.config">
+      <DependentUpon>Oceanside.Main.config</DependentUpon>
+    </Content>
+    <Content Include="ProductDetail.cshtml" />
+
     <None Include="Properties\PublishProfiles\DEV Local.pubxml" />
     <None Include="Properties\PublishProfiles\Vasiliy Local.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -736,6 +753,13 @@
     <Content Include="Views\Checkout\Reviewx.cshtml" />
     <Content Include="Views\Checkout\Reviewy.cshtml" />
     <Content Include="Views\Product\GeoTargetedProducts.cshtml" />
+    <Content Include="Views\Product\ProductDefault.cshtml" />
+    <Content Include="Views\Product\ProductDetailCeramic.cshtml" />
+    <Content Include="Views\Product\ProductDetailGlassTiles.cshtml" />
+    <Content Include="Views\Product\ProductDetailGlassTilesNew.cshtml" />
+    <Content Include="Views\Product\DealerOrderingSystem.cshtml" />
+    <Content Include="Views\Product\SalesQuote.cshtml" />
+    <Content Include="Views\Product\QuickOrderSystem.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

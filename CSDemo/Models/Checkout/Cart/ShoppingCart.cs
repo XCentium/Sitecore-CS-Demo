@@ -22,17 +22,21 @@ namespace CSDemo.Models.Checkout.Cart
         public Decimal LineTotal { get; set; }
 
         private Decimal _productsTotal;
-        public Decimal ProductsTotal { 
-            
+        public Decimal ProductsTotal
+        {
+
             get
             {
+                if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { return this.LineTotal > 0 ? (decimal)0.90 * this.GetDiscount() + this.LineTotal : this.GetDiscount() + this.LineTotal; }
+                if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { return this.LineTotal > 0 ? (decimal)0.75 * this.GetDiscount() + this.LineTotal : this.GetDiscount() + this.LineTotal; }
+
                 return this.GetDiscount() + this.LineTotal;
             }
-            
+
             set
             {
                 _productsTotal = value;
-            } 
+            }
         }
 
 
@@ -40,16 +44,17 @@ namespace CSDemo.Models.Checkout.Cart
 
         private Decimal _grandTotal;
 
-        public Decimal GrandTotal {
+        public Decimal GrandTotal
+        {
 
             get
             {
                 if (this._grandTotal > 0)
                 {
-                    return (this._grandTotal > (this.LineTotal + this.Tax - this.Shipping)) ? this.LineTotal + this.Tax - this.Shipping : this._grandTotal; 
-                    
+                    return (this._grandTotal > (this.LineTotal + this.Tax - this.Shipping)) ? this.LineTotal + this.Tax - this.Shipping : this._grandTotal;
+
                 }
-                return this.LineTotal + this.Tax - this.Shipping; 
+                return this.LineTotal + this.Tax - this.Shipping;
             }
 
 
@@ -57,7 +62,7 @@ namespace CSDemo.Models.Checkout.Cart
             {
                 _grandTotal = value;
             }
-        
+
         }
 
         private Decimal _discount;
@@ -67,14 +72,14 @@ namespace CSDemo.Models.Checkout.Cart
             get { return this.GetDiscount(); }
             set { _discount = value; }
         }
-        
+
 
 
         public ShoppingCart()
         {
             this.Discount = 0.00m;
             this.Currency = "USD";
-            this.Shipping = 0.00m; 
+            this.Shipping = 0.00m;
             this.Tax = 0.00m;
             this.GrandTotal = 0.00m;
 

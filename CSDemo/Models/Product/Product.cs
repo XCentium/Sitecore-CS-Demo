@@ -1,32 +1,32 @@
 ﻿#region
 
+using CSDemo.Contracts;
+using CSDemo.Contracts.Product;
+using CSDemo.Models.Checkout.Cart;
+using Glass.Mapper.Sc;
+using Glass.Mapper.Sc.Configuration;
+using Glass.Mapper.Sc.Configuration.Attributes;
+using Glass.Mapper.Sc.Fields;
+using Newtonsoft.Json;
+using Sitecore;
+using Sitecore.Analytics;
+using Sitecore.Analytics.Automation.Data;
+using Sitecore.Analytics.Automation.MarketingAutomation;
+using Sitecore.Commerce.Connect.CommerceServer.Catalog.Fields;
+using Sitecore.Commerce.Connect.CommerceServer.Inventory;
+using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
+using Sitecore.Commerce.Contacts;
+using Sitecore.Commerce.Entities.Inventory;
+using Sitecore.Commerce.Services.Inventory;
+using Sitecore.Data;
+using Sitecore.Data.Items;
+using Sitecore.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
-using CSDemo.Contracts;
-using CSDemo.Contracts.Product;
-using Glass.Mapper.Sc;
-using Glass.Mapper.Sc.Configuration;
-using Glass.Mapper.Sc.Configuration.Attributes;
-using Glass.Mapper.Sc.Fields;
-using Sitecore;
-using Sitecore.Commerce.Connect.CommerceServer.Catalog.Fields;
-using Sitecore.Data.Items;
-using Sitecore.Commerce.Entities.Inventory;
-using Sitecore.Data;
-using Newtonsoft.Json;
-using Sitecore.Diagnostics;
 using System.Net;
-using Sitecore.Analytics;
-using Sitecore.Analytics.Automation.Data;
-using Sitecore.Analytics.Automation.MarketingAutomation;
-using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
-using Sitecore.Commerce.Connect.CommerceServer.Inventory;
-using Sitecore.Commerce.Contacts;
-using Sitecore.Commerce.Services.Inventory;
-using CSDemo.Models.Checkout.Cart;
 using System.Runtime.Serialization;
 
 #endregion
@@ -115,6 +115,8 @@ namespace CSDemo.Models.Product
                 var info = (NumberFormatInfo)Sitecore.Context.Language.CultureInfo.NumberFormat.Clone();
                 info.CurrencySymbol = Constants.Commerce.DefaultCurrencyCode;
                 info.CurrencyPositivePattern = 3;
+                if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { return Price > 0 ? ((decimal)0.90 * Price).ToString("C", info) : Price.ToString("C", info); }
+                if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { return Price > 0 ? ((decimal)0.75 * Price).ToString("C", info) : Price.ToString("C", info); }
                 return Price.ToString("C", info);
             }
         }
@@ -124,6 +126,8 @@ namespace CSDemo.Models.Product
             get
             {
                 var cultureInfo = Sitecore.Context.Culture;
+                if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { return Price > 0 ? ((decimal)0.90 * Price).ToString("c", cultureInfo) : Price.ToString("c", cultureInfo); }
+                if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { return Price > 0 ? ((decimal)0.75 * Price).ToString("c", cultureInfo) : Price.ToString("c", cultureInfo); }
                 return Price.ToString("c", cultureInfo);
             }
         }
@@ -329,6 +333,20 @@ namespace CSDemo.Models.Product
         public virtual string ShippingWeight { get; set; }
 
         public virtual string CountryOfOrigin { get; set; }
+        public virtual string Thickness { get; set; }
+
+        [SitecoreField(Fields.SquareFeetPerSheet)]
+        public virtual string SquareFeetPerSheet { get; set; }
+        public virtual string Finish { get; set; }
+
+
+        [SitecoreField(Fields.XsPrice), DataMember]
+        public virtual decimal XsPrice { get; set; }
+
+        [SitecoreField(Fields.Color)]
+        public virtual string Color { get; set; }
+        public virtual string StoneColor { get; set; }
+        public virtual string GlassColor { get; set; }
 
         #endregion
 
@@ -361,6 +379,14 @@ namespace CSDemo.Models.Product
             public const string Image1 = "Image1";
             public const string Image2 = "Image2";
             public const string Image3 = "Image3";
+            public const string Thickness = "Thickness";
+            public const string SquareFeetPerSheet = "Square Feet Per Sheet";
+            public const string Finish = "Finish";
+            public const string XsPrice = "XSPrice";
+            public const string Color = "ProductColor";
+            public const string StoneColor = "StoneColor";
+            public const string GlassColor = "GlassColor";
+
         }
 
         #endregion
@@ -417,7 +443,7 @@ namespace CSDemo.Models.Product
                 zipCode = "90292";
                 Log.Warn("Using default sample zip 90292.", zipCode);
             }
-            Log.Info($"The zip code is set to {zipCode}.", zipCode);
+            Log.Info(string.Format("The zip code is set to {0}.", zipCode), zipCode);
             if (string.IsNullOrWhiteSpace(zipCode)) yield return null;
             var response = string.Empty;
 

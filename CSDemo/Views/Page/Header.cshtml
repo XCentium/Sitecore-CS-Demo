@@ -37,9 +37,9 @@
                             }
                         </ul>
                         <ul class="list-inline languages hidden-sm">
-                            <li><a href="#"><img src="/assets/images/flags/cz.png" alt="cs_CZ"></a></li>
-                            <li><a href="#"><img src="/assets/images/flags/us.png" alt="en_US"></a></li>
-                            <li><a href="#"><img src="/assets/images/flags/de.png" alt="de_DE"></a></li>
+                            <li><a href="~/fr-fr"><img src="/assets/images/flags/fr.png" alt="fr_fr"></a></li>
+                            <li><a href="~/en/"><img src="/assets/images/flags/us.png" alt="en_US"></a></li>
+                            <li><a href="~/de-de"><img src="/assets/images/flags/de.png" alt="de_DE"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -53,13 +53,41 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
+
                         <!-- ==========================
                         NAVIGATION WITH MEGA MENU - START
                         =========================== -->
-                        @Html.Sitecore().Rendering("/sitecore/layout/Renderings/CSDemo/Navigation/Main Navigation", new { Datasource = string.Format("/sitecore/content/{0}/Components/Navigation", Model.Name) })
+                        @Html.Sitecore().Rendering("/sitecore/layout/Renderings/CSDemo/Navigation/Main Navigation", new {Datasource = string.Format("/sitecore/content/{0}/Components/Navigation", Model.Name)})
                         <!-- ==========================
                         NAVIGATION WITH MEGA MENU - END
                         =========================== -->
+                        <li>
+                            <a href="/SQS">Sales Quote</a>
+                        </li>
+
+                        <li>
+                            <a href="~/DOS">Dealer Ordering</a>
+                        </li>
+
+                        <li>
+                            <a href="/QOS">Quick Order</a>
+                        </li>
+
+                        @if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer"))
+                        {
+                            <li>
+                                <a href="~/DOS">Dealer Ordering</a>
+                            </li>
+                        }
+
+                        @if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer"))
+                        {
+                            <li>
+                                <a href="/SQ">Sales Quote</a>
+                            </li>
+                        }
+
+
                         <!-- ==========================
                         CART AND SEARCH NAVIGATION - START
                         =========================== -->
@@ -74,7 +102,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search"></i></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    @Html.Sitecore().Rendering("/sitecore/layout/Renderings/CSDemo/Search/Search Input", new { Datasource = string.Format("/sitecore/content/{0}/Home/Search", Model.Name) })
+                                    @Html.Sitecore().Rendering("/sitecore/layout/Renderings/CSDemo/Search/Search Input", new {Datasource = string.Format("/sitecore/content/{0}/Home/Search", Model.Name)})
                                 </li>
                             </ul>
                         </li>

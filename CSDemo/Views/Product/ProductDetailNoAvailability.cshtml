@@ -400,7 +400,7 @@
                         <li role="presentation" class="active">
                             <a href="#description" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="true">Description</a>
                         </li>
-                        @if (Model.MoreInfo.Trim().Length > 0)
+                        @if (Model.MoreInfo != null && Model.MoreInfo.Trim().Length > 0)
                         {
                             <li role="presentation" class="">
                                 <a href="#moreinfo" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">More Info</a>
@@ -414,7 +414,7 @@
                         <div role="tabpanel" class="tab-pane active" id="description">
                             @Editable(Model, x => x.FullDescription)
                         </div>
-                        @if (Model.MoreInfo.Trim().Length > 0)
+                        @if (Model.MoreInfo != null && Model.MoreInfo.Trim().Length > 0)
                         {
                             <div role="tabpanel" class="tab-pane in" id="moreinfo">
                                 @Editable(Model, x => x.MoreInfo)
@@ -439,7 +439,7 @@
 
             @Html.Partial("~/Views/Product/RelatedProducts.cshtml", Model.RelatedProducts)
 
-            @Html.Partial("~/Views/Product/ComplementaryProducts.cshtml", Model.AlsoBoughtProducts)
+            @*@Html.Partial("~/Views/Product/ComplementaryProducts.cshtml", Model.AlsoBoughtProducts)*@
         </div>
     </section>
 }

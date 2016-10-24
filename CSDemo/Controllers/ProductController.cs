@@ -53,11 +53,39 @@ namespace CSDemo.Controllers
             return View(products);
         }
 
+        public ActionResult DealerOrderingSystem()
+        {
+
+            return View();
+        }
+
+        public ActionResult SalesQuote()
+        {
+
+            return View();
+        }
+
+
+        public ActionResult QuickOrderSystem()
+        {
+
+            return View();
+        }
+
         public ActionResult FeaturedCategories()
         {
             var item = RenderingContext.Current.Rendering.Item; // csdemo >> home
             var featuredCategories = item.GlassCast<FeaturedCategories>();
-            return View(featuredCategories.Categories);
+
+            try
+            {
+                return View(featuredCategories.Categories);
+            }
+            catch (Exception ex)
+            {
+
+                return View(new List<GeneralCategory>());
+            }
         }
 
         public ActionResult SpecialtySelectedForYou()
@@ -75,7 +103,7 @@ namespace CSDemo.Controllers
         public ActionResult GeoTargetedProducts()
         {
 
-            var geoTargetedProducts = Product.GetGeoTargetedProducts(Tracker.Current.Interaction.GeoData.AreaCode);
+            var geoTargetedProducts = Product.GetGeoTargetedProducts(Tracker.Current.Interaction.GeoData.AreaCode).ToList();
 
             //           var geoTargetedProducts = Product.GetGeoTargetedProducts(Tracker.Current.Interaction.GeoData.PostalCode);
 
@@ -258,6 +286,7 @@ namespace CSDemo.Controllers
             }
             return model;
         }
+
 
         #endregion
 

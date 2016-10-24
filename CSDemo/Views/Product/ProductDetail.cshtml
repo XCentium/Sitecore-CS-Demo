@@ -3,280 +3,31 @@
 @if (Model != null)
 {
 
-    string stockLabel = Model.StockInformation != null && Model.StockInformation.Count > 0 ? string.Format("{0:#,###0} In Stock", Convert.ToInt32(Model.StockInformation.Count)) : "Out Of Stock";
-    bool isInStock = Model.StockInformation != null && Model.StockInformation.Count > 0;
-    // out-of-stock
-    var clickCmd = "add-to-cart";
-    <section class="content products">
-        <div class="container">
-            @using (BeginEditFrame(Model, "Edit Product",
-                                    x => x.Images,
-                                    x => x.Title,
-                                    x => x.CatalogName,
-                                    x => x.VariantProdId,
-                                    x => x.DefaultVariant,
-                                    x => x.IsNew,
-                                    x => x.IsOnSale,
-                                    x => x.Rating,
-                                    x => x.ListPrice,
-                                    x => x.Brand,
-                                    x => x.Description,
-                                    x => x.VariantSize,
-                                    x => x.VariantColors,
-                                    x => x.FullDescription,
-                                    x => x.DateOfIntroduction,
-                                    x => x.Size, x => x.Price,
-                                    x => x.DefinitionName,
-                                    x => x.Categories,
-                                    x => x.SortFields,
-                                    x => x.ItemsPerPage,
-                                    x => x.Variants))
-            {
-                <article class=" product-item product-single">
-                    <div class="row">
-                        <div class="col-xs-4 product-crousel-parent" style="visibility:hidden">
-                            @if (Model.ProductVariants != null)
-                            {
-                                var defaultVariantImg = "variant_img_default";
-                                foreach (var prodVariant in Model.ProductVariants)
-                                {
-                                    var variantAltImages = prodVariant.AltImages();
-                                    if (prodVariant.Images.Any() || variantAltImages.Count > 0)
-                                    {
+    switch (Model.DefinitionName.ToLower())
+    {
+        case "ceramicproduct":
+            @Html.Partial("~/Views/Product/ProductDetailCeramic.cshtml", Model)
+            break;
 
-                                        <div class="product-carousel-wrapper variant_img_@prodVariant.VariantId">
-                                            <div class="variant_images @defaultVariantImg variant_img_@prodVariant.VariantId">
-                                                <div class="product-carousel">
-                                                    @if (variantAltImages != null && variantAltImages.Count > 0)
-                                                    {
-                                                        foreach (var src in variantAltImages)
-                                                        {
-                                                            <div class="item">
-                                                                <img src="@src" class="img-responsive" style="width:538px;height:538px" />
-                                                            </div>
-                                                        }
-                                                    }
-                                                    else
-                                                    {
+        case "glasstiles":
+            @Html.Partial("~/Views/Product/ProductDetailGlassTiles.cshtml", Model)
+            break;
 
-                                                        if (prodVariant.Images != null && prodVariant.Images.Any())
-                                                        {
-                                                            foreach (var image in prodVariant.Images)
-                                                            {
-                                                                <div class="item">
-                                                                    @RenderImage(image, x => x, new { Width = 538, Height = 538, AS = 1, @class = "img-responsive" }, isEditable: false)
-                                                                </div>
-                                                            }
-                                                        }
-                                                        else
-                                                        {
-                                                            if (!string.IsNullOrEmpty(Model.Image1) || !string.IsNullOrEmpty(Model.Image2))
-                                                            {
-                                                                var altImages = Model.AltImages();
-                                                                foreach (var src in altImages)
-                                                                {
-                                                                    <div class="item">
-                                                                        <img src="@src" class="img-responsive" style="width:538px;height:538px" />
-                                                                    </div>
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="product-carousel-wrapper variant_img_@prodVariant.VariantId">
-                                            <div class="variant_images @defaultVariantImg variant_img_@prodVariant.VariantId">
-                                                <div class="product-carousel">
-                                                    @if (Model.Images != null && Model.Images.Any())
-                                                    {
-                                                        foreach (var image in Model.Images)
-                                                        {
-                                                            <div class="item">
-                                                                @RenderImage(image, x => x, new { Width = 538, Height = 538, AS = 1, @class = "img-responsive" }, isEditable: false)
-                                                            </div>
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        if (!string.IsNullOrEmpty(Model.Image1) || !string.IsNullOrEmpty(Model.Image2))
-                                                        {
-                                                            var altImages = Model.AltImages();
-                                                            foreach (var src in altImages)
-                                                            {
-                                                                <div class="item">
-                                                                    <img src="@src" class="img-responsive" style="width:538px;height:538px" />
-                                                                </div>
-                                                            }
-                                                        }
-                                                    }
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                    defaultVariantImg = "";
-                                }
-                            }
-                            else
-                            {
-                                <div class="product-carousel-wrapper">
-                                    <div class="variant_images variant_img_default">
-                                        <div class="product-carousel">
-                                            @if (Model.Images != null && Model.Images.Any())
-                                            {
-                                                foreach (var image in Model.Images)
-                                                {
-                                                    <div class="item">
-                                                        @RenderImage(image, x => x, new { Width = 538, Height = 538, AS = 1, @class = "img-responsive" }, isEditable: false)
-                                                    </div>
-                                                }
-                                            }
-                                            else
-                                            {
-                                                if (!string.IsNullOrEmpty(Model.Image1) || !string.IsNullOrEmpty(Model.Image2))
-                                                {
-                                                    var altImages = Model.AltImages();
-                                                    foreach (var src in altImages)
-                                                    {
-                                                        <div class="item">
-                                                            <img src="@src" class="img-responsive" style="width:538px;height:538px" />
-                                                        </div>
-                                                    }
-                                                }
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                        <div class="col-xs-8">
-                            <div class="product-body">
-                                <form name="@Model.ProductId" id="@Model.ProductId">
-                                    <input type="hidden" id="ProductId" name="ProductId" value="@Model.ProductId" />
-                                    <input type="hidden" id="CatalogName" name="CatalogName" value="@Model.CatalogName" />
-                                    <input type="hidden" name="VariantId" id="@string.Concat("VariantID", Model.VariantProdId)" value="@Model.DefaultVariant" />
-                                    <h3>@Model.Title</h3>
-                                    <div class="product-labels">
-                                        @if (Model.IsNew)
-                                        {
-                                            <span class="label label-info">new</span>
-                                        }
-                                        @if (Model.IsOnSale)
-                                        {
-                                            <span class="label label-danger">sale</span>
-                                        }
-                                    </div>
-                                    <div class="product-rating">
-                                        <i class="fa fa-star@(Model.Rating > 0 ? string.Empty : "-o")"></i>
-                                        <i class="fa fa-star@(Model.Rating > 1 ? string.Empty : "-o")"></i>
-                                        <i class="fa fa-star@(Model.Rating > 2 ? string.Empty : "-o")"></i>
-                                        <i class="fa fa-star@(Model.Rating > 3 ? string.Empty : "-o")"></i>
-                                        <i class="fa fa-star@(Model.Rating > 4 ? string.Empty : "-o")"></i>
-                                    </div>
-                                    @if (Model.IsOnSale && Model.SalePrice > 0)
-                                    {
-                                        <span class="price">
-                                            <del><span id="@string.Concat("productVariantAmount", Model.VariantProdId)" class="amount">@Editable(Model, x => x.ListPrice)</span></del>
-                                        </span>
-                                        <span class="price">
-                                            <ins><span id="@string.Concat("productAmount", Model.VariantProdId)" class="amount">@Editable(Model, x => x.SalePrice.ToString("C"))</span></ins>
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <span class="price">
-                                            <ins><span id="@string.Concat("productAmount", Model.VariantProdId)" class="amount">@Editable(Model, x => x.ListPrice)</span></ins>
-                                        </span>
-                                    }
-                                    <ul class="list-unstyled product-info">
-                                        <li><span>ID</span>@Model.ProductId</li>
+        case "glasstilesnew":
+            @Html.Partial("~/Views/Product/ProductDetailGlassTilesNew.cshtml", Model)
+            break;
 
-                                        <li class="variants_in_stock">
-                                            <span>Availability</span>@stockLabel
-                                        </li>
-                                        @if (Model.ProductVariants != null)
-                                        {
-                                            foreach (var prodVariant in Model.ProductVariants)
-                                            {
-                                                <li class="variants_in_stock variants_in_stock_@prodVariant.VariantId" style="display:none">
-                                                    <span>Availability</span>@prodVariant.StockLabel
-                                                </li>
-                                            }
-                                        }
-                                        <li><span>Brand</span>@Editable(Model, x => x.Brand)</li>
-                                    </ul>
 
-                                    @if (Model.CatalogName.StartsWith("Rio"))
-                                    {
+        default:
+            @Html.Partial("~/Views/Product/ProductDefault.cshtml", Model)
+          
+            break;
+            
 
-                                        <div class="row row-no-padding">
-                                            <div class="col-md-3 col-sm-4">
-                                                <table class="rio-meta-table">
-                                                    <tbody>
-                                                        @if (!string.IsNullOrEmpty(Model.MetalType))
-                                                        {
-                                                            <tr>
-                                                                <th>Metal Type</th>
-                                                                <td style="padding-left: 15px">@Model.MetalType</td>
-                                                            </tr>
-                                                        }
-                                                        @if (!string.IsNullOrEmpty(Model.MetalColor))
-                                                        {
-                                                            <tr>
-                                                                <th>Metal Color</th>
-                                                                <td style="padding-left: 15px">@Model.MetalColor</td>
-                                                            </tr>
-                                                        }
-                                                        @if (!string.IsNullOrEmpty(Model.KaratPurity))
-                                                        {
-                                                            <tr>
-                                                                <th>Karat Purity</th>
-                                                                <td style="padding-left: 15px">@Model.KaratPurity</td>
-                                                            </tr>
-                                                        }
-                                                        @if (!string.IsNullOrEmpty(Model.InsideDimension))
-                                                        {
-                                                            <tr>
-                                                                <th>Inside Dimension</th>
-                                                                <td style="padding-left: 15px">@Model.InsideDimension</td>
-                                                            </tr>
-                                                        }
-                                                        @if (!string.IsNullOrEmpty(Model.FabricationMethod))
-                                                        {
-                                                            <tr>
-                                                                <th>Fabrication Method</th>
-                                                                <td style="padding-left: 15px">@Model.FabricationMethod</td>
-                                                            </tr>
-                                                        }
-                                                        @if (!string.IsNullOrEmpty(Model.ShippingWeight))
-                                                        {
-                                                            <tr>
-                                                                <th>Shipping Weight</th>
-                                                                <td style="padding-left: 15px">@Model.ShippingWeight</td>
-                                                            </tr>
-                                                        }
-                                                        @if (!string.IsNullOrEmpty(Model.CountryOfOrigin))
-                                                        {
-                                                            <tr>
-                                                                <th>Country Of Origin</th>
-                                                                <td style="padding-left: 15px">@Model.CountryOfOrigin</td>
-                                                            </tr>
-                                                        }
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    }
-                                    <p>@Editable(Model, x => x.Description)</p>
-                                    @if (isInStock)
-                                    {
-                                        <div class="product-form clearfix">
-                                            <div class="row row-no-padding">
-                                                <div class="col-md-3 col-sm-4">
+    }
+    
 
+<<<<<<< Updated upstream
                                                     <div class="product-quantity clearfix">
                                                         <a class="btn btn-default" id="qty-minus">-</a>
                                                         <input type="text" class="form-control" id="Quantity" value="1" />
@@ -455,4 +206,6 @@
             }*@
         </div>
     </section>
+=======
+>>>>>>> Stashed changes
 }

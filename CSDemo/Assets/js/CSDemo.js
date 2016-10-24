@@ -1,9 +1,11 @@
-﻿(function (window, $, undefined) {
+﻿
+
+(function (window, $, undefined) {
 
     //
     var commerceActionAllowed = false;  // This variable will determine if the user can perform commerce actions
    
-
+    
     window.ProductComparisonCookieName = "ComparisonProducts";
     $(document).ready(function () {
 
@@ -421,7 +423,7 @@
                     commerceActionAllowed = true;
 
                 } else {
-
+                    console.log(result);
                     commerceActionAllowed = false;
                 }
             },
@@ -544,7 +546,7 @@
 
             for (var i = 0; i < cartItems.length; i++) {
 
-                $("#cart-items-list").append('<li><div class="row"><div class="col-sm-3"><img src="' + cartItems[i].ImageUrl + '" class="img-responsive" alt=""></div><div class="col-sm-9"><h4><a href="/categories/' + cartItems[i].Category + "/" + cartItems[i].CSProductId + '">' + cartItems[i].ProductName + "</a></h4><p>" + cartItems[i].Quantity + "x - $" + cartItems[i].UnitPrice + '</p><a href="javascript:void(0)" data-externalid="' + cartItems[i].ExternalId + '" class="remove RemoveMiniCartItem"><i class="fa fa-times-circle"></i></a></div></div></li>');
+                $("#cart-items-list").append('<li><div class="row"><div class="col-sm-3"><img src="' + cartItems[i].ImageUrl + '" class="img-responsive" alt=""></div><div class="col-sm-9"><h4><a href="/categories/' + cartItems[i].Category + "/" + cartItems[i].CSProductId + '">' + cartItems[i].ProductName + "</a></h4><p>" + cartItems[i].Quantity + "x - $" + cartItems[i].UnitPrice.toFixed(2) + '</p><a href="javascript:void(0)" data-externalid="' + cartItems[i].ExternalId + '" class="remove RemoveMiniCartItem"><i class="fa fa-times-circle"></i></a></div></div></li>');
             }
 
             $("#cart-items-list").append('<li><div class="row"><div class="col-sm-6"><a href="/cart" class="btn btn-primary btn-block">View Cart</a></div><div class="col-sm-6"><a href="/checkout" class="btn btn-primary btn-block">Checkout</a></div></div></li>');
@@ -1416,4 +1418,9 @@
         showActionMessageFixed("Loaded! Please add email and other mandatory data");
     });
 
+
+
+
 })(window, jQuery);
+
+

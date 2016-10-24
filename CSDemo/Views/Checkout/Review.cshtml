@@ -28,6 +28,11 @@
             grandtotal = String.Format("{0:0.00}", shoppingCart.GrandTotal);
             total = String.Format("{0:0.00}", shoppingCart.ProductsTotal);
 
+            //if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { total = shoppingCart.ProductsTotal > 0 ? ((decimal)0.90 * shoppingCart.ProductsTotal).ToString("C") : shoppingCart.ProductsTotal.ToString("C"); }
+            //if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { total = shoppingCart.ProductsTotal > 0 ? ((decimal)0.75 * shoppingCart.ProductsTotal).ToString("C") : shoppingCart.ProductsTotal.ToString("C"); }
+
+
+
         }
         catch (Exception ex)
         {
@@ -162,7 +167,7 @@
 
                                     <div class="call-xs-12">
                                         <ul class="list-unstyled order-total">
-                                            <li>Total products<span>$@total</span></li>
+                                            <li>Total products<span>@total</span></li>
                                             <li>Discount<span>- $@discount</span></li>
                                             <li>Shipping<span class="total">$@shipping</span></li>
                                             <li>Tax<span class="total">$@tax</span></li>

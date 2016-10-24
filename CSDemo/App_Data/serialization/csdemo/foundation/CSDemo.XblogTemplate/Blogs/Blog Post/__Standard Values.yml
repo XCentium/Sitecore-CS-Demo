@@ -22,7 +22,7 @@ SharedFields:
     <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{22DD9E70-D79C-4A77-BC90-FCCFB1B574F5}">
         <r id="{027AF0D5-BC10-42A4-B796-577FB651D073}" ph="page-header" uid="{E6EA51F9-FF18-48FD-B067-ACB6484A55E1}" />
-        <r id="{A37E3138-DF2A-4FE9-A1C7-3B01E2CF2E95}" ph="page-body" uid="{382C6072-F6E8-406C-B038-400504475A9D}" />
+        <r id="{C87651F3-AC34-44EB-839A-A127FF530774}" ph="page-body" uid="{F3425B67-1337-4366-8139-F00838D7957C}" />
         <r id="{5B018176-BF32-4BB1-91FA-63044B6FFE4B}" ph="page-footer" uid="{EACD3F31-E5B6-4AD6-AA1B-43F18FC325B3}" />
       </d>
     </r>

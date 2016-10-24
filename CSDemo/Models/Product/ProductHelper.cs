@@ -1,11 +1,9 @@
 ﻿#region
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using CSDemo.Configuration;
 using CSDemo.Models.Account;
 using CSDemo.Models.Checkout.Cart;
+using CSDemo.Models.Page;
 using Glass.Mapper.Sc;
 using Sitecore;
 using Sitecore.Analytics;
@@ -21,8 +19,11 @@ using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Links;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Convert = System.Convert;
-using CSDemo.Models.Page;
+
 
 #endregion
 
@@ -780,7 +781,30 @@ namespace CSDemo.Models.Product
 
             if (rootItem == null) return string.Empty;
             var rootModel = rootItem.GlassCast<Root>();
-            return rootModel.Catalog != null ? rootModel.Catalog.ID.ToString() : string.Empty;
+
+
+            try
+            {
+                return rootModel.Catalog != null ? rootModel.Catalog.ID.ToString() : string.Empty;
+            }
+            catch (Exception ex)
+            {
+
+                return string.Empty;
+            }
+
+        }
+
+        internal static string GetSiteRootCatalogName()
+        {
+
+            // Fetch the start item from Site definition
+
+            var rootItem = Sitecore.Context.Database.GetItem(Sitecore.Context.Site.ContentStartPath);
+
+            if (rootItem == null) return string.Empty;
+            var rootModel = rootItem.GlassCast<Root>();
+            return rootModel.Catalog != null ? rootModel.Catalog.Name : string.Empty;
 
         }
 
@@ -845,7 +869,7 @@ namespace CSDemo.Models.Product
                                     catch (Exception ex)
                                     {
                                         Log.Error(ex.StackTrace, ex);
-                                        
+
                                     }
                                 }
                                 catalogCategories.Add(category);
@@ -919,7 +943,8 @@ namespace CSDemo.Models.Product
         /// <param name="personalizedProducts"></param>
         internal static void SetPersonalizedCoupon(PersonalizedProducts personalizedProducts)
         {
-            if (Sitecore.Context.User.IsAuthenticated && Sitecore.Context.User.Name.ToLower().Contains(Constants.Commerce.CommerceUserDomain.ToLower()))
+            if (Sitecore.Context.User.IsAuthenticated &&
+                Sitecore.Context.User.Name.ToLower().Contains(Constants.Commerce.CommerceUserDomain.ToLower()))
             {
                 var showCouponCookie = Cookie.Get(Constants.Commerce.ShowCoupon);
                 if (showCouponCookie == null)
@@ -932,5 +957,66 @@ namespace CSDemo.Models.Product
                 }
             }
         }
+
+        
+        /// <summary>
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public static List<SearchResultItem> GetSearchResultItemByNameOrId(string query)
+        {
+            var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
+            try
+            {
+                var culture = Context.Language.CultureInfo;
+                using (var context = index.CreateSearchContext())
+                {
+                    var queryable = context.GetQueryable<SearchResultItem>()
+                        .Where(x => x.Language == Context.Language.Name);
+                    return queryable.Where(x=>(x.Name.Contains(query) && x.Path.Contains("/departments/") && x.TemplateName != "GeneralCategory")).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.StackTrace, ex);
+            }
+            return null;
+        }
+
+
+        internal static List<ProductMini> GetProductsByName(string query)
+        {
+                        
+            var catalogId = ProductHelper.GetSiteRootCatalogId();
+
+            var catalogName = ProductHelper.GetSiteRootCatalogName();
+
+            var productList = new List<ProductMini>();
+
+            var products = GetSearchResultItemByNameOrId(query);
+
+            if (products != null && products.Any())
+            {
+                foreach (var searchResultItem in products)
+                {
+                    try
+                    {
+                        var product = searchResultItem.GetItem().GlassCast<Product>();
+                        if (product.ProductId != null)
+                        {
+                            productList.Add(new ProductMini {Id = product.ProductId, CatalogId = catalogId, Guid = Sitecore.Data.ID.Parse(product.ID).ToString(), Title  = product.Title, Price = product.Price, CatalogName = catalogName, ImageSrc= product.FirstImage});
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex.StackTrace, ex);
+                    }
+                }
+            }
+
+            return productList;
+        }
+
+
     }
 }

@@ -1,6 +1,9 @@
 ﻿@using System.Diagnostics
 @using System.Linq;
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<CSDemo.Models.Blog.Blog>>
+@{
+    var dat = Model;
+}
 @if (Model == null || !Model.Any())
 {
     return;   

@@ -448,6 +448,15 @@ namespace CSDemo.Models.Checkout.Cart
             shoppingCart.Tax = cart.Total.TaxTotal.Amount == null ? 0.00m : cart.Total.TaxTotal.Amount;
             shoppingCart.GrandTotal = cart.Total.Amount == null ? 0.00m : cart.Total.Amount;
 
+
+            if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { shoppingCart.LineTotal = shoppingCart.LineTotal > 0 ? (decimal)0.90 * shoppingCart.LineTotal : shoppingCart.LineTotal; }
+            if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { shoppingCart.LineTotal = shoppingCart.LineTotal > 0 ? (decimal)0.75 * shoppingCart.LineTotal : shoppingCart.LineTotal; }
+
+            if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { shoppingCart.GrandTotal = shoppingCart.GrandTotal > 0 ? (decimal)0.90 * shoppingCart.GrandTotal : shoppingCart.GrandTotal; }
+            if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { shoppingCart.GrandTotal = shoppingCart.GrandTotal > 0 ? (decimal)0.75 * shoppingCart.GrandTotal : shoppingCart.GrandTotal; }
+
+
+
             var cartItems = new List<CartItem>();
             if (cart.LineItemCount > 0)
             {
@@ -495,6 +504,15 @@ namespace CSDemo.Models.Checkout.Cart
                     cartItem.UnitPrice = product.Price.Amount;
                     cartItem.SubTotal = cartLine.Total.Amount;
                     cartItem.ExternalId = cartLine.ExternalCartLineId;
+
+
+
+                    if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { cartItem.UnitPrice = cartItem.UnitPrice > 0 ? (decimal)0.90 * cartItem.UnitPrice : cartItem.UnitPrice; }
+                    if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { cartItem.UnitPrice = cartItem.UnitPrice > 0 ? (decimal)0.75 * cartItem.UnitPrice : cartItem.UnitPrice; }
+
+                    if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { cartItem.SubTotal = cartItem.SubTotal > 0 ? (decimal)0.90 * cartItem.SubTotal : cartItem.SubTotal; }
+                    if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { cartItem.SubTotal = cartItem.SubTotal > 0 ? (decimal)0.75 * cartItem.SubTotal : cartItem.SubTotal; }
+
 
                     if (string.IsNullOrEmpty(cartItem.ImageUrl))
                     {

@@ -1,21 +1,21 @@
 ﻿#region
 
+using CSDemo.Models.Account;
+using CSDemo.Models.Checkout.Cart;
+using CSDemo.Models.Product;
+using Glass.Mapper.Sc;
+using Newtonsoft.Json;
+using Sitecore.Analytics;
+using Sitecore.Analytics.Data.Items;
+using Sitecore.Data;
+using Sitecore.Data.Items;
+using Sitecore.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Script.Services;
 using System.Web.Services;
-using CSDemo.Models.Checkout.Cart;
-using Sitecore.Analytics.Data.Items;
-using Sitecore.Analytics;
-using Sitecore.Diagnostics;
-using System.Web.Mvc;
-using CSDemo.Models.Product;
-using Newtonsoft.Json;
-using CSDemo.Models.Account;
-using Sitecore.Security.Accounts;
-using Sitecore.Configuration;
-using Glass.Mapper.Sc;
+
 
 #endregion
 
@@ -229,6 +229,97 @@ namespace CSDemo.AJAX
 
             return true;
         }
+
+                
+        //[ScriptMethod(UseHttpGet = true,ResponseFormat = ResponseFormat.Json)]
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public object GetProductsResult(string query)
+        {
+            var products = new List<object>();
+
+            //return "aaaa,bbbb,ccccc,dd,eeeee,fff,gggggg hhh".Split(',').ToList();
+            
+            var productsResult = ProductHelper.GetProductsByName(query);
+
+            if (productsResult != null && productsResult.Any())
+            {
+                foreach (var product in productsResult)
+                {
+                    products.Add(new {Id = product.Id, CatalogId = product.CatalogId, Guid = product.Guid, Title  = product.Title, Price = product.Price, CatalogName = product.CatalogName, ImageSrc= product.ImageSrc});
+                  
+                }
+            }
+
+            return new { success = true, total = products.Count , products = products };
+        }
+
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public object GetSubCategories(string category)
+        {
+            var categories = new List<object>();
+            var products = new List<object>();
+
+            var catalogId = ProductHelper.GetSiteRootCatalogId();
+
+            var catalogName = ProductHelper.GetSiteRootCatalogName();
+
+            var categoryId = ProductHelper.GetItemIdsFromName(category, catalogId);
+
+
+            var categoryItem = Sitecore.Context.Database.GetItem(new ID(categoryId));
+
+            if (categoryItem != null && categoryItem.HasChildren)
+            {
+                var subCategories =
+                    categoryItem.GetChildren()
+                        .Where(x => x.TemplateName == Constants.Products.GeneralCategoryTemplateName).ToList();
+
+                                
+                if (subCategories.Count >0 && subCategories.Any())
+                {
+                    foreach (Item subCategory in subCategories)
+                    {
+                        var gsubCategory = subCategory.GlassCast<Category>();
+
+                        if(gsubCategory.DefinitionName == "GeneralCategory")
+                        {
+                            categories.Add(new {text = subCategory.Name, value = subCategory.Name  });
+                        }
+                    }
+                }
+
+                var subProducts =
+                    categoryItem.GetChildren()
+                        .Where(x => x.TemplateName != Constants.Products.GeneralCategoryTemplateName).ToList();
+
+                                
+                if (subProducts.Count >0 && subProducts.Any())
+                {
+                    foreach (var subProduct in subProducts)
+                    {
+                        var gsubProduct = subProduct.GlassCast<Product>();
+
+                        if(gsubProduct.DefinitionName  != "GeneralCategory")
+                        {
+
+                            //products.Add(new {text = gsubProduct.Title, value = gsubProduct.Title  });
+
+                            var guid = Sitecore.Data.ID.Parse(gsubProduct.ID).ToString();
+
+                            //var prodid = gsubProduct.ProductId;
+
+                            products.Add(new {cat = catalogId, text = gsubProduct.Title, pid = gsubProduct.ProductId, pguid = guid, img = gsubProduct.FirstImage, price = gsubProduct.Price, catName = catalogName });
+                        }
+                    }
+                }
+            }
+
+            return new { success = true, id = category , categories = categories, products = products };
+        }
+
 
 
         #region Private Helpers

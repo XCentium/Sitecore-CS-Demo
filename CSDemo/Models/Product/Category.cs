@@ -1,13 +1,13 @@
 #region
 
-using System;
-using System.Collections.Generic;
 using CSDemo.Contracts;
 using CSDemo.Contracts.Product;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
-using Sitecore.Data.Items;
 using Glass.Mapper.Sc.Fields;
+using Sitecore.Data.Items;
+using System;
+using System.Collections.Generic;
 
 #endregion
 
@@ -16,7 +16,7 @@ namespace CSDemo.Models.Product
 
 
     [SitecoreType(AutoMap = true)]
-    public partial class Category : ICategory,IEditableBase
+    public partial class Category : ICategory, IEditableBase
     {
         #region Properties
         [SitecoreId]
@@ -27,7 +27,7 @@ namespace CSDemo.Models.Product
 
         [SitecoreField(Fields.DisplayName)]
         public virtual string Name { get; set; }
-        
+
         [SitecoreField(Fields.CatalogName)]
         public virtual string CatalogName { get; set; }
 
@@ -59,6 +59,10 @@ namespace CSDemo.Models.Product
         public virtual string ParentCategories { get; set; }
         [SitecoreField(Fields.Description)]
         public virtual string Description { get; set; }
+
+        [SitecoreField(Fields.CategoryDescription)]
+        public virtual string CategoryDescription { get; set; }
+
         [SitecoreField(Fields.ListPrice)]
         public virtual string ListPrice { get; set; }
 
@@ -93,6 +97,7 @@ namespace CSDemo.Models.Product
             public const string ListPrice = "ListPrice";
             public const string Images = "Images";
             public const string DisplayName = "__Display name";
+            public const string CategoryDescription = "Category description";
         }
         #endregion
 

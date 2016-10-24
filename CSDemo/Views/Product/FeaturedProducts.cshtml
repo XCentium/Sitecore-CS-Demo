@@ -43,7 +43,7 @@
                                             <i class="fa fa-star@(featuredProduct.Rating > 4 ? string.Empty : "-o")"></i>
                                         </div>
                                         <span class="price">
-                                            <ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>
+                                            <ins><span class="amount">@featuredProduct.ListPrice</span></ins>
                                         </span>
                                     </article>
                                 </a>
@@ -89,7 +89,7 @@
                                             <i class="fa fa-star@(featuredProduct.Rating>4 ? string.Empty:"-o" )"></i>
                                         </div>
                                         <span class="price">
-                                            <ins><span class="amount">@featuredProduct.Price.ToString("C")</span></ins>
+                                            <ins><span class="amount">@featuredProduct.ListPrice</span></ins>
                                         </span>
                                         }
                                     </li>

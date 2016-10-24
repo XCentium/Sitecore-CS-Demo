@@ -52,7 +52,7 @@ namespace CSDemo.Controllers
             [Bind(Prefix = Constants.QueryStrings.SearchQuery)] string query,
             [Bind(Prefix = Constants.QueryStrings.Facets)] string facetValues,
             [Bind(Prefix = Constants.QueryStrings.Sort)] string sortField = "Title",
-            [Bind(Prefix = Constants.QueryStrings.PageSize)] int pageSize = 2,
+            [Bind(Prefix = Constants.QueryStrings.PageSize)] int pageSize = 6,
             [Bind(Prefix = Constants.QueryStrings.SortDirection)] CommerceConstants.SortDirection sortDirection =
                 CommerceConstants.SortDirection.Desc,
             [Bind(Prefix = Constants.QueryStrings.Paging)] int pageNumber = 1)
@@ -134,14 +134,13 @@ namespace CSDemo.Controllers
             int pageSize, CommerceConstants.SortDirection? sortDirection)
         {
             var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
-            var searchInfo = new SearchInfo
-            {
-                SearchQuery = searchKeyword ?? string.Empty,
-                RequiredFacets = searchManager.GetFacetFieldsForItem(_context.GetCurrentItem<Item>()),
-                SortFields = searchManager.GetSortFieldsForItem(_context.GetCurrentItem<Item>()),
-                CatalogName = ConfigurationHelper.GetSiteSettingInfo("Catalog"),
-                ItemsPerPage = pageSize
-            };
+            var searchInfo = new SearchInfo();
+                                                                    
+            searchInfo.SearchQuery = searchKeyword ?? string.Empty;                       
+            searchInfo.CatalogName = ConfigurationHelper.GetSiteSettingInfo("Catalog");
+            var facetItem = _context.GetCurrentItem<Item>();
+            searchInfo.RequiredFacets = searchManager.GetFacetFieldsForItem(facetItem);
+            searchInfo.ItemsPerPage = pageSize;
 
             var productSearchOptions = new CommerceSearchOptions(searchInfo.ItemsPerPage, pageNumber - 1);
             UpdateOptionsWithFacets(searchInfo.RequiredFacets, facetValues, productSearchOptions);

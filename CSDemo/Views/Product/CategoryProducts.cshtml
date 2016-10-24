@@ -63,69 +63,123 @@
                     </aside>
                 </div>
                 <div class="col-sm-9">
-                    <div class="products-header">
-                        <div class="row">
-                            <div class="col-xs-6 col-sm-4">
-                                <form name="products_per_page" id="products_per_page" class="form-inline products-per-page">
-                                    <div class="form-group">
-                                        <label>Show:</label>
-                                    </div>
-                                    <div class="form-group">
-                                        <select name="prod_page_show" id="prod_page_show" class="form-control">
-                                            @for (int i = 1; i < 11; i++)
-                                            {
-                                                <option @(Model.PaginationViewModel.PageSize == i ? " selected " : string.Empty) value="@i">@i</option>
-                                            }
-                                            <option @(Model.PaginationViewModel.PageSize == 12 ? " selected " : string.Empty) value="12">12</option>
-                                            <option @(Model.PaginationViewModel.PageSize == 24 ? " selected " : string.Empty) value="24">24</option>
-                                            <option @(Model.PaginationViewModel.PageSize == 10000 ? " selected " : string.Empty) value="10000">ALL</option>
-                                        </select>
-                                    </div>
-                                </form>
-                            </div>
 
-                            <div class="col-xs-6 col-sm-8">
-                                <div class="btn-group toggle-list-grid hidden-xs" role="group">
-                                    <button type="button" class="btn btn-default active" id="toggle-grid"><i class="fa fa-th"></i></button>
-                                    <button type="button" class="btn btn-default" id="toggle-list"><i class="fa fa-list"></i></button>
+                    @if (Model.Category.Products == null)
+                    {
+                        <h2>@Html.Raw(Model.Category.Description)</h2>
+                        <div class="products-header">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <h2>This category has no products or sub-categories</h2>
                                 </div>
-                                <form name="products_sort" id="products_sort" class="form-inline order-by">
-                                    <div class="form-group">
-                                        <label>Sort by:</label>
-                                    </div>
-                                    <div class="form-group">
-
-                                        <select name="OrderBy" id="OrderBy" class="form-control">
-                                            <option @(Model.PaginationViewModel.OrderBy == string.Empty ? " selected " : string.Empty) value="">Default</option>
-                                            <option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByBrand ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByBrand">@CSDemo.Constants.Products.OrderByBrand</option>
-                                            <option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByRatings ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByRatings">@CSDemo.Constants.Products.OrderByRatings</option>
-                                            <option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByNewness ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByNewness">@CSDemo.Constants.Products.OrderByNewness</option>
-                                            <option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByPriceAsc ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByPriceAsc">@CSDemo.Constants.Products.OrderByPriceAsc</option>
-                                            <option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByPriceDesc ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByPriceDesc">@CSDemo.Constants.Products.OrderByPriceDesc</option>
-                                        </select>
-                                        <input type="hidden" name="CategoryID" id="Category" value="@Model.PaginationViewModel.CategoryId" />
-                                        <input type="hidden" name="Category" id="Category" value="@Model.PaginationViewModel.Category" />
-                                        <input type="hidden" name="PageSize" id="PageSize" value="@Model.PaginationViewModel.PageSize" />
-                                        <input type="hidden" name="CurrentPage" id="CurrentPage" value="@Model.PaginationViewModel.CurrentPage" />
-                                    </div>
-                                </form>
                             </div>
 
                         </div>
-                    </div>
-                    <div class="row grid" id="products">
+                    }
+                    else
+                    {
 
-                        @foreach (CSDemo.Models.Product.Product product in Model.Category.Products)
-                        {
-                            if (!string.IsNullOrEmpty(product.ListPrice.Trim()) && product.Title!="Add Initials") //TODO: demo fix, hiding initials product
+
+                        <div class="products-header">
+
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-4">
+                                    <form name="products_per_page" id="products_per_page" class="form-inline products-per-page">
+                                        <div class="form-group">
+                                            <label>Show:</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <select name="prod_page_show" id="prod_page_show" class="form-control">
+                                                @for (int i = 1; i < 11; i++)
+                                                {
+                                                    <option @(Model.PaginationViewModel.PageSize == i ? " selected " : string.Empty) value="@i">@i</option>
+                                                }
+                                                <option @(Model.PaginationViewModel.PageSize == 12 ? " selected " : string.Empty) value="12">12</option>
+                                                <option @(Model.PaginationViewModel.PageSize == 24 ? " selected " : string.Empty) value="24">24</option>
+                                                <option @(Model.PaginationViewModel.PageSize == 10000 ? " selected " : string.Empty) value="10000">ALL</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-8">
+                                    <div class="btn-group toggle-list-grid hidden-xs" role="group">
+                                        <button type="button" class="btn btn-default active" id="toggle-grid"><i class="fa fa-th"></i></button>
+                                        <button type="button" class="btn btn-default" id="toggle-list"><i class="fa fa-list"></i></button>
+                                    </div>
+                                    <form name="products_sort" id="products_sort" class="form-inline order-by">
+                                        <div class="form-group">
+                                            <label>Sort by:</label>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <select name="OrderBy" id="OrderBy" class="form-control">
+                                                <option @(Model.PaginationViewModel.OrderBy == string.Empty ? " selected " : string.Empty) value="">Default</option>
+                                                <option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByBrand ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByBrand">@CSDemo.Constants.Products.OrderByBrand</option>
+                                                <option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByRatings ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByRatings">@CSDemo.Constants.Products.OrderByRatings</option>
+                                                <option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByNewness ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByNewness">@CSDemo.Constants.Products.OrderByNewness</option>
+                                                <option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByPriceAsc ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByPriceAsc">@CSDemo.Constants.Products.OrderByPriceAsc</option>
+                                                <option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByPriceDesc ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByPriceDesc">@CSDemo.Constants.Products.OrderByPriceDesc</option>
+                                            </select>
+                                            <input type="hidden" name="CategoryID" id="Category" value="@Model.PaginationViewModel.CategoryId" />
+                                            <input type="hidden" name="Category" id="Category" value="@Model.PaginationViewModel.Category" />
+                                            <input type="hidden" name="PageSize" id="PageSize" value="@Model.PaginationViewModel.PageSize" />
+                                            <input type="hidden" name="CurrentPage" id="CurrentPage" value="@Model.PaginationViewModel.CurrentPage" />
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row grid" id="products">
+                            <div class="col-sm-12">
+                                @Html.Raw(Model.Category.CategoryDescription)
+                            </div>
+                            @foreach (CSDemo.Models.Product.Product product in Model.Category.Products)
                             {
-
-                                int count = 0;
-
-                                if (product.DefinitionName == "GeneralCategory")
+                                if (!string.IsNullOrEmpty(product.ListPrice.Trim()) && product.Title != "Add Initials") //TODO: demo fix, hiding initials product
                                 {
 
-                                    <!-- PRODUCT - START -->
+                                    int count = 0;
+
+                                    if (product.DefinitionName == "GeneralCategory")
+                                    {
+
+                                <!-- PRODUCT - START -->
+                                        <div class="col-sm-4 col-xs-6">
+                                            <article class="product-item">
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <div class="product-overlay">
+                                                            <div class="product-mask"></div>
+                                                            <a href="@product.Url" class="product-permalink"></a>
+                                                            @foreach (var image in product.Images)
+                                                            {
+                                                                count++;
+                                                                @RenderImage(image, x => x, new { Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive " }, isEditable: false)
+                                                                ;
+
+                                                                if (count == 1)
+                                                                {
+                                                                    break;
+                                                                }
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-9">
+                                                        <div class="product-body" style="height: 146px">
+                                                            <h3>@product.Title <span>Collection</span></h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                <!-- PRODUCT - END -->
+                                                            continue;
+                                    }
+
+
+                            <!-- PRODUCT - START -->
                                     <div class="col-sm-4 col-xs-6">
                                         <article class="product-item">
                                             <div class="row">
@@ -133,119 +187,97 @@
                                                     <div class="product-overlay">
                                                         <div class="product-mask"></div>
                                                         <a href="@product.Url" class="product-permalink"></a>
-                                                        @foreach (var image in product.Images)
+                                                        @if (product.Images != null && product.Images.Any())
                                                         {
-                                                            count++;
-                                                            @RenderImage(image, x => x, new { Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive " }, isEditable: false);
-
-                                                                                                                                                if (count == 1) { break; }
+                                                            foreach (var image in product.Images)
+                                                            {
+                                                                count++;
+                                                                @RenderImage(image, x => x, new { Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive product-image-" + count }, isEditable: false)
+                                                                ;
+                                                                if (count == 2)
+                                                                {
+                                                                    break;
+                                                                }
+                                                            }
                                                         }
+                                                        else
+                                                        {
+                                                            if (!string.IsNullOrEmpty(product.Image1) || !string.IsNullOrEmpty(product.Image2))
+                                                            {
+                                                                var altImages = product.AltImages();
+                                                                foreach (var src in altImages)
+                                                                {
+                                                                    count++;
+                                                                    <img src="@src" style="width: 420px; height: 287px; background-color: #ffffff" class="img-responsive product-image-@count" />
+                                                                    if (count == 2)
+                                                                    {
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+
+
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <div class="product-body" style="height: 146px">
-                                                        <h3>@product.Title <span>Collection</span></h3>
+                                                    <div class="product-body">
+                                                        <h3>@product.Title</h3>
+                                                        <div class="product-labels">
+                                                            @if (product.IsNew)
+                                                            {
+                                                                <span class="label label-info">new</span>
+                                                            }
+                                                            @if (product.IsOnSale)
+                                                            {
+                                                                <span class="label label-danger">sale</span>
+                                                            }
+                                                        </div>
+
+                                                        <div class="product-rating">
+                                                            <i class="fa fa-star@(product.Rating > 0 ? string.Empty : "-o")"></i>
+                                                            <i class="fa fa-star@(product.Rating > 1 ? string.Empty : "-o")"></i>
+                                                            <i class="fa fa-star@(product.Rating > 2 ? string.Empty : "-o")"></i>
+                                                            <i class="fa fa-star@(product.Rating > 3 ? string.Empty : "-o")"></i>
+                                                            <i class="fa fa-star@(product.Rating > 4 ? string.Empty : "-o")"></i>
+                                                        </div>
+                                                        <span class="price">
+                                                            <ins><span id="@string.Concat("productAmount", product.VariantProdId)" class="amount">@product.ListPrice</span></ins>
+                                                        </span>
+                                                        <p>@product.Description</p>
+                                                        @Html.Partial("~/Views/Product/_ComparisonControl.cshtml", product)
                                                     </div>
                                                 </div>
                                             </div>
                                         </article>
                                     </div>
-                    <!-- PRODUCT - END -->
-                                                continue;
+                            <!-- PRODUCT - END -->
                                 }
-
-
-                    <!-- PRODUCT - START -->
-                                <div class="col-sm-4 col-xs-6">
-                                    <article class="product-item">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <div class="product-overlay">
-                                                    <div class="product-mask"></div>
-                                                    <a href="@product.Url" class="product-permalink"></a>
-                                                    @if (product.Images != null && product.Images.Any())
-                                                    {
-                                                        foreach (var image in product.Images)
-                                                        {
-                                                            count++;
-                                                            @RenderImage(image, x => x, new { Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive product-image-" + count }, isEditable: false); if (count == 2) { break; }
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        if (!string.IsNullOrEmpty(product.Image1) || !string.IsNullOrEmpty(product.Image2))
-                                                        {
-                                                            var altImages = product.AltImages();
-                                                            foreach (var src in altImages)
-                                                            {
-                                                                count++;
-                                                                <img src="@src" style="width:420px;height:287px;background-color:#ffffff" class="img-responsive product-image-@count" />
-                                                                if (count == 2) { break; }
-                                                            }
-                                                        }
-                                                    }
-
-
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <div class="product-body">
-                                                    <h3>@product.Title</h3>
-                                                    <div class="product-labels">
-                                                        @if (product.IsNew)
-                                                        {
-                                                            <span class="label label-info">new</span>
-                                                        }
-                                                        @if (product.IsOnSale)
-                                                        {
-                                                            <span class="label label-danger">sale</span>
-                                                        }
-                                                    </div>
-
-                                                    <div class="product-rating">
-                                                        <i class="fa fa-star@(product.Rating > 0 ? string.Empty : "-o")"></i>
-                                                        <i class="fa fa-star@(product.Rating > 1 ? string.Empty : "-o")"></i>
-                                                        <i class="fa fa-star@(product.Rating > 2 ? string.Empty : "-o")"></i>
-                                                        <i class="fa fa-star@(product.Rating > 3 ? string.Empty : "-o")"></i>
-                                                        <i class="fa fa-star@(product.Rating > 4 ? string.Empty : "-o")"></i>
-                                                    </div>
-                                                    <span class="price">
-                                                        <ins><span id="@string.Concat("productAmount", product.VariantProdId)" class="amount">@product.ListPrice</span></ins>
-                                                    </span>
-                                                    <p>@product.Description</p>
-                                                    @Html.Partial("~/Views/Product/_ComparisonControl.cshtml", product)
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                    <!-- PRODUCT - END -->
                             }
-                        }
-                    </div>
-                    @if (Model.PaginationViewModel.TotalPages > 1)
-                    {
-                        var left = (Model.PaginationViewModel.CurrentPage > 1) ? Model.PaginationViewModel.CurrentPage - 1 : 1;
-                        var right = (Model.PaginationViewModel.CurrentPage < Model.PaginationViewModel.TotalPages) ? Model.PaginationViewModel.CurrentPage + 1 : Model.PaginationViewModel.TotalPages;
-
-                        <div class="pagination-wrapper">
-                            <ul id="products_page" class="pagination">
-                                <li><a val="@left" href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                                @for (int i = 0; i < Model.PaginationViewModel.TotalPages; i++)
-                                {
-                                    var thePage = i + 1;
-                                    var active = (Model.PaginationViewModel.CurrentPage == thePage) ? " class=active" : "";
-                                    <li @active><a val="@thePage" href="#">@thePage</a></li>
-                                }
-                                <li><a val="@right" href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                            </ul>
                         </div>
-                    }
+                        if (Model.PaginationViewModel.TotalPages > 1)
+                        {
+                            var left = (Model.PaginationViewModel.CurrentPage > 1) ? Model.PaginationViewModel.CurrentPage - 1 : 1;
+                            var right = (Model.PaginationViewModel.CurrentPage < Model.PaginationViewModel.TotalPages) ? Model.PaginationViewModel.CurrentPage + 1 : Model.PaginationViewModel.TotalPages;
 
+                            <div class="pagination-wrapper">
+                                <ul id="products_page" class="pagination">
+                                    <li><a val="@left" href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                                    @for (int i = 0; i < Model.PaginationViewModel.TotalPages; i++)
+                                    {
+                                        var thePage = i + 1;
+                                        var active = (Model.PaginationViewModel.CurrentPage == thePage) ? " class=active" : "";
+                                        <li @active><a val="@thePage" href="#">@thePage</a></li>
+                                    }
+                                    <li><a val="@right" href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                                </ul>
+                            </div>
+                        }
+                    }
                 </div>
 
             </div>
         </section>
     }
 }
-}
+
