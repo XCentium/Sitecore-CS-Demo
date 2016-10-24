@@ -21,4 +21,4 @@ Languages:
       Value: sitecore\admin
     - ID: af321234-4eb9-4ef5-9197-65903351939c
       Hint: Text
-      Value: where current contact return to the website within the past  [Number,Integer,,number] days
+      Value: where current contact returned to the website within the past  [Number,Integer,,number] days

@@ -13,6 +13,9 @@ using System.Web.Mvc;
 using CSDemo.Models.Product;
 using Newtonsoft.Json;
 using CSDemo.Models.Account;
+using Sitecore.Security.Accounts;
+using Sitecore.Configuration;
+using Glass.Mapper.Sc;
 
 #endregion
 
@@ -58,8 +61,32 @@ namespace CSDemo.AJAX
         {
             string ret = CartHelper.SubmitCart();
             RegisterGoal(Constants.Marketing.SubmitOrderGoalId, contextItemId);
+
+            if (!Sitecore.Context.User.IsAuthenticated) return ret;
+            decimal total = 0;
+            decimal.TryParse(orderTotal, out total);
+            var newStatus = UserStatus.GetStatus(total);
+            var user = Sitecore.Context.User;
+            if (user.Domain.Name.ToLower() != "commerceusers") return ret;
+
+            
+            if (newStatus == null)
+                return ret;
+            var statuses = UserStatus.GetAllStatuses();
+            if (string.IsNullOrWhiteSpace(user.Profile.Comment))
+                user.Profile.Comment = newStatus.Name;
+            else
+            {
+                var currentStatus = statuses.First(s => s.Name == user.Profile.Name);
+                if (currentStatus == null) return ret;
+                if (currentStatus.Amount < newStatus.Amount)
+                    user.Profile.Comment = newStatus.Name;
+            }
+
             return ret;
         }
+
+        
 
 
         

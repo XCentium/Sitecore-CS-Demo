@@ -14,13 +14,12 @@ Languages:
       Value: 20160316T203924Z
     - ID: 35d787ae-0f1f-412a-a570-d5a79018ebb8
       Hint: Image
-      Value: "<image mediaid=\"{C0B9D0EB-5E7C-440B-8FB5-8C744B5E914A}\" />"
+      Value: "<image mediaid=\"{73FDA8C0-7DB4-457B-9083-00E7D127C457}\" />"
     - ID: 8ef3659b-8284-4484-9b7e-6fff97496411
       Hint: Content
       Value: |
-        <h1 class="border animation top-to-bottom">Alternate version, triggered by Campaign</h1>
+        <h1 class="border animation top-to-bottom">Alternate version, triggered by Facebook Campaign</h1>
         <div class="container">
         <em class="fa fa-paper-plane animation top-to-bottom delay-1 slow"></em>
-        <h1 class="animation top-to-bottom slow">XCMarket</h1>
-        <p class="animation bottom-to-top slow">30+ HTML Pages &bull; Simple Design &bull; Components </p>
+        <h1 class="animation top-to-bottom slow">Backpacks on Sale</h1>
         </div>

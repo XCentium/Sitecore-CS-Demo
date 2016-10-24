@@ -1,0 +1,23 @@
+﻿---
+ID: 8483e5da-dd02-4fef-9975-3ce4e15430f7
+Parent: 3936f488-9a41-4d9f-940f-895b81014522
+Template: 3936f488-9a41-4d9f-940f-895b81014522
+Path: /sitecore/templates/CSDemo/Components/Tagging/User Status/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160831T190454Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
+    - ID: d61d3d94-869d-4968-90c0-89e916af76f3
+      Hint: Spending Amount
+      Value: 100
+    - ID: f8f5c80a-4c82-45b4-a601-60d61d88ca1d
+      Hint: Badge
+      Value: "<image mediaid=\"{D97B54E7-F5DE-4B2C-B466-F25B13FCB2B9}\" />"

@@ -1,0 +1,72 @@
+﻿---
+ID: a86bd4a2-8524-4f11-b3c1-03d585e27464
+Parent: 4d4205d9-666d-4777-ae99-e40d500125ca
+Template: fee031c4-e8e3-49cb-b7b6-3e9afa33d5be
+Path: /sitecore/content/CSDemo/Home/Blogs/2016/05/16/Adrenaline Aid Kit
+DB: master
+SharedFields:
+- ID: b0a67b2a-8b07-4e0b-8809-69f751709806
+  Hint: __Tracking
+  Type: Tracking
+  Value: |
+    <tracking>
+      <profile id="{9311296F-1A3D-4E58-AED1-0A6B4B1E654B}" name="Score">
+        <key name="CampingTools" value="2" />
+        <key name="ClimbingTools" value="2" />
+        <key name="ClothingCamping" value="0" />
+        <key name="ClothingClimbing" value="0" />
+        <key name="Hiking" value="0" />
+        <key name="SalesAndBargains" value="4" />
+      </profile>
+    </tracking>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 06b84f39-cf71-446a-81aa-30e76febe4a5
+      Hint: Author
+      Value: {C8AA60E8-F51B-461B-BEC2-BE189049BB7C}
+    - ID: 0e02704d-0afd-4102-8d99-9241a8b03c89
+      Hint: Category
+      Value: {9A9E7235-3A5E-4577-AD11-A99B81C3DE4E}
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160516T061117Z
+    - ID: 2779a63d-dd7f-4e0f-96c0-4066f90b6a8d
+      Hint: Summary
+      Value: Announcing Summer Collection - link to a special category that shows summer collector
+    - ID: 39e1df71-9e59-4dca-a4c1-ec588bc554ec
+      Hint: Thumb
+      Value: "<image mediaid=\"{93A9EC8E-8523-45C7-8490-9C2F61C2AE8D}\" />"
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
+    - ID: 9608e520-ef16-49fc-bd92-75cc101e5fec
+      Hint: Publish Date
+      Value: 20160516T061117Z
+    - ID: 9821df39-a4bc-476b-baef-2a2922c7a8c3
+      Hint: Title
+      Value: Summer Blitz Sale
+    - ID: da2c062a-087b-488b-8505-c5e4f52d6e4b
+      Hint: Main
+      Value: 
+    - ID: f148b76b-8bc2-4a5b-89f1-9e5e42ed7f85
+      Hint: Body
+      Value: |
+        <span style="color: #222222; background-color: #ffffff;">Mount Whitney, of the California Sierra Nevada, holds numerous distinctions. It is the highpoint of both Tulare &amp; Inyo counties. It is the highest peak in the Sierra, &amp; indeed in all of California. Finally, it rises higher than any piece of land in the United States outside of Alaska.&nbsp;</span><br style="color: #222222; background-color: #ffffff;" />
+        <br style="color: #222222; background-color: #ffffff;" />
+        <span style="color: #222222; background-color: #ffffff;">Mount Whitney's elevation stature continues to intrigue the human psyche, both from a civilian as well as a governmental perspective. Its elevation seems to be continually evaluated and reevaluated using the newest technologies, perpetually changing (usually in an upward trend) the mountain's height. The NPS plaque on the mountain lists Whitney's official height at 14,496.811 feet.&nbsp;</span><a href="http://www.ngs.noaa.gov/cgi-bin/ds_mark.prl?PidBox=GT1811" style="color: #486ca0; background-color: #ffffff;">The most recent observations</a><span style="color: #222222; background-color: #ffffff;">&nbsp;by NGS (National Geodetic Survey)/NOAA (National Oceanographic &amp; Atmospheric Administration) put it at 14,505' (4,421m)- thanks&nbsp;</span><a href="http://www.summitpost.org/user_page.php?user_id=28054" style="color: #486ca0; background-color: #ffffff;">Eleutheros</a><span style="color: #222222; background-color: #ffffff;">!</span><br style="color: #222222; background-color: #ffffff;" />
+        <br style="color: #222222; background-color: #ffffff;" />
+        <span style="color: #222222; background-color: #ffffff;">All this being said, it is still no 5,000m (let alone 6,000 or 7,000m) peak. It would be a minor (if somewhat steep on certain aspects) foothill in any of the Earth&rsquo;s great ranges. It harbors no glaciers. A huge number of people, possessing little wilderness skills or technical expertise, manage to run, hike, &amp;/or crawl their way to the top of this large piece of exposed granite each year via the uninspiring Mt. Whitney trail.&nbsp;</span><br style="color: #222222; background-color: #ffffff;" />
+        <br style="color: #222222; background-color: #ffffff;" />
+        <span style="color: #222222; background-color: #ffffff;">The attributes which make Mt. Whitney a truly great mountain are frequently overlooked. History, commanding position, excellent rock, its great east face &amp; &lsquo;subsidiary&rsquo; needles, &amp; a tantalizing selection of routes are arguably the bread &amp; butter of Mt. Whitney. During the winter months, delightful opportunities also exist for the ski mountaineer / backcountry snowboarder.</span><br style="color: #222222; background-color: #ffffff;" />
+        <br style="color: #222222; background-color: #ffffff;" />
+        <span style="color: #222222; background-color: #ffffff;">While its gentle western slopes would hardly inspire the hardened mountaineer, Whitney&rsquo;s east face, erupting 2,000 ft. above cold &amp; serene Iceberg Lake, draws the climber&rsquo;s eye upward &amp; makes them yearn. Whitney&rsquo;s subsidiary needles, (to the south of the main east face), are awe-inspiring enough by themselves, &amp; have their own epics, legends, &amp; lore firmly established.&nbsp;</span><br style="color: #222222; background-color: #ffffff;" />
+        <br style="color: #222222; background-color: #ffffff;" />
+        <span style="color: #222222; background-color: #ffffff;">The proximity of the highest point in the continental US with the lowest point in North America has not escaped notice. The&nbsp;</span><a href="http://www.badwater.com/" style="color: #486ca0; background-color: #ffffff;">Badwater Ultramarathon,</a><span style="color: #222222; background-color: #ffffff;">&nbsp;begun officially in 1987, takes some of the most masochistic individuals imaginable from Badwater (Death Valley) to the lofty summit of Mt. Whitney. Before this was &lsquo;en vogue,&rsquo; Stan Rodefer and Jim Burnworth of San Diego became the first people to do the Badwater/Whitney (Lowest/Highest) hike in recorded history, in October 1969. They took 2 weeks, crossed the dreaded salt flats and hiked a direct route not using roads or any other conveniences (this was documented by the Park Rangers and in a November 4, 1969 San Diego Tribune article entitled "Hikers View High, Low Sites in the U.S.&rdquo;). Props. Ouch.</span><br style="color: #222222; background-color: #ffffff;" />
+        <p>&nbsp;</p>
+        <p><a href="/search?s=Title&amp;q=sale&amp;ps=8&amp;pn=1">View All On-Sale Summer Items</a></p>
+    - ID: fe842158-1c63-48ac-91cd-85bf89f473c9
+      Hint: Tags
+      Value: {D31C4FA9-8E11-4ED7-9606-54E07D258640}|{76A1A750-64CD-442A-86E8-373BE1BBE24B}|{EECB2F99-8DD6-4611-863F-D8410FBA46FE}

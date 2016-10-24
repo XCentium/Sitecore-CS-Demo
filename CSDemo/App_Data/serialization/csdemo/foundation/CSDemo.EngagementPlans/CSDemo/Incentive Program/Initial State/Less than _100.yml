@@ -12,7 +12,7 @@ SharedFields:
     <ruleset>
       <rule uid="{84351DB0-5A9C-420D-B219-9F811C599165}">
         <conditions>
-          <condition id="{9B1A61F1-8716-41F0-9FC7-3C3757EE5E6D}" uid="16C70ED01F704C9C82A6B9820FDE751E" OutcomeDefinition="{9016E456-95CB-42E9-AD58-997D6D77AE83}" operatorid="{E362A3A4-E230-4A40-A7C4-FC42767E908F}" value="5" />
+          <condition id="{90CDE8C0-D67C-41E0-96EA-C94E8AFA2AEE}" uid="268D7555C72149E09A2AFF06F096A62A" Amount="1" operatorid="{B88CD556-082E-4385-BB76-E4D1B565F290}" />
         </conditions>
       </rule>
     </ruleset>
@@ -39,7 +39,7 @@ Languages:
     Value: Has the customer made a purchase for less than a given amount?
   - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
     Hint: __Display name
-    Value: Less than $5?
+    Value: Less than $1?
   Versions:
   - Version: 1
     Fields:

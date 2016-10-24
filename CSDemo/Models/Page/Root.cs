@@ -5,6 +5,7 @@ using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using System;
 using Sitecore.Data.Items;
+using CSDemo.Models.Account;
 
 #endregion
 
@@ -13,6 +14,10 @@ namespace CSDemo.Models.Page
     [SitecoreType]
     public class Root : IRoot
     {
+        public Root()
+        {
+            UserStatus = UserStatus.GetStatus(Sitecore.Context.User);
+        }
 
         #region Properties
 
@@ -43,6 +48,8 @@ namespace CSDemo.Models.Page
         [SitecoreInfo(SitecoreInfoType.Path)]
         public virtual string Path { get; set; }
 
+        [SitecoreIgnore]
+        public UserStatus UserStatus { get; set; }
 
         [SitecoreField(Fields.Catalog)]
         public virtual Item Catalog { get; set; }

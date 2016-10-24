@@ -37,6 +37,17 @@ namespace CSDemo.Models.Checkout.Cart
         private readonly ContactFactory _contactFactory = new ContactFactory();
         private readonly AccountHelper _accountService;
 
+        public CartHelper(string shopName)
+        {
+            if (Tracker.Current == null)
+            {
+                Tracker.StartTracking();
+            }
+            ShopName = shopName;
+            DefaultCartName = CommerceConstants.CartSettings.DefaultCartName;
+            _accountService = new AccountHelper(this, new CustomerServiceProvider());
+        }
+
         public CartHelper()
         {
             if (Tracker.Current == null)

@@ -18,7 +18,12 @@
                         <ul class="list-inline links">
                             @if (Sitecore.Context.User.IsAuthenticated)
                             {
-                                <li>Welcome [@Sitecore.Context.User.Profile.FullName] <a href="~/Account">My account</a></li>
+                                <li>Welcome [@Sitecore.Context.User.Profile.FullName] 
+                                @if (Model.UserStatus != null)
+                                {
+                                    @RenderImage(Model.UserStatus, m=>m.Badge, new { w = 15, @class = "badge", @title=Model.UserStatus.Name +" Member" })
+                                }
+                                <a href="~/Account">My account</a></li>
                             }
                             <li><a href="~/cart">Cart</a></li>
                             <li><a href="~/checkout">Checkout</a></li>

@@ -14,14 +14,4 @@ Languages:
       Value: 20160316T204017Z
     - ID: 35d787ae-0f1f-412a-a570-d5a79018ebb8
       Hint: Image
-      Value: "<image mediaid=\"{C0B9D0EB-5E7C-440B-8FB5-8C744B5E914A}\" />"
-    - ID: 8ef3659b-8284-4484-9b7e-6fff97496411
-      Hint: Content
-      Value: |
-        <h1 class="border animation top-to-bottom">Alternate version, triggered by Campaign</h1>
-        <h1 class="border animation top-to-bottom">The <b>easiest</b> way to shop</h1>
-        <ul class="list-unstyled">
-            <li class="animation left-to-right delay-1"><i class="fa fa-check"></i> An Established Product</li>
-            <li class="animation left-to-right delay-2"><i class="fa fa-check"></i> True Premium Quality</li>
-            <li class="animation left-to-right delay-3"><i class="fa fa-check"></i> Dedicated Support</li>
-        </ul>
+      Value: "<image mediaid=\"{1CD42A06-BDC0-4BB9-A60A-E813295A41C7}\" />"

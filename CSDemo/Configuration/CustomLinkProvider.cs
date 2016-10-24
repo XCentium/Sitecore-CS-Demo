@@ -4,6 +4,7 @@ using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Links;
+using Sitecore.Configuration;
 
 namespace CSDemo.Configuration
 {
@@ -39,8 +40,12 @@ namespace CSDemo.Configuration
 
         private string GetCategoryUrl(Item categoryItem, UrlOptions options)
         {
-            if(Context.Database == null) return base.GetItemUrl(categoryItem, options);
-            var categoriesListingPage = Context.Database.GetItem(ConfigurationHelper.GetSiteSettingInfo("CategoryListing"));
+            var database = Context.Database;
+            if (database == null || database.Name.ToLower() == "core")
+                database = Factory.GetDatabase("master");
+            if(database == null) return base.GetItemUrl(categoryItem, options);
+
+            var categoriesListingPage = database.GetItem(ConfigurationHelper.GetSiteSettingInfo("CategoryListing"));
             if (categoriesListingPage == null) return base.GetItemUrl(categoryItem, options);
             return
                 $"{LinkManager.GetItemUrl(categoriesListingPage)}/{(options.LowercaseUrls ? categoryItem.Name.ToLower() : categoryItem.Name)}";

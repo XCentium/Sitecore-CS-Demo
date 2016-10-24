@@ -1,0 +1,17 @@
+﻿---
+ID: 102395a9-32d6-4b30-8631-ccb06511ef14
+Parent: 461bcc39-770b-484c-a179-7f2de86e67a0
+Template: fe5dd826-48c6-436d-b87a-7c4210c7413b
+Path: /sitecore/media library/CSDemo/User Badges
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160831T203633Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo

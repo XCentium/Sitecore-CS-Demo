@@ -178,7 +178,7 @@ namespace CSDemo.Controllers
                 NotificationSigneupInput inputModel = new NotificationSigneupInput()
                 {
                     CatalogName = model.CatalogName,
-                    Email = model.VisitorSignupForStockNotificationEmail,
+                    Email = Context.User.Profile.Email,
                     ProductId = model.ProductId
                 };
                 Product.VisitorSignupForStockNotification(Context.Site.Name, inputModel, model.LocationName ?? string.Empty);

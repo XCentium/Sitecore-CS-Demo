@@ -1,0 +1,42 @@
+﻿---
+ID: 9397430f-aa85-48d0-bf6d-17acc5e46129
+Parent: fe5331cb-a759-44aa-bdd9-d6457177634c
+Template: 6e5b63d6-2401-4a52-8b4d-cfef5e4e9752
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CSDemo/Test
+DB: master
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: {689E2994-4656-4C58-9112-7826CB46EE69}
+- ID: c36d22d2-94fc-46ac-91db-2cf322c66895
+  Hint: Flow designer items
+  Value: |
+    <flowDesignerItems>
+      <connectors>
+        <connector itemId="1b6013cc-2572-451d-89f0-14907e4463af" originId="00000000-0000-0000-0000-000000000000" designerId="da2d5b15-00a6-4c5f-8e03-6c65ff37cf74" name="New item" description="Description" startItemId="1b0fdf6f-7da3-474a-b7fb-abc7ee17e44d" endItemId="74c2383b-0920-47dc-b967-6d77726251ca" points="23,12 23,16" />
+        <connector itemId="7ab83094-db55-4865-a60f-90a1000e3f0c" originId="00000000-0000-0000-0000-000000000000" designerId="2765fa95-e1a3-4080-bfe1-d45993386955" name="New item" description="Description" startItemId="74c2383b-0920-47dc-b967-6d77726251ca" endItemId="3f2cf839-f72a-4a7c-b268-c04c7a865428" points="28,19 34,19" />
+      </connectors>
+      <disconnectedItems />
+      <flowRenderedItemsValues>
+        <flowRenderedItemValues itemId="1b0fdf6f-7da3-474a-b7fb-abc7ee17e44d" x="17" y="6" width="12" height="6" zIndex="5" backgroundColor="#FF00344E" foregroundColor="#FFFFFFFF" iconUri="" showIcon="false" fieldEditorValues="&lt;fields itemId=&quot;{D637DCD5-30A7-4609-B561-62A4158ED092}&quot;&gt;&#xD;&#xA;  &lt;field id=&quot;{06F2D72A-1924-4B9A-BA1E-186CE4E57EFD}&quot; name=&quot;Description&quot; value=&quot;Description&quot; /&gt;&#xD;&#xA;  &lt;field id=&quot;{B5E02AD9-D56F-4C41-A065-A133DB87BDEB}&quot; name=&quot;__Display name&quot; value=&quot;Start&quot; /&gt;&#xD;&#xA;&lt;/fields&gt;" />
+        <flowRenderedItemValues itemId="74c2383b-0920-47dc-b967-6d77726251ca" x="18" y="16" width="10" height="6" zIndex="10" backgroundColor="#FF00767E" foregroundColor="#FFFFFFFF" iconUri="" showIcon="false" fieldEditorValues="&lt;fields itemId=&quot;{614BAFF9-3ECF-4201-8073-38C18597092A}&quot;&gt;&#xD;&#xA;  &lt;field id=&quot;{06F2D72A-1924-4B9A-BA1E-186CE4E57EFD}&quot; name=&quot;Description&quot; value=&quot;Description&quot; /&gt;&#xD;&#xA;  &lt;field id=&quot;{E13DCD09-D9BB-43C9-8D7D-438C79D714CA}&quot; name=&quot;Evaluate&quot; value=&quot;{B81C1F4C-8B83-44D9-902F-448463DBCCBC}&quot; /&gt;&#xD;&#xA;  &lt;field id=&quot;{21F3482B-BB14-4555-BA5D-AF20D400D5B9}&quot; name=&quot;Rule&quot; value=&quot;&amp;lt;ruleset&amp;gt;&amp;#xD;&amp;#xA;  &amp;lt;rule uid=&amp;quot;{E973F987-191F-496A-A269-3FFFE566A4FF}&amp;quot;&amp;gt;&amp;#xD;&amp;#xA;    &amp;lt;conditions&amp;gt;&amp;#xD;&amp;#xA;      &amp;lt;condition id=&amp;quot;{4888ABBB-F17D-4485-B14B-842413F88732}&amp;quot; uid=&amp;quot;742F341DD1024ECEAFA7B10730604B24&amp;quot; /&amp;gt;&amp;#xD;&amp;#xA;    &amp;lt;/conditions&amp;gt;&amp;#xD;&amp;#xA;  &amp;lt;/rule&amp;gt;&amp;#xD;&amp;#xA;&amp;lt;/ruleset&amp;gt;&quot; /&gt;&#xD;&#xA;  &lt;field id=&quot;{B5E02AD9-D56F-4C41-A065-A133DB87BDEB}&quot; name=&quot;__Display name&quot; value=&quot;true&quot; /&gt;&#xD;&#xA;&lt;/fields&gt;" />
+        <flowRenderedItemValues itemId="43a53eef-fe49-4a54-b827-8f9c2825d596" x="10" y="10" width="8" height="4" zIndex="0" backgroundColor="#FF00344E" foregroundColor="#FFFFFFFF" iconUri="/temp/iconcache/imaging/32x32/line_straight_blue_h.png" showIcon="true" fieldEditorValues="&lt;fields itemId=&quot;{62560DD7-C643-49D4-946D-66EE09D7B3C1}&quot;&gt;&#xD;&#xA;  &lt;field id=&quot;{B5E02AD9-D56F-4C41-A065-A133DB87BDEB}&quot; value=&quot;&quot; name=&quot;__Display name&quot; /&gt;&#xD;&#xA;  &lt;field id=&quot;{A291A22B-99E2-46BB-A27B-8EC744275396}&quot; value=&quot;CSDemo.Configuration.Social.PostMessageToFacebook,CSDemo&quot; name=&quot;Type&quot; /&gt;&#xD;&#xA;  &lt;field id=&quot;{8728A037-47D3-4180-B754-87926EDA7AE8}&quot; value=&quot;&quot; name=&quot;Editor&quot; /&gt;&#xD;&#xA;&lt;/fields&gt;" />
+        <flowRenderedItemValues itemId="3f2cf839-f72a-4a7c-b268-c04c7a865428" x="34" y="16" width="12" height="6" zIndex="11" backgroundColor="#FF00344E" foregroundColor="#FFFFFFFF" iconUri="" showIcon="false" fieldEditorValues="" />
+        <flowRenderedItemValues itemId="da2d5b15-00a6-4c5f-8e03-6c65ff37cf74" x="23" y="12" width="10" height="10" zIndex="4" backgroundColor="#00FFFFFF" foregroundColor="#FFFFFFFF" iconUri="" showIcon="false" fieldEditorValues="" />
+        <flowRenderedItemValues itemId="2765fa95-e1a3-4080-bfe1-d45993386955" x="28" y="19" width="10" height="10" zIndex="9" backgroundColor="#00FFFFFF" foregroundColor="#FFFFFFFF" iconUri="" showIcon="false" fieldEditorValues="" />
+      </flowRenderedItemsValues>
+    </flowDesignerItems>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160902T190625Z
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: {EDCBB550-BED3-490F-82B8-7B2F14CCD26E}
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo

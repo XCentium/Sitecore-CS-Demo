@@ -1,0 +1,28 @@
+﻿---
+ID: 3936f488-9a41-4d9f-940f-895b81014522
+Parent: a2a77e3b-eac4-4906-becd-712100d52105
+Template: ab86861a-6030-46c5-b394-e8f99e8b87db
+Path: /sitecore/templates/CSDemo/Components/Tagging/User Status
+DB: master
+SharedFields:
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: Applications/16x16/star_yellow.png
+- ID: 12c33f3f-86c5-43a5-aeb4-5598cec45116
+  Hint: __Base template
+  Type: tree list
+  Value: {1930BBEB-7805-471A-A3BE-4858AC7CF696}
+- ID: f7d48a55-2158-4f02-9356-756654404f73
+  Hint: __Standard values
+  Value: {8483E5DA-DD02-4FEF-9975-3CE4E15430F7}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160831T190416Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo

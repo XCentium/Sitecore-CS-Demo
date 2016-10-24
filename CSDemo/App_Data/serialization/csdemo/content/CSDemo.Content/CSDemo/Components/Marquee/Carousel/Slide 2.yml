@@ -14,16 +14,16 @@ Languages:
       Value: 20160227T020642Z
     - ID: 35d787ae-0f1f-412a-a570-d5a79018ebb8
       Hint: Image
-      Value: "<image mediaid=\"{067D41B6-9BCD-4FA3-B2C0-8770186AD349}\" />"
+      Value: "<image mediaid=\"{FD704D2A-8DCF-4D71-91B2-D8629A2F1776}\" />"
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
       Value: sitecore\admin
     - ID: 8ef3659b-8284-4484-9b7e-6fff97496411
       Hint: Content
       Value: |
-        <h1 class="border animation top-to-bottom">The <b>easiest</b> way to shop</h1>
+        <h1 class="border animation top-to-bottom">The <strong>easiest</strong> way to shop</h1>
         <ul class="list-unstyled">
-            <li class="animation left-to-right delay-1"><i class="fa fa-check"></i> An Established Product</li>
-            <li class="animation left-to-right delay-2"><i class="fa fa-check"></i> True Premium Quality</li>
-            <li class="animation left-to-right delay-3"><i class="fa fa-check"></i> Dedicated Support</li>
+            <li class="animation left-to-right delay-1"><em class="fa fa-check"></em> An Established Product</li>
+            <li class="animation left-to-right delay-2"><em class="fa fa-check"></em> True Premium Quality</li>
+            <li class="animation left-to-right delay-3"><em class="fa fa-check"></em> Dedicated Support</li>
         </ul>

@@ -24,24 +24,25 @@
             }
             else
             {
-                <a href="#" class="collapsed notify-me__link" data-toggle="collapse" data-target="#notify-collapse">
+                @*<a href="#" class="collapsed notify-me__link" data-toggle="collapse" data-target="#notify-collapse">
                     <span class="notify-me__closed-text"><b>Notify me when back in stock</b></span>
                     <span class="notify-me__opened-text">Cancel</span>
-                </a>
-                <div id="notify-collapse" class="collapse form-inline notify-me__form">
-                    <fieldset>
+                </a>*@
+                <div id="notify-collapse" class=" form-inline notify-me__form">
+                    @*<fieldset>
                         <div class="form-group">
-                            @Html.TextBoxFor(x => x.VisitorSignupForStockNotificationEmail, "", new {@placeholder = "Email Address"})
+                            @Html.TextBoxFor(x => x.VisitorSignupForStockNotificationEmail, "", new {@placeholder = "Email Address"}) 
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-xs">Sign Up</button>
                         </div>
-                    </fieldset>
+                    </fieldset>*@
+                    <button type="submit" class="btn btn-primary btn-xs">Notify me when it's back!</button>
                     @if (result == "error")
                     {
                         <p class="notify-me__signed-up">Oops! Something went wrong, please try again.</p>
                     }
-                    <p class="notify-me__signed-up">We'll notify you as soon as this item is back in stock!</p>
+                    <p class="notify-me__signed-up">We'll notify you by email and via Facebook as soon as this item is back in stock!</p>
                 </div>
             }
         </div>

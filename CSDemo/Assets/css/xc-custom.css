@@ -400,3 +400,17 @@ ul.variantcolorlist {
     color:#454545;
 }
 
+.badge{
+    display:inline-block !important;
+    margin-right:20px;
+}
+.cart-upsell .highlight{
+    
+    font-weight:bold;
+}
+
+    .cart-upsell p {
+        color:#E87169 !important;
+            width: 50%;
+    text-align: right;
+    }

@@ -734,7 +734,7 @@ namespace CSDemo.Models.Product
         /// <returns></returns>
         internal static SearchResultItem GetItemByName(string productId)
         {
-            var index = ContentSearchManager.GetIndex($"sitecore_{Sitecore.Context.Database}_index");
+            var index = ContentSearchManager.GetIndex($"sitecore_{(Context.Database==null || Context.Database.Name.ToLower() == "core"? "master":Context.Database.Name)}_index");
             try
             {
                 var culture = Context.Language.CultureInfo;
