@@ -155,7 +155,7 @@
       <HintPath>..\Lib\Sitecore\Sitecore.Commerce.Engine.Connect.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Commerce.Remote">
-      <HintPath>..\..\..\Sitecore-CS-Demo-SC_8-1_Upgrade\Lib\Sitecore\Sitecore.Commerce.Remote.dll</HintPath>
+      <HintPath>..\Lib\Sitecore\Sitecore.Commerce.Remote.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.ContentSearch">
       <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.dll</HintPath>
@@ -241,13 +241,13 @@
       <HintPath>..\Lib\Sitecore\WebGrease.dll</HintPath>
     </Reference>
     <Reference Include="XBlogGlobal">
-      <HintPath>..\Lib\Sitecore\XBlogGlobal.dll</HintPath>
+      <HintPath>..\Lib\XBlog\XBlogGlobal.dll</HintPath>
     </Reference>
     <Reference Include="XBlogHelper">
-      <HintPath>..\Lib\Sitecore\XBlogHelper.dll</HintPath>
+      <HintPath>..\Lib\XBlog\XBlogHelper.dll</HintPath>
     </Reference>
     <Reference Include="XBlogMVC">
-      <HintPath>..\Lib\Sitecore\XBlogMVC.dll</HintPath>
+      <HintPath>..\Lib\XBlog\XBlogMVC.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
