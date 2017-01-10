@@ -1,0 +1,28 @@
+﻿---
+ID: d7ca7488-36a0-41bd-b9aa-d1af2759442e
+Parent: 0c33ca01-2c10-41a4-bd12-6f26744cd299
+Template: 0c33ca01-2c10-41a4-bd12-6f26744cd299
+Path: /sitecore/templates/CSDemo/Components/Article/ArticlePage/__Standard Values
+DB: master
+SharedFields:
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{22DD9E70-D79C-4A77-BC90-FCCFB1B574F5}">
+        <r id="{027AF0D5-BC10-42A4-B796-577FB651D073}" ph="page-header" uid="{786ECE31-95BE-42A4-BD3B-7FC824D276EF}" />
+        <r id="{6FA52375-AEF0-43C3-99D8-C43A749B01A7}" ph="page-body" uid="{7D4562A7-D2F5-47C8-80F6-28726CF79BAC}" />
+        <r id="{1EF61C4A-F759-4CE9-BD3F-E357199948A0}" ph="page-body" uid="{31E7845A-D70B-4B07-88A0-F95D715062B0}" />
+        <r id="{12F349C6-3ED9-46DB-99CF-B5503975617F}" ph="page-body" uid="{D00515F4-3B73-47CF-92F1-26A90A18C07D}" />
+        <r id="{5B018176-BF32-4BB1-91FA-63044B6FFE4B}" ph="page-footer" uid="{E5A6C541-E277-499D-9CB9-DFF8CE125A23}" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161025T131947Z

@@ -1,0 +1,42 @@
+﻿---
+ID: c8aa60e8-f51b-461b-bec2-be189049bb7c
+Parent: ccb0c01b-c983-4262-a78a-b8c3709787be
+Template: f3fdfc91-c3d6-480d-83eb-74333ec2de1c
+Path: /sitecore/content/Data/Blogs/Authors/Vasiliy Fomichev
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 247f2f57-7523-4edd-a340-ab03c1beebf1
+      Hint: Profile Image
+      Value: "<image mediaid=\"{A59E7F57-BA7A-402A-B0C4-D8145782EBC2}\" />"
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160506T051818Z
+    - ID: 3138c2a2-0370-430d-986a-255454afac61
+      Hint: Location
+      Value: Los Angeles, California
+    - ID: 5c6c7a6f-2dc1-47a2-a28b-c224df0cc0f2
+      Hint: Creator
+      Value: Blogger
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
+    - ID: 91843c0e-fb61-494c-b949-3a8dabad20c1
+      Hint: Title
+      Value: Technical Manager
+    - ID: ae1b3ca1-21b0-4d6a-9327-17d5571335df
+      Hint: Full Name
+      Value: Vasiliy Fomichev
+    - ID: f84e5dd5-3919-46ea-80f2-cfa105888c68
+      Hint: Bio
+      Value: |
+        <p>Cool Guy,</p>
+        <p>Genius</p>
+        <p>Blogger</p>
+        <p>&nbsp;</p>
+    - ID: fe4cf004-52b4-46e4-93a3-99dba835337a
+      Hint: Email Address
+      Value: vasiliy.fomichev@xcentium.com

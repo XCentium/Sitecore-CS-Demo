@@ -1,0 +1,55 @@
+﻿---
+ID: 4a337806-636b-4e6e-80bb-6d6af2784a56
+Parent: ddc17390-edf0-4f98-9e2a-38fe2eebbcd0
+Template: 0c33ca01-2c10-41a4-bd12-6f26744cd299
+Path: /sitecore/content/CSDemo/Home/Articles/Test123
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161102T154740Z
+    - ID: 51b6d790-2a6d-4f1e-8520-a4b93b484ed8
+      Hint: Header Image
+      Value: "<image mediaid=\"{ACBB45B4-4551-4294-BF66-764DE5178AC0}\" />"
+    - ID: 55a55b4d-d866-4df7-9821-46e9f9cf3ee3
+      Hint: Title
+      Value: Test123
+    - ID: cb8d200f-f73a-40de-9b4b-30d05f10abd0
+      Hint: Accordion
+      Value: {CBB72EB0-E8E2-48D5-971F-798F00B43A25}
+    - ID: e982e4f8-0f07-41c1-8456-825a33e1a64a
+      Hint: Content
+      Value: |
+        <p>Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 </p>
+        <p></p>
+        <p>Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 </p>
+        <p></p>
+        <p>Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 </p>
+        <p></p>
+        <p>Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 </p>
+        <p></p>
+        <p>Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 </p>
+        <p></p>
+        <p>Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 </p>
+        <p></p>
+        <p>Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 </p>
+        <p></p>
+        <p>Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 </p>
+        <p></p>
+        <p>Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 </p>
+        <p></p>
+        <p>Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 </p>
+        <p></p>
+        <p>Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 </p>
+        <p></p>
+        <p>Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 </p>
+        <p></p>
+        <p>Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 Test123 </p>
+        <p></p>
+    - ID: f21acfc2-7f45-493c-a4bd-f48145b5d951
+      Hint: Article link
+      Value: {D9EB74EA-FFF6-4F8F-9943-1D1EC7A3EB72}

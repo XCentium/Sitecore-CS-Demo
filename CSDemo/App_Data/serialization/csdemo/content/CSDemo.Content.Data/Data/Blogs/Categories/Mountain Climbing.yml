@@ -1,0 +1,20 @@
+﻿---
+ID: 9a9e7235-3a5e-4577-ad11-a99b81c3de4e
+Parent: c96d62bf-217d-4ec4-9162-17203cb40d08
+Template: a1d40a70-21be-440b-a828-257cb81a985f
+Path: /sitecore/content/Data/Blogs/Categories/Mountain Climbing
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 0a0acc0f-21b2-40ac-a934-e5b38e632ea0
+      Hint: Category Name
+      Value: Mountain Climbing
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160506T052225Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo

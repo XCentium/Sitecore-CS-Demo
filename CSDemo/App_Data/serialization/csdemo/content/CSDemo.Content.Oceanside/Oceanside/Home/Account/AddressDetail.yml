@@ -1,0 +1,34 @@
+﻿---
+ID: 41eef4d8-5b05-49bf-8bab-ac680de6a706
+Parent: 58ee4fa6-cdd7-4a59-b392-ac1a617fd9a9
+Template: b3d2832f-2fbf-4466-9d95-d3a0c6476362
+Path: /sitecore/content/Oceanside/Home/Account/AddressDetail
+DB: master
+SharedFields:
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s" p:p="1">
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r uid="{74333C36-4E75-469E-9966-8CB0CCEF67AE}" p:after="r[@uid='{63223E3A-7BE4-4C4F-A69F-29C0F4CD44EA}']" s:id="{F6376E88-8BD1-4C35-BE12-07C5FC274948}" s:ph="page-body" />
+        <r uid="{E5A6C541-E277-499D-9CB9-DFF8CE125A23}" p:after="*[1=2]" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160629T224047Z
+    - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
+      Hint: Page Title
+      Value: Address Detail
+    - ID: 55a55b4d-d866-4df7-9821-46e9f9cf3ee3
+      Hint: Title
+      Value: Address Detail
+    - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
+      Hint: Meta Description
+      Value: Address Detail Page

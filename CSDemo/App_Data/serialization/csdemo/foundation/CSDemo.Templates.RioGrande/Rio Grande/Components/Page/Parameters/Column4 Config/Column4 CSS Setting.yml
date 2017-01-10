@@ -1,0 +1,17 @@
+﻿---
+ID: e485cdca-0a8c-4ba5-94f8-6c61349dc8d5
+Parent: 548e0118-8a36-4020-b505-31a8819c6252
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Rio Grande/Components/Page/Parameters/Column4 Config/Column4 CSS Setting
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160217T091422Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

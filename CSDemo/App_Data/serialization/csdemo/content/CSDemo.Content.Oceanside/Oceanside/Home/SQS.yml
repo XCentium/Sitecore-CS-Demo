@@ -1,0 +1,33 @@
+﻿---
+ID: c1f3cea2-2c24-48de-868a-3b844fd4601b
+Parent: 73222b1d-a8b9-4d1c-b0a3-dd713144007b
+Template: b3d2832f-2fbf-4466-9d95-d3a0c6476362
+Path: /sitecore/content/Oceanside/Home/SQS
+DB: master
+SharedFields:
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s" p:p="1">
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r uid="{CC983247-6375-4A64-86B8-FA0324A37C81}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:id="{63010A84-B5C3-471B-81D7-658B445FEC3C}" s:ph="page-body" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160824T234713Z
+    - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
+      Hint: Page Title
+      Value: Sales Quote
+    - ID: 55a55b4d-d866-4df7-9821-46e9f9cf3ee3
+      Hint: Title
+      Value: Sales Quote
+    - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
+      Hint: Meta Description
+      Value: Sales Quote Page

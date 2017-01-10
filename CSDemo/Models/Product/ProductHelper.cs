@@ -958,12 +958,13 @@ namespace CSDemo.Models.Product
             }
         }
 
-        
+
         /// <summary>
         /// </summary>
         /// <param name="query"></param>
+        /// <param name="searchFor">Search for either product or category</param>
         /// <returns></returns>
-        public static List<SearchResultItem> GetSearchResultItemByNameOrId(string query)
+        public static List<SearchResultItem> GetSearchResultItemByNameOrId(string query, string searchFor = "products")
         {
             var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
             try
@@ -971,9 +972,28 @@ namespace CSDemo.Models.Product
                 var culture = Context.Language.CultureInfo;
                 using (var context = index.CreateSearchContext())
                 {
+                                            
                     var queryable = context.GetQueryable<SearchResultItem>()
-                        .Where(x => x.Language == Context.Language.Name);
-                    return queryable.Where(x=>(x.Name.Contains(query) && x.Path.Contains("/departments/") && x.TemplateName != "GeneralCategory")).ToList();
+                            .Where(x => x.Language == Context.Language.Name);
+                    if (searchFor == "products")
+                    {
+
+                        return
+                            queryable.Where(
+                                x =>
+                                    (x.Name.Contains(query) && x.Path.Contains("/departments/") &&
+                                     x.TemplateName != "GeneralCategory")).ToList();
+                    }
+                    else
+                    {
+                                                
+
+                        return
+                            queryable.Where(
+                                x =>
+                                    (x.Name.Contains(query) && x.Path.Contains("/departments/") &&
+                                     x.TemplateName == "GeneralCategory")).ToList();
+                    }
                 }
             }
             catch (Exception ex)
@@ -1001,10 +1021,12 @@ namespace CSDemo.Models.Product
                 {
                     try
                     {
-                        var product = searchResultItem.GetItem().GlassCast<Product>();
+                        var productItem = searchResultItem.GetItem();
+                        var product = productItem.GlassCast<Product>();
+                        var parentName = productItem.Parent.Name;
                         if (product.ProductId != null)
                         {
-                            productList.Add(new ProductMini {Id = product.ProductId, CatalogId = catalogId, Guid = Sitecore.Data.ID.Parse(product.ID).ToString(), Title  = product.Title, Price = product.Price, CatalogName = catalogName, ImageSrc= product.FirstImage});
+                            productList.Add(new ProductMini {Id = product.ProductId, CategoryName = parentName, CatalogId = catalogId, Guid = Sitecore.Data.ID.Parse(product.ID).ToString(), Title  = product.Title, Price = product.Price, CatalogName = catalogName, ImageSrc= product.FirstImage});
                         }
                     }
                     catch (Exception ex)
@@ -1017,6 +1039,49 @@ namespace CSDemo.Models.Product
             return productList;
         }
 
+
+
+        internal static List<ProductMini> GetCategoriesByName(string query)
+        {
+                        
+            var catalogId = ProductHelper.GetSiteRootCatalogId();
+
+            var catalogName = ProductHelper.GetSiteRootCatalogName();
+
+            var productList = new List<ProductMini>();
+
+            var categories = GetSearchResultItemByNameOrId(query, "categories");
+
+            if (categories != null && categories.Any())
+            {
+                foreach (var searchResultItem in categories)
+                {
+                    try
+                    {
+                        var category = searchResultItem.GetItem().GlassCast<Category>();
+                        if (category.Name != null)
+                        {
+                            var imageSrc = string.Empty;
+
+                            if (category.Images != null && category.Images.Any())
+                            {
+                                var firstImage = category.Images.ElementAt(0);
+
+                                if (firstImage != null) imageSrc = firstImage.Src;
+                            }
+
+                            productList.Add(new ProductMini {Id = category.ID.ToString(), CatalogId = catalogId, Guid = Sitecore.Data.ID.Parse(category.ID).ToString(), Title  = category.Name, Price = 0.00m, CatalogName = catalogName, ImageSrc= imageSrc});
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex.StackTrace, ex);
+                    }
+                }
+            }
+
+            return productList;
+        }
 
     }
 }

@@ -1,0 +1,22 @@
+﻿---
+ID: 47b1658c-bec9-4af5-bd8b-20e51a9468ed
+Parent: a5dd109f-91dc-4d9f-b5d5-dbae28652f17
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+Path: /sitecore/content/Oceanside/Components/Articles/Accordions data
+DB: master
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Type: TreelistEx
+  Value: {ABA6553F-B590-4C60-BB42-F3C8B29D8BB5}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161101T164134Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

@@ -1,0 +1,17 @@
+﻿---
+ID: c96d62bf-217d-4ec4-9162-17203cb40d08
+Parent: 81f4b10d-e420-4ffe-8990-e374509afafa
+Template: ea3abbc0-280b-4e62-9cb6-57c82b2b73d9
+Path: /sitecore/content/Data/Blogs/Categories
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160506T045750Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo

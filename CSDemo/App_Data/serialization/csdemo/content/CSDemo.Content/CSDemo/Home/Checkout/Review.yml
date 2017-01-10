@@ -14,7 +14,7 @@ SharedFields:
   Value: |
     <r xmlns:p="p" xmlns:s="s" p:p="1">
       <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-        <r uid="{8DEB2AD4-4C8A-4846-B1D8-C74DFEC5494B}" p:before="r[@uid='{E5A6C541-E277-499D-9CB9-DFF8CE125A23}']" s:ds="" s:id="{06D5815C-624F-4260-A890-BAB99735A7F3}" s:par="" s:ph="page-body">
+        <r uid="{8DEB2AD4-4C8A-4846-B1D8-C74DFEC5494B}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:ds="" s:id="{06D5815C-624F-4260-A890-BAB99735A7F3}" s:par="" s:ph="page-body">
           <rls>
             <ruleset>
               <rule uid="{00000000-0000-0000-0000-000000000000}" s:name="Default">
@@ -26,7 +26,7 @@ SharedFields:
             </ruleset>
           </rls>
         </r>
-        <r uid="{63223E3A-7BE4-4C4F-A69F-29C0F4CD44EA}" p:before="*[1=2]" />
+        <r uid="{63223E3A-7BE4-4C4F-A69F-29C0F4CD44EA}" p:after="*[1=2]" />
       </d>
     </r>
 Languages:
@@ -34,10 +34,6 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: 04bf00db-f5fb-41f7-8ab7-22408372a981
-      Hint: __Final Renderings
-      Type: Layout
-      Value: "<r xmlns:p=\"p\" xmlns:s=\"s\" p:p=\"1\" />"
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
       Value: 20160220T061700Z

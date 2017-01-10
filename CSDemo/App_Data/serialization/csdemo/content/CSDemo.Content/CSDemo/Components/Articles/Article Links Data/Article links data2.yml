@@ -1,0 +1,29 @@
+﻿---
+ID: 09c6e329-b9e2-4223-9d1a-764d3728a96a
+Parent: 62f89637-2b09-47bc-aa77-de67ff4dbfe2
+Template: d67f0f54-0a1a-4bff-a161-d557ee62a86b
+Path: /sitecore/content/CSDemo/Components/Articles/Article Links Data/Article links data2
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161101T185623Z
+    - ID: 55bd0817-64b7-4048-803f-c920f06a1a23
+      Hint: Link Text
+      Value: Article links data Article links data Article links data
+    - ID: 5a8367ac-6371-4266-8e1d-d0ee71142896
+      Hint: Link Image
+      Value: "<image mediaid=\"{F0369A31-F4B0-47D9-A185-3FDB16C77C60}\" />"
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 67445bdc-ea27-461c-96ae-22c01227f43e
+      Hint: Link Title
+      Value: Article links data2
+    - ID: d9256246-d2cd-4678-9db2-9805a4556f63
+      Hint: Article path
+      Value: "<link text=\"Home\" linktype=\"internal\" class=\"\" title=\"\" target=\"\" querystring=\"\" id=\"{73222B1D-A8B9-4D1C-B0A3-DD713144007B}\" />"

@@ -1,0 +1,39 @@
+﻿---
+ID: 88cf4cb5-c3e1-4051-87bd-328546068dcd
+Parent: 1b2a8eb1-0352-4140-bd66-9e025d83e7fc
+Template: 6d36df55-60e5-4591-899c-efccaf83579a
+Path: /sitecore/content/Oceanside/Components/Marquee/Carousel/Slide 5
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160227T020642Z
+    - ID: 35d787ae-0f1f-412a-a570-d5a79018ebb8
+      Hint: Image
+      Value: "<image mediaid=\"{0B5DB017-5034-48FB-B2AF-695D68618AD7}\" />"
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 8ef3659b-8284-4484-9b7e-6fff97496411
+      Hint: Content
+      Value: |
+        <h1 class="border animation top-to-bottom">The <b>easiest</b> way to shop</h1>
+        <ul class="list-unstyled">
+            <li class="animation left-to-right delay-1"><i class="fa fa-check"></i> An Established Product</li>
+            <li class="animation left-to-right delay-2"><i class="fa fa-check"></i> True Premium Quality</li>
+            <li class="animation left-to-right delay-3"><i class="fa fa-check"></i> Dedicated Support</li>
+        </ul>
+- Language: fr-FR
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161024T182623Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

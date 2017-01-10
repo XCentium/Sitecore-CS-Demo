@@ -1,0 +1,21 @@
+﻿---
+ID: 12b56738-1731-4d36-a10d-af4a328322f3
+Parent: c49724bb-3397-4bd5-90f0-effa3d19ded9
+Template: 455a3e98-a627-4b40-8035-e683a0331ac7
+Path: /sitecore/templates/Rio Grande/Components/Page/Parameters/Row Config/CSS Class Settings/Container CSS Class
+DB: master
+SharedFields:
+- ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
+  Hint: Type
+  Value: Single-Line Text
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 300
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160217T081339Z

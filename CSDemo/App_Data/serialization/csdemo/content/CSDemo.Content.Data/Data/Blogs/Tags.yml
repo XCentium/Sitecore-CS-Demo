@@ -1,0 +1,17 @@
+﻿---
+ID: 6ce6e7c8-2ddc-4f5e-b43b-c89c8942b61d
+Parent: 81f4b10d-e420-4ffe-8990-e374509afafa
+Template: 42c5d698-2945-465f-936c-950af504c559
+Path: /sitecore/content/Data/Blogs/Tags
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160506T045750Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo

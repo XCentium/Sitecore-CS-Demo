@@ -1,0 +1,17 @@
+﻿---
+ID: 07a81cbf-d921-4d15-9145-3741b8b3b61e
+Parent: 8f661043-896d-495a-90d6-fafab96ee5d4
+Template: 8f661043-896d-495a-90d6-fafab96ee5d4
+Path: /sitecore/templates/Oceanside/Components/Product/Personalized Products/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160318T234158Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

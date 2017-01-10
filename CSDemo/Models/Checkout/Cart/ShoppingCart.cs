@@ -51,10 +51,10 @@ namespace CSDemo.Models.Checkout.Cart
             {
                 if (this._grandTotal > 0)
                 {
-                    return (this._grandTotal > (this.LineTotal + this.Tax - this.Shipping)) ? this.LineTotal + this.Tax - this.Shipping : this._grandTotal;
+                    return (this._grandTotal > (this.LineTotal + this.Tax + this.Shipping)) ? this.LineTotal + this.Tax + this.Shipping : this._grandTotal;
 
                 }
-                return this.LineTotal + this.Tax - this.Shipping;
+                return this.LineTotal + this.Tax + this.Shipping;
             }
 
 

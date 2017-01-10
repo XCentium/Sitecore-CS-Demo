@@ -1,0 +1,57 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Article.ArticlePage>
+@if (Model == null)
+{
+    return;
+}
+<section class="content">
+    <div class="container">
+        <article class="components-content">
+
+            @using (BeginEditFrame(Model.Path))
+            {
+                if (Model.HeaderImage != null)
+                {
+                    <div class="portfolio_main">
+
+                        <div class="portfolio_description">
+                            <h2>@Model.Title</h2>
+                            <p>@Model.Caption</p>
+
+                        </div>
+                        @RenderImage(Model, t => t.HeaderImage, new { @class = "img-responsive", style = "width:100%; min-height:150px" }, true)
+
+                    </div>
+
+                }
+
+                @*if (!string.IsNullOrWhiteSpace(Model.Title))
+                {
+                    <h1>@Editable(Model, x => x.Title)</h1>
+                }*@
+                if (!string.IsNullOrWhiteSpace(Model.Content))
+                {
+                    @Editable(Model, x => x.Content)
+                }
+            }
+
+        </article>
+    </div>
+</section>
+
+<style>
+    
+    .portfolio_main {
+         position:relative;
+
+    }
+
+     .portfolio_description {
+         position:absolute;
+         width:100%;
+         top:25px;       
+         text-align: center;
+         background-color:rgba(255, 255, 255, 0.5);
+         padding: 10px;
+     }
+
+</style>

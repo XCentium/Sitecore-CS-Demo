@@ -84,6 +84,7 @@ namespace CSDemo.Models.Account
                 if (catalogOptions.Contains(Constants.Common.PipeStringSeparator))
                 {
                     Cookie.Set(Constants.Commerce.UserSelectedCatalogId, "");
+                    Cookie.Set(Constants.Commerce.UserSelectedCatalogPostfix, "");
                 }
                 else
                 {
@@ -102,6 +103,21 @@ namespace CSDemo.Models.Account
             if (catalogItem != null)
             {
                 Cookie.Set(Constants.Commerce.UserSelectedCatalogId, catalogItem.ID.ToString());
+                if (catalogItem.HasChildren)
+                {
+                    // get the first child and check if if has a postfix starting with (
+                    foreach (Item child in catalogItem.Children)
+                    {
+                        var firstChild = child.Name;
+                        if (firstChild.Contains("("))
+                        {
+                            var postFix = firstChild.Substring(firstChild.IndexOf("(", StringComparison.Ordinal));
+                            Cookie.Set(Constants.Commerce.UserSelectedCatalogPostfix, postFix);
+                        }
+                        break;
+                    }
+
+                }
             }
         }
 
@@ -310,7 +326,7 @@ namespace CSDemo.Models.Account
 
         }
 
-        
+
 
         /// <summary>
         /// Get Commerce user
@@ -436,12 +452,12 @@ namespace CSDemo.Models.Account
         /// <returns></returns>
         internal string GetCurrentCustomerCatalogIds()
         {
-            if (Sitecore.Context.User.IsAuthenticated && Sitecore.Context.Database.Name!="core")
+            if (Sitecore.Context.User.IsAuthenticated && Sitecore.Context.Database.Name != "core")
             {
                 try
                 {
 
-                    var cataLogId = Cookie.Get(Constants.Commerce.UserSelectedCatalogId)!=null ? Cookie.Get(Constants.Commerce.UserSelectedCatalogId).Value : null;
+                    var cataLogId = Cookie.Get(Constants.Commerce.UserSelectedCatalogId) != null ? Cookie.Get(Constants.Commerce.UserSelectedCatalogId).Value : null;
 
                     if (cataLogId != null && !string.IsNullOrEmpty(cataLogId))
                     {
@@ -539,6 +555,7 @@ namespace CSDemo.Models.Account
             Cookie.Del(Constants.Commerce.CommerceUserLoggedIn);
             Cookie.Del(Constants.Commerce.UserCatalogOptions);
             Cookie.Del(Constants.Commerce.UserSelectedCatalogId);
+            Cookie.Del(Constants.Commerce.UserSelectedCatalogPostfix);
             Cookie.Del(Constants.Commerce.ShowCoupon);
             Cookie.Del(Constants.Commerce.CouponMessage);
         }
@@ -739,6 +756,11 @@ namespace CSDemo.Models.Account
             {
                 return new List<CSDemo.Models.Address>();  //{ new CSDemo.Models.Address() };
             }
+        }
+
+        internal string GetCurrentCustomerCatalogPostFix()
+        {
+            return Cookie.Get(Constants.Commerce.UserSelectedCatalogPostfix) != null ? Cookie.Get(Constants.Commerce.UserSelectedCatalogPostfix).Value : null;
         }
     }
 }

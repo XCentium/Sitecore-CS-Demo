@@ -1180,6 +1180,11 @@
             The currency page event data key.
             </summary>
         </member>
+        <member name="F:Sitecore.Commerce.Constants.KnownPageEventDataNames.TrackingNumber">
+            <summary>
+            The tracking number page event data key.
+            </summary>
+        </member>
         <member name="T:Sitecore.Commerce.Constants.KnownWorkflowDataNames">
             <summary>
             The names of commonly used workflow state data keys
@@ -1294,6 +1299,159 @@
             <summary>
             The Connect Partner License name 
             </summary>
+        </member>
+        <member name="T:Sitecore.Commerce.Controls.LanguageMultilistControl">
+            <summary>
+            Class that handles the selection of multiple languages from a list.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Commerce.Controls.LanguageMultilistControl.GetItemValue(Sitecore.Data.Items.Item)">
+            <summary>
+            Gets the item value.
+            </summary>
+            <param name="item">The item.</param>
+            <returns>
+            The item value.
+            </returns>
+            <contract><requires name="item" condition="not null"/><ensures condition="none"/></contract>
+        </member>
+        <member name="M:Sitecore.Commerce.Controls.LanguageMultilistControl.GetSelectedItems(Sitecore.Data.Items.Item[],System.Collections.ArrayList@,System.Collections.IDictionary@)">
+            <summary>
+            Gets the selected items.
+            </summary>
+            <param name="sources">The sources.</param><param name="selected">The selected.</param><param name="unselected">The unselected.</param><contract><requires name="sources" condition="not null"/></contract>
+        </member>
+        <member name="T:Sitecore.Commerce.Controls.CurrencyMultilistControl">
+            <summary>
+            Class that handles the selection of multiple currencies from a list.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Commerce.Controls.CurrencyMultilistControl.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Commerce.Controls.CurrencyMultilistControl"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Commerce.Controls.CurrencyMultilistControl.SetModified">
+            <summary>
+            Sets the modified flag on the page indicating content has been modified.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Commerce.Controls.CurrencyMultilistControl.OnLoad(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Web.UI.Control.Load"/> event. 
+            </summary>
+            <param name="e">The <see cref="T:System.EventArgs"/> object that contains the event data.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Controls.CurrencyMultilistControl.OnPreRender(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Web.UI.Control.PreRender"/> event. 
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> object that contains the event data.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Controls.CurrencyMultilistControl.DoRender(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Renders the control. 
+            </summary>
+            <param name="output">The output.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Controls.CurrencyMultilistControl.GetCurrencies">
+            <summary>
+            Get the list of currencies.
+            </summary>
+            <returns>
+            A dictionary of available currencies.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Controls.CurrencyMultilistControl.RenderButton(System.Web.UI.HtmlTextWriter,System.String,System.String)">
+            <summary>
+            Renders the button. 
+            </summary>
+            <param name="output">The output.</param><param name="icon">The icon.</param><param name="click">The click.</param>
+        </member>
+        <member name="P:Sitecore.Commerce.Controls.CurrencyMultilistControl.ItemID">
+            <summary>
+            Gets or sets the item ID. 
+            </summary> 
+            <value>
+            The item ID.
+            </value>
+        </member>
+        <member name="P:Sitecore.Commerce.Controls.CurrencyMultilistControl.ReadOnly">
+            <summary>
+            Gets or sets a value indicating whether the field is read only. 
+            </summary> 
+            <value>
+            <c>true</c> if the field is read only; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Sitecore.Commerce.Controls.CurrencyMultilistControl.TrackModified">
+            <summary>
+            Gets or sets a value indicating whether modifications are tracked.
+            </summary>
+            <value><c>true</c> if  modifications are tracked; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="T:Sitecore.Commerce.Controls.CurrencyDroplistControl">
+            <summary>
+            Class that handles the selection of a currency from a list.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Commerce.Controls.CurrencyDroplistControl.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Commerce.Controls.CurrencyDroplistControl"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Commerce.Controls.CurrencyDroplistControl.OnLoad(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Web.UI.Control.Load"></see> event.
+            </summary>
+            <param name="e">The <see cref="T:System.EventArgs"></see> object that contains the event data.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Controls.CurrencyDroplistControl.DoRender(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Sends server control content to a provided <see cref="T:System.Web.UI.HtmlTextWriter"></see> object, which writes the content to be rendered on the client.
+            </summary>
+            <param name="output">The <see cref="T:System.Web.UI.HtmlTextWriter"></see> object that receives the server control content.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Controls.CurrencyDroplistControl.LoadPostData(System.String)">
+            <summary>
+            Loads the post data.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+            Returns <c>true</c>, if a change has occurred, otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Controls.CurrencyDroplistControl.SetModified">
+            <summary>
+            Sets the modified flag on the page indicating content has been modified.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Commerce.Controls.CurrencyDroplistControl.GetCurrencies">
+            <summary>
+            Get the list of currencies.
+            </summary>
+            <returns>
+            A dictionary of available currencies.
+            </returns>
+        </member>
+        <member name="P:Sitecore.Commerce.Controls.CurrencyDroplistControl.ItemID">
+            <summary>
+            Gets or sets the item ID.
+            </summary>
+            <value>
+            The item ID.
+            </value>
+        </member>
+        <member name="P:Sitecore.Commerce.Controls.CurrencyDroplistControl.ReadOnly">
+            <summary>
+            Gets or sets a value indicating whether the control is read-only.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Commerce.Controls.CurrencyDroplistControl.TrackModified">
+            <summary>
+            Gets or sets a value indicating whether modifications are tracked.
+            </summary>
+            <value><c>true</c> if  modifications are tracked; otherwise, <c>false</c>.</value>
         </member>
         <member name="T:Sitecore.Commerce.Data.Carts.EaStateCartRepository">
             <summary>
@@ -5376,6 +5534,14 @@
             </summary>
             <value>
             The order date.
+            </value>
+        </member>
+        <member name="P:Sitecore.Commerce.Entities.Orders.Order.TrackingNumber">
+            <summary>
+            Gets or sets the tracking number.
+            </summary>
+            <value>
+            The tracking number.
             </value>
         </member>
         <member name="T:Sitecore.Commerce.Entities.Orders.OrderHeader">
@@ -10434,6 +10600,15 @@
             <param name="stateContext">The existing automation state context for the contact.</param>
             <param name="result">The result of the current pipeline run.</param>
         </member>
+        <member name="M:Sitecore.Commerce.Pipelines.Orders.Common.AddOrderToEAPlan.UpdateVisitorStateData(System.String,Sitecore.Analytics.Automation.Data.AutomationStateContext,Sitecore.Commerce.Services.Orders.SubmitVisitorOrderResult,Sitecore.Commerce.Pipelines.ServicePipelineArgs)">
+            <summary>
+            Updates state data for a visitor that already exists in an EAP state.
+            </summary>
+            <param name="contactIdentifier">The contact identifier.</param>
+            <param name="stateContext">The existing automation state context for the contact.</param>
+            <param name="result">The result of the current pipeline run.</param>
+            <param name="args">The arguments.</param>
+        </member>
         <member name="M:Sitecore.Commerce.Pipelines.Orders.Common.AddOrderToEAPlan.AddContactToPlan(System.String,Sitecore.Data.ID,Sitecore.Data.ID,Sitecore.Commerce.Services.Orders.SubmitVisitorOrderResult)">
             <summary>
             Adds the visitor to plan.
@@ -10442,6 +10617,16 @@
             <param name="planId">The engagement plan identifier.</param>
             <param name="initialStateId">The initial state identifier.</param>
             <param name="result">The result of the current pipeline run.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Pipelines.Orders.Common.AddOrderToEAPlan.AddContactToPlan(System.String,Sitecore.Data.ID,Sitecore.Data.ID,Sitecore.Commerce.Services.Orders.SubmitVisitorOrderResult,Sitecore.Commerce.Pipelines.ServicePipelineArgs)">
+            <summary>
+            Adds the visitor to plan.
+            </summary>
+            <param name="contactIdentifier">The contact identifier.</param>
+            <param name="planId">The engagement plan identifier.</param>
+            <param name="initialStateId">The initial state identifier.</param>
+            <param name="result">The result of the current pipeline run.</param>
+            <param name="args">The arguments.</param>
         </member>
         <member name="M:Sitecore.Commerce.Pipelines.Orders.Common.AddOrderToEAPlan.GetContactIdentifier(Sitecore.Commerce.Pipelines.ServicePipelineArgs,Sitecore.Commerce.Services.Orders.SubmitVisitorOrderRequest)">
             <summary>

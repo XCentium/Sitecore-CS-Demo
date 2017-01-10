@@ -1,0 +1,83 @@
+﻿---
+ID: 395aa1f9-fa94-49d0-b99a-0c430dac64a4
+Parent: 6b72e437-798d-4152-ab8d-b4ef312dca23
+Template: daf085e8-602e-43a6-8299-038ff171349f
+Path: /sitecore/media library/Articles/Article headers/images
+DB: master
+SharedFields:
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: -/media/395aa1f9fa9449d0b99a0c430dac64a4.ashx?h=16&thn=1&w=16
+- ID: 22eac599-f13b-4607-a89d-c091763a467d
+  Hint: Width
+  Value: 401
+- ID: 40e50ed9-ba07-4702-992e-a912738d32dc
+  Hint: Blob
+  BlobID: d19f2b1a-1ecc-4b38-8087-7a597cb355fe
+  Value: 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
+- ID: 6954b7c7-2487-423f-8600-436cb3b6dc0e
+  Hint: Size
+  Value: 3491
+- ID: 6f47a0a5-9c94-4b48-abeb-42d38def6054
+  Hint: Mime Type
+  Value: image/jpeg
+- ID: c06867fe-9a43-4c7d-b739-48780492d06f
+  Hint: Extension
+  Value: jpg
+- ID: cb09946f-3218-4823-87d2-d5007c199a96
+  Hint: Dimensions
+  Value: 401 x 125
+- ID: de2ca9e4-c117-4c8a-a139-1ff4b199d15a
+  Hint: Height
+  Value: 125
+Languages:
+- Language: de-DE
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161101T190646Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161101T190646Z
+    - ID: 65885c44-8fcd-4a7f-94f1-ee63703fe193
+      Hint: Alt
+      Value: images
+- Language: es-MX
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161101T190646Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: fr-FR
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161101T190646Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: ja-JP
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161101T190646Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

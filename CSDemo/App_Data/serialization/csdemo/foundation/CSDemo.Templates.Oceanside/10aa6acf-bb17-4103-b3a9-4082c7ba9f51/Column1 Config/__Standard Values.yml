@@ -1,0 +1,21 @@
+﻿---
+ID: 461e82d3-e464-434c-8a4e-9e31eb4a1fa9
+Parent: 49f35a81-a5c5-41af-8524-0c240c4ce026
+Template: 49f35a81-a5c5-41af-8524-0c240c4ce026
+Path: /sitecore/templates/Oceanside/Components/Page/Parameters/Column1 Config/__Standard Values
+DB: master
+SharedFields:
+- ID: 3094d236-5985-4c4f-ae6a-e30740885532
+  Hint: Caching
+  Value: 0|0|0|0|0|0|0|0
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160217T091439Z
+    - ID: b9858c49-df10-440d-85f0-62f4ef51bd76
+      Hint: Column1 CSS Class
+      Value: col-md-12

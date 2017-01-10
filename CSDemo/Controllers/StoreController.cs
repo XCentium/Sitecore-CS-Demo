@@ -1,14 +1,11 @@
-﻿using CSDemo.Models.Store;
+﻿using CSDemo.Models.Product;
+using CSDemo.Models.Store;
 using Glass.Mapper.Sc;
-using Newtonsoft.Json;
 using Sitecore.Analytics;
-using Sitecore.Analytics.Lookups;
-using Sitecore.Diagnostics;
+using Sitecore.Mvc.Extensions;
 using Sitecore.Mvc.Presentation;
-using System;
-using System.Collections.Generic;
+using Sitecore.Web;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CSDemo.Controllers
@@ -41,8 +38,8 @@ namespace CSDemo.Controllers
             if (storeFolderItem == null) return null;
             var stores = storeFolderItem.Children.Select(c => c.GlassCast<Store>());
             const int numberOfStroresToShow = 4;
-            if (Tracker.Current == null || Tracker.Current.Interaction == null || Tracker.Current.Interaction.GeoData == null 
-                || Tracker.Current.Interaction.GeoData.Latitude== 0 || Tracker.Current.Interaction.GeoData.Longitude==0)
+            if (Tracker.Current == null || Tracker.Current.Interaction == null || Tracker.Current.Interaction.GeoData == null
+                || Tracker.Current.Interaction.GeoData.Latitude == 0 || Tracker.Current.Interaction.GeoData.Longitude == 0)
             {
                 if (stores.Count() > numberOfStroresToShow)
                     stores = stores.Take(4);
@@ -55,7 +52,7 @@ namespace CSDemo.Controllers
                 Longitude = Tracker.Current.Interaction.GeoData.Longitude
             };
             var distances = Store.SortByProximity(origin, stores);
-            
+
             if (distances == null || !distances.Any()) return null;
 
             if (distances.Count() > numberOfStroresToShow)
@@ -63,6 +60,19 @@ namespace CSDemo.Controllers
             return View(distances);
         }
 
+        public ActionResult ProductInstockLocations()
+        {
+            var productId = WebUtil.GetUrlName(0).Replace(Constants.Common.Space, Constants.Common.Dash);
+            if (productId.IsEmptyOrNull())
+            {
+                return null;
+            }
+
+            Product model = ProductHelper.GetProductByNameAndCategory(productId, string.Empty);
+
+
+            return View(model.Stores);
+        }
 
     }
 }

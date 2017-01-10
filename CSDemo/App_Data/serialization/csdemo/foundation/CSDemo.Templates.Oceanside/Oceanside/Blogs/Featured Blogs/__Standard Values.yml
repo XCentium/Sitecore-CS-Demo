@@ -1,0 +1,17 @@
+﻿---
+ID: fe9c40e1-1bde-46f6-a646-3bff48b16640
+Parent: f3abc5f1-3a42-4575-a2d9-4093e2ae1f9e
+Template: f3abc5f1-3a42-4575-a2d9-4093e2ae1f9e
+Path: /sitecore/templates/Oceanside/Blogs/Featured Blogs/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T210421Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

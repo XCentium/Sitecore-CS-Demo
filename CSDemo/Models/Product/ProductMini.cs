@@ -10,5 +10,6 @@ namespace CSDemo.Models.Product
         public decimal Price { get; set; }
         public string Guid { get; set; }
         public string ImageSrc { get; set; }
+        public string CategoryName { get; set; }
     }
 }

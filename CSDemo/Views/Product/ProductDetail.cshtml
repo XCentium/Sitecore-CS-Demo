@@ -1,6 +1,6 @@
 ﻿@using System.Linq
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Product.Product>
-@if (Model != null)
+@if (Model.DefinitionName != null)
 {
 
     switch (Model.DefinitionName.ToLower())
@@ -20,192 +20,25 @@
 
         default:
             @Html.Partial("~/Views/Product/ProductDefault.cshtml", Model)
-          
+
             break;
-            
+
 
     }
-    
 
-<<<<<<< Updated upstream
-                                                    <div class="product-quantity clearfix">
-                                                        <a class="btn btn-default" id="qty-minus">-</a>
-                                                        <input type="text" class="form-control" id="Quantity" value="1" />
-                                                        <a class="btn btn-default" id="qty-plus">+</a>
-                                                    </div>
-                                                    @if (Model.Units != null && Model.Units.Any())
-                                                    {
-                                                        <div style="display: inline">
-                                                            <label>Order in:</label>
-                                                            <select name="UOM"
-                                                                    id="UOM"
-                                                                    data-objid="#UOM"
-                                                                    data-num=""
-                                                                    class="form-control" style="width: 100px">
-                                                                @foreach (var unit in Model.Units)
-                                                                {
-                                                                    <option value="@unit.Type">@unit.Type</option>
-                                                                }
-                                                            </select>
-                                                        </div>
-                                                        <div class="unit-of-measure">
-                                                            @foreach (var unit in Model.Units.Where(t => t.Units != null && t.Units.Any()))
-                                                            {
-                                                                <select name="@unit.Type"
-                                                                        id="@unit.Type"
-                                                                        data-objid="#@unit.Type"
-                                                                        data-num=""
-                                                                        class="form-control measures" style="width: 100px">
-                                                                    @foreach (var measure in unit.Units)
-                                                                    {
-                                                                        <option value="@measure.Value">@measure.Value</option>
-                                                                    }
-                                                                </select>
-                                                            }
-                                                        </div>
-                                                    }
-                                                </div>
-                                                @if (Model.VariantSize != null)
-                                                {
-                                                    <div class="col-md-3 col-sm-4">
-                                                        <div class="product-size">
-                                                            <div class="form-inline">
-                                                                <div class="form-group">
-                                                                    <label>Size:</label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <select name="ProductSize" id="ProductSize" data-objid="#ProductSize" data-num="@Model.VariantProdId" class="form-control ProductSize">
-                                                                        @foreach (var size in Model.VariantSize.VariantSizeLines)
-                                                                        {
-                                                                            <option value="@size.Value">@size.Size</option>
-                                                                        }
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                }
-                                                @if (Model.VariantColors != null && Model.VariantColors.Any())
-                                                {
-                                                    <div class="col-md-3 col-sm-4">
-                                                        <div class="product-color">
-                                                            <div class="form-inline">
-                                                                <div class="form-group">
-                                                                    <label>Color:</label>
-                                                                </div>
-                                                                <div class="form-group">
 
-                                                                    @foreach (var variantColor in Model.VariantColors)
-                                                                    {
-                                                                        <ul id="ul_@string.Concat(variantColor.Name, Model.VariantProdId)" style="display: @variantColor.Display" data-num="@Model.VariantProdId" class="variantcolorlist @string.Concat("ProductColor", Model.VariantProdId) ProductColor">
-                                                                            @foreach (var color in variantColor.VariantColorLines)
-                                                                            {
-                                                                                <li><a href="#" data-num="@Model.VariantProdId" data-vname="@variantColor.Name" data-val="@color.Value" class="variantcolorrectangle" style="background-color: @color.Color.Replace(" ","")">&nbsp;</a></li>
-                                                                            }
-                                                                        </ul>
-                                                                    }
+}
+else
+{
+    <section class="content products">
+        <div class="container">
+            <h2>
+                Product not found!
+            </h2>
 
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                }
-                                                @if (!isInStock)
-                                                {
-                                                    clickCmd = "out-of-stock";
-                                                }
-                                                <div class="col-md-3 col-sm-12">
-                                                    <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary variant_btn @clickCmd"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                    @if (Model.ProductVariants != null)
-                                                    {
-                                                        foreach (var prodVariant in Model.ProductVariants)
-                                                        {
-                                                            clickCmd = "out-of-stock";
-                                                            if (prodVariant.StockQuantity > 0)
-                                                            {
-                                                                clickCmd = "add-to-cart";
-                                                            }
-                                                            <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary variant_btn variant_btn_@prodVariant.VariantId @clickCmd" style="display: none"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                        }
-                                                    }
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                    <ul class="list-inline product-links">
-                                        <li><a href="#"><i class="fa fa-heart"></i>Add to wishlist</a></li>
-                                        <li>
-                                            @Html.Partial("~/Views/Product/_ComparisonControl.cshtml", Model)
-                                        </li>
-                                        <li><a href="#"><i class="fa fa-envelope"></i>Email to friend</a></li>
-                                    </ul>
-                                </form>
-                                @if (!isInStock) { 
-                                if (User.Identity.IsAuthenticated)
-                                {
-                                    @Html.Partial("~/Views/Product/VisitorStockNotificationSignup.cshtml", Model)
-                                    }
-                                    else
-                                    {
-                                        <p><a style="font-weight:bold; color:#E87169" href="/account/signin">Login</a> to sign up for notifications. We'll let you know when it's back in stock!</p>
-                                    }
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <div class="tabs product-tabs">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active">
-                            <a href="#description" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="true">Description</a>
-                        </li>
-                        @if (Model.MoreInfo.Trim().Length > 0)
-                        {
-                            <li role="presentation" class="">
-                                <a href="#moreinfo" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">More Info</a>
-                            </li>
-                        }
-                        <li role="presentation" class="">
-                            <a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">Reviews</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="description">
-                            @Editable(Model, x => x.FullDescription)
-                        </div>
-                        @if (Model.MoreInfo.Trim().Length > 0)
-                        {
-                            <div role="tabpanel" class="tab-pane in" id="moreinfo">
-                                @Editable(Model, x => x.MoreInfo)
-                            </div>
-                        }
-                        <div role="tabpanel" class="tab-pane in" id="reviews">
-                            <div class="comments-reviews">
-                                <!-- Begin: Intense Debate Scripting (comments service) -->
-                                <script>
-                                    var idcomments_acct = 'e51a68d7ae9a2ded4bf583c290a77ae9';
-                                    var idcomments_post_id;
-                                    var idcomments_post_url;
-                                </script>
-                                <span id="IDCommentsPostTitle" style="display: none"></span>
-                                <script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
-                                <!-- End: Intense Debate Scripting (comments service) -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-
-            @Html.Partial("~/Views/Product/RelatedProducts.cshtml", Model.RelatedProducts)
-
-            @Html.Partial("~/Views/Product/ComplementaryProducts.cshtml", Model.AlsoBoughtProducts)
-
-            @*@if (Model.GeoTargetedProducts != null)
-            {
-                @Html.Partial("~/Views/Product/GeoTargetedProducts.cshtml", Model.GeoTargetedProducts)
-            }*@
+            <h3>
+                The product you are looking for does not exist in your current catalog or the path may be incorrect.
+            </h3>
         </div>
     </section>
-=======
->>>>>>> Stashed changes
 }

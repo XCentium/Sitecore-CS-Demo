@@ -1,0 +1,14 @@
+﻿---
+ID: 3626cdbd-6217-4b1c-a2e3-0e75bfa17fef
+Parent: 951f189c-4a2a-4fb3-bc23-086a0c5243b4
+Template: adb6ca4f-03ef-4f47-b9ac-9ce2ba53ff97
+Path: /sitecore/content/Oceanside/Home/Blogs/08
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160822T033739Z

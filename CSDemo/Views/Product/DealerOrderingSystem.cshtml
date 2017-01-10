@@ -1,0 +1,232 @@
+﻿
+<section class="content products">
+    <div class="container">
+        <h2>Dealer Ordering System</h2>
+
+        <form>
+            <div>
+                <div id="categoriesBox">
+                    <select id="categoryList_1" class="form-control CategoryListBox" onchange="loadChildrenSubCategory(this.value,this.id)">
+                        <option value="">Select a category</option>
+                        <option value="Kinship">Kinship</option>
+                    </select>
+                </div>
+                <hr />
+                <table class="table table-bordered" id="productsToAdd">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <hr />
+                <table class="table table-bordered" id="productsAdded">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <input type="button" id="prodList" class="btn btn-primary" value="Place Order" onclick="submitData()" style="display: none" />
+
+            </div>
+        </form>
+
+    </div>
+</section>
+
+<script>
+
+
+    function loadChildrenSubCategory(categoryName, categoryId) {
+
+
+        removeExtraCategoryDropDowns(categoryId);
+
+        console.log("|" + categoryName);
+        // use ajax to fetch children categories
+
+       // console.log(categoryId);
+
+        var data = "category:'" + categoryName + "'";
+
+        $.ajax({
+            type: "POST",
+            url: "/AJAX/cart.asmx/GetSubCategories",
+            data: "{" + data + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+                var output = result.d;
+
+                var newCatId = categoryId + "_1";
+
+                var catClass = "form-control CategoryListBox";
+
+                var categories = output.categories;
+
+                if (categories && categories.length > 0) {
+
+
+
+
+                    var combo = $("<select></select>").attr("id", newCatId).attr("name", newCatId).attr("class", catClass).attr("onchange", "loadChildrenSubCategory(this.value,this.id)");
+                    combo.append("<option>Select a sub category</option>");
+
+                    $.each(categories, function (i, el) {
+                        combo.append("<option value='" + el.value + "'>" + el.text + "</option>");
+                    });
+
+                    $("#categoriesBox").append(combo);
+                }
+
+                var products = output.products;
+
+                if (products && products.length > 0) {
+
+                    $("#productsToAdd > tbody").html("");
+
+                    $('#prodList').show();
+
+                    //alert("Building product table");
+                    $.each(products, function (i, el) {
+
+                        var param = el.text + "|||" + el.cat + "|||" + el.pguid + "|||" + el.img + "|||" + el.price + "|||" + el.pid + "|||" + el.catName;
+                    $("#productsToAdd tbody").append(
+                        "<tr>"
+                        + "<td><img style='max-width:75px' src='" + el.img + "' /><br/>" + el.text + "</td>"
+                        + "<td>$" + el.price +"</td>"
+                        + "<td><input class='btn btn-primary' type='button' value='+'  onclick='AddToSelectedList(\"" + param + "\");$(this).closest(\"tr\").remove();' /></td>"
+                        + "</tr>"
+                        );
+
+                    });
+
+
+
+
+                }
+
+                //console.log(categories);
+                //console.log(products);
+
+                //console.log(result.d);
+
+            },
+            error: function (error) {
+
+                console.log(error);
+
+            }
+
+        });
+
+
+        // if result create new id
+
+        // build new select html
+
+        // append new html to the div #categoriesBox
+    }
+
+
+    function AddToSelectedList(productData) {
+
+     // console.log(productData);
+
+        var productDataArr = productData.split("|||");
+
+
+        $("#productsAdded tbody").append(
+            "<tr>"
+            + "<td><img style='max-width:75px' src='" + productDataArr[3] + "' /><br/>" + productDataArr[0] + "</td>"
+            + "<td><input type='number' min='1' max='1000000' value = '1' class='form-control prodQuantuty' data-proddata='" + productData + "'  /></td>"
+            + "<td><input class='btn btn-primary' type='button' value='-'  onclick=\"$(this).closest('tr').remove();\" /></td>"
+            + "</tr>"
+            );
+
+    }
+
+    function removeExtraCategoryDropDowns(categoryId) {
+
+        if (categoryId) {
+
+            var totalSelect = $(".CategoryListBox").length;
+            var toRemove = categoryId.split("_").length - 1;
+
+            var diff = toRemove - totalSelect;
+
+            if (diff < 0) {
+
+                $('#categoriesBox > .CategoryListBox').slice(diff).remove();
+            }
+        }
+    }
+
+    function submitData() {
+
+        var data = "<table><thead><tr><td>Product</td><td>Unit Price</td><td>Quantity</td><td>Sub Total</td></tr></thead>";
+        var total = 0.00;
+
+        $('.prodQuantuty').each(function (i, obj) {
+            //test
+            var quantity = obj.value;
+            var productData = obj.getAttribute("data-proddata");
+
+
+            var productDataArr = productData.split("|||");
+            var productId = productDataArr[5];
+            var catalogName = productDataArr[6];
+            var contextItemId = productDataArr[2];
+            var variantId = -1;
+
+            addProductToCart(quantity, productId, catalogName, variantId, contextItemId);
+
+
+        });
+
+        removeExtraCategoryDropDowns("categoryList_1");
+        $("#productsAdded tbody").html();
+
+        refresh();
+
+    }
+
+    function addProductToCart(quantity, productId, catalogName, variantId, contextItemId) {
+
+        $.ajax({
+            type: "POST",
+            url: "/AJAX/cart.asmx/AddProductToCart",
+            data: "{quantity:'" + quantity + "', productId:'" + productId + "', catalogName:'" + catalogName + "', variantId:'" + variantId + "', contextItemId:'" + contextItemId + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+                if (result.d == "") {
+                 
+
+                }
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+
+        });
+
+    }
+
+    function refresh() {
+
+        setTimeout(function () {
+            location.reload();
+        }, 1000);
+    }
+</script>

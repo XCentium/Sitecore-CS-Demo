@@ -4,6 +4,71 @@
         <name>Sitecore.Commerce.Connect.CommerceServer</name>
     </assembly>
     <members>
+        <member name="T:Sitecore.Commerce.Connect.CommerceServer.Agents.CleanupExternalSettingsAgent">
+            <summary>
+            Agent responsible for cleaning up stale external settings entries.  This is valid only when the SeparateCatalogExternalSettingsResolver is used.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Agents.CleanupExternalSettingsAgent.Run">
+            <summary>
+            Run entry point for the agent.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Agents.CleanupExternalSettingsAgent.ProcessCatalog(Sitecore.Commerce.Connect.CommerceServer.Catalog.ICatalogRepository,System.String)">
+            <summary>
+            Processes the catalog.
+            </summary>
+            <param name="catalogRepository">The catalog respository.</param>
+            <param name="catalogName">Name of the catalog.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Agents.CleanupExternalSettingsAgent.ProcessExternalSettingsCatalog(Sitecore.Commerce.Connect.CommerceServer.Catalog.ICatalogRepository,CommerceServer.Core.Catalog.ProductCatalog,CommerceServer.Core.Catalog.ProductCatalog)">
+            <summary>
+            Processes the external settings catalog.
+            </summary>
+            <param name="catalogRepository">The catalog repository.</param>
+            <param name="csCatalog">The cs catalog.</param>
+            <param name="csSettingsCatalog">The cs settings catalog.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Agents.CleanupExternalSettingsAgent.ProcessProduct(Sitecore.Commerce.Connect.CommerceServer.Catalog.ICatalogRepository,CommerceServer.Core.Catalog.ProductCatalog,CommerceServer.Core.Catalog.Product)">
+            <summary>
+            Processes the product.
+            </summary>
+            <param name="catalogRepository">The catalog repository.</param>
+            <param name="csCatalog">The cs catalog.</param>
+            <param name="csSettingsProduct">The cs settings product.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Agents.CleanupExternalSettingsAgent.ProcessVariants(Sitecore.Commerce.Connect.CommerceServer.Catalog.ICatalogRepository,CommerceServer.Core.Catalog.ProductCatalog,CommerceServer.Core.Catalog.Product,CommerceServer.Core.Catalog.Product)">
+            <summary>
+            Processes the variants.
+            </summary>
+            <param name="catalogRepository">The catalog repository.</param>
+            <param name="csCatalog">The cs catalog.</param>
+            <param name="csProduct">The cs product.</param>
+            <param name="csSettingsProduct">The cs settings product.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Agents.CleanupExternalSettingsAgent.ProcessCategory(Sitecore.Commerce.Connect.CommerceServer.Catalog.ICatalogRepository,CommerceServer.Core.Catalog.ProductCatalog,CommerceServer.Core.Catalog.Category)">
+            <summary>
+            Processes the category.
+            </summary>
+            <param name="catalogRepository">The catalog repository.</param>
+            <param name="csCatalog">The cs catalog.</param>
+            <param name="csSettingsCategory">The cs settings category.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Agents.CleanupExternalSettingsAgent.LogInfo(System.String,System.Object[])">
+            <summary>
+            Logs the information.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="parameters">The parms.</param>
+        </member>
+        <member name="P:Sitecore.Commerce.Connect.CommerceServer.Agents.CleanupExternalSettingsAgent.ShouldLogActivity">
+            <summary>
+            Gets or sets a value indicating whether activities should be logged.
+            </summary>
+            <value>
+              <c>true</c> if activities should be logged; otherwise, <c>false</c>.
+            </value>
+        </member>
         <member name="T:Sitecore.Commerce.Connect.CommerceServer.Caching.CacheRefresh">
             <summary>
             Cache refresh class
@@ -640,25 +705,6 @@
             </summary>
             <returns>The UserId of the current contact.</returns>
         </member>
-        <member name="T:Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.UpdateVisitorInEAPlan">
-            <summary>
-            Defines the UpdateVisitorInEAPlan class.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.UpdateVisitorInEAPlan.#ctor(Sitecore.Commerce.Multishop.IEaPlanProvider)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.UpdateVisitorInEAPlan"/> class.
-            </summary>
-            <param name="engagementPlanProvider">The ea plan provider.</param>
-        </member>
-        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.UpdateVisitorInEAPlan.GetContactIdentifier(Sitecore.Commerce.Pipelines.ServicePipelineArgs,Sitecore.Commerce.Services.Carts.CartResult)">
-            <summary>
-            Gets the contact identifier.
-            </summary>
-            <param name="args">The arguments.</param>
-            <param name="result">The result.</param>
-            <returns>The contact id from the contact factory.</returns>
-        </member>
         <member name="T:Sitecore.Commerce.Connect.CommerceServer.Profiles.Pipelines.PopulateContactBasicFacetsProcessor">
             <summary>
             Updates the xDB contact with some basic required information
@@ -707,32 +753,6 @@
             </summary>
             <param name="result">The result that contains all info about the user</param>
             <returns>The string to identify the user with</returns>
-        </member>
-        <member name="T:Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.AddOrderToEAPlan">
-            <summary>
-            Defines the AddOrderToEAPlan pipeline processor.
-            </summary>
-        </member>
-        <member name="F:Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.AddOrderToEAPlan.DataKey">
-            <summary>
-            The data key.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.AddOrderToEAPlan.#ctor(Sitecore.Commerce.Multishop.IEaPlanProvider,Sitecore.Commerce.Entities.IEntityFactory)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.AddOrderToEAPlan"/> class.
-            </summary>
-            <param name="eaPlanProvider">The ea plan provider.</param>
-            <param name="entityFactory">The entity factory.</param>
-        </member>
-        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.AddOrderToEAPlan.AddContactToPlan(System.String,Sitecore.Data.ID,Sitecore.Data.ID,Sitecore.Commerce.Services.Orders.SubmitVisitorOrderResult)">
-            <summary>
-            Adds the contact to plan.
-            </summary>
-            <param name="contactIdentifier">The contact identifier.</param>
-            <param name="planId">The engagement plan identifier.</param>
-            <param name="initialStateId">The initial state identifier.</param>
-            <param name="result">The result of the current pipeline run.</param>
         </member>
         <member name="T:Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.UpdateCartLinePrice">
             <summary>
@@ -813,6 +833,12 @@
             <param name="productVariantId">The product variant id.</param>
             <param name="quantity">The quantity.</param>
             <returns>An object which inherits from LineItem.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Connect.Utility.OrderUtility.CreateShipment">
+            <summary>
+            Creates a Shipment using the type definition from the configuration settings.
+            </summary>
+            <returns>An object which inherits from Shipment.</returns>
         </member>
         <member name="T:Sitecore.Commerce.Connect.CommerceServer.Catalog.Fields.CommerceOneColumnFormatter">
             <summary>
@@ -2333,6 +2359,47 @@
             <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
             <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
         </member>
+        <member name="T:Sitecore.Commerce.Connect.CommerceServer.Catalog.ExternalSettingsResolverException">
+            <summary>
+            General exception thrown by External Setting resolvers.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.ExternalSettingsResolverException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Commerce.Connect.CommerceServer.Catalog.ExternalSettingsResolverException"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.ExternalSettingsResolverException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Commerce.Connect.CommerceServer.Catalog.ExternalSettingsResolverException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.ExternalSettingsResolverException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Commerce.Connect.CommerceServer.Catalog.ExternalSettingsResolverException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.ExternalSettingsResolverException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Commerce.Connect.CommerceServer.Catalog.ExternalSettingsResolverException"/> class.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.ExternalSettingsResolverException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            When overridden in a derived class, sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with information about the exception.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
+            <PermissionSet>
+              <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Read="*AllFiles*" PathDiscovery="*AllFiles*" />
+              <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="SerializationFormatter" />
+            </PermissionSet>
+        </member>
         <member name="T:Sitecore.Commerce.Connect.CommerceServer.Profiles.ProfileImportException">
             <summary>
             Exception thrown from the Profile import jobs.
@@ -2786,6 +2853,61 @@
             <value>
             The user identifier.
             </value>
+        </member>
+        <member name="T:Sitecore.Commerce.Connect.CommerceServer.Catalog.IExternalSettingsResolver">
+            <summary>
+            Interface for External Settings
+            </summary>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.IExternalSettingsResolver.GetCatalogItem(CommerceServer.Core.Catalog.Variant,CommerceServer.Core.Catalog.Product,CommerceServer.Core.Catalog.Product@)">
+            <summary>
+            Gets the catalog item.
+            </summary>
+            <param name="current">The base catalog variant.</param>
+            <param name="currentProduct">The product of the variant.</param>
+            <param name="settingsProduct">The settings product is returned in this parameter.</param>
+            <returns>
+            A Commerce Variant.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.IExternalSettingsResolver.GetCatalogItem(CommerceServer.Core.Catalog.ProductCatalog)">
+            <summary>
+            Gets the catalog item.
+            </summary>
+            <param name="current">The current.</param>
+            <returns>A Commerce ProductCatalog.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.IExternalSettingsResolver.GetCatalogItem(CommerceServer.Core.Catalog.CatalogItem)">
+            <summary>
+            Gets the catalog item.
+            </summary>
+            <param name="current">The current.</param>
+            <returns>A Commerce CatalogItem.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.IExternalSettingsResolver.TryGetCatalogItem(CommerceServer.Core.Catalog.Variant,CommerceServer.Core.Catalog.Product,CommerceServer.Core.Catalog.Product@)">
+            <summary>
+            Tries the get catalog item.
+            </summary>
+            <param name="current">The base catalog variant.</param>
+            <param name="currentProduct">The product of the variant.</param>
+            <param name="settingsProduct">The settings product is returned in this parameter.</param>
+            <returns>
+            A Commerce Variant; or null if it was not found.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.IExternalSettingsResolver.TryGetCatalogItem(CommerceServer.Core.Catalog.ProductCatalog)">
+            <summary>
+            Tries the get catalog item.
+            </summary>
+            <param name="current">The current.</param>
+            <returns>A Commerce catalogItem or null if it was not found.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.IExternalSettingsResolver.TryGetCatalogItem(CommerceServer.Core.Catalog.CatalogItem)">
+            <summary>
+            Tries the get catalog item.
+            </summary>
+            <param name="current">The current.</param>
+            <returns>A Commerce CatalogItem or null if it was not found.</returns>
         </member>
         <member name="T:Sitecore.Commerce.Connect.CommerceServer.Search.IIndexResolver">
             <summary>
@@ -3867,11 +3989,6 @@
         <member name="P:Sitecore.Commerce.Connect.CommerceServer.Orders.Models.CommerceOrder.StatusCode">
             <summary>
             Gets or sets a value indicating the status code of the basket
-            </summary>
-        </member>
-        <member name="P:Sitecore.Commerce.Connect.CommerceServer.Orders.Models.CommerceOrder.TrackingNumber">
-            <summary>
-            Gets or sets the tracking number associated to the basket
             </summary>
         </member>
         <member name="T:Sitecore.Commerce.Connect.CommerceServer.Orders.Models.CommerceOrderForm">
@@ -9478,6 +9595,14 @@
             <param name="item">The item to delete</param>
             <returns>True if successful and false otherwise</returns>
         </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.Pipelines.DeleteCatalogItems.DeleteExternalSettingsCategory(Sitecore.Commerce.Connect.CommerceServer.Catalog.ICatalogRepository,System.String,System.String)">
+            <summary>
+            Deletes the external settings category.
+            </summary>
+            <param name="repository">The repository.</param>
+            <param name="catalogName">Name of the catalog.</param>
+            <param name="categoryId">The category identifier.</param>
+        </member>
         <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.Pipelines.DeleteCatalogItems.GetDatabase(Sitecore.Web.UI.Sheer.ClientPipelineArgs)">
             <summary>
             Gets the Database from the incoming pipeline args
@@ -10967,11 +11092,25 @@
             <param name="definitionName">Name of the definition.</param>
             <returns>CatalogDefinition for the specified definition name.</returns>
         </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.ICatalogRepository.CreateCatalogDefinition(System.String,CommerceServer.Core.Catalog.CatalogDefinitionType)">
+            <summary>
+            Creates the catalog definition.
+            </summary>
+            <param name="definitionName">Name of the definition.</param>
+            <param name="definitionType">Type of the definition.</param>
+            <returns>The newly created catalog definition instance; otherwise null.</returns>
+        </member>
         <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.ICatalogRepository.GetCatalogMetadataDefinitions">
             <summary>
             Gets the catalog metadata definitions.
             </summary>
             <returns>CatalogPropertiesDataSet of metadata definitions.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.ICatalogRepository.AddCatalogMetadata(System.String)">
+            <summary>
+            Adds the catalog metadata.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
         </member>
         <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.ICatalogRepository.GetCatalogPropertyDefinitionList">
             <summary>
@@ -10985,6 +11124,15 @@
             </summary>
             <param name="propertyName">Name of the property.</param>
             <returns>CatalogProperty for the specified property name.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.ICatalogRepository.CreateCatalogPropertyDefinition(System.String,CommerceServer.Core.Catalog.CatalogDataType,System.Int32)">
+            <summary>
+            Creates the catalog property definition.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="catalogDataType">Type of the catalog data.</param>
+            <param name="maxLength">The maximum length.</param>
+            <returns>The created catalog property definition.</returns>
         </member>
         <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.ICatalogRepository.GetCategoryChildIDs(System.String,System.String,System.Boolean)">
             <summary>
@@ -11353,6 +11501,12 @@
             </summary>
             <returns>CatalogPropertiesDataSet of metadata definitions.</returns>
         </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.CatalogRepository.AddCatalogMetadata(System.String)">
+            <summary>
+            Adds the catalog metadata.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+        </member>
         <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.CatalogRepository.GetCatalogDefinitionList">
             <summary>
             Gets the catalog definition list.
@@ -11366,6 +11520,16 @@
             <param name="definitionName">Name of the definition.</param>
             <returns>CatalogDefinition for the specified definition name.</returns>
         </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.CatalogRepository.CreateCatalogDefinition(System.String,CommerceServer.Core.Catalog.CatalogDefinitionType)">
+            <summary>
+            Creates the catalog definition.
+            </summary>
+            <param name="definitionName">Name of the definition.</param>
+            <param name="definitionType">Type of the definition.</param>
+            <returns>
+            The newly created catalog definition instance; otherwise null.
+            </returns>
+        </member>
         <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.CatalogRepository.GetCatalogPropertyDefinitionList">
             <summary>
             Gets a data set containing all property definitions in the Catalog system.
@@ -11378,6 +11542,17 @@
             </summary>
             <param name="propertyName">Name of the property.</param>
             <returns>CatalogProperty for the specified property name.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.CatalogRepository.CreateCatalogPropertyDefinition(System.String,CommerceServer.Core.Catalog.CatalogDataType,System.Int32)">
+            <summary>
+            Creates the catalog property definition.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="catalogDataType">Type of the catalog data.</param>
+            <param name="maxLength">The maximum length.</param>
+            <returns>
+            The created catalog property definition.
+            </returns>
         </member>
         <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.CatalogRepository.GetCategoryChildIDs(System.String,System.String,System.Boolean)">
             <summary>
@@ -14060,6 +14235,31 @@
         <member name="T:Sitecore.Commerce.Connect.CommerceServer.CommerceConstants.KnownCatalogFieldNames">
             <summary>
             Known list of Commerce Server catalog field names.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Commerce.Connect.CommerceServer.CommerceConstants.KnownCatalogFieldNames.ProductId">
+            <summary>
+            The name of the built-in field in Commerce Server that identifies products
+            </summary>
+        </member>
+        <member name="F:Sitecore.Commerce.Connect.CommerceServer.CommerceConstants.KnownCatalogFieldNames.VariantId">
+            <summary>
+            The name of the built-in field in Commerce Server that identifies variants
+            </summary>
+        </member>
+        <member name="F:Sitecore.Commerce.Connect.CommerceServer.CommerceConstants.KnownCatalogFieldNames.IsExternalSettingsCatalog">
+            <summary>
+            The name of the field in Commerce Server that identifies external settings catalogs
+            </summary>
+        </member>
+        <member name="F:Sitecore.Commerce.Connect.CommerceServer.CommerceConstants.KnownCatalogFieldNames.ExternalSettingsCatalogName">
+            <summary>
+            The name of the field in Commerce Server that defines the external settings catalogs of a base catalog
+            </summary>
+        </member>
+        <member name="F:Sitecore.Commerce.Connect.CommerceServer.CommerceConstants.KnownCatalogFieldNames.ExternalSettingsVariantProperty">
+            <summary>
+            The name of the field in Commerce Server that is associated with a ExternalSettingsProduct definition.
             </summary>
         </member>
         <member name="F:Sitecore.Commerce.Connect.CommerceServer.CommerceConstants.KnownCatalogFieldNames.ExternalId">
@@ -16855,17 +17055,17 @@
         </member>
         <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.Pipelines.UpdateVariantProcessor.HandleRank(Sitecore.Data.Items.FieldChange,CommerceServer.Core.Catalog.Variant)">
             <summary>
-            Applies a <see cref="T:Sitecore.Data.Items.FieldChange"/> that represnts the rank of a <see cref="T:CommerceServer.Core.Catalog.Variant"/> to the provided <see cref="T:CommerceServer.Core.Catalog.Variant"/>.
+            Applies a <see cref="T:Sitecore.Data.Items.FieldChange"/> that represnts the rank of a CommerceServer.Core.Catalog.Variant to the provided CommerceServer.Core.Catalog.Variant.
             </summary>
-            <param name="change">A <see cref="T:Sitecore.Data.Items.FieldChange"/> that represnts the rank of a <see cref="T:CommerceServer.Core.Catalog.Variant"/>.</param>
+            <param name="change">A <see cref="T:Sitecore.Data.Items.FieldChange"/> that represnts the rank of a CommerceServer.Core.Catalog.Variant.</param>
             <param name="variant">The <see cref="T:CommerceServer.Core.Catalog.CatalogItem"/> on which the provided <paramref name="change"/> will be applied.</param>
             <returns><c>True</c> if the provided <paramref name="variant"/> was modified, otherwise false.</returns>
         </member>
         <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.Pipelines.UpdateVariantProcessor.HandleDisplayName(Sitecore.Data.Items.FieldChange,CommerceServer.Core.Catalog.Variant)">
             <summary>
-            Applies a <see cref="T:Sitecore.Data.Items.FieldChange"/> that represnts the display name of a <see cref="T:CommerceServer.Core.Catalog.Variant"/> to the provided <see cref="T:CommerceServer.Core.Catalog.Variant"/>.
+            Applies a <see cref="T:Sitecore.Data.Items.FieldChange"/> that represnts the display name of a CommerceServer.Core.Catalog.Variant to the provided CommerceServer.Core.Catalog.Variant.
             </summary>
-            <param name="change">A <see cref="T:Sitecore.Data.Items.FieldChange"/> that represnts the display name of a <see cref="T:CommerceServer.Core.Catalog.Variant"/>.</param>
+            <param name="change">A <see cref="T:Sitecore.Data.Items.FieldChange"/> that represnts the display name of a CommerceServer.Core.Catalog.Variant.</param>
             <param name="variant">The <see cref="T:CommerceServer.Core.Catalog.CatalogItem"/> on which the provided <paramref name="change"/> will be applied.</param>
             <returns><c>True</c> if the provided <paramref name="variant"/> was modified, otherwise false.</returns>
         </member>
@@ -20452,6 +20652,14 @@
             <param name="product">The product.</param>
             <returns>True if the Product has variants; false otherwise.</returns>
         </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.ProductProvider.DeleteExternalSettingsProduct(Sitecore.Commerce.Connect.CommerceServer.Catalog.ICatalogRepository,System.String,System.String)">
+            <summary>
+            Deletes the external settings product.
+            </summary>
+            <param name="repository">The repository.</param>
+            <param name="catalogName">Name of the catalog.</param>
+            <param name="productId">The product identifier.</param>
+        </member>
         <member name="T:Sitecore.Commerce.Connect.CommerceServer.Catalog.ProductVariantProvider">
             <summary>
             Product variant data provider for Sitecore.  
@@ -20618,6 +20826,15 @@
             </summary>
             <param name="product">The product.</param>
             <returns>True if the Product has variants; false otherwise.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.ProductVariantProvider.DeleteExternalSettingsVariant(Sitecore.Commerce.Connect.CommerceServer.Catalog.ICatalogRepository,System.String,System.String,System.String)">
+            <summary>
+            Deletes the external settings variant.
+            </summary>
+            <param name="repository">The repository.</param>
+            <param name="catalogName">Name of the catalog.</param>
+            <param name="productId">The product identifier.</param>
+            <param name="variantId">The variant identifier.</param>
         </member>
         <member name="T:Sitecore.Commerce.Connect.CommerceServer.Catalog.NavigationItemProvider">
             <summary>
@@ -21098,6 +21315,16 @@
         <member name="T:Sitecore.Commerce.Connect.CommerceServer.Texts">
             <summary>
                 Represents the texts in Sitecore.Commerce.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Commerce.Connect.CommerceServer.Texts.CreateCatalogDefinitionError">
+            <summary>
+                "An error has occurred when trying to create the following catalog definition: {0}"
+            </summary>
+        </member>
+        <member name="F:Sitecore.Commerce.Connect.CommerceServer.Texts.CreateCatalogError">
+            <summary>
+                "An error has occurred when trying to create the following catalog: {0}"
             </summary>
         </member>
         <member name="F:Sitecore.Commerce.Connect.CommerceServer.Texts.CannotAddVersionIfLanguageExists">
@@ -22108,6 +22335,69 @@
             Gets or sets the ProfileContext
             </summary>
         </member>
+        <member name="T:Sitecore.Commerce.Connect.CommerceServer.Catalog.DefaultExternalSettingsResolver">
+            <summary>
+            Represents the default catalog external settings resolver.  The default is to return the external settings from the given catalog item.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.DefaultExternalSettingsResolver.GetCatalogItem(CommerceServer.Core.Catalog.Variant,CommerceServer.Core.Catalog.Product,CommerceServer.Core.Catalog.Product@)">
+            <summary>
+            Gets the catalog item.
+            </summary>
+            <param name="current">The base catalog variant.</param>
+            <param name="currentProduct">The product of the variant.</param>
+            <param name="settingsProduct">The settings product is returned in this parameter.</param>
+            <returns>
+            A Commerce Variant.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.DefaultExternalSettingsResolver.GetCatalogItem(CommerceServer.Core.Catalog.ProductCatalog)">
+            <summary>
+            Gets the catalog item.
+            </summary>
+            <param name="current">The current.</param>
+            <returns>
+            A Commerce ProductCatalog.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.DefaultExternalSettingsResolver.GetCatalogItem(CommerceServer.Core.Catalog.CatalogItem)">
+            <summary>
+            Gets the catalog item.
+            </summary>
+            <param name="current">The current.</param>
+            <returns>
+            A Commerce CatalogItem.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.DefaultExternalSettingsResolver.TryGetCatalogItem(CommerceServer.Core.Catalog.Variant,CommerceServer.Core.Catalog.Product,CommerceServer.Core.Catalog.Product@)">
+            <summary>
+            Tries the get catalog item.
+            </summary>
+            <param name="current">The base catalog variant.</param>
+            <param name="currentProduct">The product of the variant.</param>
+            <param name="settingsProduct">The settings product is returned in this parameter.</param>
+            <returns>
+            A Commerce Variant; or null if it was not found.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.DefaultExternalSettingsResolver.TryGetCatalogItem(CommerceServer.Core.Catalog.ProductCatalog)">
+            <summary>
+            Tries the get catalog item.
+            </summary>
+            <param name="current">The current.</param>
+            <returns>
+            A Commerce catalogItem or null if it was not found.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.DefaultExternalSettingsResolver.TryGetCatalogItem(CommerceServer.Core.Catalog.CatalogItem)">
+            <summary>
+            Tries the get catalog item.
+            </summary>
+            <param name="current">The current.</param>
+            <returns>
+            A Commerce CatalogItem or null if it was not found.
+            </returns>
+        </member>
         <member name="T:Sitecore.Commerce.Connect.CommerceServer.IntegrationPostStep">
             <summary>
             A class used for post step work after installing packages.  
@@ -22586,6 +22876,194 @@
             <summary>
             Gets or sets the collection of AccessRightsPropagations for the RoleName.
             </summary>
+        </member>
+        <member name="T:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver">
+            <summary>
+            Represents the external settings provider that saves external settings values in a separate catalog.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.GetCatalogItem(CommerceServer.Core.Catalog.Variant,CommerceServer.Core.Catalog.Product,CommerceServer.Core.Catalog.Product@)">
+            <summary>
+            Gets the catalog item.  Creates it if it was not found.
+            </summary>
+            <param name="current">The current.</param>
+            <param name="currentProduct">The product of the variant.</param>
+            <param name="settingsProduct">The settings product is returned in this parameter.</param>
+            <returns>
+            A Commerce Variant.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.GetCatalogItem(CommerceServer.Core.Catalog.ProductCatalog)">
+            <summary>
+            Gets the catalog item.  Creates it if it was not found.
+            </summary>
+            <param name="current">The current.</param>
+            <returns>
+            A Commerce ProductCatalog.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.GetCatalogItem(CommerceServer.Core.Catalog.CatalogItem)">
+            <summary>
+            Gets the catalog item.  Creates it if it was not found.
+            </summary>
+            <param name="current">The current.</param>
+            <returns>
+            A Commerce CatalogItem.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.TryGetCatalogItem(CommerceServer.Core.Catalog.Variant,CommerceServer.Core.Catalog.Product,CommerceServer.Core.Catalog.Product@)">
+            <summary>
+            Tries the get catalog item.
+            </summary>
+            <param name="current">The current.</param>
+            <param name="currentProduct">The product of the variant.</param>
+            <param name="settingsProduct">The settings product is returned in this parameter.</param>
+            <returns>
+            A Commerce Variant; or null if it was not found.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.TryGetCatalogItem(CommerceServer.Core.Catalog.ProductCatalog)">
+            <summary>
+            Tries the get catalog item.
+            </summary>
+            <param name="current">The current.</param>
+            <returns>
+            A Commerce catalogItem or null if it was not found.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.TryGetCatalogItem(CommerceServer.Core.Catalog.CatalogItem)">
+            <summary>
+            Tries the get catalog item.
+            </summary>
+            <param name="current">The current.</param>
+            <returns>
+            A Commerce CatalogItem or null if it was not found.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.GetExternalSettingsCatalogName(System.String)">
+            <summary>
+            Gets the name of the external settings catalog.
+            </summary>
+            <param name="catalog">The base catalog.</param>
+            <returns>The name of the external settings catalog.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.EnsureExternalSettingsCatalog(System.String,System.Boolean)">
+            <summary>
+            Ensures the external settings product catalog has been created..
+            </summary>
+            <param name="baseCatalog">The base catalog.</param>
+            <param name="createIfNotExist">if set to <c>true</c> [create if not exist].</param>
+            <returns>An instance of the product catalog.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.TryGetExternalSettingsProductCatalog(System.String)">
+            <summary>
+            Tries the get the product catalog.
+            </summary>
+            <param name="catalogName">Name of the catalog.</param>
+            <returns>An instance of the product catalog;  Otherwise null.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.TryGetExternalSettingsCategory(CommerceServer.Core.Catalog.Category)">
+            <summary>
+            Tries the get the external settings category.
+            </summary>
+            <param name="current">The current.</param>
+            <returns>An instance of the Category; Otherwise null.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.TryGetExternalSettingsProduct(System.String,System.String)">
+            <summary>
+            Tries the get the external settings product.
+            </summary>
+            <param name="baseCatalog">The base catalog.</param>
+            <param name="productId">The product identifier.</param>
+            <returns>A Product instance; Otherwise null.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.CreateExternalSettingsCatalog(System.String,System.String)">
+            <summary>
+            Creates the external settings catalog.
+            </summary>
+            <param name="baseCatalog">The base catalog.</param>
+            <param name="settingsCatalog">The settings catalog.</param>
+            <returns>The external settings Catalog.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.CreateExternalSettingsCategory(CommerceServer.Core.Catalog.Category,CommerceServer.Core.Catalog.ProductCatalog)">
+            <summary>
+            Creates the external settings category.
+            </summary>
+            <param name="current">The current.</param>
+            <param name="csCatalog">The cs catalog.</param>
+            <returns>The external settings Catagory.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.CreateExternalSettingsProduct(System.String,CommerceServer.Core.Catalog.ProductCatalog)">
+            <summary>
+            Creates the external settings product.
+            </summary>
+            <param name="productId">The product identifier.</param>
+            <param name="csCatalog">The cs catalog.</param>
+            <returns>The external settings Product</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.CreateExternalSettingsVariant(CommerceServer.Core.Catalog.Variant,CommerceServer.Core.Catalog.ProductCatalog,CommerceServer.Core.Catalog.Product@)">
+            <summary>
+            Creates the external settings variant.
+            </summary>
+            <param name="current">The current.</param>
+            <param name="settingsCatalog">The settings catalog.</param>
+            <param name="settingsProduct">The settings product is returned in this parameter.</param>
+            <returns>The external settings Variant.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.EnsureExternalSettingsCatalogPropertyDefinition(System.String,CommerceServer.Core.Catalog.CatalogDataType,System.Int32,System.Boolean)">
+            <summary>
+            Ensures the external settings catalog property definition gets created if it does not already exist.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="dataType">Type of the data.</param>
+            <param name="length">The length.</param>
+            <param name="isCatalogMetadata">if set to <c>true</c> the property is added as Catalog metadata.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.TryGetCatalogPropertyDefinition(System.String)">
+            <summary>
+            Tries to get the given catalog property definition.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <returns>The catalog property definition;  Otherwise null if it does not exist.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.EnsureProductDefinition(CommerceServer.Core.Catalog.ProductCatalog)">
+            <summary>
+            Ensures the product definition gets created if it does not exist.
+            </summary>
+            <param name="csCatalog">The cs catalog.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.EnsureCategoryDefinition(CommerceServer.Core.Catalog.ProductCatalog)">
+            <summary>
+            Ensures the category definition gets created if it does not exist.
+            </summary>
+            <param name="csCatalog">The cs catalog.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.TryGetCatalogDefinition(System.String)">
+            <summary>
+            Tries to get the catalog definition.
+            </summary>
+            <param name="definitionName">Name of the definition.</param>
+            <returns>A catalog definition or null if it does not exist.</returns>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.CreateProductDefinition(CommerceServer.Core.Catalog.ProductCatalog)">
+            <summary>
+            Creates the product definition.
+            </summary>
+            <param name="csCatalog">The cs catalog.</param>
+        </member>
+        <member name="M:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.CreateCategoryDefinition(CommerceServer.Core.Catalog.ProductCatalog)">
+            <summary>
+            Creates the category definition.
+            </summary>
+            <param name="csCatalog">The cs catalog.</param>
+        </member>
+        <member name="P:Sitecore.Commerce.Connect.CommerceServer.Catalog.SeparateCatalogExternalSettingsResolver.CatalogRepository">
+            <summary>
+            Gets the catalog repository.
+            </summary>
+            <value>
+            The catalog repository.
+            </value>
         </member>
         <member name="T:Sitecore.Commerce.Connect.CommerceServer.ServicesDisabler">
             <summary>

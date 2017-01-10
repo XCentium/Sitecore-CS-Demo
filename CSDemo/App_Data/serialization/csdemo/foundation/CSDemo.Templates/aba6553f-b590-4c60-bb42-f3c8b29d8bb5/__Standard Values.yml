@@ -1,0 +1,20 @@
+﻿---
+ID: a5cd511a-6070-4da4-8292-3f0d7da48b92
+Parent: aba6553f-b590-4c60-bb42-f3c8b29d8bb5
+Template: aba6553f-b590-4c60-bb42-f3c8b29d8bb5
+Path: /sitecore/templates/CSDemo/Components/Article/Accordion data/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 0c5f5824-6766-4575-bc8c-a09bb7f64b7e
+      Hint: Title
+      Value: $name
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161101T165204Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

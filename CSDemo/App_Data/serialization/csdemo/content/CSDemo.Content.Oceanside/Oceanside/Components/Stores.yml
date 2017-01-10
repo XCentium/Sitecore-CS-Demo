@@ -1,0 +1,22 @@
+﻿---
+ID: 6b745487-e1c2-4310-86ae-9524158af8c3
+Parent: 501f552d-3b6a-4041-ad67-f75244cce8cf
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+Path: /sitecore/content/Oceanside/Components/Stores
+DB: master
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Type: TreelistEx
+  Value: {B6EE1AEC-38EB-4072-AEFB-35A29E1AF90D}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160512T005702Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

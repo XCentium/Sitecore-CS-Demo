@@ -1,0 +1,21 @@
+﻿---
+ID: 8935039e-6e00-40d5-b0eb-7067f932cda9
+Parent: b60fbfb0-183d-4ea6-b764-3d743ce37745
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Oceanside/Components/Page/Metadata/Metadata
+DB: master
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 900
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T054939Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

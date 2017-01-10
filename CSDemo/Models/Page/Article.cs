@@ -1,13 +1,13 @@
-﻿using CSDemo.Contracts.Page;
-using CSDemo.Contracts;
+﻿using CSDemo.Contracts;
+using CSDemo.Contracts.Page;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using System;
 
 namespace CSDemo.Models.Page
 {
-    [SitecoreType(AutoMap =true, Cachable = false)]
-    public class Article :IArticle, IEditableBase
+    [SitecoreType(AutoMap = true, Cachable = false)]
+    public class Article : IArticle, IEditableBase
     {
         public virtual string Title { get; set; }
 

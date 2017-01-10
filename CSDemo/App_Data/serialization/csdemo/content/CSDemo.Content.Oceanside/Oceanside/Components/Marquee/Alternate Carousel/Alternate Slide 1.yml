@@ -1,0 +1,48 @@
+﻿---
+ID: 90a70814-4496-42da-9ce2-15fc98c41150
+Parent: b43cf7dd-df85-4814-a2ec-75cdd067dc79
+Template: 6d36df55-60e5-4591-899c-efccaf83579a
+Path: /sitecore/content/Oceanside/Components/Marquee/Alternate Carousel/Alternate Slide 1
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160316T203924Z
+    - ID: 35d787ae-0f1f-412a-a570-d5a79018ebb8
+      Hint: Image
+      Value: "<image mediaid=\"{22BEBA8C-3145-49C3-957A-5E1B9E878715}\" />"
+    - ID: 8ef3659b-8284-4484-9b7e-6fff97496411
+      Hint: Content
+      Value: |
+        <h1 class="border animation top-to-bottom">Alternate version, triggered by Campaign</h1>
+        <div class="container">
+        <em class="fa fa-paper-plane animation top-to-bottom delay-1 slow"></em>
+        <h1 class="animation top-to-bottom slow">XCMarket</h1>
+        <p class="animation bottom-to-top slow">30+ HTML Pages &bull; Simple Design &bull; Components </p>
+        </div>
+- Language: fr-FR
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161024T182547Z
+    - ID: 35d787ae-0f1f-412a-a570-d5a79018ebb8
+      Hint: Image
+      Value: "<image mediaid=\"{A4088D35-B3FD-424A-BC5A-92CF118CD13D}\" />"
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 8ef3659b-8284-4484-9b7e-6fff97496411
+      Hint: Content
+      Value: |
+        <h1 class="border animation top-to-bottom">Alternate version, triggered by Campaign</h1>
+        <div class="container">
+        <em class="fa fa-paper-plane animation top-to-bottom delay-1 slow"></em>
+        <h1 class="animation top-to-bottom slow">XCMarket</h1>
+        <p class="animation bottom-to-top slow">30+ HTML Pages &bull; Simple Design &bull; Components </p>
+        </div>

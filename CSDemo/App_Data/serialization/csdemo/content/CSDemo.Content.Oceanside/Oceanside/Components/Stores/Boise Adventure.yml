@@ -1,0 +1,14 @@
+﻿---
+ID: 696cb41f-5b91-43f6-b1ff-e9c5c3433ff0
+Parent: 6b745487-e1c2-4310-86ae-9524158af8c3
+Template: b6ee1aec-38eb-4072-aefb-35a29e1af90d
+Path: /sitecore/content/Oceanside/Components/Stores/Boise Adventure
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160512T012245Z

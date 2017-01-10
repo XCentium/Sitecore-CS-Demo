@@ -1,0 +1,17 @@
+﻿---
+ID: 1eac2bcf-d054-48f5-9e73-000c9f32c24d
+Parent: cd7c28eb-6d95-4369-9e44-cfd6c26021ee
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Rio Grande/Components/Product/Personalized Products/Personalized Products
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160318T234144Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

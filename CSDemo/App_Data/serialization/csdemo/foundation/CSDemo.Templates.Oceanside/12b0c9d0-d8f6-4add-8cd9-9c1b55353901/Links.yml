@@ -1,0 +1,24 @@
+﻿---
+ID: e7dbe439-cea2-47fd-9d26-4d3401a1f4be
+Parent: 12b0c9d0-d8f6-4add-8cd9-9c1b55353901
+Template: 455a3e98-a627-4b40-8035-e683a0331ac7
+Path: /sitecore/templates/Oceanside/Components/Navigation/Mega Menu Navigation Item/Mega Menu Navigation/Links
+DB: master
+SharedFields:
+- ID: 1eb8ae32-e190-44a6-968d-ed904c794ebf
+  Hint: Source
+  Value: StartSearchLocation={08BFB57F-DAC9-4B11-90C5-5D19647899EF}&Filter=_path:{2C1225CC-24C0-496B-AEB7-7BEF84C0252A}|_path:{50FD3B76-F271-4504-83E3-F9CA53FC4AE6}|parsedlanguage:english|commercesearchitemtype:GeneralCategory
+- ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
+  Hint: Type
+  Value: Multilist with Search
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 200
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T193656Z

@@ -1,0 +1,14 @@
+﻿---
+ID: 1dbae2ae-6adc-498d-b7dd-3cd02eef686b
+Parent: c3fee24e-c33e-413b-b029-10469fb1805c
+Template: a21b890e-c798-469c-8727-0f2c525787f3
+Path: /sitecore/content/Oceanside/Settings
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T161000Z

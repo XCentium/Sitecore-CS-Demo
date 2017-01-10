@@ -1,0 +1,29 @@
+﻿---
+ID: 016430cc-6c65-4fe5-8b22-883f0aad9af7
+Parent: 81f4b10d-e420-4ffe-8990-e374509afafa
+Template: 0951b1c7-0699-415f-9ff5-ecdfeaec79d6
+Path: /sitecore/content/Data/Blogs/Settings
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160506T045749Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
+    - ID: 8c33ab62-e715-4369-a220-9cc0a241b41c
+      Hint: Category Folder
+      Value: {C96D62BF-217D-4EC4-9162-17203CB40D08}
+    - ID: d0332649-962a-41d0-806b-89bd1cbfcf71
+      Hint: Author Folder
+      Value: {CCB0C01B-C983-4262-A78A-B8C3709787BE}
+    - ID: d8480e1e-8502-4b6a-bf41-dc6ce16dc177
+      Hint: Tag Folder
+      Value: {6CE6E7C8-2DDC-4F5E-B43B-C89C8942B61D}
+    - ID: f30b7285-3051-4c39-a710-f3b4f91f0e0e
+      Hint: Author View Page
+      Value: {34B19E54-04FE-42C4-96B3-2DCAF57B3ED3}

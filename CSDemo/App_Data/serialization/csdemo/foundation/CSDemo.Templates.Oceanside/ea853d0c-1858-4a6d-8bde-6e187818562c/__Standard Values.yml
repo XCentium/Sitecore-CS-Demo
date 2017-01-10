@@ -1,0 +1,22 @@
+﻿---
+ID: 4bfd64f5-d9de-417d-b047-eaa1b9d2ed39
+Parent: ea853d0c-1858-4a6d-8bde-6e187818562c
+Template: ea853d0c-1858-4a6d-8bde-6e187818562c
+Path: /sitecore/templates/Oceanside/Components/Navigation/Navigation Item/__Standard Values
+DB: master
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Type: TreelistEx
+  Value: {0A2A31A0-A3B8-493C-B5FE-1935E1723F52}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T210417Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

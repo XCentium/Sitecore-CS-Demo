@@ -1,0 +1,17 @@
+﻿---
+ID: c45ff3f8-ad3f-407e-bc65-c0833e1e548a
+Parent: 010b8f25-879e-47f9-a349-a47c4a25fcc7
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Oceanside/Components/Product/Categories/Parameters/Page Size/Page Size Section
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160315T005137Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

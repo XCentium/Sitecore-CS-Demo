@@ -1,0 +1,60 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Article.Accordion>
+@if (Model == null)
+{
+    return;
+}
+<section class="content">
+    <div class="container">
+        <article class="components-content">
+            @using (BeginEditFrame(Model.Path))
+            {
+
+                if (!string.IsNullOrWhiteSpace(Model.Title))
+                {
+
+                    <h2 class="component-heading" id="accordition">
+                        <i class="fa fa-bars"></i>@Editable(Model, x => x.Title)
+                    </h2>
+                }
+
+            }
+            <!-- COMPONENTS:ACCORDITION - START -->
+            @if (Model.Data != null)
+            {
+                var cnt = 0;
+                var openFirst = "in";
+                var openNext = "true";
+                var classCloapsed = "";
+                <div class="panel-group" id="demo-accordion" role="tablist" aria-multiselectable="true">
+                    @foreach (var accordion in Model.Data)
+                    {
+                        cnt++;
+                        
+                        <div class="panel panel-primary">
+                            <div class="panel-heading" role="tab">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#demo-accordion" href="#demo-accordion-@cnt" aria-expanded="@openNext" aria-controls="demo-accordion-@cnt" @classCloapsed>@accordion.Title</a>
+                                </h4>
+                            </div>
+                            <div id="demo-accordion-@cnt" class="panel-collapse collapse @openFirst" role="tabpanel">
+                                <div class="panel-body">
+                                    @Html.Raw(accordion.Body)
+                                </div>
+                            </div>
+                        </div>
+                        openFirst = "";
+                        openNext = "false";
+                        classCloapsed = "class=collapsed";
+                    }
+
+                </div>
+                
+            }
+            <!-- COMPONENTS:ACCORDITION - END -->
+
+
+        </article>
+
+</div>
+</section>
+

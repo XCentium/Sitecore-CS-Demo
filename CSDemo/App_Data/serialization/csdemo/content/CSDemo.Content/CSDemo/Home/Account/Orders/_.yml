@@ -11,13 +11,10 @@ SharedFields:
   Value: |
     <r xmlns:p="p" xmlns:s="s" p:p="1">
       <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-        <p uid="{26F398F5-777E-4CD0-8114-236A9FF2E2B9}">
-          <p:d />
-        </p>
         <r uid="{63223E3A-7BE4-4C4F-A69F-29C0F4CD44EA}">
           <p:d />
         </r>
-        <r uid="{0C8AFC47-8581-4982-A8CA-EFBAE7302B6E}" p:before="r[@uid='{E5A6C541-E277-499D-9CB9-DFF8CE125A23}']" s:id="{B14E4FFB-469A-4F8A-9ADE-24A27FA46104}" s:ph="page-body" />
+        <r uid="{0C8AFC47-8581-4982-A8CA-EFBAE7302B6E}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:id="{B14E4FFB-469A-4F8A-9ADE-24A27FA46104}" s:ph="page-body" />
       </d>
     </r>
 Languages:

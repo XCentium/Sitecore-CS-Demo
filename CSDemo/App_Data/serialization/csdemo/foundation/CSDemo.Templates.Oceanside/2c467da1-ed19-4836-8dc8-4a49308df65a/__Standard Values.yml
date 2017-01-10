@@ -1,0 +1,27 @@
+﻿---
+ID: 0185f40a-ba75-4576-9072-002bdb053013
+Parent: 2c467da1-ed19-4836-8dc8-4a49308df65a
+Template: 2c467da1-ed19-4836-8dc8-4a49308df65a
+Path: /sitecore/templates/Oceanside/Components/Page/Parameters/Row Config/__Standard Values
+DB: master
+SharedFields:
+- ID: 3094d236-5985-4c4f-ae6a-e30740885532
+  Hint: Caching
+  Value: 0|0|0|0|0|0|0|0
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 24aff080-44c1-4118-a730-d7ad3b2cedc5
+      Hint: Section CSS Class
+      Value: content
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160217T080444Z
+    - ID: 658d086d-27f9-46c5-a1d1-b4c536f8ac6e
+      Hint: Container CSS Class
+      Value: container
+    - ID: caeee33f-c959-41de-a770-90a5779eb53a
+      Hint: Row CSS Class
+      Value: Row

@@ -1,11 +1,12 @@
 ﻿#region
 
-using System;
-using System.Collections.Generic;
 using CSDemo.Models.Product;
+using CSDemo.Models.Store;
 using Glass.Mapper.Sc.Fields;
 using Sitecore.Commerce.Entities.Inventory;
 using Sitecore.Data.Items;
+using System;
+using System.Collections.Generic;
 
 #endregion
 
@@ -64,5 +65,7 @@ namespace CSDemo.Contracts.Product
         string ShippingWeight { get; set; }
         string CountryOfOrigin { get; set; }
         List<string> AltImages();
+
+        IEnumerable<Store> Stores { get; set; }
     }
 }

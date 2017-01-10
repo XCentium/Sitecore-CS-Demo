@@ -50,9 +50,14 @@
     <Reference Include="CommerceMessageManager">
       <HintPath>..\Lib\CommerceServer\CommerceMessageManager.dll</HintPath>
     </Reference>
+    <Reference Include="CommerceServer.Core.Catalog, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\CommerceServer\CommerceServer.Core.Catalog.dll</HintPath>
+    </Reference>
     <Reference Include="CommerceServer.Core.CrossTier, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\CommerceServer\CommerceServer.Core.CrossTier.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="CommerceServer.Core.Orders.CrossTier, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -62,6 +67,7 @@
     <Reference Include="CommerceServer.Core.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\CommerceServer\CommerceServer.Core.Runtime.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Facebook">
       <HintPath>..\Lib\Social\Facebook.dll</HintPath>
@@ -111,92 +117,78 @@
       <HintPath>..\packages\Rainbow.Storage.Yaml.1.1.0\lib\net45\Rainbow.Storage.Yaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Simple.OData.Client.Net40">
+      <HintPath>..\Lib\Sitecore\Simple.OData.Client.Net40.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Analytics">
       <HintPath>..\Lib\Sitecore\Sitecore.Analytics.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Analytics.Automation">
       <HintPath>..\Lib\Sitecore\Sitecore.Analytics.Automation.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.Analytics.Core, Version=8.0.5401.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Sitecore.Analytics.Core">
       <HintPath>..\Lib\Sitecore\Sitecore.Analytics.Core.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.Analytics.Model, Version=8.0.5401.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Sitecore.Analytics.Model">
       <HintPath>..\Lib\Sitecore\Sitecore.Analytics.Model.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Analytics.Outcome">
       <HintPath>..\Lib\Sitecore\Sitecore.Analytics.Outcome.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Cintel">
       <HintPath>..\Lib\Sitecore\Sitecore.Cintel.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Commerce">
       <HintPath>..\Lib\Sitecore\Sitecore.Commerce.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Commerce.Connect.CommerceServer">
       <HintPath>..\Lib\Sitecore\Sitecore.Commerce.Connect.CommerceServer.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.ContentSearch">
       <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.ContentSearch.Analytics">
       <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.Analytics.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.ContentSearch.Linq">
       <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.Linq.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.ContentSearch.LuceneProvider">
       <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.LuceneProvider.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\Lib\Sitecore\Sitecore.Kernel.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Mvc">
       <HintPath>..\Lib\Sitecore\Sitecore.Mvc.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Mvc.Analytics">
       <HintPath>..\Lib\Sitecore\Sitecore.Mvc.Analytics.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Social, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Sitecore\Sitecore.Social.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.Social.Client.Mvc">
+    <Reference Include="Sitecore.Social.Client.Mvc, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Sitecore\Sitecore.Social.Client.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Social.Domain, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Bin\Sitecore.Social.Domain.dll</HintPath>
+      <HintPath>..\Lib\Sitecore\Sitecore.Social.Domain.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Social.Facebook">
-      <HintPath>..\Lib\Social\Sitecore.Social.Facebook.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\Lib\Sitecore\Sitecore.Social.Facebook.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Social.Facebook.Api">
-      <HintPath>..\Lib\Social\Sitecore.Social.Facebook.Api.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\Lib\Sitecore\Sitecore.Social.Facebook.Api.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Social.Infrastructure, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Sitecore\Sitecore.Social.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.Social.NetworkProviders">
+    <Reference Include="Sitecore.Social.NetworkProviders, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Sitecore\Sitecore.Social.NetworkProviders.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Linq" />
@@ -263,6 +255,27 @@
     </Compile>
     <Compile Include="App_Start\GlassMapperSc.cs" />
     <Compile Include="App_Start\GlassMapperScCustom.cs" />
+    <Compile Include="CatalogTool\CatalogSoap.aspx.cs">
+      <DependentUpon>CatalogSoap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CatalogTool\CatalogSoap.aspx.designer.cs">
+      <DependentUpon>CatalogSoap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CatalogTool\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CatalogTool\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CatalogTool\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CatalogTool\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Configuration\Conditions\ContactEmailCheck.cs" />
     <Compile Include="Configuration\Conditions\LastPurchaseAmountCheck.cs" />
     <Compile Include="Configuration\Conditions\ProductBackInStock.cs" />
@@ -276,6 +289,11 @@
     <Compile Include="Configuration\Social\CreateUser.cs" />
     <Compile Include="Configuration\Social\PostMessageToFacebook.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Contracts\Article\IAccordion.cs" />
+    <Compile Include="Contracts\Article\IAccordionData.cs" />
+    <Compile Include="Contracts\Article\IArticleLinks.cs" />
+    <Compile Include="Contracts\Article\IArticleLinksData.cs" />
+    <Compile Include="Contracts\Article\IArticlePage.cs" />
     <Compile Include="Contracts\Blog\IBlog.cs" />
     <Compile Include="Contracts\Blog\IBlogAuthor.cs" />
     <Compile Include="Contracts\Blog\IBlogCategory.cs" />
@@ -298,6 +316,7 @@
     <Compile Include="Contracts\Product\IProductVariant.cs" />
     <Compile Include="Contracts\Product\ITag.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\MarqueeController.cs" />
@@ -316,6 +335,11 @@
     <Compile Include="Models\Account\OrderLine.cs" />
     <Compile Include="Models\Account\OrdersViewModel.cs" />
     <Compile Include="Models\Account\UserStatus.cs" />
+    <Compile Include="Models\Article\Accordion.cs" />
+    <Compile Include="Models\Article\AccordionData.cs" />
+    <Compile Include="Models\Article\ArticleLinks.cs" />
+    <Compile Include="Models\Article\ArticleLinksData.cs" />
+    <Compile Include="Models\Article\ArticlePage.cs" />
     <Compile Include="Models\Blog\Blog.cs" />
     <Compile Include="Models\Blog\BlogAuthor.cs" />
     <Compile Include="Models\Blog\BlogCategory.cs" />
@@ -326,6 +350,9 @@
     <Compile Include="Models\Blog\BlogViewModel.cs" />
     <Compile Include="Models\Blog\FeaturedBlogs.cs" />
     <Compile Include="Models\Checkout\Cart\CartHelper.cs" />
+    <Compile Include="Models\Checkout\Cart\GetShippingMethods.cs" />
+    <Compile Include="Models\Checkout\Cart\GetShippingMethodsRequest.cs" />
+    <Compile Include="Models\Checkout\Cart\GetShippingOptions.cs" />
     <Compile Include="Models\CommerceModels.cs" />
     <Compile Include="Models\Page\HomePage.cs" />
     <Compile Include="Models\Page\Root.cs" />
@@ -452,6 +479,9 @@
     <Content Include="Assets\images\flags\de.png" />
     <Content Include="Assets\images\flags\fr.png" />
     <Content Include="Assets\images\flags\us.png" />
+    <Content Include="Assets\images\image1.jpg" />
+    <Content Include="Assets\images\image2.jpg" />
+    <Content Include="Assets\images\image3.png" />
     <Content Include="Assets\images\lookbook-1.png" />
     <Content Include="Assets\images\lookbook-2.png" />
     <Content Include="Assets\images\map.jpg" />
@@ -491,6 +521,13 @@
     <Content Include="Assets\js\SmoothScroll.js" />
     <Content Include="Assets\js\twitterFetcher_min.js" />
     <Content Include="Assets\js\typeahead.js" />
+    <Content Include="CatalogTool\CatalogSoap.aspx" />
+    <Content Include="CatalogTool\Default.aspx" />
+    <Content Include="CatalogTool\getItemChildren.aspx" />
+    <Content Include="CatalogTool\Index.aspx" />
+    <Content Include="CatalogTool\marketingdata.aspx" />
+    <Content Include="CatalogTool\mySitecoreAPI.aspx" />
+    <Content Include="CatalogTool\pullCSV.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
@@ -499,27 +536,9 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Config\Include\zCSDemo\CSDemo.PatternMatchFix.config" />
-    <Content Include="App_Config\ConnectionStrings.config" />
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.Debug.config">
-      <DependentUpon>CSDemo.Main.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.DEV Local.config">
-      <DependentUpon>CSDemo.Main.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Debug.config">
-      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.DEV Local.config">
-      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Vasiliy Local.config">
-      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
+    <Content Include="App_Config\ConnectionStrings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Config\Include\zOceanside\Oceanside.Main.config">
       <SubType>Designer</SubType>
     </Content>
@@ -529,10 +548,7 @@
     <Content Include="App_Config\Include\zOceanside\Oceanside.Main.Debug.config">
       <DependentUpon>Oceanside.Main.config</DependentUpon>
     </Content>
-    <Content Include="ProductDetail.cshtml" />
-
-    <None Include="Properties\PublishProfiles\DEV Local.pubxml" />
-    <None Include="Properties\PublishProfiles\Vasiliy Local.pubxml" />
+    <None Include="Properties\PublishProfiles\Ola.CTP.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -621,35 +637,11 @@
       <DependentUpon>CSDemo.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.DebuLocal.config">
-      <DependentUpon>CSDemo.Main.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.Release.config">
-      <DependentUpon>CSDemo.Main.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Main.XcCommerce112Demo.config">
-      <DependentUpon>CSDemo.Main.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
     <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.csDemo.config">
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Ola.debug.config">
-      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
     <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Release.config">
-      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.VM.config">
-      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.XcCommerce112Demo.config">
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
@@ -703,10 +695,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Properties\PublishProfiles\Castle Local.pubxml" />
-    <None Include="Properties\PublishProfiles\csDemo.pubxml" />
-    <None Include="Properties\PublishProfiles\DebuLocal.pubxml" />
-    <None Include="Properties\PublishProfiles\Release Test.pubxml" />
-    <None Include="Properties\PublishProfiles\XcCommerce112Demo.pubxml" />
     <Content Include="Views\Checkout\Cart.cshtml" />
     <Content Include="Views\Checkout\Checkout.cshtml" />
     <Content Include="Views\Checkout\Shipping.cshtml" />
@@ -739,7 +727,6 @@
     <Content Include="Views\Page\Layouts\Styles.cshtml" />
     <Content Include="Views\Product\SpecialtySelectedForYou.cshtml" />
     <Content Include="Views\Product\ComplementaryProducts.cshtml" />
-    <None Include="Properties\PublishProfiles\xccommerce113demo.pubxml" />
     <Content Include="Views\Product\VisitorStockNotificationSignup.cshtml" />
     <Content Include="Views\Account\AddAddress.cshtml" />
     <Content Include="Views\Account\AddressDetail.cshtml" />
@@ -760,6 +747,10 @@
     <Content Include="Views\Product\DealerOrderingSystem.cshtml" />
     <Content Include="Views\Product\SalesQuote.cshtml" />
     <Content Include="Views\Product\QuickOrderSystem.cshtml" />
+    <Content Include="Views\Article\ArticlePage.cshtml" />
+    <Content Include="Views\Article\Accordion.cshtml" />
+    <Content Include="Views\Article\ArticleLinks.cshtml" />
+    <Content Include="Views\Store\ProductInstockLocations.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

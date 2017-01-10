@@ -1,0 +1,21 @@
+﻿---
+ID: d81c08c2-9480-453b-90d1-197bca4d51e9
+Parent: 4c0a1338-0d89-4a32-ba6d-06e1d3168f4f
+Template: 455a3e98-a627-4b40-8035-e683a0331ac7
+Path: /sitecore/templates/Oceanside/Site/Header Section/Title
+DB: master
+SharedFields:
+- ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
+  Hint: Type
+  Value: Single-Line Text
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 200
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T163835Z

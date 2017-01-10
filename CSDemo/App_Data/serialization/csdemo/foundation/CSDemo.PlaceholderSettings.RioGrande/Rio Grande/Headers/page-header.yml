@@ -1,0 +1,22 @@
+﻿---
+ID: 86dcc55b-2553-4da6-8752-2691ccd6d08f
+Parent: e3450145-2814-4904-8d7f-815c18db038a
+Template: 5c547d4e-7111-4995-95b0-6b561751bf2e
+Path: /sitecore/layout/Placeholder Settings/Rio Grande/Headers/page-header
+DB: master
+SharedFields:
+- ID: 7256bdab-1fd2-49dd-b205-cb4873d2917c
+  Hint: Placeholder Key
+  Value: page-header
+- ID: e391b526-d0c5-439d-803e-17512eae6222
+  Hint: Allowed Controls
+  Type: TreelistEx
+  Value: {027AF0D5-BC10-42A4-B796-577FB651D073}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T183516Z

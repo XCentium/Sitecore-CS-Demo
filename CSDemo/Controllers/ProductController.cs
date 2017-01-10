@@ -96,7 +96,20 @@ namespace CSDemo.Controllers
             var parentItem = _context.Database.GetItem(datasource);
             if (parentItem == null) return View(empty);
             var personalizedProducts = parentItem.GlassCast<PersonalizedProducts>();
-            if (!string.IsNullOrEmpty(personalizedProducts.CouponCode)){ProductHelper.SetPersonalizedCoupon(personalizedProducts);}
+
+            try
+            {
+                if (!string.IsNullOrEmpty(personalizedProducts.CouponCode))
+                {
+                    ProductHelper.SetPersonalizedCoupon(personalizedProducts);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message,ex,this);
+                
+            }
+
             return personalizedProducts?.Products != null ? View(personalizedProducts.Products) : View(empty);
         }
 
@@ -146,37 +159,25 @@ namespace CSDemo.Controllers
 
                 model.Category = categoryName;
                 model.UserCatalogIds = _userCatalogIds;
+
                 if (!string.IsNullOrEmpty(categoryName))
                 {
 
-                    var categoryId = (!string.IsNullOrEmpty(cid)) ? cid : ProductHelper.GetItemIdsFromName(categoryName, _userCatalogIds);
-
-                    if (!string.IsNullOrEmpty(categoryId))
+                    if (_catalogPostFix != null)
                     {
-                        var rc = RenderingContext.CurrentOrNull;
-
-                        if (rc != null && rc.Rendering.Parameters[Constants.Products.PageSize] != null)
+                        if (!categoryName.ToLower().Contains(_catalogPostFix.ToLower()))
                         {
-                            var pageSizeData = rc.Rendering.Parameters[Constants.Products.PageSize];
-                            if (!pageSizeData.IsEmptyOrNull())
+                            categoryProduct = GetCategoryProducts(cid, categoryName + _catalogPostFix);
+
+                            if (categoryProduct != null && categoryProduct.PaginationViewModel.TotalItems > 0)
                             {
-                                int pageSize = 0;
-                                var success = int.TryParse(pageSizeData, out pageSize);
-                                model.PageSize = 2;
-                                if (success)
-                                {
-                                    model.PageSize = pageSize;
-                                }
+                                return View(categoryProduct);
                             }
-
                         }
-
-                        model.CategoryId = categoryId;
-                        model.CurrentPage = 1;
-                        model.OrderBy = string.Empty;
-
-                        categoryProduct = ProductHelper.GetCategoryProducts(model);
                     }
+
+                    categoryProduct = GetCategoryProducts(cid, categoryName);
+
                 }
             }
             else
@@ -189,6 +190,49 @@ namespace CSDemo.Controllers
             }
 
             return View(categoryProduct);
+        }
+
+        private CategoryProductViewModel GetCategoryProducts(string cid, string categoryName)
+        {
+            var model = new PaginationViewModel();
+
+            model.Category = categoryName;
+            model.UserCatalogIds = _userCatalogIds;
+            if (!string.IsNullOrEmpty(categoryName))
+            {
+
+
+                var categoryId = (!string.IsNullOrEmpty(cid)) ? cid : ProductHelper.GetItemIdsFromName(categoryName, _userCatalogIds);
+
+                if (!string.IsNullOrEmpty(categoryId))
+                {
+                    var rc = RenderingContext.CurrentOrNull;
+
+                    if (rc != null && rc.Rendering.Parameters[Constants.Products.PageSize] != null)
+                    {
+                        var pageSizeData = rc.Rendering.Parameters[Constants.Products.PageSize];
+                        if (!pageSizeData.IsEmptyOrNull())
+                        {
+                            int pageSize = 0;
+                            var success = int.TryParse(pageSizeData, out pageSize);
+                            model.PageSize = 2;
+                            if (success)
+                            {
+                                model.PageSize = pageSize;
+                            }
+                        }
+
+                    }
+
+                    model.CategoryId = categoryId;
+                    model.CurrentPage = 1;
+                    model.OrderBy = string.Empty;
+
+                    return ProductHelper.GetCategoryProducts(model);
+                }
+            }
+
+            return null;
         }
 
         public ActionResult ProductDetail()
@@ -257,10 +301,27 @@ namespace CSDemo.Controllers
                             t => string.Equals(t.Name, id, StringComparison.CurrentCultureIgnoreCase));
                 if (result != null)
                 {
+                    var addProd = true;
                     var resultItem = result.GetItem();
-                    var product = resultItem.GlassCast<Product>();
-                    if (!products.Any() || !products.Exists(t => t.ID == product.ID))
-                        products.Add(product);
+                    if (_catalogPostFix != null)
+                    {
+                        if (!resultItem.Name.ToLower().Contains(_catalogPostFix.ToLower()))
+                        {
+                            Product tmpProduct = ProductHelper.GetProductByNameAndCategory(resultItem.Name + _catalogPostFix, _catalogPostFix);
+                            if (tmpProduct != null && tmpProduct.DefinitionName != null)
+                            {
+                                products.Add(tmpProduct);
+                                addProd = false;
+                            }
+                        }
+                    }
+
+                    if (addProd)
+                    {
+                        var product = resultItem.GlassCast<Product>();
+                        if (!products.Any() || !products.Exists(t => t.ID == product.ID))
+                            products.Add(product);
+                    }
                 }
             }
         }
@@ -273,6 +334,46 @@ namespace CSDemo.Controllers
             if (productId.IsEmptyOrNull())
             {
                 return null;
+            }
+
+            if (_catalogPostFix != null)
+            {
+                //if (!productId.ToLower().Contains(_catalogPostFix.ToLower()))
+                if (!productId.ToLower().Contains("("))
+                {
+                    
+                    
+                    productId = productId + _catalogPostFix;
+
+                    if (!categoryId.ToLower().Contains("("))
+                    {
+                        categoryId = categoryId + _catalogPostFix;
+                    }
+
+                   
+                    Response.Redirect(String.Format("/categories/{0}/{1}",categoryId,productId));
+
+                    
+                    Response.End();
+
+
+                    //Product tmpModel = ProductHelper.GetProductByNameAndCategory(tempproductId, categoryId);
+
+                    //if (tmpModel != null)
+                    //{
+
+                    //    Cookie.SaveFeaturedProductCookie(tempproductId);
+
+                    //    tmpModel.ProfileProduct(_context);
+
+                    //    if (tmpModel.StockInformation?.Location != null)
+                    //    {
+                    //        tmpModel.LocationName = tmpModel.StockInformation.Location.Name;
+                    //    }
+                    //    return tmpModel;
+                    //}
+
+                }
             }
 
             Cookie.SaveFeaturedProductCookie(productId);
@@ -296,6 +397,7 @@ namespace CSDemo.Controllers
         private const int MaxNumberOfProductsToShow = 10;
         private readonly AccountHelper _usr = new AccountHelper();
         private readonly string _userCatalogIds;
+        private static string _catalogPostFix;
 
         #endregion
 
@@ -310,6 +412,7 @@ namespace CSDemo.Controllers
             : this(new SitecoreContext())
         {
             _userCatalogIds = _usr.GetCurrentCustomerCatalogIds();
+            _catalogPostFix = _usr.GetCurrentCustomerCatalogPostFix();
         }
 
         #endregion

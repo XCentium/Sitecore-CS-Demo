@@ -12,6 +12,7 @@ SharedFields:
     {0FF9EE5D-5842-4CA8-B2D9-2793203E968D}
     {71FC777B-5BD7-47B1-A99A-1334698986C8}
     {4AA17EEE-0C83-4017-A3CD-E1C53F7E6067}
+    {BAF80E06-55AE-4568-9533-E6ACD1AC450F}
 - ID: 337e20e1-999a-4eea-85ad-b58a03ae75cc
   Hint: Quick Action Bar
   Type: tree list
@@ -19,6 +20,7 @@ SharedFields:
     {0FF9EE5D-5842-4CA8-B2D9-2793203E968D}
     {71FC777B-5BD7-47B1-A99A-1334698986C8}
     {4AA17EEE-0C83-4017-A3CD-E1C53F7E6067}
+    {BAF80E06-55AE-4568-9533-E6ACD1AC450F}
 - ID: 39847666-389d-409b-95bd-f2016f11eed5
   Hint: Unversioned
   Value: 1
@@ -38,6 +40,7 @@ SharedFields:
     {0FF9EE5D-5842-4CA8-B2D9-2793203E968D}
     {71FC777B-5BD7-47B1-A99A-1334698986C8}
     {4AA17EEE-0C83-4017-A3CD-E1C53F7E6067}
+    {BAF80E06-55AE-4568-9533-E6ACD1AC450F}
 - ID: a0f35a32-14b5-4147-9851-7e0bbdc17efc
   Hint: Assign To All Product Types
   Value: 1
@@ -46,11 +49,7 @@ SharedFields:
   Value: Checkbox
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
-<<<<<<< Updated upstream
-  Value: 82
-=======
-  Value: 83
->>>>>>> Stashed changes
+  Value: 86
 - ID: be351a73-fcb0-4213-93fa-c302d8ab4f51
   Hint: Shared
   Value: 1

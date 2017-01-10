@@ -1,0 +1,21 @@
+﻿---
+ID: 243aaea6-abaf-4672-86c4-0c909f280bea
+Parent: 010b8f25-879e-47f9-a349-a47c4a25fcc7
+Template: 010b8f25-879e-47f9-a349-a47c4a25fcc7
+Path: /sitecore/templates/Oceanside/Components/Product/Categories/Parameters/Page Size/__Standard Values
+DB: master
+SharedFields:
+- ID: 3094d236-5985-4c4f-ae6a-e30740885532
+  Hint: Caching
+  Value: 0|0|0|0|0|0|0|0
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160315T005200Z
+    - ID: 87eaa9af-a698-4ead-a240-9706d573b903
+      Hint: PageSize
+      Value: 15

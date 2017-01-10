@@ -1,0 +1,14 @@
+﻿---
+ID: e040edd9-eb3b-47a3-8eb6-4d63adfa914e
+Parent: eca3b435-1bcb-445f-ba65-4f33f74a5efa
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+Path: /sitecore/templates/XBlog/Page/Test Blog
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20151124T002703Z

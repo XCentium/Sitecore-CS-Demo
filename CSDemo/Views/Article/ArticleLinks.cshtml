@@ -1,0 +1,66 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Article.ArticleLinks>
+@if (Model == null)
+{
+    return;
+}
+<section class="content">
+    <div class="container">
+        <article class="components-content">
+
+            @using (BeginEditFrame(Model.Path))
+            {
+
+                if (!string.IsNullOrWhiteSpace(Model.Title))
+                {
+
+                    <h2 class="component-heading" id="grids">
+                        <i class="fa fa-th"></i>@Editable(Model, x => x.Title)
+                    </h2>
+                }
+
+            }
+
+            <!-- COMPONENTS:GRIDS - START -->
+            @if (Model.ArticlelinksList != null)
+            {
+                <div class="row">
+
+                    @foreach (var articleLink in Model.ArticlelinksList)
+                    {
+                        // articleLink.Articlepath.Url
+                        // articleLink.LinkImage.Src
+                        var url = articleLink.ArticlePath != null ? articleLink.ArticlePath.Url : "#";
+                        var src = articleLink.LinkImage != null ? articleLink.LinkImage.Src : "";
+                        
+                        <div class="col-xs-6">
+                            <a href="@url">
+                                <div class="default-style">
+                                    <img src="@src" style="max-height: 70px; margin-right: 5px" class="pull-left img-thumbnail" />
+                                    <h4>@articleLink.LinkTitle</h4>
+                                    <p>@articleLink.LinkText</p>
+                                </div>
+                            </a>
+                        </div>
+                    }
+
+                </div>
+
+            }
+            <!-- COMPONENTS:GRIDS - END -->
+
+        </article>
+    </div>
+
+</section>
+
+<style>
+    .components .default-style {
+    background-color: #F9F9F9;
+    margin-bottom: 30px;
+}
+
+.default-style {
+     background-color: #F9F9F9;
+    margin-bottom: 30px;
+}
+</style>

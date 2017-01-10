@@ -1,0 +1,184 @@
+﻿---
+ID: 73222b1d-a8b9-4d1c-b0a3-dd713144007b
+Parent: c3fee24e-c33e-413b-b029-10469fb1805c
+Template: 751afa54-ff64-49eb-a8a3-96cd705addaf
+Path: /sitecore/content/Oceanside/Home
+DB: master
+SharedFields:
+- ID: b0a67b2a-8b07-4e0b-8809-69f751709806
+  Hint: __Tracking
+  Type: Tracking
+  Value: |
+    <tracking>
+      <event id="{F358D040-256F-4FC6-B2A1-739ACA2B2983}" name="Campaign" />
+    </tracking>
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 0
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s" p:p="1">
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r uid="{546A314C-A42E-4C0F-892F-C6796486247C}">
+          <p:d />
+        </r>
+        <r uid="{AF6A3953-C35E-4517-B345-AC7F3003C6E2}" p:before="r[@uid='{6729DA82-1F38-4D16-9957-E29D38D34488}']" s:ds="{1B2A8EB1-0352-4140-BD66-9E025D83E7FC}" s:id="{8040BB2A-3983-4156-A3BA-A37A8FE5F6E8}" s:par="" s:ph="page-jumbotron">
+          <rls>
+            <ruleset>
+              <rule uid="{73D61D55-F927-426A-8F8B-0545F0F98B91}" s:name="Campaign 1">
+                <conditions>
+                  <condition uid="33FC935BFE63459F8B2B8E65D3607BA2" s:id="{D379525C-4DE6-4738-89ED-60CC0B8F91E5}" s:CampaignId="{1C1A2338-741F-4A2A-9BAE-C2CEA5C9DA04}" />
+                </conditions>
+                <actions>
+                  <action uid="6E0182CCFED44186BDE11FD4C9BA297E" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{B43CF7DD-DF85-4814-A2EC-75CDD067DC79}" />
+                </actions>
+              </rule>
+              <rule uid="{00000000-0000-0000-0000-000000000000}" s:name="Default">
+                <conditions>
+                  <condition uid="6AFE113D86EC41A4821E1E3E41C762D0" s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                </conditions>
+                <actions>
+                  <action uid="49C11A9E1FCD45C38CD7B5990E997613" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{1B2A8EB1-0352-4140-BD66-9E025D83E7FC}" />
+                </actions>
+              </rule>
+            </ruleset>
+          </rls>
+        </r>
+        <r uid="{6729DA82-1F38-4D16-9957-E29D38D34488}" p:before="r[@uid='{D88FBB9E-6A2F-487D-9A0B-D24B401E4E5F}']" s:id="{AB9DF062-ECC5-4FE2-A63B-93971BB0C388}" s:ph="page-body" />
+        <r uid="{D88FBB9E-6A2F-487D-9A0B-D24B401E4E5F}" p:before="r[@uid='{89440489-11CE-45B1-8411-08E14ECF5604}']" s:id="{1616599D-7D76-4ABD-957B-7DCAC84C01B2}" s:ph="page-body" />
+        <r uid="{89440489-11CE-45B1-8411-08E14ECF5604}" p:before="r[@uid='{A385C37F-E0C8-4638-A692-2A78D53281E9}']" s:id="{839E8618-D080-4802-A0E8-BE682C3AF542}" s:ph="page-body" />
+        <r uid="{A385C37F-E0C8-4638-A692-2A78D53281E9}" p:before="r[@uid='{FD094EF6-17FC-4E67-9563-86DC97020C2F}']" s:id="{27FCD6DB-011A-4A6E-B04A-0AEB168B78F9}" s:ph="page-body">
+          <rls>
+            <ruleset>
+              <rule uid="{E7310019-0853-4D93-8B7D-2F2433CF9545}" s:name="Campers">
+                <conditions>
+                  <condition uid="151116A86FC04F4981E736A1C13744FB" s:id="{6426B5B4-83E9-4E24-BA97-43293A10B47D}" s:ProfileName="Score" s:PatternName="Campers" />
+                </conditions>
+                <actions>
+                  <action uid="3313ECB9C995499291C353A33D152D79" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{56B6A07F-A6FD-47E8-A5F9-3BC3422B35A5}" />
+                </actions>
+              </rule>
+              <rule uid="{B749E881-002E-4C04-A6E8-9BED97A451B5}" s:name="Climbers">
+                <conditions>
+                  <condition uid="3CFDEE977835466A8AB7551AEAD65642" s:id="{6426B5B4-83E9-4E24-BA97-43293A10B47D}" s:ProfileName="Score" s:PatternName="Climbers" />
+                </conditions>
+                <actions>
+                  <action uid="03EECFBC50AC4E34B8A918379ADE9920" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{3CCF2551-53D6-4018-B599-9B36DFC3D5EE}" />
+                </actions>
+              </rule>
+              <rule uid="{521DD000-2E50-4534-B165-9D56BB064642}" s:name="Bargain Hunters">
+                <conditions>
+                  <condition uid="65CC4BEC52474AD69546D18455AA1826" s:id="{6426B5B4-83E9-4E24-BA97-43293A10B47D}" s:ProfileName="Score" s:PatternName="BargainHunters" />
+                </conditions>
+                <actions>
+                  <action uid="5F947340D80544339727F162F68109B7" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{AEA9A1B0-8FD3-4C16-9612-866F4FB31BCD}" />
+                </actions>
+              </rule>
+              <rule uid="{00000000-0000-0000-0000-000000000000}" s:name="Default">
+                <conditions>
+                  <condition uid="B449D9298E6441EB80135B2F2D498B77" s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                </conditions>
+                <actions>
+                  <action uid="71B50328D61B42198D8E99EF32ACEB9E" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{56B6A07F-A6FD-47E8-A5F9-3BC3422B35A5}" />
+                </actions>
+              </rule>
+            </ruleset>
+          </rls>
+        </r>
+        <r uid="{FD094EF6-17FC-4E67-9563-86DC97020C2F}" p:before="r[@uid='{E5A6C541-E277-499D-9CB9-DFF8CE125A23}']" s:id="{3219ACE8-B6A2-490C-9983-507AD3AB3F7C}" s:ph="page-body" />
+      </d>
+    </r>
+Languages:
+- Language: de-DE
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 04bf00db-f5fb-41f7-8ab7-22408372a981
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s" p:p="1">
+          <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r uid="{FD094EF6-17FC-4E67-9563-86DC97020C2F}" s:id="{3219ACE8-B6A2-490C-9983-507AD3AB3F7C}" />
+          </d>
+        </r>
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160418T203709Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 04bf00db-f5fb-41f7-8ab7-22408372a981
+      Hint: __Final Renderings
+      Type: Layout
+      Value: "<r xmlns:p=\"p\" xmlns:s=\"s\" p:p=\"1\" />"
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T160952Z
+    - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
+      Hint: Page Title
+      Value: Home
+    - ID: 8e51331c-de24-425f-affd-9e12d8f6e43f
+      Hint: Categories
+      Type: Multilist with Search
+      Value: |
+        {E3418FB5-D43F-448C-932E-B943E77197A3}
+        {CAA3D460-5ABB-43D5-A8F7-998196AE8D0B}
+        {7FAB3C46-5D1B-4DF1-8AF4-C5F699FA098A}
+    - ID: dfa5a729-2b3d-4d80-920e-d9c4d5ee9e02
+      Hint: Featured Blogs
+      Type: Multilist with Search
+      Value: |
+        {CDE7C051-534B-4579-A272-2EAC4CCEFBE9}
+        {8F8EC1C4-7854-43AF-91A5-63F12565C485}
+        {6F1F8EF8-D3D4-4A3F-AB29-C126BF5E1569}
+    - ID: e01a6b72-8c71-47af-8584-c33a14d9e691
+      Hint: Products
+      Type: Multilist with Search
+      Value: |
+        {C9E63ABE-C016-43DD-967A-994E1B47ABA7}
+        {7B7F6911-F98B-42A7-A3E8-DA5F2D53DCB3}
+        {8421A9DE-DD12-4B84-B370-99DE3590DF57}
+        {3E42556D-58DE-404B-85C4-327D1C71075D}
+        {E0AF56DD-9066-4740-A6E5-96E1F2D5478C}
+        {CE6D3BED-B660-4B4D-B704-EC5524EF216E}
+    - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
+      Hint: Meta Description
+      Value: Home Page
+- Language: fr-FR
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161024T182212Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 8e51331c-de24-425f-affd-9e12d8f6e43f
+      Hint: Categories
+      Type: Multilist with Search
+      Value: |
+        {4967277C-9182-4215-85B7-7A2597BF81C2}
+        {7FAB3C46-5D1B-4DF1-8AF4-C5F699FA098A}
+        {590ECD4C-F337-43E9-A226-ADF74FA9C89D}
+    - ID: dfa5a729-2b3d-4d80-920e-d9c4d5ee9e02
+      Hint: Featured Blogs
+      Type: Multilist with Search
+      Value: |
+        {8F8EC1C4-7854-43AF-91A5-63F12565C485}
+        {CDE7C051-534B-4579-A272-2EAC4CCEFBE9}
+        {6F1F8EF8-D3D4-4A3F-AB29-C126BF5E1569}
+    - ID: e01a6b72-8c71-47af-8584-c33a14d9e691
+      Hint: Products
+      Type: Multilist with Search
+      Value: |
+        {37992F89-0198-4138-A883-97101DE5B184}
+        {F7C4A612-1361-4559-A71A-EE3F899731BE}
+        {FC08ED18-810C-4DC6-8C00-052BAB0B5DB1}

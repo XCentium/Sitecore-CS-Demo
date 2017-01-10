@@ -77,10 +77,18 @@ namespace CSDemo.AJAX
                 user.Profile.Comment = newStatus.Name;
             else
             {
-                var currentStatus = statuses.First(s => s.Name == user.Profile.Name);
-                if (currentStatus == null) return ret;
-                if (currentStatus.Amount < newStatus.Amount)
-                    user.Profile.Comment = newStatus.Name;
+                try
+                {
+                    var currentStatus = statuses.First(s => s.Name == user.Profile.Comment);
+                    if (currentStatus == null) return ret;
+                    if (currentStatus.Amount < newStatus.Amount)
+                        user.Profile.Comment = newStatus.Name;
+                }
+                catch (Exception ex)
+                {
+
+                    return ret;
+                }
             }
 
             return ret;
@@ -246,12 +254,36 @@ namespace CSDemo.AJAX
             {
                 foreach (var product in productsResult)
                 {
-                    products.Add(new {Id = product.Id, CatalogId = product.CatalogId, Guid = product.Guid, Title  = product.Title, Price = product.Price, CatalogName = product.CatalogName, ImageSrc= product.ImageSrc});
+                    products.Add(new {Id = product.Id, CategoryName = product.CategoryName, CatalogId = product.CatalogId, Guid = product.Guid, Title  = product.Title, Price = product.Price, CatalogName = product.CatalogName, ImageSrc= product.ImageSrc});
                   
                 }
             }
 
             return new { success = true, total = products.Count , products = products };
+        }
+
+                        
+        //[ScriptMethod(UseHttpGet = true,ResponseFormat = ResponseFormat.Json)]
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public object GetCategoriesResult(string query)
+        {
+            var categories = new List<object>();
+
+            //return "aaaa,bbbb,ccccc,dd,eeeee,fff,gggggg hhh".Split(',').ToList();
+            
+            var categoriesResult = ProductHelper.GetCategoriesByName(query);
+
+            if (categoriesResult != null && categoriesResult.Any())
+            {
+                foreach (var product in categoriesResult)
+                {
+                    categories.Add(new {Id = product.Id, CatalogId = product.CatalogId, Guid = product.Guid, Title  = product.Title, Price = product.Price, CatalogName = product.CatalogName, ImageSrc= product.ImageSrc});
+                  
+                }
+            }
+
+            return new { success = true, total = categories.Count , products = categories };
         }
 
 

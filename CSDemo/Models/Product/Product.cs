@@ -23,7 +23,6 @@ using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -201,6 +200,9 @@ namespace CSDemo.Models.Product
 
             return altImages;
         }
+
+        [SitecoreField(Fields.Stores)]
+        public IEnumerable<CSDemo.Models.Store.Store> Stores { get; set; }
 
         #endregion
 
@@ -386,6 +388,7 @@ namespace CSDemo.Models.Product
             public const string Color = "ProductColor";
             public const string StoneColor = "StoneColor";
             public const string GlassColor = "GlassColor";
+            public const string Stores = "Store Location";
 
         }
 

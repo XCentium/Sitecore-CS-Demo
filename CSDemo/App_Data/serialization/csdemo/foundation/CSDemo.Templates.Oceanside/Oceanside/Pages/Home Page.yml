@@ -1,0 +1,32 @@
+﻿---
+ID: 751afa54-ff64-49eb-a8a3-96cd705addaf
+Parent: 2049e653-d9ab-4019-975f-95492832ecf8
+Template: ab86861a-6030-46c5-b394-e8f99e8b87db
+Path: /sitecore/templates/Oceanside/Pages/Home Page
+DB: master
+SharedFields:
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: Apps/32x32/Home.png
+- ID: 12c33f3f-86c5-43a5-aeb4-5598cec45116
+  Hint: __Base template
+  Type: tree list
+  Value: |
+    {6EABF83B-72E6-4E98-A3EE-BBC68A279D50}
+    {F3ABC5F1-3A42-4575-A2D9-4093E2AE1F9E}
+    {5085D19C-D43D-424A-A518-BDFE87F3E7AC}
+    {68133B09-AC54-42A9-9CD7-62AD53A4897D}
+- ID: f7d48a55-2158-4f02-9356-756654404f73
+  Hint: __Standard values
+  Value: {F81F0C4F-1EC6-4BA5-8206-8DB1F4D28881}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T055241Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
