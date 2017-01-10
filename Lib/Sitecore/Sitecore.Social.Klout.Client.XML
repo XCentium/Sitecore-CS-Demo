@@ -35,16 +35,6 @@
             <param name="kloutProfileManager">The Klout profile manager.</param>
             <param name="kloutApplicationManager">The Klout application manager.</param>
         </member>
-        <member name="M:Sitecore.Social.Klout.Client.EventHandlers.SocialConnectorEventsHelper.ProcessKloutProfileUpdateAsync(Sitecore.Social.Domain.Model.Identifier,Sitecore.Social.Client.Api.EventArgs.SocialConnectorEventArgs)">
-            <summary>
-            Processes the Klout profile update asynchronous.
-            </summary>
-            <param name="contactId">The contact identifier.</param>
-            <param name="socialConnectorEventArgs">The <see cref="T:Sitecore.Social.Client.Api.EventArgs.SocialConnectorEventArgs"/> instance containing the event data.</param>
-            <returns>
-            The <see cref="T:System.Threading.Tasks.Task"/> to run it asynchronously.
-            </returns>
-        </member>
         <member name="P:Sitecore.Social.Klout.Client.EventHandlers.SocialConnectorEventsHelper.KloutApplicationManager">
             <summary>
             Gets the Klout application manager.
@@ -68,6 +58,16 @@
             <value>
             The Klout profile client manager.
             </value>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Client.EventHandlers.SocialConnectorEventsHelper.ProcessKloutProfileUpdateAsync(Sitecore.Social.Domain.Model.Identifier,Sitecore.Social.Client.Api.EventArgs.SocialConnectorEventArgs)">
+            <summary>
+            Processes the Klout profile update asynchronous.
+            </summary>
+            <param name="contactId">The contact identifier.</param>
+            <param name="socialConnectorEventArgs">The <see cref="T:Sitecore.Social.Client.Api.EventArgs.SocialConnectorEventArgs" /> instance containing the event data.</param>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task" /> to run it asynchronously.
+            </returns>
         </member>
         <member name="T:Sitecore.Social.Klout.Client.EventHandlers.SocialNetworkUserLoggedInHandler">
             <summary>
@@ -156,17 +156,6 @@
             </summary>
             <param name="kloutProfileManager">The Klout profile manager.</param>
         </member>
-        <member name="M:Sitecore.Social.Klout.Client.KloutProfileClientManager.RefreshKloutProfileAsync(Sitecore.Social.Domain.Model.Identifier,Sitecore.Social.Domain.Model.Identifier,Sitecore.Social.Klout.Api.Domain.Model.SourceNetworkIdentity)">
-            <summary>
-            Refreshes the Klout profile asynchronous.
-            </summary>
-            <param name="contactId">The contact identifier.</param>
-            <param name="kloutApplicationId">The Klout application identifier.</param>
-            <param name="sourceNetworkIdentity">The source network identity.</param>
-            <returns>
-            The <see cref="T:System.Threading.Tasks.Task"/> to run it asynchronously.
-            </returns>
-        </member>
         <member name="P:Sitecore.Social.Klout.Client.KloutProfileClientManager.KloutProfileManager">
             <summary>
             Gets the Klout profile manager.
@@ -175,12 +164,16 @@
             The Klout profile manager.
             </value>
         </member>
-        <member name="M:Sitecore.Social.Klout.Client.Rules.Conditions.KloutScoreCondition`1.Execute(`0)">
+        <member name="M:Sitecore.Social.Klout.Client.KloutProfileClientManager.RefreshKloutProfileAsync(Sitecore.Social.Domain.Model.Identifier,Sitecore.Social.Domain.Model.Identifier,Sitecore.Social.Klout.Api.Domain.Model.SourceNetworkIdentity)">
             <summary>
-            Executes the specified rule context.
+            Refreshes the Klout profile asynchronous.
             </summary>
-            <param name="ruleContext">The rule context.</param>
-            <returns></returns>
+            <param name="contactId">The contact identifier.</param>
+            <param name="kloutApplicationId">The Klout application identifier.</param>
+            <param name="sourceNetworkIdentity">The source network identity.</param>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task" /> to run it asynchronously.
+            </returns>
         </member>
         <member name="P:Sitecore.Social.Klout.Client.Rules.Conditions.KloutScoreCondition`1.Value">
             <summary>
@@ -189,6 +182,13 @@
             <value>
             The value.
             </value>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Client.Rules.Conditions.KloutScoreCondition`1.Execute(`0)">
+            <summary>
+            Executes the specified rule context.
+            </summary>
+            <param name="ruleContext">The rule context.</param>
+            <returns></returns>
         </member>
         <member name="T:Sitecore.Social.Klout.Client.Tasks.SynchronizeKloutScores">
             <summary>
@@ -247,7 +247,7 @@
         </member>
         <member name="M:Sitecore.Social.Klout.Client.Tasks.SynchronizeKloutScores.#ctor(Sitecore.Social.Klout.Api.Domain.IKloutProfileManager,Sitecore.Social.Klout.Api.Domain.IKloutApplicationManager,Sitecore.Social.Infrastructure.Logging.ILogManager,Sitecore.Social.Klout.Api.Domain.IKloutScoreUtils,Sitecore.Social.Infrastructure.Wrappers.System.IMembershipWrapper,Sitecore.Social.Infrastructure.Wrappers.Sitecore.ISiteContextSwitcherWrapper,Sitecore.Social.Configuration.IConfigurationFactory)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Client.Tasks.SynchronizeKloutScores"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Client.Tasks.SynchronizeKloutScores" /> class.
             </summary>
             <param name="kloutProfileManager">The Klout profile manager.</param>
             <param name="kloutApplicationManager">The Klout application manager.</param>
@@ -265,7 +265,7 @@
         </member>
         <member name="M:Sitecore.Social.Klout.Client.Tasks.SynchronizeKloutScores.ProcessKloutProfiles(System.Collections.Generic.IEnumerable{Sitecore.Social.Klout.Api.Domain.Model.KloutProfile},Sitecore.Social.Klout.Api.Domain.Model.KloutApplication)">
             <summary>
-            Processes the <see cref="T:Sitecore.Social.Klout.Api.Domain.Model.KloutProfile"/>s.
+            Processes the <see cref="T:Sitecore.Social.Klout.Api.Domain.Model.KloutProfile" />s.
             </summary>
             <param name="kloutProfiles">The Klout profiles.</param>
             <param name="kloutApplication">The Klout application.</param>

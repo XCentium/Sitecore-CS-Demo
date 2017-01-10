@@ -1,12 +1,12 @@
-﻿@using Sitecore.Commerce.Entities.Shipping
-@using Sitecore.Commerce.Services.Shipping
-@using Sitecore.Mvc;
+﻿@using Sitecore.Mvc;
+@using CSDemo.Models.Checkout.Cart
+@using CSDemo.Models.Account
 
 <!-- ==========================
     MY ACCOUNT - START
 =========================== -->
 @{
-// Get shipping method from Commerce
+    // Get shipping method from Commerce
 
 }
 <section class="content account">
@@ -51,33 +51,32 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div id="shipping-methods" role="tablist" aria-multiselectable="true">
-                                        <div class="panel radio">
+                                         <div class="panel radio">
                                             <input type="radio" name="optionsRadios" value="Delivery to your address" id="radio-shipping-2" checked>
                                             <label for="radio-shipping-2" class="collapsed" data-toggle="collapse" data-target="#parent-2" data-parent="#shipping-methods" aria-controls="parent-2">Delivery to your address</label>
                                             <div id="parent-2" class="panel-collapse collapse in" role="tabpanel">
 
                                                 @{
-                                                    // var cartHelper = new CSDemo.Models.Checkout.Cart.CartHelper();
-                                                    var request = new CSDemo.Models.Checkout.Cart.GetShippingMethodsRequest("en-us", new ShippingOption { ShippingOptionType = ShippingOptionType.ElectronicDelivery }, null);
+                                                    var cartHelper = new CartHelper();
 
-                                                    var shippingServiceProvider = new ShippingServiceProvider();
 
-                                                    var result = shippingServiceProvider.GetShippingMethods(request);
+                                                    var shippingService = new Sitecore.Commerce.Services.Shipping.ShippingServiceProvider();
+                                                    var shippingOption = new Sitecore.Commerce.Entities.Shipping.ShippingOption { Description = "Super Fast Shipping", Name = "SuperFast", ShippingOptionType = new Sitecore.Commerce.Entities.Shipping.ShippingOptionType(1, "Courier"), ShopName = "XCentiumCSDemo" };
+                                                    var request = new Sitecore.Commerce.Engine.Connect.Services.Shipping.GetShippingMethodsRequest(shippingOption, null, cartHelper.GetCustomerCart());
+                                                    var result = shippingService.GetShippingMethods(request);
 
-                                                    // ).GetShippingMethods<CSDemo.Models.Checkout.Cart.GetShippingMethodsRequest, GetShippingMethodsResult>(
-
-                                                    var provider = new Sitecore.Commerce.Services.Shipping.ShippingServiceProvider();
-                                                    var shippingRequest = new Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.CommerceGetShippingMethodsRequest(Sitecore.Context.Language.ToString());
-                                                    var shippingResult = provider.GetShippingMethods(shippingRequest);
+                                                    //var provider = new Sitecore.Commerce.Services.Shipping.ShippingServiceProvider();
+                                                    //var shippingRequest = new Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines.CommerceGetShippingMethodsRequest(Sitecore.Context.Language.ToString());
+                                                    //var shippingResult = provider.GetShippingMethods(shippingRequest);
                                                     var count = 0;
                                                 }
 
-                                                @foreach (var shippingMethod in shippingResult.ShippingMethods)
+                                                @foreach (var shippingMethod in result.ShippingMethods)
                                                 {
                                                     count++;
 
                                                     <div class="radio">
-                                                        <input type="radio" name="radio_shipping_2_options" value="@shippingMethod.ExternalId" id="radio_shipping_2_@count" required>
+                                                        <input type="radio" name="radio_shipping_2_options" value="@shippingMethod.ExternalId|@shippingMethod.Description" id="radio_shipping_2_@count" required>
                                                         <label for="radio_shipping_2_@count">@shippingMethod.Description<span> </span></label>
                                                     </div>
                                                 }

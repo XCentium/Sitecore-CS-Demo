@@ -49,6 +49,20 @@
             Extension methods for <see cref="T:System.Xml.Linq.XElement"/>.
             </summary>
         </member>
+        <member name="M:Simple.OData.Client.Extensions.HomogenizeEx.Homogenize(System.String)">
+            <summary>
+            Downshift a string and remove all non-alphanumeric characters.
+            </summary>
+            <param name="source">The original string.</param>
+            <returns>The modified string.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.Extensions.HomogenizeEx.SetRegularExpression(System.Text.RegularExpressions.Regex)">
+            <summary>
+            Sets the regular expression to be used for homogenizing object names.
+            </summary>
+            <param name="regex">A regular expression matching all non-comparing characters. The default is &quot;[^a-z0-9]&quot;.</param>
+            <remarks>Homogenized strings are always forced to lower-case.</remarks>
+        </member>
         <member name="T:Simple.OData.Client.BoundClient`1">
             <summary>
             Provides access to OData operations in a fluent style.
@@ -60,164 +74,6 @@
             Provides access to OData operations in a fluent style.
             </summary>
             <typeparam name="T">The entity type.</typeparam>
-        </member>
-        <member name="T:Simple.OData.Client.IFluentClient`1">
-            <summary>
-            Provides access to OData operations in a fluent style.
-            </summary>
-            <typeparam name="T">The entity type.</typeparam>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo``1(System.String)">
-            <summary>
-            Navigates to the linked entity.
-            </summary>
-            <typeparam name="U">The type of the linked entity.</typeparam>
-            <param name="linkName">Name of the link.</param>
-            <returns>Self.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
-            <summary>
-            Navigates to the linked entity.
-            </summary>
-            <typeparam name="U">The type of the linked entity.</typeparam>
-            <param name="expression">The expression for the link.</param>
-            <returns>Self.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IEnumerable{``0}}})">
-            <summary>
-            Navigates to the linked entity.
-            </summary>
-            <typeparam name="U">The type of the linked entity.</typeparam>
-            <param name="expression">The expression for the link.</param>
-            <returns>Self.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IList{``0}}})">
-            <summary>
-            Navigates to the linked entity.
-            </summary>
-            <typeparam name="U">The type of the linked entity.</typeparam>
-            <param name="expression">The expression for the link.</param>
-            <returns>Self.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.ISet{``0}}})">
-            <summary>
-            Navigates to the linked entity.
-            </summary>
-            <typeparam name="U">The type of the linked entity.</typeparam>
-            <param name="expression">The expression for the link.</param>
-            <returns>Self.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.HashSet{``0}}})">
-            <summary>
-            Navigates to the linked entity.
-            </summary>
-            <typeparam name="U">The type of the linked entity.</typeparam>
-            <param name="expression">The expression for the link.</param>
-            <returns>Self.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo``1(System.Linq.Expressions.Expression{System.Func{`0,``0[]}})">
-            <summary>
-            Navigates to the linked entity.
-            </summary>
-            <typeparam name="U">The type of the linked entity.</typeparam>
-            <param name="expression">The expression for the link.</param>
-            <returns>Self.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo(System.String)">
-            <summary>
-            Navigates to the linked entity.
-            </summary>
-            <param name="linkName">Name of the link.</param>
-            <returns>Self.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo(Simple.OData.Client.ODataExpression)">
-            <summary>
-            Navigates to the linked entity.
-            </summary>
-            <param name="expression">The expression for the link.</param>
-            <returns>Self.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsync">
-            <summary>
-            Executes the OData function or action.
-            </summary>
-            <returns>Execution result.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsync(System.Threading.CancellationToken)">
-            <summary>
-            Executes the OData function or action.
-            </summary>
-            <param name="cancellationToken">The cancellation token.</param>
-            <returns>Action execution result.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsSingleAsync">
-            <summary>
-            Executes the OData function or action.
-            </summary>
-            <returns>Execution result.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsSingleAsync(System.Threading.CancellationToken)">
-            <summary>
-            Executes the OData function or action.
-            </summary>
-            <param name="cancellationToken">The cancellation token.</param>
-            <returns>Action execution result.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsEnumerableAsync">
-            <summary>
-            Executes the OData function or action and returns collection.
-            </summary>
-            <returns>Action execution result.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsEnumerableAsync(System.Threading.CancellationToken)">
-            <summary>
-            Executes the OData function or action and returns collection.
-            </summary>
-            <param name="cancellationToken">The cancellation token.</param>
-            <returns>Execution result.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsScalarAsync``1">
-            <summary>
-            Executes the OData function or action and returns scalar result.
-            </summary>
-            <typeparam name="U">The type of the result.</typeparam>
-            <returns>Execution result.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsScalarAsync``1(System.Threading.CancellationToken)">
-            <summary>
-            Executes the OData function or action and returns scalar result.
-            </summary>
-            <typeparam name="U">The type of the result.</typeparam>
-            <param name="cancellationToken">The cancellation token.</param>
-            <returns>Action execution result.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsArrayAsync``1">
-            <summary>
-            Executes the OData function or action and returns an array.
-            </summary>
-            <typeparam name="U">The type of the result array.</typeparam>
-            <returns>Execution result.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsArrayAsync``1(System.Threading.CancellationToken)">
-            <summary>
-            Executes the OData function or action and returns an array.
-            </summary>
-            <typeparam name="U">The type of the result array.</typeparam>
-            <param name="cancellationToken">The cancellation token.</param>
-            <returns>Action execution result.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.GetCommandTextAsync">
-            <summary>
-            Gets the OData command text.
-            </summary>
-            <returns>The command text.</returns>
-        </member>
-        <member name="M:Simple.OData.Client.IFluentClient`1.GetCommandTextAsync(System.Threading.CancellationToken)">
-            <summary>
-            Gets the OData command text.
-            </summary>
-            <param name="cancellationToken">The cancellation token.</param>
-            <returns>The command text.</returns>
         </member>
         <member name="M:Simple.OData.Client.FluentClientBase`1.NavigateTo``1(System.String)">
             <summary>
@@ -869,6 +725,13 @@
             <param name="expression">The filter expression.</param>
             <returns>Self.</returns>
         </member>
+        <member name="M:Simple.OData.Client.IBoundClient`1.Search(System.String)">
+            <summary>
+            Sets the specified OData search.
+            </summary>
+            <param name="search">The search term.</param>
+            <returns>Self.</returns>
+        </member>
         <member name="M:Simple.OData.Client.IBoundClient`1.Function(System.String)">
             <summary>
             Sets the OData function name.
@@ -1104,6 +967,164 @@
             <value>
             The filter as entry key.
             </value>
+        </member>
+        <member name="T:Simple.OData.Client.IFluentClient`1">
+            <summary>
+            Provides access to OData operations in a fluent style.
+            </summary>
+            <typeparam name="T">The entity type.</typeparam>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo``1(System.String)">
+            <summary>
+            Navigates to the linked entity.
+            </summary>
+            <typeparam name="U">The type of the linked entity.</typeparam>
+            <param name="linkName">Name of the link.</param>
+            <returns>Self.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Navigates to the linked entity.
+            </summary>
+            <typeparam name="U">The type of the linked entity.</typeparam>
+            <param name="expression">The expression for the link.</param>
+            <returns>Self.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IEnumerable{``0}}})">
+            <summary>
+            Navigates to the linked entity.
+            </summary>
+            <typeparam name="U">The type of the linked entity.</typeparam>
+            <param name="expression">The expression for the link.</param>
+            <returns>Self.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IList{``0}}})">
+            <summary>
+            Navigates to the linked entity.
+            </summary>
+            <typeparam name="U">The type of the linked entity.</typeparam>
+            <param name="expression">The expression for the link.</param>
+            <returns>Self.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.ISet{``0}}})">
+            <summary>
+            Navigates to the linked entity.
+            </summary>
+            <typeparam name="U">The type of the linked entity.</typeparam>
+            <param name="expression">The expression for the link.</param>
+            <returns>Self.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.HashSet{``0}}})">
+            <summary>
+            Navigates to the linked entity.
+            </summary>
+            <typeparam name="U">The type of the linked entity.</typeparam>
+            <param name="expression">The expression for the link.</param>
+            <returns>Self.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo``1(System.Linq.Expressions.Expression{System.Func{`0,``0[]}})">
+            <summary>
+            Navigates to the linked entity.
+            </summary>
+            <typeparam name="U">The type of the linked entity.</typeparam>
+            <param name="expression">The expression for the link.</param>
+            <returns>Self.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo(System.String)">
+            <summary>
+            Navigates to the linked entity.
+            </summary>
+            <param name="linkName">Name of the link.</param>
+            <returns>Self.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.NavigateTo(Simple.OData.Client.ODataExpression)">
+            <summary>
+            Navigates to the linked entity.
+            </summary>
+            <param name="expression">The expression for the link.</param>
+            <returns>Self.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsync">
+            <summary>
+            Executes the OData function or action.
+            </summary>
+            <returns>Execution result.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+            Executes the OData function or action.
+            </summary>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>Action execution result.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsSingleAsync">
+            <summary>
+            Executes the OData function or action.
+            </summary>
+            <returns>Execution result.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsSingleAsync(System.Threading.CancellationToken)">
+            <summary>
+            Executes the OData function or action.
+            </summary>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>Action execution result.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsEnumerableAsync">
+            <summary>
+            Executes the OData function or action and returns collection.
+            </summary>
+            <returns>Action execution result.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsEnumerableAsync(System.Threading.CancellationToken)">
+            <summary>
+            Executes the OData function or action and returns collection.
+            </summary>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>Execution result.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsScalarAsync``1">
+            <summary>
+            Executes the OData function or action and returns scalar result.
+            </summary>
+            <typeparam name="U">The type of the result.</typeparam>
+            <returns>Execution result.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsScalarAsync``1(System.Threading.CancellationToken)">
+            <summary>
+            Executes the OData function or action and returns scalar result.
+            </summary>
+            <typeparam name="U">The type of the result.</typeparam>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>Action execution result.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsArrayAsync``1">
+            <summary>
+            Executes the OData function or action and returns an array.
+            </summary>
+            <typeparam name="U">The type of the result array.</typeparam>
+            <returns>Execution result.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.ExecuteAsArrayAsync``1(System.Threading.CancellationToken)">
+            <summary>
+            Executes the OData function or action and returns an array.
+            </summary>
+            <typeparam name="U">The type of the result array.</typeparam>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>Action execution result.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.GetCommandTextAsync">
+            <summary>
+            Gets the OData command text.
+            </summary>
+            <returns>The command text.</returns>
+        </member>
+        <member name="M:Simple.OData.Client.IFluentClient`1.GetCommandTextAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets the OData command text.
+            </summary>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The command text.</returns>
         </member>
         <member name="T:Simple.OData.Client.IUnboundClient`1">
             <summary>
@@ -1384,12 +1405,13 @@
             <param name="statusCode">The HTTP status code.</param>
             <returns>The instance of <see cref="T:Simple.OData.Client.WebRequestException"/>.</returns>
         </member>
-        <member name="M:Simple.OData.Client.WebRequestException.#ctor(System.String,System.Net.HttpStatusCode,System.String,System.Exception)">
+        <member name="M:Simple.OData.Client.WebRequestException.#ctor(System.String,System.Net.HttpStatusCode,System.Uri,System.String,System.Exception)">
             <summary>
             Initializes a new instance of the <see cref="T:Simple.OData.Client.WebRequestException"/> class.
             </summary>
             <param name="message">The message that describes the error.</param>
             <param name="statusCode">The HTTP status code.</param>
+            <param name="requestUri">The original request URI.</param>
             <param name="responseContent">The response content.</param>
             <param name="inner">The inner exception.</param>
         </member>
@@ -1420,6 +1442,14 @@
             </summary>
             <value>
             The response text.
+            </value>
+        </member>
+        <member name="P:Simple.OData.Client.WebRequestException.RequestUri">
+            <summary>
+            Gets the HTTP Uri
+            </summary>
+            <value>
+            The original request URI, or the resulting URI if a redirect took place.
             </value>
         </member>
         <member name="T:Simple.OData.Client.IODataClient">
@@ -2049,19 +2079,6 @@
             Provide access to session-specific details.
             </summary>
         </member>
-        <member name="M:Simple.OData.Client.ISession.Trace(System.String,System.Object[])">
-            <summary>
-            Writes a trace message.
-            </summary>
-            <param name="message">Trace message format string.</param>
-            <param name="messageParams">Trace message parameters.</param>
-        </member>
-        <member name="M:Simple.OData.Client.ISession.GetHttpConnection">
-            <summary>
-            Obtains an instance of <see cref="T:Simple.OData.Client.HttpConnection"/> that is used to issue HTTP requests to OData service.
-            </summary>
-            <returns>An <see cref="T:System.Net.Http.HttpClient"/> instance.</returns>
-        </member>
         <member name="P:Simple.OData.Client.ISession.Settings">
             <summary>
             Gets OData client configuration settings.
@@ -2081,6 +2098,19 @@
             <summary>
             Gets the word pluralizer.
             </summary>
+        </member>
+        <member name="M:Simple.OData.Client.ISession.Trace(System.String,System.Object[])">
+            <summary>
+            Writes a trace message.
+            </summary>
+            <param name="message">Trace message format string.</param>
+            <param name="messageParams">Trace message parameters.</param>
+        </member>
+        <member name="M:Simple.OData.Client.ISession.GetHttpConnection">
+            <summary>
+            Obtains an instance of <see cref="T:Simple.OData.Client.HttpConnection"/> that is used to issue HTTP requests to OData service.
+            </summary>
+            <returns>An <see cref="T:System.Net.Http.HttpClient"/> instance.</returns>
         </member>
         <member name="T:Simple.OData.Client.ODataClient">
             <summary>
@@ -2300,7 +2330,7 @@
             </summary>
             <param name="baseUri">The OData service URL.</param>
             <remarks>
-            This constructor overload is obsolete. Use <see cref="M:Simple.OData.Client.ODataClient.#ctor(System.Uri)"/> constructor overload./&gt;
+            This constructor overload is obsolete. Use <see cref="M:Simple.OData.Client.ODataClient.#ctor(System.Uri)"/> constructor overload./>
             </remarks>
         </member>
         <member name="M:Simple.OData.Client.ODataClient.#ctor(System.Uri)">
@@ -2380,25 +2410,6 @@
             <summary>
             OData client configuration settings
             </summary>
-        </member>
-        <member name="M:Simple.OData.Client.ODataClientSettings.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Simple.OData.Client.ODataClientSettings"/> class.
-            </summary>
-        </member>
-        <member name="M:Simple.OData.Client.ODataClientSettings.#ctor(System.String,System.Net.ICredentials)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Simple.OData.Client.ODataClientSettings"/> class.
-            </summary>
-            <param name="baseUri">The URL address.</param>
-            <param name="credentials">The client credentials.</param>
-        </member>
-        <member name="M:Simple.OData.Client.ODataClientSettings.#ctor(System.Uri,System.Net.ICredentials)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Simple.OData.Client.ODataClientSettings"/> class.
-            </summary>
-            <param name="baseUri">The URL address.</param>
-            <param name="credentials">The client credentials.</param>
         </member>
         <member name="P:Simple.OData.Client.ODataClientSettings.UrlBase">
             <summary>
@@ -2505,6 +2516,22 @@
             <c>true</c> to create a new <see cref="T:System.Net.Http.HttpClient"/> instance for each request; <c>false</c> to reuse <see cref="T:System.Net.Http.HttpClient"/> between requests.
             </value>
         </member>
+        <member name="P:Simple.OData.Client.ODataClientSettings.UnqualifiedNameCall">
+            <summary>
+            Gets or sets a value indicating whether <see cref="T:System.Net.Http.HttpClient"/> should omit namespaces for function and action calls in generated URI.
+            </summary>
+            <value>
+            <c>true</c> to omit namespaces for function and action calls in generated URI; <c>false</c> otherwise.
+            </value>
+        </member>
+        <member name="P:Simple.OData.Client.ODataClientSettings.EnumPrefixFree">
+            <summary>
+            Gets or sets a value indicating whether <see cref="T:System.Net.Http.HttpClient"/> should omit type prefix for Enum values in generated URI.
+            </summary>
+            <value>
+            <c>true</c> to omit type prefix for Enum values in generated URI; <c>false</c> otherwise.
+            </value>
+        </member>
         <member name="P:Simple.OData.Client.ODataClientSettings.OnCreateMessageHandler">
             <summary>
             Gets or sets the HttpMessageHandler factory used by HttpClient.
@@ -2554,6 +2581,25 @@
             The <see cref="T:Simple.OData.Client.ODataTrace"/> filter value.
             </value>
         </member>
+        <member name="M:Simple.OData.Client.ODataClientSettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Simple.OData.Client.ODataClientSettings"/> class.
+            </summary>
+        </member>
+        <member name="M:Simple.OData.Client.ODataClientSettings.#ctor(System.String,System.Net.ICredentials)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Simple.OData.Client.ODataClientSettings"/> class.
+            </summary>
+            <param name="baseUri">The URL address.</param>
+            <param name="credentials">The client credentials.</param>
+        </member>
+        <member name="M:Simple.OData.Client.ODataClientSettings.#ctor(System.Uri,System.Net.ICredentials)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Simple.OData.Client.ODataClientSettings"/> class.
+            </summary>
+            <param name="baseUri">The URL address.</param>
+            <param name="credentials">The client credentials.</param>
+        </member>
         <member name="T:Simple.OData.Client.ODataBatch">
             <summary>
             Performs batch processing of OData requests by grouping multiple operations in a single HTTP POST request in accordance with OData protocol
@@ -2565,7 +2611,7 @@
             </summary>
             <param name="urlBase">The URL base.</param>
             <remarks>
-            This constructor overload is obsolete. Use <see cref="M:Simple.OData.Client.ODataBatch.#ctor(System.Uri)"/> constructor overload./&gt;
+            This constructor overload is obsolete. Use <see cref="M:Simple.OData.Client.ODataBatch.#ctor(System.Uri)"/> constructor overload./>
             </remarks>
         </member>
         <member name="M:Simple.OData.Client.ODataBatch.#ctor(System.Uri)">
@@ -2628,6 +2674,16 @@
             </summary>
             <param name="entry">The collection of entry properties.</param>
         </member>
+        <member name="P:Simple.OData.Client.ODataEntry.Item(System.String)">
+            <summary>
+            Gets or sets the value of the specified property.
+            </summary>
+            <value>
+            The property value.
+            </value>
+            <param name="key">The property name.</param>
+            <returns>The property value.</returns>
+        </member>
         <member name="M:Simple.OData.Client.ODataEntry.AsDictionary">
             <summary>
             Returns OData entry properties as dictionary.
@@ -2652,27 +2708,25 @@
             The result of the conversion.
             </returns>
         </member>
-        <member name="P:Simple.OData.Client.ODataEntry.Item(System.String)">
-            <summary>
-            Gets or sets the value of the specified property.
-            </summary>
-            <value>
-            The property value.
-            </value>
-            <param name="key">The property name.</param>
-            <returns>The property value.</returns>
-        </member>
         <member name="T:Simple.OData.Client.ODataEntryAnnotations">
             <summary>
             Contains additional information about OData entry
             </summary>
         </member>
-        <member name="M:Simple.OData.Client.ODataEntryAnnotations.GetInstanceAnnotations``1">
+        <member name="T:Simple.OData.Client.ODataEntryAnnotations.AssociationLink">
             <summary>
-            Custom feed annotations returned as an adapter-specific annotation type
+            Contains additional information about OData association links
             </summary>
-            <typeparam name="T">Custom type</typeparam>
-            <returns></returns>
+        </member>
+        <member name="P:Simple.OData.Client.ODataEntryAnnotations.AssociationLink.Name">
+            <summary>
+            The association name.
+            </summary>
+        </member>
+        <member name="P:Simple.OData.Client.ODataEntryAnnotations.AssociationLink.Uri">
+            <summary>
+            The association URI.
+            </summary>
         </member>
         <member name="P:Simple.OData.Client.ODataEntryAnnotations.Id">
             <summary>
@@ -2714,20 +2768,12 @@
             Custom feed annotations.
             </summary>
         </member>
-        <member name="T:Simple.OData.Client.ODataEntryAnnotations.AssociationLink">
+        <member name="M:Simple.OData.Client.ODataEntryAnnotations.GetInstanceAnnotations``1">
             <summary>
-            Contains additional information about OData association links
+            Custom feed annotations returned as an adapter-specific annotation type
             </summary>
-        </member>
-        <member name="P:Simple.OData.Client.ODataEntryAnnotations.AssociationLink.Name">
-            <summary>
-            The association name.
-            </summary>
-        </member>
-        <member name="P:Simple.OData.Client.ODataEntryAnnotations.AssociationLink.Uri">
-            <summary>
-            The association URI.
-            </summary>
+            <typeparam name="T">Custom type</typeparam>
+            <returns></returns>
         </member>
         <member name="T:Simple.OData.Client.ODataExpandLevels">
             <summary>
@@ -2759,6 +2805,16 @@
             Specifies how to expand entity associations.
             </summary>
         </member>
+        <member name="P:Simple.OData.Client.ODataExpandOptions.Levels">
+            <summary>
+            The number of levels to expand.
+            </summary>
+        </member>
+        <member name="P:Simple.OData.Client.ODataExpandOptions.ExpandMode">
+            <summary>
+            The expansion mode (by value or by reference).
+            </summary>
+        </member>
         <member name="M:Simple.OData.Client.ODataExpandOptions.ByValue(System.Int32)">
             <summary>
             Expansion by value.
@@ -2783,27 +2839,10 @@
             </summary>
             <param name="levels">The number of levels to expand.</param>
         </member>
-        <member name="P:Simple.OData.Client.ODataExpandOptions.Levels">
-            <summary>
-            The number of levels to expand.
-            </summary>
-        </member>
-        <member name="P:Simple.OData.Client.ODataExpandOptions.ExpandMode">
-            <summary>
-            The expansion mode (by value or by reference).
-            </summary>
-        </member>
         <member name="T:Simple.OData.Client.ODataFeedAnnotations">
             <summary>
             Contains additional information about OData feed
             </summary>
-        </member>
-        <member name="M:Simple.OData.Client.ODataFeedAnnotations.GetInstanceAnnotations``1">
-            <summary>
-            Custom feed annotations returned as an adapter-specific annotation type
-            </summary>
-            <typeparam name="T">Custom type</typeparam>
-            <returns></returns>
         </member>
         <member name="P:Simple.OData.Client.ODataFeedAnnotations.Id">
             <summary>
@@ -2830,6 +2869,13 @@
             <summary>
             Custom feed annotations.
             </summary>
+        </member>
+        <member name="M:Simple.OData.Client.ODataFeedAnnotations.GetInstanceAnnotations``1">
+            <summary>
+            Custom feed annotations returned as an adapter-specific annotation type
+            </summary>
+            <typeparam name="T">Custom type</typeparam>
+            <returns></returns>
         </member>
         <member name="T:Simple.OData.Client.ODataMediaAnnotations">
             <summary>
@@ -2946,25 +2992,6 @@
             Provides pluralization and singularization of words when resolving names of resources and properties
             </summary>
         </member>
-        <member name="T:Simple.OData.Client.IPluralizer">
-            <summary>
-            Provides pluralization and singularization of words when resolving names of resources and properties
-            </summary>
-        </member>
-        <member name="M:Simple.OData.Client.IPluralizer.Pluralize(System.String)">
-            <summary>
-            Pluralizes the specified word.
-            </summary>
-            <param name="word">The word to pluralize.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Simple.OData.Client.IPluralizer.Singularize(System.String)">
-            <summary>
-            Singularizes the specified word.
-            </summary>
-            <param name="word">The word to singularize.</param>
-            <returns></returns>
-        </member>
         <member name="M:Simple.OData.Client.Pluralizer.#ctor(System.Func{System.String,System.String},System.Func{System.String,System.String})">
             <summary>
             Initializes a new instance of the <see cref="T:Simple.OData.Client.Pluralizer"/> class.
@@ -2986,19 +3013,24 @@
             <param name="word">The word to singularize.</param>
             <returns></returns>
         </member>
-        <member name="M:Simple.OData.Client.Extensions.HomogenizeEx.Homogenize(System.String)">
+        <member name="T:Simple.OData.Client.IPluralizer">
             <summary>
-            Downshift a string and remove all non-alphanumeric characters.
+            Provides pluralization and singularization of words when resolving names of resources and properties
             </summary>
-            <param name="source">The original string.</param>
-            <returns>The modified string.</returns>
         </member>
-        <member name="M:Simple.OData.Client.Extensions.HomogenizeEx.SetRegularExpression(System.Text.RegularExpressions.Regex)">
+        <member name="M:Simple.OData.Client.IPluralizer.Pluralize(System.String)">
             <summary>
-            Sets the regular expression to be used for homogenizing object names.
+            Pluralizes the specified word.
             </summary>
-            <param name="regex">A regular expression matching all non-comparing characters. The default is &quot;[^a-z0-9]&quot;.</param>
-            <remarks>Homogenized strings are always forced to lower-case.</remarks>
+            <param name="word">The word to pluralize.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Simple.OData.Client.IPluralizer.Singularize(System.String)">
+            <summary>
+            Singularizes the specified word.
+            </summary>
+            <param name="word">The word to singularize.</param>
+            <returns></returns>
         </member>
         <member name="T:Simple.OData.Client.UnresolvableObjectException">
             <summary>

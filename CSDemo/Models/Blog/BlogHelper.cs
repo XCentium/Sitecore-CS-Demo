@@ -104,7 +104,7 @@ namespace CSDemo.Models.Blog
             }
             catch (Exception ex)
             {
-                Log.Error(ex.StackTrace, ex);
+                Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
             }
 
             return 0;

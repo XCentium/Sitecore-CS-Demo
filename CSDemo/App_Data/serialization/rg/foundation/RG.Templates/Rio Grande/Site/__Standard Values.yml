@@ -4,6 +4,14 @@ Parent: cd6f62f4-e0ef-48b7-9a3b-90c51d2a3be6
 Template: d5e5858b-4bed-4666-88c0-6de55e088ccc
 Path: /sitecore/templates/Rio Grande/Site/__Standard Values
 DB: master
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Type: TreelistEx
+  Value: |
+    {24216566-BD19-4EB9-B421-1CB7A97060E7}
+    {27707EF4-EA14-439A-BA20-DBD16605AE04}
+    {A21B890E-C798-469C-8727-0F2C525787F3}
 Languages:
 - Language: en
   Versions:
@@ -12,3 +20,6 @@ Languages:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
       Value: 20160216T155734Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

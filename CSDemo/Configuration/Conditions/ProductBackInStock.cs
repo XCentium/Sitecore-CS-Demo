@@ -20,7 +20,7 @@ namespace CSDemo.Configuration.Conditions
             var provider = (InventoryAutomationProvider)Factory.CreateObject("inventoryAutomationProvider", true);
             if (provider == null)
             {
-                Log.Error("XC Products Back ini Stock: Unable to get inventoryAutomationProvider.", this);
+                Sitecore.Diagnostics.Log.Error("XC Products Back ini Stock: Unable to get inventoryAutomationProvider.", this);
                 return false;
             }
 

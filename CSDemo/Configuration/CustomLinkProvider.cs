@@ -12,28 +12,56 @@ namespace CSDemo.Configuration
     {
         public override string GetItemUrl(Item item, UrlOptions options)
         {
+            // Ola added
             try
             {
                 if (item == null) return base.GetItemUrl(item, options);
-                if (item.Template.BaseTemplates.Any(t => t.ID == new ID(Constants.Commerce.ProductBaseTemplateId)))
+                if (item.Paths.Path.ToLower().Contains("/sitecore/commerce/catalog"))
                 {
-                    var categoryUrl = GetCategoryUrl(item.Parent, options);
-                    return $"{categoryUrl}/{(options.LowercaseUrls ? item.Name.ToLower() : item.Name)}";
+                    if (item.TemplateName.ToLower() == Constants.Products.GeneralCategoryTemplateName.ToLower()){
+                        return "/categories/" + item.Name.ToLower();
+                    }
+
+                    if (!item.TemplateName.ToLower().Contains("variant"))
+                    {
+                        return "/categories/" + item.Parent.Name.ToLower() + "/" + item.Name.ToLower();
+                    }
+
                 }
 
-                if (item.Template.BaseTemplates.Any(t => t.ID == new ID(Constants.Commerce.CategoryBaseTemplateId)))
-                {
-                    return GetCategoryUrl(item, options);
-                }
+
 
                 return base.GetItemUrl(item, options);
             }
             catch (System.Exception ex)
             {
-                Log.Error("Error", ex, this);
-                return string.Empty;
 
+                Sitecore.Diagnostics.Log.Error("Error", ex, this);
+                return string.Empty;
             }
+
+            //try
+            //{
+            //    if (item == null) return base.GetItemUrl(item, options);
+            //    if (item.Template.BaseTemplates.Any(t => t.ID == new ID(Constants.Commerce.ProductBaseTemplateId)))
+            //    {
+            //        var categoryUrl = GetCategoryUrl(item.Parent, options);
+            //        return $"{categoryUrl}/{(options.LowercaseUrls ? item.Name.ToLower() : item.Name)}";
+            //    }
+
+            //    if (item.Template.BaseTemplates.Any(t => t.ID == new ID(Constants.Commerce.CategoryBaseTemplateId)))
+            //    {
+            //        return GetCategoryUrl(item, options);
+            //    }
+
+            //    return base.GetItemUrl(item, options);
+            //}
+            //catch (System.Exception ex)
+            //{
+            //    Sitecore.Diagnostics.Log.Error("Error", ex, this);
+            //    return string.Empty;
+
+            //}
         }
 
         #region Private Helpers

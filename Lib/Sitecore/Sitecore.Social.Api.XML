@@ -11,15 +11,31 @@
         </member>
         <member name="M:Sitecore.Social.Api.AccountManager.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.AccountManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.AccountManager" /> class.
             </summary>
         </member>
         <member name="M:Sitecore.Social.Api.AccountManager.#ctor(Sitecore.Social.Domain.INetworkManager,Sitecore.Social.IAccountBusinessManager)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.AccountManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.AccountManager" /> class.
             </summary>
             <param name="networkManager">The network manager.</param>
             <param name="accountBusinessManager">The account business manager.</param>
+        </member>
+        <member name="P:Sitecore.Social.Api.AccountManager.NetworkManager">
+            <summary>
+            Gets or sets the network manager.
+            </summary>
+            <value>
+            The network manager.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Api.AccountManager.AccountBusinessManager">
+            <summary>
+            Gets or sets the account business manager.
+            </summary>
+            <value>
+            The account business manager.
+            </value>
         </member>
         <member name="M:Sitecore.Social.Api.AccountManager.GetAccount(Sitecore.Social.Domain.Model.Identifier)">
              <summary>
@@ -254,22 +270,6 @@
             </code>
             </example>
         </member>
-        <member name="P:Sitecore.Social.Api.AccountManager.NetworkManager">
-            <summary>
-            Gets or sets the network manager.
-            </summary>
-            <value>
-            The network manager.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Api.AccountManager.AccountBusinessManager">
-            <summary>
-            Gets or sets the account business manager.
-            </summary>
-            <value>
-            The account business manager.
-            </value>
-        </member>
         <member name="T:Sitecore.Social.Api.ApplicationManager">
             <summary>
             Defines the methods that are used to manage social network applications.
@@ -277,15 +277,31 @@
         </member>
         <member name="M:Sitecore.Social.Api.ApplicationManager.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.ApplicationManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.ApplicationManager" /> class.
             </summary>
         </member>
         <member name="M:Sitecore.Social.Api.ApplicationManager.#ctor(Sitecore.Social.Domain.INetworkManager,Sitecore.Social.IApplicationBusinessManager)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.ApplicationManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.ApplicationManager" /> class.
             </summary>
             <param name="networkManager">The network manager.</param>
             <param name="applicationBusinessManager">The application business manager.</param>
+        </member>
+        <member name="P:Sitecore.Social.Api.ApplicationManager.NetworkManager">
+            <summary>
+            Gets or sets the network manager.
+            </summary>
+            <value>
+            The network manager.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Api.ApplicationManager.ApplicationBusinessManager">
+            <summary>
+            Gets or sets the application business manager.
+            </summary>
+            <value>
+            The application business manager.
+            </value>
         </member>
         <member name="M:Sitecore.Social.Api.ApplicationManager.GetApplication(Sitecore.Social.Domain.Model.Identifier)">
             <summary>
@@ -293,7 +309,7 @@
             </summary>
             <param name="applicationId">The application id.</param>
             <returns>
-            The application. If the application is not found <see cref="F:Sitecore.Social.Domain.Model.Application.Empty"/> is returned.
+            The application. If the application is not found <see cref="F:Sitecore.Social.Domain.Model.Application.Empty" /> is returned.
             </returns>
             <example>
             <code>
@@ -478,26 +494,27 @@
              </code>
              </example>
         </member>
-        <member name="P:Sitecore.Social.Api.ApplicationManager.NetworkManager">
-            <summary>
-            Gets or sets the network manager.
-            </summary>
-            <value>
-            The network manager.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Api.ApplicationManager.ApplicationBusinessManager">
-            <summary>
-            Gets or sets the application business manager.
-            </summary>
-            <value>
-            The application business manager.
-            </value>
-        </member>
         <member name="T:Sitecore.Social.Api.EventArgs.SocialMessageCreatedEventArgs">
             <summary>
             Event arguments, which are passed to the "social:message:created" event.
             </summary>
+        </member>
+        <member name="M:Sitecore.Social.Api.EventArgs.SocialMessageCreatedEventArgs.#ctor(Sitecore.Social.Domain.Model.Message)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.EventArgs.SocialMessageCreatedEventArgs"/> class.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="T:Sitecore.Social.Api.EventArgs.SocialMessageDeletedEventArgs">
+            <summary>
+            Event arguments, which are passed to the "social:message:deleted" event.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Api.EventArgs.SocialMessageDeletedEventArgs.#ctor(Sitecore.Social.Domain.Model.Message)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.EventArgs.SocialMessageDeletedEventArgs"/> class.
+            </summary>
+            <param name="message">The message.</param>
         </member>
         <member name="T:Sitecore.Social.Api.EventArgs.SocialMessageEventArgs">
             <summary>
@@ -517,23 +534,6 @@
             <value>
             The message.
             </value>
-        </member>
-        <member name="M:Sitecore.Social.Api.EventArgs.SocialMessageCreatedEventArgs.#ctor(Sitecore.Social.Domain.Model.Message)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.EventArgs.SocialMessageCreatedEventArgs"/> class.
-            </summary>
-            <param name="message">The message.</param>
-        </member>
-        <member name="T:Sitecore.Social.Api.EventArgs.SocialMessageDeletedEventArgs">
-            <summary>
-            Event arguments, which are passed to the "social:message:deleted" event.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Api.EventArgs.SocialMessageDeletedEventArgs.#ctor(Sitecore.Social.Domain.Model.Message)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.EventArgs.SocialMessageDeletedEventArgs"/> class.
-            </summary>
-            <param name="message">The message.</param>
         </member>
         <member name="T:Sitecore.Social.Api.EventArgs.SocialMessageUpdatedEventArgs">
             <summary>
@@ -758,9 +758,9 @@
              <param name="user">The user.</param>
              <param name="messageId">The message id.</param>
              <returns>
-             The posting preference. If the posting preference is not found the <see cref="F:Sitecore.Social.Domain.Model.AutomaticPostingPreference.Default"/> value is used.
+             The posting preference. If the posting preference is not found the <see cref="F:Sitecore.Social.Domain.Model.AutomaticPostingPreference.Default" /> value is used.
              </returns>
-             <seealso cref="P:Sitecore.Social.Domain.Model.PostingPreference.AutomaticPostingPreference"/>
+             <seealso cref="P:Sitecore.Social.Domain.Model.PostingPreference.AutomaticPostingPreference" />
              <example>
              <code>
              var postingPreference = Sitecore.Context.User.GetPostingPreference(messageId);
@@ -816,15 +816,31 @@
         </member>
         <member name="M:Sitecore.Social.Api.MessageManager.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.MessageManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.MessageManager" /> class.
             </summary>
         </member>
         <member name="M:Sitecore.Social.Api.MessageManager.#ctor(Sitecore.Social.IMessageBusinessManager,Sitecore.Social.Infrastructure.Logging.ILogManager)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.MessageManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.MessageManager" /> class.
             </summary>
             <param name="messageBusinessManager">The message business manager.</param>
             <param name="logManager">The log manager.</param>
+        </member>
+        <member name="P:Sitecore.Social.Api.MessageManager.MessageBusinessManager">
+            <summary>
+            Gets or sets the message business manager.
+            </summary>
+            <value>
+            The message business manager.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Api.MessageManager.LogManager">
+            <summary>
+            Gets or sets the log manager.
+            </summary>
+            <value>
+            The log manager.
+            </value>
         </member>
         <member name="M:Sitecore.Social.Api.MessageManager.GetMessage(Sitecore.Social.Domain.Model.Identifier)">
             <summary>
@@ -832,7 +848,7 @@
             </summary>
             <param name="messageId">The message id.</param>
             <returns>
-            The message. If message is not found <see cref="F:Sitecore.Social.Domain.Model.Message.Empty"/> is returned.
+            The message. If message is not found <see cref="F:Sitecore.Social.Domain.Model.Message.Empty" /> is returned.
             </returns>
             <exception cref="T:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException">Message data builder is not found.</exception>
             <exception cref="T:System.InvalidCastException">Invalid casts occured.</exception>
@@ -1037,7 +1053,7 @@
              <remarks>
              <list type="bullet">
              <item>
-             <description>The <see cref="P:Sitecore.Social.Domain.Model.Message.Id"/> field will contain identifier of the created message.</description>
+             <description>The <see cref="P:Sitecore.Social.Domain.Model.Message.Id" /> field will contain identifier of the created message.</description>
              </item>
              <item>
              <description>
@@ -1228,7 +1244,7 @@
              </summary>
              <param name="messageId">The message id.</param>
              <returns>
-             The <see cref="T:Sitecore.Social.Domain.Model.MessageStatus"/>. If the status is not defined <see cref="F:Sitecore.Social.Domain.Model.MessageStatus.Empty"/> is returned.
+             The <see cref="T:Sitecore.Social.Domain.Model.MessageStatus" />. If the status is not defined <see cref="F:Sitecore.Social.Domain.Model.MessageStatus.Empty" /> is returned.
              </returns>
              <exception cref="T:Sitecore.Social.Exceptions.MessageStatusBuilderIsNotFoundException">Message status builder is not found.</exception>
              <example>
@@ -1266,22 +1282,6 @@
              </code>
              </example>
         </member>
-        <member name="P:Sitecore.Social.Api.MessageManager.MessageBusinessManager">
-            <summary>
-            Gets or sets the message business manager.
-            </summary>
-            <value>
-            The message business manager.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Api.MessageManager.LogManager">
-            <summary>
-            Gets or sets the log manager.
-            </summary>
-            <value>
-            The log manager.
-            </value>
-        </member>
         <member name="T:Sitecore.Social.Api.MessageStatisticsManager">
             <summary>
             Defines the methods that are used to manage social network message statistics.
@@ -1294,12 +1294,12 @@
         </member>
         <member name="M:Sitecore.Social.Api.MessageStatisticsManager.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.MessageStatisticsManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.MessageStatisticsManager" /> class.
             </summary>
         </member>
         <member name="M:Sitecore.Social.Api.MessageStatisticsManager.#ctor(Sitecore.Social.IMessageStatisticsBusinessManager)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.MessageStatisticsManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.MessageStatisticsManager" /> class.
             </summary>
             <param name="messageStatisticsBusinessManager">The message statistics business manager.</param>
         </member>
@@ -1414,14 +1414,22 @@
         </member>
         <member name="M:Sitecore.Social.Api.NetworkManager.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.NetworkManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.NetworkManager" /> class.
             </summary>
         </member>
         <member name="M:Sitecore.Social.Api.NetworkManager.#ctor(Sitecore.Social.INetworkBusinessManager)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.NetworkManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.NetworkManager" /> class.
             </summary>
             <param name="networkBusinessManager">The network business manager.</param>
+        </member>
+        <member name="P:Sitecore.Social.Api.NetworkManager.NetworkBusinessManager">
+            <summary>
+            Gets or sets the network business manager.
+            </summary>
+            <value>
+            The network business manager.
+            </value>
         </member>
         <member name="M:Sitecore.Social.Api.NetworkManager.GetNetworks">
              <summary>
@@ -1573,14 +1581,6 @@
              </code>
              </example>
         </member>
-        <member name="P:Sitecore.Social.Api.NetworkManager.NetworkBusinessManager">
-            <summary>
-            Gets or sets the network business manager.
-            </summary>
-            <value>
-            The network business manager.
-            </value>
-        </member>
         <member name="T:Sitecore.Social.Api.PostingPreferenceManager">
             <summary>
             Defines the methods that are used to manage user’s posting preferences.
@@ -1593,15 +1593,31 @@
         </member>
         <member name="M:Sitecore.Social.Api.PostingPreferenceManager.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.PostingPreferenceManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.PostingPreferenceManager" /> class.
             </summary>
         </member>
         <member name="M:Sitecore.Social.Api.PostingPreferenceManager.#ctor(Sitecore.Social.IPostingPreferenceBusinessManager,Sitecore.Social.Domain.IMessageManager)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.PostingPreferenceManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Api.PostingPreferenceManager" /> class.
             </summary>
             <param name="postingPreferenceBusinessManager">The posting preference business manager.</param>
             <param name="messageManager">The message manager.</param>
+        </member>
+        <member name="P:Sitecore.Social.Api.PostingPreferenceManager.MessageManager">
+            <summary>
+            Gets or sets the message manager.
+            </summary>
+            <value>
+            The message manager.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Api.PostingPreferenceManager.PostingPreferenceBusinessManager">
+            <summary>
+            Gets or sets the posting preference business manager.
+            </summary>
+            <value>
+            The posting preference business manager.
+            </value>
         </member>
         <member name="M:Sitecore.Social.Api.PostingPreferenceManager.GetPostingPreferences(System.String,System.String)">
              <summary>
@@ -1632,10 +1648,10 @@
             <param name="userName">Name of the user.</param>
             <param name="messageId">The message id.</param>
             <returns>
-            The posting preference. If the posting preference is not found the <see cref="F:Sitecore.Social.Domain.Model.AutomaticPostingPreference.Default"/> value is used.
+            The posting preference. If the posting preference is not found the <see cref="F:Sitecore.Social.Domain.Model.AutomaticPostingPreference.Default" /> value is used.
             </returns>
-            <seealso cref="P:Sitecore.Social.Domain.Model.PostingPreference.AutomaticPostingPreference"/>
-            <seealso cref="M:Sitecore.Social.Api.Extensions.UserExtensions.GetPostingPreference(System.Security.Principal.IPrincipal,Sitecore.Social.Domain.Model.Identifier)"/>
+            <seealso cref="P:Sitecore.Social.Domain.Model.PostingPreference.AutomaticPostingPreference" />
+            <seealso cref="M:Sitecore.Social.Api.Extensions.UserExtensions.GetPostingPreference(System.Security.Principal.IPrincipal,Sitecore.Social.Domain.Model.Identifier)" />
             <example>
             <code>
             var postingPreference = postingPreferenceManager.GetPostingPreference(@"extranet\johnsmith", messageId);
@@ -1712,22 +1728,6 @@
              </code>
              </example>
         </member>
-        <member name="P:Sitecore.Social.Api.PostingPreferenceManager.MessageManager">
-            <summary>
-            Gets or sets the message manager.
-            </summary>
-            <value>
-            The message manager.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Api.PostingPreferenceManager.PostingPreferenceBusinessManager">
-            <summary>
-            Gets or sets the posting preference business manager.
-            </summary>
-            <value>
-            The posting preference business manager.
-            </value>
-        </member>
         <member name="T:Sitecore.Social.Api.SocialProfileManager">
             <summary>
             Defines the methods that are used to manage a social profile.
@@ -1745,6 +1745,11 @@
             <param name="socialProfileBusinessManager">
             The social profile business manager.
             </param>
+        </member>
+        <member name="P:Sitecore.Social.Api.SocialProfileManager.SocialProfileBusinessManager">
+            <summary>
+            Gets or sets the social profile business manager.
+            </summary>
         </member>
         <member name="M:Sitecore.Social.Api.SocialProfileManager.GetSocialProfiles(System.String)">
             <summary>
@@ -2154,7 +2159,7 @@
              <param name="applicationCredentials">The application credentials.</param>
              <param name="accountCredentials">The account credentials.</param>
              <returns>
-             The social profile. If the request couldn't be executed, an <see cref="F:Sitecore.Social.Domain.Model.SocialProfile.Empty"/> is returned.
+             The social profile. If the request couldn't be executed, an <see cref="F:Sitecore.Social.Domain.Model.SocialProfile.Empty" /> is returned.
              </returns>
              <exception cref="T:System.InvalidCastException">The network provider is not implemented IGetAccountInfo interface.</exception>
              <example>
@@ -2338,11 +2343,6 @@
             }
             </code>
             </example>
-        </member>
-        <member name="P:Sitecore.Social.Api.SocialProfileManager.SocialProfileBusinessManager">
-            <summary>
-            Gets or sets the social profile business manager.
-            </summary>
         </member>
     </members>
 </doc>

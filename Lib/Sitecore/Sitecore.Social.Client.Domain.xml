@@ -98,7 +98,7 @@
         <member name="M:Sitecore.Social.Client.Domain.IConnectorClientManager.AttachToUser(System.String,System.String)">
             <summary>
             Attaches the specified network social profile to the logged in user.
-            If the current user is not logged in, it tries to log in with <see cref="!:LogOnUser(string)"/>
+            If the current user is not logged in, it tries to log in with <see cref="!:LogOnUser(string)" />
             </summary>
             <param name="networkName">The name of the network.</param>
             <param name="callbackUrl">The URL, where the user will be redirected after login.</param>
@@ -106,7 +106,7 @@
         <member name="M:Sitecore.Social.Client.Domain.IConnectorClientManager.AttachToUser(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
             <summary>
             Attaches the specified network social profile to the logged in user.
-            If the current user is not logged in, it tries to log in with <see cref="!:LogOnUser(string)"/>
+            If the current user is not logged in, it tries to log in with <see cref="!:LogOnUser(string)" />
             </summary>
             <param name="networkName">The name of the network.</param>
             <param name="callbackUrl">The URL, where the user will be redirected after login.</param>
@@ -115,7 +115,7 @@
         <member name="M:Sitecore.Social.Client.Domain.IConnectorClientManager.AttachToUser(System.String,System.String,System.Boolean)">
             <summary>
             Attaches the specified network social profile to the logged in user.
-            If the current user is not logged in, it tries to log in with <see cref="!:LogOnUser(string, bool)"/>
+            If the current user is not logged in, it tries to log in with <see cref="!:LogOnUser(string, bool)" />
             </summary>
             <param name="networkName">The name of the network.</param>
             <param name="callbackUrl">The URL, where the user will be redirected after login.</param>
@@ -124,7 +124,7 @@
         <member name="M:Sitecore.Social.Client.Domain.IConnectorClientManager.AttachToUser(System.String,System.String,System.Boolean,System.Collections.Generic.Dictionary{System.String,System.Object})">
             <summary>
             Attaches the specified network social profile to the logged in user.
-            If the current user is not logged in, it tries to log in with <see cref="!:LogOnUser(string, bool, Dictionary&lt;string, object&gt;)"/>
+            If the current user is not logged in, it tries to log in with <see cref="!:LogOnUser(string, bool, Dictionary&lt;string, object&gt;)" />
             </summary>
             <param name="networkName">The name of the network.</param>
             <param name="callbackUrl">The URL, where the user will be redirected after login.</param>
@@ -134,7 +134,7 @@
         <member name="M:Sitecore.Social.Client.Domain.IConnectorClientManager.AttachToUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials)">
             <summary>
             Attaches the specified network social profile to the logged in user.
-            If the current user is not logged in, it tries to log in with <see cref="!:LogOnUser(string, ApplicationCredentials)"/>
+            If the current user is not logged in, it tries to log in with <see cref="!:LogOnUser(string, ApplicationCredentials)" />
             </summary>
             <param name="networkName">The name of the network.</param>
             <param name="callbackUrl">The URL, where the user will be redirected after login.</param>
@@ -143,7 +143,7 @@
         <member name="M:Sitecore.Social.Client.Domain.IConnectorClientManager.AttachToUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,System.Collections.Generic.Dictionary{System.String,System.Object})">
             <summary>
             Attaches the specified network social profile to the logged in user.
-            If the current user is not logged in, it tries to log in with <see cref="!:LogOnUser(string, ApplicationCredentials, Dictionary&lt;string, object&gt;)"/>
+            If the current user is not logged in, it tries to log in with <see cref="!:LogOnUser(string, ApplicationCredentials, Dictionary&lt;string, object&gt;)" />
             </summary>
             <param name="networkName">The name of the network.</param>
             <param name="callbackUrl">The URL, where the user will be redirected after login.</param>
@@ -153,7 +153,7 @@
         <member name="M:Sitecore.Social.Client.Domain.IConnectorClientManager.AttachToUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,System.Boolean)">
             <summary>
             Attaches the specified network social profile to the logged in user.
-            If the current user is not logged in, it tries to log in with <see cref="!:LogOnUser(string, ApplicationCredentials, bool)"/>
+            If the current user is not logged in, it tries to log in with <see cref="!:LogOnUser(string, ApplicationCredentials, bool)" />
             </summary>
             <param name="networkName">The name of the network.</param>
             <param name="callbackUrl">The URL, where the user will be redirected after login.</param>
@@ -163,7 +163,7 @@
         <member name="M:Sitecore.Social.Client.Domain.IConnectorClientManager.AttachToUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,System.Boolean,System.Collections.Generic.Dictionary{System.String,System.Object})">
             <summary>
             Attaches the specified network social profile to the logged in user.
-            If the current user is not logged in, it tries to log in with <see cref="!:LogOnUser(string, ApplicationCredentials, bool, Dictionary&lt;string, object&gt;)"/>
+            If the current user is not logged in, it tries to log in with <see cref="!:LogOnUser(string, ApplicationCredentials, bool, Dictionary&lt;string, object&gt;)" />
             </summary>
             <param name="networkName">The name of the network.</param>
             <param name="callbackUrl">The URL, where the user will be redirected after login.</param>
@@ -183,7 +183,7 @@
         </member>
         <member name="M:Sitecore.Social.Client.Domain.Requests.GetAccountCredentialsRequest.#ctor(System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,System.Uri)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Domain.Requests.GetAccountCredentialsRequest"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Domain.Requests.GetAccountCredentialsRequest" /> class.
             </summary>
             <param name="networkName">The network name.</param>
             <param name="applicationCredentials">The application credentials.</param>
@@ -261,42 +261,22 @@
             Represents the account credentials response.
             </summary>
         </member>
-        <member name="T:Sitecore.Social.Client.Domain.Responses.ResponseStatus`1">
-            <summary>
-            Represents the base class for API responses.
-            </summary>
-            <typeparam name="T">The response status type.</typeparam>
-        </member>
-        <member name="M:Sitecore.Social.Client.Domain.Responses.ResponseStatus`1.#ctor(`0)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Domain.Responses.ResponseStatus`1"/> class.
-            </summary>
-            <param name="status">The status.</param>
-        </member>
-        <member name="P:Sitecore.Social.Client.Domain.Responses.ResponseStatus`1.Status">
-            <summary>
-            Gets the status.
-            </summary>
-            <value>
-            The status.
-            </value>
-        </member>
         <member name="M:Sitecore.Social.Client.Domain.Responses.GetAccountCredentialsResponse.#ctor(Sitecore.Social.Client.Domain.Responses.GetAccountCredentialsResponseStatus)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Domain.Responses.GetAccountCredentialsResponse"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Domain.Responses.GetAccountCredentialsResponse" /> class.
             </summary>
             <param name="status">The status.</param>
         </member>
         <member name="M:Sitecore.Social.Client.Domain.Responses.GetAccountCredentialsResponse.#ctor(Sitecore.Social.Client.Domain.Responses.GetAccountCredentialsResponseStatus,Sitecore.Social.Domain.Model.AccountCredentials)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Domain.Responses.GetAccountCredentialsResponse"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Domain.Responses.GetAccountCredentialsResponse" /> class.
             </summary>
             <param name="status">The status.</param>
             <param name="accountCredentials">The account credentials.</param>
         </member>
         <member name="M:Sitecore.Social.Client.Domain.Responses.GetAccountCredentialsResponse.#ctor(Sitecore.Social.Client.Domain.Responses.GetAccountCredentialsResponseStatus,Sitecore.Social.Domain.Model.AccountCredentials,System.Object)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Domain.Responses.GetAccountCredentialsResponse"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Domain.Responses.GetAccountCredentialsResponse" /> class.
             </summary>
             <param name="status">The status.</param>
             <param name="accountCredentials">The account credentials.</param>
@@ -339,6 +319,26 @@
             <summary>
             The response is not found
             </summary>
+        </member>
+        <member name="T:Sitecore.Social.Client.Domain.Responses.ResponseStatus`1">
+            <summary>
+            Represents the base class for API responses.
+            </summary>
+            <typeparam name="T">The response status type.</typeparam>
+        </member>
+        <member name="M:Sitecore.Social.Client.Domain.Responses.ResponseStatus`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Domain.Responses.ResponseStatus`1" /> class.
+            </summary>
+            <param name="status">The status.</param>
+        </member>
+        <member name="P:Sitecore.Social.Client.Domain.Responses.ResponseStatus`1.Status">
+            <summary>
+            Gets the status.
+            </summary>
+            <value>
+            The status.
+            </value>
         </member>
     </members>
 </doc>

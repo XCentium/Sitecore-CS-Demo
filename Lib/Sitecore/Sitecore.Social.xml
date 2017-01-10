@@ -9,93 +9,6 @@
             Defines business methods to manage social accounts.
             </summary>
         </member>
-        <member name="T:Sitecore.Social.IAccountBusinessManager">
-            <summary>
-            Defines business methods to manage social accounts.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.IAccountBusinessManager.GetAccount(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets an account by id.
-            </summary>
-            <param name="accountId">The account id.</param>
-            <returns>The account. If the account is not found, <see cref="F:Sitecore.Social.Domain.Model.NetworkAccount.Empty"/> is returned.</returns>
-        </member>
-        <member name="M:Sitecore.Social.IAccountBusinessManager.GetAccounts(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets all accounts by network id. Returns a collection of accounts.
-            </summary>
-            <param name="networkId">The network id.</param>
-            <returns>The account list. If no accounts are found an empty list is returned.</returns>
-        </member>
-        <member name="M:Sitecore.Social.IAccountBusinessManager.GetAccountsByApplication(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets the accounts by application.
-            </summary>
-            <param name="applicationId">The application id.</param>
-            <returns>The account list. If no accounts are found an empty list is returned.</returns>
-        </member>
-        <member name="M:Sitecore.Social.IAccountBusinessManager.GetAccountsByContainer(System.String)">
-            <summary>
-            Gets the accounts by container.
-            </summary>
-            <param name="accountContainer">The account container.</param>
-            <returns>
-            The account list. If no accounts are found an empty list is returned.
-            </returns>
-            <remarks>The sub-containers are not included to the search. To search in the sub-containers use <see cref="M:Sitecore.Social.IAccountBusinessManager.GetAccountsByContainer(System.String,System.Boolean)"/>.</remarks>
-        </member>
-        <member name="M:Sitecore.Social.IAccountBusinessManager.GetAccountsByContainer(System.String,System.Boolean)">
-            <summary>
-            Gets the accounts by container.
-            </summary>
-            <param name="accountContainer">The account container.</param>
-            <param name="searchForDescendants">if set to <c>true</c> sub-containers are included to the search.</param>
-            <returns>The account list. If no accounts are found an empty list is returned.</returns>
-        </member>
-        <member name="M:Sitecore.Social.IAccountBusinessManager.AccountExists(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Checks if account exist.
-            </summary>
-            <param name="accountId">The account id.</param>
-            <returns>If account exists True else False.</returns>
-        </member>
-        <member name="M:Sitecore.Social.IAccountBusinessManager.CreateAccount(Sitecore.Social.Domain.Model.Account)">
-            <summary>
-            Creates an account.
-            </summary>
-            <param name="account">The account to create.</param>
-            <remarks>The <see cref="P:Sitecore.Social.Domain.Model.Account.Id"/> field will contain identifier of the new account after creation.</remarks>
-        </member>
-        <member name="M:Sitecore.Social.IAccountBusinessManager.GetNetworkAccountDisplayName(Sitecore.Social.Domain.Model.AccountCredentials,Sitecore.Social.Domain.Model.ApplicationCredentials,Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets an account display name in a social network.
-            </summary>
-            <param name="accountCredentials">The account credentials.</param>
-            <param name="applicationCredentials">The application credentials.</param>
-            <param name="networkId">The network id.</param>
-            <returns>
-            The account display name.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.IAccountBusinessManager.GetNetworkAccountDisplayName(Sitecore.Social.Domain.Model.AccountCredentials,Sitecore.Social.Domain.Model.ApplicationCredentials,System.String)">
-            <summary>
-            Gets an account display name in a social network.
-            </summary>
-            <param name="accountCredentials">The account credentials.</param>
-            <param name="applicationCredentials">The application credentials.</param>
-            <param name="networkName">Name of the network.</param>
-            <returns>
-            The account display name.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.IAccountBusinessManager.GetDaysUntilRenewalRequired(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets the number of days before the required renewal of an account.
-            </summary>
-            <param name="accountId">The account id.</param>
-            <returns>The number of days. If negative then account expired, if null then account renewal disabled or not needed.</returns>
-        </member>
         <member name="F:Sitecore.Social.AccountBusinessManager.ApplicationField">
             <summary>
             The application field
@@ -113,109 +26,12 @@
         </member>
         <member name="M:Sitecore.Social.AccountBusinessManager.#ctor(Sitecore.Social.INetworkBusinessManager,Sitecore.Social.IApplicationBusinessManager,Sitecore.Social.Configuration.IConfigurationFactory,Sitecore.Social.Builders.IAccountBuilderFactory)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.AccountBusinessManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.AccountBusinessManager" /> class.
             </summary>
             <param name="networkBusinessManager">The network business manager.</param>
             <param name="applicationBusinessManager">The application business manager.</param>
             <param name="configurationFactory">The configuration factory.</param>
             <param name="accountBuilderFactory">The account builder factory.</param>
-        </member>
-        <member name="M:Sitecore.Social.AccountBusinessManager.GetAccount(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets an account by id.
-            </summary>
-            <param name="accountId">The account id.</param>
-            <returns>
-            The account. If the account is not found, <see cref="F:Sitecore.Social.Domain.Model.NetworkAccount.Empty"/> is returned.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.AccountBusinessManager.GetAccounts(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets all accounts by network id. Returns a collection of accounts.
-            </summary>
-            <param name="networkId">The network id.</param>
-            <returns>
-            The account list. If no accounts are found an empty list is returned.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.AccountBusinessManager.GetAccountsByApplication(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets the accounts by application.
-            </summary>
-            <param name="applicationId">The application id.</param>
-            <returns>
-            The account list. If no accounts are found an empty list is returned.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.AccountBusinessManager.GetAccountsByContainer(System.String)">
-            <summary>
-            Gets the accounts by container.
-            </summary>
-            <param name="accountContainer">The account container.</param>
-            <returns>
-            The account list. If no accounts are found an empty list is returned.
-            </returns>
-            <remarks>
-            The sub-containers are not included to the search. To search in the sub-containers use <see cref="M:Sitecore.Social.AccountBusinessManager.GetAccountsByContainer(System.String,System.Boolean)"/>.
-            </remarks>
-        </member>
-        <member name="M:Sitecore.Social.AccountBusinessManager.GetAccountsByContainer(System.String,System.Boolean)">
-            <summary>
-            Gets the accounts by container.
-            </summary>
-            <param name="accountContainer">The account container.</param>
-            <param name="searchForDescendants">if set to <c>true</c> sub-containers are included to the search.</param>
-            <returns>
-            The account list. If no accounts are found an empty list is returned.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.AccountBusinessManager.AccountExists(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Checks if account exist.
-            </summary>
-            <param name="accountId">The account id.</param>
-            <returns>If account exists True else False.</returns>
-        </member>
-        <member name="M:Sitecore.Social.AccountBusinessManager.CreateAccount(Sitecore.Social.Domain.Model.Account)">
-            <summary>
-            Creates an account.
-            </summary>
-            <param name="account">The account to create.</param>
-            <exception cref="T:Sitecore.Social.Exceptions.AccountContainerIsNotFoundException">Account container is not found.</exception>
-            <exception cref="T:Sitecore.Social.Exceptions.CannotReadAccountException">The account item was created, but could not be read.</exception>
-            <remarks>
-            The <see cref="P:Sitecore.Social.Domain.Model.Account.Id"/> field will contain identifier of the new account after creation.
-            </remarks>
-        </member>
-        <member name="M:Sitecore.Social.AccountBusinessManager.GetNetworkAccountDisplayName(Sitecore.Social.Domain.Model.AccountCredentials,Sitecore.Social.Domain.Model.ApplicationCredentials,Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets an account display name in a social network.
-            </summary>
-            <param name="accountCredentials">The account credentials.</param>
-            <param name="applicationCredentials">The application credentials.</param>
-            <param name="networkId">The network id.</param>
-            <returns>
-            The account display name.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.AccountBusinessManager.GetNetworkAccountDisplayName(Sitecore.Social.Domain.Model.AccountCredentials,Sitecore.Social.Domain.Model.ApplicationCredentials,System.String)">
-            <summary>
-            Gets an account display name in a social network.
-            </summary>
-            <param name="accountCredentials">The account credentials.</param>
-            <param name="applicationCredentials">The application credentials.</param>
-            <param name="networkName">Name of the network.</param>
-            <returns>
-            The account display name.
-            </returns>
-            <exception cref="T:Sitecore.Social.NetworkProviders.Exceptions.InterfaceIsNotSupportedByProviderException">The interface does not supported by the network provider.</exception>
-        </member>
-        <member name="M:Sitecore.Social.AccountBusinessManager.GetDaysUntilRenewalRequired(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets the number of days before the required renewal of an account.
-            </summary>
-            <param name="accountId">The account id.</param>
-            <returns>The number of days. If negative then account expired, if null then account renewal disabled or not needed.</returns>
         </member>
         <member name="P:Sitecore.Social.AccountBusinessManager.AccountBuilderFactory">
             <summary>
@@ -248,6 +64,103 @@
             <value>
             The configuration factory.
             </value>
+        </member>
+        <member name="M:Sitecore.Social.AccountBusinessManager.GetAccount(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets an account by id.
+            </summary>
+            <param name="accountId">The account id.</param>
+            <returns>
+            The account. If the account is not found, <see cref="F:Sitecore.Social.Domain.Model.NetworkAccount.Empty" /> is returned.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Social.AccountBusinessManager.GetAccounts(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets all accounts by network id. Returns a collection of accounts.
+            </summary>
+            <param name="networkId">The network id.</param>
+            <returns>
+            The account list. If no accounts are found an empty list is returned.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Social.AccountBusinessManager.GetAccountsByApplication(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets the accounts by application.
+            </summary>
+            <param name="applicationId">The application id.</param>
+            <returns>
+            The account list. If no accounts are found an empty list is returned.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Social.AccountBusinessManager.GetAccountsByContainer(System.String)">
+            <summary>
+            Gets the accounts by container.
+            </summary>
+            <param name="accountContainer">The account container.</param>
+            <returns>
+            The account list. If no accounts are found an empty list is returned.
+            </returns>
+            <remarks>
+            The sub-containers are not included to the search. To search in the sub-containers use <see cref="M:Sitecore.Social.AccountBusinessManager.GetAccountsByContainer(System.String,System.Boolean)" />.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Social.AccountBusinessManager.GetAccountsByContainer(System.String,System.Boolean)">
+            <summary>
+            Gets the accounts by container.
+            </summary>
+            <param name="accountContainer">The account container.</param>
+            <param name="searchForDescendants">if set to <c>true</c> sub-containers are included to the search.</param>
+            <returns>
+            The account list. If no accounts are found an empty list is returned.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Social.AccountBusinessManager.AccountExists(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Checks if account exist.
+            </summary>
+            <param name="accountId">The account id.</param>
+            <returns>If account exists True else False.</returns>
+        </member>
+        <member name="M:Sitecore.Social.AccountBusinessManager.CreateAccount(Sitecore.Social.Domain.Model.Account)">
+            <summary>
+            Creates an account.
+            </summary>
+            <param name="account">The account to create.</param>
+            <exception cref="T:Sitecore.Social.Exceptions.AccountContainerIsNotFoundException">Account container is not found.</exception>
+            <exception cref="T:Sitecore.Social.Exceptions.CannotReadAccountException">The account item was created, but could not be read.</exception>
+            <remarks>
+            The <see cref="P:Sitecore.Social.Domain.Model.Account.Id" /> field will contain identifier of the new account after creation.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Social.AccountBusinessManager.GetNetworkAccountDisplayName(Sitecore.Social.Domain.Model.AccountCredentials,Sitecore.Social.Domain.Model.ApplicationCredentials,Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets an account display name in a social network.
+            </summary>
+            <param name="accountCredentials">The account credentials.</param>
+            <param name="applicationCredentials">The application credentials.</param>
+            <param name="networkId">The network id.</param>
+            <returns>
+            The account display name.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Social.AccountBusinessManager.GetNetworkAccountDisplayName(Sitecore.Social.Domain.Model.AccountCredentials,Sitecore.Social.Domain.Model.ApplicationCredentials,System.String)">
+            <summary>
+            Gets an account display name in a social network.
+            </summary>
+            <param name="accountCredentials">The account credentials.</param>
+            <param name="applicationCredentials">The application credentials.</param>
+            <param name="networkName">Name of the network.</param>
+            <returns>
+            The account display name.
+            </returns>
+            <exception cref="T:Sitecore.Social.NetworkProviders.Exceptions.InterfaceIsNotSupportedByProviderException">The interface does not supported by the network provider.</exception>
+        </member>
+        <member name="M:Sitecore.Social.AccountBusinessManager.GetDaysUntilRenewalRequired(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets the number of days before the required renewal of an account.
+            </summary>
+            <param name="accountId">The account id.</param>
+            <returns>The number of days. If negative then account expired, if null then account renewal disabled or not needed.</returns>
         </member>
         <member name="T:Sitecore.Social.Accounts.Account">
             <summary>
@@ -363,60 +276,6 @@
             Defines business methods to manage social network applications.
             </summary>
         </member>
-        <member name="T:Sitecore.Social.IApplicationBusinessManager">
-            <summary>
-            Defines business methods to manage social network applications.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.IApplicationBusinessManager.GetApplication(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets an application by id.
-            </summary>
-            <param name="applicationId">The application id.</param>
-            <returns>The application. If the application is not found <see cref="F:Sitecore.Social.Domain.Model.Application.Empty"/> is returned.</returns>
-        </member>
-        <member name="M:Sitecore.Social.IApplicationBusinessManager.GetApplicationContainer(System.String)">
-            <summary>
-            Gets the application container by account container.
-            </summary>
-            <param name="accountContainer">The account container.</param>
-            <returns>The application container. If the application container is not found <c>string.Empty</c> is returned.</returns>
-        </member>
-        <member name="M:Sitecore.Social.IApplicationBusinessManager.GetApplications(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets the applications by network id.
-            </summary>
-            <param name="networkId">Id of the network.</param>
-            <returns>The application list. If no applications are found an empty list is returned.</returns>
-        </member>
-        <member name="M:Sitecore.Social.IApplicationBusinessManager.GetApplicationsByContainer(System.String,Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets the applications of a specific network by the container.
-            </summary>
-            <param name="applicationContainer">The application container.</param>
-            <param name="networkId">Id of the network.</param>
-            <returns>The application list. If no applications are found an empty list is returned.</returns>
-            <remarks>The sub-containers are not included to the search. To search in the sub-containers use <see cref="M:Sitecore.Social.IApplicationBusinessManager.GetApplicationsByContainer(System.String,Sitecore.Social.Domain.Model.Identifier,System.Boolean)"/>.</remarks>
-        </member>
-        <member name="M:Sitecore.Social.IApplicationBusinessManager.GetApplicationsByContainer(System.String,Sitecore.Social.Domain.Model.Identifier,System.Boolean)">
-            <summary>
-            Gets the applications by container.
-            </summary>
-            <param name="applicationContainer">The application container.</param>
-            <param name="networkId">Id of the network.</param>
-            <param name="searchForDescendants">if set to <c>true</c> sub-containers are included to the search.</param>
-            <returns>The application list. If no applications are found an empty list is returned.</returns>
-        </member>
-        <member name="F:Sitecore.Social.ApplicationBusinessManager.DefaultApplicationFolderField">
-            <summary>
-            The default application folder field
-            </summary>
-        </member>
-        <member name="F:Sitecore.Social.ApplicationBusinessManager.RootApplicationFolder">
-            <summary>
-            The root application folder
-            </summary>
-        </member>
         <member name="F:Sitecore.Social.ApplicationBusinessManager.ApplicationIdFieldID">
             <summary>
             The application id field identifier
@@ -437,6 +296,16 @@
             The network field identifier
             </summary>
         </member>
+        <member name="F:Sitecore.Social.ApplicationBusinessManager.DefaultApplicationFolderField">
+            <summary>
+            The default application folder field
+            </summary>
+        </member>
+        <member name="F:Sitecore.Social.ApplicationBusinessManager.RootApplicationFolder">
+            <summary>
+            The root application folder
+            </summary>
+        </member>
         <member name="F:Sitecore.Social.ApplicationBusinessManager.ApplicationTemplateId">
             <summary>
             The application template id
@@ -448,7 +317,7 @@
             </summary>
             <param name="applicationId">The application id.</param>
             <returns>
-            The application. If the application is not found <see cref="F:Sitecore.Social.Domain.Model.Application.Empty"/> is returned.
+            The application. If the application is not found <see cref="F:Sitecore.Social.Domain.Model.Application.Empty" /> is returned.
             </returns>
         </member>
         <member name="M:Sitecore.Social.ApplicationBusinessManager.GetApplicationContainer(System.String)">
@@ -502,40 +371,6 @@
             Represents an abstract class of account builders.
             </summary>
         </member>
-        <member name="T:Sitecore.Social.Builders.IAccountBuilder">
-            <summary>
-            Defines methods to build and manage <see cref="T:Sitecore.Social.Domain.Model.Account"/> instances.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Builders.IAccountBuilder.GetNetworkId(Sitecore.Data.Items.Item)">
-            <summary>
-            Gets the network identifier of the specified account item.
-            </summary>
-            <param name="accountItem">The account item.</param>
-            <returns>The network identifier.</returns>
-        </member>
-        <member name="M:Sitecore.Social.Builders.IAccountBuilder.UpdateAccountItemFields(Sitecore.Data.Items.Item,Sitecore.Social.Domain.Model.Account)">
-            <summary>
-            Updates the account item fields from the account.
-            </summary>
-            <param name="accountItem">The account item.</param>
-            <param name="account">The account.</param>
-        </member>
-        <member name="M:Sitecore.Social.Builders.IAccountBuilder.BuildAccount(Sitecore.Data.Items.Item)">
-            <summary>
-            Builds the account from the account item.
-            </summary>
-            <param name="accountItem">The account item.</param>
-            <returns>The <see cref="T:Sitecore.Social.Domain.Model.Account"/> instance.</returns>
-        </member>
-        <member name="P:Sitecore.Social.Builders.IAccountBuilder.AccountTemplateId">
-            <summary>
-            Gets the account template id.
-            </summary>
-            <value>
-            The account template id.
-            </value>
-        </member>
         <member name="F:Sitecore.Social.Builders.AccountBuilder.ReviewingRoleSeparator">
             <summary>
             The reviewing role separator
@@ -546,6 +381,14 @@
             Initializes a new instance of the <see cref="T:Sitecore.Social.Builders.AccountBuilder"/> class.
             </summary>
             <param name="accountBuilderSettings">The account builder settings.</param>
+        </member>
+        <member name="P:Sitecore.Social.Builders.AccountBuilder.AccountTemplateId">
+            <summary>
+            Gets the account template id.
+            </summary>
+            <value>
+            The account template id.
+            </value>
         </member>
         <member name="M:Sitecore.Social.Builders.AccountBuilder.GetNetworkId(Sitecore.Data.Items.Item)">
             <summary>
@@ -569,7 +412,7 @@
             </summary>
             <param name="accountItem">The account item.</param>
             <returns>
-            The <see cref="T:Sitecore.Social.Domain.Model.Account"/> instance.
+            The <see cref="T:Sitecore.Social.Domain.Model.Account" /> instance.
             </returns>
         </member>
         <member name="M:Sitecore.Social.Builders.AccountBuilder.CreateAccountInstance">
@@ -577,14 +420,6 @@
             Creates the account instance.
             </summary>
             <returns>The <see cref="T:Sitecore.Social.Domain.Model.Account"/> instance.</returns>
-        </member>
-        <member name="P:Sitecore.Social.Builders.AccountBuilder.AccountTemplateId">
-            <summary>
-            Gets the account template id.
-            </summary>
-            <value>
-            The account template id.
-            </value>
         </member>
         <member name="T:Sitecore.Social.Builders.AccountBuilder.AccountFieldIds">
             <summary>
@@ -613,27 +448,8 @@
         </member>
         <member name="T:Sitecore.Social.Builders.AccountBuilderFactory">
             <summary>
-            Defines methods to get <see cref="T:Sitecore.Social.Builders.IAccountBuilder"/> instances.
+            Defines methods to get <see cref="T:Sitecore.Social.Builders.IAccountBuilder" /> instances.
             </summary>
-        </member>
-        <member name="T:Sitecore.Social.Builders.IAccountBuilderFactory">
-            <summary>
-            Defines methods to get <see cref="T:Sitecore.Social.Builders.IAccountBuilder"/> instances.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Builders.IAccountBuilderFactory.GetBuilder(System.Type)">
-            <summary>
-            Gets the builder by account type.
-            </summary>
-            <param name="accountType">Type of the account.</param>
-            <returns>The <see cref="T:Sitecore.Social.Builders.IAccountBuilder"/> instance.</returns>
-        </member>
-        <member name="M:Sitecore.Social.Builders.IAccountBuilderFactory.GetBuilder(Sitecore.Data.ID)">
-            <summary>
-            Gets the builder by account item template ID.
-            </summary>
-            <param name="accountTemplateID">The account item template ID.</param>
-            <returns>The <see cref="T:Sitecore.Social.Builders.IAccountBuilder"/> instance.</returns>
         </member>
         <member name="M:Sitecore.Social.Builders.AccountBuilderFactory.#ctor(Sitecore.Social.Configuration.IConfigurationFactory)">
             <summary>
@@ -641,13 +457,21 @@
             </summary>
             <param name="configurationFactory">The configuration factory.</param>
         </member>
+        <member name="P:Sitecore.Social.Builders.AccountBuilderFactory.ConfigurationFactory">
+            <summary>
+            Gets the configuration factory.
+            </summary>
+            <value>
+            The configuration factory.
+            </value>
+        </member>
         <member name="M:Sitecore.Social.Builders.AccountBuilderFactory.GetBuilder(System.Type)">
             <summary>
             Gets the builder by account type.
             </summary>
             <param name="accountType">Type of the account.</param>
             <returns>
-            The <see cref="T:Sitecore.Social.Builders.IAccountBuilder"/> instance.
+            The <see cref="T:Sitecore.Social.Builders.IAccountBuilder" /> instance.
             </returns>
             <exception cref="T:Sitecore.Social.Exceptions.AccountBuilderIsNotFoundException">Account builder is not found.</exception>
         </member>
@@ -657,7 +481,7 @@
             </summary>
             <param name="accountTemplateID">The account item template ID.</param>
             <returns>
-            The <see cref="T:Sitecore.Social.Builders.IAccountBuilder"/> instance.
+            The <see cref="T:Sitecore.Social.Builders.IAccountBuilder" /> instance.
             </returns>
             <exception cref="T:Sitecore.Social.Exceptions.AccountBuilderIsNotFoundException">The account builder for template ID is not found.</exception>
         </member>
@@ -668,58 +492,10 @@
             <param name="builderSettingsFilter">The builder settings filter.</param>
             <returns>The builder instance.</returns>
         </member>
-        <member name="P:Sitecore.Social.Builders.AccountBuilderFactory.ConfigurationFactory">
-            <summary>
-            Gets the configuration factory.
-            </summary>
-            <value>
-            The configuration factory.
-            </value>
-        </member>
         <member name="T:Sitecore.Social.Builders.ContainerPostingConfigurationBuilder">
             <summary>
             Represents an abstract class of container posting configuration builders.
             </summary>
-        </member>
-        <member name="T:Sitecore.Social.Builders.IPostingConfigurationBuilder">
-            <summary>
-            Defines methods to build and manage <see cref="T:Sitecore.Social.Domain.Model.PostingConfiguration"/> instances.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Builders.IPostingConfigurationBuilder.BuildFrom(Sitecore.Social.MessagePosting.Items.MessageItemBase)">
-            <summary>
-            Builds from social message base.
-            </summary>
-            <param name="messageItemBase">The social message base.</param>
-            <returns>The <see cref="T:Sitecore.Social.Domain.Model.PostingConfiguration"/>.</returns>
-        </member>
-        <member name="M:Sitecore.Social.Builders.IPostingConfigurationBuilder.GetPostingConfigurationBase(Sitecore.Social.Domain.Model.PostingConfiguration)">
-            <summary>
-            Gets the posting configuration base.
-            </summary>
-            <param name="postingConfiguration">The posting configuration.</param>
-            <returns>The <see cref="T:Sitecore.Social.MessagePosting.PostingConfigurationContext.PostingConfigurationBase"/>.</returns>
-        </member>
-        <member name="M:Sitecore.Social.Builders.IPostingConfigurationBuilder.UpdatePostingConfigurationItem(Sitecore.Data.Items.Item,Sitecore.Social.Domain.Model.PostingConfiguration)">
-            <summary>
-            Updates the posting configuration item.
-            </summary>
-            <param name="postingConfigurationItem">The posting configuration item.</param>
-            <param name="postingConfiguration">The posting configuration.</param>
-        </member>
-        <member name="M:Sitecore.Social.Builders.IPostingConfigurationBuilder.GetReviewingWorkflowId(Sitecore.Social.Domain.Model.PostingConfiguration)">
-            <summary>
-            Gets the reviewing workflow id.
-            </summary>
-            <param name="postingConfiguration">The posting configuration.</param>
-            <returns>The reviewing workflow id.</returns>
-        </member>
-        <member name="M:Sitecore.Social.Builders.IPostingConfigurationBuilder.GetReviewingRoles(Sitecore.Social.Domain.Model.PostingConfiguration)">
-            <summary>
-            Gets the reviewing roles.
-            </summary>
-            <param name="postingConfiguration">The posting configuration.</param>
-            <returns>The reviewing roles.</returns>
         </member>
         <member name="F:Sitecore.Social.Builders.ContainerPostingConfigurationBuilder.ItemUriFieldId">
             <summary>
@@ -737,7 +513,7 @@
             </summary>
             <param name="messageItemBase">The social message base.</param>
             <returns>
-            The <see cref="T:Sitecore.Social.Domain.Model.PostingConfiguration"/>.
+            The <see cref="T:Sitecore.Social.Domain.Model.PostingConfiguration" />.
             </returns>
         </member>
         <member name="M:Sitecore.Social.Builders.ContainerPostingConfigurationBuilder.GetPostingConfigurationBase(Sitecore.Social.Domain.Model.PostingConfiguration)">
@@ -817,7 +593,7 @@
             </summary>
             <param name="messageItemBase">The social message base.</param>
             <returns>
-            The <see cref="T:Sitecore.Social.Domain.Model.ContentPostingConfiguration"/>.
+            The <see cref="T:Sitecore.Social.Domain.Model.ContentPostingConfiguration" />.
             </returns>
             <exception cref="T:Sitecore.Exceptions.ItemNotFoundException">PostingConfiguration  item is not found.</exception>
         </member>
@@ -859,25 +635,13 @@
             Defines methods to get <see cref="T:Sitecore.Social.Domain.Model.MessageStatus"/> instances.
             </summary>
         </member>
-        <member name="T:Sitecore.Social.Builders.IMessageStatusBuilder">
-            <summary>
-            Defines methods to build <see cref="T:Sitecore.Social.Domain.Model.MessageStatus"/> instances.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Builders.IMessageStatusBuilder.BuildFrom(Sitecore.Social.MessagePosting.Items.MessageItemBase)">
-            <summary>
-            Builds from social message base.
-            </summary>
-            <param name="messageItemBase">The social message base.</param>
-            <returns>The <see cref="T:Sitecore.Social.Domain.Model.MessageStatus"/>.</returns>
-        </member>
         <member name="M:Sitecore.Social.Builders.ContentPostingMessageStatusBuilder.BuildFrom(Sitecore.Social.MessagePosting.Items.MessageItemBase)">
             <summary>
             Builds from social message base.
             </summary>
             <param name="messageItemBase">The social message base.</param>
             <returns>
-            The <see cref="T:Sitecore.Social.Domain.Model.MessageStatus"/>.
+            The <see cref="T:Sitecore.Social.Domain.Model.MessageStatus" />.
             </returns>
         </member>
         <member name="T:Sitecore.Social.Builders.GoalPostingConfigurationBuilder">
@@ -891,7 +655,7 @@
             </summary>
             <param name="messageItemBase">The social message base.</param>
             <returns>
-            The <see cref="T:Sitecore.Social.Domain.Model.PostingConfiguration"/>.
+            The <see cref="T:Sitecore.Social.Domain.Model.PostingConfiguration" />.
             </returns>
         </member>
         <member name="M:Sitecore.Social.Builders.GoalPostingConfigurationBuilder.GetPostingConfigurationBase(Sitecore.Social.Domain.Model.PostingConfiguration)">
@@ -931,8 +695,61 @@
             </summary>
             <param name="messageItemBase">The social message base.</param>
             <returns>
-            The <see cref="T:Sitecore.Social.Domain.Model.MessageStatus"/>.
+            The <see cref="T:Sitecore.Social.Domain.Model.MessageStatus" />.
             </returns>
+        </member>
+        <member name="T:Sitecore.Social.Builders.IAccountBuilder">
+            <summary>
+            Defines methods to build and manage <see cref="T:Sitecore.Social.Domain.Model.Account"/> instances.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Social.Builders.IAccountBuilder.AccountTemplateId">
+            <summary>
+            Gets the account template id.
+            </summary>
+            <value>
+            The account template id.
+            </value>
+        </member>
+        <member name="M:Sitecore.Social.Builders.IAccountBuilder.GetNetworkId(Sitecore.Data.Items.Item)">
+            <summary>
+            Gets the network identifier of the specified account item.
+            </summary>
+            <param name="accountItem">The account item.</param>
+            <returns>The network identifier.</returns>
+        </member>
+        <member name="M:Sitecore.Social.Builders.IAccountBuilder.UpdateAccountItemFields(Sitecore.Data.Items.Item,Sitecore.Social.Domain.Model.Account)">
+            <summary>
+            Updates the account item fields from the account.
+            </summary>
+            <param name="accountItem">The account item.</param>
+            <param name="account">The account.</param>
+        </member>
+        <member name="M:Sitecore.Social.Builders.IAccountBuilder.BuildAccount(Sitecore.Data.Items.Item)">
+            <summary>
+            Builds the account from the account item.
+            </summary>
+            <param name="accountItem">The account item.</param>
+            <returns>The <see cref="T:Sitecore.Social.Domain.Model.Account"/> instance.</returns>
+        </member>
+        <member name="T:Sitecore.Social.Builders.IAccountBuilderFactory">
+            <summary>
+            Defines methods to get <see cref="T:Sitecore.Social.Builders.IAccountBuilder"/> instances.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Builders.IAccountBuilderFactory.GetBuilder(System.Type)">
+            <summary>
+            Gets the builder by account type.
+            </summary>
+            <param name="accountType">Type of the account.</param>
+            <returns>The <see cref="T:Sitecore.Social.Builders.IAccountBuilder"/> instance.</returns>
+        </member>
+        <member name="M:Sitecore.Social.Builders.IAccountBuilderFactory.GetBuilder(Sitecore.Data.ID)">
+            <summary>
+            Gets the builder by account item template ID.
+            </summary>
+            <param name="accountTemplateID">The account item template ID.</param>
+            <returns>The <see cref="T:Sitecore.Social.Builders.IAccountBuilder"/> instance.</returns>
         </member>
         <member name="T:Sitecore.Social.Builders.IMessageDataBuilder">
             <summary>
@@ -979,6 +796,18 @@
             <param name="messageDataType">Type of the message data.</param>
             <returns>The <see cref="T:Sitecore.Social.Builders.IMessageDataBuilder"/>.</returns>
         </member>
+        <member name="T:Sitecore.Social.Builders.IMessageStatusBuilder">
+            <summary>
+            Defines methods to build <see cref="T:Sitecore.Social.Domain.Model.MessageStatus"/> instances.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Builders.IMessageStatusBuilder.BuildFrom(Sitecore.Social.MessagePosting.Items.MessageItemBase)">
+            <summary>
+            Builds from social message base.
+            </summary>
+            <param name="messageItemBase">The social message base.</param>
+            <returns>The <see cref="T:Sitecore.Social.Domain.Model.MessageStatus"/>.</returns>
+        </member>
         <member name="T:Sitecore.Social.Builders.IMessageStatusBuilderFactory">
             <summary>
             Defines methods to get <see cref="T:Sitecore.Social.Builders.IMessageStatusBuilder"/> instances.
@@ -990,6 +819,46 @@
             </summary>
             <param name="messageItemBase">The social message base.</param>
             <returns>The <see cref="T:Sitecore.Social.Builders.IMessageStatusBuilder"/>.</returns>
+        </member>
+        <member name="T:Sitecore.Social.Builders.IPostingConfigurationBuilder">
+            <summary>
+            Defines methods to build and manage <see cref="T:Sitecore.Social.Domain.Model.PostingConfiguration"/> instances.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Builders.IPostingConfigurationBuilder.BuildFrom(Sitecore.Social.MessagePosting.Items.MessageItemBase)">
+            <summary>
+            Builds from social message base.
+            </summary>
+            <param name="messageItemBase">The social message base.</param>
+            <returns>The <see cref="T:Sitecore.Social.Domain.Model.PostingConfiguration"/>.</returns>
+        </member>
+        <member name="M:Sitecore.Social.Builders.IPostingConfigurationBuilder.GetPostingConfigurationBase(Sitecore.Social.Domain.Model.PostingConfiguration)">
+            <summary>
+            Gets the posting configuration base.
+            </summary>
+            <param name="postingConfiguration">The posting configuration.</param>
+            <returns>The <see cref="T:Sitecore.Social.MessagePosting.PostingConfigurationContext.PostingConfigurationBase"/>.</returns>
+        </member>
+        <member name="M:Sitecore.Social.Builders.IPostingConfigurationBuilder.UpdatePostingConfigurationItem(Sitecore.Data.Items.Item,Sitecore.Social.Domain.Model.PostingConfiguration)">
+            <summary>
+            Updates the posting configuration item.
+            </summary>
+            <param name="postingConfigurationItem">The posting configuration item.</param>
+            <param name="postingConfiguration">The posting configuration.</param>
+        </member>
+        <member name="M:Sitecore.Social.Builders.IPostingConfigurationBuilder.GetReviewingWorkflowId(Sitecore.Social.Domain.Model.PostingConfiguration)">
+            <summary>
+            Gets the reviewing workflow id.
+            </summary>
+            <param name="postingConfiguration">The posting configuration.</param>
+            <returns>The reviewing workflow id.</returns>
+        </member>
+        <member name="M:Sitecore.Social.Builders.IPostingConfigurationBuilder.GetReviewingRoles(Sitecore.Social.Domain.Model.PostingConfiguration)">
+            <summary>
+            Gets the reviewing roles.
+            </summary>
+            <param name="postingConfiguration">The posting configuration.</param>
+            <returns>The reviewing roles.</returns>
         </member>
         <member name="T:Sitecore.Social.Builders.IPostingConfigurationBuilderFactory">
             <summary>
@@ -1035,7 +904,7 @@
             Creates the account instance.
             </summary>
             <returns>
-            The <see cref="T:Sitecore.Social.Domain.Model.SocialMarketerAccount"/> instance.
+            The <see cref="T:Sitecore.Social.Domain.Model.SocialMarketerAccount" /> instance.
             </returns>
         </member>
         <member name="T:Sitecore.Social.Builders.MessageDataBuilder">
@@ -1079,7 +948,7 @@
             </summary>
             <param name="messageItemBase">The social message base.</param>
             <returns>
-            The <seealso cref="T:Sitecore.Social.Domain.Model.MessageData"/>
+            The <seealso cref="T:Sitecore.Social.Domain.Model.MessageData" />
             </returns>
         </member>
         <member name="M:Sitecore.Social.Builders.MessageDataBuilder.BuildFrom(Sitecore.Social.Domain.Model.MessageData)">
@@ -1107,13 +976,21 @@
             </summary>
             <param name="configurationFactory">The configuration factory.</param>
         </member>
+        <member name="P:Sitecore.Social.Builders.MessageDataBuilderFactory.ConfigurationFactory">
+            <summary>
+            Gets the configuration factory.
+            </summary>
+            <value>
+            The configuration factory.
+            </value>
+        </member>
         <member name="M:Sitecore.Social.Builders.MessageDataBuilderFactory.GetBuilderByMessageItemBase(System.Type)">
             <summary>
             Gets the builder by social message base.
             </summary>
             <param name="messageItemBaseType">Type of the social message base.</param>
             <returns>
-            The <see cref="T:Sitecore.Social.Builders.IMessageDataBuilder"/>.
+            The <see cref="T:Sitecore.Social.Builders.IMessageDataBuilder" />.
             </returns>
             <exception cref="T:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException">Message data builder is not found.</exception>
         </member>
@@ -1123,7 +1000,7 @@
             </summary>
             <param name="messageDataType">Type of the message data.</param>
             <returns>
-            The <see cref="T:Sitecore.Social.Builders.IMessageDataBuilder"/> instance.
+            The <see cref="T:Sitecore.Social.Builders.IMessageDataBuilder" /> instance.
             </returns>
             <exception cref="T:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException">Message data builder is not found.</exception>
         </member>
@@ -1133,14 +1010,6 @@
             </summary>
             <param name="builderSettingsFilter">The builder settings filter.</param>
             <returns>The <see cref="T:Sitecore.Social.Builders.IMessageDataBuilder"/> instance.</returns>
-        </member>
-        <member name="P:Sitecore.Social.Builders.MessageDataBuilderFactory.ConfigurationFactory">
-            <summary>
-            Gets the configuration factory.
-            </summary>
-            <value>
-            The configuration factory.
-            </value>
         </member>
         <member name="T:Sitecore.Social.Builders.MessageStatusBuilderFactory">
             <summary>
@@ -1153,13 +1022,21 @@
             </summary>
             <param name="configurationFactory">The configuration factory.</param>
         </member>
+        <member name="P:Sitecore.Social.Builders.MessageStatusBuilderFactory.ConfigurationFactory">
+            <summary>
+            Gets the configuration factory.
+            </summary>
+            <value>
+            The configuration factory.
+            </value>
+        </member>
         <member name="M:Sitecore.Social.Builders.MessageStatusBuilderFactory.GetBuilder(Sitecore.Social.MessagePosting.Items.MessageItemBase)">
             <summary>
             Gets the builder by social message base.
             </summary>
             <param name="messageItemBase">The social message base.</param>
             <returns>
-            The <see cref="T:Sitecore.Social.Builders.IMessageStatusBuilder"/>.
+            The <see cref="T:Sitecore.Social.Builders.IMessageStatusBuilder" />.
             </returns>
             <exception cref="T:Sitecore.Social.Exceptions.MessageStatusBuilderIsNotFoundException">Message status builder is not found.</exception>
         </member>
@@ -1169,14 +1046,6 @@
             </summary>
             <param name="builderSettingsFilter">The builder settings filter.</param>
             <returns>The builder instance.</returns>
-        </member>
-        <member name="P:Sitecore.Social.Builders.MessageStatusBuilderFactory.ConfigurationFactory">
-            <summary>
-            Gets the configuration factory.
-            </summary>
-            <value>
-            The configuration factory.
-            </value>
         </member>
         <member name="T:Sitecore.Social.Builders.NetworkAccountBuilder">
             <summary>
@@ -1217,7 +1086,7 @@
             </summary>
             <param name="accountItem">The account item.</param>
             <returns>
-            The <see cref="T:Sitecore.Social.Domain.Model.NetworkAccount"/> instance.
+            The <see cref="T:Sitecore.Social.Domain.Model.NetworkAccount" /> instance.
             </returns>
         </member>
         <member name="M:Sitecore.Social.Builders.NetworkAccountBuilder.CreateAccountInstance">
@@ -1225,7 +1094,7 @@
             Creates the account instance.
             </summary>
             <returns>
-            The <see cref="T:Sitecore.Social.Domain.Model.Account"/> instance.
+            The <see cref="T:Sitecore.Social.Domain.Model.Account" /> instance.
             </returns>
         </member>
         <member name="T:Sitecore.Social.Builders.NetworkAccountBuilder.NetworkAccountFieldIds">
@@ -1264,13 +1133,21 @@
             </summary>
             <param name="configurationFactory">The configuration factory.</param>
         </member>
+        <member name="P:Sitecore.Social.Builders.PostingConfigurationBuilderFactory.ConfigurationFactory">
+            <summary>
+            Gets the configuration factory.
+            </summary>
+            <value>
+            The configuration factory.
+            </value>
+        </member>
         <member name="M:Sitecore.Social.Builders.PostingConfigurationBuilderFactory.GetBuilder(Sitecore.Social.MessagePosting.Items.MessageItemBase)">
             <summary>
             Gets the builder by social message base.
             </summary>
             <param name="messageItemBase">The social message base.</param>
             <returns>
-            The <see cref="T:Sitecore.Social.Builders.IPostingConfigurationBuilder"/>.
+            The <see cref="T:Sitecore.Social.Builders.IPostingConfigurationBuilder" />.
             </returns>
             <exception cref="T:Sitecore.Social.Exceptions.PostingConfigurationBuilderIsNotFoundException">Posting configuration builder is not found.</exception>
         </member>
@@ -1280,7 +1157,7 @@
             </summary>
             <param name="postingConfigurationType">Type of the posting configuration.</param>
             <returns>
-            The <see cref="T:Sitecore.Social.Builders.IPostingConfigurationBuilder"/>.
+            The <see cref="T:Sitecore.Social.Builders.IPostingConfigurationBuilder" />.
             </returns>
             <exception cref="T:Sitecore.Social.Exceptions.PostingConfigurationBuilderIsNotFoundException">Posting configuration builder is not found.</exception>
         </member>
@@ -1291,31 +1168,10 @@
             <param name="builderSettingsFilter">The builder settings filter.</param>
             <returns>The builder instance.</returns>
         </member>
-        <member name="P:Sitecore.Social.Builders.PostingConfigurationBuilderFactory.ConfigurationFactory">
-            <summary>
-            Gets the configuration factory.
-            </summary>
-            <value>
-            The configuration factory.
-            </value>
-        </member>
         <member name="T:Sitecore.Social.Connector.Facets.Contact.SocialProfile.FieldElement">
             <summary>
             Represents the field element.
             </summary>
-        </member>
-        <member name="T:Sitecore.Social.Connector.Facets.Contact.SocialProfile.IFieldElement">
-            <summary>
-            Defines the field element.
-            </summary>
-        </member>
-        <member name="P:Sitecore.Social.Connector.Facets.Contact.SocialProfile.IFieldElement.Value">
-            <summary>
-            Gets or sets the value.
-            </summary>
-            <value>
-            The value.
-            </value>
         </member>
         <member name="F:Sitecore.Social.Connector.Facets.Contact.SocialProfile.FieldElement.ValueKey">
             <summary>
@@ -1328,6 +1184,19 @@
             </summary>
         </member>
         <member name="P:Sitecore.Social.Connector.Facets.Contact.SocialProfile.FieldElement.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="T:Sitecore.Social.Connector.Facets.Contact.SocialProfile.IFieldElement">
+            <summary>
+            Defines the field element.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Social.Connector.Facets.Contact.SocialProfile.IFieldElement.Value">
             <summary>
             Gets or sets the value.
             </summary>
@@ -1412,37 +1281,25 @@
             Fast User lookup
             </summary>
         </member>
-        <member name="T:Sitecore.Social.Connector.Lookup.IFastUserLookup">
-            <summary>
-               Fast User lookup interface
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Connector.Lookup.IFastUserLookup.LookupUsersByAccountId(System.String)">
-            <summary>
-            Lookups the users by account id.
-            </summary>
-            <param name="accountId">The account id.</param>
-            <returns>List of user names.</returns>
-        </member>
-        <member name="M:Sitecore.Social.Connector.Lookup.IFastUserLookup.IsFastLookupAvailable">
-            <summary>
-            Determines whether is fast lookup available.
-            </summary>
-            <returns>
-              <c>true</c> if fast lookup is available; otherwise, <c>false</c>.
-            </returns>
-        </member>
         <member name="M:Sitecore.Social.Connector.Lookup.FastUserLookup.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Connector.Lookup.FastUserLookup"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Connector.Lookup.FastUserLookup" /> class.
             </summary>
         </member>
         <member name="M:Sitecore.Social.Connector.Lookup.FastUserLookup.#ctor(Sitecore.Social.SitecoreAccess.Wrappers.ISqlDataApiWrapper,Sitecore.Social.Infrastructure.Wrappers.System.IProfileBaseWrapper)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Connector.Lookup.FastUserLookup"/> class with the specific <see cref="T:Sitecore.Social.SitecoreAccess.Wrappers.ISqlDataApiWrapper"/>.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Connector.Lookup.FastUserLookup" /> class with the specific <see cref="T:Sitecore.Social.SitecoreAccess.Wrappers.ISqlDataApiWrapper" />.
             </summary>
             <param name="sqlDataApiWrapper">The SQL data API wrapper.</param>
             <param name="profileBaseWrapper">The profile base wrapper.</param>
+        </member>
+        <member name="P:Sitecore.Social.Connector.Lookup.FastUserLookup.ProfileBaseWrapper">
+            <summary>
+            Gets the profile base wrapper.
+            </summary>
+            <value>
+            The profile base wrapper.
+            </value>
         </member>
         <member name="M:Sitecore.Social.Connector.Lookup.FastUserLookup.LookupUsersByAccountId(System.String)">
             <summary>
@@ -1470,13 +1327,25 @@
               <c>true</c> if the property is a core one; otherwise, <c>false</c>.
             </returns>
         </member>
-        <member name="P:Sitecore.Social.Connector.Lookup.FastUserLookup.ProfileBaseWrapper">
+        <member name="T:Sitecore.Social.Connector.Lookup.IFastUserLookup">
             <summary>
-            Gets the profile base wrapper.
+               Fast User lookup interface
             </summary>
-            <value>
-            The profile base wrapper.
-            </value>
+        </member>
+        <member name="M:Sitecore.Social.Connector.Lookup.IFastUserLookup.LookupUsersByAccountId(System.String)">
+            <summary>
+            Lookups the users by account id.
+            </summary>
+            <param name="accountId">The account id.</param>
+            <returns>List of user names.</returns>
+        </member>
+        <member name="M:Sitecore.Social.Connector.Lookup.IFastUserLookup.IsFastLookupAvailable">
+            <summary>
+            Determines whether is fast lookup available.
+            </summary>
+            <returns>
+              <c>true</c> if fast lookup is available; otherwise, <c>false</c>.
+            </returns>
         </member>
         <member name="M:Sitecore.Social.Connector.Lookup.INetworkIdParser.Parse(System.String)">
             <summary>
@@ -1523,7 +1392,7 @@
         </member>
         <member name="M:Sitecore.Social.Connector.Lookup.NetworkIdParser.#ctor(Sitecore.Social.Configuration.IConfigurationFactory,Sitecore.Social.INetworkBusinessManager)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Connector.Lookup.NetworkIdParser"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Connector.Lookup.NetworkIdParser" /> class.
             </summary>
             <param name="configurationFactory">The configuration manager.</param>
             <param name="networkBusinessManager">The network business manager.</param>
@@ -1732,75 +1601,6 @@
             Defines methods to manage social profile fields persistence on a contact via facet.
             </summary>
         </member>
-        <member name="T:Sitecore.Social.Connector.Providers.ISocialProfileFieldsProvider">
-            <summary>
-            Defines methods to manage social profile fields persistence.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Connector.Providers.ISocialProfileFieldsProvider.GetSocialProfileFields(Sitecore.Social.Domain.Model.Identifier,System.String,System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            Gets the social profile fields.
-            </summary>
-            <param name="contactId">The contact identifier.</param>
-            <param name="networkName">Name of the network.</param>
-            <param name="acceptedFieldsKeys">The accepted fields keys.</param>
-            <returns>
-            The social profile fields.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.Connector.Providers.ISocialProfileFieldsProvider.GetSocialProfileFields(System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            Gets the social profile fields.
-            </summary>
-            <param name="userName">Name of the user.</param>
-            <param name="networkName">Name of the network.</param>
-            <param name="acceptedFieldsKeys">The accepted fields keys.</param>
-            <returns>
-            The social profile fields.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.Connector.Providers.ISocialProfileFieldsProvider.UpdateSocialProfileFields(Sitecore.Social.Domain.Model.Identifier,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            Updates the social profile fields.
-            </summary>
-            <param name="contactId">The contact identifier.</param>
-            <param name="networkName">Name of the network.</param>
-            <param name="fields">The fields.</param>
-            <param name="acceptedFieldsKeys">The accepted fields keys.</param>
-        </member>
-        <member name="M:Sitecore.Social.Connector.Providers.ISocialProfileFieldsProvider.UpdateSocialProfileFields(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            Updates the social profile fields.
-            </summary>
-            <param name="userName">Name of the user.</param>
-            <param name="networkName">Name of the network.</param>
-            <param name="fields">The fields.</param>
-            <param name="acceptedFieldsKeys">The accepted fields keys.</param>
-        </member>
-        <member name="M:Sitecore.Social.Connector.Providers.ISocialProfileFieldsProvider.RemoveSocialProfileFields(Sitecore.Social.Domain.Model.Identifier,System.String)">
-            <summary>
-            Removes the social profile fields.
-            </summary>
-            <param name="contactId">The contact identifier.</param>
-            <param name="networkName">Name of the network.</param>
-        </member>
-        <member name="M:Sitecore.Social.Connector.Providers.ISocialProfileFieldsProvider.RemoveSocialProfileFields(System.String,System.String)">
-            <summary>
-            Removes the social profile fields.
-            </summary>
-            <param name="userName">Name of the user.</param>
-            <param name="networkName">Name of the network.</param>
-        </member>
-        <member name="M:Sitecore.Social.Connector.Providers.ISocialProfileFieldsProvider.SocialProfileFieldsExists(System.String,System.String)">
-            <summary>
-            Defines if there is social profile fields.
-            </summary>
-            <param name="userName">Name of the user.</param>
-            <param name="networkName">Name of the network.</param>
-            <returns>
-              <c>true</c> if the social profile fields exists; otherwise, <c>false</c>
-            </returns>
-        </member>
         <member name="F:Sitecore.Social.Connector.Providers.XdbSocialProfileFieldsProvider.SocialProfileFacetKey">
             <summary>
             The social profile facet key
@@ -1808,11 +1608,35 @@
         </member>
         <member name="M:Sitecore.Social.Connector.Providers.XdbSocialProfileFieldsProvider.#ctor(Sitecore.Social.SitecoreAccess.Analytics.IContactDataProvider,Sitecore.Social.INetworkBusinessManager,Sitecore.Social.NetworkProviders.NetworkFields.IAcceptedFieldsSelector)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Connector.Providers.XdbSocialProfileFieldsProvider"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Connector.Providers.XdbSocialProfileFieldsProvider" /> class.
             </summary>
             <param name="contactDataProvider">The contact data provider.</param>
             <param name="networkBusinessManager">The network business manager.</param>
             <param name="acceptedFieldsSelector">The accepted fields selector.</param>
+        </member>
+        <member name="P:Sitecore.Social.Connector.Providers.XdbSocialProfileFieldsProvider.ContactDataProvider">
+            <summary>
+            Gets the contact data provider.
+            </summary>
+            <value>
+            The contact data provider.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Connector.Providers.XdbSocialProfileFieldsProvider.NetworkBusinessManager">
+            <summary>
+            Gets the network business manager.
+            </summary>
+            <value>
+            The network business manager.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Connector.Providers.XdbSocialProfileFieldsProvider.AcceptedFieldsSelector">
+            <summary>
+            Gets or sets the accepted fields selector.
+            </summary>
+            <value>
+            The accepted fields selector.
+            </value>
         </member>
         <member name="M:Sitecore.Social.Connector.Providers.XdbSocialProfileFieldsProvider.GetSocialProfileFields(Sitecore.Social.Domain.Model.Identifier,System.String,System.Collections.Generic.IEnumerable{System.String})">
             <summary>
@@ -1886,29 +1710,74 @@
             <param name="networkPrefix">The network prefix.</param>
             <returns>The field key without network prefix. If the field key doesn't start with the network prefix then original field key is returned.</returns>
         </member>
-        <member name="P:Sitecore.Social.Connector.Providers.XdbSocialProfileFieldsProvider.ContactDataProvider">
+        <member name="T:Sitecore.Social.Connector.Providers.ISocialProfileFieldsProvider">
             <summary>
-            Gets the contact data provider.
+            Defines methods to manage social profile fields persistence.
             </summary>
-            <value>
-            The contact data provider.
-            </value>
         </member>
-        <member name="P:Sitecore.Social.Connector.Providers.XdbSocialProfileFieldsProvider.NetworkBusinessManager">
+        <member name="M:Sitecore.Social.Connector.Providers.ISocialProfileFieldsProvider.GetSocialProfileFields(Sitecore.Social.Domain.Model.Identifier,System.String,System.Collections.Generic.IEnumerable{System.String})">
             <summary>
-            Gets the network business manager.
+            Gets the social profile fields.
             </summary>
-            <value>
-            The network business manager.
-            </value>
+            <param name="contactId">The contact identifier.</param>
+            <param name="networkName">Name of the network.</param>
+            <param name="acceptedFieldsKeys">The accepted fields keys.</param>
+            <returns>
+            The social profile fields.
+            </returns>
         </member>
-        <member name="P:Sitecore.Social.Connector.Providers.XdbSocialProfileFieldsProvider.AcceptedFieldsSelector">
+        <member name="M:Sitecore.Social.Connector.Providers.ISocialProfileFieldsProvider.GetSocialProfileFields(System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
             <summary>
-            Gets or sets the accepted fields selector.
+            Gets the social profile fields.
             </summary>
-            <value>
-            The accepted fields selector.
-            </value>
+            <param name="userName">Name of the user.</param>
+            <param name="networkName">Name of the network.</param>
+            <param name="acceptedFieldsKeys">The accepted fields keys.</param>
+            <returns>
+            The social profile fields.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Social.Connector.Providers.ISocialProfileFieldsProvider.UpdateSocialProfileFields(Sitecore.Social.Domain.Model.Identifier,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Updates the social profile fields.
+            </summary>
+            <param name="contactId">The contact identifier.</param>
+            <param name="networkName">Name of the network.</param>
+            <param name="fields">The fields.</param>
+            <param name="acceptedFieldsKeys">The accepted fields keys.</param>
+        </member>
+        <member name="M:Sitecore.Social.Connector.Providers.ISocialProfileFieldsProvider.UpdateSocialProfileFields(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Updates the social profile fields.
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <param name="networkName">Name of the network.</param>
+            <param name="fields">The fields.</param>
+            <param name="acceptedFieldsKeys">The accepted fields keys.</param>
+        </member>
+        <member name="M:Sitecore.Social.Connector.Providers.ISocialProfileFieldsProvider.RemoveSocialProfileFields(Sitecore.Social.Domain.Model.Identifier,System.String)">
+            <summary>
+            Removes the social profile fields.
+            </summary>
+            <param name="contactId">The contact identifier.</param>
+            <param name="networkName">Name of the network.</param>
+        </member>
+        <member name="M:Sitecore.Social.Connector.Providers.ISocialProfileFieldsProvider.RemoveSocialProfileFields(System.String,System.String)">
+            <summary>
+            Removes the social profile fields.
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <param name="networkName">Name of the network.</param>
+        </member>
+        <member name="M:Sitecore.Social.Connector.Providers.ISocialProfileFieldsProvider.SocialProfileFieldsExists(System.String,System.String)">
+            <summary>
+            Defines if there is social profile fields.
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <param name="networkName">Name of the network.</param>
+            <returns>
+              <c>true</c> if the social profile fields exists; otherwise, <c>false</c>
+            </returns>
         </member>
         <member name="T:Sitecore.Social.Connector.Providers.ISocialProfileIdentityDataProvider">
             <summary>
@@ -2039,13 +1908,53 @@
         </member>
         <member name="M:Sitecore.Social.Connector.Providers.MembershipAndXdbSocialProfileProvider.#ctor(Sitecore.Social.Connector.Providers.ISocialProfileIdentityDataProvider,Sitecore.Social.Connector.Providers.ISocialProfileFieldsProvider,Sitecore.Social.Infrastructure.Wrappers.System.IMembershipWrapper,Sitecore.Social.INetworkBusinessManager,Sitecore.Social.SitecoreAccess.Analytics.IContactDataProvider)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Connector.Providers.MembershipAndXdbSocialProfileProvider"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Connector.Providers.MembershipAndXdbSocialProfileProvider" /> class.
             </summary>
             <param name="socialProfileIdentityDataProvider">The social profile identity data provider.</param>
             <param name="socialProfileFieldsProvider">The social profile fields provider.</param>
             <param name="membershipWrapper">The membership wrapper.</param>
             <param name="networkBusinessManager">The network business manager.</param>
             <param name="contactDataProvider">The contact data provider.</param>
+        </member>
+        <member name="P:Sitecore.Social.Connector.Providers.MembershipAndXdbSocialProfileProvider.ContactDataProvider">
+            <summary>
+            Gets the contact data provider.
+            </summary>
+            <value>
+            The contact data provider.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Connector.Providers.MembershipAndXdbSocialProfileProvider.SocialProfileFieldsProvider">
+            <summary>
+            Gets the social profile fields provider.
+            </summary>
+            <value>
+            The social profile fields provider.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Connector.Providers.MembershipAndXdbSocialProfileProvider.SocialProfileIdentityDataProvider">
+            <summary>
+            Gets the social profile identity data provider.
+            </summary>
+            <value>
+            The social profile identity data provider.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Connector.Providers.MembershipAndXdbSocialProfileProvider.NetworkBusinessManager">
+            <summary>
+            Gets the network business manager.
+            </summary>
+            <value>
+            The network business manager.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Connector.Providers.MembershipAndXdbSocialProfileProvider.MembershipWrapper">
+            <summary>
+            Gets the membership wrapper.
+            </summary>
+            <value>
+            The membership wrapper.
+            </value>
         </member>
         <member name="M:Sitecore.Social.Connector.Providers.MembershipAndXdbSocialProfileProvider.GetSocialProfile(System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
             <summary>
@@ -2161,46 +2070,6 @@
             <param name="networkPrefix">The network prefix.</param>
             <param name="dateKeyFormat">The date key format.</param>
         </member>
-        <member name="P:Sitecore.Social.Connector.Providers.MembershipAndXdbSocialProfileProvider.ContactDataProvider">
-            <summary>
-            Gets the contact data provider.
-            </summary>
-            <value>
-            The contact data provider.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Connector.Providers.MembershipAndXdbSocialProfileProvider.SocialProfileFieldsProvider">
-            <summary>
-            Gets the social profile fields provider.
-            </summary>
-            <value>
-            The social profile fields provider.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Connector.Providers.MembershipAndXdbSocialProfileProvider.SocialProfileIdentityDataProvider">
-            <summary>
-            Gets the social profile identity data provider.
-            </summary>
-            <value>
-            The social profile identity data provider.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Connector.Providers.MembershipAndXdbSocialProfileProvider.NetworkBusinessManager">
-            <summary>
-            Gets the network business manager.
-            </summary>
-            <value>
-            The network business manager.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Connector.Providers.MembershipAndXdbSocialProfileProvider.MembershipWrapper">
-            <summary>
-            Gets the membership wrapper.
-            </summary>
-            <value>
-            The membership wrapper.
-            </value>
-        </member>
         <member name="T:Sitecore.Social.Connector.Providers.MembershipSocialProfileIdentityDataProvider">
             <summary>
             Defines methods to manage social profile identity data persistence on a user profile.
@@ -2275,6 +2144,38 @@
             <param name="networkIdParser">The network identifier parser.</param>
             <param name="fastUserLookup">The fast user lookup.</param>
         </member>
+        <member name="P:Sitecore.Social.Connector.Providers.MembershipSocialProfileIdentityDataProvider.FastUserLookup">
+            <summary>
+            Gets the fast user lookup.
+            </summary>
+            <value>
+            The fast user lookup.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Connector.Providers.MembershipSocialProfileIdentityDataProvider.NetworkIdParser">
+            <summary>
+            Gets the network identifier parser.
+            </summary>
+            <value>
+            The network identifier parser.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Connector.Providers.MembershipSocialProfileIdentityDataProvider.NetworkBusinessManager">
+            <summary>
+            Gets the network business manager.
+            </summary>
+            <value>
+            The network business manager.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Connector.Providers.MembershipSocialProfileIdentityDataProvider.MembershipWrapper">
+            <summary>
+            Gets the membership wrapper.
+            </summary>
+            <value>
+            The membership wrapper.
+            </value>
+        </member>
         <member name="M:Sitecore.Social.Connector.Providers.MembershipSocialProfileIdentityDataProvider.GetSocialProfileIdentityData(System.String,System.String)">
             <summary>
             Gets the social profile identity data.
@@ -2320,38 +2221,6 @@
             The user names.
             </returns>
         </member>
-        <member name="P:Sitecore.Social.Connector.Providers.MembershipSocialProfileIdentityDataProvider.FastUserLookup">
-            <summary>
-            Gets the fast user lookup.
-            </summary>
-            <value>
-            The fast user lookup.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Connector.Providers.MembershipSocialProfileIdentityDataProvider.NetworkIdParser">
-            <summary>
-            Gets the network identifier parser.
-            </summary>
-            <value>
-            The network identifier parser.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Connector.Providers.MembershipSocialProfileIdentityDataProvider.NetworkBusinessManager">
-            <summary>
-            Gets the network business manager.
-            </summary>
-            <value>
-            The network business manager.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Connector.Providers.MembershipSocialProfileIdentityDataProvider.MembershipWrapper">
-            <summary>
-            Gets the membership wrapper.
-            </summary>
-            <value>
-            The membership wrapper.
-            </value>
-        </member>
         <member name="T:Sitecore.Social.Connector.RefreshSocialProfileDataContainer">
             <summary>
             Defines properties to update a social profile asynchrously.
@@ -2378,12 +2247,7 @@
             Read inline campaign indicators from the Campaign Efficieny report.
             </summary>
         </member>
-        <member name="T:Sitecore.Social.DMS.InlineCampaignIndicators.IInlineCampaignIndicatorsReader">
-            <summary>
-            Inline campaign indicators reader interface.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.DMS.InlineCampaignIndicators.IInlineCampaignIndicatorsReader.Read(Sitecore.Data.ID)">
+        <member name="M:Sitecore.Social.DMS.InlineCampaignIndicators.CampaignEfficiencyReportReader.Read(Sitecore.Data.ID)">
             <summary>
             Reads the inline campaign indicators.
             </summary>
@@ -2395,7 +2259,12 @@
             - Value per Visits.
             </returns>
         </member>
-        <member name="M:Sitecore.Social.DMS.InlineCampaignIndicators.CampaignEfficiencyReportReader.Read(Sitecore.Data.ID)">
+        <member name="T:Sitecore.Social.DMS.InlineCampaignIndicators.IInlineCampaignIndicatorsReader">
+            <summary>
+            Inline campaign indicators reader interface.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.DMS.InlineCampaignIndicators.IInlineCampaignIndicatorsReader.Read(Sitecore.Data.ID)">
             <summary>
             Reads the inline campaign indicators.
             </summary>
@@ -2432,29 +2301,11 @@
         </member>
         <member name="M:Sitecore.Social.DMS.InlineCampaignIndicators.XAnalyticsReportReader.#ctor(Sitecore.ExperienceAnalytics.Api.IReportingService,Sitecore.Marketing.Definitions.IDefinitionManager{Sitecore.Marketing.Definitions.Campaigns.ICampaignActivityDefinition},Sitecore.ExperienceAnalytics.Api.Encoding.ITextCodec)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.DMS.InlineCampaignIndicators.XAnalyticsReportReader"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.DMS.InlineCampaignIndicators.XAnalyticsReportReader" /> class.
             </summary>
             <param name="reportingService">The reporting service.</param>
             <param name="definitionManager">The definition manager.</param>
             <param name="textCodec">The text codec.</param>
-        </member>
-        <member name="M:Sitecore.Social.DMS.InlineCampaignIndicators.XAnalyticsReportReader.Read(Sitecore.Data.ID)">
-            <summary>
-            Reads the inline campaign indicators.
-            </summary>
-            <param name="campaignId">The campaign id.</param>
-            <returns>
-            The following indicators:
-            - Value;
-            - Visits;
-            - Value per Visits.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.DMS.InlineCampaignIndicators.XAnalyticsReportReader.CreateEmptyInlineCampaignIndicators">
-            <summary>
-            Creates the empty inline campaign indicators.
-            </summary>
-            <returns>The empty inline campaign indicators.</returns>
         </member>
         <member name="P:Sitecore.Social.DMS.InlineCampaignIndicators.XAnalyticsReportReader.TextCodec">
             <summary>
@@ -2479,6 +2330,24 @@
             <value>
             The reporting service.
             </value>
+        </member>
+        <member name="M:Sitecore.Social.DMS.InlineCampaignIndicators.XAnalyticsReportReader.Read(Sitecore.Data.ID)">
+            <summary>
+            Reads the inline campaign indicators.
+            </summary>
+            <param name="campaignId">The campaign id.</param>
+            <returns>
+            The following indicators:
+            - Value;
+            - Visits;
+            - Value per Visits.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Social.DMS.InlineCampaignIndicators.XAnalyticsReportReader.CreateEmptyInlineCampaignIndicators">
+            <summary>
+            Creates the empty inline campaign indicators.
+            </summary>
+            <returns>The empty inline campaign indicators.</returns>
         </member>
         <member name="T:Sitecore.Social.Encryption.StringCipher">
             <summary>
@@ -2531,13 +2400,13 @@
         </member>
         <member name="M:Sitecore.Social.Exceptions.AccountBuilderIsNotFoundException.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountBuilderIsNotFoundException"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountBuilderIsNotFoundException" /> class.
             </summary>
             <remarks>This constructor initializes the Message property of the new instance to a system-supplied message that describes the error, such as "The account builder is not found."</remarks>
         </member>
         <member name="M:Sitecore.Social.Exceptions.AccountBuilderIsNotFoundException.#ctor(System.Type)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountBuilderIsNotFoundException"/> class with the account type.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountBuilderIsNotFoundException" /> class with the account type.
             </summary>
             <param name="accountType">Type of the account.</param>
         </member>
@@ -2549,20 +2418,20 @@
         </member>
         <member name="M:Sitecore.Social.Exceptions.AccountBuilderIsNotFoundException.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountBuilderIsNotFoundException"/> class with a specified error message.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountBuilderIsNotFoundException" /> class with a specified error message.
             </summary>
             <param name="message">The message that describes the error.</param>
         </member>
         <member name="M:Sitecore.Social.Exceptions.AccountBuilderIsNotFoundException.#ctor(System.String,System.Exception)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountBuilderIsNotFoundException"/> class with the specified error message and the exception that caused this exception.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountBuilderIsNotFoundException" /> class with the specified error message and the exception that caused this exception.
             </summary>
             <param name="message">The error message that explains the cause of this exception.</param>
             <param name="inner">The exception that is the cause of the current exception, or a null reference.</param>
         </member>
         <member name="M:Sitecore.Social.Exceptions.AccountBuilderIsNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountBuilderIsNotFoundException"/> class with serialized data.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountBuilderIsNotFoundException" /> class with serialized data.
             </summary>
             <param name="info">The object that holds the serialized object data.</param>
             <param name="context">The object that describes the source or destination of the serialized data.</param>
@@ -2585,26 +2454,26 @@
         </member>
         <member name="M:Sitecore.Social.Exceptions.AccountContainerIsNotFoundException.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountContainerIsNotFoundException"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountContainerIsNotFoundException" /> class.
             </summary>
             <remarks>This constructor initializes the Message property of the new instance to a system-supplied message that describes the error, such as "The account container is not found."</remarks>
         </member>
         <member name="M:Sitecore.Social.Exceptions.AccountContainerIsNotFoundException.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountContainerIsNotFoundException"/> class with the account container value.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountContainerIsNotFoundException" /> class with the account container value.
             </summary>
             <param name="accountContainer">The account container value.</param>
         </member>
         <member name="M:Sitecore.Social.Exceptions.AccountContainerIsNotFoundException.#ctor(System.String,System.Exception)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountContainerIsNotFoundException"/> class with a specified error message and the exception that is the cause of this exception.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountContainerIsNotFoundException" /> class with a specified error message and the exception that is the cause of this exception.
             </summary>
             <param name="message">The error message that explains the cause of this exception.</param>
             <param name="inner">The exception that is the cause of the current exception, or a null reference.</param>
         </member>
         <member name="M:Sitecore.Social.Exceptions.AccountContainerIsNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountContainerIsNotFoundException"/> class with serialized data.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.AccountContainerIsNotFoundException" /> class with serialized data.
             </summary>
             <param name="info">The object that holds the serialized object data.</param>
             <param name="context">The object that describes the source or destination of the serialized data.</param>
@@ -2652,26 +2521,26 @@
         </member>
         <member name="M:Sitecore.Social.Exceptions.CannotReadAccountException.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.CannotReadAccountException"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.CannotReadAccountException" /> class.
             </summary>
             <remarks>This constructor initializes the Message property of the new instance to a system-supplied message that describes the error, such as "Could not read account."</remarks>
         </member>
         <member name="M:Sitecore.Social.Exceptions.CannotReadAccountException.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.CannotReadAccountException"/> class with a specified error message.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.CannotReadAccountException" /> class with a specified error message.
             </summary>
             <param name="message">The message that describes the error.</param>
         </member>
         <member name="M:Sitecore.Social.Exceptions.CannotReadAccountException.#ctor(System.String,System.Exception)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.CannotReadAccountException"/> class with a specified error message and the exception that is the cause of this exception.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.CannotReadAccountException" /> class with a specified error message and the exception that is the cause of this exception.
             </summary>
             <param name="message">The error message that explains the cause of this exception.</param>
             <param name="inner">The exception that is the cause of the current exception, or a null reference.</param>
         </member>
         <member name="M:Sitecore.Social.Exceptions.CannotReadAccountException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.CannotReadAccountException"/> class with serialized data.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.CannotReadAccountException" /> class with serialized data.
             </summary>
             <param name="info">The object that holds the serialized object data.</param>
             <param name="context">The object that describes the source or destination of the serialized data.</param>
@@ -2693,32 +2562,32 @@
         </member>
         <member name="M:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException.#ctor(System.Type)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException"/> class the message type.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException" /> class the message type.
             </summary>
             <param name="messageType">Type of the message.</param>
         </member>
         <member name="M:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException" /> class.
             </summary>
             <remarks>This constructor initializes the Message property of the new instance to a system-supplied message that describes the error, such as "The message data builder is not found."</remarks>
         </member>
         <member name="M:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException"/> class with a specified error message.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException" /> class with a specified error message.
             </summary>
             <param name="message">The message that describes the error.</param>
         </member>
         <member name="M:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException.#ctor(System.String,System.Exception)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException"/> class with a specified error message and the exception that is the cause of this exception.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException" /> class with a specified error message and the exception that is the cause of this exception.
             </summary>
             <param name="message">The error message that explains the cause of this exception.</param>
             <param name="inner">The exception that is the cause of the current exception, or a null reference.</param>
         </member>
         <member name="M:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException"/> class with serialized data.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageDataBuilderIsNotFoundException" /> class with serialized data.
             </summary>
             <param name="info">The object that holds the serialized object data.</param>
             <param name="context">The object that describes the source or destination of the serialized data.</param>
@@ -2735,26 +2604,26 @@
         </member>
         <member name="M:Sitecore.Social.Exceptions.MessageStatusBuilderIsNotFoundException.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageStatusBuilderIsNotFoundException"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageStatusBuilderIsNotFoundException" /> class.
             </summary>
             <remarks>This constructor initializes the Message property of the new instance to a system-supplied message that describes the error, such as "The message status builder is not found."</remarks>
         </member>
         <member name="M:Sitecore.Social.Exceptions.MessageStatusBuilderIsNotFoundException.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageStatusBuilderIsNotFoundException"/> class with a specified error message.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageStatusBuilderIsNotFoundException" /> class with a specified error message.
             </summary>
             <param name="message">The message that describes the error.</param>
         </member>
         <member name="M:Sitecore.Social.Exceptions.MessageStatusBuilderIsNotFoundException.#ctor(System.String,System.Exception)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageStatusBuilderIsNotFoundException"/> class with a specified error message and the exception that is the cause of this error.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageStatusBuilderIsNotFoundException" /> class with a specified error message and the exception that is the cause of this error.
             </summary>
             <param name="message">The error message that explains the cause of this exception.</param>
             <param name="inner">The exception that is the cause of the current exception, or a null reference.</param>
         </member>
         <member name="M:Sitecore.Social.Exceptions.MessageStatusBuilderIsNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageStatusBuilderIsNotFoundException"/> class with serialized data.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.MessageStatusBuilderIsNotFoundException" /> class with serialized data.
             </summary>
             <param name="info">The object that holds the serialized object data.</param>
             <param name="context">The object that describes the source or destination of the serialized data.</param>
@@ -2776,32 +2645,32 @@
         </member>
         <member name="M:Sitecore.Social.Exceptions.PostingConfigurationBuilderIsNotFoundException.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingConfigurationBuilderIsNotFoundException"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingConfigurationBuilderIsNotFoundException" /> class.
             </summary>
             <remarks>This constructor initializes the Message property of the new instance to a system-supplied message that describes the error, such as "The posting configuration builder is not found."</remarks>
         </member>
         <member name="M:Sitecore.Social.Exceptions.PostingConfigurationBuilderIsNotFoundException.#ctor(System.Type)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingConfigurationBuilderIsNotFoundException"/> class with the posting configuration type.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingConfigurationBuilderIsNotFoundException" /> class with the posting configuration type.
             </summary>
             <param name="postingConfigurationType">Type of the posting configuration.</param>
         </member>
         <member name="M:Sitecore.Social.Exceptions.PostingConfigurationBuilderIsNotFoundException.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingConfigurationBuilderIsNotFoundException"/> class with a specified error message.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingConfigurationBuilderIsNotFoundException" /> class with a specified error message.
             </summary>
             <param name="message">The message that describes the error.</param>
         </member>
         <member name="M:Sitecore.Social.Exceptions.PostingConfigurationBuilderIsNotFoundException.#ctor(System.String,System.Exception)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingConfigurationBuilderIsNotFoundException"/> class with a specified error message and the exception that is the cause of this exception.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingConfigurationBuilderIsNotFoundException" /> class with a specified error message and the exception that is the cause of this exception.
             </summary>
             <param name="message">The error message that explains the cause of this exception.</param>
             <param name="inner">The exception that is the cause of the current exception, or a null reference.</param>
         </member>
         <member name="M:Sitecore.Social.Exceptions.PostingConfigurationBuilderIsNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingConfigurationBuilderIsNotFoundException"/> class with serialized data.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingConfigurationBuilderIsNotFoundException" /> class with serialized data.
             </summary>
             <param name="info">The object that holds the serialized object data.</param>
             <param name="context">The object that describes the source or destination of the serialized data.</param>
@@ -2819,29 +2688,160 @@
         </member>
         <member name="M:Sitecore.Social.Exceptions.PostingIsNotMaintainedByProviderException.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingIsNotMaintainedByProviderException"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingIsNotMaintainedByProviderException" /> class.
             </summary>
             <remarks>This constructor initializes the Message property of the new instance to a system-supplied message that describes the error, such as "Could not post on the wall."</remarks>
         </member>
         <member name="M:Sitecore.Social.Exceptions.PostingIsNotMaintainedByProviderException.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingIsNotMaintainedByProviderException"/> class with a specified error message.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingIsNotMaintainedByProviderException" /> class with a specified error message.
             </summary>
             <param name="message">The message that describes the error.</param>
         </member>
         <member name="M:Sitecore.Social.Exceptions.PostingIsNotMaintainedByProviderException.#ctor(System.String,System.Exception)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingIsNotMaintainedByProviderException"/> class with a specified error message and the exception that is the cause of this exception.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingIsNotMaintainedByProviderException" /> class with a specified error message and the exception that is the cause of this exception.
             </summary>
             <param name="message">The error message that explains the cause of this exception.</param>
             <param name="inner">The exception that is the cause of the current exception, or a null reference.</param>
         </member>
         <member name="M:Sitecore.Social.Exceptions.PostingIsNotMaintainedByProviderException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingIsNotMaintainedByProviderException"/> class with serialized data.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Exceptions.PostingIsNotMaintainedByProviderException" /> class with serialized data.
             </summary>
             <param name="info">The object that holds the serialized object data.</param>
             <param name="context">The object that describes the source or destination of the serialized data.</param>
+        </member>
+        <member name="T:Sitecore.Social.IAccountBusinessManager">
+            <summary>
+            Defines business methods to manage social accounts.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.IAccountBusinessManager.GetAccount(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets an account by id.
+            </summary>
+            <param name="accountId">The account id.</param>
+            <returns>The account. If the account is not found, <see cref="F:Sitecore.Social.Domain.Model.NetworkAccount.Empty"/> is returned.</returns>
+        </member>
+        <member name="M:Sitecore.Social.IAccountBusinessManager.GetAccounts(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets all accounts by network id. Returns a collection of accounts.
+            </summary>
+            <param name="networkId">The network id.</param>
+            <returns>The account list. If no accounts are found an empty list is returned.</returns>
+        </member>
+        <member name="M:Sitecore.Social.IAccountBusinessManager.GetAccountsByApplication(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets the accounts by application.
+            </summary>
+            <param name="applicationId">The application id.</param>
+            <returns>The account list. If no accounts are found an empty list is returned.</returns>
+        </member>
+        <member name="M:Sitecore.Social.IAccountBusinessManager.GetAccountsByContainer(System.String)">
+            <summary>
+            Gets the accounts by container.
+            </summary>
+            <param name="accountContainer">The account container.</param>
+            <returns>
+            The account list. If no accounts are found an empty list is returned.
+            </returns>
+            <remarks>The sub-containers are not included to the search. To search in the sub-containers use <see cref="M:Sitecore.Social.IAccountBusinessManager.GetAccountsByContainer(System.String,System.Boolean)"/>.</remarks>
+        </member>
+        <member name="M:Sitecore.Social.IAccountBusinessManager.GetAccountsByContainer(System.String,System.Boolean)">
+            <summary>
+            Gets the accounts by container.
+            </summary>
+            <param name="accountContainer">The account container.</param>
+            <param name="searchForDescendants">if set to <c>true</c> sub-containers are included to the search.</param>
+            <returns>The account list. If no accounts are found an empty list is returned.</returns>
+        </member>
+        <member name="M:Sitecore.Social.IAccountBusinessManager.AccountExists(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Checks if account exist.
+            </summary>
+            <param name="accountId">The account id.</param>
+            <returns>If account exists True else False.</returns>
+        </member>
+        <member name="M:Sitecore.Social.IAccountBusinessManager.CreateAccount(Sitecore.Social.Domain.Model.Account)">
+            <summary>
+            Creates an account.
+            </summary>
+            <param name="account">The account to create.</param>
+            <remarks>The <see cref="P:Sitecore.Social.Domain.Model.Account.Id"/> field will contain identifier of the new account after creation.</remarks>
+        </member>
+        <member name="M:Sitecore.Social.IAccountBusinessManager.GetNetworkAccountDisplayName(Sitecore.Social.Domain.Model.AccountCredentials,Sitecore.Social.Domain.Model.ApplicationCredentials,Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets an account display name in a social network.
+            </summary>
+            <param name="accountCredentials">The account credentials.</param>
+            <param name="applicationCredentials">The application credentials.</param>
+            <param name="networkId">The network id.</param>
+            <returns>
+            The account display name.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Social.IAccountBusinessManager.GetNetworkAccountDisplayName(Sitecore.Social.Domain.Model.AccountCredentials,Sitecore.Social.Domain.Model.ApplicationCredentials,System.String)">
+            <summary>
+            Gets an account display name in a social network.
+            </summary>
+            <param name="accountCredentials">The account credentials.</param>
+            <param name="applicationCredentials">The application credentials.</param>
+            <param name="networkName">Name of the network.</param>
+            <returns>
+            The account display name.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Social.IAccountBusinessManager.GetDaysUntilRenewalRequired(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets the number of days before the required renewal of an account.
+            </summary>
+            <param name="accountId">The account id.</param>
+            <returns>The number of days. If negative then account expired, if null then account renewal disabled or not needed.</returns>
+        </member>
+        <member name="T:Sitecore.Social.IApplicationBusinessManager">
+            <summary>
+            Defines business methods to manage social network applications.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.IApplicationBusinessManager.GetApplication(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets an application by id.
+            </summary>
+            <param name="applicationId">The application id.</param>
+            <returns>The application. If the application is not found <see cref="F:Sitecore.Social.Domain.Model.Application.Empty"/> is returned.</returns>
+        </member>
+        <member name="M:Sitecore.Social.IApplicationBusinessManager.GetApplicationContainer(System.String)">
+            <summary>
+            Gets the application container by account container.
+            </summary>
+            <param name="accountContainer">The account container.</param>
+            <returns>The application container. If the application container is not found <c>string.Empty</c> is returned.</returns>
+        </member>
+        <member name="M:Sitecore.Social.IApplicationBusinessManager.GetApplications(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets the applications by network id.
+            </summary>
+            <param name="networkId">Id of the network.</param>
+            <returns>The application list. If no applications are found an empty list is returned.</returns>
+        </member>
+        <member name="M:Sitecore.Social.IApplicationBusinessManager.GetApplicationsByContainer(System.String,Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets the applications of a specific network by the container.
+            </summary>
+            <param name="applicationContainer">The application container.</param>
+            <param name="networkId">Id of the network.</param>
+            <returns>The application list. If no applications are found an empty list is returned.</returns>
+            <remarks>The sub-containers are not included to the search. To search in the sub-containers use <see cref="M:Sitecore.Social.IApplicationBusinessManager.GetApplicationsByContainer(System.String,Sitecore.Social.Domain.Model.Identifier,System.Boolean)"/>.</remarks>
+        </member>
+        <member name="M:Sitecore.Social.IApplicationBusinessManager.GetApplicationsByContainer(System.String,Sitecore.Social.Domain.Model.Identifier,System.Boolean)">
+            <summary>
+            Gets the applications by container.
+            </summary>
+            <param name="applicationContainer">The application container.</param>
+            <param name="networkId">Id of the network.</param>
+            <param name="searchForDescendants">if set to <c>true</c> sub-containers are included to the search.</param>
+            <returns>The application list. If no applications are found an empty list is returned.</returns>
         </member>
         <member name="T:Sitecore.Social.IMessageBusinessManager">
             <summary>
@@ -3147,6 +3147,101 @@
               <remarks><c>false</c> is returned, if the network is not found.</remarks>
             </returns>
         </member>
+        <member name="T:Sitecore.Social.Installation.Helpers.AnalyticsWorkflowDeployHelper">
+            <summary>
+            Provides methods to deploy items that are in the Analytics Workflow.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Installation.Helpers.AnalyticsWorkflowDeployHelper.Deploy(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Deploys the items.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Social.Installation.Helpers.SetupSecurityHelper">
+            <summary>
+            Provides methods to install security roles and apply necessary permissions.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Social.Installation.Helpers.SetupSecurityHelper.AuthorRoleName">
+            <summary>
+            Author role name.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Social.Installation.Helpers.SetupSecurityHelper.SitecoreClientSocialAuthoringRoleName">
+            <summary>
+            Sitecore Client Social Authoring role name.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Social.Installation.Helpers.SetupSecurityHelper.SocialMessageAuthorRoleName">
+            <summary>
+            Social Message Author role name.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Social.Installation.Helpers.SetupSecurityHelper.SocialMessageEditorRoleName">
+            <summary>
+            Social Message Editor role name.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Social.Installation.Helpers.SetupSecurityHelper.SocialMessageReviewerRoleName">
+            <summary>
+            Social Message Reviewer role name.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Installation.Helpers.SetupSecurityHelper.InstallClientSocialAuthoringRole">
+            <summary>
+            Installs and includes "Sitecore Client Social Authoring" role into "sitecore\Author" one.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Installation.Helpers.SetupSecurityHelper.InstallSocialMessageAuthorRole">
+            <summary>
+            Installs "Social Message Author" role.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Installation.Helpers.SetupSecurityHelper.InstallSocialMessageAuthorPermissionsOnSocialMessagesFolder">
+            <summary>
+            Installs the social message author permissions on social messages folder.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Installation.Helpers.SetupSecurityHelper.InstallSocialMessageAuthorPermissionsOnSocialTemplates(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Installs the social message author permissions.
+            </summary>
+            <param name="standardValuesItemIds">The standard values item ids.</param>
+        </member>
+        <member name="M:Sitecore.Social.Installation.Helpers.SetupSecurityHelper.InstallSocialMessageEditorRole">
+            <summary>
+            Installs "Social Message Editor" role.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Installation.Helpers.SetupSecurityHelper.InstallSocialMessageEditorPermissionsOnSocialWorkflow(System.String)">
+            <summary>
+            Installs the social message editor role permissions.
+            </summary>
+            <param name="workflowId">The workflow identifier.</param>
+        </member>
+        <member name="M:Sitecore.Social.Installation.Helpers.SetupSecurityHelper.InstallSocialMessageReviewerRole">
+            <summary>
+            Installs "Social Message Reviewer" role.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Installation.Helpers.SetupSecurityHelper.InstallSocialMessageReviewerPermissionsOnSocialWorkflow(System.String)">
+            <summary>
+            Installs the social message reviewer role permissions.
+            </summary>
+            <param name="workflowId">The workflow identifier.</param>
+        </member>
+        <member name="T:Sitecore.Social.Installation.PostStepActions">
+            <summary>
+            Post step actions for module installation.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Installation.PostStepActions.Run(Sitecore.Install.Framework.ITaskOutput,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Runs this post step
+            </summary>
+            <param name="output">The output.</param>
+            <param name="metaData">The meta data.</param>
+        </member>
         <member name="T:Sitecore.Social.IoC.Modules.BuildersModule">
             <summary>
             Defines bindings of builders implementations.
@@ -3224,9 +3319,9 @@
             <param name="userName">Name of the user.</param>
             <param name="messageId">The message id.</param>
             <returns>
-            The posting preference. If the posting preference is not found the <see cref="F:Sitecore.Social.Domain.Model.AutomaticPostingPreference.Default"/> value is used.
+            The posting preference. If the posting preference is not found the <see cref="F:Sitecore.Social.Domain.Model.AutomaticPostingPreference.Default" /> value is used.
             </returns>
-            <seealso cref="P:Sitecore.Social.Domain.Model.PostingPreference.AutomaticPostingPreference"/>
+            <seealso cref="P:Sitecore.Social.Domain.Model.PostingPreference.AutomaticPostingPreference" />
         </member>
         <member name="M:Sitecore.Social.IPostingPreferenceBusinessManager.SetPostingPreference(System.String,Sitecore.Social.Domain.Model.Identifier,Sitecore.Social.Domain.Model.AutomaticPostingPreference)">
             <summary>
@@ -3486,7 +3581,7 @@
             <param name="networkName">The name of the network (case-sensitive).</param>
             <param name="applicationCredentials">The application credentials.</param>
             <param name="accountCredentials">The account credentials.</param>
-            <returns>The social profile. If the request couldn't be executed, an <see cref="F:Sitecore.Social.Domain.Model.SocialProfile.Empty"/> is returned.</returns>
+            <returns>The social profile. If the request couldn't be executed, an <see cref="F:Sitecore.Social.Domain.Model.SocialProfile.Empty" /> is returned.</returns>
         </member>
         <member name="M:Sitecore.Social.ISocialProfileBusinessManager.RetrieveSocialProfileIdentityData(System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,Sitecore.Social.Domain.Model.AccountCredentials)">
             <summary>
@@ -3633,7 +3728,7 @@
         </member>
         <member name="M:Sitecore.Social.MessageBusinessManager.#ctor(Sitecore.Social.INetworkBusinessManager,Sitecore.Social.Builders.IMessageDataBuilderFactory,Sitecore.Social.Builders.IPostingConfigurationBuilderFactory,Sitecore.Social.Builders.IMessageStatusBuilderFactory,Sitecore.Social.MessagePosting.Managers.IMessageItemManager,Sitecore.Social.Configuration.IConfigurationFactory,Sitecore.Social.Search.ISearchProvider,Sitecore.Social.MessagePosting.Managers.IMessagesByContainerCacheManager,Sitecore.Social.Strategies.IMessageDisplayNameStrategy,Sitecore.Social.NetworkProviders.Interfaces.INetworkProviderFactory)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.MessageBusinessManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.MessageBusinessManager" /> class.
             </summary>
             <param name="networkBusinessManager">The network business manager.</param>
             <param name="messageDataBuilderFactory">The message data builder factory.</param>
@@ -3647,13 +3742,85 @@
             <param name="messageDisplayNameStrategy">The message display name strategy</param>
             <param name="networkProviderFactory">The network provider factory.</param>
         </member>
+        <member name="P:Sitecore.Social.MessageBusinessManager.MessagesByContainerCacheManager">
+            <summary>
+            Gets the messages by container cache manager.
+            </summary>
+            <value>
+            The messages by container cache manager.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.MessageBusinessManager.SearchProvider">
+            <summary>
+            Gets the search provider.
+            </summary>
+            <value>
+            The search provider.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.MessageBusinessManager.MessageItemManager">
+            <summary>
+            Gets the message item manager.
+            </summary>
+            <value>
+            The message item manager.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.MessageBusinessManager.NetworkBusinessManager">
+            <summary>
+            Gets the network business manager.
+            </summary>
+            <value>
+            The network business manager.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.MessageBusinessManager.MessageDataBuilderFactory">
+            <summary>
+            Gets the message data builder factory.
+            </summary>
+            <value>
+            The message data builder factory.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.MessageBusinessManager.PostingConfigurationBuilderFactory">
+            <summary>
+            Gets the posting configuration builder factory.
+            </summary>
+            <value>
+            The posting configuration builder factory.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.MessageBusinessManager.MessageStatusBuilderFactory">
+            <summary>
+            Gets the message status builder factory.
+            </summary>
+            <value>
+            The message status builder factory.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.MessageBusinessManager.ConfigurationFactory">
+            <summary>
+            Gets the configuration factory.
+            </summary>
+            <value>
+            The configuration factory.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.MessageBusinessManager.MessageDisplayNameStrategy">
+            <summary>
+            Gets the message display name strategy.
+            </summary>
+            <value>
+            The message display name strategy.
+            </value>
+        </member>
         <member name="M:Sitecore.Social.MessageBusinessManager.GetMessage(Sitecore.Social.Domain.Model.Identifier)">
             <summary>
             Gets the message by id.
             </summary>
             <param name="messageId">The message id.</param>
             <returns>
-            The message. If message is not found <see cref="F:Sitecore.Social.Domain.Model.Message.Empty"/> is returned.
+            The message. If message is not found <see cref="F:Sitecore.Social.Domain.Model.Message.Empty" /> is returned.
             </returns>
         </member>
         <member name="M:Sitecore.Social.MessageBusinessManager.GetMessagesByContainer(System.String)">
@@ -3743,7 +3910,7 @@
             </summary>
             <param name="message">The message to create.</param>
             <remarks>
-            The <see cref="P:Sitecore.Social.Domain.Model.Message.Id"/> field will contain identifier of the created message.
+            The <see cref="P:Sitecore.Social.Domain.Model.Message.Id" /> field will contain identifier of the created message.
             </remarks>
         </member>
         <member name="M:Sitecore.Social.MessageBusinessManager.UpdateMessage(Sitecore.Social.Domain.Model.Message)">
@@ -3794,7 +3961,7 @@
             </summary>
             <param name="messageId">The message id.</param>
             <returns>
-            The <see cref="T:Sitecore.Social.Domain.Model.MessageStatus"/>. If the status is not defined <see cref="F:Sitecore.Social.Domain.Model.MessageStatus.Empty"/> is returned.
+            The <see cref="T:Sitecore.Social.Domain.Model.MessageStatus" />. If the status is not defined <see cref="F:Sitecore.Social.Domain.Model.MessageStatus.Empty" /> is returned.
             </returns>
         </member>
         <member name="M:Sitecore.Social.MessageBusinessManager.GetMessageComments(System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,Sitecore.Social.Domain.Model.AccountCredentials,System.String)">
@@ -3889,78 +4056,6 @@
             </summary>
             <param name="message">The message.</param>
         </member>
-        <member name="P:Sitecore.Social.MessageBusinessManager.MessagesByContainerCacheManager">
-            <summary>
-            Gets the messages by container cache manager.
-            </summary>
-            <value>
-            The messages by container cache manager.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.MessageBusinessManager.SearchProvider">
-            <summary>
-            Gets the search provider.
-            </summary>
-            <value>
-            The search provider.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.MessageBusinessManager.MessageItemManager">
-            <summary>
-            Gets the message item manager.
-            </summary>
-            <value>
-            The message item manager.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.MessageBusinessManager.NetworkBusinessManager">
-            <summary>
-            Gets the network business manager.
-            </summary>
-            <value>
-            The network business manager.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.MessageBusinessManager.MessageDataBuilderFactory">
-            <summary>
-            Gets the message data builder factory.
-            </summary>
-            <value>
-            The message data builder factory.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.MessageBusinessManager.PostingConfigurationBuilderFactory">
-            <summary>
-            Gets the posting configuration builder factory.
-            </summary>
-            <value>
-            The posting configuration builder factory.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.MessageBusinessManager.MessageStatusBuilderFactory">
-            <summary>
-            Gets the message status builder factory.
-            </summary>
-            <value>
-            The message status builder factory.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.MessageBusinessManager.ConfigurationFactory">
-            <summary>
-            Gets the configuration factory.
-            </summary>
-            <value>
-            The configuration factory.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.MessageBusinessManager.MessageDisplayNameStrategy">
-            <summary>
-            Gets the message display name strategy.
-            </summary>
-            <value>
-            The message display name strategy.
-            </value>
-        </member>
         <member name="T:Sitecore.Social.MessagePosting.Cache.MessagesByContainerCacheKey">
             <summary>
             Defines the key of the messages by container cache.
@@ -3971,14 +4066,6 @@
             Initializes a new instance of the <see cref="T:Sitecore.Social.MessagePosting.Cache.MessagesByContainerCacheKey"/> class.
             </summary>
             <param name="container">The container.</param>
-        </member>
-        <member name="M:Sitecore.Social.MessagePosting.Cache.MessagesByContainerCacheKey.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-            <returns>
-            A <see cref="T:System.String"/> that represents this instance.
-            </returns>
         </member>
         <member name="P:Sitecore.Social.MessagePosting.Cache.MessagesByContainerCacheKey.ItemId">
             <summary>
@@ -4004,14 +4091,50 @@
             The name of the database.
             </value>
         </member>
+        <member name="M:Sitecore.Social.MessagePosting.Cache.MessagesByContainerCacheKey.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that represents this instance.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Social.MessagePosting.Cache.MessagesByContainerCache">
+            <summary>
+            Defines messages by container cache.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.MessagePosting.Cache.MessagesByContainerCache.#ctor(System.String,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Social.MessagePosting.Cache.MessagesByContainerCache"/> class.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="maxSize"> Max cache size.</param>
+        </member>
+        <member name="M:Sitecore.Social.MessagePosting.Cache.MessagesByContainerCache.GetValue(Sitecore.Social.MessagePosting.Cache.MessagesByContainerCacheKey)">
+            <summary>
+            Gets the value by key.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>The value.</returns>
+        </member>
+        <member name="M:Sitecore.Social.MessagePosting.Cache.MessagesByContainerCache.SetValue(Sitecore.Social.MessagePosting.Cache.MessagesByContainerCacheKey,System.Collections.Generic.IList{Sitecore.Social.Domain.Model.Identifier})">
+            <summary>
+            Sets the value.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Sitecore.Social.MessagePosting.Cache.MessagesByContainerCache.ContainsKey(Sitecore.Social.MessagePosting.Cache.MessagesByContainerCacheKey)">
+            <summary>
+            Determines whether the cache contains a key.
+            </summary>
+            <param name="key">The key.</param>
+            <returns><c>true</c> if the cache contains the key; otherwise, <c>false</c>.</returns>
+        </member>
         <member name="T:Sitecore.Social.MessagePosting.Conditions.PostingWithItemCondition">
             <summary>
             The class evaluates condition for posting message with item publishing.
-            </summary>
-        </member>
-        <member name="T:Sitecore.Social.MessagePosting.PostingConfigurationContext.IMessageFilterCondition">
-            <summary>
-            TODO: Update summary.
             </summary>
         </member>
         <member name="M:Sitecore.Social.MessagePosting.Conditions.PostingWithItemCondition.#ctor(Sitecore.Social.MessagePosting.PostingConfigurationContext.PostingConfigurationBase)">
@@ -4031,33 +4154,6 @@
             <summary>
             The class represents message statistics.
             </summary>
-        </member>
-        <member name="M:Sitecore.Social.MessagePosting.Fields.MessageStatistics.Equals(Sitecore.Social.MessagePosting.Fields.MessageStatistics)">
-            <summary>
-            Checks if the current MessageStatistics is equal to another one.
-            </summary>
-            <param name="other">The other MessageStatistics.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Sitecore.Social.MessagePosting.Fields.MessageStatistics.Equals(System.Object)">
-            <summary>
-            Determines whether the specified <see cref="T:System.Object"/> is equal to this instance.
-            </summary>
-            <param name="obj">The <see cref="T:System.Object"/> to compare with this instance.</param>
-            <returns>
-              <c>true</c> if the specified <see cref="T:System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-            </returns>
-            <exception cref="T:System.NullReferenceException">
-            The <paramref name="obj"/> parameter is null.
-            </exception>
-        </member>
-        <member name="M:Sitecore.Social.MessagePosting.Fields.MessageStatistics.GetHashCode">
-            <summary>
-            Returns a hash code for this instance.
-            </summary>
-            <returns>
-            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
-            </returns>
         </member>
         <member name="P:Sitecore.Social.MessagePosting.Fields.MessageStatistics.UpdateStatus">
             <summary>
@@ -4098,6 +4194,33 @@
             <value>
             The statistics elements.
             </value>
+        </member>
+        <member name="M:Sitecore.Social.MessagePosting.Fields.MessageStatistics.Equals(Sitecore.Social.MessagePosting.Fields.MessageStatistics)">
+            <summary>
+            Checks if the current MessageStatistics is equal to another one.
+            </summary>
+            <param name="other">The other MessageStatistics.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.Social.MessagePosting.Fields.MessageStatistics.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/> is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object"/> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object"/> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+            <exception cref="T:System.NullReferenceException">
+            The <paramref name="obj"/> parameter is null.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Social.MessagePosting.Fields.MessageStatistics.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
         </member>
         <member name="T:Sitecore.Social.MessagePosting.Fields.MessageStatus">
             <summary>
@@ -4168,6 +4291,22 @@
             The class represents the element of statistics.
             </summary>
         </member>
+        <member name="P:Sitecore.Social.MessagePosting.Fields.StatisticsElement.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.MessagePosting.Fields.StatisticsElement.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
         <member name="M:Sitecore.Social.MessagePosting.Fields.StatisticsElement.Equals(Sitecore.Social.MessagePosting.Fields.StatisticsElement)">
             <summary>
             Checks if the current StatisticsElement is equal to another one.
@@ -4195,25 +4334,14 @@
             A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
             </returns>
         </member>
-        <member name="P:Sitecore.Social.MessagePosting.Fields.StatisticsElement.Name">
-            <summary>
-            Gets or sets the name.
-            </summary>
-            <value>
-            The name.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.MessagePosting.Fields.StatisticsElement.Value">
-            <summary>
-            Gets or sets the value.
-            </summary>
-            <value>
-            The value.
-            </value>
-        </member>
         <member name="T:Sitecore.Social.MessagePosting.Fields.Status">
             <summary>
             The class represents the message status.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Social.MessagePosting.Fields.Status.eStatusType">
+            <summary>
+            The status type.
             </summary>
         </member>
         <member name="P:Sitecore.Social.MessagePosting.Fields.Status.ErrorText">
@@ -4231,11 +4359,6 @@
             <value>
             The type of the status.
             </value>
-        </member>
-        <member name="T:Sitecore.Social.MessagePosting.Fields.Status.eStatusType">
-            <summary>
-            The status type.
-            </summary>
         </member>
         <member name="T:Sitecore.Social.MessagePosting.Items.MessageItemBase">
             <summary>
@@ -4277,33 +4400,6 @@
             Initializes a new instance of the <see cref="T:Sitecore.Social.MessagePosting.Items.MessageItemBase"/> class.
             </summary>
             <param name="item">The item.</param>
-        </member>
-        <member name="M:Sitecore.Social.MessagePosting.Items.MessageItemBase.GetPostingConfigurationItem(System.String)">
-            <summary>
-            Gets the posting configuration item.
-            </summary>
-            <param name="postingConfigurationName">Name of the posting configuration.</param>
-            <returns>The posting configuration item.</returns>
-        </member>
-        <member name="M:Sitecore.Social.MessagePosting.Items.MessageItemBase.SaveStatus(Sitecore.Social.MessagePosting.Fields.MessageStatus)">
-            <summary>
-            Saves the status.
-            </summary>
-            <param name="messageStatus">
-            The message Status.
-            </param>
-        </member>
-        <member name="M:Sitecore.Social.MessagePosting.Items.MessageItemBase.DeleteMessage">
-            <summary>
-            Deletes the message.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.MessagePosting.Items.MessageItemBase.GetMessageNetworkName(Sitecore.Data.Items.Item)">
-            <summary>
-            Gets the name of the message network.
-            </summary>
-            <param name="item">The item.</param>
-            <returns>The network name.</returns>
         </member>
         <member name="P:Sitecore.Social.MessagePosting.Items.MessageItemBase.NetworkName">
             <summary>
@@ -4359,6 +4455,33 @@
             </summary>
             <value>The message item.</value>
         </member>
+        <member name="M:Sitecore.Social.MessagePosting.Items.MessageItemBase.GetPostingConfigurationItem(System.String)">
+            <summary>
+            Gets the posting configuration item.
+            </summary>
+            <param name="postingConfigurationName">Name of the posting configuration.</param>
+            <returns>The posting configuration item.</returns>
+        </member>
+        <member name="M:Sitecore.Social.MessagePosting.Items.MessageItemBase.SaveStatus(Sitecore.Social.MessagePosting.Fields.MessageStatus)">
+            <summary>
+            Saves the status.
+            </summary>
+            <param name="messageStatus">
+            The message Status.
+            </param>
+        </member>
+        <member name="M:Sitecore.Social.MessagePosting.Items.MessageItemBase.DeleteMessage">
+            <summary>
+            Deletes the message.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.MessagePosting.Items.MessageItemBase.GetMessageNetworkName(Sitecore.Data.Items.Item)">
+            <summary>
+            Gets the name of the message network.
+            </summary>
+            <param name="item">The item.</param>
+            <returns>The network name.</returns>
+        </member>
         <member name="T:Sitecore.Social.MessagePosting.Managers.ILinkManager">
             <summary>
             Defines methods to manage link in a message.
@@ -4382,7 +4505,7 @@
             Creates the message campaign and deploys it.
             </summary>
             <param name="campaignName">Name of the campaign.</param>
-            <param name="network">The <see cref="T:Sitecore.Social.NetworkProviders.Network"/>.</param>
+            <param name="network">The <see cref="T:Sitecore.Social.NetworkProviders.Network" />.</param>
             <returns>The campaign identifier.</returns>
         </member>
         <member name="M:Sitecore.Social.MessagePosting.Managers.IMessageCampaignManager.Deploy(Sitecore.Data.Items.Item)">
@@ -4468,6 +4591,12 @@
             Defines methods to manage the messages count cache.
             </summary>
         </member>
+        <member name="P:Sitecore.Social.MessagePosting.Managers.IMessagesByContainerCacheManager.CacheEnabled">
+            <summary>
+            Determines if the cache is enabled.
+            </summary>
+            <returns><c>true</c> if the cache is enabled; otherwise, <c>false</c>.</returns>
+        </member>
         <member name="M:Sitecore.Social.MessagePosting.Managers.IMessagesByContainerCacheManager.GetMessages(Sitecore.Social.MessagePosting.Cache.MessagesByContainerCacheKey)">
             <summary>
             Gets cached messages by a key.
@@ -4513,12 +4642,6 @@
             </summary>
             <param name="cacheKey">The cache key.</param>
         </member>
-        <member name="P:Sitecore.Social.MessagePosting.Managers.IMessagesByContainerCacheManager.CacheEnabled">
-            <summary>
-            Determines if the cache is enabled.
-            </summary>
-            <returns><c>true</c> if the cache is enabled; otherwise, <c>false</c>.</returns>
-        </member>
         <member name="T:Sitecore.Social.MessagePosting.Managers.LinkManager">
             <summary>
             The class responds to links generating.
@@ -4529,6 +4652,20 @@
             Initializes a new instance of the <see cref="T:Sitecore.Social.MessagePosting.Managers.LinkManager"/> class.
             </summary>
             <param name="configurationFactory">The configuration factory.</param>
+        </member>
+        <member name="P:Sitecore.Social.MessagePosting.Managers.LinkManager.DefaultServerUrl">
+            <summary>
+            Gets or sets the default server URL.
+            </summary>
+            <value>The default server URL.</value>
+        </member>
+        <member name="P:Sitecore.Social.MessagePosting.Managers.LinkManager.ConfigurationFactory">
+            <summary>
+            Gets the configuration factory.
+            </summary>
+            <value>
+            The configuration factory.
+            </value>
         </member>
         <member name="M:Sitecore.Social.MessagePosting.Managers.LinkManager.GenerateLink(System.String,System.String)">
             <summary>
@@ -4570,53 +4707,6 @@
             <param name="campaignId">The campaign id.</param>
             <returns>The url with added parameters.</returns>
         </member>
-        <member name="P:Sitecore.Social.MessagePosting.Managers.LinkManager.DefaultServerUrl">
-            <summary>
-            Gets or sets the default server URL.
-            </summary>
-            <value>The default server URL.</value>
-        </member>
-        <member name="P:Sitecore.Social.MessagePosting.Managers.LinkManager.ConfigurationFactory">
-            <summary>
-            Gets the configuration factory.
-            </summary>
-            <value>
-            The configuration factory.
-            </value>
-        </member>
-        <member name="T:Sitecore.Social.MessagePosting.Cache.MessagesByContainerCache">
-            <summary>
-            Defines messages by container cache.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.MessagePosting.Cache.MessagesByContainerCache.#ctor(System.String,System.Int64)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.MessagePosting.Cache.MessagesByContainerCache"/> class.
-            </summary>
-            <param name="name">The name.</param>
-            <param name="maxSize"> Max cache size.</param>
-        </member>
-        <member name="M:Sitecore.Social.MessagePosting.Cache.MessagesByContainerCache.GetValue(Sitecore.Social.MessagePosting.Cache.MessagesByContainerCacheKey)">
-            <summary>
-            Gets the value by key.
-            </summary>
-            <param name="key">The key.</param>
-            <returns>The value.</returns>
-        </member>
-        <member name="M:Sitecore.Social.MessagePosting.Cache.MessagesByContainerCache.SetValue(Sitecore.Social.MessagePosting.Cache.MessagesByContainerCacheKey,System.Collections.Generic.IList{Sitecore.Social.Domain.Model.Identifier})">
-            <summary>
-            Sets the value.
-            </summary>
-            <param name="key">The key.</param>
-            <param name="value">The value.</param>
-        </member>
-        <member name="M:Sitecore.Social.MessagePosting.Cache.MessagesByContainerCache.ContainsKey(Sitecore.Social.MessagePosting.Cache.MessagesByContainerCacheKey)">
-            <summary>
-            Determines whether the cache contains a key.
-            </summary>
-            <param name="key">The key.</param>
-            <returns><c>true</c> if the cache contains the key; otherwise, <c>false</c>.</returns>
-        </member>
         <member name="T:Sitecore.Social.MessagePosting.Managers.MessagesByContainerCacheManager">
             <summary>
             Defines methods to manage the messages count cache.
@@ -4632,6 +4722,26 @@
             Initializes a new instance of the <see cref="T:Sitecore.Social.MessagePosting.Managers.MessagesByContainerCacheManager"/> class.
             </summary>
             <param name="configurationFactory">The configuration factory.</param>
+        </member>
+        <member name="P:Sitecore.Social.MessagePosting.Managers.MessagesByContainerCacheManager.CacheEnabled">
+            <summary>
+            Determines if the message cache is enabled.
+            </summary>
+            <returns><c>true</c> if the message cache is enabled; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="P:Sitecore.Social.MessagePosting.Managers.MessagesByContainerCacheManager.ConfigurationFactory">
+            <summary>
+            Gets the configuration factory.
+            </summary>
+            <value>
+            The configuration factory.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.MessagePosting.Managers.MessagesByContainerCacheManager.Cache">
+            <summary>
+            Gets the cache.
+            </summary>
+            <returns>The cache.</returns>
         </member>
         <member name="M:Sitecore.Social.MessagePosting.Managers.MessagesByContainerCacheManager.GetMessages(Sitecore.Social.MessagePosting.Cache.MessagesByContainerCacheKey)">
             <summary>
@@ -4680,26 +4790,6 @@
             </summary>
             <param name="cacheKey">The cache key.</param>
         </member>
-        <member name="P:Sitecore.Social.MessagePosting.Managers.MessagesByContainerCacheManager.CacheEnabled">
-            <summary>
-            Determines if the message cache is enabled.
-            </summary>
-            <returns><c>true</c> if the message cache is enabled; otherwise, <c>false</c>.</returns>
-        </member>
-        <member name="P:Sitecore.Social.MessagePosting.Managers.MessagesByContainerCacheManager.ConfigurationFactory">
-            <summary>
-            Gets the configuration factory.
-            </summary>
-            <value>
-            The configuration factory.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.MessagePosting.Managers.MessagesByContainerCacheManager.Cache">
-            <summary>
-            Gets the cache.
-            </summary>
-            <returns>The cache.</returns>
-        </member>
         <member name="T:Sitecore.Social.MessagePosting.Managers.MessageCampaignManager">
             <summary>
             The class helps to work with message campaigns.
@@ -4717,7 +4807,7 @@
         </member>
         <member name="M:Sitecore.Social.MessagePosting.Managers.MessageCampaignManager.#ctor(Sitecore.Social.Configuration.IConfigurationFactory,Sitecore.Social.Infrastructure.Logging.ILogManager)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.MessagePosting.Managers.MessageCampaignManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.MessagePosting.Managers.MessageCampaignManager" /> class.
             </summary>
             <param name="configurationFactory">The configuration manager.</param>
             <param name="logManager">The log manager.</param>
@@ -4727,7 +4817,7 @@
             Creates the message campaign and deploys it.
             </summary>
             <param name="campaignName">Name of the campaign.</param>
-            <param name="network">The <see cref="T:Sitecore.Social.NetworkProviders.Network"/>.</param>
+            <param name="network">The <see cref="T:Sitecore.Social.NetworkProviders.Network" />.</param>
             <returns>
             The campaign identifier.
             </returns>
@@ -4783,6 +4873,14 @@
             </summary>
             <param name="configurationFactory">The configuration factory.</param>
         </member>
+        <member name="P:Sitecore.Social.MessagePosting.Managers.MessageItemManager.ConfigurationFactory">
+            <summary>
+            Gets the configuration factory.
+            </summary>
+            <value>
+            The configuration factory.
+            </value>
+        </member>
         <member name="M:Sitecore.Social.MessagePosting.Managers.MessageItemManager.ReadMessageItems(System.Collections.Generic.IEnumerable{Sitecore.Social.Domain.Model.Identifier})">
             <summary>
             Reads message items.
@@ -4828,14 +4926,6 @@
             </summary>
             <param name="message">The message.</param>
         </member>
-        <member name="P:Sitecore.Social.MessagePosting.Managers.MessageItemManager.ConfigurationFactory">
-            <summary>
-            Gets the configuration factory.
-            </summary>
-            <value>
-            The configuration factory.
-            </value>
-        </member>
         <member name="T:Sitecore.Social.MessagePosting.MessageStatistics.InlineCampaignIndicator">
             <summary>
             Inline campaign indicator.
@@ -4880,36 +4970,24 @@
             3. In case of an user initiates message statistics update manually we will reset current Fibonacci counter to start point.
             </summary>
         </member>
-        <member name="T:Sitecore.Social.MessagePosting.MessageStatistics.Strategies.IFibonacciRefreshStrategy">
-            <summary>
-            Fibonacci refresh strategy interface.
-            </summary>
-        </member>
-        <member name="T:Sitecore.Social.MessagePosting.MessageStatistics.Strategies.IRefreshStrategy">
-            <summary>
-            Social message statistics refresh strategy
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.MessagePosting.MessageStatistics.Strategies.IRefreshStrategy.IsStatisticsExpired(System.DateTime,System.DateTime)">
-            <summary>
-            Determines whether is message statistics expired.
-            </summary>
-            <param name="startRefreshDate">The start refresh date.</param>
-            <param name="lastRefreshDate">The last refresh date.</param>
-            <returns>
-              <c>true</c> if statistics is expired; otherwise, <c>false</c>.
-            </returns>
-        </member>
-        <member name="P:Sitecore.Social.MessagePosting.MessageStatistics.Strategies.IFibonacciRefreshStrategy.FibonacciAges">
-            <summary>
-            Gets Fibonacci ages (in minutes).
-            </summary>         
-        </member>
         <member name="M:Sitecore.Social.MessagePosting.MessageStatistics.Strategies.FibonacciRefreshStrategy.#ctor(Sitecore.Social.Configuration.IConfigurationFactory)">
             <summary>
             Initializes a new instance of the <see cref="T:Sitecore.Social.MessagePosting.MessageStatistics.Strategies.FibonacciRefreshStrategy"/> class.
             </summary>
             <param name="configurationFactory">The configuration manager.</param>
+        </member>
+        <member name="P:Sitecore.Social.MessagePosting.MessageStatistics.Strategies.FibonacciRefreshStrategy.FibonacciAges">
+            <summary>
+            Gets Fibonacci ages (in minutes).
+            </summary>
+        </member>
+        <member name="P:Sitecore.Social.MessagePosting.MessageStatistics.Strategies.FibonacciRefreshStrategy.ConfigurationFactory">
+            <summary>
+            Gets the configuration manager.
+            </summary>
+            <value>
+            The configuration manager.
+            </value>
         </member>
         <member name="M:Sitecore.Social.MessagePosting.MessageStatistics.Strategies.FibonacciRefreshStrategy.IsStatisticsExpired(System.DateTime,System.DateTime)">
             <summary>
@@ -4933,18 +5011,30 @@
             <param name="ageMinutes">The age (in minutes).</param>
             <returns>Fibbonacci age.</returns>
         </member>
-        <member name="P:Sitecore.Social.MessagePosting.MessageStatistics.Strategies.FibonacciRefreshStrategy.FibonacciAges">
+        <member name="T:Sitecore.Social.MessagePosting.MessageStatistics.Strategies.IFibonacciRefreshStrategy">
             <summary>
-            Gets Fibonacci ages (in minutes).
+            Fibonacci refresh strategy interface.
             </summary>
         </member>
-        <member name="P:Sitecore.Social.MessagePosting.MessageStatistics.Strategies.FibonacciRefreshStrategy.ConfigurationFactory">
+        <member name="P:Sitecore.Social.MessagePosting.MessageStatistics.Strategies.IFibonacciRefreshStrategy.FibonacciAges">
             <summary>
-            Gets the configuration manager.
+            Gets Fibonacci ages (in minutes).
+            </summary>         
+        </member>
+        <member name="T:Sitecore.Social.MessagePosting.MessageStatistics.Strategies.IRefreshStrategy">
+            <summary>
+            Social message statistics refresh strategy
             </summary>
-            <value>
-            The configuration manager.
-            </value>
+        </member>
+        <member name="M:Sitecore.Social.MessagePosting.MessageStatistics.Strategies.IRefreshStrategy.IsStatisticsExpired(System.DateTime,System.DateTime)">
+            <summary>
+            Determines whether is message statistics expired.
+            </summary>
+            <param name="startRefreshDate">The start refresh date.</param>
+            <param name="lastRefreshDate">The last refresh date.</param>
+            <returns>
+              <c>true</c> if statistics is expired; otherwise, <c>false</c>.
+            </returns>
         </member>
         <member name="T:Sitecore.Social.MessagePosting.Messages.Message">
             <summary>
@@ -5113,6 +5203,14 @@
             Initializes a new instance of the <see cref="T:Sitecore.Social.MessagePosting.Pipelines.CreateMessage.CreateItem"/> class.
             </summary>
         </member>
+        <member name="P:Sitecore.Social.MessagePosting.Pipelines.CreateMessage.CreateItem.ConfigurationFactory">
+            <summary>
+            Gets the configuration factory.
+            </summary>
+            <value>
+            The configuration factory.
+            </value>
+        </member>
         <member name="M:Sitecore.Social.MessagePosting.Pipelines.CreateMessage.CreateItem.Process(Sitecore.Social.MessagePosting.Pipelines.CreateMessage.CreateMessagePipelineArgs)">
             <summary>
             Processor for message creation.
@@ -5149,14 +5247,6 @@
             </summary>
             <param name="networkName">Name of the network.</param>
             <returns>The message template ID.</returns>
-        </member>
-        <member name="P:Sitecore.Social.MessagePosting.Pipelines.CreateMessage.CreateItem.ConfigurationFactory">
-            <summary>
-            Gets the configuration factory.
-            </summary>
-            <value>
-            The configuration factory.
-            </value>
         </member>
         <member name="T:Sitecore.Social.MessagePosting.Pipelines.CreateMessage.CreateMessagePipelineArgs">
             <summary>
@@ -5300,6 +5390,14 @@
             Initializes a new instance of the <see cref="T:Sitecore.Social.MessagePosting.Pipelines.ReadMessage.ReadMessages"/> class.
             </summary>
         </member>
+        <member name="P:Sitecore.Social.MessagePosting.Pipelines.ReadMessage.ReadMessages.ConfigurationFactory">
+            <summary>
+            Gets the configuration factory.
+            </summary>
+            <value>
+            The configuration factory.
+            </value>
+        </member>
         <member name="M:Sitecore.Social.MessagePosting.Pipelines.ReadMessage.ReadMessages.Process(Sitecore.Social.MessagePosting.Pipelines.ReadMessage.ReadMessagePipelineArgs)">
             <summary>
             Processor for message item reading.
@@ -5315,14 +5413,6 @@
             <returns>
             The message item.
             </returns>
-        </member>
-        <member name="P:Sitecore.Social.MessagePosting.Pipelines.ReadMessage.ReadMessages.ConfigurationFactory">
-            <summary>
-            Gets the configuration factory.
-            </summary>
-            <value>
-            The configuration factory.
-            </value>
         </member>
         <member name="T:Sitecore.Social.MessagePosting.PostingPreferences.Providers.IPostingPreferenceProvider">
             <summary>
@@ -5477,13 +5567,6 @@
             </summary>
             <param name="socialProfileBusinessManager">The social profile business manager.</param>
         </member>
-        <member name="M:Sitecore.Social.MessagePosting.Providers.ProfileAccountProvider.GetAccounts(Sitecore.Security.Accounts.User)">
-            <summary>
-            Gets the accounts.
-            </summary>
-            <param name="user">The user.</param>
-            <returns></returns>
-        </member>
         <member name="P:Sitecore.Social.MessagePosting.Providers.ProfileAccountProvider.SocialProfileBusinessManager">
             <summary>
             Gets or sets the social profile business manager.
@@ -5491,6 +5574,13 @@
             <value>
             The social profile business manager.
             </value>
+        </member>
+        <member name="M:Sitecore.Social.MessagePosting.Providers.ProfileAccountProvider.GetAccounts(Sitecore.Security.Accounts.User)">
+            <summary>
+            Gets the accounts.
+            </summary>
+            <param name="user">The user.</param>
+            <returns></returns>
         </member>
         <member name="T:Sitecore.Social.MessagePosting.Providers.MessagePostingProviderBase">
             <summary>
@@ -5543,6 +5633,11 @@
             </summary>
             <param name="account">The account.</param>
             <returns></returns>
+        </member>
+        <member name="T:Sitecore.Social.MessagePosting.PostingConfigurationContext.IMessageFilterCondition">
+            <summary>
+            TODO: Update summary.
+            </summary>
         </member>
         <member name="T:Sitecore.Social.MessagePosting.PostingConfigurationContext.PostingConfigurationBase">
             <summary>
@@ -5606,7 +5701,7 @@
         </member>
         <member name="M:Sitecore.Social.MessageStatisticsBusinessManager.#ctor(Sitecore.Social.IStatisticsStatusFactory,Sitecore.Social.INetworkBusinessManager,Sitecore.Social.NetworkProviders.Interfaces.INetworkProviderFactory,Sitecore.Social.MessagePosting.Managers.IMessageItemManager,Sitecore.Social.Infrastructure.Logging.ILogManager)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.MessageStatisticsBusinessManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.MessageStatisticsBusinessManager" /> class.
             </summary>
             <param name="statisticsStatusFactory">The statistics status factory.</param>
             <param name="networkBusinessManager">The network business manager.</param>
@@ -5677,10 +5772,26 @@
         </member>
         <member name="M:Sitecore.Social.NetworkBusinessManager.#ctor(Sitecore.Social.NetworkProviders.Interfaces.INetworkProviderFactory,Sitecore.Social.Configuration.IConfigurationFactory)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.NetworkBusinessManager"/> class with specific network provider factory and configuration factory.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.NetworkBusinessManager" /> class with specific network provider factory and configuration factory.
             </summary>
             <param name="networkProviderFactory">The network provider factory.</param>
             <param name="configurationFactory">The configuration factory.</param>
+        </member>
+        <member name="P:Sitecore.Social.NetworkBusinessManager.ConfigurationFactory">
+            <summary>
+            Gets the configuration factory.
+            </summary>
+            <value>
+            The configuration factory.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.NetworkBusinessManager.NetworkProviderFactory">
+            <summary>
+            Gets the network provider factory.
+            </summary>
+            <value>
+            The network provider factory.
+            </value>
         </member>
         <member name="M:Sitecore.Social.NetworkBusinessManager.GetNetworks">
             <summary>
@@ -5827,22 +5938,6 @@
             <param name="networkSettingsFilter">The network settings filter.</param>
             <returns>The network settings.</returns>
         </member>
-        <member name="P:Sitecore.Social.NetworkBusinessManager.ConfigurationFactory">
-            <summary>
-            Gets the configuration factory.
-            </summary>
-            <value>
-            The configuration factory.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.NetworkBusinessManager.NetworkProviderFactory">
-            <summary>
-            Gets the network provider factory.
-            </summary>
-            <value>
-            The network provider factory.
-            </value>
-        </member>
         <member name="F:Sitecore.Social.Networks.Managers.ApplicationManager.ApplicationIdFieldID">
             <summary>
             The application id field identifier
@@ -5884,10 +5979,26 @@
         </member>
         <member name="M:Sitecore.Social.PostingPreferenceBusinessManager.#ctor(Sitecore.Social.MessagePosting.PostingPreferences.Providers.IPostingPreferenceProvider,Sitecore.Social.Infrastructure.Wrappers.System.IMembershipWrapper)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.PostingPreferenceBusinessManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.PostingPreferenceBusinessManager" /> class.
             </summary>
             <param name="postingPreferenceProvider">The posting preference provider.</param>
             <param name="membershipWrapper">The membership wrapper.</param>
+        </member>
+        <member name="P:Sitecore.Social.PostingPreferenceBusinessManager.PostingPreferenceProvider">
+            <summary>
+            Gets the posting preference provider.
+            </summary>
+            <value>
+            The posting preference provider.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.PostingPreferenceBusinessManager.MembershipWrapper">
+            <summary>
+            Gets the membership wrapper.
+            </summary>
+            <value>
+            The membership wrapper.
+            </value>
         </member>
         <member name="M:Sitecore.Social.PostingPreferenceBusinessManager.GetPostingPreference(System.String,Sitecore.Social.Domain.Model.Identifier)">
             <summary>
@@ -5896,9 +6007,9 @@
             <param name="userName">Name of the user.</param>
             <param name="messageId">The message id.</param>
             <returns>
-            The posting preference. If the posting preference is not found the <see cref="F:Sitecore.Social.Domain.Model.AutomaticPostingPreference.Default"/> value is used.
+            The posting preference. If the posting preference is not found the <see cref="F:Sitecore.Social.Domain.Model.AutomaticPostingPreference.Default" /> value is used.
             </returns>
-            <seealso cref="P:Sitecore.Social.Domain.Model.PostingPreference.AutomaticPostingPreference"/>
+            <seealso cref="P:Sitecore.Social.Domain.Model.PostingPreference.AutomaticPostingPreference" />
             <exception cref="T:System.Exception">There is no item with this id.</exception>
             <exception cref="T:System.Exception">There is no item with this id.</exception>
         </member>
@@ -5930,45 +6041,10 @@
             <returns><c>true</c> if automatic posting is allowed, otherwise <c>false</c>.</returns>
             <exception cref="T:System.NotSupportedException">AutomaticPostingPreference is not supported</exception>
         </member>
-        <member name="P:Sitecore.Social.PostingPreferenceBusinessManager.PostingPreferenceProvider">
-            <summary>
-            Gets the posting preference provider.
-            </summary>
-            <value>
-            The posting preference provider.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.PostingPreferenceBusinessManager.MembershipWrapper">
-            <summary>
-            Gets the membership wrapper.
-            </summary>
-            <value>
-            The membership wrapper.
-            </value>
-        </member>
         <member name="T:Sitecore.Social.Rules.GenderRule.GenderConditionManager">
             <summary>
             The class helps to receive users gender from social network properties in user profile.
             </summary>
-        </member>
-        <member name="T:Sitecore.Social.Rules.GenderRule.IGenderConditionManager">
-            <summary>
-            Defines methods for getting gender from user and contact.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Rules.GenderRule.IGenderConditionManager.GetGender(System.String)">
-            <summary>
-            Gets the gender.
-            </summary>
-            <param name="userName">Name of the user.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Sitecore.Social.Rules.GenderRule.IGenderConditionManager.GetGender(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets the gender.
-            </summary>
-            <param name="contactId">The contact identifier.</param>
-            <returns></returns>
         </member>
         <member name="F:Sitecore.Social.Rules.GenderRule.GenderConditionManager.socialProfileManager">
             <summary>
@@ -6016,6 +6092,25 @@
             <param name="socialProfile">The social profile.</param>
             <returns></returns>
         </member>
+        <member name="T:Sitecore.Social.Rules.GenderRule.IGenderConditionManager">
+            <summary>
+            Defines methods for getting gender from user and contact.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Rules.GenderRule.IGenderConditionManager.GetGender(System.String)">
+            <summary>
+            Gets the gender.
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.Social.Rules.GenderRule.IGenderConditionManager.GetGender(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets the gender.
+            </summary>
+            <param name="contactId">The contact identifier.</param>
+            <returns></returns>
+        </member>
         <member name="T:Sitecore.Social.Rules.InterestedInRule.IInterestedInConditionManager">
             <summary>
             Defines methods for determining whether contact or user is interested in some specific information.
@@ -6046,11 +6141,35 @@
         </member>
         <member name="M:Sitecore.Social.Rules.InterestedInRule.InterestedInConditionManager.#ctor(Sitecore.Social.Configuration.IConfigurationFactory,Sitecore.Social.Domain.ISocialProfileManager,Sitecore.Social.NetworkProviders.NetworkFields.IAcceptedFieldsSelector)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Rules.InterestedInRule.InterestedInConditionManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Rules.InterestedInRule.InterestedInConditionManager" /> class.
             </summary>
             <param name="configurationFactory">The instance of ConfigurationFactory</param>
             <param name="socialProfileManager">The social profile manager.</param>
             <param name="acceptedFieldsSelector">The accepted fields selector.</param>
+        </member>
+        <member name="P:Sitecore.Social.Rules.InterestedInRule.InterestedInConditionManager.ConfigurationFactory">
+            <summary>
+            Gets or sets the configuration factory.
+            </summary>
+            <value>
+            The configuration factory.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Rules.InterestedInRule.InterestedInConditionManager.SocialProfileManager">
+            <summary>
+            Gets or sets the social profile manager.
+            </summary>
+            <value>
+            The social profile manager.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Rules.InterestedInRule.InterestedInConditionManager.AcceptedFieldsSelector">
+            <summary>
+            Gets or sets the accepted fields selector.
+            </summary>
+            <value>
+            The accepted fields selector.
+            </value>
         </member>
         <member name="M:Sitecore.Social.Rules.InterestedInRule.InterestedInConditionManager.IsInterestedIn(System.String,System.String)">
             <summary>
@@ -6077,30 +6196,6 @@
             <param name="socialProfiles">The social profiles.</param>
             <param name="infoToSearch">The information to search.</param>
             <returns></returns>
-        </member>
-        <member name="P:Sitecore.Social.Rules.InterestedInRule.InterestedInConditionManager.ConfigurationFactory">
-            <summary>
-            Gets or sets the configuration factory.
-            </summary>
-            <value>
-            The configuration factory.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Rules.InterestedInRule.InterestedInConditionManager.SocialProfileManager">
-            <summary>
-            Gets or sets the social profile manager.
-            </summary>
-            <value>
-            The social profile manager.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Rules.InterestedInRule.InterestedInConditionManager.AcceptedFieldsSelector">
-            <summary>
-            Gets or sets the accepted fields selector.
-            </summary>
-            <value>
-            The accepted fields selector.
-            </value>
         </member>
         <member name="T:Sitecore.Social.Search.ISearchProvider">
             <summary>
@@ -6253,6 +6348,19 @@
             Initializes a new instance of the <see cref="T:Sitecore.Social.Search.SearchProvider"/> class.
             </summary>
         </member>
+        <member name="P:Sitecore.Social.Search.SearchProvider.ConfigurationFactory">
+            <summary>
+            Gets or sets the configuration factory.
+            </summary>
+            <value>
+            The configuration factory.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Search.SearchProvider.SearchIndex">
+            <summary>
+            Gets the search index.
+            </summary>
+        </member>
         <member name="M:Sitecore.Social.Search.SearchProvider.GetMessagesByContainer(System.String)">
             <summary>
             Gets messages identifiers by message container.
@@ -6384,19 +6492,6 @@
             The expression.
             </returns>
         </member>
-        <member name="P:Sitecore.Social.Search.SearchProvider.ConfigurationFactory">
-            <summary>
-            Gets or sets the configuration factory.
-            </summary>
-            <value>
-            The configuration factory.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Search.SearchProvider.SearchIndex">
-            <summary>
-            Gets the search index.
-            </summary>
-        </member>
         <member name="T:Sitecore.Social.SocialProfileBusinessManager">
             <summary>
             Defines business methods to manage social profiles.
@@ -6404,7 +6499,7 @@
         </member>
         <member name="M:Sitecore.Social.SocialProfileBusinessManager.#ctor(Sitecore.Social.INetworkBusinessManager,Sitecore.Social.NetworkProviders.Interfaces.INetworkProviderFactory,Sitecore.Social.Connector.Providers.ISocialProfileProvider,Sitecore.Social.Configuration.IConfigurationFactory,Sitecore.Social.Infrastructure.Logging.ILogManager,Sitecore.Social.NetworkProviders.NetworkFields.IAcceptedFieldsSelector,Sitecore.Social.SitecoreAccess.Analytics.IContactDataProvider)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.SocialProfileBusinessManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.SocialProfileBusinessManager" /> class.
             </summary>
             <param name="networkBusinessManager">The network business manager.</param>
             <param name="networkProviderFactory">The network provider factory.</param>
@@ -6413,6 +6508,62 @@
             <param name="logManager">The log manager.</param>
             <param name="acceptedFieldsSelector">The accepted fields selector.</param>
             <param name="contactDataProvider">The contact data provider.</param>
+        </member>
+        <member name="P:Sitecore.Social.SocialProfileBusinessManager.ContactDataProvider">
+            <summary>
+            Gets the contact data provider.
+            </summary>
+            <value>
+            The contact data provider.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.SocialProfileBusinessManager.NetworkBusinessManager">
+            <summary>
+            Gets the network business manager.
+            </summary>
+            <value>
+            The network business manager.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.SocialProfileBusinessManager.ConfigurationFactory">
+            <summary>
+            Gets the configuration factory.
+            </summary>
+            <value>
+            The configuration factory.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.SocialProfileBusinessManager.LogManager">
+            <summary>
+            Gets or sets the log manager.
+            </summary>
+            <value>
+            The log manager.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.SocialProfileBusinessManager.AcceptedFieldsSelector">
+            <summary>
+            Gets or sets the accepted fields selector.
+            </summary>
+            <value>
+            The accepted fields selector.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.SocialProfileBusinessManager.SocialProfileProvider">
+            <summary>
+            Gets the social profile provider.
+            </summary>
+            <value>
+            The social profile provider.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.SocialProfileBusinessManager.NetworkProviderFactory">
+            <summary>
+            Gets the network provider factory.
+            </summary>
+            <value>
+            The network provider factory.
+            </value>
         </member>
         <member name="M:Sitecore.Social.SocialProfileBusinessManager.GetSocialProfiles(System.String)">
             <summary>
@@ -6637,7 +6788,7 @@
             <param name="networkName">The name of the network (case-sensitive).</param>
             <param name="applicationCredentials">The application credentials.</param>
             <param name="accountCredentials">The account credentials.</param>
-            <returns>The social profile. If the request couldn't be executed, an <see cref="F:Sitecore.Social.Domain.Model.SocialProfile.Empty"/> is returned.</returns>
+            <returns>The social profile. If the request couldn't be executed, an <see cref="F:Sitecore.Social.Domain.Model.SocialProfile.Empty" /> is returned.</returns>
         </member>
         <member name="M:Sitecore.Social.SocialProfileBusinessManager.RetrieveSocialProfileIdentityData(System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,Sitecore.Social.Domain.Model.AccountCredentials)">
             <summary>
@@ -6809,62 +6960,6 @@
             This is used to run a social profile fields refresh in a separate thread.
             </remarks>
         </member>
-        <member name="P:Sitecore.Social.SocialProfileBusinessManager.ContactDataProvider">
-            <summary>
-            Gets the contact data provider.
-            </summary>
-            <value>
-            The contact data provider.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.SocialProfileBusinessManager.NetworkBusinessManager">
-            <summary>
-            Gets the network business manager.
-            </summary>
-            <value>
-            The network business manager.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.SocialProfileBusinessManager.ConfigurationFactory">
-            <summary>
-            Gets the configuration factory.
-            </summary>
-            <value>
-            The configuration factory.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.SocialProfileBusinessManager.LogManager">
-            <summary>
-            Gets or sets the log manager.
-            </summary>
-            <value>
-            The log manager.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.SocialProfileBusinessManager.AcceptedFieldsSelector">
-            <summary>
-            Gets or sets the accepted fields selector.
-            </summary>
-            <value>
-            The accepted fields selector.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.SocialProfileBusinessManager.SocialProfileProvider">
-            <summary>
-            Gets the social profile provider.
-            </summary>
-            <value>
-            The social profile provider.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.SocialProfileBusinessManager.NetworkProviderFactory">
-            <summary>
-            Gets the network provider factory.
-            </summary>
-            <value>
-            The network provider factory.
-            </value>
-        </member>
         <member name="T:Sitecore.Social.StatisticsStatusFactory">
             <summary>
             Represents the factory of receiving statistics status by the core status.
@@ -6902,14 +6997,6 @@
             </summary>
             <param name="accountBusinessManager">The account business manager</param>
         </member>
-        <member name="M:Sitecore.Social.Strategies.MessageDisplayNameStrategy.GetDisplayName(Sitecore.Social.Domain.Model.MessageData,Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets message display name.
-            </summary>
-            <param name="messageData">The message data.</param>
-            <param name="accountId">The account id.</param>
-            <returns>The message display name.</returns>
-        </member>
         <member name="P:Sitecore.Social.Strategies.MessageDisplayNameStrategy.AccountBusinessManager">
             <summary>
             Gets account business manager.
@@ -6917,6 +7004,14 @@
             <value>
             The account business manager.
             </value>
+        </member>
+        <member name="M:Sitecore.Social.Strategies.MessageDisplayNameStrategy.GetDisplayName(Sitecore.Social.Domain.Model.MessageData,Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets message display name.
+            </summary>
+            <param name="messageData">The message data.</param>
+            <param name="accountId">The account id.</param>
+            <returns>The message display name.</returns>
         </member>
     </members>
 </doc>

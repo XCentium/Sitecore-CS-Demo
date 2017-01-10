@@ -9,6 +9,101 @@
             The configuration cache.
             </summary>
         </member>
+        <member name="F:Sitecore.Social.Configuration.ConfigurationCache.slidingExpiration">
+            <summary>
+            The cache sliding expiration.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Configuration.ConfigurationCache.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Configuration.ConfigurationCache"/> class.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Social.Configuration.ConfigurationCache.Cache">
+            <summary>
+            Gets or sets the cache.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Configuration.ConfigurationCache.Get``1">
+            <summary>
+            Gets ConfigurationData from the cache.
+            </summary>
+            <typeparam name="T">
+            The ConfigurationData type.
+            </typeparam>
+            <returns>
+            The <see cref="T:Sitecore.Social.Configuration.Model.ConfigurationData"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Social.Configuration.ConfigurationCache.Set(Sitecore.Social.Configuration.Model.ConfigurationData)">
+            <summary>
+            Sets ConfigurationData in the cache.
+            </summary>
+            <param name="data">
+            The configuration data.
+            </param>
+        </member>
+        <member name="M:Sitecore.Social.Configuration.ConfigurationCache.Exists``1">
+            <summary>
+            Checks if there is ConfigurationData in the cache.
+            </summary>
+            <typeparam name="T">
+            The ConfigurationData type.
+            </typeparam>
+            <returns>
+            The <see cref="T:System.Boolean"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Social.Configuration.ConfigurationFactory">
+            <summary>
+            The configuration factory.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Configuration.ConfigurationFactory.#ctor(Sitecore.Social.Configuration.IConfigurationCache)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Configuration.ConfigurationFactory"/> class.
+            </summary>
+            <param name="configurationCache">
+            The configuration cache.
+            </param>
+        </member>
+        <member name="P:Sitecore.Social.Configuration.ConfigurationFactory.ConfigurationCache">
+            <summary>
+            Gets or sets the configuration cache.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Configuration.ConfigurationFactory.Get``1">
+             <summary>
+             Gets ConfigurationData.
+             </summary>
+             <typeparam name="T">
+             The ConfigurationData type.
+             </typeparam>
+             <returns>
+             The <see cref="T:Sitecore.Social.Configuration.Model.ConfigurationData"/>.
+             </returns>
+             <example>
+             <code>
+             var networksConfiguration = ExecutingContext.Current.IoC.Get&lt;IConfigurationFactory&gt;().Get&lt;NetworksConfiguration&gt;();
+            
+             foreach (var networkSettings in networksConfiguration.Networks)
+             {
+               Console.WriteLine("network: {0}, itemId: {1}", networkSettings.Name, networkSettings.ItemId);
+             }
+             </code>
+             </example>
+        </member>
+        <member name="M:Sitecore.Social.Configuration.ConfigurationFactory.GetConfigurationFromManager``1">
+            <summary>
+            Gets configuration from manager.
+            </summary>
+            <typeparam name="T">
+            The ConfigurationData type.
+            </typeparam>
+            <returns>
+            The <see cref="T:Sitecore.Social.Configuration.Model.ConfigurationData"/>.
+            </returns>
+        </member>
         <member name="T:Sitecore.Social.Configuration.IConfigurationCache">
             <summary>
             The ConfigurationCache interface.
@@ -44,56 +139,6 @@
             The <see cref="T:System.Boolean"/>.
             </returns>
         </member>
-        <member name="F:Sitecore.Social.Configuration.ConfigurationCache.slidingExpiration">
-            <summary>
-            The cache sliding expiration.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Configuration.ConfigurationCache.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Configuration.ConfigurationCache"/> class.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Configuration.ConfigurationCache.Get``1">
-            <summary>
-            Gets ConfigurationData from the cache.
-            </summary>
-            <typeparam name="T">
-            The ConfigurationData type.
-            </typeparam>
-            <returns>
-            The <see cref="T:Sitecore.Social.Configuration.Model.ConfigurationData"/>.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.Configuration.ConfigurationCache.Set(Sitecore.Social.Configuration.Model.ConfigurationData)">
-            <summary>
-            Sets ConfigurationData in the cache.
-            </summary>
-            <param name="data">
-            The configuration data.
-            </param>
-        </member>
-        <member name="M:Sitecore.Social.Configuration.ConfigurationCache.Exists``1">
-            <summary>
-            Checks if there is ConfigurationData in the cache.
-            </summary>
-            <typeparam name="T">
-            The ConfigurationData type.
-            </typeparam>
-            <returns>
-            The <see cref="T:System.Boolean"/>.
-            </returns>
-        </member>
-        <member name="P:Sitecore.Social.Configuration.ConfigurationCache.Cache">
-            <summary>
-            Gets or sets the cache.
-            </summary>
-        </member>
-        <member name="T:Sitecore.Social.Configuration.ConfigurationFactory">
-            <summary>
-            The configuration factory.
-            </summary>
-        </member>
         <member name="T:Sitecore.Social.Configuration.IConfigurationFactory">
             <summary>
             The ConfigurationFactory interface.
@@ -110,51 +155,6 @@
             The <see cref="T:Sitecore.Social.Configuration.Model.ConfigurationData"/>.
             </returns>
         </member>
-        <member name="M:Sitecore.Social.Configuration.ConfigurationFactory.#ctor(Sitecore.Social.Configuration.IConfigurationCache)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Configuration.ConfigurationFactory"/> class.
-            </summary>
-            <param name="configurationCache">
-            The configuration cache.
-            </param>
-        </member>
-        <member name="M:Sitecore.Social.Configuration.ConfigurationFactory.Get``1">
-             <summary>
-             Gets ConfigurationData.
-             </summary>
-             <typeparam name="T">
-             The ConfigurationData type.
-             </typeparam>
-             <returns>
-             The <see cref="T:Sitecore.Social.Configuration.Model.ConfigurationData"/>.
-             </returns>
-             <example>
-             <code>
-             var networksConfiguration = ExecutingContext.Current.IoC.Get&lt;IConfigurationFactory&gt;().Get&lt;NetworksConfiguration&gt;();
-            
-             foreach (var networkSettings in networksConfiguration.Networks)
-             {
-               Console.WriteLine("network: {0}, itemId: {1}", networkSettings.Name, networkSettings.ItemId);
-             }
-             </code>
-             </example>
-        </member>
-        <member name="M:Sitecore.Social.Configuration.ConfigurationFactory.GetConfigurationFromManager``1">
-            <summary>
-            Gets configuration from manager.
-            </summary>
-            <typeparam name="T">
-            The ConfigurationData type.
-            </typeparam>
-            <returns>
-            The <see cref="T:Sitecore.Social.Configuration.Model.ConfigurationData"/>.
-            </returns>
-        </member>
-        <member name="P:Sitecore.Social.Configuration.ConfigurationFactory.ConfigurationCache">
-            <summary>
-            Gets or sets the configuration cache.
-            </summary>
-        </member>
         <member name="T:Sitecore.Social.Configuration.IoC.Modules.FactoryModule">
             <summary>
             Defines bindings of managers implementations.
@@ -169,40 +169,6 @@
             <summary>
             Represents the analytics settings configuration manager.
             </summary>
-        </member>
-        <member name="T:Sitecore.Social.Configuration.Managers.ConfigurationManager">
-            <summary>
-            The configuration manager.
-            </summary>
-        </member>
-        <member name="T:Sitecore.Social.Configuration.Managers.IConfigurationManager">
-            <summary>
-            The ConfigurationManager interface.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Configuration.Managers.IConfigurationManager.GetConfigurationData">
-            <summary>
-            The get configuration data.
-            </summary>
-            <returns>
-            The <see cref="T:Sitecore.Social.Configuration.Model.ConfigurationData"/>.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.Configuration.Managers.ConfigurationManager.GetConfigurationData">
-            <summary>
-            The get configuration data.
-            </summary>
-            <returns>
-            The <see cref="T:Sitecore.Social.Configuration.Model.ConfigurationData"/>.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.Configuration.Managers.ConfigurationManager.GetAttribute(System.Xml.XmlNode,System.String)">
-            <summary>
-            Gets the attribute value.
-            </summary>
-            <param name="node">The node.</param>
-            <param name="attribute">The attribute.</param>
-            <returns>The attribute value.</returns>
         </member>
         <member name="M:Sitecore.Social.Configuration.Managers.AnalyticsSettingsConfigurationManager.GetConfigurationData">
             <summary>
@@ -251,12 +217,46 @@
             <param name="node">The node.</param>
             <returns>The account builder settings.</returns>
         </member>
+        <member name="T:Sitecore.Social.Configuration.Managers.ConfigurationManager">
+            <summary>
+            The configuration manager.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Configuration.Managers.ConfigurationManager.GetConfigurationData">
+            <summary>
+            The get configuration data.
+            </summary>
+            <returns>
+            The <see cref="T:Sitecore.Social.Configuration.Model.ConfigurationData" />.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Social.Configuration.Managers.ConfigurationManager.GetAttribute(System.Xml.XmlNode,System.String)">
+            <summary>
+            Gets the attribute value.
+            </summary>
+            <param name="node">The node.</param>
+            <param name="attribute">The attribute.</param>
+            <returns>The attribute value.</returns>
+        </member>
         <member name="T:Sitecore.Social.Configuration.Managers.GenderRuleConfigurationManager">
             <summary>
             The gender rule configuration manager.
             </summary>
         </member>
         <member name="M:Sitecore.Social.Configuration.Managers.GenderRuleConfigurationManager.GetConfigurationData">
+            <summary>
+            The get configuration data.
+            </summary>
+            <returns>
+            The <see cref="T:Sitecore.Social.Configuration.Model.ConfigurationData"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Social.Configuration.Managers.IConfigurationManager">
+            <summary>
+            The ConfigurationManager interface.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Configuration.Managers.IConfigurationManager.GetConfigurationData">
             <summary>
             The get configuration data.
             </summary>
@@ -434,36 +434,20 @@
             </summary>
             <returns>The configuration data.</returns>
         </member>
+        <member name="T:Sitecore.Social.Configuration.Managers.ConfigurationManagerAttribute">
+            <summary>
+            The config manager attribute.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Social.Configuration.Managers.ConfigurationManagerAttribute.ManagerType">
+            <summary>
+            Gets or sets the manager type.
+            </summary>
+        </member>
         <member name="T:Sitecore.Social.Configuration.Model.AnalyticsSettingsConfiguration">
             <summary>
             Represents analytics settings configuration.
             </summary>
-        </member>
-        <member name="T:Sitecore.Social.Configuration.Model.ConfigurationData">
-            <summary>
-            The configuration data.
-            </summary>
-        </member>
-        <member name="T:Sitecore.Social.Configuration.Model.IEmptyable">
-            <summary>
-            Defines the property that is used to check if an entity is empty.
-            </summary>
-        </member>
-        <member name="P:Sitecore.Social.Configuration.Model.IEmptyable.IsEmpty">
-            <summary>
-            Returns a Boolean value indicating if the specified instance is empty.
-            </summary>
-            <value>
-              <c>true</c> if this instance is empty; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Configuration.Model.ConfigurationData.IsEmpty">
-            <summary>
-            Returns a Boolean value indicating if the specified instance is empty.
-            </summary>
-            <value>
-              <c>true</c> if this instance is empty; otherwise, <c>false</c>.
-            </value>
         </member>
         <member name="F:Sitecore.Social.Configuration.Model.AnalyticsSettingsConfiguration.Empty">
             <summary>
@@ -795,31 +779,6 @@
             A read-only instance of the <see cref="T:Sitecore.Social.Configuration.Model.GenderRule.GenderSettings"/> class whose value represents not defined configuration.
             </summary>
         </member>
-        <member name="M:Sitecore.Social.Configuration.Model.GenderRule.GenderSettings.Equals(Sitecore.Social.Configuration.Model.GenderRule.GenderSettings)">
-            <summary>
-            Checks if the current GenderSettings is equal to another one.
-            </summary>
-            <param name="other">The other GenderSettings.</param>
-            <returns><c>true</c> if the current GenderSettings is equal to another one, otherwise <c>false</c>.</returns>
-        </member>
-        <member name="M:Sitecore.Social.Configuration.Model.GenderRule.GenderSettings.Equals(System.Object)">
-            <summary>
-            Determines whether the specified <see cref="T:System.Object"/> is equal to this instance.
-            </summary>
-            <param name="obj">The <see cref="T:System.Object"/> to compare with this instance.</param>
-            <returns>
-              <c>true</c> if the specified <see cref="T:System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-            </returns>
-            <exception cref="T:System.InvalidCastException">The 'obj' argument is not an Identifier object.</exception>
-        </member>
-        <member name="M:Sitecore.Social.Configuration.Model.GenderRule.GenderSettings.GetHashCode">
-            <summary>
-            Returns a hash code for this instance.
-            </summary>
-            <returns>
-            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
-            </returns>
-        </member>
         <member name="P:Sitecore.Social.Configuration.Model.GenderRule.GenderSettings.SitecoreKey">
             <summary>
             Gets or sets the sitecore key.
@@ -851,6 +810,31 @@
             <value>
               <c>true</c> if this instance is empty; otherwise, <c>false</c>.
             </value>
+        </member>
+        <member name="M:Sitecore.Social.Configuration.Model.GenderRule.GenderSettings.Equals(Sitecore.Social.Configuration.Model.GenderRule.GenderSettings)">
+            <summary>
+            Checks if the current GenderSettings is equal to another one.
+            </summary>
+            <param name="other">The other GenderSettings.</param>
+            <returns><c>true</c> if the current GenderSettings is equal to another one, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Sitecore.Social.Configuration.Model.GenderRule.GenderSettings.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" /> is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+            <exception cref="T:System.InvalidCastException">The 'obj' argument is not an Identifier object.</exception>
+        </member>
+        <member name="M:Sitecore.Social.Configuration.Model.GenderRule.GenderSettings.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
         </member>
         <member name="T:Sitecore.Social.Configuration.Model.GenderRule.NetworkSettings">
             <summary>
@@ -884,6 +868,19 @@
             </value>
         </member>
         <member name="P:Sitecore.Social.Configuration.Model.GenderRule.NetworkSettings.IsEmpty">
+            <summary>
+            Returns a Boolean value indicating if the specified instance is empty.
+            </summary>
+            <value>
+              <c>true</c> if this instance is empty; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:Sitecore.Social.Configuration.Model.IEmptyable">
+            <summary>
+            Defines the property that is used to check if an entity is empty.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Social.Configuration.Model.IEmptyable.IsEmpty">
             <summary>
             Returns a Boolean value indicating if the specified instance is empty.
             </summary>
@@ -1142,16 +1139,6 @@
             <value>
               <c>true</c> if this instance is empty; otherwise, <c>false</c>.
             </value>
-        </member>
-        <member name="T:Sitecore.Social.Configuration.Managers.ConfigurationManagerAttribute">
-            <summary>
-            The config manager attribute.
-            </summary>
-        </member>
-        <member name="P:Sitecore.Social.Configuration.Managers.ConfigurationManagerAttribute.ManagerType">
-            <summary>
-            Gets or sets the manager type.
-            </summary>
         </member>
         <member name="T:Sitecore.Social.Configuration.Model.Networks.MessageSettings">
             <summary>
@@ -1432,6 +1419,19 @@
             </value>
         </member>
         <member name="P:Sitecore.Social.Configuration.Model.Networks.PublisherSettings.IsEmpty">
+            <summary>
+            Returns a Boolean value indicating if the specified instance is empty.
+            </summary>
+            <value>
+              <c>true</c> if this instance is empty; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:Sitecore.Social.Configuration.Model.ConfigurationData">
+            <summary>
+            The configuration data.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Social.Configuration.Model.ConfigurationData.IsEmpty">
             <summary>
             Returns a Boolean value indicating if the specified instance is empty.
             </summary>

@@ -1,0 +1,21 @@
+﻿---
+ID: 5b8b4deb-33dc-4904-822e-5743862a6ec1
+Parent: 3ce15bd5-ae1c-455d-b359-6a18f80dcbd9
+Template: 455a3e98-a627-4b40-8035-e683a0331ac7
+Path: /sitecore/templates/Rio Grande/Components/Page/Parameters/Column1 Config/Column1 CSS Setting/Column1 CSS Class
+DB: master
+SharedFields:
+- ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
+  Hint: Type
+  Value: Single-Line Text
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 100
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160217T090148Z

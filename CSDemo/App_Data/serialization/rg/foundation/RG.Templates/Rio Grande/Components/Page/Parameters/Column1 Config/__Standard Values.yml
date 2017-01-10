@@ -4,6 +4,10 @@ Parent: 1af6ed60-6dec-4f36-a239-7deab79e1866
 Template: 0b336c1e-b0f2-40fe-970f-bdb4810b7bfe
 Path: /sitecore/templates/Rio Grande/Components/Page/Parameters/Column1 Config/__Standard Values
 DB: master
+SharedFields:
+- ID: 3094d236-5985-4c4f-ae6a-e30740885532
+  Hint: Caching
+  Value: 0|0|0|0|0|0|0|0
 Languages:
 - Language: en
   Versions:
@@ -12,3 +16,6 @@ Languages:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
       Value: 20160217T091439Z
+    - ID: aba1551f-acf0-4397-9009-ad73fb9a2e57
+      Hint: Column1 CSS Class
+      Value: col-md-12

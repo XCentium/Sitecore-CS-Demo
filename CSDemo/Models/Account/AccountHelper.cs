@@ -478,7 +478,7 @@ namespace CSDemo.Models.Account
                 catch (Exception ex)
                 {
 
-                    Log.Error("CatalogId Error", ex, this);
+                    Sitecore.Diagnostics.Log.Error("CatalogId Error", ex, this);
                 }
 
             }
@@ -736,7 +736,7 @@ namespace CSDemo.Models.Account
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex.Message, this);
+                    Sitecore.Diagnostics.Log.Error(ex.Message, this);
                 }
             }
 

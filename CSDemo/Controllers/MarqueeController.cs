@@ -50,7 +50,7 @@ namespace CSDemo.Controllers
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message, ex);
+                Sitecore.Diagnostics.Log.Error(ex.Message, ex);
             }
             return items.Where(i=>i!=null && i.Image!= null).ToList();
         }

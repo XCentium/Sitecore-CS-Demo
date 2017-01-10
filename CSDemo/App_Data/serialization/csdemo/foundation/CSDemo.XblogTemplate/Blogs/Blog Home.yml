@@ -1,0 +1,30 @@
+﻿---
+ID: 2f002842-aa9d-435f-96c6-a2b7e7db531f
+Parent: 639cab99-2d5a-4584-bf85-cb54656c1041
+Template: ab86861a-6030-46c5-b394-e8f99e8b87db
+Path: /sitecore/templates/XBlog/Page/Blogs/Blog Home
+DB: master
+SharedFields:
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: Applications/32x32/form_green.png
+- ID: 12c33f3f-86c5-43a5-aeb4-5598cec45116
+  Hint: __Base template
+  Type: tree list
+  Value: |
+    {1930BBEB-7805-471A-A3BE-4858AC7CF696}
+    {69F0EB70-7F15-4356-B036-7786332AC92F}
+- ID: f7d48a55-2158-4f02-9356-756654404f73
+  Hint: __Standard values
+  Value: {54A0DB01-51EE-41A3-937E-DBB0C463E78E}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20140820T152737
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

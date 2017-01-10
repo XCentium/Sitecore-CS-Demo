@@ -116,7 +116,7 @@ namespace CSDemo.Models.Product
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex.StackTrace, ex);
+                    Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
                 }
             }
             return categories;
@@ -141,7 +141,7 @@ namespace CSDemo.Models.Product
             }
             catch (Exception ex)
             {
-                Log.Error(ex.StackTrace, ex);
+                Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
             }
             return null;
         }
@@ -150,7 +150,7 @@ namespace CSDemo.Models.Product
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        internal static CategoryProductViewModel GetCategoryProducts(PaginationViewModel model)
+        internal static CategoryProductViewModel GetCategoryProducts(PaginationViewModel model, bool includeVariants = true)
         {
             var cartHelper = new CartHelper();
             var categoryProductVm = new CategoryProductViewModel {PaginationViewModel = model};
@@ -167,7 +167,7 @@ namespace CSDemo.Models.Product
                 {
                     var catChildren = catItem.GetChildren().Select(x => x.GlassCast<Product>()).ToList();
                     model.TotalItems = catChildren.Count();
-                    model.TotalPages = (long) Math.Ceiling((double) model.TotalItems/model.PageSize);
+                    model.TotalPages = (long)Math.Ceiling((double)model.TotalItems / model.PageSize);
 
                     // do sorting
                     if (!string.IsNullOrEmpty(model.OrderBy))
@@ -196,21 +196,26 @@ namespace CSDemo.Models.Product
 
                     // do paging
                     category.Products = catChildren
-                        .Skip(model.PageSize*(model.CurrentPage - 1))
+                        .Skip(model.PageSize * (model.CurrentPage - 1))
                         .Take(model.PageSize);
 
-                    // Process ProductVariants
-                    foreach (var product in category.Products)
+                    if (includeVariants)
                     {
-                        var catProdItem = catItem.GetChildren().FirstOrDefault(x => x.ID.ToGuid() == product.ID);
-                        if (catProdItem != null && catProdItem.HasChildren)
+                        // Process ProductVariants
+                        foreach (var product in category.Products)
                         {
-                            // Update ProductVariants
-                            product.ProductVariants =
-                                catProdItem.GetChildren().Select(x => x.GlassCast<ProductVariant>());
-                            BuildUiVariants(product);
+
+                            var catProdItem = catItem.GetChildren().FirstOrDefault(x => x.ID.ToGuid() == product.ID);
+                            if (catProdItem != null && catProdItem.HasChildren)
+                            {
+                                // Update ProductVariants
+                                product.ProductVariants =
+                                    catProdItem.GetChildren().Select(x => x.GlassCast<ProductVariant>());
+                                BuildUiVariants(product);
+                            }
+
+                            //var stockInfo = cartHelper.GetProductStockInformation(product.ProductId, product.CatalogName);
                         }
-                        var stockInfo = cartHelper.GetProductStockInformation(product.ProductId, product.CatalogName);
                     }
                 }
             }
@@ -370,26 +375,36 @@ namespace CSDemo.Models.Product
                     var categories = GetCategoryMenuListByParentId(parentId);
                     if (categories != null)
                     {
+                        var cnt = 0;
                         foreach (var category in categories)
                         {
+                            cnt++;
                             var c = new CategoryMenulistViewModel();
                             c.ID = category.ID.ToString();
                             c.Name = category.Name;
-                            c.Url = LinkManager.GetItemUrl(category);
-                            var categoryChildern = category.GetChildren();
-                            c.ProductsCount = categoryChildern.Count();
-                            var pList = new List<ProductMenulistViewModel>();
-                            foreach (Item categoryChild in categoryChildern)
+                            //c.Url = LinkManager.GetItemUrl(category);
+                            c.Url = "/categories/" + c.Name;
+
+
+                            // need to rewrite to boost performance
+                            var i = 0;
+                            if (2 < i)
                             {
-                                if (categoryChild.TemplateID.ToString() != Constants.Products.CategoriesTemplateId)
+                                var categoryChildern = category.GetChildren();
+                                c.ProductsCount = categoryChildern.Count();
+                                var pList = new List<ProductMenulistViewModel>();
+                                foreach (Item categoryChild in categoryChildern)
                                 {
-                                    var p = new ProductMenulistViewModel();
-                                    p.Name = categoryChild.DisplayName;
-                                    p.Url = LinkManager.GetItemUrl(categoryChild);
-                                    pList.Add(p);
+                                    if (categoryChild.TemplateID.ToString() != Constants.Products.CategoriesTemplateId)
+                                    {
+                                        var p = new ProductMenulistViewModel();
+                                        p.Name = categoryChild.DisplayName;
+                                        p.Url = LinkManager.GetItemUrl(categoryChild);
+                                        pList.Add(p);
+                                    }
                                 }
+                                c.ProductMenulistViewModel = pList;
                             }
-                            c.ProductMenulistViewModel = pList;
                             categoryMenulistViewModel.Add(c);
                         }
                     }
@@ -407,27 +422,51 @@ namespace CSDemo.Models.Product
         /// <returns></returns>
         private static List<Item> GetCategoryMenuListByParentId(string parentId)
         {
-
+            var output = new List<Item>();
             var catParentItem = Context.Database.GetItem(new ID(parentId));
 
             try
             {
                 if (catParentItem != null)
                 {
-                    var catItem =
-                        catParentItem.Axes.GetDescendants()
-                            .Where(
-                                x =>
-                                    x.TemplateName.Equals(Constants.Products.GeneralCategoryTemplateName,
-                                        StringComparison.InvariantCultureIgnoreCase))
-                            .ToList();
 
-                    return catItem;
+                    var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
+                    try
+                    {
+                        var culture = Context.Language.CultureInfo;
+                        using (var context = index.CreateSearchContext())
+                        {
+
+                            var queryable = context.GetQueryable<SearchResultItem>()
+                                    .Where(x => x.Language == Context.Language.Name);
+                            var result =
+                                queryable.Where(
+                                    x =>
+                                        (x.TemplateName == "GeneralCategory") && x.Path.Contains(catParentItem.Paths.Path) 
+                                         ).ToList();
+
+                            if (result != null && result.Any())
+                            {
+                                foreach (var r in result)
+                                {
+                                    output.Add(r.GetItem());
+                                   
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
+                       
+                    }
+
+                    return output;
                 }
             }
             catch (Exception ex)
             {
-                Log.Error(ex.StackTrace, ex);
+                Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
             }
             return null;
         }
@@ -458,7 +497,7 @@ namespace CSDemo.Models.Product
             }
             catch (Exception ex)
             {
-                Log.Error(ex.StackTrace, ex);
+                Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
             }
             return string.Empty;
         }
@@ -485,7 +524,7 @@ namespace CSDemo.Models.Product
             }
             catch (Exception ex)
             {
-                Log.Error(ex.StackTrace, ex);
+                Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
             }
             return null;
         }
@@ -604,7 +643,7 @@ namespace CSDemo.Models.Product
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message, ex);
+                Sitecore.Diagnostics.Log.Error(ex.Message, ex);
             }
             return resp;
         }
@@ -658,7 +697,7 @@ namespace CSDemo.Models.Product
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message, ex);
+                Sitecore.Diagnostics.Log.Error(ex.Message, ex);
             }
             return resp;
         }
@@ -682,10 +721,12 @@ namespace CSDemo.Models.Product
                 if (productVariants.Any())
                 {
                     var theVariants = new List<ProductVariant>();
+                    
                     for (var i = 0; i < productVariants.Count(); i++)
                     {
                         productVariants[i] = UpdateVariantProperties(productVariants[i], product, cartHelper);
                         theVariants.Add(productVariants[i]);
+                        if (i < 1 && string.IsNullOrEmpty(product.DefaultVariant)) { product.DefaultVariant = productVariants[i].VariantId; }
                     }
                     product.ProductVariants = theVariants;
                 }
@@ -750,7 +791,7 @@ namespace CSDemo.Models.Product
             }
             catch (Exception ex)
             {
-                Log.Error(ex.StackTrace, ex);
+                Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
             }
             return null;
         }
@@ -868,7 +909,7 @@ namespace CSDemo.Models.Product
                                     }
                                     catch (Exception ex)
                                     {
-                                        Log.Error(ex.StackTrace, ex);
+                                        Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
 
                                     }
                                 }
@@ -899,15 +940,12 @@ namespace CSDemo.Models.Product
         /// <returns></returns>
         internal static string GetItemIdsFromName(string categoryName, string catalogIds)
         {
-
             // get the catalog ids for this user
             // loop through the ids and get ids of children items with the given name
-
             var categoryChildIds = new List<string>();
 
             if (!string.IsNullOrEmpty(catalogIds))
             {
-
                 var catalogs = catalogIds.Split(Constants.Common.PipeSeparator);
 
                 foreach (var catalogId in catalogs)
@@ -915,23 +953,42 @@ namespace CSDemo.Models.Product
                     var catalog = Sitecore.Context.Database.GetItem(new ID(catalogId));
                     if (catalog != null)
                     {
-                        var childitems =
-                            catalog.Axes.GetDescendants()
-                                .Where(n => n.Name.Equals(categoryName, StringComparison.InvariantCultureIgnoreCase))
-                                .ToList();
-
-                        if (childitems.Any())
+                        var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
+                        try
                         {
-                            categoryChildIds.AddRange(childitems.Select(i => i.ID.ToString()));
+                            var culture = Context.Language.CultureInfo;
+                            using (var context = index.CreateSearchContext())
+                            {
+
+                                var queryable = context.GetQueryable<SearchResultItem>()
+                                        .Where(x => x.Language == Context.Language.Name);
+                                var result =
+                                    queryable.Where(
+                                        x =>
+                                            (x.Name.Contains(categoryName) && x.Path.Contains(catalog.Paths.Path) &&
+                                             x.TemplateName == "GeneralCategory")).ToList();
+
+                                if (result != null && result.Any())
+                                {
+                                    foreach (var r in result)
+                                    {
+                                        if (r.Name.ToLower() == categoryName.ToLower()){
+                                            categoryChildIds.Add(r.ItemId.ToString());
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
+                            return string.Empty;
                         }
 
                     }
                 }
+                return (categoryChildIds.Count < 1) ? String.Empty : categoryChildIds.Aggregate((current, next) => current + Constants.Common.PipeStringSeparator + next);
 
-                return (categoryChildIds.Count < 1)
-                    ? String.Empty
-                    : categoryChildIds.Aggregate(
-                        (current, next) => current + Constants.Common.PipeStringSeparator + next);
             }
 
             return string.Empty;
@@ -981,8 +1038,8 @@ namespace CSDemo.Models.Product
                         return
                             queryable.Where(
                                 x =>
-                                    (x.Name.Contains(query) && x.Path.Contains("/departments/") &&
-                                     x.TemplateName != "GeneralCategory")).ToList();
+                                    (x.Name.Contains(query) && x.Path.Contains("/sitecore/commerce/catalog") &&
+                                     x.TemplateName != "GeneralCategory")).Take(5).ToList();
                     }
                     else
                     {
@@ -991,14 +1048,14 @@ namespace CSDemo.Models.Product
                         return
                             queryable.Where(
                                 x =>
-                                    (x.Name.Contains(query) && x.Path.Contains("/departments/") &&
-                                     x.TemplateName == "GeneralCategory")).ToList();
+                                    (x.Name.Contains(query) && x.Path.Contains("/sitecore/commerce/catalog") &&
+                                     x.TemplateName == "GeneralCategory")).Take(5).ToList();
                     }
                 }
             }
             catch (Exception ex)
             {
-                Log.Error(ex.StackTrace, ex);
+                Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
             }
             return null;
         }
@@ -1026,12 +1083,18 @@ namespace CSDemo.Models.Product
                         var parentName = productItem.Parent.Name;
                         if (product.ProductId != null)
                         {
-                            productList.Add(new ProductMini {Id = product.ProductId, CategoryName = parentName, CatalogId = catalogId, Guid = Sitecore.Data.ID.Parse(product.ID).ToString(), Title  = product.Title, Price = product.Price, CatalogName = catalogName, ImageSrc= product.FirstImage});
+                            var variantId = "-1";
+                            if (productItem.HasChildren)
+                            {
+                                var child = productItem.Children.FirstOrDefault();
+                                variantId = child.Name;
+                            }
+                            productList.Add(new ProductMini {Id = product.ProductId, CategoryName = parentName, CatalogId = catalogId, Guid = Sitecore.Data.ID.Parse(product.ID).ToString(), Title  = product.Title, Price = product.Price, CatalogName = catalogName, ImageSrc= product.FirstImage, VariantId= variantId });
                         }
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex.StackTrace, ex);
+                        Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
                     }
                 }
             }
@@ -1075,7 +1138,7 @@ namespace CSDemo.Models.Product
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex.StackTrace, ex);
+                        Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
                     }
                 }
             }

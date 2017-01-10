@@ -13,6 +13,7 @@ using Sitecore.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
 
@@ -93,22 +94,28 @@ namespace CSDemo.AJAX
 
             return ret;
         }
-
-        
-
-
-        
+       
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public bool ApplyShippingAndBillingToCart(string firstname, string lastname, string email, string company,
-            string address, string addressline1, string city, string country, string fax, string phone, string zip,
+            string address, string addressline1, string city, string state, string country, string countryName, string fax, string phone, string zip,
             string firstname2, string lastname2, string email2, string company2, string address2, string addressline12,
-            string city2, string country2, string fax2, string phone2, string zip2, string billandshipping)
+            string city2, string state2, string country2, string countryName2, string fax2, string phone2, string zip2, string billandshipping)
         {
 
+
+            // var app = CartHelper.AddShippingMethodToCart("e14965b9-306a-43c4-bffc-3c67be8726fa");
             return CartHelper.ApplyShippingAndBillingToCart(firstname, lastname, email, company, address, addressline1,
-                city, country, fax, phone, zip, firstname2, lastname2, email2, company2, address2, addressline12, city2,
-                country2, fax2, phone2, zip2);
+                city, state, country, countryName, fax, phone, zip, firstname2, lastname2, email2, company2, address2, addressline12, city2, state2,
+                country2, countryName2, fax2, phone2, zip2);
+
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public bool ApplyShippingToCart(Models.Checkout.Cart.Address shipping)
+        {
+            return CartHelper.ApplyShippingToCart(shipping);
 
         }
 
@@ -127,6 +134,64 @@ namespace CSDemo.AJAX
             return CartHelper.ApplyPaymentMethodToCart(paymentExternalID, nameoncard, creditcard, expmonth, expyear, ccv);
         }
 
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public bool ApplyNewPaymentMethodToCart(Payment cartPayment)
+        {
+            return CartHelper.ApplyNewPaymentMethodToCart(cartPayment);
+
+        }
+
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public bool ApplyPaymentMethodToCart2(string nounceData, string cardPrefixData)
+        {
+            return CartHelper.ApplyPaymentMethodToCart2(nounceData, cardPrefixData);
+
+        }
+
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string SubmitCartOrder(string inputModel)
+        {
+            var inputModelObj = new JavaScriptSerializer().Deserialize<SubmitOrderInputModel>(inputModel);
+            return CartHelper.SubmitOrder(inputModelObj);
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public bool SetPaymentMethodToCart(string inputModel)
+        {
+            var inputModelObj = new JavaScriptSerializer().Deserialize<PaymentInputModel>(inputModel);
+            //var result = "{'FederatedPayment':{'CardToken':'83f75be7 - 5f73 - 0f07 - 190e-df2017045f5b','Amount':'198.00','CardPaymentAcceptCardPrefix':'paypal'},'BillingAddress':{'Name':'billing','Address1':'Test AddressLine1','Country':'Test Country','City':'Test City','State':'Test State','ZipPostalCode':'12345','ExternalId':'','PartyId':''}}";
+            //var inputModel = new JavaScriptSerializer().Deserialize<PaymentInputModel>(result);
+            //    "{"FederatedPayment":{"CardToken":"83f75be7 - 5f73 - 0f07 - 190e-df2017045f5b","Amount":"198.00","CardPaymentAcceptCardPrefix":"paypal"},"BillingAddress":{"Name":"billing","Address1":"Test AddressLine1","Country":"Test Country","City":"Test City","State":"Test State","ZipPostalCode":"12345","ExternalId":"","PartyId":""}}"
+            return CartHelper.SetPaymentMethods(inputModelObj);
+        }
+
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public bool SetPaymentMethodToCart2(string nounce)
+        {
+            return CartHelper.CompleteACheckout4(nounce);
+        }
+
+        //[WebMethod(EnableSession = true)]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        //public bool SetPaymentMethodToCart(PaymentInputModel inputModel)
+        //{
+        //    return CartHelper.SetPaymentMethods(inputModel);
+        //}
+
+        //[WebMethod(EnableSession = true)]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        //public bool SetPaymentMethodToCart(PaymentInputModel inputModel)
+        //{
+        //    return CartHelper.SetPaymentMethods(inputModel);
+        //}
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -245,8 +310,6 @@ namespace CSDemo.AJAX
         public object GetProductsResult(string query)
         {
             var products = new List<object>();
-
-            //return "aaaa,bbbb,ccccc,dd,eeeee,fff,gggggg hhh".Split(',').ToList();
             
             var productsResult = ProductHelper.GetProductsByName(query);
 
@@ -254,7 +317,7 @@ namespace CSDemo.AJAX
             {
                 foreach (var product in productsResult)
                 {
-                    products.Add(new {Id = product.Id, CategoryName = product.CategoryName, CatalogId = product.CatalogId, Guid = product.Guid, Title  = product.Title, Price = product.Price, CatalogName = product.CatalogName, ImageSrc= product.ImageSrc});
+                    products.Add(new {Id = product.Id, CategoryName = product.CategoryName, CatalogId = product.CatalogId, Guid = product.Guid, Title  = product.Title, Price = product.Price, CatalogName = product.CatalogName, ImageSrc= product.ImageSrc, VariantId = product.VariantId });
                   
                 }
             }
@@ -371,12 +434,12 @@ namespace CSDemo.AJAX
                 var goalItem = deliveryDatabase.GetItem(goalId);
                 if (goalItem == null)
                 {
-                    Log.Error($"Unable to register goal with ID {goalId}. Make sure everything is deployed and published correctly.", this);
+                    Sitecore.Diagnostics.Log.Error($"Unable to register goal with ID {goalId}. Make sure everything is deployed and published correctly.", this);
                 }
                 var goal = new PageEventItem(goalItem);
                 if (goal == null)
                 {
-                    Log.Error($"Unable to register page event goal with ID {goalId}. Make sure everything is deployed and published correctly.", this);
+                    Sitecore.Diagnostics.Log.Error($"Unable to register page event goal with ID {goalId}. Make sure everything is deployed and published correctly.", this);
                 }
                 var pageEventsRow = Tracker.Current.CurrentPage.Register(goal);
 
@@ -392,7 +455,7 @@ namespace CSDemo.AJAX
             }
             catch(Exception ex)
             {
-                Log.Error($"Unable to register goal with ID {goalId}.", ex);
+                Sitecore.Diagnostics.Log.Error($"Unable to register goal with ID {goalId}.", ex);
             }
         }
 

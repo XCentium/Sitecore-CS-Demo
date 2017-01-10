@@ -13,8 +13,9 @@
         isUserLoggedInCommerceUser();
         
         checkIfCommerceActionsAllowed();
-        loadCheckoutFormData();
+
         loadPaymentFormData();
+        loadCheckoutFormData();
         loadShippingFormData();
         loadReviewFormData();
         loadOrderConfirmationData();
@@ -650,7 +651,7 @@
 
     function loadCheckoutFormData() {
 
-        // if CheckoutForm exists
+        // if CheckoutForm exists 
         if ($("#checkout-form").length) {
 
             // If checkoutFormCookie exists
@@ -669,6 +670,28 @@
             }
 
         }
+
+
+        if ($("#payment-form").length) {
+
+            // If checkoutFormCookie exists
+            if (typeof (Cookies.get("checkout_form")) !== "undefined") {
+
+                // Load the data
+                // Get data from cookie
+                var formValues = Cookies.get("checkout_form");
+
+                formValues = JSON.parse(formValues);
+
+                console.log(formValues);
+
+                $("#payment-form").values(formValues);
+
+            }
+
+        }
+
+
     }
 
     function actionMessageFixed(message) {
@@ -726,58 +749,38 @@
 
             console.log(formValues);
 
-            var data = "firstname:'" + formValues.firstname[0] + "',";
-            data += "lastname:'" + formValues.lastname[0] + "',";
-            data += "email:'" + formValues.email[0] + "',";
-            data += "company:'" + formValues.company[0] + "',";
-            data += "address:'" + formValues.address[0] + "',";
-            data += "addressline1:'" + formValues.addressline1[0] + "',";
-            data += "city:'" + formValues.city[0] + "',";
-            data += "country:'" + formValues.country[0] + "',";
-            data += "fax:'" + formValues.fax[0] + "',";
-            data += "phone:'" + formValues.phone[0] + "',";
-            data += "zip:'" + formValues.zip[0] + "',";
+            var shipping = {};
+            shipping.FirstName = formValues.firstname[0];
+            shipping.LastName = formValues.lastname[0];
+            shipping.Address1 = formValues.address[0];
+            shipping.Address2 = formValues.addressline1[0];
+            shipping.City = formValues.city[0];
+            shipping.State = formValues.state[0];
+            shipping.Company = formValues.company[0];
+            shipping.Email = formValues.email[0];
+            shipping.FaxNumber = formValues.fax[0];
+            shipping.Country = formValues.countryName[0];
+            shipping.CountryCode = formValues.country[0];
+            shipping.ZipPostalCode = formValues.zip[0];
 
-            if (formValues.firstname2[0] == 0) {
-                data += "firstname2:'" + formValues.firstname[0] + "',";
-                data += "lastname2:'" + formValues.lastname[0] + "',";
-                data += "email2:'" + formValues.email[0] + "',";
-                data += "company2:'" + formValues.company[0] + "',";
-                data += "address2:'" + formValues.address[0] + "',";
-                data += "addressline12:'" + formValues.addressline1[0] + "',";
-                data += "city2:'" + formValues.city[0] + "',";
-                data += "country2:'" + formValues.country[0] + "',";
-                data += "fax2:'" + formValues.fax[0] + "',";
-                data += "phone2:'" + formValues.phone[0] + "',";
-                data += "zip2:'" + formValues.zip[0] + "',";
-            } else {
-                data += "firstname2:'" + formValues.firstname2[0] + "',";
-                data += "lastname2:'" + formValues.lastname2[0] + "',";
-                data += "email2:'" + formValues.email2[0] + "',";
-                data += "company2:'" + formValues.company2[0] + "',";
-                data += "address2:'" + formValues.address2[0] + "',";
-                data += "addressline12:'" + formValues.addressline12[0] + "',";
-                data += "city2:'" + formValues.city2[0] + "',";
-                data += "country2:'" + formValues.country2[0] + "',";
-                data += "fax2:'" + formValues.fax2[0] + "',";
-                data += "phone2:'" + formValues.phone2[0] + "',";
-                data += "zip2:'" + formValues.zip2[0] + "',";
-            }
+            var shippingData = { "shipping": shipping };
 
-            data += "billandshipping:'1'";
-
-            console.log(data);
+            console.log(shippingData);
 
             $.ajax({
                 type: "POST",
-                url: "/AJAX/cart.asmx/ApplyShippingAndBillingToCart",
-                data: "{" + data + "}",
+                url: "/AJAX/cart.asmx/ApplyShippingToCart",
+                data: JSON.stringify(shippingData),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result) {
+                    if (result.d == true) {
+                        showActionMessage("Shipping Applied");
+                        redirectPage(thisObj.attr("href"));
+                    } else {
+                        showActionMessageFixed("Error! Please try again");
+                    }
 
-                    showActionMessage("Shipping and Billing Applied");
-                    redirectPage(thisObj.attr("href"));
                 },
                 error: function (error) {
                     console.log(error);
@@ -973,6 +976,7 @@
             var radioVal = $(":radio[name='optionsRadios']:checked").val();
             var radioIdx = $(":radio[name='optionsRadios']:checked").index(":radio[name='optionsRadios']");
 
+            $('#nounceData').val(accessCode);
             // save data 
             saveFormData("#payment-form", "payment_form");
 
@@ -980,25 +984,57 @@
 
             console.log(formValues);
 
-            var data = "paymentExternalID:'" + radioVal + "',";
-            data += "nameoncard:'" + formValues.nameoncard[radioIdx] + "',";
-            data += "creditcard:'" + formValues.creditcard[radioIdx] + "',";
-            data += "expmonth:'" + formValues.expmonth[radioIdx] + "',";
-            data += "expyear:'" + formValues.expyear[radioIdx] + "',";
-            data += "ccv:'" + formValues.ccv[radioIdx] + "'";
+            var payment = {};
+            payment.Token = accessCode;
+            payment.CardPrefix = $('#cardPrefixData').val();
+
+            var billing = {};
+            billing.FirstName = formValues.firstname[0];
+            billing.LastName = formValues.lastname[0];
+            billing.Address1 = formValues.address[0];
+            billing.Address2 = formValues.addressline1[0];
+            billing.City = formValues.city[0];
+            billing.State = formValues.state[0];
+            billing.Company = formValues.company[0];
+            billing.Email = formValues.email[0];
+            billing.FaxNumber = formValues.fax[0];
+            billing.Country = formValues.countryName[0];
+            billing.CountryCode = formValues.country[0];
+            billing.ZipPostalCode = formValues.zip[0];
+
+            console.log(billing);
+            payment.BillingAddress = billing;
+
+            //console.log(payment);
+
+            //console.log(JSON.stringify(payment));
+
+            var cartPayment = { "cartPayment": payment };
+            console.log(cartPayment);
+            console.log(JSON.stringify(cartPayment));
+
+
+            if (accessCode == "") {
+                showActionMessageFixed("Please validate payment first");
+                return false;
+            }
 
             $.ajax({
                 type: "POST",
-                url: "/AJAX/cart.asmx/ApplyPaymentMethodToCart",
-                data: "{" + data + "}",
+                url: "/AJAX/cart.asmx/ApplyNewPaymentMethodToCart",
+                data: JSON.stringify(cartPayment),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result) {
 
-                    showActionMessage("Payment Method Applied");
+                    if (result.d == true) {
+                        showActionMessage("Payment Method Applied");
 
-                    redirectPage(thisObj.attr("href"));
-
+                        redirectPage(thisObj.attr("href"));
+                    } else {
+                        showActionMessageFixed("Error! Please try again");
+                        return false;
+                    }
                 },
                 error: function (error) {
                     console.log(error);
@@ -1007,7 +1043,7 @@
 
             });
 
-            return true;
+
 
         } else {
 
@@ -1022,7 +1058,7 @@
 
     function loadReviewFormData() {
 
-        // if CheckoutForm exists
+        // if review Form exists
         if ($("#review-form").length) {
 
             var formValues = "";
@@ -1033,24 +1069,14 @@
 
                 formValues = JSON.parse(formValues);
 
+                console.log("---Checkout form------");
                 console.log(formValues);
 
-                $("#billingAddress").append("<li><b>" + formValues.firstname[0] + " " + formValues.lastname[0] + "</b><li>");
-                $("#billingAddress").append("<li>" + formValues.address[0] + "<li>");
-                $("#billingAddress").append("<li>" + formValues.zip[0] + " " + formValues.city[0] + "<li>");
-                $("#billingAddress").append("<li>" + formValues.country[0] + "<li>");
+                $("#shippingAddress").append("<li><b>" + formValues.firstname[0] + " " + formValues.lastname[0] + "</b><li>");
+                $("#shippingAddress").append("<li>" + formValues.address[0] + "<li>");
+                $("#shippingAddress").append("<li>" + formValues.zip[0] + " " + formValues.city[0] + "<li>");
+                $("#shippingAddress").append("<li>" + formValues.country[0] + "<li>");
 
-                if (formValues.firstname2[0] == 0) {
-                    $("#shippingAddress").append("<li><b>" + formValues.firstname[0] + " " + formValues.lastname[0] + "</b><li>");
-                    $("#shippingAddress").append("<li>" + formValues.address[0] + "<li>");
-                    $("#shippingAddress").append("<li>" + formValues.zip[0] + " " + formValues.city[0] + "<li>");
-                    $("#shippingAddress").append("<li>" + formValues.country[0] + "<li>");
-                } else {
-                    $("#shippingAddress").append("<li><b>" + formValues.firstname2[0] + " " + formValues.lastname2[0] + "</b><li>");
-                    $("#shippingAddress").append("<li>" + formValues.address2[0] + "<li>");
-                    $("#shippingAddress").append("<li>" + formValues.zip2[0] + " " + formValues.city2[0] + "<li>");
-                    $("#shippingAddress").append("<li>" + formValues.country2[0] + "<li>");
-                }
 
                 $("#orderDetails").append("<li><b>Email:</b> " + formValues.email[0] + "<li>");
                 $("#orderDetails").append("<li><b>Phone:</b> " + formValues.phone[0] + "<li>");
@@ -1064,8 +1090,15 @@
 
                 formValues = JSON.parse(formValues);
 
+                console.log("---Payment form------");
                 console.log(formValues);
-                $("#paymentMethod").append("<li>" + formValues.Payment_Type_Description[0] + "<li>");
+
+                $("#billingAddress").append("<li><b>" + formValues.firstname[0] + " " + formValues.lastname[0] + "</b><li>");
+                $("#billingAddress").append("<li>" + formValues.address[0] + "<li>");
+                $("#billingAddress").append("<li>" + formValues.zip[0] + " " + formValues.city[0] + "<li>");
+                $("#billingAddress").append("<li>" + formValues.country[0] + "<li>");
+
+                //$("#paymentMethod").append("<li>" + formValues.Payment_Type_Description[0] + "<li>");
 
             }
 
@@ -1075,6 +1108,7 @@
 
                 formValues = JSON.parse(formValues);
 
+                console.log("---Shipping form------");
                 console.log(formValues);
 
                 $("#shippingMethod").append("<li>" + formValues.optionsRadios[0] + "<li>");
@@ -1350,9 +1384,11 @@
             success: function (result) {
 
                 console.log(result.d);
-
-                showActionMessageReload("Promocode Applied");
-
+                if (result.d == true) {
+                    showActionMessageReload("Promocode Applied");
+                } else {
+                    showActionMessageFixed("ERROR!! Promocode NOT Applied");
+                }
             },
             error: function (error) {
                 showActionMessageFixed("ERROR!! Promocode NOT Applied");

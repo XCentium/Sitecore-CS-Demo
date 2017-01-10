@@ -27,7 +27,7 @@
             The get configuration data.
             </summary>
             <returns>
-            The <see cref="T:Sitecore.Social.Configuration.Model.ConfigurationData"/>.
+            The <see cref="T:Sitecore.Social.Configuration.Model.ConfigurationData" />.
             </returns>
         </member>
         <member name="T:Sitecore.Social.Klout.Api.Configuration.Model.KloutSettingsConfiguration">
@@ -387,11 +387,6 @@
             </summary>
             <param name="innerItem">Inner item.</param>
         </member>
-        <member name="M:Sitecore.Social.Klout.Api.DataProviders.Items.EntityItem.EnsureEditing">
-            <summary>
-            Ensure the item is in the edit mode.
-            </summary>
-        </member>
         <member name="P:Sitecore.Social.Klout.Api.DataProviders.Items.EntityItem.Name">
             <summary>
             Gets the name.
@@ -410,6 +405,11 @@
             <value>
             The path.
             </value>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.DataProviders.Items.EntityItem.EnsureEditing">
+            <summary>
+            Ensure the item is in the edit mode.
+            </summary>
         </member>
         <member name="T:Sitecore.Social.Klout.Api.DataProviders.Items.KloutApplicationItem">
             <summary>
@@ -502,6 +502,131 @@
             Defines methods to manage Klout application persistence on an item.
             </summary>
         </member>
+        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider"/> class with the specified database name.
+            </summary>
+            <param name="databaseName">Name of the database.</param>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.#ctor(Sitecore.Data.Database)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider"/> class with the specified database.
+            </summary>
+            <param name="database">The database.</param>
+        </member>
+        <member name="P:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.Database">
+            <summary>
+            Gets the database.
+            </summary>
+            <value>
+            The database.
+            </value>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.GetKloutApplicationsByContainer(System.String,System.Boolean)">
+            <summary>
+            Gets Klout applications by container.
+            </summary>
+            <param name="kloutApplicationContainer">The Klout application container.</param>
+            <param name="searchForDescendants">if set to <c>true</c> sub-containers are included to the search.</param>
+            <returns>
+            The Klout application list. If no Klout applications are found an empty list is returned.
+            </returns>
+            <exception cref="T:Sitecore.Exceptions.ItemNotFoundException"></exception>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.GetKloutApplication(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets a Klout application by id.
+            </summary>
+            <param name="kloutApplicationId">The Klout application identifier.</param>
+            <returns>
+            The Klout application. If the Klout application is not found <see cref="F:Sitecore.Social.Klout.Api.Domain.Model.KloutApplication.Empty" /> is returned.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.CreateKloutApplication(Sitecore.Social.Klout.Api.Domain.Model.KloutApplication)">
+            <summary>
+            Creates a Klout application.
+            </summary>
+            <param name="kloutApplication">The Klout application.</param>
+            <exception cref="T:Sitecore.Exceptions.ItemNotFoundException">The container is not found.</exception>
+            <remarks>
+            The <see cref="P:Sitecore.Social.Klout.Api.Domain.Model.KloutApplication.Id" /> will contain the identifier.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.UpdateKloutApplication(Sitecore.Social.Klout.Api.Domain.Model.KloutApplication)">
+            <summary>
+            Updates a Klout application.
+            </summary>
+            <param name="kloutApplication">The Klout application.</param>
+            <exception cref="T:Sitecore.Exceptions.ItemNotFoundException">
+            The item is not found.
+            The container is not found.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.DeleteKloutApplication(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Deletes a Klout application.
+            </summary>
+            <param name="kloutApplicationId">The Klout application identifier.</param>
+            <exception cref="T:Sitecore.Exceptions.ItemNotFoundException">The item is not found.</exception>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.CreateKloutApplication(Sitecore.Social.Klout.Api.DataProviders.Items.KloutApplicationItem)">
+            <summary>
+            Creates the Klout application from a Klout application item.
+            </summary>
+            <param name="kloutApplicationItem">The Klout application item.</param>
+            <returns>The Klout application.</returns>
+        </member>
+        <member name="T:Sitecore.Social.Klout.Api.DataProviders.XdbKloutProfileDataProvider">
+            <summary>
+            Defines methods to manage Klout profile persistence on a contact via facet.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Social.Klout.Api.DataProviders.XdbKloutProfileDataProvider.KloutProfileFacetKey">
+            <summary>
+            The Klout profile facet key
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.DataProviders.XdbKloutProfileDataProvider.#ctor(Sitecore.Social.SitecoreAccess.Analytics.IContactDataProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.DataProviders.XdbKloutProfileDataProvider" /> class.
+            </summary>
+            <param name="contactDataProvider">The contact data provider.</param>
+        </member>
+        <member name="P:Sitecore.Social.Klout.Api.DataProviders.XdbKloutProfileDataProvider.ContactDataProvider">
+            <summary>
+            Gets the contact data provider.
+            </summary>
+            <value>
+            The contact data provider.
+            </value>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.DataProviders.XdbKloutProfileDataProvider.GetKloutProfile(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets a Klout profile of the contact.
+            </summary>
+            <param name="contactId">The contact identifier.</param>
+            <returns>
+            The Klout profile. If Klout profile is not exist, an empty profile is returned.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.DataProviders.XdbKloutProfileDataProvider.UpdateKloutProfile(Sitecore.Social.Domain.Model.Identifier,Sitecore.Social.Klout.Api.Domain.Model.KloutProfile)">
+            <summary>
+            Updates a Klout profile of the specified contact.
+            </summary>
+            <param name="contactId">The contact identifier.</param>
+            <param name="kloutProfile">The Klout profile.</param>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.DataProviders.XdbKloutProfileDataProvider.RemoveKloutProfile(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Removes a Klout profile from the specified contact.
+            </summary>
+            <param name="contactId">The contact identifier.</param>
+        </member>
         <member name="T:Sitecore.Social.Klout.Api.Domain.IKloutApplicationDataProvider">
             <summary>
             Defines methods to manage Klout application persistence.
@@ -542,158 +667,6 @@
             Deletes a Klout application.
             </summary>
             <param name="kloutApplicationId">The Klout application identifier.</param>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider"/> class.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider"/> class with the specified database name.
-            </summary>
-            <param name="databaseName">Name of the database.</param>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.#ctor(Sitecore.Data.Database)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider"/> class with the specified database.
-            </summary>
-            <param name="database">The database.</param>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.GetKloutApplicationsByContainer(System.String,System.Boolean)">
-            <summary>
-            Gets Klout applications by container.
-            </summary>
-            <param name="kloutApplicationContainer">The Klout application container.</param>
-            <param name="searchForDescendants">if set to <c>true</c> sub-containers are included to the search.</param>
-            <returns>
-            The Klout application list. If no Klout applications are found an empty list is returned.
-            </returns>
-            <exception cref="T:Sitecore.Exceptions.ItemNotFoundException"></exception>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.GetKloutApplication(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets a Klout application by id.
-            </summary>
-            <param name="kloutApplicationId">The Klout application identifier.</param>
-            <returns>
-            The Klout application. If the Klout application is not found <see cref="F:Sitecore.Social.Klout.Api.Domain.Model.KloutApplication.Empty"/> is returned.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.CreateKloutApplication(Sitecore.Social.Klout.Api.Domain.Model.KloutApplication)">
-            <summary>
-            Creates a Klout application.
-            </summary>
-            <param name="kloutApplication">The Klout application.</param>
-            <exception cref="T:Sitecore.Exceptions.ItemNotFoundException">The container is not found.</exception>
-            <remarks>
-            The <see cref="P:Sitecore.Social.Klout.Api.Domain.Model.KloutApplication.Id"/> will contain the identifier.
-            </remarks>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.UpdateKloutApplication(Sitecore.Social.Klout.Api.Domain.Model.KloutApplication)">
-            <summary>
-            Updates a Klout application.
-            </summary>
-            <param name="kloutApplication">The Klout application.</param>
-            <exception cref="T:Sitecore.Exceptions.ItemNotFoundException">
-            The item is not found.
-            The container is not found.
-            </exception>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.DeleteKloutApplication(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Deletes a Klout application.
-            </summary>
-            <param name="kloutApplicationId">The Klout application identifier.</param>
-            <exception cref="T:Sitecore.Exceptions.ItemNotFoundException">The item is not found.</exception>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.CreateKloutApplication(Sitecore.Social.Klout.Api.DataProviders.Items.KloutApplicationItem)">
-            <summary>
-            Creates the Klout application from a Klout application item.
-            </summary>
-            <param name="kloutApplicationItem">The Klout application item.</param>
-            <returns>The Klout application.</returns>
-        </member>
-        <member name="P:Sitecore.Social.Klout.Api.DataProviders.KloutApplicationItemDataProvider.Database">
-            <summary>
-            Gets the database.
-            </summary>
-            <value>
-            The database.
-            </value>
-        </member>
-        <member name="T:Sitecore.Social.Klout.Api.DataProviders.XdbKloutProfileDataProvider">
-            <summary>
-            Defines methods to manage Klout profile persistence on a contact via facet.
-            </summary>
-        </member>
-        <member name="T:Sitecore.Social.Klout.Api.Domain.IKloutProfileDataProvider">
-            <summary>
-            Defines methods to manage Klout profile persistence.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.Domain.IKloutProfileDataProvider.GetKloutProfile(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets a Klout profile of the contact.
-            </summary>
-            <param name="contactId">The contact identifier.</param>
-            <returns>
-            The Klout profile. If Klout profile is not exist, an empty profile is returned.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.Domain.IKloutProfileDataProvider.UpdateKloutProfile(Sitecore.Social.Domain.Model.Identifier,Sitecore.Social.Klout.Api.Domain.Model.KloutProfile)">
-            <summary>
-            Updates a Klout profile of the specified contact.
-            </summary>
-            <param name="contactId">The contact identifier.</param>
-            <param name="kloutProfile">The Klout profile.</param>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.Domain.IKloutProfileDataProvider.RemoveKloutProfile(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Removes a Klout profile from the specified contact.
-            </summary>
-            <param name="contactId">The contact identifier.</param>
-        </member>
-        <member name="F:Sitecore.Social.Klout.Api.DataProviders.XdbKloutProfileDataProvider.KloutProfileFacetKey">
-            <summary>
-            The Klout profile facet key
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.DataProviders.XdbKloutProfileDataProvider.#ctor(Sitecore.Social.SitecoreAccess.Analytics.IContactDataProvider)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.DataProviders.XdbKloutProfileDataProvider"/> class.
-            </summary>
-            <param name="contactDataProvider">The contact data provider.</param>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.DataProviders.XdbKloutProfileDataProvider.GetKloutProfile(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Gets a Klout profile of the contact.
-            </summary>
-            <param name="contactId">The contact identifier.</param>
-            <returns>
-            The Klout profile. If Klout profile is not exist, an empty profile is returned.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.DataProviders.XdbKloutProfileDataProvider.UpdateKloutProfile(Sitecore.Social.Domain.Model.Identifier,Sitecore.Social.Klout.Api.Domain.Model.KloutProfile)">
-            <summary>
-            Updates a Klout profile of the specified contact.
-            </summary>
-            <param name="contactId">The contact identifier.</param>
-            <param name="kloutProfile">The Klout profile.</param>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.DataProviders.XdbKloutProfileDataProvider.RemoveKloutProfile(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Removes a Klout profile from the specified contact.
-            </summary>
-            <param name="contactId">The contact identifier.</param>
-        </member>
-        <member name="P:Sitecore.Social.Klout.Api.DataProviders.XdbKloutProfileDataProvider.ContactDataProvider">
-            <summary>
-            Gets the contact data provider.
-            </summary>
-            <value>
-            The contact data provider.
-            </value>
         </member>
         <member name="T:Sitecore.Social.Klout.Api.Domain.IKloutApplicationManager">
             <summary>
@@ -765,7 +738,7 @@
             <param name="kloutApplicationCredentials">The Klout application credentials.</param>
             <param name="kloutId">The Klout identifier.</param>
             <returns>
-            An instance of the <see cref="T:Sitecore.Social.Klout.Api.Domain.Model.KloutScore"/> class.
+            An instance of the <see cref="T:Sitecore.Social.Klout.Api.Domain.Model.KloutScore" /> class.
             </returns>
         </member>
         <member name="M:Sitecore.Social.Klout.Api.Domain.IKloutNetworkProvider.SourceNetworkSupported(System.String)">
@@ -776,6 +749,33 @@
             <returns>
             true if <paramref name="networkName" /> is supported, false otherwise.
             </returns>
+        </member>
+        <member name="T:Sitecore.Social.Klout.Api.Domain.IKloutProfileDataProvider">
+            <summary>
+            Defines methods to manage Klout profile persistence.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.Domain.IKloutProfileDataProvider.GetKloutProfile(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Gets a Klout profile of the contact.
+            </summary>
+            <param name="contactId">The contact identifier.</param>
+            <returns>
+            The Klout profile. If Klout profile is not exist, an empty profile is returned.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.Domain.IKloutProfileDataProvider.UpdateKloutProfile(Sitecore.Social.Domain.Model.Identifier,Sitecore.Social.Klout.Api.Domain.Model.KloutProfile)">
+            <summary>
+            Updates a Klout profile of the specified contact.
+            </summary>
+            <param name="contactId">The contact identifier.</param>
+            <param name="kloutProfile">The Klout profile.</param>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.Domain.IKloutProfileDataProvider.RemoveKloutProfile(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Removes a Klout profile from the specified contact.
+            </summary>
+            <param name="contactId">The contact identifier.</param>
         </member>
         <member name="T:Sitecore.Social.Klout.Api.Domain.IKloutProfileManager">
             <summary>
@@ -854,7 +854,7 @@
             <param name="kloutApplicationId">The Klout application identifier.</param>
             <param name="sourceNetworkIdentity">The source network identity.</param>
             <returns>
-            The Klout identifier. If the request couldn't be executed or Klout account is not exist, a <see cref="F:System.String.Empty"/> is returned.
+            The Klout identifier. If the request couldn't be executed or Klout account is not exist, a <see cref="F:System.String.Empty" /> is returned.
             </returns>
         </member>
         <member name="M:Sitecore.Social.Klout.Api.Domain.IKloutProfileManager.RetrieveKloutIdAsync(Sitecore.Social.Klout.Api.Domain.Model.KloutApplication,Sitecore.Social.Klout.Api.Domain.Model.SourceNetworkIdentity)">
@@ -864,7 +864,7 @@
             <param name="kloutApplication">The Klout application.</param>
             <param name="sourceNetworkIdentity">The source network identity.</param>
             <returns>
-            The Klout identifier. If the request couldn't be executed or Klout account is not exist, a <see cref="F:System.String.Empty"/> is returned.
+            The Klout identifier. If the request couldn't be executed or Klout account is not exist, a <see cref="F:System.String.Empty" /> is returned.
             </returns>
         </member>
         <member name="M:Sitecore.Social.Klout.Api.Domain.IKloutProfileManager.RetrieveKloutScoreAsync(Sitecore.Social.Domain.Model.Identifier,System.String)">
@@ -874,7 +874,7 @@
             <param name="kloutApplicationId">The Klout application identifier.</param>
             <param name="kloutId">The Klout identifier.</param>
             <returns>
-            The Klout Score. If the request couldn't be executed, a <see cref="F:Sitecore.Social.Klout.Api.Domain.Model.KloutScore.Empty"/> is returned.
+            The Klout Score. If the request couldn't be executed, a <see cref="F:Sitecore.Social.Klout.Api.Domain.Model.KloutScore.Empty" /> is returned.
             </returns>
         </member>
         <member name="M:Sitecore.Social.Klout.Api.Domain.IKloutProfileManager.RetrieveKloutScoreAsync(Sitecore.Social.Klout.Api.Domain.Model.KloutApplication,System.String)">
@@ -884,7 +884,7 @@
             <param name="kloutApplication">The Klout application.</param>
             <param name="kloutId">The Klout identifier.</param>
             <returns>
-            The Klout Score. If the request couldn't be executed, a <see cref="F:Sitecore.Social.Klout.Api.Domain.Model.KloutScore.Empty"/> is returned.
+            The Klout Score. If the request couldn't be executed, a <see cref="F:Sitecore.Social.Klout.Api.Domain.Model.KloutScore.Empty" /> is returned.
             </returns>
         </member>
         <member name="T:Sitecore.Social.Klout.Api.Domain.IKloutScoreUtils">
@@ -1184,36 +1184,6 @@
             The exception that is thrown during a Klout profile attaching when other Klout profile is already attached to a contact.
             </summary>
         </member>
-        <member name="T:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException">
-            <summary>
-            The base exception that is thrown in Social.Klout.Api.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException"/> class.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException"/> class with a specified error message.
-            </summary>
-            <param name="message">The message that describes the error.</param>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException.#ctor(System.String,System.Exception)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException"/> class with the specified error message and the exception that caused this exception.
-            </summary>
-            <param name="message">The error message that explains the cause of this exception.</param>
-            <param name="inner">The exception that is the cause of the current exception, or a null reference.</param>
-        </member>
-        <member name="M:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException"/> class with serialized data.
-            </summary>
-            <param name="info">The object that holds the serialized object data.</param>
-            <param name="context">The object that describes the source or destination of the serialized data.</param>
-        </member>
         <member name="F:Sitecore.Social.Klout.Api.Exceptions.KloutProfileAlreadyAttachedException.DefaultErrorText">
             <summary>
             The error text by default
@@ -1221,32 +1191,32 @@
         </member>
         <member name="M:Sitecore.Social.Klout.Api.Exceptions.KloutProfileAlreadyAttachedException.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.KloutProfileAlreadyAttachedException"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.KloutProfileAlreadyAttachedException" /> class.
             </summary>
             <remarks>This constructor initializes the Message property of the new instance to a system-supplied message that describes the error, such as "The Klout profile is attached already."</remarks>
         </member>
         <member name="M:Sitecore.Social.Klout.Api.Exceptions.KloutProfileAlreadyAttachedException.#ctor(Sitecore.Social.Domain.Model.Identifier)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.KloutProfileAlreadyAttachedException"/> class with the contact identifier.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.KloutProfileAlreadyAttachedException" /> class with the contact identifier.
             </summary>
             <param name="contactId">The contact identifier.</param>
         </member>
         <member name="M:Sitecore.Social.Klout.Api.Exceptions.KloutProfileAlreadyAttachedException.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.KloutProfileAlreadyAttachedException"/> class with a specified error message.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.KloutProfileAlreadyAttachedException" /> class with a specified error message.
             </summary>
             <param name="message">The message that describes the error.</param>
         </member>
         <member name="M:Sitecore.Social.Klout.Api.Exceptions.KloutProfileAlreadyAttachedException.#ctor(System.String,System.Exception)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.KloutProfileAlreadyAttachedException"/> class with the specified error message and the exception that caused this exception.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.KloutProfileAlreadyAttachedException" /> class with the specified error message and the exception that caused this exception.
             </summary>
             <param name="message">The error message that explains the cause of this exception.</param>
             <param name="inner">The exception that is the cause of the current exception, or a null reference.</param>
         </member>
         <member name="M:Sitecore.Social.Klout.Api.Exceptions.KloutProfileAlreadyAttachedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.KloutProfileAlreadyAttachedException"/> class with serialized data.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.KloutProfileAlreadyAttachedException" /> class with serialized data.
             </summary>
             <param name="info">The object that holds the serialized object data.</param>
             <param name="context">The object that describes the source or destination of the serialized data.</param>
@@ -1273,20 +1243,20 @@
         </member>
         <member name="M:Sitecore.Social.Klout.Api.Exceptions.KloutRequestErrorException.#ctor(System.String,System.Int32)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.KloutRequestErrorException"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.KloutRequestErrorException" /> class.
             </summary>
             <param name="errorText">The error text.</param>
             <param name="errorCode">The error code.</param>
         </member>
         <member name="M:Sitecore.Social.Klout.Api.Exceptions.KloutRequestErrorException.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.KloutRequestErrorException"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.KloutRequestErrorException" /> class.
             </summary>
             <param name="message">The message that describes the error.</param>
         </member>
         <member name="M:Sitecore.Social.Klout.Api.Exceptions.KloutRequestErrorException.#ctor(System.String,System.Exception)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.KloutRequestErrorException"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.KloutRequestErrorException" /> class.
             </summary>
             <param name="message">The message that describes the error.</param>
             <param name="innerException">The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.</param>
@@ -1305,6 +1275,36 @@
             <value>
             The error code.
             </value>
+        </member>
+        <member name="T:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException">
+            <summary>
+            The base exception that is thrown in Social.Klout.Api.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException" /> class with a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException" /> class with the specified error message and the exception that caused this exception.
+            </summary>
+            <param name="message">The error message that explains the cause of this exception.</param>
+            <param name="inner">The exception that is the cause of the current exception, or a null reference.</param>
+        </member>
+        <member name="M:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.SocialKloutException" /> class with serialized data.
+            </summary>
+            <param name="info">The object that holds the serialized object data.</param>
+            <param name="context">The object that describes the source or destination of the serialized data.</param>
         </member>
         <member name="T:Sitecore.Social.Klout.Api.Exceptions.UrlOptionsNotFoundException">
             <summary>
@@ -1334,7 +1334,7 @@
         </member>
         <member name="M:Sitecore.Social.Klout.Api.Exceptions.UrlOptionsNotFoundException.#ctor(System.String,System.Exception)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.UrlOptionsNotFoundException"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.Exceptions.UrlOptionsNotFoundException" /> class.
             </summary>
             <param name="networkName">Name of the network.</param>
             <param name="inner">The inner exception.</param>
@@ -1387,6 +1387,14 @@
             </summary>
             <param name="kloutApplicationDataProvider">The Klout application data provider.</param>
         </member>
+        <member name="P:Sitecore.Social.Klout.Api.KloutApplicationManager.KloutApplicationDataProvider">
+            <summary>
+            Gets the Klout application data provider.
+            </summary>
+            <value>
+            The Klout application data provider.
+            </value>
+        </member>
         <member name="M:Sitecore.Social.Klout.Api.KloutApplicationManager.GetKloutApplicationsByContainer(System.String)">
             <summary>
             Gets Klout applications by container.
@@ -1436,7 +1444,7 @@
             </summary>
             <param name="kloutApplicationId">The Klout application identifier.</param>
             <returns>
-            The Klout application. If the Klout application is not found <see cref="F:Sitecore.Social.Klout.Api.Domain.Model.KloutApplication.Empty"/> is returned.
+            The Klout application. If the Klout application is not found <see cref="F:Sitecore.Social.Klout.Api.Domain.Model.KloutApplication.Empty" /> is returned.
             </returns>
             <example>
             <code>
@@ -1454,7 +1462,7 @@
             </summary>
             <param name="kloutApplication">The Klout application.</param>
             <remarks>
-            The <see cref="P:Sitecore.Social.Klout.Api.Domain.Model.KloutApplication.Id"/> will contain the identifier.
+            The <see cref="P:Sitecore.Social.Klout.Api.Domain.Model.KloutApplication.Id" /> will contain the identifier.
             </remarks>
             <example>
             <code>
@@ -1506,14 +1514,6 @@
             </code>
             </example>
         </member>
-        <member name="P:Sitecore.Social.Klout.Api.KloutApplicationManager.KloutApplicationDataProvider">
-            <summary>
-            Gets the Klout application data provider.
-            </summary>
-            <value>
-            The Klout application data provider.
-            </value>
-        </member>
         <member name="T:Sitecore.Social.Klout.Api.KloutProfileManager">
             <summary>
             Defines the methods that are used to manage a Klout profile.
@@ -1526,12 +1526,44 @@
         </member>
         <member name="M:Sitecore.Social.Klout.Api.KloutProfileManager.#ctor(Sitecore.Social.Klout.Api.Domain.IKloutApplicationManager,Sitecore.Social.Klout.Api.Domain.IKloutProfileDataProvider,Sitecore.Social.Klout.Api.Domain.IKloutNetworkProvider,Sitecore.Social.SitecoreAccess.Analytics.IContactDataProvider)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.KloutProfileManager"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Klout.Api.KloutProfileManager" /> class.
             </summary>
             <param name="kloutApplicationManager">The Klout application manager.</param>
             <param name="kloutProfileDataProvider">The Klout profile data provider.</param>
             <param name="kloutNetworkProvider">The Klout network provider.</param>
             <param name="contactDataProvider">The contact data provider.</param>
+        </member>
+        <member name="P:Sitecore.Social.Klout.Api.KloutProfileManager.KloutApplicationManager">
+            <summary>
+            Gets the Klout application manager.
+            </summary>
+            <value>
+            The Klout application manager.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Klout.Api.KloutProfileManager.KloutProfileDataProvider">
+            <summary>
+            Gets the Klout profile data provider.
+            </summary>
+            <value>
+            The Klout profile data provider.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Klout.Api.KloutProfileManager.KloutNetworkProvider">
+            <summary>
+            Gets the Klout network provider.
+            </summary>
+            <value>
+            The Klout network provider.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Klout.Api.KloutProfileManager.ContactDataProvider">
+            <summary>
+            Gets the contact data provider.
+            </summary>
+            <value>
+            The contact data provider.
+            </value>
         </member>
         <member name="M:Sitecore.Social.Klout.Api.KloutProfileManager.GetKloutProfile(Sitecore.Social.Domain.Model.Identifier)">
             <summary>
@@ -1740,7 +1772,7 @@
             <param name="kloutApplicationId">The Klout application identifier.</param>
             <param name="sourceNetworkIdentity">The source network identity.</param>
             <returns>
-            The Klout identifier. If the request couldn't be executed or Klout account is not exist, a <see cref="F:System.String.Empty"/> is returned.
+            The Klout identifier. If the request couldn't be executed or Klout account is not exist, a <see cref="F:System.String.Empty" /> is returned.
             </returns>
             <example>
               <code>
@@ -1766,7 +1798,7 @@
             <param name="kloutApplication">The Klout application.</param>
             <param name="sourceNetworkIdentity">The source network identity.</param>
             <returns>
-            The Klout identifier. If the request couldn't be executed or Klout account is not exist, a <see cref="F:System.String.Empty"/> is returned.
+            The Klout identifier. If the request couldn't be executed or Klout account is not exist, a <see cref="F:System.String.Empty" /> is returned.
             </returns>
             <example>
               <code>
@@ -1792,7 +1824,7 @@
             <param name="kloutApplicationId">The Klout application identifier.</param>
             <param name="kloutId">The Klout identifier.</param>
             <returns>
-            The Klout Score. If the request couldn't be executed, a <see cref="F:Sitecore.Social.Klout.Api.Domain.Model.KloutScore.Empty"/> is returned.
+            The Klout Score. If the request couldn't be executed, a <see cref="F:Sitecore.Social.Klout.Api.Domain.Model.KloutScore.Empty" /> is returned.
             </returns>
             <example>
               <code>
@@ -1811,7 +1843,7 @@
             <param name="kloutApplication">The Klout application.</param>
             <param name="kloutId">The Klout identifier.</param>
             <returns>
-            The Klout Score. If the request couldn't be executed, a <see cref="F:Sitecore.Social.Klout.Api.Domain.Model.KloutScore.Empty"/> is returned.
+            The Klout Score. If the request couldn't be executed, a <see cref="F:Sitecore.Social.Klout.Api.Domain.Model.KloutScore.Empty" /> is returned.
             </returns>
             <example>
               <code>
@@ -1822,38 +1854,6 @@
             }
             </code>
             </example>
-        </member>
-        <member name="P:Sitecore.Social.Klout.Api.KloutProfileManager.KloutApplicationManager">
-            <summary>
-            Gets the Klout application manager.
-            </summary>
-            <value>
-            The Klout application manager.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Klout.Api.KloutProfileManager.KloutProfileDataProvider">
-            <summary>
-            Gets the Klout profile data provider.
-            </summary>
-            <value>
-            The Klout profile data provider.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Klout.Api.KloutProfileManager.KloutNetworkProvider">
-            <summary>
-            Gets the Klout network provider.
-            </summary>
-            <value>
-            The Klout network provider.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Klout.Api.KloutProfileManager.ContactDataProvider">
-            <summary>
-            Gets the contact data provider.
-            </summary>
-            <value>
-            The contact data provider.
-            </value>
         </member>
         <member name="T:Sitecore.Social.Klout.Api.KloutScoreUtils">
             <summary>
@@ -1952,7 +1952,7 @@
             <param name="kloutApplicationCredentials">The Klout application credentials.</param>
             <param name="kloutId">The Klout identifier.</param>
             <returns>
-            An instance of the <see cref="T:Sitecore.Social.Klout.Api.Domain.Model.KloutScore"/> class.
+            An instance of the <see cref="T:Sitecore.Social.Klout.Api.Domain.Model.KloutScore" /> class.
             </returns>
         </member>
         <member name="M:Sitecore.Social.Klout.Api.NetworkProviders.KloutNetworkProvider.SourceNetworkSupported(System.String)">

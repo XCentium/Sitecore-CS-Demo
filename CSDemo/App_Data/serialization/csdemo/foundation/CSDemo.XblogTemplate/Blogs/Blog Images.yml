@@ -1,0 +1,21 @@
+﻿---
+ID: e92a824d-1adc-440b-8647-f2d3e7180757
+Parent: 639cab99-2d5a-4584-bf85-cb54656c1041
+Template: ab86861a-6030-46c5-b394-e8f99e8b87db
+Path: /sitecore/templates/XBlog/Page/Blogs/Blog Images
+DB: master
+SharedFields:
+- ID: f7d48a55-2158-4f02-9356-756654404f73
+  Hint: __Standard values
+  Value: {6649A5A4-E9BB-4A55-9008-6FAB5E4E63A9}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160516T060251Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo

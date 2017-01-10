@@ -15,7 +15,7 @@
             </summary>
             <param name="messageItemBase">The message item base.</param>
             <returns>
-            The <seealso cref="T:Sitecore.Social.Domain.Model.MessageData"/>
+            The <seealso cref="T:Sitecore.Social.Domain.Model.MessageData" />
             </returns>
             <exception cref="T:System.InvalidCastException">The 'messageItemBase' argument is not a TwitterMessageItem object.</exception>
         </member>
@@ -25,7 +25,7 @@
             </summary>
             <param name="messageData">The message data.</param>
             <returns>
-            The <seealso cref="T:Sitecore.Social.NetworkProviders.Messages.Message"/>
+            The <seealso cref="T:Sitecore.Social.NetworkProviders.Messages.Message" />
             </returns>
             <exception cref="T:System.InvalidCastException">"The 'messageData' argument is not a TwitterMessageData object."</exception>
         </member>
@@ -36,7 +36,7 @@
         </member>
         <member name="M:Sitecore.Social.Twitter.Api.Model.TweetsCounter.#ctor(System.String,System.Int32)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Twitter.Api.Model.TweetsCounter"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Twitter.Api.Model.TweetsCounter" /> class.
             </summary>
             <param name="displayName">The display name.</param>
             <param name="number">The number.</param>

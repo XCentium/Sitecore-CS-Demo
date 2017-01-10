@@ -30,7 +30,7 @@
             </summary>
             <param name="messageItemBase">The message item base.</param>
             <returns>
-            The <seealso cref="T:Sitecore.Social.Domain.Model.MessageData"/>
+            The <seealso cref="T:Sitecore.Social.Domain.Model.MessageData" />
             </returns>
             <exception cref="T:System.InvalidCastException">The 'messageItemBase' argument is not a FacebookMessageItem object.</exception>
         </member>
@@ -40,7 +40,7 @@
             </summary>
             <param name="messageData">The message data.</param>
             <returns>
-            The <seealso cref="T:Sitecore.Social.NetworkProviders.Messages.Message"/>
+            The <seealso cref="T:Sitecore.Social.NetworkProviders.Messages.Message" />
             </returns>
             <exception cref="T:System.InvalidCastException">The 'messageData' argument is not a FacebookMessageData object.</exception>
         </member>
@@ -66,18 +66,6 @@
             <summary>
             Defines methods for managing Facebook social profile.
             </summary>
-        </member>
-        <member name="T:Sitecore.Social.Facebook.Api.Managers.IFacebookSocialProfileManager">
-            <summary>
-            Defines methods for managing Facebook social profile.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Facebook.Api.Managers.IFacebookSocialProfileManager.DetachFacebookProfile(System.String,System.String)">
-            <summary>
-            Detaches the Facebook profile.
-            </summary>
-            <param name="applicationId">The application identifier.</param>
-            <param name="signedRequest">The signed request.</param>
         </member>
         <member name="F:Sitecore.Social.Facebook.Api.Managers.FacebookSocialProfileManager.FacebookNetworkName">
             <summary>
@@ -111,6 +99,18 @@
             <param name="encodedBase64Url">The encoded base64 URL.</param>
             <returns></returns>
         </member>
+        <member name="T:Sitecore.Social.Facebook.Api.Managers.IFacebookSocialProfileManager">
+            <summary>
+            Defines methods for managing Facebook social profile.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Facebook.Api.Managers.IFacebookSocialProfileManager.DetachFacebookProfile(System.String,System.String)">
+            <summary>
+            Detaches the Facebook profile.
+            </summary>
+            <param name="applicationId">The application identifier.</param>
+            <param name="signedRequest">The signed request.</param>
+        </member>
         <member name="T:Sitecore.Social.Facebook.Api.Model.CommentsCounter">
             <summary>
             Represents the comments counter.
@@ -118,7 +118,7 @@
         </member>
         <member name="M:Sitecore.Social.Facebook.Api.Model.CommentsCounter.#ctor(System.String,System.Int32)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Facebook.Api.Model.CommentsCounter"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Facebook.Api.Model.CommentsCounter" /> class.
             </summary>
             <param name="displayName">The display name.</param>
             <param name="number">The number.</param>
@@ -160,7 +160,7 @@
         </member>
         <member name="M:Sitecore.Social.Facebook.Api.Model.LikesCounter.#ctor(System.String,System.Int32)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Facebook.Api.Model.LikesCounter"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Facebook.Api.Model.LikesCounter" /> class.
             </summary>
             <param name="displayName">The display name.</param>
             <param name="number">The number.</param>

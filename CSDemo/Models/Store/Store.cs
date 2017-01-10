@@ -29,7 +29,7 @@ namespace CSDemo.Models.Store
             }
             catch (Exception ex)
             {
-                Log.Error("Unable to get coors from Google: " + ex.Message, ex);
+                Sitecore.Diagnostics.Log.Error("Unable to get coors from Google: " + ex.Message, ex);
             }
 
             if (string.IsNullOrEmpty(response)) return null;
@@ -38,7 +38,7 @@ namespace CSDemo.Models.Store
 
             if (result==null || result.status!="OK")
             {
-                Log.Error("Unable to calculate distance to stores.", result);
+                Sitecore.Diagnostics.Log.Error("Unable to calculate distance to stores.", result);
                  return null;
             }
             var distances = new Dictionary<Store, int>();

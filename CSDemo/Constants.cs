@@ -164,6 +164,7 @@
             public const string CartAlreadyInCache = "CartCacheHelper::AddCartToCache - Cart for customer id {0} is already in the cache!";
             public const string ErrorInBasket = "Error in Basket";
             public const string AbandonedCartSocialGoalItemId = "{D2D3D9F2-4DFE-452F-9BEF-F1E79EDD0A11}";
+
             public const string BillingAddressNamePrefix = "Billing_";
             public const string ShippingAddressNamePrefix = "Shipping_";
             public const string EmailAddressNamePrefix = ShippingAddressNamePrefix + "Email_";
@@ -182,74 +183,5 @@
         {
             public const string FacebookAppConfigItemId = "{98698A26-FA7E-40E4-B723-1A732B66CAF3}";
         }
-
-        public struct KnownFieldNames
-        {
-            /// <summary>
-            /// The commerce server payment methods field.
-            /// </summary>
-            public const string CommerceServerPaymentMethods = "CS Payment Methods";
-
-            /// <summary>
-            /// The commerce server shipping methods field.
-            /// </summary>
-            public const string CommerceServerShippingMethods = "CS Shipping Methods";
-
-            /// <summary>
-            /// The country location path field
-            /// </summary>
-            public const string CountryLocationPath = "Country location path";
-
-            /// <summary>
-            /// The country name field.
-            /// </summary>
-            public const string CountryName = "Name";
-
-            /// <summary>
-            /// The country code field.
-            /// </summary>
-            public const string CountryCode = "Country Code";
-
-            /// <summary>
-            /// The payment option value field.
-            /// </summary>
-            public const string PaymentOptionValue = "Payment Option Value";
-
-            /// <summary>
-            /// The region name field.
-            /// </summary>
-            public const string RegionName = "Name";
-
-            /// <summary>
-            /// The shipping option value field.
-            /// </summary>
-            public const string ShippingOptionValue = "Shipping Option Value";
-
-            /// <summary>
-            /// The shipping options location path field.
-            /// </summary>
-            public const string ShippingOptionsLocationPath = "Shipping Options location path";
-
-            /// <summary>
-            /// The supports wishlists field.
-            /// </summary>
-            public const string SupportsWishLists = "Supports Wishlists";
-
-            /// <summary>
-            /// The supports loyalty program field.
-            /// </summary>
-            public const string SupportsLoyaltyProgram = "Supports Loyalty Program ";
-
-            /// <summary>
-            /// The supports girst card payment field.
-            /// </summary>
-            public const string SupportsGirstCardPayment = "Supports Girft Card Payment";
-
-            /// <summary>
-            /// The value field.
-            /// </summary>
-            public const string Value = "Value";
-        }
-
     }
 }

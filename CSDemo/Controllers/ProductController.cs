@@ -48,7 +48,7 @@ namespace CSDemo.Controllers
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message, ex);
+                Sitecore.Diagnostics.Log.Error(ex.Message, ex);
             }
             return View(products);
         }
@@ -106,7 +106,7 @@ namespace CSDemo.Controllers
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message,ex,this);
+                Sitecore.Diagnostics.Log.Error(ex.Message,ex,this);
                 
             }
 
@@ -203,6 +203,7 @@ namespace CSDemo.Controllers
 
 
                 var categoryId = (!string.IsNullOrEmpty(cid)) ? cid : ProductHelper.GetItemIdsFromName(categoryName, _userCatalogIds);
+                if(categoryId == "") { categoryId = (!string.IsNullOrEmpty(cid)) ? cid : ProductHelper.GetItemIdsFromName(categoryName.Replace(" ","-"), _userCatalogIds); }
 
                 if (!string.IsNullOrEmpty(categoryId))
                 {
@@ -228,7 +229,7 @@ namespace CSDemo.Controllers
                     model.CurrentPage = 1;
                     model.OrderBy = string.Empty;
 
-                    return ProductHelper.GetCategoryProducts(model);
+                    return ProductHelper.GetCategoryProducts(model, false);
                 }
             }
 

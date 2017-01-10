@@ -4,6 +4,10 @@ Parent: 8cd4d38a-d0a4-44d5-b891-7ae034545451
 Template: a80ee381-58cc-4c20-9297-4a4c002c95d1
 Path: /sitecore/templates/Rio Grande/Components/Product/Categories/Parameters/Page Size/__Standard Values
 DB: master
+SharedFields:
+- ID: 3094d236-5985-4c4f-ae6a-e30740885532
+  Hint: Caching
+  Value: 0|0|0|0|0|0|0|0
 Languages:
 - Language: en
   Versions:
@@ -12,3 +16,6 @@ Languages:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
       Value: 20160315T005200Z
+    - ID: b3a43406-6dab-4daa-8f2f-bcd68333e361
+      Hint: PageSize
+      Value: 15

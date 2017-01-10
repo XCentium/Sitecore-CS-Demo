@@ -97,6 +97,28 @@
         <member name="F:Sitecore.Social.Twitter.Connector.Paths.TwitterPathsFactory.Twitter">
             <summary>Twitter paths.</summary>
         </member>
+        <member name="T:Sitecore.Social.Twitter.Installation.PostStepActions">
+            <summary>
+            Post step actions for module installation.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Social.Twitter.Installation.PostStepActions.TwitterMessageReviewerRoleName">
+            <summary>
+            Twitter Message Reviewer role name.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Twitter.Installation.PostStepActions.Run(Sitecore.Install.Framework.ITaskOutput,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Runs this post step
+            </summary>
+            <param name="output">The output.</param>
+            <param name="metaData">The meta data.</param>
+        </member>
+        <member name="M:Sitecore.Social.Twitter.Installation.PostStepActions.InstallTwitterReviewerRole">
+            <summary>
+            Installs "Twitter Message Reviewer" role.
+            </summary>
+        </member>
         <member name="T:Sitecore.Social.Twitter.Networks.Accounts.TwitterAccount">
             <summary>
             The class represents a Twitter network account
@@ -132,6 +154,14 @@
             Initializes a new instance of the <see cref="T:Sitecore.Social.Twitter.Networks.Providers.TwitterProvider"/> class.
             </summary>
             <param name="application">The application.</param>
+        </member>
+        <member name="P:Sitecore.Social.Twitter.Networks.Providers.TwitterProvider.StatisticNames">
+            <summary>
+            Gets the statistic names.
+            </summary>
+            <value>
+            The statistic names.
+            </value>
         </member>
         <member name="M:Sitecore.Social.Twitter.Networks.Providers.TwitterProvider.PostMessage(Sitecore.Social.NetworkProviders.Account,Sitecore.Social.NetworkProviders.Messages.Message)">
             <summary>
@@ -209,14 +239,6 @@
             </summary>
             <param name="account">The account.</param>
             <returns>The user profile.</returns>
-        </member>
-        <member name="P:Sitecore.Social.Twitter.Networks.Providers.TwitterProvider.StatisticNames">
-            <summary>
-            Gets the statistic names.
-            </summary>
-            <value>
-            The statistic names.
-            </value>
         </member>
         <member name="T:Sitecore.Social.Twitter.MessagePosting.Items.TwitterMessageItem">
             <summary>

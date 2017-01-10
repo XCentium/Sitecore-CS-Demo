@@ -59,27 +59,6 @@
             Key to get ExecutingContext from HttpContext/Thread
             </summary>
         </member>
-        <member name="M:Sitecore.Social.Infrastructure.ExecutingContext.CreateDefaultContext">
-            <summary>
-            Creates the default context.
-            </summary>
-            <returns>
-            - <see cref="T:Sitecore.Social.Infrastructure.HttpRequestExecutingContext"/> in case of http request;
-            - <see cref="T:Sitecore.Social.Infrastructure.ManagedThreadExecutingContext"/> in another case.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.Infrastructure.ExecutingContext.GetContext">
-            <summary>
-            Gets the current executing context.
-            </summary>
-            <returns><see cref="T:Sitecore.Social.Infrastructure.ExecutingContext"/></returns>
-        </member>
-        <member name="M:Sitecore.Social.Infrastructure.ExecutingContext.SetContext(Sitecore.Social.Infrastructure.ExecutingContext)">
-            <summary>
-            Sets the context.
-            </summary>
-            <param name="ctx">The <see cref="T:Sitecore.Social.Infrastructure.ExecutingContext"/></param>
-        </member>
         <member name="P:Sitecore.Social.Infrastructure.ExecutingContext.Current">
             <summary>
             Gets or sets the current Social executing context.
@@ -110,6 +89,27 @@
             <summary>
             Gets the list of network account IDs which are being renewed currently.
             </summary>
+        </member>
+        <member name="M:Sitecore.Social.Infrastructure.ExecutingContext.CreateDefaultContext">
+            <summary>
+            Creates the default context.
+            </summary>
+            <returns>
+            - <see cref="T:Sitecore.Social.Infrastructure.HttpRequestExecutingContext"/> in case of http request;
+            - <see cref="T:Sitecore.Social.Infrastructure.ManagedThreadExecutingContext"/> in another case.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Social.Infrastructure.ExecutingContext.GetContext">
+            <summary>
+            Gets the current executing context.
+            </summary>
+            <returns><see cref="T:Sitecore.Social.Infrastructure.ExecutingContext"/></returns>
+        </member>
+        <member name="M:Sitecore.Social.Infrastructure.ExecutingContext.SetContext(Sitecore.Social.Infrastructure.ExecutingContext)">
+            <summary>
+            Sets the context.
+            </summary>
+            <param name="ctx">The <see cref="T:Sitecore.Social.Infrastructure.ExecutingContext"/></param>
         </member>
         <member name="T:Sitecore.Social.Infrastructure.Extensions.GuidExtensions">
             <summary>
@@ -246,18 +246,9 @@
         </member>
         <member name="M:Sitecore.Social.Infrastructure.Identifiers.GuidIdentifier.#ctor(System.Guid)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Infrastructure.Identifiers.GuidIdentifier"/> class with specific GUID.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Infrastructure.Identifiers.GuidIdentifier" /> class with specific GUID.
             </summary>
             <param name="id">The id.</param>
-        </member>
-        <member name="M:Sitecore.Social.Infrastructure.Identifiers.GuidIdentifier.Equals(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Checks if the current identifier is equal to another one.
-            </summary>
-            <param name="other">The other identifier.</param>
-            <returns>
-              <c>true</c> if the current identifier is equal to another one, otherwise <c>false</c>.
-            </returns>
         </member>
         <member name="P:Sitecore.Social.Infrastructure.Identifiers.GuidIdentifier.OriginalId">
             <summary>
@@ -283,6 +274,15 @@
               <c>true</c> if this instance is empty; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="M:Sitecore.Social.Infrastructure.Identifiers.GuidIdentifier.Equals(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Checks if the current identifier is equal to another one.
+            </summary>
+            <param name="other">The other identifier.</param>
+            <returns>
+              <c>true</c> if the current identifier is equal to another one, otherwise <c>false</c>.
+            </returns>
+        </member>
         <member name="T:Sitecore.Social.Infrastructure.Identifiers.IDIdentifier">
             <summary>
             Represents the identifier for the <see cref="T:Sitecore.Data.ID"/> object.
@@ -295,18 +295,9 @@
         </member>
         <member name="M:Sitecore.Social.Infrastructure.Identifiers.IDIdentifier.#ctor(Sitecore.Data.ID)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Infrastructure.Identifiers.IDIdentifier"/> class from the id.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Infrastructure.Identifiers.IDIdentifier" /> class from the id.
             </summary>
             <param name="id">The id.</param>
-        </member>
-        <member name="M:Sitecore.Social.Infrastructure.Identifiers.IDIdentifier.Equals(Sitecore.Social.Domain.Model.Identifier)">
-            <summary>
-            Checks if the current identifier is equal to another one.
-            </summary>
-            <param name="other">The other identifier.</param>
-            <returns>
-              <c>true</c> if the current identifier is equal to another one, otherwise <c>false</c>.
-            </returns>
         </member>
         <member name="P:Sitecore.Social.Infrastructure.Identifiers.IDIdentifier.OriginalId">
             <summary>
@@ -331,6 +322,15 @@
             <value>
               <c>true</c> if this instance is empty; otherwise, <c>false</c>.
             </value>
+        </member>
+        <member name="M:Sitecore.Social.Infrastructure.Identifiers.IDIdentifier.Equals(Sitecore.Social.Domain.Model.Identifier)">
+            <summary>
+            Checks if the current identifier is equal to another one.
+            </summary>
+            <param name="other">The other identifier.</param>
+            <returns>
+              <c>true</c> if the current identifier is equal to another one, otherwise <c>false</c>.
+            </returns>
         </member>
         <member name="T:Sitecore.Social.Infrastructure.IoC.IoCState">
             <summary>
@@ -383,6 +383,35 @@
             <summary>
             Loads the module into the kernel.
             </summary>
+        </member>
+        <member name="T:Sitecore.Social.Infrastructure.IoC.NinjectState">
+            <summary>
+            Defines methods to determine the Ninject container state.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Social.Infrastructure.IoC.NinjectState.ioCLoaded">
+            <summary>
+            Specifies if the IoC container is loaded.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Social.Infrastructure.IoC.NinjectState.ioCAssemblyFullName">
+            <summary>
+            The IoC assembly full name.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Infrastructure.IoC.NinjectState.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Infrastructure.IoC.NinjectState"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Infrastructure.IoC.NinjectState.IoCLoaded(System.String)">
+            <summary>
+            Checks if the IoC container is loaded.
+            </summary>
+            <param name="warnMessageToLog">The warn message to log if the IoC container is not loaded.</param>
+            <returns>
+              <c>true</c> if the IoC container is loaded; otherwise, <c>false</c>.
+            </returns>
         </member>
         <member name="T:Sitecore.Social.Infrastructure.Logging.FormatterForAttribute">
             <summary>
@@ -836,35 +865,6 @@
             Gets the list of network account IDs which are being renewed currently.
             </summary>
         </member>
-        <member name="T:Sitecore.Social.Infrastructure.IoC.NinjectState">
-            <summary>
-            Defines methods to determine the Ninject container state.
-            </summary>
-        </member>
-        <member name="F:Sitecore.Social.Infrastructure.IoC.NinjectState.ioCLoaded">
-            <summary>
-            Specifies if the IoC container is loaded.
-            </summary>
-        </member>
-        <member name="F:Sitecore.Social.Infrastructure.IoC.NinjectState.ioCAssemblyFullName">
-            <summary>
-            The IoC assembly full name.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Infrastructure.IoC.NinjectState.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Infrastructure.IoC.NinjectState"/> class.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Infrastructure.IoC.NinjectState.IoCLoaded(System.String)">
-            <summary>
-            Checks if the IoC container is loaded.
-            </summary>
-            <param name="warnMessageToLog">The warn message to log if the IoC container is not loaded.</param>
-            <returns>
-              <c>true</c> if the IoC container is loaded; otherwise, <c>false</c>.
-            </returns>
-        </member>
         <member name="T:Sitecore.Social.Infrastructure.Utils.DateTimeUtil">
             <summary>
             Represents the set of extensions to work with <see cref="T:System.DateTime"/> values.
@@ -1004,12 +1004,12 @@
         </member>
         <member name="M:Sitecore.Social.Infrastructure.Utils.DateTimeUtil.ToServerTimeZoneString(System.Nullable{System.DateTime},System.String)">
             <summary>
-            Converts the <see cref="T:System.Nullable`1"/> to the server's time zone and then to string using <see cref="P:System.Globalization.CultureInfo.CurrentCulture"/>.
+            Converts the <see cref="T:System.Nullable`1" /> to the server's time zone and then to string using <see cref="P:System.Globalization.CultureInfo.CurrentCulture" />.
             </summary>
             <param name="dateTime">The date time.</param>
             <param name="defaultValue">The default string value.</param>
             <returns>
-            The string representation of the <see cref="T:System.Nullable`1"/> class. <paramref name="defaultValue"/> is returned in case of <paramref name="dateTime"/> is <c>null</c>.
+            The string representation of the <see cref="T:System.Nullable`1" /> class. <paramref name="defaultValue" /> is returned in case of <paramref name="dateTime"/> is <c>null</c>.
             </returns>
         </member>
         <member name="M:Sitecore.Social.Infrastructure.Utils.DateTimeUtil.ToUtc(System.Int64)">
@@ -1048,30 +1048,6 @@
             <summary>
             Defines the Google URL shortener class.
             </summary>
-        </member>
-        <member name="T:Sitecore.Social.Infrastructure.Utils.IUrlShortener">
-            <summary>
-            Defines the IUrlSortener interface class.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Infrastructure.Utils.IUrlShortener.ShortenUrl(System.Uri,System.String)">
-            <summary>
-            Shortens the URL using the specified API key.
-            </summary>
-            <param name="url">Long URL.</param>
-            <param name="key">API key.</param>
-            <returns>
-            Shortened URL.
-            </returns>
-        </member>
-        <member name="M:Sitecore.Social.Infrastructure.Utils.IUrlShortener.ShortenUrl(System.Uri)">
-            <summary>
-            Shortens the URL using the default API key.
-            </summary>
-            <param name="url">Long URL.</param>
-            <returns>
-            Shortened URL.
-            </returns>
         </member>
         <member name="M:Sitecore.Social.Infrastructure.Utils.GoogleUrlShortener.ShortenUrl(System.Uri,System.String)">
             <summary>
@@ -1471,6 +1447,30 @@
             <summary>
             The account posting configuration template standard values item identifier
             </summary>
+        </member>
+        <member name="T:Sitecore.Social.Infrastructure.Utils.IUrlShortener">
+            <summary>
+            Defines the IUrlSortener interface class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Infrastructure.Utils.IUrlShortener.ShortenUrl(System.Uri,System.String)">
+            <summary>
+            Shortens the URL using the specified API key.
+            </summary>
+            <param name="url">Long URL.</param>
+            <param name="key">API key.</param>
+            <returns>
+            Shortened URL.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Social.Infrastructure.Utils.IUrlShortener.ShortenUrl(System.Uri)">
+            <summary>
+            Shortens the URL using the default API key.
+            </summary>
+            <param name="url">Long URL.</param>
+            <returns>
+            Shortened URL.
+            </returns>
         </member>
         <member name="T:Sitecore.Social.Infrastructure.Utils.RedirectUtil">
             <summary>

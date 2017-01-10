@@ -1,6 +1,8 @@
 ﻿@using CSDemo
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Product.CategoryProductViewModel>
 
+@using System.Data.Linq
+
 @if (Model != null)
 {
     var currentCat = 0;
@@ -46,13 +48,18 @@
                                         var catProducts = cat.ProductMenulistViewModel;
 
                                         <li class="panel">
-                                            <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name<span>[@cat.ProductsCount]</span></a>
+                                           @* <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name<span>[@cat.ProductsCount]</span></a>*@
+                                            <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name</a>
                                             <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">
+
                                                 <li><a href="@cat.Url@cid"><span class="fa fa-arrow-right"></span></a></li>
-                                                @foreach (CSDemo.Models.Product.ProductMenulistViewModel catProduct in catProducts)
-                                                {
-                                                    <li><a href="@catProduct.Url">@catProduct.Name</a></li>
-                                                }
+                                                    @if (catProducts != null)
+                                                    {
+                                                        foreach (CSDemo.Models.Product.ProductMenulistViewModel catProduct in catProducts)
+                                                        {                                                  
+                                                            <li><a href="@catProduct.Url">@catProduct.Name</a></li>
+                                                        }
+                                                    }
                                             </ul>
                                         </li>
                                     }

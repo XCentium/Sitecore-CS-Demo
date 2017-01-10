@@ -35,7 +35,7 @@
                  "Facebook",
                  facebookApplication.ApplicationCredentials,
                  HttpContext.Current.Request.Url,
-                 new Dictionary&lt;string, object&gt;
+                 new Dictionary&lt;string, object>
                    {
                      { "ApplicationId", facebookApplicationId },
                      { "AccountName", newAccountName }
@@ -46,9 +46,12 @@
             
                // to retrieve user pages accessTokens
                accountDataRequest.Permissions.Add("manage_pages", string.Empty);
+             
+               // to grant publish on the Pages
+               accountDataRequest.Permissions.Add("publish_pages", string.Empty);
             
                // to get message statistics
-               accountDataRequest.Permissions.Add("read_stream", string.Empty);
+               accountDataRequest.Permissions.Add("user_posts", string.Empty);
             
                accountClientManager.BeginGetAccountCredentials(accountDataRequest);
              }
@@ -73,7 +76,7 @@
              switch (response.Status)
              {
                case GetAccountCredentialsResponseStatus.Done:
-                 var contextData = (Dictionary&lt;string, object&gt;)response.ContextData;
+                 var contextData = (Dictionary&lt;string, object>)response.ContextData;
             
                  var newAccount = new Account
                    {
@@ -126,10 +129,26 @@
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.#ctor(Sitecore.Social.Configuration.IConfigurationFactory,Sitecore.Social.ISocialProfileBusinessManager)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Api.ConnectorClientManager"/> class with the specified parameters.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Api.ConnectorClientManager" /> class with the specified parameters.
             </summary>
             <param name="configurationFactory">The configuration factory.</param>
             <param name="socialProfileBusinessManager">The social profile business manager.</param>
+        </member>
+        <member name="P:Sitecore.Social.Client.Api.ConnectorClientManager.SocialProfileBusinessManager">
+            <summary>
+            Gets the social profile business manager.
+            </summary>
+            <value>
+            The social profile business manager.
+            </value>
+        </member>
+        <member name="P:Sitecore.Social.Client.Api.ConnectorClientManager.ConfigurationFactory">
+            <summary>
+            Gets the configuration factory.
+            </summary>
+            <value>
+            The configuration factory.
+            </value>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String)">
             <summary>
@@ -169,7 +188,7 @@
               </example>
             <remarks>
             At the end of the flow you'll be redirected to the same page again.
-            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)"/> to get the exception information in a case of error.
+            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)" /> to get the exception information in a case of error.
             </remarks>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
@@ -211,7 +230,7 @@
               </example>
             <remarks>
             At the end of the flow you'll be redirected to the same page again.
-            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)"/> to get the exception information in a case of error.
+            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)" /> to get the exception information in a case of error.
             </remarks>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,System.Boolean)">
@@ -253,7 +272,7 @@
               </example>
             <remarks>
             At the end of the flow you'll be redirected to the same page again.
-            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)"/> to get the exception information in a case of error.
+            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)" /> to get the exception information in a case of error.
             </remarks>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,System.Boolean,System.Collections.Generic.Dictionary{System.String,System.Object})">
@@ -296,7 +315,7 @@
               </example>
             <remarks>
             At the end of the flow you'll be redirected to the same page again.
-            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)"/> to get the exception information in a case of error.
+            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)" /> to get the exception information in a case of error.
             </remarks>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials)">
@@ -338,7 +357,7 @@
               </example>
             <remarks>
             At the end of the flow you'll be redirected to the same page again.
-            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)"/> to get the exception information in a case of error.
+            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)" /> to get the exception information in a case of error.
             </remarks>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,System.Collections.Generic.Dictionary{System.String,System.Object})">
@@ -381,7 +400,7 @@
               </example>
             <remarks>
             At the end of the flow you'll be redirected to the same page again.
-            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)"/> to get the exception information in a case of error.
+            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)" /> to get the exception information in a case of error.
             </remarks>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,System.Boolean)">
@@ -424,7 +443,7 @@
               </example>
             <remarks>
             At the end of the flow you'll be redirected to the same page again.
-            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)"/> to get the exception information in a case of error.
+            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)" /> to get the exception information in a case of error.
             </remarks>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,System.Boolean,System.Collections.Generic.Dictionary{System.String,System.Object})">
@@ -468,13 +487,13 @@
               </example>
             <remarks>
             At the end of the flow you'll be redirected to the same page again.
-            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)"/> to get the exception information in a case of error.
+            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)" /> to get the exception information in a case of error.
             </remarks>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.AttachToUser(System.String,System.String)">
             <summary>
             Attaches the specified network social profile to the logged in user.
-            If the current user is not logged in, it tries to log in with <see cref="M:Sitecore.Social.Client.Domain.IConnectorClientManager.LogOnUser(System.String,System.String)"/>
+            If the current user is not logged in, it tries to log in with <see cref="M:Sitecore.Social.Client.Domain.IConnectorClientManager.LogOnUser(System.String,System.String)" />
             </summary>
             <param name="networkName">The name of the network (case-sensitive).</param>
             <param name="callbackUrl">The URL, where the user will be redirected after login.</param>
@@ -510,13 +529,13 @@
               </example>
             <remarks>
             At the end of the flow you'll be redirected on the same page again.
-            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)"/> to get exception information in a case of error.
+            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)" /> to get exception information in a case of error.
             </remarks>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.AttachToUser(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
             <summary>
             Attaches the specified network social profile to the logged in user.
-            If the current user is not logged in, it tries to log in with <see cref="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String)"/>
+            If the current user is not logged in, it tries to log in with <see cref="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String)" />
             </summary>
             <param name="networkName">The name of the network.</param>
             <param name="callbackUrl">The URL, where the user will be redirected after login.</param>
@@ -553,13 +572,13 @@
               </example>
             <remarks>
             At the end of the flow you'll be redirected on the same page again.
-            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)"/> to get exception information in a case of error.
+            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)" /> to get exception information in a case of error.
             </remarks>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.AttachToUser(System.String,System.String,System.Boolean)">
             <summary>
             Attaches the specified network social profile to the logged in user.
-            If the current user is not logged in, it tries to log in with <see cref="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,System.Boolean)"/>
+            If the current user is not logged in, it tries to log in with <see cref="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,System.Boolean)" />
             </summary>
             <param name="networkName">The name of the network.</param>
             <param name="callbackUrl">The URL, where the user will be redirected after login.</param>
@@ -596,13 +615,13 @@
               </example>
             <remarks>
             At the end of the flow you'll be redirected to the same page again.
-            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)"/> to get the exception information in a case of error.
+            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)" /> to get the exception information in a case of error.
             </remarks>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.AttachToUser(System.String,System.String,System.Boolean,System.Collections.Generic.Dictionary{System.String,System.Object})">
             <summary>
             Attaches the specified network social profile to the logged in user.
-            If the current user is not logged in, it tries to log in with <see cref="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,System.Boolean,System.Collections.Generic.Dictionary{System.String,System.Object})"/>
+            If the current user is not logged in, it tries to log in with <see cref="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,System.Boolean,System.Collections.Generic.Dictionary{System.String,System.Object})" />
             </summary>
             <param name="networkName">The name of the network.</param>
             <param name="callbackUrl">The URL, where the user will be redirected after login.</param>
@@ -640,13 +659,13 @@
               </example>
             <remarks>
             At the end of the flow you'll be redirected to the same page again.
-            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)"/> to get the exception information in a case of error.
+            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)" /> to get the exception information in a case of error.
             </remarks>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.AttachToUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials)">
             <summary>
             Attaches the specified network social profile to the logged in user.
-            If the current user is not logged in, it tries to log in with <see cref="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials)"/>
+            If the current user is not logged in, it tries to log in with <see cref="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials)" />
             </summary>
             <param name="networkName">The name of the network.</param>
             <param name="callbackUrl">The URL, where the user will be redirected after login.</param>
@@ -683,13 +702,13 @@
               </example>
             <remarks>
             At the end of the flow you'll be redirected to the same page again.
-            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)"/> to get the exception information in a case of error.
+            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)" /> to get the exception information in a case of error.
             </remarks>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.AttachToUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,System.Collections.Generic.Dictionary{System.String,System.Object})">
             <summary>
             Attaches the specified network social profile to the logged in user.
-            If the current user is not logged in, it tries to log in with <see cref="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,System.Collections.Generic.Dictionary{System.String,System.Object})"/>
+            If the current user is not logged in, it tries to log in with <see cref="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,System.Collections.Generic.Dictionary{System.String,System.Object})" />
             </summary>
             <param name="networkName">The name of the network.</param>
             <param name="callbackUrl">The URL, where the user will be redirected after login.</param>
@@ -727,13 +746,13 @@
               </example>
             <remarks>
             At the end of the flow you'll be redirected to the same page again.
-            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)"/> to get the exception information in a case of error.
+            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)" /> to get the exception information in a case of error.
             </remarks>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.AttachToUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,System.Boolean)">
             <summary>
             Attaches the specified network social profile to the logged in user.
-            If the current user is not logged in, it tries to log in with <see cref="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,System.Boolean)"/>
+            If the current user is not logged in, it tries to log in with <see cref="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,System.Boolean)" />
             </summary>
             <param name="networkName">The name of the network.</param>
             <param name="callbackUrl">The URL, where the user will be redirected after login.</param>
@@ -771,13 +790,13 @@
               </example>
             <remarks>
             At the end of the flow you'll be redirected to the same page again.
-            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)"/> to get the exception information in a case of error.
+            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)" /> to get the exception information in a case of error.
             </remarks>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.AttachToUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,System.Boolean,System.Collections.Generic.Dictionary{System.String,System.Object})">
             <summary>
             Attaches the specified network social profile to the logged in user.
-            If the current user is not logged in, it tries to log in with <see cref="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,System.Boolean,System.Collections.Generic.Dictionary{System.String,System.Object})"/>
+            If the current user is not logged in, it tries to log in with <see cref="M:Sitecore.Social.Client.Api.ConnectorClientManager.LogOnUser(System.String,System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,System.Boolean,System.Collections.Generic.Dictionary{System.String,System.Object})" />
             </summary>
             <param name="networkName">The name of the network.</param>
             <param name="callbackUrl">The URL, where the user will be redirected after login.</param>
@@ -816,7 +835,7 @@
               </example>
             <remarks>
             At the end of the flow you'll be redirected to the same page again.
-            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)"/> to get the exception information in a case of error.
+            Use <see cref="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)" /> to get the exception information in a case of error.
             </remarks>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ConnectorClientManager.Connect(System.String,Sitecore.Social.Domain.Model.ApplicationCredentials,Sitecore.Social.Domain.Model.AccountCredentials,System.Boolean,System.Boolean,System.Collections.Generic.Dictionary{System.String,System.Object})">
@@ -854,22 +873,6 @@
             <param name="updateSocialProfileAsync">if set to <c>true</c> [update social profile async].</param>
             <param name="attachAccountToLoggedInUser">if set to <c>true</c> a social profile will be attached to the current user; otherwise, the current user will be logged in first.</param>
             <param name="additionalParameters">The additional parameters, which will be kept during the authentication flow.</param>
-        </member>
-        <member name="P:Sitecore.Social.Client.Api.ConnectorClientManager.SocialProfileBusinessManager">
-            <summary>
-            Gets the social profile business manager.
-            </summary>
-            <value>
-            The social profile business manager.
-            </value>
-        </member>
-        <member name="P:Sitecore.Social.Client.Api.ConnectorClientManager.ConfigurationFactory">
-            <summary>
-            Gets the configuration factory.
-            </summary>
-            <value>
-            The configuration factory.
-            </value>
         </member>
         <member name="T:Sitecore.Social.Client.Api.EventArgs.SocialConnectorEventArgs">
             <summary>
@@ -961,18 +964,6 @@
             Represents receiving of exception information.
             </summary>
         </member>
-        <member name="T:Sitecore.Social.Client.Api.IExceptionClientManager">
-            <summary>
-            Represents receiving of exception information.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Client.Api.IExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)">
-            <summary>
-            Receives the exception information.
-            </summary>
-            <param name="request">The http request.</param>
-            <returns>The exception information.</returns>
-        </member>
         <member name="M:Sitecore.Social.Client.Api.ExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)">
             <summary>
             Receives the exception information.
@@ -995,53 +986,6 @@
             Represents the information about exception.
             </summary>
         </member>
-        <member name="T:Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo">
-            <summary>
-            The class represents the social excption info.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo.#ctor(Sitecore.Social.Domain.Exceptions.ISocialException)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo"/> class.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo.Equals(Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo)">
-            <summary>
-            Checks if the current SocialExceptionInfo is equal to another one.
-            </summary>
-            <param name="other">The other SocialExceptionInfo.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo.Equals(System.Object)">
-            <summary>
-            Determines whether the specified <see cref="T:System.Object"/> is equal to this instance.
-            </summary>
-            <param name="obj">The <see cref="T:System.Object"/> to compare with this instance.</param>
-            <returns>
-              <c>true</c> if the specified <see cref="T:System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-            </returns>
-            <exception cref="T:System.NullReferenceException">
-            The <paramref name="obj"/> parameter is null.
-              </exception>
-        </member>
-        <member name="M:Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo.GetHashCode">
-            <summary>
-            Returns a hash code for this instance.
-            </summary>
-            <returns>
-            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
-            </returns>
-        </member>
-        <member name="P:Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo.SimpleMessage">
-            <summary>
-            The simple message.
-            </summary>
-        </member>
-        <member name="P:Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo.DetailedMessage">
-            <summary>
-            The detailed message.
-            </summary>
-        </member>
         <member name="F:Sitecore.Social.Client.Api.ExceptionInfo.Empty">
             <summary>
             A read-only instance of the <see cref="T:Sitecore.Social.Client.Api.ExceptionInfo"/> class whose value represents not found exception info.
@@ -1049,12 +993,12 @@
         </member>
         <member name="M:Sitecore.Social.Client.Api.ExceptionInfo.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Api.ExceptionInfo"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Api.ExceptionInfo" /> class.
             </summary>
         </member>
         <member name="M:Sitecore.Social.Client.Api.ExceptionInfo.#ctor(Sitecore.Social.Domain.Exceptions.ISocialException)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Api.ExceptionInfo"/> class and fills the class with information from the provided <see cref="T:Sitecore.Social.Domain.Exceptions.ISocialException"/> parameter.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Api.ExceptionInfo" /> class and fills the class with information from the provided <see cref="T:Sitecore.Social.Domain.Exceptions.ISocialException"/> parameter.
             </summary>
             <param name="exception">The exception.</param>
         </member>
@@ -1111,6 +1055,65 @@
             Saves the collection.
             </summary>
             <param name="collection">The collection.</param>
+        </member>
+        <member name="T:Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo">
+            <summary>
+            The class represents the social excption info.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo.#ctor(Sitecore.Social.Domain.Exceptions.ISocialException)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo"/> class.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo.SimpleMessage">
+            <summary>
+            The simple message.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo.DetailedMessage">
+            <summary>
+            The detailed message.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo.Equals(Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo)">
+            <summary>
+            Checks if the current SocialExceptionInfo is equal to another one.
+            </summary>
+            <param name="other">The other SocialExceptionInfo.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/> is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object"/> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object"/> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+            <exception cref="T:System.NullReferenceException">
+            The <paramref name="obj"/> parameter is null.
+              </exception>
+        </member>
+        <member name="M:Sitecore.Social.Client.Api.Exceptions.SocialExceptionInfo.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
+        </member>
+        <member name="T:Sitecore.Social.Client.Api.IExceptionClientManager">
+            <summary>
+            Represents receiving of exception information.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Client.Api.IExceptionClientManager.GetExceptionInfo(System.Web.HttpRequest)">
+            <summary>
+            Receives the exception information.
+            </summary>
+            <param name="request">The http request.</param>
+            <returns>The exception information.</returns>
         </member>
         <member name="T:Sitecore.Social.Client.Api.IoC.Modules.ClientManagersModule">
             <summary>

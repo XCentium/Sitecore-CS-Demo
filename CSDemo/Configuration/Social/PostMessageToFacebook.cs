@@ -50,14 +50,14 @@ namespace CSDemo.Configuration.Social
             var contact = context.Contact;
             if (contact == null)
             {
-                Log.Error("Facebook Post Error: Unable to get the contact.", this);
+                Sitecore.Diagnostics.Log.Error("Facebook Post Error: Unable to get the contact.", this);
                 return AutomationActionResult.Continue; ;
             }
 
             var fbConfigItem = context.Action.Database.GetItem(Constants.Social.FacebookAppConfigItemId);
             if (fbConfigItem == null)
             {
-                Log.Error("Facebook Post Error: Unable to get the FacebookAppConfigItemId.", this);
+                Sitecore.Diagnostics.Log.Error("Facebook Post Error: Unable to get the FacebookAppConfigItemId.", this);
                 return AutomationActionResult.Continue; 
             }
             var appId = fbConfigItem["Application ID"];
@@ -66,7 +66,7 @@ namespace CSDemo.Configuration.Social
             var products = GetBackInStockProducts(contact, context.AutomationStateContext);
             if (products == null || !products.Any())
             {
-                Log.Error("Facebook Post Error: Unable to get product info.", this);
+                Sitecore.Diagnostics.Log.Error("Facebook Post Error: Unable to get product info.", this);
                 return AutomationActionResult.Continue;
             }
             
@@ -79,7 +79,7 @@ namespace CSDemo.Configuration.Social
             //dynamic accessToken = fbAuthClient.GetApplicationAccessToken();
             //if (string.IsNullOrWhiteSpace((string)accessToken["access_token"]))
             //{
-            //    Log.Error("Facebook Post Error: Unable to get application access token.", this);
+            //    Sitecore.Diagnostics.Log.Error("Facebook Post Error: Unable to get application access token.", this);
             //    return AutomationActionResult.Continue;
             //}
             var fb = new FacebookClient(appId, appSecret); //FacebookClient((string)accessToken["access_token"]); 
@@ -110,7 +110,7 @@ namespace CSDemo.Configuration.Social
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("Facebook Post Error: Unable to post message to facebook. " + ex.Message, this);
+                    Sitecore.Diagnostics.Log.Error("Facebook Post Error: Unable to post message to facebook. " + ex.Message, this);
                 }
             }
             return AutomationActionResult.Continue;
@@ -122,7 +122,7 @@ namespace CSDemo.Configuration.Social
             
             if (contact == null || !contact.Facets.ContainsKey("SocialProfile"))
             {
-                Log.Error("Facebook Post Error: Unable to get the SocialProfile.", this);
+                Sitecore.Diagnostics.Log.Error("Facebook Post Error: Unable to get the SocialProfile.", this);
                 return null;
             }
 
@@ -132,7 +132,7 @@ namespace CSDemo.Configuration.Social
             var test = socialProfileFacet.Networks as IEnumerable<NetworkElement>;
             if (socialProfileFacet == null || socialProfileFacet.Networks == null || !socialProfileFacet.Networks.Contains("Facebook"))
             {
-                Log.Error("Facebook Post Error: Facebook network does not exist in this contact's profile.", this);
+                Sitecore.Diagnostics.Log.Error("Facebook Post Error: Facebook network does not exist in this contact's profile.", this);
                 return null;
             }
 
@@ -140,7 +140,7 @@ namespace CSDemo.Configuration.Social
             var fbNetwork = socialProfileFacet.Networks["Facebook"];
             if (fbNetwork == null)
             {
-                Log.Error("Facebook Post Error: Facebook network is null.", this);
+                Sitecore.Diagnostics.Log.Error("Facebook Post Error: Facebook network is null.", this);
                 return null;
             }
             var firstname = fbNetwork.Fields["first_name"].Value;
@@ -154,7 +154,7 @@ namespace CSDemo.Configuration.Social
             var provider = (InventoryAutomationProvider)Factory.CreateObject("inventoryAutomationProvider", true);
             if (provider == null)
             {
-                Log.Error("Facebook Post Error: Unable to get inventoryAutomationProvider.", this);
+                Sitecore.Diagnostics.Log.Error("Facebook Post Error: Unable to get inventoryAutomationProvider.", this);
                 return null;
             }
 

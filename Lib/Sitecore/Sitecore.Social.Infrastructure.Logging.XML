@@ -31,24 +31,10 @@
         </member>
         <member name="M:Sitecore.Social.Infrastructure.Logging.AttributeEntityFormatterMapper.#ctor(Sitecore.Social.Configuration.IConfigurationFactory,Sitecore.Social.Infrastructure.Logging.IEntityFormatterCache)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Infrastructure.Logging.AttributeEntityFormatterMapper"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Infrastructure.Logging.AttributeEntityFormatterMapper" /> class.
             </summary>
             <param name="configurationFactory">The configuration factory.</param>
             <param name="cache">The cache.</param>
-        </member>
-        <member name="M:Sitecore.Social.Infrastructure.Logging.AttributeEntityFormatterMapper.GetEntityFormatter(System.Type)">
-            <summary>
-            Gets the entity formatter for specific type.
-            </summary>
-            <param name="type">The type.</param>
-            <returns>
-            The <see cref="T:Sitecore.Social.Infrastructure.Logging.IEntityFormatter"/> implementation for <paramref name="type"/>.
-            </returns>
-            <example>
-            <code>
-            IEntityFormatter entityFormatter = entityFormatterMapper.GetEntityFormatter(typeof(Context));
-            </code>
-            </example>
         </member>
         <member name="P:Sitecore.Social.Infrastructure.Logging.AttributeEntityFormatterMapper.EntityFormatterTypesCache">
             <summary>
@@ -57,6 +43,20 @@
             <value>
             The entity formatter types.
             </value>
+        </member>
+        <member name="M:Sitecore.Social.Infrastructure.Logging.AttributeEntityFormatterMapper.GetEntityFormatter(System.Type)">
+            <summary>
+            Gets the entity formatter for specific type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>
+            The <see cref="T:Sitecore.Social.Infrastructure.Logging.IEntityFormatter" /> implementation for <paramref name="type" />.
+            </returns>
+            <example>
+            <code>
+            IEntityFormatter entityFormatter = entityFormatterMapper.GetEntityFormatter(typeof(Context));
+            </code>
+            </example>
         </member>
         <member name="T:Sitecore.Social.Infrastructure.Logging.EntityFormatterCache">
             <summary>
@@ -75,11 +75,11 @@
         </member>
         <member name="M:Sitecore.Social.Infrastructure.Logging.EntityFormatterCache.Get(System.Type)">
             <summary>
-            Gets the <see cref="T:Sitecore.Social.Infrastructure.Logging.IEntityFormatter"/> instance for the passed <paramref name="type"/> from cache.
+            Gets the <see cref="T:Sitecore.Social.Infrastructure.Logging.IEntityFormatter" /> instance for the passed <paramref name="type" /> from cache.
             </summary>
             <param name="type">The type.</param>
             <returns>
-            The <see cref="T:Sitecore.Social.Infrastructure.Logging.IEntityFormatter"/> concrete implementation.
+            The <see cref="T:Sitecore.Social.Infrastructure.Logging.IEntityFormatter" /> concrete implementation.
             </returns>
             <example>
             <code>
@@ -101,11 +101,11 @@
         </member>
         <member name="M:Sitecore.Social.Infrastructure.Logging.EntityFormatterCache.Exists(System.Type)">
             <summary>
-            Checks if an <see cref="T:Sitecore.Social.Infrastructure.Logging.IEntityFormatter"/> for <paramref name="type"/> exists in cache.
+            Checks if an <see cref="T:Sitecore.Social.Infrastructure.Logging.IEntityFormatter" /> for <paramref name="type" /> exists in cache.
             </summary>
             <param name="type">The type.</param>
             <returns>
-            true, if an <see cref="T:Sitecore.Social.Infrastructure.Logging.IEntityFormatter"/> for <paramref name="type"/> exists in cache, otherwise - false.
+            true, if an <see cref="T:Sitecore.Social.Infrastructure.Logging.IEntityFormatter" /> for <paramref name="type" /> exists in cache, otherwise - false.
             </returns>
             <example>
             <code>
@@ -138,7 +138,7 @@
             </summary>
             <param name="entity">The entity.</param>
             <returns>
-            A string representation of the <paramref name="entity"/>.
+            A string representation of the <paramref name="entity" />.
             </returns>
             <example>
             <code>
@@ -240,7 +240,7 @@
         </member>
         <member name="M:Sitecore.Social.Infrastructure.Logging.LogManager.#ctor(Sitecore.Social.Infrastructure.Logging.ILogMessageFormatter,Sitecore.Social.Infrastructure.Logging.ILogProvider,Sitecore.Social.Infrastructure.Logging.IEntityFormatterMapper,Sitecore.Social.Infrastructure.Wrappers.System.IMembershipWrapper,Sitecore.Social.Configuration.IConfigurationFactory)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Infrastructure.Logging.LogManager"/> class with the specific parameters.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Infrastructure.Logging.LogManager" /> class with the specific parameters.
             </summary>
             <param name="logMessageFormatter">The log message formatter.</param>
             <param name="logProvider">The log provider.</param>

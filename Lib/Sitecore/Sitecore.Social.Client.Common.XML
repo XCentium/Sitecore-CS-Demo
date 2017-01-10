@@ -66,16 +66,6 @@
             <param name="itemId">The Id of an item.</param>
             <param name="defaultGoalName">Name of default goal.</param>
         </member>
-        <member name="T:Sitecore.Social.Client.Common.IoC.HelpersModule">
-            <summary>
-            IoC module to bind client helpers related implementations.
-            </summary>
-        </member>
-        <member name="M:Sitecore.Social.Client.Common.IoC.HelpersModule.Load">
-            <summary>
-            Loads the module into the kernel.
-            </summary>
-        </member>
         <member name="T:Sitecore.Social.Client.Common.Helpers.LoginHelper">
             <summary>
             Defines methods for logging in users
@@ -108,7 +98,7 @@
         </member>
         <member name="M:Sitecore.Social.Client.Common.Helpers.LoginHelper.#ctor(Sitecore.Social.Client.Domain.IConnectorClientManager,Sitecore.Social.Domain.IApplicationManager,Sitecore.Social.Infrastructure.Wrappers.System.IMembershipWrapper,Sitecore.Social.Infrastructure.Logging.ILogManager)">
             <summary>
-            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Common.Helpers.LoginHelper"/> class.
+            Initializes a new instance of the <see cref="T:Sitecore.Social.Client.Common.Helpers.LoginHelper" /> class.
             </summary>
             <param name="connectorClientManager">The connector client manager.</param>
             <param name="applicationManager">The application manager.</param>
@@ -125,6 +115,16 @@
             <param name="additionalParameters">The additional parameters, which will be kept during the authentication flow.
             If Social application ID is specified in the "Application" parameter, the appropriate application will be utilized during the login process.</param>
             <param name="callbackUrl">The URL, where the user will be redirected after login.</param>
+        </member>
+        <member name="T:Sitecore.Social.Client.Common.IoC.HelpersModule">
+            <summary>
+            IoC module to bind client helpers related implementations.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Social.Client.Common.IoC.HelpersModule.Load">
+            <summary>
+            Loads the module into the kernel.
+            </summary>
         </member>
     </members>
 </doc>

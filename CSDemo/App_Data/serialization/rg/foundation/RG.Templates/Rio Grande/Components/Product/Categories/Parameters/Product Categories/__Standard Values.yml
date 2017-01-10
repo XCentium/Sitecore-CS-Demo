@@ -1,0 +1,18 @@
+﻿---
+ID: 4e795cc6-64a4-4b37-8e20-8c43f857023a
+Parent: a343166d-6b49-4041-b318-699bdbfd3081
+Template: 9c1bb9e1-d757-4ac8-ac7b-898c29f43cce
+Path: /sitecore/templates/Rio Grande/Components/Product/Categories/Parameters/Product Categories/__Standard Values
+DB: master
+SharedFields:
+- ID: 3094d236-5985-4c4f-ae6a-e30740885532
+  Hint: Caching
+  Value: 0|0|0|0|0|0|0|0
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T060320Z

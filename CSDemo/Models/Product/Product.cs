@@ -60,7 +60,7 @@ namespace CSDemo.Models.Product
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex.Message, ex, this);
+                    Sitecore.Diagnostics.Log.Error(ex.Message, ex, this);
                 }
 
                 if (string.IsNullOrEmpty(response)) yield return null;
@@ -71,7 +71,7 @@ namespace CSDemo.Models.Product
                     if (result.Messages == null) yield return null;
                     foreach (var message in result.Messages)
                     {
-                        Log.Warn(message, this);
+                        Sitecore.Diagnostics.Log.Warn(message, this);
                     }
                     yield return null;
                 }
@@ -178,7 +178,7 @@ namespace CSDemo.Models.Product
             {
                 foreach (var message in result.SystemMessages)
                 {
-                    Log.Error(message.Message, message);
+                    Sitecore.Diagnostics.Log.Error(message.Message, message);
                 }
             }
         }
@@ -444,9 +444,9 @@ namespace CSDemo.Models.Product
             if (zipCode == "N/A")
             {
                 zipCode = "90292";
-                Log.Warn("Using default sample zip 90292.", zipCode);
+                Sitecore.Diagnostics.Log.Warn("Using default sample zip 90292.", zipCode);
             }
-            Log.Info(string.Format("The zip code is set to {0}.", zipCode), zipCode);
+            Sitecore.Diagnostics.Log.Info(string.Format("The zip code is set to {0}.", zipCode), zipCode);
             if (string.IsNullOrWhiteSpace(zipCode)) yield return null;
             var response = string.Empty;
 
@@ -460,7 +460,7 @@ namespace CSDemo.Models.Product
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message, ex);
+                Sitecore.Diagnostics.Log.Error(ex.Message, ex);
             }
 
             if (string.IsNullOrEmpty(response)) yield return null;
@@ -471,7 +471,7 @@ namespace CSDemo.Models.Product
                 if (result.Messages == null) yield return null;
                 foreach (var message in result.Messages)
                 {
-                    Log.Warn(message, result);
+                    Sitecore.Diagnostics.Log.Warn(message, result);
                 }
                 yield return null;
             }

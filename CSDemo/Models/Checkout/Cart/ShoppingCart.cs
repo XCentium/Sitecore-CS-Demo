@@ -73,7 +73,8 @@ namespace CSDemo.Models.Checkout.Cart
             set { _discount = value; }
         }
 
-
+        public decimal LineDiscount { get; internal set; }
+        public decimal OrderLevelDiscountAmount { get; internal set; }
 
         public ShoppingCart()
         {
@@ -91,9 +92,11 @@ namespace CSDemo.Models.Checkout.Cart
 
             if (CartItems.Count > 0)
             {
-                var cartToTal = CartItems.Sum(x => (x.UnitPrice * x.Quantity));
+                //  var cartToTal = CartItems.Sum(x => (x.UnitPrice * x.Quantity));
 
-                return cartToTal - LineTotal;
+                //  return cartToTal - LineTotal;
+
+                return this.LineDiscount + OrderLevelDiscountAmount;
             }
 
             return discount;
