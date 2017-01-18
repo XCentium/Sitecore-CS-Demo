@@ -3,26 +3,29 @@
 {
     return;
 }
-<section class="content our-stores">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-lg-8">
-                <h2>Let's check our stores </h2>
-                <div class="row">
-                    @foreach (var store in Model)
-                    {
-                        <div class="col-sm-6">
-                            <div class="store">
-                                <h3>@Editable(store, s => s.Title)</h3>
-                                <ul class="list-unstyled">
-                                    <li>@Editable(store, s => s.Street)</li>
-                                    <li>@Editable(store, s => s.City), @Editable(store, s => s.State) @Editable(store, s => s.Zip)</li>
-                                </ul>
+@if (Model != null && Model.ToList().Count > 0)
+{
+    <section class="content our-stores">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8">
+                    <h2>Let's check our stores </h2>
+                    <div class="row">
+                        @foreach (var store in Model)
+                        {
+                            <div class="col-sm-6">
+                                <div class="store">
+                                    <h3>@Editable(store, s => s.Title)</h3>
+                                    <ul class="list-unstyled">
+                                        <li>@Editable(store, s => s.Street)</li>
+                                        <li>@Editable(store, s => s.City), @Editable(store, s => s.State) @Editable(store, s => s.Zip)</li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                    }
+                        }
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+}
