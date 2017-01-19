@@ -6,6 +6,7 @@ using Sitecore.Data.Items;
 using Sitecore.Mvc.Extensions;
 using Sitecore.Mvc.Presentation;
 using Sitecore.Web;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -34,24 +35,56 @@ namespace CSDemo.Controllers
         #endregion
 
 
-        public Item GetDatasourceItem()
+        private Item GetDatasourceItem()
         {
             var datasourceId = RenderingContext.Current.Rendering.DataSource;
             return Sitecore.Data.ID.IsID(datasourceId) ? Sitecore.Context.Database.GetItem(datasourceId) : null;
         }
+
+        private LocationInformation GetUserLocation() {
+            double? lat = null, lon = null;
+            if (!(Tracker.Current == null ||
+                    Tracker.Current.Interaction == null ||
+                    Tracker.Current.Interaction.GeoData == null ||
+                    Tracker.Current.Interaction.GeoData.Latitude == null ||
+                    Tracker.Current.Interaction.GeoData.Longitude == null ||
+                    Tracker.Current.Interaction.GeoData.Latitude == 0 ||
+                    Tracker.Current.Interaction.GeoData.Longitude == 0)) 
+               {
+                   lat = Tracker.Current.Interaction.GeoData.Latitude;
+                   lon = Tracker.Current.Interaction.GeoData.Longitude;
+               }
+
+            LocationInformation userLocation = new LocationInformation
+            {
+                Latitude = lat,
+                Longitude = lon
+            };
+
+            return userLocation;
+        }
+
+        public bool IsLocationValid(LocationInformation location) {
+            bool isValid = false;
+
+            if ( (location.Latitude != null && location.Latitude != 0) &&
+                 (location.Longitude != null && location.Longitude != 0)  )
+            {
+                isValid = true;
+            }
+
+            return isValid;
+        }
+
         public ActionResult ClosestLocations()
         {
             var storeFolderItem = GetDatasourceItem();
             if (storeFolderItem == null) { return null; }
-            var stores = storeFolderItem.Children.Select(c => c.GlassCast<Store>());
+            IEnumerable<Store> stores = storeFolderItem.Children.Select(c => c.GlassCast<Store>());
+ 
+            LocationInformation userLocation = GetUserLocation();
             const int numberOfStroresToShow = 4; // MG: Create a jira issue to make this a setting
-            if (Tracker.Current == null || 
-                Tracker.Current.Interaction == null || 
-                Tracker.Current.Interaction.GeoData == null ||
-                Tracker.Current.Interaction.GeoData.Latitude == null ||
-                Tracker.Current.Interaction.GeoData.Longitude == null ||
-                Tracker.Current.Interaction.GeoData.Latitude == 0 ||
-                Tracker.Current.Interaction.GeoData.Longitude == 0       )
+            if (!IsLocationValid(userLocation))
             {
                 if (stores.Count() > numberOfStroresToShow)
                 {
@@ -60,12 +93,7 @@ namespace CSDemo.Controllers
                 return View(stores);
             }
 
-            var origin = new LocationInformation
-            {
-                Latitude = Tracker.Current.Interaction.GeoData.Latitude,
-                Longitude = Tracker.Current.Interaction.GeoData.Longitude
-            };
-            var distances = Store.SortByProximity(origin, stores);
+            var distances = Store.SortByProximity(userLocation, stores);
 
             if (distances == null || !distances.Any())
             {
