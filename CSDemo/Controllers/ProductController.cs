@@ -8,6 +8,7 @@ using Sitecore;
 using Sitecore.Analytics;
 using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.SearchTypes;
+using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Mvc.Controllers;
@@ -148,8 +149,12 @@ namespace CSDemo.Controllers
                 model.UserCatalogIds = _userCatalogIds;
                 if (!string.IsNullOrEmpty(categoryName))
                 {
-
+                    var searchCategory = ProductHelper.GetItemByName(categoryName);
                     var categoryId = (!string.IsNullOrEmpty(cid)) ? cid : ProductHelper.GetItemIdsFromName(categoryName, _userCatalogIds);
+
+                    if (string.IsNullOrEmpty(categoryId) && searchCategory != null &&
+                        !ID.IsNullOrEmpty(searchCategory.ItemId))
+                        categoryId = searchCategory.ItemId.ToString();
 
                     if (!string.IsNullOrEmpty(categoryId))
                     {
@@ -168,7 +173,6 @@ namespace CSDemo.Controllers
                                     model.PageSize = pageSize;
                                 }
                             }
-
                         }
 
                         model.CategoryId = categoryId;

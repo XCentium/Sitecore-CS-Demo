@@ -731,10 +731,12 @@ namespace CSDemo.Models.Product
 
         /// <summary>
         /// </summary>
-        /// <param name="productId"></param>
+        /// <param name="itemName"></param>
         /// <returns></returns>
-        internal static SearchResultItem GetItemByName(string productId)
+        internal static SearchResultItem GetItemByName(string itemName)
         {
+            string cleanName = itemName.Replace(Constants.Common.Space, Constants.Common.Dash);
+
             var index = ContentSearchManager.GetIndex($"sitecore_{(Context.Database==null || Context.Database.Name.ToLower() == "core"? "master":Context.Database.Name)}_index");
             try
             {
@@ -743,9 +745,10 @@ namespace CSDemo.Models.Product
                 {
                     var queryable = context.GetQueryable<SearchResultItem>()
                         .Where(x => x.Language == Context.Language.Name);
+
                     return
                         queryable.FirstOrDefault(
-                            x => string.Equals(x.Name, productId, StringComparison.CurrentCultureIgnoreCase));
+                            x => string.Equals(x.Name, itemName, StringComparison.CurrentCultureIgnoreCase));
                 }
             }
             catch (Exception ex)

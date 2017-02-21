@@ -8,7 +8,7 @@ using IDependencyResolver = Glass.Mapper.Sc.IoC.IDependencyResolver;
 
 #endregion
 
-namespace CSDemo
+namespace CSDemo.App_Start
 {
     public static class GlassMapperScCustom
     {

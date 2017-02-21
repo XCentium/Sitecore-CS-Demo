@@ -463,26 +463,32 @@ namespace CSDemo.Models.Product
             if (string.IsNullOrEmpty(response)) yield return null;
 
             var result = JsonConvert.DeserializeObject<ComplementaryProductResult>(response);
-            if (!result.IsSuccessful)
+            if (result == null)
             {
-                if (result.Messages == null) yield return null;
-                foreach (var message in result.Messages)
-                {
-                    Log.Warn(message, result);
-                }
                 yield return null;
+                yield break;
             }
-            if (result.ProductIds == null || !result.ProductIds.Any()) yield return null;
-            foreach (var productId in result.ProductIds)
+            else
             {
-                var productResult = ProductHelper.GetItemByProductId(productId);
-                if (productResult != null)
+                if (!result.IsSuccessful)
                 {
-                    var productItem = productResult.GetItem();
-                    yield return productItem.GlassCast<Product>();
+                    if (result == null || result.Messages == null) yield return null;
+                    foreach (var message in result.Messages)
+                    {
+                        Log.Warn(message, result);
+                    }
+                    yield return null;
                 }
-
-
+                if (result.ProductIds == null || !result.ProductIds.Any()) yield return null;
+                foreach (var productId in result.ProductIds)
+                {
+                    var productResult = ProductHelper.GetItemByProductId(productId);
+                    if (productResult != null)
+                    {
+                        var productItem = productResult.GetItem();
+                        yield return productItem.GlassCast<Product>();
+                    }
+                }
             }
         }
         #endregion
