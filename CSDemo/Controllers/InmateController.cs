@@ -27,13 +27,13 @@ namespace CSDemo.Controllers
             switch (model.SelectedPrisonId)
             {
                 case "20021":
-                    return Redirect(string.Format("http://keefeca.xcentium.net?pid={0}&iid={1}",
+                    return Redirect(string.Format("http://keefeca.xcentium.net?pid={0}&iid={1}&fid=123",
                         model.SelectedPrisonId, model.InmateId));
                 case "20114":
-                    return Redirect(string.Format("http://keefeoh.xcentium.net?pid={0}&iid={1}",
+                    return Redirect(string.Format("http://keefeoh.xcentium.net?pid={0}&iid={1}&fid=123",
                         model.SelectedPrisonId,  model.InmateId));
                 default:
-                    return Redirect(string.Format("http://keefeca.xcentium.net?pid={0}&iid={1}", 
+                    return Redirect(string.Format("http://keefeca.xcentium.net?pid={0}&iid={1}&fid=123", 
                         model.SelectedPrisonId, model.InmateId));
             }
         }
