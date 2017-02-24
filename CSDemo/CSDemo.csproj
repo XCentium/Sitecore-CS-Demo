@@ -542,7 +542,18 @@
       <DependentUpon>Oceanside.Main.config</DependentUpon>
     </Content>
     <Content Include="ProductDetail.cshtml" />
-
+    <Content Include="App_Config\Include\zKeefe\Keefe.Main.config">
+      <SubType>Designer</SubType>
+      <TransformOnBuild>true</TransformOnBuild>
+    </Content>
+    <None Include="App_Config\Include\zKeefe\Keefe.Main.csDemo.config">
+      <DependentUpon>Keefe.Main.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zKeefe\Keefe.Main.Release.config">
+      <DependentUpon>Keefe.Main.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
     <None Include="Properties\PublishProfiles\DEV Local.pubxml" />
     <None Include="Properties\PublishProfiles\Vasiliy Local.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
