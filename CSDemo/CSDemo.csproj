@@ -310,6 +310,7 @@
     <Compile Include="Contracts\Product\ITag.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\InmateController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\DataMigrationController.cs" />
     <Compile Include="Controllers\MarqueeController.cs" />
@@ -339,6 +340,7 @@
     <Compile Include="Models\Blog\FeaturedBlogs.cs" />
     <Compile Include="Models\Checkout\Cart\CartHelper.cs" />
     <Compile Include="Models\CommerceModels.cs" />
+    <Compile Include="Models\Inmate\InmateSelector.cs" />
     <Compile Include="Models\Page\HomePage.cs" />
     <Compile Include="Models\Page\Root.cs" />
     <Compile Include="Models\Page\Navigation\MegaMenuNavigationItem.cs" />
@@ -551,6 +553,10 @@
       <IsTransformFile>True</IsTransformFile>
     </None>
     <None Include="App_Config\Include\zKeefe\Keefe.Main.Release.config">
+      <DependentUpon>Keefe.Main.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zKeefe\Keefe.Main.Vasiliy Local.config">
       <DependentUpon>Keefe.Main.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
@@ -783,6 +789,7 @@
     <Content Include="Views\Product\DealerOrderingSystem.cshtml" />
     <Content Include="Views\Product\SalesQuote.cshtml" />
     <Content Include="Views\Product\QuickOrderSystem.cshtml" />
+    <Content Include="Views\Inmate\InmateSelector.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
