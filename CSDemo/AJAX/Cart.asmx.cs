@@ -59,6 +59,11 @@ namespace CSDemo.AJAX
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string SubmitOrder(string contextItemId, string orderTotal)
         {
+            //return fake order number if the order is being submitted in preview or expereince editor
+            if (Sitecore.Context.PageMode.IsExperienceEditor || Sitecore.Context.PageMode.IsExperienceEditorEditing 
+                || Sitecore.Context.PageMode.IsPreview || Sitecore.Context.PageMode.IsProfiling)
+                return "000000001";
+
             string ret = CartHelper.SubmitCart();
             RegisterGoal(Constants.Marketing.SubmitOrderGoalId, contextItemId);
 
