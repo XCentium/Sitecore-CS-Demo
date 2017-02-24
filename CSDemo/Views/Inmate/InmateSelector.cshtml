@@ -7,10 +7,10 @@
     <div class="container">
         @using (Html.BeginForm())
         {
-            <div style="margin:0px auto; width:440px">
+            <div style="margin:0px auto; width:480px" class="account-content">
                 <div>
                     <label>Inmate #:</label><br />
-                    @Html.EditorFor(m => Model.InmateId, new { htmlAttributes = new { @style = "width:439px" } })
+                    @Html.EditorFor(m => Model.InmateId, new { htmlAttributes = new { @style = "width:439px", @class = "form-control" } })
                 </div><br />
                 <div>
                     <label>Institution:</label><br />
@@ -21,9 +21,9 @@
                     new SelectListItem { Text="Central Valley MCCF PG A/B 2017 - 1st ", Value= "20114" },
                     new SelectListItem { Text="Delano MCCF PG A/B 2017 - 1st ", Value= "20126" },
                     new SelectListItem { Text="Desert View MCCF PG A/B 2017 - 1st", Value= "20127" }
-              })
+              }, new { @class = "form-control" })
                 </div><br />
-                <button type="submit">Go</button>
+                <button type="submit" class="btn btn-primary variant_btn">Find</button>
                 <br />
                 <br />
                 <a target="_blank" href="../templates/CaliforniaQP_2014/CAQP_Jan2015_OrderForms.pdf"><font size="1"><font>Click Here to download a blank order form</font></font></a>
