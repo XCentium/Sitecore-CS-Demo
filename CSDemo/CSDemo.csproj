@@ -298,6 +298,7 @@
     <Compile Include="Configuration\Conditions\LastPurchaseAmountCheck.cs" />
     <Compile Include="Configuration\Conditions\ProductBackInStock.cs" />
     <Compile Include="Configuration\Conditions\ReturnedVisitorAfterPurchase.cs" />
+    <Compile Include="Configuration\Conditions\UrlComparison.cs" />
     <Compile Include="Configuration\ConfigurationHelper.cs" />
     <Compile Include="Configuration\Facets\ILastOrderTotal.cs" />
     <Compile Include="Configuration\Facets\LastOrderTotal.cs" />
@@ -337,6 +338,7 @@
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\InmateController.cs" />
     <Compile Include="Controllers\MarqueeController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\PageController.cs" />
@@ -381,6 +383,7 @@
     <Compile Include="Models\Checkout\Cart\ShippingMethodInputModelItem.cs" />
     <Compile Include="Models\Checkout\Cart\SubmitOrderInputModel.cs" />
     <Compile Include="Models\CommerceModels.cs" />
+    <Compile Include="Models\InmateSelector.cs" />
     <Compile Include="Models\Page\HomePage.cs" />
     <Compile Include="Models\Page\Root.cs" />
     <Compile Include="Models\Page\Navigation\MegaMenuNavigationItem.cs" />
@@ -573,6 +576,7 @@
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Web.config" />
+    <Content Include="Views\Inmate\InmateSelector.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
