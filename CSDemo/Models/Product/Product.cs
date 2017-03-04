@@ -350,6 +350,12 @@ namespace CSDemo.Models.Product
         public virtual string StoneColor { get; set; }
         public virtual string GlassColor { get; set; }
 
+        public virtual string Artist { get; set; }
+        public virtual string Song { get; set; }
+        public virtual string Genre { get; set; }
+        public virtual string Album { get; set; }
+        public virtual string Length { get; set; }
+
         #endregion
 
         #region Fieldname Mappings

@@ -5,7 +5,7 @@ namespace CSDemo.Models.Account
 {
     public class OrderDetailViewModel
     {
-        public string OrderID { get; set; }
+        public string OrderId { get; set; }
         public string OrderDate { get; set; }
         public int NumberofItems { get; set; }
 
@@ -21,14 +21,16 @@ namespace CSDemo.Models.Account
         public string PaymentAuthorizationCode { get; set; }
 
         public string OrderStatus { get; set; }
-        public string UserID { get; set; }
-        public string ExternalID { get; set; }
+        public string UserId { get; set; }
+        public string ExternalId { get; set; }
 
         public IEnumerable<OrderLine> OrderLines { get; set; }
 
         public CommerceParty Shipping { get; set; }
 
         public CommerceParty Billing { get; set; }
-
+        public string TrackingNumber { get; internal set; }
+        public string Email { get; set; }
+        public string Phone { get; internal set; }
     }
 }

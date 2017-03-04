@@ -40,12 +40,12 @@
                             @if (Model != null) { 
                                 foreach(var order in Model.Orders){
                                     <tr>
-                                        <td><a href="~/account/orders/@order.OrderID">#@order.OrderID</a></td>
+                                        <td><a href="~/account/orders/@order.OrderId">#@order.TrackingNumber</a></td>
                                         <td> @order.OrderDate </td>
                                         <td class="hidden-xs hidden-sm">@order.NumberofItems</td>
                                         <td>@order.TotalPrice</td>
                                         <td><span class="label label-info">@order.OrderStatus</span></td>
-                                        <td><a href="~/account/orders/@order.OrderID" class="btn btn-primary btn-sm">View</a></td>
+                                        <td><a href="~/account/orders/@order.OrderId" class="btn btn-primary btn-sm">View</a></td>
                                     </tr>
                                 
                                 }

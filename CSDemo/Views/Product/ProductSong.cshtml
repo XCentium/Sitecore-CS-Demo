@@ -206,65 +206,53 @@
                                                 </li>
                                             }
                                         }
-                                        <li><span>Brand</span>@Editable(Model, x => x.Brand)</li>
                                     </ul>
 
-                                    @if (Model.CatalogName.StartsWith("Rio"))
+                                    @if (Model.CatalogName.ToLower().StartsWith("keefe_musi"))
                                     {
 
                                         <div class="row row-no-padding">
                                             <div class="col-md-3 col-sm-4">
                                                 <table class="rio-meta-table">
                                                     <tbody>
-                                                        @if (!string.IsNullOrEmpty(Model.MetalType))
-                                                        {
-                                                            <tr>
-                                                                <th>Metal Type</th>
-                                                                <td style="padding-left: 15px">@Model.MetalType</td>
-                                                            </tr>
-                                                        }
-                                                        @if (!string.IsNullOrEmpty(Model.MetalColor))
-                                                        {
-                                                            <tr>
-                                                                <th>Metal Color</th>
-                                                                <td style="padding-left: 15px">@Model.MetalColor</td>
-                                                            </tr>
-                                                        }
-                                                        @if (!string.IsNullOrEmpty(Model.KaratPurity))
-                                                        {
-                                                            <tr>
-                                                                <th>Karat Purity</th>
-                                                                <td style="padding-left: 15px">@Model.KaratPurity</td>
-                                                            </tr>
-                                                        }
-                                                        @if (!string.IsNullOrEmpty(Model.InsideDimension))
-                                                        {
-                                                            <tr>
-                                                                <th>Inside Dimension</th>
-                                                                <td style="padding-left: 15px">@Model.InsideDimension</td>
-                                                            </tr>
-                                                        }
-                                                        @if (!string.IsNullOrEmpty(Model.FabricationMethod))
-                                                        {
-                                                            <tr>
-                                                                <th>Fabrication Method</th>
-                                                                <td style="padding-left: 15px">@Model.FabricationMethod</td>
-                                                            </tr>
-                                                        }
-                                                        @if (!string.IsNullOrEmpty(Model.ShippingWeight))
-                                                        {
-                                                            <tr>
-                                                                <th>Shipping Weight</th>
-                                                                <td style="padding-left: 15px">@Model.ShippingWeight</td>
-                                                            </tr>
-                                                        }
-                                                        @if (!string.IsNullOrEmpty(Model.CountryOfOrigin))
-                                                        {
-                                                            <tr>
-                                                                <th>Country Of Origin</th>
-                                                                <td style="padding-left: 15px">@Model.CountryOfOrigin</td>
-                                                            </tr>
-                                                        }
+                                                    
+                                                        
+
+                                                    @if (!string.IsNullOrEmpty(Model.Artist))
+                                                    {
+                                                        <tr>
+                                                            <th>Artist</th>
+                                                            <td style="padding-left: 15px">@Model.Artist</td>
+                                                        </tr>
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(Model.Song))
+                                                    {
+                                                        <tr>
+                                                            <th>Song</th>
+                                                            <td style="padding-left: 15px">@Model.Song</td>
+                                                        </tr>
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(Model.Genre))
+                                                    {
+                                                        <tr>
+                                                            <th>Genre</th>
+                                                            <td style="padding-left: 15px">@Model.Genre</td>
+                                                        </tr>
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(Model.Album))
+                                                    {
+                                                        <tr>
+                                                            <th>Album</th>
+                                                            <td style="padding-left: 15px">@Model.Album</td>
+                                                        </tr>
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(Model.Length))
+                                                    {
+                                                        <tr>
+                                                            <th>Length</th>
+                                                            <td style="padding-left: 15px">@Model.Length mins</td>
+                                                        </tr>
+                                                    }
                                                     </tbody>
                                                 </table>
                                             </div>

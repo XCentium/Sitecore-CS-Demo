@@ -561,6 +561,7 @@
     <None Include="Properties\PublishProfiles\CTP4B.pubxml" />
     <None Include="Properties\PublishProfiles\CTP5.pubxml" />
     <None Include="Properties\PublishProfiles\DEV Local.pubxml" />
+    <None Include="Properties\PublishProfiles\keefe.pubxml" />
     <None Include="Properties\PublishProfiles\Ola.DebugNew.pubxml" />
     <None Include="Properties\PublishProfiles\Vasiliy Local.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -577,6 +578,7 @@
     <Content Include="packages.config" />
     <Content Include="Web.config" />
     <Content Include="Views\Inmate\InmateSelector.cshtml" />
+    <Content Include="Views\Product\ProductSong.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

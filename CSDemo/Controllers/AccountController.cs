@@ -99,11 +99,12 @@ namespace CSDemo.Controllers
 
                 if (!string.IsNullOrEmpty(orderId))
                 {
+                    orderId = orderId.Replace(" ", "-");
                     var cartHelper = new CartHelper();
                     var model = ProductHelper.GetCustomerOrderDetail(orderId, cartHelper);
 
                     // Only show the order detail if the viewer is the rightful owner
-                    if (model.UserID == cartHelper.GetVisitorId())
+                    if (model.UserId == cartHelper.GetVisitorId())
                     {
                         return View(model);
                     }

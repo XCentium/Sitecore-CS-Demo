@@ -66,6 +66,12 @@ namespace CSDemo.Contracts.Product
         string CountryOfOrigin { get; set; }
         List<string> AltImages();
 
+        string Artist { get; set; }
+        string Song { get; set; }
+        string Genre { get; set; }
+        string Album { get; set; }
+        string Length { get; set; }
+
         IEnumerable<Store> Stores { get; set; }
     }
 }

@@ -22,4 +22,34 @@
     <script src="~/Assets/js/CSDemo.js"></script>
 
 
-    
+<script>
+    if (window.location.hash) {
+        var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
+        
+        // hash found
+        if (hash.toLowerCase() == "af7374") {
+            alert(hash);
+            $.ajax({
+                type: "POST",
+                url: "/AJAX/cart.asmx/AddProductToCart",
+                data: "{quantity:'1', productId:'99999', catalogName:'Keefe_Music_Catalog', variantId:'" + variantId + "', contextItemId:'{AECEEB5A-040F-489F-97CB-D924CAA089DF}'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+
+                    alert("SD card Added to cart!");
+                    if (result.d == "") {
+
+                       
+
+                    }
+
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+
+            });
+        }
+    } 
+</script>
