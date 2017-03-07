@@ -290,6 +290,25 @@ namespace CSDemo.Controllers
                         ItemId = p.ItemId,
                         Uri = p.Uri
                     });
+
+                // Code for Keefe demo, delete after
+                var productTypeFilter = RenderingContext.Current.Rendering.Parameters["ProductType"];
+                if (!string.IsNullOrWhiteSpace(productTypeFilter))
+                {
+                    switch (productTypeFilter.ToLower()) {
+                        case "kosher":
+                            searchResults.Where(item => item["kosher"] == "1");
+                            break;
+                        case "male":
+                            searchResults.Where(item => item["male"] == "1");
+                            break;
+                        case "female":
+                            searchResults.Where(item => item["female"] == "1");
+                            break;
+                    }
+                }
+                // Code for Keefe demo, delete after
+
                 searchResults = searchManager.AddSearchOptionsToQuery<CustomCommerceSearchResultItem>(searchResults,
                     searchOptions);
                 SearchResults<CustomCommerceSearchResultItem> results = searchResults.GetResults();
