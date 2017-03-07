@@ -49,7 +49,11 @@ namespace CSDemo.Configuration.WFFM
         {
             get
             {
-                return WebUtil.GetUrlName(1);
+                string orderId = WebUtil.GetUrlName(1);
+
+                orderId = orderId.Replace(" ", "-");
+
+                return orderId;
             }
         }
 
@@ -61,11 +65,7 @@ namespace CSDemo.Configuration.WFFM
                 List<string> output = new List<string>();
                 var customerOrderDetail = Order;
 
-                output.Add("Order Guid: " + OrderId);
-                output.Add("Parent Url: " + WebUtil.GetUrlName(2));
-
-                if (customerOrderDetail != null)
-                    output.Add("Order Number: " + customerOrderDetail.OrderId);
+                output.Add("Order #" + Order.TrackingNumber);
                 
                 return String.Join(Environment.NewLine, output);
             }

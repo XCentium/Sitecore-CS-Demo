@@ -1,11 +1,12 @@
 @using Sitecore.Forms.Mvc.Html
 @model CSDemo.Configuration.WFFM.OrderInfoField
-@Html.Label(Model.Value)
 @if (Model.Order == null)
 {
     <p>Failed to lookup order</p>
-} else {
-<p>Date: @Html.Label(Model.Order.OrderDate ?? "Empty")</p>
-<p>Email: @Html.Label(Model.Order.Email ?? "Empty")</p>
-<p>Order #@Html.Label(Model.Order.OrderId ?? "Empty")</p>
+}
+else
+{
+    <p>Order #@Html.Label(Model.Order.OrderId ?? "Empty")</p>
+    <p>Date: @Html.Label(Model.Order.OrderDate ?? "Empty")</p>
+    <p>Name: @Html.Label(Model.Order.Billing.FirstName + Model.Order.Billing.LastName ?? "Empty")</p>
 }
