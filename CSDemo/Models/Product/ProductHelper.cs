@@ -387,9 +387,9 @@ namespace CSDemo.Models.Product
 
 
                             // need to rewrite to boost performance
-                            var i = 0;
-                            if (2 < i)
-                            {
+                          //  var i = 0;
+                         //   if (2 < i)
+                         //   {
                                 var categoryChildern = category.GetChildren();
                                 c.ProductsCount = categoryChildern.Count();
                                 var pList = new List<ProductMenulistViewModel>();
@@ -404,7 +404,7 @@ namespace CSDemo.Models.Product
                                     }
                                 }
                                 c.ProductMenulistViewModel = pList;
-                            }
+                          //  }
                             categoryMenulistViewModel.Add(c);
                         }
                     }
@@ -960,7 +960,9 @@ namespace CSDemo.Models.Product
                                 var result =
                                     queryable.Where(
                                         x =>
-                                            (x.Name.Contains(categoryName) && x.Path.Contains(catalog.Paths.Path) &&
+                                            (x.Name.Contains(categoryName) 
+                                            && x.Path.Contains(catalog.Paths.Path) 
+                                            &&
                                              x.TemplateName == "GeneralCategory")).ToList();
 
                                 if (result != null && result.Any())

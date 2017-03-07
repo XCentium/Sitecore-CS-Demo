@@ -137,7 +137,7 @@ namespace CSDemo.Controllers
             var searchInfo = new SearchInfo();
                                                                     
             searchInfo.SearchQuery = searchKeyword ?? string.Empty;                       
-            searchInfo.CatalogName = ConfigurationHelper.GetSiteSettingInfo("Catalog");
+            searchInfo.CatalogName = ProductHelper.GetSiteRootCatalogName();
             var facetItem = _context.GetCurrentItem<Item>();
             searchInfo.RequiredFacets = searchManager.GetFacetFieldsForItem(facetItem);
             searchInfo.ItemsPerPage = pageSize;
