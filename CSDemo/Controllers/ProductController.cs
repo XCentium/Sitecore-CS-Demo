@@ -27,6 +27,7 @@ namespace CSDemo.Controllers
     {
         public ActionResult FeaturedProducts()
         {
+            Sitecore.Diagnostics.Log.Info("CS DEMO: Starting Featured products.", this);
             var products = new List<Product>();
             products.AddRange(GetRecentlyViewedProducts());
             if (products.Count == MaxNumberOfProductsToShow) return View(products);
@@ -53,6 +54,7 @@ namespace CSDemo.Controllers
 
             // Code for Keefe demo, delete after
             var showProdutFilter = RenderingContext.Current.Rendering.Parameters[Constants.QueryStrings.ShowProductType];
+            Sitecore.Diagnostics.Log.Info("CS DEMO: " + Constants.QueryStrings.ShowProductType + " is set to "+ showProdutFilter, this);
             if (!string.IsNullOrWhiteSpace(showProdutFilter))
             {
                 Sitecore.Diagnostics.Log.Info("CS DEMO: ShowProductType is set to " + showProdutFilter, showProdutFilter);
@@ -71,6 +73,7 @@ namespace CSDemo.Controllers
             }
 
             var hideProdutFilter = RenderingContext.Current.Rendering.Parameters[Constants.QueryStrings.HideProductType];
+            Sitecore.Diagnostics.Log.Info("CS DEMO: " + Constants.QueryStrings.HideProductType + " is set to " + hideProdutFilter, this);
             if (!string.IsNullOrWhiteSpace(hideProdutFilter))
             {
                 Sitecore.Diagnostics.Log.Info("Keefe Log: HideProductType is set to " + hideProdutFilter, hideProdutFilter);
