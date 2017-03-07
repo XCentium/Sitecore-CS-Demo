@@ -9,15 +9,16 @@ namespace CSDemo.Configuration.Conditions
 {
     public class InmateIdCheck<T> :  IntegerComparisonCondition<T> where T : RuleContext
     {
-        public long InmateId { get; set; }
+        public int InmateId { get; set; }
 
         protected override bool Execute(T ruleContext)
         {
+            Log.Info("CS DEMO: Checking inmate id.", this);
             if (ruleContext == null) return false;
             var currentInmateId = HttpContext.Current.Request.QueryString["iid"];
             Log.Info("CS DEMO: checking inmate id from querystring:" + currentInmateId, this);
-            long inmateIdInt = 0;
-            var conditionResult = !string.IsNullOrWhiteSpace(currentInmateId) && long.TryParse(currentInmateId, out inmateIdInt) 
+            int inmateIdInt = 0;
+            var conditionResult = !string.IsNullOrWhiteSpace(currentInmateId) && int.TryParse(currentInmateId, out inmateIdInt) 
                 && inmateIdInt == InmateId;
             Log.Info("CS DEMO: Inmate ID check condition result:" + conditionResult, this);
             return conditionResult;
