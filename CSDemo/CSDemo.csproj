@@ -173,6 +173,10 @@
       <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.LuceneProvider.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Sitecore.Forms.Mvc, Version=8.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Sitecore\Sitecore.Forms.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\Lib\Sitecore\Sitecore.Kernel.dll</HintPath>
       <Private>False</Private>
@@ -209,6 +213,10 @@
     </Reference>
     <Reference Include="Sitecore.Social.NetworkProviders">
       <HintPath>..\Lib\Sitecore\Sitecore.Social.NetworkProviders.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.WFFM.Abstractions, Version=8.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Sitecore\Sitecore.WFFM.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
@@ -307,6 +315,7 @@
     <Compile Include="Configuration\Social\CustomSocialGoalTrigger.cs" />
     <Compile Include="Configuration\Social\CreateUser.cs" />
     <Compile Include="Configuration\Social\PostMessageToFacebook.cs" />
+    <Compile Include="Configuration\WFFM\OrderInfoField.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Contracts\Article\IAccordion.cs" />
     <Compile Include="Contracts\Article\IAccordionData.cs" />
@@ -579,6 +588,25 @@
     <Content Include="Web.config" />
     <Content Include="Views\Inmate\InmateSelector.cshtml" />
     <Content Include="Views\Product\ProductSong.cshtml" />
+    <Content Include="Views\Form\EditorTemplates\CaptchaField.cshtml" />
+    <Content Include="Views\Form\EditorTemplates\CheckboxField.cshtml" />
+    <Content Include="Views\Form\EditorTemplates\CheckboxListField.cshtml" />
+    <Content Include="Views\Form\EditorTemplates\DateField.cshtml" />
+    <Content Include="Views\Form\EditorTemplates\DatePickerField.cshtml" />
+    <Content Include="Views\Form\EditorTemplates\DropListField.cshtml" />
+    <Content Include="Views\Form\EditorTemplates\FieldViewModel.cshtml" />
+    <Content Include="Views\Form\EditorTemplates\FileUploadField.cshtml" />
+    <Content Include="Views\Form\EditorTemplates\FormViewModel.cshtml" />
+    <Content Include="Views\Form\EditorTemplates\ListBoxField.cshtml" />
+    <Content Include="Views\Form\EditorTemplates\MultipleLineTextField.cshtml" />
+    <Content Include="Views\Form\EditorTemplates\OrderInfoField.cshtml" />
+    <Content Include="Views\Form\EditorTemplates\PasswordConfirmationField.cshtml" />
+    <Content Include="Views\Form\EditorTemplates\RadioListField.cshtml" />
+    <Content Include="Views\Form\EditorTemplates\RecaptchaField.cshtml" />
+    <Content Include="Views\Form\EditorTemplates\SectionViewModel.cshtml" />
+    <Content Include="Views\Form\Index.cshtml" />
+    <Content Include="Views\Form\SuccessRedirect.cshtml" />
+    <Content Include="Views\Form\Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -26,5 +26,35 @@
 
 @Html.RenderStyles(styles.Select(s => Sitecore.Forms.Mvc.Constants.ScriptsBaseUrl + s).ToArray())
 @Html.RenderStyles(string.Format(StaticSettings.CustomCssPath, string.Empty))
-@Html.EditorFor(x => Model)
+<section class="content account">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <aside class="sidebar">
+
+                    <!-- WIDGET:CATEGORIES - START -->
+                    <div class="widget widget-navigation">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="~/account">Account Dashboard</a></li>
+                            <li><a href="#">Personal Infromation</a></li>
+                            <li><a href="~/Account/Addresses">My Address</a></li>
+                            <li class="active"><a href="~/account/orders">My Orders</a></li>
+                            <li><a href="#">Warranty Claims</a></li>
+                            <li><a href="#">Wishlist</a></li>
+                            <li><a href="~/categories">Back to Shop</a></li>
+                        </ul>
+                    </div>
+                    <!-- WIDGET:CATEGORIES - END -->
+
+                </aside>
+            </div>
+            <div class="col-sm-9">
+                <article class="account-content">
+                    @Html.EditorFor(x => Model)
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
 @Html.RenderScripts(scripts.Select(s => Sitecore.Forms.Mvc.Constants.ScriptsBaseUrl + s).ToArray())
