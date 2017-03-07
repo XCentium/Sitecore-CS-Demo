@@ -2,14 +2,14 @@
 
 namespace CSDemo.Configuration.Actions
 {
-    public class ShowCertainProducts<T> : Sitecore.Rules.Actions.RuleAction<T> 
+    public class HideCertainProducts<T> : Sitecore.Rules.Actions.RuleAction<T> 
         where T : Sitecore.Rules.ConditionalRenderings.ConditionalRenderingsRuleContext
     {
         public string ProductType { get; set; }
 
         public override void Apply(T ruleContext)
         {
-            string key = Constants.QueryStrings.ShowProductType;
+            string key = Constants.QueryStrings.HideProductType;
             Log.Info("CS DEMO: Evaluating Keefe Product Type Rule for " + key, this);
             
             if (string.IsNullOrWhiteSpace(ruleContext.Reference.Settings.Parameters))

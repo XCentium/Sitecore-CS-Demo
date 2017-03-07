@@ -292,9 +292,10 @@ namespace CSDemo.Controllers
                     });
 
                 // Code for Keefe demo, delete after
-                var productTypeFilter = RenderingContext.Current.Rendering.Parameters["ProductType"];
+                var productTypeFilter = RenderingContext.Current.Rendering.Parameters[Constants.QueryStrings.ShowProductType];
                 if (!string.IsNullOrWhiteSpace(productTypeFilter))
                 {
+                    Sitecore.Diagnostics.Log.Info("Keefe Log: ShowProductType is " + productTypeFilter, productTypeFilter);
                     switch (productTypeFilter.ToLower()) {
                         case "kosher":
                             searchResults.Where(item => item["kosher"] == "1");

@@ -50,6 +50,45 @@ namespace CSDemo.Controllers
             {
                 Sitecore.Diagnostics.Log.Error(ex.Message, ex);
             }
+
+            // Code for Keefe demo, delete after
+            var showProdutFilter = RenderingContext.Current.Rendering.Parameters[Constants.QueryStrings.ShowProductType];
+            if (!string.IsNullOrWhiteSpace(showProdutFilter))
+            {
+                Sitecore.Diagnostics.Log.Info("CS DEMO: ShowProductType is set to " + showProdutFilter, showProdutFilter);
+                switch (showProdutFilter.ToLower())
+                {
+                    case "kosher":
+                        products = products.Where(p=>p.IsKosher).ToList();
+                        break;
+                    case "male":
+                        products = products.Where(p => p.IsForMales).ToList();
+                        break;
+                    case "female":
+                        products = products.Where(p => p.IsForFemales).ToList();
+                        break;
+                }
+            }
+
+            var hideProdutFilter = RenderingContext.Current.Rendering.Parameters[Constants.QueryStrings.HideProductType];
+            if (!string.IsNullOrWhiteSpace(hideProdutFilter))
+            {
+                Sitecore.Diagnostics.Log.Info("Keefe Log: HideProductType is set to " + hideProdutFilter, hideProdutFilter);
+                switch (showProdutFilter.ToLower())
+                {
+                    case "kosher":
+                        products = products.Where(p => !p.IsKosher).ToList();
+                        break;
+                    case "male":
+                        products = products.Where(p => !p.IsForMales).ToList();
+                        break;
+                    case "female":
+                        products = products.Where(p => !p.IsForFemales).ToList();
+                        break;
+                }
+            }
+            // Code for Keefe demo, delete after
+
             return View(products);
         }
 

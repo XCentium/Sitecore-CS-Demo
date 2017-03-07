@@ -294,6 +294,7 @@
     <Compile Include="CatalogTool\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Configuration\Actions\HideCertainProducts.cs" />
     <Compile Include="Configuration\Actions\ShowCertainProducts.cs" />
     <Compile Include="Configuration\Conditions\ContactEmailCheck.cs" />
     <Compile Include="Configuration\Conditions\InmateIdCheck.cs" />
