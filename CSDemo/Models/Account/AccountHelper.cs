@@ -452,38 +452,40 @@ namespace CSDemo.Models.Account
         /// <returns></returns>
         internal string GetCurrentCustomerCatalogIds()
         {
-            if (Sitecore.Context.User.IsAuthenticated && Sitecore.Context.Database.Name != "core")
-            {
-                try
-                {
+           return ProductHelper.GetSiteRootCatalogId();
 
-                    var cataLogId = Cookie.Get(Constants.Commerce.UserSelectedCatalogId) != null ? Cookie.Get(Constants.Commerce.UserSelectedCatalogId).Value : null;
+            //if (Sitecore.Context.User.IsAuthenticated && Sitecore.Context.Database.Name != "core")
+            //{
+            //    try
+            //    {
 
-                    if (cataLogId != null && !string.IsNullOrEmpty(cataLogId))
-                    {
-                        return cataLogId;
-                    }
+            //        var cataLogId = Cookie.Get(Constants.Commerce.UserSelectedCatalogId) != null ? Cookie.Get(Constants.Commerce.UserSelectedCatalogId).Value : null;
 
-                    string userName = Sitecore.Context.User.Name;
-                    var user = User.FromName(userName, true);
-                    Sitecore.Security.UserProfile profile = user.Profile;
+            //        if (cataLogId != null && !string.IsNullOrEmpty(cataLogId))
+            //        {
+            //            return cataLogId;
+            //        }
 
-                    var commerceCatalogSet = profile[Constants.Commerce.CommerceUserCatalogSetId];
+            //        string userName = Sitecore.Context.User.Name;
+            //        var user = User.FromName(userName, true);
+            //        Sitecore.Security.UserProfile profile = user.Profile;
 
-                    if (!string.IsNullOrEmpty(commerceCatalogSet) && commerceCatalogSet.Contains(Constants.Common.Dash))
-                    {
-                        return GetCatalogIdsFromCatalogSet(commerceCatalogSet);
-                    }
-                }
-                catch (Exception ex)
-                {
+            //        var commerceCatalogSet = profile[Constants.Commerce.CommerceUserCatalogSetId];
 
-                    Sitecore.Diagnostics.Log.Error("CatalogId Error", ex, this);
-                }
+            //        if (!string.IsNullOrEmpty(commerceCatalogSet) && commerceCatalogSet.Contains(Constants.Common.Dash))
+            //        {
+            //            return GetCatalogIdsFromCatalogSet(commerceCatalogSet);
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
 
-            }
+            //        Sitecore.Diagnostics.Log.Error("CatalogId Error", ex, this);
+            //    }
 
-            return ProductHelper.GetSiteRootCatalogId();
+            //}
+
+       //     return ProductHelper.GetSiteRootCatalogId();
 
         }
 
