@@ -90,6 +90,46 @@ namespace CSDemo.Controllers
                         break;
                 }
             }
+
+            var iid = Request.QueryString["iid"];
+            if (!string.IsNullOrWhiteSpace(iid))
+            {
+                switch (iid)
+                {
+                    case "123":
+                        products = products.Where(p => p.IsKosher).ToList();
+                        break;
+                    case "222":
+                        products = products.Where(p => p.IsForMales).ToList();
+                        break;
+                    case "111":
+                        products = products.Where(p => p.IsForFemales).ToList();
+                        break;
+                    case "321":
+                         products = products.Where(p => !p.IsKosher).ToList();
+                        break;
+                    case "211":
+                        products = products.Where(p => !p.IsForMales).ToList();
+                        break;
+                    case "122":
+                        products = products.Where(p => !p.IsForMales).ToList();
+                        break;
+                    case "123222":
+                        products = products.Where(p => p.IsKosher & p.IsForMales).ToList();
+                        break;
+                    case "123111":
+                        products = products.Where(p => p.IsKosher & p.IsForFemales).ToList();
+                        break;
+                    case "321222":
+                        products = products.Where(p => !p.IsKosher & p.IsForMales).ToList();
+                        break;
+                    case "321111":
+                        products = products.Where(p => !p.IsKosher & p.IsForMales).ToList();
+                        break;
+                }   
+            }
+
+
             // Code for Keefe demo, delete after
 
             return View(products);

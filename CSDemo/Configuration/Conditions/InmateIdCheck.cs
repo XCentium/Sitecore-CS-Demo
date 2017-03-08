@@ -1,4 +1,5 @@
 ﻿using CSDemo.Models.Account;
+using Sitecore;
 using Sitecore.Analytics.Automation.Rules.Workflows;
 using Sitecore.Diagnostics;
 using Sitecore.Rules;
@@ -7,7 +8,8 @@ using System.Web;
 
 namespace CSDemo.Configuration.Conditions
 {
-    public class InmateIdCheck<T> :  IntegerComparisonCondition<T> where T : RuleContext
+    [UsedImplicitly]
+    public class InmateIdCheck<T> : Sitecore.Rules.Conditions.OperatorCondition<T> where T : RuleContext
     {
         public int InmateId { get; set; }
 
