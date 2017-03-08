@@ -90,6 +90,27 @@ namespace CSDemo.Controllers
                         break;
                 }
             }
+
+            var iid = Request.QueryString["iid"];
+            if (!string.IsNullOrWhiteSpace(iid))
+            {
+                if (iid == "123")
+                {
+                    products = products.Where(p => !p.IsKosher).ToList();
+                }
+
+                if (iid == "111")
+                {
+                    products = products.Where(p => !p.IsForMales).ToList();
+                }
+
+                if (iid == "222")
+                {
+                    products = products.Where(p => !p.IsForFemales).ToList();
+                }
+            }
+
+
             // Code for Keefe demo, delete after
 
             return View(products);
