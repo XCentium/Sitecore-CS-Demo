@@ -30,7 +30,8 @@ namespace CSDemo.Configuration.Actions
             }
             parameters[key] = ProductType.ToString();
             ruleContext.Reference.Settings.Parameters =
-            Sitecore.Web.WebUtil.BuildQueryString(parameters, false);
+            Sitecore.Web.WebUtil.BuildQueryString(parameters, false);
+
         }
     }
 }

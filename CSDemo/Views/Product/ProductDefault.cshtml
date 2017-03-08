@@ -158,7 +158,7 @@
                                     <input type="hidden" id="ProductId" name="ProductId" value="@Model.ProductId" />
                                     <input type="hidden" id="CatalogName" name="CatalogName" value="@Model.CatalogName" />
                                     <input type="hidden" name="VariantId" id="@string.Concat("VariantID", Model.VariantProdId)" value="@Model.DefaultVariant" />
-                                    <h3>@Model.Title.Replace("-", " ")</h3>
+                                    <h3>@Model.Title.Replace("CA-", "").Replace("OH-", "").Replace("MI-", "").Replace("-", " ").Replace("(Keefe)", "")</h3>
                                     <div class="product-labels">
                                         @if (Model.IsNew)
                                         {
@@ -192,7 +192,7 @@
                                         </span>
                                     }
                                     <ul class="list-unstyled product-info">
-                                        <li><span>ID</span>@Model.ProductId.Replace("-", " ")</li>
+                                        <li><span>ID</span>@Model.ProductId.Replace("CA-", "").Replace("OH-", "").Replace("MI-", "").Replace("-", " ").Replace("(Keefe)", "")</li>
 
                                         <li class="variants_in_stock">
                                             <span>Availability</span>@stockLabel

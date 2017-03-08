@@ -156,7 +156,7 @@ namespace CSDemo.Models.Product
             var categoryProductVm = new CategoryProductViewModel {PaginationViewModel = model};
 
             var category = new Category();
-            categoryProductVm.CategoryMenulist = GetCategoryMenuList(model.UserCatalogIds);
+            categoryProductVm.CategoryMenulist = GetCategoryMenuList(model.CategoryId);
 
             var searchedItem = GetSearchResultItemById(model.CategoryId);
             if (searchedItem != null)
