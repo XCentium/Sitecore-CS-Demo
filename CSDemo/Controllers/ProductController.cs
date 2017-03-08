@@ -94,20 +94,39 @@ namespace CSDemo.Controllers
             var iid = Request.QueryString["iid"];
             if (!string.IsNullOrWhiteSpace(iid))
             {
-                if (iid == "123")
+                switch (iid)
                 {
-                    products = products.Where(p => !p.IsKosher).ToList();
-                }
-
-                if (iid == "111")
-                {
-                    products = products.Where(p => !p.IsForMales).ToList();
-                }
-
-                if (iid == "222")
-                {
-                    products = products.Where(p => !p.IsForFemales).ToList();
-                }
+                    case "123":
+                        products = products.Where(p => p.IsKosher).ToList();
+                        break;
+                    case "222":
+                        products = products.Where(p => p.IsForMales).ToList();
+                        break;
+                    case "111":
+                        products = products.Where(p => p.IsForFemales).ToList();
+                        break;
+                    case "321":
+                         products = products.Where(p => !p.IsKosher).ToList();
+                        break;
+                    case "211":
+                        products = products.Where(p => !p.IsForMales).ToList();
+                        break;
+                    case "122":
+                        products = products.Where(p => !p.IsForMales).ToList();
+                        break;
+                    case "123222":
+                        products = products.Where(p => p.IsKosher & p.IsForMales).ToList();
+                        break;
+                    case "123111":
+                        products = products.Where(p => p.IsKosher & p.IsForFemales).ToList();
+                        break;
+                    case "321222":
+                        products = products.Where(p => !p.IsKosher & p.IsForMales).ToList();
+                        break;
+                    case "321111":
+                        products = products.Where(p => !p.IsKosher & p.IsForMales).ToList();
+                        break;
+                }   
             }
 
 
