@@ -2,6 +2,7 @@
 @using Sitecore.Mvc;
 @using CSDemo.Models.Checkout.Cart
 @using CSDemo.Models.Account
+@using System.Linq
 
 @{
 
@@ -19,7 +20,7 @@
     var total = "0.00";
     var totalAmountSpentWithinAMonth = Order.GetTotalAmountOrderedWithinPeriod(Sitecore.Analytics.Tracker.Current.Contact, 30);
     var maxAllowedTopendWithinAMonth = 500;
-
+    var maxAllowedWeight = 20;
     if (shoppingCart != null && shoppingCart.Total > 0)
     {
 
@@ -147,14 +148,21 @@
                                 </div>
                             }
                             <div class="clearfix">
-                                @if (shoppingCart != null && shoppingCart.Total > 0 && totalAmountSpentWithinAMonth + shoppingCart.Total <= maxAllowedTopendWithinAMonth)
+                                @if (shoppingCart != null && shoppingCart.Total > 0 
+                                    && totalAmountSpentWithinAMonth + shoppingCart.GrandTotal <= maxAllowedTopendWithinAMonth
+                                    && shoppingCart.TotalWeight <= maxAllowedWeight)
                                 {
                                     <a href="/checkout" class="btn btn-primary btn-lg pull-right ">Checkout</a>
                                 }
-                                @if(totalAmountSpentWithinAMonth+ shoppingCart.Total >= maxAllowedTopendWithinAMonth)
+                                @if(totalAmountSpentWithinAMonth+ shoppingCart.GrandTotal > maxAllowedTopendWithinAMonth)
                                 {
                                     <p>You have exceeded your 30-day limit of $@maxAllowedTopendWithinAMonth (current running amount is $@totalAmountSpentWithinAMonth). 
                                         Please remove items worth $@Math.Abs(maxAllowedTopendWithinAMonth-(totalAmountSpentWithinAMonth+ shoppingCart.Total)) to proceed.</p>
+                                }
+                                @if(shoppingCart.TotalWeight > maxAllowedWeight)
+                                {
+                                    <p>You have exceeded the maximum allowed weight for a single order (@maxAllowedWeight lbs.). 
+                                        Please remove items from the cart to bring the weight down by @Math.Abs(maxAllowedWeight-shoppingCart.TotalWeight) lbs. to proceed.</p>
                                 }
                             </div>
                         </form>
