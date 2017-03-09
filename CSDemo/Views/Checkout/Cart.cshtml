@@ -17,6 +17,8 @@
     var tax = "0.00";
     var grandtotal = "0.00";
     var total = "0.00";
+    var totalAmountSpentWithinAMonth = Order.GetTotalAmountOrderedWithinPeriod(Sitecore.Analytics.Tracker.Current.Contact, 30);
+    var maxAllowedTopendWithinAMonth = 500;
 
     if (shoppingCart != null && shoppingCart.Total > 0)
     {
@@ -145,9 +147,13 @@
                                 </div>
                             }
                             <div class="clearfix">
-                                @if (shoppingCart != null && shoppingCart.Total > 0)
+                                @if (shoppingCart != null && shoppingCart.Total > 0 & totalAmountSpentWithinAMonth<=maxAllowedTopendWithinAMonth)
                                 {
                                     <a href="/checkout" class="btn btn-primary btn-lg pull-right ">Checkout</a>
+                                }
+                                @if(totalAmountSpentWithinAMonth >= maxAllowedTopendWithinAMonth)
+                                {
+                                    <p>You have exceeded your 30-day limit of $@maxAllowedTopendWithinAMonth (current running amount is $@totalAmountSpentWithinAMonth).</p>
                                 }
                             </div>
                         </form>
