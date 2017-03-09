@@ -109,7 +109,7 @@
 
 
                             </div>
-                            @if (shoppingCart.ProductsTotal > 0)
+                            @if (shoppingCart.ProductsTotal > 0 && Sitecore.Context.User.Name=="customer3")
                             {
                                 if (totalAmountSpentWithinAMonth + shoppingCart.GrandTotal > maxAllowedTopendWithinAMonth)
                                 {
@@ -165,8 +165,8 @@
                             }
                             <div class="clearfix">
                                 @if (shoppingCart != null && shoppingCart.Total > 0 
-                                    && totalAmountSpentWithinAMonth + shoppingCart.GrandTotal <= maxAllowedTopendWithinAMonth
-                                    && shoppingCart.TotalWeight <= maxAllowedWeight)
+                                    && (totalAmountSpentWithinAMonth + shoppingCart.GrandTotal <= maxAllowedTopendWithinAMonth  && Sitecore.Context.User.Name=="customer3")
+                                    && (shoppingCart.TotalWeight <= maxAllowedWeight  && Sitecore.Context.User.Name=="customer3"))
                                 {
                                     <a href="/checkout" class="btn btn-primary btn-lg pull-right ">Checkout</a>
                                 }
