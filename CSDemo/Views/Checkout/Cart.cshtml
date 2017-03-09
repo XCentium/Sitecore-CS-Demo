@@ -109,7 +109,23 @@
 
 
                             </div>
-
+                            @if (shoppingCart.ProductsTotal > 0)
+                            {
+                                if (totalAmountSpentWithinAMonth + shoppingCart.GrandTotal > maxAllowedTopendWithinAMonth)
+                                {
+                                <p style="color:red; font-weight:bold">
+                                    You have exceeded your 30-day limit of $@maxAllowedTopendWithinAMonth (current running amount is $@Math.Round(totalAmountSpentWithinAMonth + shoppingCart.Total, 2)).
+                                    Please remove items worth $@Math.Round(Math.Abs(maxAllowedTopendWithinAMonth - (totalAmountSpentWithinAMonth + shoppingCart.Total)), 2) to proceed.
+                                </p>
+                                }
+                                if (shoppingCart.TotalWeight > maxAllowedWeight)
+                                {
+                                <p style="color:red; font-weight:bold">
+                                    You have exceeded the maximum allowed weight for a single order (@maxAllowedWeight lbs.).
+                                    Please remove items from the cart to bring the weight down by @Math.Round(Math.Abs(maxAllowedWeight - shoppingCart.TotalWeight), 2) lbs. to proceed.
+                                </p>
+                                }
+                            }
 
                             <div class="products-order shopping-cart">
                                 <div class="table-responsive">
@@ -139,7 +155,7 @@
                                     @if (nextStatus != null && nextStatus.Amount != 0)
                                     {
                                         <p><img style="float: right; margin: 5px" src="@nextStatus.Badge.Src?w=30" alt="@nextStatus.Badge.Alt" title="@nextStatus.Name Member"/>
-                                            You are $@(nextStatus.Amount - shoppingCart.ProductsTotal) away from becoming a @nextStatus.Name member, which gives you extra discounts coupons in the mail and free shipping on all orders.
+                                            You are $@Math.Round(nextStatus.Amount - shoppingCart.ProductsTotal, 2) away from becoming a @nextStatus.Name member, which gives you extra discounts coupons in the mail and free shipping on all orders.
                                             <br/><br/><a class="btn btn-inverse" href="/categories" title="Continue Shopping">Get More</a>
                                         </p>
 
@@ -154,16 +170,7 @@
                                 {
                                     <a href="/checkout" class="btn btn-primary btn-lg pull-right ">Checkout</a>
                                 }
-                                @if(totalAmountSpentWithinAMonth+ shoppingCart.GrandTotal > maxAllowedTopendWithinAMonth)
-                                {
-                                    <p>You have exceeded your 30-day limit of $@maxAllowedTopendWithinAMonth (current running amount is $@totalAmountSpentWithinAMonth). 
-                                        Please remove items worth $@Math.Abs(maxAllowedTopendWithinAMonth-(totalAmountSpentWithinAMonth+ shoppingCart.Total)) to proceed.</p>
-                                }
-                                @if(shoppingCart.TotalWeight > maxAllowedWeight)
-                                {
-                                    <p>You have exceeded the maximum allowed weight for a single order (@maxAllowedWeight lbs.). 
-                                        Please remove items from the cart to bring the weight down by @Math.Abs(maxAllowedWeight-shoppingCart.TotalWeight) lbs. to proceed.</p>
-                                }
+                               
                             </div>
                         </form>
 
