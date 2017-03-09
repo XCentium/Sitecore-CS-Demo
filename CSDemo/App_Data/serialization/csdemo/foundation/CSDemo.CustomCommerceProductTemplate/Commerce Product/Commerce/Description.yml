@@ -5,6 +5,9 @@ Template: 455a3e98-a627-4b40-8035-e683a0331ac7
 Path: /sitecore/templates/Commerce/Catalog/Commerce Product/Commerce/Description
 DB: master
 SharedFields:
+- ID: 09e76fed-d919-4277-b6bf-748628dfd8ed
+  Hint: Managed by External Commerce System
+  Value: 1
 - ID: 21828437-ea4b-40a1-8c61-4ce60ea41db6
   Hint: Validate Button
   Type: tree list
@@ -13,6 +16,7 @@ SharedFields:
     {C79D95EE-59F0-439E-8105-A35FD6D3D9F8}
     {61C4FF28-C0AE-4358-933F-4709CD6F4FED}
     {240A5F67-A541-45EC-B9B5-2B4766BD7FEC}
+    {4E2C08AA-B3C7-437D-B111-B792B8CAD4CB}
 - ID: 337e20e1-999a-4eea-85ad-b58a03ae75cc
   Hint: Quick Action Bar
   Type: tree list
@@ -21,6 +25,7 @@ SharedFields:
     {C79D95EE-59F0-439E-8105-A35FD6D3D9F8}
     {61C4FF28-C0AE-4358-933F-4709CD6F4FED}
     {240A5F67-A541-45EC-B9B5-2B4766BD7FEC}
+    {4E2C08AA-B3C7-437D-B111-B792B8CAD4CB}
 - ID: 39847666-389d-409b-95bd-f2016f11eed5
   Hint: Unversioned
   Value: 1
@@ -41,6 +46,7 @@ SharedFields:
     {C79D95EE-59F0-439E-8105-A35FD6D3D9F8}
     {61C4FF28-C0AE-4358-933F-4709CD6F4FED}
     {240A5F67-A541-45EC-B9B5-2B4766BD7FEC}
+    {4E2C08AA-B3C7-437D-B111-B792B8CAD4CB}
 - ID: a0f35a32-14b5-4147-9851-7e0bbdc17efc
   Hint: Assign To All Product Types
   Value: 1
@@ -49,7 +55,7 @@ SharedFields:
   Value: Single-Line Text
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
-  Value: 26
+  Value: 27
 - ID: be351a73-fcb0-4213-93fa-c302d8ab4f51
   Hint: Shared
   Value: 0

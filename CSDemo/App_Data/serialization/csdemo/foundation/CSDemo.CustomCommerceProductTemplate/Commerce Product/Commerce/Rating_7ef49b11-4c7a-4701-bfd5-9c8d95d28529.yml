@@ -5,14 +5,23 @@ Template: 455a3e98-a627-4b40-8035-e683a0331ac7
 Path: /sitecore/templates/Commerce/Catalog/Commerce Product/Commerce/Rating
 DB: master
 SharedFields:
+- ID: 09e76fed-d919-4277-b6bf-748628dfd8ed
+  Hint: Managed by External Commerce System
+  Value: 1
 - ID: 21828437-ea4b-40a1-8c61-4ce60ea41db6
   Hint: Validate Button
   Type: tree list
-  Value: {18974997-1CB8-407C-827A-29F74C399B70}
+  Value: |
+    {18974997-1CB8-407C-827A-29F74C399B70}
+    {D6D09F14-B8E6-45B3-BC6D-09B7B816C4AC}
+    {8DD0FFCA-BC47-4246-BEF3-1BCA8CE8A4B3}
 - ID: 337e20e1-999a-4eea-85ad-b58a03ae75cc
   Hint: Quick Action Bar
   Type: tree list
-  Value: {18974997-1CB8-407C-827A-29F74C399B70}
+  Value: |
+    {18974997-1CB8-407C-827A-29F74C399B70}
+    {D6D09F14-B8E6-45B3-BC6D-09B7B816C4AC}
+    {8DD0FFCA-BC47-4246-BEF3-1BCA8CE8A4B3}
 - ID: 39847666-389d-409b-95bd-f2016f11eed5
   Hint: Unversioned
   Value: 1
@@ -28,7 +37,10 @@ SharedFields:
 - ID: 9c903e29-650d-4af2-b9bd-526d5c14a1a5
   Hint: Validator Bar
   Type: tree list
-  Value: {18974997-1CB8-407C-827A-29F74C399B70}
+  Value: |
+    {18974997-1CB8-407C-827A-29F74C399B70}
+    {D6D09F14-B8E6-45B3-BC6D-09B7B816C4AC}
+    {8DD0FFCA-BC47-4246-BEF3-1BCA8CE8A4B3}
 - ID: a0f35a32-14b5-4147-9851-7e0bbdc17efc
   Hint: Assign To All Product Types
   Value: 1
@@ -37,7 +49,7 @@ SharedFields:
   Value: Single-Line Text
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
-  Value: 100
+  Value: 87
 - ID: be351a73-fcb0-4213-93fa-c302d8ab4f51
   Hint: Shared
   Value: 0
@@ -48,6 +60,23 @@ SharedFields:
   Hint: Display On Site
   Value: 1
 Languages:
+- Language: de-DE
+  Fields:
+  - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
+    Hint: Title
+    Value: Bewertung
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Bewertung
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170309T143821Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: default\Anonymous
 - Language: en
   Fields:
   - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
@@ -60,4 +89,39 @@ Languages:
   - Version: 1
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
       Value: 20161212T063032:636171210321932573Z
+- Language: fr-FR
+  Fields:
+  - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
+    Hint: Title
+    Value: Classement
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Classement
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170309T143821Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: default\Anonymous
+- Language: ja-JP
+  Fields:
+  - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
+    Hint: Title
+    Value: Rating
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Rating
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170303T202533Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: default\Anonymous

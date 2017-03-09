@@ -1,8 +1,8 @@
 ﻿---
-ID: 01d30dbb-ed4a-4df7-965f-8b7cdb0753e7
+ID: 27c5b132-726f-415b-9d94-ee1cad25ef21
 Parent: 616cad27-50c7-424b-b907-4b929cd9fc29
 Template: 455a3e98-a627-4b40-8035-e683a0331ac7
-Path: /sitecore/templates/Commerce/Catalog/Commerce Product/Commerce/OnSale
+Path: /sitecore/templates/Commerce/Catalog/Commerce Product/Commerce/PriceCardName
 DB: master
 SharedFields:
 - ID: 09e76fed-d919-4277-b6bf-748628dfd8ed
@@ -12,22 +12,14 @@ SharedFields:
   Hint: Validate Button
   Type: tree list
   Value: |
-    {0FF9EE5D-5842-4CA8-B2D9-2793203E968D}
-    {71FC777B-5BD7-47B1-A99A-1334698986C8}
-    {4AA17EEE-0C83-4017-A3CD-E1C53F7E6067}
-    {BAF80E06-55AE-4568-9533-E6ACD1AC450F}
-    {B2C14959-0E90-4116-97D6-2684A8BF89E9}
-    {3F68B4AD-4903-4BCC-9289-F402BDF90C31}
+    {68671872-F5AE-469D-AF4D-99EDE2D07079}
+    {E46ABC9B-2F0E-446F-9B70-3FD3CE4BACF4}
 - ID: 337e20e1-999a-4eea-85ad-b58a03ae75cc
   Hint: Quick Action Bar
   Type: tree list
   Value: |
-    {0FF9EE5D-5842-4CA8-B2D9-2793203E968D}
-    {71FC777B-5BD7-47B1-A99A-1334698986C8}
-    {4AA17EEE-0C83-4017-A3CD-E1C53F7E6067}
-    {BAF80E06-55AE-4568-9533-E6ACD1AC450F}
-    {B2C14959-0E90-4116-97D6-2684A8BF89E9}
-    {3F68B4AD-4903-4BCC-9289-F402BDF90C31}
+    {68671872-F5AE-469D-AF4D-99EDE2D07079}
+    {E46ABC9B-2F0E-446F-9B70-3FD3CE4BACF4}
 - ID: 39847666-389d-409b-95bd-f2016f11eed5
   Hint: Unversioned
   Value: 1
@@ -36,7 +28,7 @@ SharedFields:
   Value: 0
 - ID: 7ee38888-5f13-4cb1-bad0-09f5b7759856
   Hint: Specification Searchable
-  Value: 1
+  Value: 0
 - ID: 81180d30-1185-426f-ae2d-7da7741399a1
   Hint: Free Text Searchable
   Value: 0
@@ -44,27 +36,23 @@ SharedFields:
   Hint: Validator Bar
   Type: tree list
   Value: |
-    {0FF9EE5D-5842-4CA8-B2D9-2793203E968D}
-    {71FC777B-5BD7-47B1-A99A-1334698986C8}
-    {4AA17EEE-0C83-4017-A3CD-E1C53F7E6067}
-    {BAF80E06-55AE-4568-9533-E6ACD1AC450F}
-    {B2C14959-0E90-4116-97D6-2684A8BF89E9}
-    {3F68B4AD-4903-4BCC-9289-F402BDF90C31}
+    {68671872-F5AE-469D-AF4D-99EDE2D07079}
+    {E46ABC9B-2F0E-446F-9B70-3FD3CE4BACF4}
 - ID: a0f35a32-14b5-4147-9851-7e0bbdc17efc
   Hint: Assign To All Product Types
   Value: 1
 - ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
   Hint: Type
-  Value: Checkbox
+  Value: Single-Line Text
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
-  Value: 67
+  Value: 75
 - ID: be351a73-fcb0-4213-93fa-c302d8ab4f51
   Hint: Shared
   Value: 1
 - ID: d8a78e27-f87f-409b-a4df-d69335dd466f
   Hint: Base Property
-  Value: 0
+  Value: 1
 - ID: ff45e279-7051-42ad-bf91-117f5ec4bd16
   Hint: Display On Site
   Value: 0
@@ -73,33 +61,33 @@ Languages:
   Fields:
   - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
     Hint: Title
-    Value: OnSale
+    Value: PriceCardName
   - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
     Hint: __Display name
-    Value: OnSale
+    Value: PriceCardName
   Versions:
   - Version: 1
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160412T180928Z
+      Value: 20170309T143821Z
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
-      Value: sitecore\admin
+      Value: default\Anonymous
 - Language: en
   Fields:
   - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
     Hint: Title
-    Value: OnSale
+    Value: PriceCardName
   - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
     Hint: __Display name
-    Value: OnSale
+    Value: PriceCardName
   Versions:
   - Version: 1
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160409T035042Z
+      Value: 20170303T202532Z
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
       Value: default\Anonymous
@@ -107,33 +95,33 @@ Languages:
   Fields:
   - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
     Hint: Title
-    Value: OnSale
+    Value: PriceCardName
   - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
     Hint: __Display name
-    Value: OnSale
+    Value: PriceCardName
   Versions:
   - Version: 1
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160412T180928Z
+      Value: 20170309T143821Z
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
-      Value: sitecore\admin
+      Value: default\Anonymous
 - Language: ja-JP
   Fields:
   - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
     Hint: Title
-    Value: OnSale
+    Value: PriceCardName
   - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
     Hint: __Display name
-    Value: OnSale
+    Value: PriceCardName
   Versions:
   - Version: 1
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160409T035042Z
+      Value: 20170303T202533Z
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
       Value: default\Anonymous

@@ -443,6 +443,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AJAX\Cart.asmx" />
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Diego Local.config">
+      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Release.config">
+      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.csDemo.config">
+      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
     <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\bootcomplete.css" />
     <Content Include="Assets\css\bootstrap.min.css" />
@@ -558,9 +570,29 @@
     <Content Include="App_Config\Include\Glass.Mapper.Sc.Start.config" />
     <Content Include="App_Config\Include\Glass.Mapper.Sc.config" />
     <Content Include="App_Config\Include\Glass.Mapper.Sc.CodeFirst.config.exclude" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.AutoPublish.config" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.config" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.Configs.Default" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.Configs.Default.example" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.Configs.Dependency.config.example" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.Configs.NewItemsOnly.example" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.CustomSerializationFolder.config.example" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.DataProvider.config" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.Deployed.config.disabled" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.Remote.config.disabled" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.UI.config" />
+    <Content Include="App_Config\Include\zCSDemo\CSDemo.GeneralSearch.config" />
+    <Content Include="App_Config\Include\zCSDemo\CSDemo.LinkOveride.config" />
+    <Content Include="App_Config\Include\zCSDemo\CSDemo.Main.config" />
+    <Content Include="App_Config\Include\zCSDemo\CSDemo.PatternMatchFix.config" />
+    <Content Include="App_Config\Include\zCSDemo\CSDemo.Serialization.config">
+      <TransformOnBuild>true</TransformOnBuild>
+    </Content>
+    <Content Include="App_Config\Include\zCSDemo\CSDemo.Social.config" />
     <None Include="Properties\PublishProfiles\CTP4B.pubxml" />
     <None Include="Properties\PublishProfiles\CTP5.pubxml" />
     <None Include="Properties\PublishProfiles\DEV Local.pubxml" />
+    <None Include="Properties\PublishProfiles\Diego Local.pubxml" />
     <None Include="Properties\PublishProfiles\Ola.DebugNew.pubxml" />
     <None Include="Properties\PublishProfiles\Vasiliy Local.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -573,7 +605,9 @@
     <Content Include="Views\GeneralSearch\SearchResults.cshtml" />
     <Content Include="Views\Product\FeaturedProducts.cshtml" />
     <Content Include="Views\Store\ClosestLocations.cshtml" />
-    <Content Include="Views\web.config" />
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="packages.config" />
     <Content Include="Web.config" />
     <Content Include="Views\Inmate\InmateSelector.cshtml" />
