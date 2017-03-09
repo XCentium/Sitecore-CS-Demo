@@ -37,7 +37,7 @@
             </div>
             <div class="col-sm-9">
                 <div class="product-body">
-                    <h3>@Model.Title</h3>
+                    <h3>@Model.Title.Replace("CA-", "").Replace("OH-", "").Replace("MI-", "").Replace("-", " ").Replace("(Keefe)", "")</h3>
                     <div class="product-labels">
                         @if (Model.IsNew)
                         {

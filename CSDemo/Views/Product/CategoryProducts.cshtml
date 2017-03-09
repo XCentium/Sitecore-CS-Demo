@@ -49,7 +49,7 @@
 
                                         <li class="panel">
                                            @* <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name<span>[@cat.ProductsCount]</span></a>*@
-                                            <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name.Replace("CA-", "").Replace("OH-", "").Replace("MI-", "").Replace("-", " ")</a>
+                                            <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name.Replace("CA-", "").Replace("OH-", "").Replace("MI-", "").Replace("-", " ").Replace("(Keefe)", "")</a>
                                             <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">
 
                                                 <li><a href="@cat.Url@cid"><span class="fa fa-arrow-right"></span></a></li>
