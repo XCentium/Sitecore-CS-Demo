@@ -147,13 +147,14 @@
                                 </div>
                             }
                             <div class="clearfix">
-                                @if (shoppingCart != null && shoppingCart.Total > 0 & totalAmountSpentWithinAMonth<=maxAllowedTopendWithinAMonth)
+                                @if (shoppingCart != null && shoppingCart.Total > 0 && totalAmountSpentWithinAMonth + shoppingCart.Total <= maxAllowedTopendWithinAMonth)
                                 {
                                     <a href="/checkout" class="btn btn-primary btn-lg pull-right ">Checkout</a>
                                 }
-                                @if(totalAmountSpentWithinAMonth >= maxAllowedTopendWithinAMonth)
+                                @if(totalAmountSpentWithinAMonth+ shoppingCart.Total >= maxAllowedTopendWithinAMonth)
                                 {
-                                    <p>You have exceeded your 30-day limit of $@maxAllowedTopendWithinAMonth (current running amount is $@totalAmountSpentWithinAMonth).</p>
+                                    <p>You have exceeded your 30-day limit of $@maxAllowedTopendWithinAMonth (current running amount is $@totalAmountSpentWithinAMonth). 
+                                        Please remove items worth $@Math.Abs(maxAllowedTopendWithinAMonth-(totalAmountSpentWithinAMonth+ shoppingCart.Total)) to proceed.</p>
                                 }
                             </div>
                         </form>
