@@ -27,6 +27,7 @@ namespace CSDemo.Controllers
     {
         public ActionResult FeaturedProducts()
         {
+            Sitecore.Diagnostics.Log.Info("CS DEMO: Starting Featured products.", this);
             var products = new List<Product>();
             products.AddRange(GetRecentlyViewedProducts());
             if (products.Count == MaxNumberOfProductsToShow) return View(products);
@@ -50,6 +51,87 @@ namespace CSDemo.Controllers
             {
                 Sitecore.Diagnostics.Log.Error(ex.Message, ex);
             }
+
+            // Code for Keefe demo, delete after
+            var showProdutFilter = RenderingContext.Current.Rendering.Parameters[Constants.QueryStrings.ShowProductType];
+            Sitecore.Diagnostics.Log.Info("CS DEMO: " + Constants.QueryStrings.ShowProductType + " is set to "+ showProdutFilter, this);
+            if (!string.IsNullOrWhiteSpace(showProdutFilter))
+            {
+                Sitecore.Diagnostics.Log.Info("CS DEMO: ShowProductType is set to " + showProdutFilter, showProdutFilter);
+                switch (showProdutFilter.ToLower())
+                {
+                    case "kosher":
+                        products = products.Where(p=>p.IsKosher).ToList();
+                        break;
+                    case "male":
+                        products = products.Where(p => p.IsForMales).ToList();
+                        break;
+                    case "female":
+                        products = products.Where(p => p.IsForFemales).ToList();
+                        break;
+                }
+            }
+
+            var hideProdutFilter = RenderingContext.Current.Rendering.Parameters[Constants.QueryStrings.HideProductType];
+            Sitecore.Diagnostics.Log.Info("CS DEMO: " + Constants.QueryStrings.HideProductType + " is set to " + hideProdutFilter, this);
+            if (!string.IsNullOrWhiteSpace(hideProdutFilter))
+            {
+                Sitecore.Diagnostics.Log.Info("Keefe Log: HideProductType is set to " + hideProdutFilter, hideProdutFilter);
+                switch (showProdutFilter.ToLower())
+                {
+                    case "kosher":
+                        products = products.Where(p => !p.IsKosher).ToList();
+                        break;
+                    case "male":
+                        products = products.Where(p => !p.IsForMales).ToList();
+                        break;
+                    case "female":
+                        products = products.Where(p => !p.IsForFemales).ToList();
+                        break;
+                }
+            }
+
+            var iid = Request.QueryString["iid"];
+            if (!string.IsNullOrWhiteSpace(iid))
+            {
+                switch (iid)
+                {
+                    case "123":
+                        products = products.Where(p => p.IsKosher).ToList();
+                        break;
+                    case "222":
+                        products = products.Where(p => p.IsForMales).ToList();
+                        break;
+                    case "111":
+                        products = products.Where(p => p.IsForFemales).ToList();
+                        break;
+                    case "321":
+                         products = products.Where(p => !p.IsKosher).ToList();
+                        break;
+                    case "211":
+                        products = products.Where(p => !p.IsForMales).ToList();
+                        break;
+                    case "122":
+                        products = products.Where(p => !p.IsForMales).ToList();
+                        break;
+                    case "123222":
+                        products = products.Where(p => p.IsKosher & p.IsForMales).ToList();
+                        break;
+                    case "123111":
+                        products = products.Where(p => p.IsKosher & p.IsForFemales).ToList();
+                        break;
+                    case "321222":
+                        products = products.Where(p => !p.IsKosher & p.IsForMales).ToList();
+                        break;
+                    case "321111":
+                        products = products.Where(p => !p.IsKosher & p.IsForMales).ToList();
+                        break;
+                }   
+            }
+
+
+            // Code for Keefe demo, delete after
+
             return View(products);
         }
 
@@ -133,15 +215,15 @@ namespace CSDemo.Controllers
                 model = ProductHelper.GetCatalogCategories(_userCatalogIds);
             }
 
-            // var department = model.FirstOrDefault(x => x.Name.ToLower().Contains(Constants.Commerce.Departments.ToLower()));
-            var department = model.FirstOrDefault(x => x.Name.ToLower().Contains(Constants.Commerce.Departments.ToLower()));
+            //// var department = model.FirstOrDefault(x => x.Name.ToLower().Contains(Constants.Commerce.Departments.ToLower()));
+            //var department = model.FirstOrDefault(x => x.Name.ToLower().Contains(Constants.Commerce.Departments.ToLower()));
 
-            if (department != null && department.ChildCategories != null && department.ChildCategories.Any())
-            {
-                // return Redirect(Constants.Commerce.CategoryDepartments);
-                return View(department.ChildCategories);
+            //if (department != null && department.ChildCategories != null && department.ChildCategories.Any())
+            //{
+            //    // return Redirect(Constants.Commerce.CategoryDepartments);
+            //    return View(department.ChildCategories);
 
-            }
+            //}
 
             return View(model);
         }

@@ -21,6 +21,15 @@ namespace CSDemo.Models.Checkout.Cart
 
         public Decimal LineTotal { get; set; }
 
+        public decimal TotalWeight
+        {
+            get
+            {
+                var totalWeight = CartItems.Sum(i => Product.Product.GetProduct(i.ProductId).Weight);
+                return totalWeight;
+            }
+        }
+
         private Decimal _productsTotal;
         public Decimal ProductsTotal
         {

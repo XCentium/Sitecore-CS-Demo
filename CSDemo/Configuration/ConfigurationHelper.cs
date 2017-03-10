@@ -1,4 +1,5 @@
-﻿using Sitecore;
+﻿using System;
+using Sitecore;
 using Sitecore.Configuration;
 using Sitecore.Mvc.Extensions;
 
@@ -22,5 +23,6 @@ namespace CSDemo.Configuration
         {
             return $"sitecore_{Context.Database.Name.ToLower()}_index";
         }
+
     }
 }

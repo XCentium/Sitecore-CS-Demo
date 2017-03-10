@@ -214,6 +214,22 @@ namespace CSDemo.Models.Product
         [SitecoreInfo(SitecoreInfoType.Path)]
         public virtual string Path { get; set; }
 
+        //Keefe fields
+        [SitecoreField("kosher")]
+        public virtual bool IsKosher { get; set; }
+
+        [SitecoreField("male")]
+        public virtual bool IsForFemales { get; set; }
+
+        [SitecoreField("female")]
+        public virtual bool IsForMales { get; set; }
+
+        [SitecoreField("weight")]
+        public virtual decimal Weight { get; set; }
+
+        //Keefe fields
+
+
         //[SitecoreInfo(SitecoreInfoType.DisplayName)]
         [SitecoreField(Fields.DisplayName), DataMember]
         public virtual string Title { get; set; }
@@ -349,6 +365,12 @@ namespace CSDemo.Models.Product
         public virtual string Color { get; set; }
         public virtual string StoneColor { get; set; }
         public virtual string GlassColor { get; set; }
+
+        public virtual string Artist { get; set; }
+        public virtual string Song { get; set; }
+        public virtual string Genre { get; set; }
+        public virtual string Album { get; set; }
+        public virtual string Length { get; set; }
 
         #endregion
 

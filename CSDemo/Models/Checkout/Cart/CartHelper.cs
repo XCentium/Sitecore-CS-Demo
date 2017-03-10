@@ -29,6 +29,7 @@ using UpdatePartiesRequest = Sitecore.Commerce.Services.Carts.UpdatePartiesReque
 using Sitecore.Commerce.Services.Payments;
 using Sitecore.Commerce.Entities.Payments;
 using System.Diagnostics.CodeAnalysis;
+using Sitecore.Commerce.Entities.Orders;
 using WebGrease.Css.Extensions;
 using Sitecore.Commerce.Entities.Shipping;
 
@@ -1424,10 +1425,15 @@ namespace CSDemo.Models.Checkout.Cart
         /// <returns></returns>
         public GetVisitorOrdersResult GetOrders(string customerId, string shopName)
         {
-            var submitRequest = new GetVisitorOrdersRequest(customerId, shopName);
-            var provider = new CommerceOrderServiceProvider();
-            var submitResult = provider.GetVisitorOrders(submitRequest);
-            return submitResult;
+
+            var request = new GetVisitorOrdersRequest(customerId, shopName);
+            var result = _orderServiceProvider.GetVisitorOrders(request);
+            if (result.Success && result.OrderHeaders != null && result.OrderHeaders.Count > 0)
+            {
+                return result;
+            }
+
+            return null;
         }
 
         /// <summary>

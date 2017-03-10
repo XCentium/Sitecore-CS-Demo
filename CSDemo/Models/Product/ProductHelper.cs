@@ -156,7 +156,7 @@ namespace CSDemo.Models.Product
             var categoryProductVm = new CategoryProductViewModel {PaginationViewModel = model};
 
             var category = new Category();
-            categoryProductVm.CategoryMenulist = GetCategoryMenuList(model.UserCatalogIds);
+            categoryProductVm.CategoryMenulist = GetCategoryMenuList(model.CategoryId);
 
             var searchedItem = GetSearchResultItemById(model.CategoryId);
             if (searchedItem != null)
@@ -387,9 +387,9 @@ namespace CSDemo.Models.Product
 
 
                             // need to rewrite to boost performance
-                            var i = 0;
-                            if (2 < i)
-                            {
+                          //  var i = 0;
+                         //   if (2 < i)
+                         //   {
                                 var categoryChildern = category.GetChildren();
                                 c.ProductsCount = categoryChildern.Count();
                                 var pList = new List<ProductMenulistViewModel>();
@@ -404,7 +404,7 @@ namespace CSDemo.Models.Product
                                     }
                                 }
                                 c.ProductMenulistViewModel = pList;
-                            }
+                          //  }
                             categoryMenulistViewModel.Add(c);
                         }
                     }
@@ -544,25 +544,17 @@ namespace CSDemo.Models.Product
             var ordersViewModel = new OrdersViewModel();
             var orderDetails = new List<OrderDetailViewModel>();
             var orders = cartHelper.GetOrders(cartHelper.GetVisitorId(), cartHelper.ShopName);
+
+
+
             if (orders != null)
             {
                 foreach (var order in orders.OrderHeaders)
                 {
                     var orderDetail = new OrderDetailViewModel();
-                    var orderHead = cartHelper.GetOrderHead(order.OrderID, order.CustomerId, order.ShopName);
-                    var commerceOrderHead = orderHead.Order as CommerceOrder;
-                    if (commerceOrderHead != null)
-                    {
-                        orderDetail.OrderDate = commerceOrderHead.Created.ToString(Constants.Products.DateFormat);
-                        orderDetail.OrderID = commerceOrderHead.OrderID;
-                        orderDetail.OrderStatus = commerceOrderHead.Status;
-                        orderDetail.UserID = commerceOrderHead.UserId;
-                        orderDetail.TotalPrice =
-                            commerceOrderHead.Total.Amount.ToString(Constants.Products.CurrencyFormat);
-                        orderDetail.NumberofItems = commerceOrderHead.LineItemCount;
-                        orderDetail.ExternalID = commerceOrderHead.ExternalId;
-                    }
-                    orderDetails.Add(orderDetail);
+                    var fullOrderDetail = GetCustomerOrderDetail(order.ExternalId, cartHelper);
+                    
+                    orderDetails.Add(fullOrderDetail);
                 }
                 ordersViewModel.Orders = orderDetails;
             }
@@ -581,7 +573,8 @@ namespace CSDemo.Models.Product
             var commerceOrderHead = orderHead.Order as CommerceOrder;
             if (commerceOrderHead != null)
             {
-                orderDetail.OrderID = commerceOrderHead.OrderID;
+                orderDetail.OrderId = commerceOrderHead.OrderID;
+                orderDetail.TrackingNumber = commerceOrderHead.TrackingNumber;
                 orderDetail.OrderDate = commerceOrderHead.Created.ToString(Constants.Products.DateTimeFormat);
                 orderDetail.NumberofItems = commerceOrderHead.LineItemCount;
                 var commerceTotal = commerceOrderHead.Total as CommerceTotal;
@@ -593,14 +586,10 @@ namespace CSDemo.Models.Product
                     orderDetail.ShippingCost = commerceTotal.ShippingTotal.ToString(Constants.Products.CurrencyFormat);
                 }
                 orderDetail.OrderStatus = commerceOrderHead.Status;
-                orderDetail.UserID = commerceOrderHead.UserId;
-                orderDetail.ExternalID = commerceOrderHead.ExternalId;
-                orderDetail.Billing =
-                    commerceOrderHead.Parties.Cast<CommerceParty>()
-                        .FirstOrDefault(party => party.Name == Constants.Products.BillingAddress);
-                orderDetail.Shipping =
-                    commerceOrderHead.Parties.Cast<CommerceParty>()
-                        .FirstOrDefault(party => party.Name == Constants.Products.ShippingAddress);
+                orderDetail.UserId = commerceOrderHead.UserId;
+                orderDetail.ExternalId = commerceOrderHead.ExternalId;
+                orderDetail.Billing = commerceOrderHead.Parties.ElementAt(1) as CommerceParty;
+                orderDetail.Shipping = commerceOrderHead.Parties.ElementAt(0) as CommerceParty;
                 if (orderDetail.Billing == null)
                 {
                     orderDetail.Billing = new CommerceParty();
@@ -608,6 +597,11 @@ namespace CSDemo.Models.Product
                 if (orderDetail.Shipping == null)
                 {
                     orderDetail.Shipping = new CommerceParty();
+                }
+                else
+                {
+                    orderDetail.Email = orderDetail.Shipping.Email;
+                    orderDetail.Phone = orderDetail.Shipping.PhoneNumber;
                 }
                 if (commerceOrderHead.Payment.ElementAtOrDefault(0) != null)
                 {
@@ -617,10 +611,11 @@ namespace CSDemo.Models.Product
                 if (commerceOrderHead.Shipping.ElementAtOrDefault(0) != null)
                 {
                     var shippingMethodId = commerceOrderHead.Shipping.ElementAt(0).ShippingMethodID;
-                    orderDetail.ShippingMethod = GetShippingMethod(shippingMethodId);
+                    orderDetail.ShippingMethod = commerceOrderHead.Shipping[0].Properties["ShippingMethodName"].ToString();
                 }
                 var lines = commerceOrderHead.Lines.ToList();
                 orderDetail.OrderLines = GetOrderLines(lines);
+
             }
             return orderDetail;
         }
@@ -965,7 +960,9 @@ namespace CSDemo.Models.Product
                                 var result =
                                     queryable.Where(
                                         x =>
-                                            (x.Name.Contains(categoryName) && x.Path.Contains(catalog.Paths.Path) &&
+                                            (x.Name.Contains(categoryName) 
+                                            && x.Path.Contains(catalog.Paths.Path) 
+                                            &&
                                              x.TemplateName == "GeneralCategory")).ToList();
 
                                 if (result != null && result.Any())

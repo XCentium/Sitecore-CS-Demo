@@ -3,14 +3,20 @@
 {
     return;
 }
+@{
+    
+}
 <section class="content">
     <div class="container">
         @using (BeginEditFrame(Model.Path))
-        { 
-            
+        {
+
             if (!string.IsNullOrWhiteSpace(Model.Title))
             {
-                <h1>@Editable(Model, x => x.Title)</h1>
+                if (!Model.Title.ToLower().Contains("$name"))
+                {
+                    <h1>@Editable(Model, x => x.Title)</h1>
+                }
             }
             if (!string.IsNullOrWhiteSpace(Model.Content))
             {

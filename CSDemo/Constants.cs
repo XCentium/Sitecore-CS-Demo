@@ -7,6 +7,10 @@
         public const string WebIndex = "sitecore_web_index";
         public struct QueryStrings
         {
+
+            public const string ShowProductType = "ShowProductType";
+
+            public const string HideProductType = "HideProductType";
             /// <summary>
             /// Used for paging
             /// </summary>

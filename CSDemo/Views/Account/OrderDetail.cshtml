@@ -36,7 +36,7 @@
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="fa fa-times"></i></button>
                             <strong>Warning!</strong> This order is unpaid.
                         </div>
-                        <h3>Order # @Model.OrderID</h3>
+                        <h3>Order Tracking Number # @Model.TrackingNumber</h3>
                         <div class="order-meta">
                             <div class="row">
                                 <div class="col-xs-4">
@@ -47,6 +47,7 @@
                                         <li><a onclick="print_window();" class="btn btn-primary btn-sm">Print</a></li>
                                         <li><a href="#" class="btn btn-primary btn-sm">Save to PDF</a></li>
                                         <li><a href="#" class="btn btn-primary btn-sm">Cancel Order</a></li>
+                                        <li><a href="@Model.OrderId/RMA" class="btn btn-primary btn-sm">Return Order</a></li>
                                     </ul>
                                 </div>
                             </div>
