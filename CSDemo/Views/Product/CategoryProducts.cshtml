@@ -28,40 +28,44 @@
 
                                 @foreach (var cat in Model.CategoryMenulist)
                                 {
-                                    var cid = Model.CategoryMenulist.Count(c => c.Name == cat.Name) > 1 ? string.Format("?cid={0}", cat.ID.ToString()) : string.Empty;
-
-                                    currentCat++;
-
-                                    var listClass = "class=collapsed";
-                                    var ariaExpand = "false";
-                                    var panelCollapse = "collapse";
-                                    if (!String.IsNullOrEmpty(cat.Name))
+                                    if (cat.Name != null && Model.Category != null && Model.Category.Name != null)
                                     {
 
-                                        if (cat.Name.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase))
+                                        var cid = Model.CategoryMenulist.Count(c => c.Name == cat.Name) > 1 ? string.Format("?cid={0}", cat.ID.ToString()) : string.Empty;
+
+                                        currentCat++;
+
+                                        var listClass = "class=collapsed";
+                                        var ariaExpand = "false";
+                                        var panelCollapse = "collapse";
+                                        if (!String.IsNullOrEmpty(cat.Name))
                                         {
-                                            listClass = " ";
-                                            ariaExpand = "true";
-                                            panelCollapse = "collapse in";
-                                        }
 
-                                        var catProducts = cat.ProductMenulistViewModel;
+                                            if (cat.Name.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase))
+                                            {
+                                                listClass = " ";
+                                                ariaExpand = "true";
+                                                panelCollapse = "collapse in";
+                                            }
 
-                                        <li class="panel">
-                                           @* <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name<span>[@cat.ProductsCount]</span></a>*@
-                                            <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name.Replace("CA-", "").Replace("OH-", "").Replace("MI-", "").Replace("-", " ").Replace("(Keefe)", "")</a>
-                                            <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">
+                                            var catProducts = cat.ProductMenulistViewModel;
 
-                                                <li><a href="@cat.Url@cid"><span class="fa fa-arrow-right"></span></a></li>
+                                            <li class="panel">
+                                                @* <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name<span>[@cat.ProductsCount]</span></a>*@
+                                                <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name.Replace("CA-", "").Replace("OH-", "").Replace("MI-", "").Replace("-", " ").Replace("(Keefe)", "")</a>
+                                                <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">
+
+                                                    <li><a href="@cat.Url@cid"><span class="fa fa-arrow-right"></span></a></li>
                                                     @if (catProducts != null)
                                                     {
                                                         foreach (CSDemo.Models.Product.ProductMenulistViewModel catProduct in catProducts)
-                                                        {                                                  
+                                                        {
                                                             <li><a href="@catProduct.Url">@catProduct.Name</a></li>
                                                         }
                                                     }
-                                            </ul>
-                                        </li>
+                                                </ul>
+                                            </li>
+                                        }
                                     }
                                 }
                             </ul>
