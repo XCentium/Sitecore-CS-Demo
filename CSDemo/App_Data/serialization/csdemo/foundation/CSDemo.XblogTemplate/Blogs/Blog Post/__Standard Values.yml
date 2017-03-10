@@ -5,16 +5,9 @@ Template: fee031c4-e8e3-49cb-b7b6-3e9afa33d5be
 Path: /sitecore/templates/XBlog/Page/Blogs/Blog Post/__Standard Values
 DB: master
 SharedFields:
-- ID: a0cb3965-8884-4c7a-8815-b6b2e5ced162
-  Hint: __Editors
-  Type: TreelistEx
-  Value: {59F53BBB-D1F5-4E38-8EBA-0D73109BB59B}
 - ID: ac51462c-8a8d-493b-9492-34d1f26f20f1
   Hint: __Default Bucket Query
   Value: sort:publish_date[desc];
-- ID: c9283d9e-7c29-4419-9c28-5a5c8ff53e84
-  Hint: __Bucketable
-  Value: 1
 - ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
   Hint: __Renderings
   Type: layout
@@ -22,7 +15,8 @@ SharedFields:
     <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{22DD9E70-D79C-4A77-BC90-FCCFB1B574F5}">
         <r id="{027AF0D5-BC10-42A4-B796-577FB651D073}" ph="page-header" uid="{E6EA51F9-FF18-48FD-B067-ACB6484A55E1}" />
-        <r id="{C87651F3-AC34-44EB-839A-A127FF530774}" ph="page-body" uid="{F3425B67-1337-4366-8139-F00838D7957C}" />
+        <r id="{A37E3138-DF2A-4FE9-A1C7-3B01E2CF2E95}" ph="page-body" uid="{8A1B33D6-120A-4F8C-9212-36A60CFFB94F}" />
+        <r id="{A58672D4-0B34-41B2-9CCF-5A48C275FD40}" ph="page-social-login" uid="{669A3E13-094B-4943-B8D2-FD53D24F7F9A}" />
         <r id="{5B018176-BF32-4BB1-91FA-63044B6FFE4B}" ph="page-footer" uid="{EACD3F31-E5B6-4AD6-AA1B-43F18FC325B3}" />
       </d>
     </r>
@@ -33,7 +27,7 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20140820T155242
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
-      Hint: __Created by
-      Value: sitecore\admin
+      Value: 20170101T000657Z
+    - ID: 9608e520-ef16-49fc-bd92-75cc101e5fec
+      Hint: Publish Date
+      Value: 20140821T193200Z
