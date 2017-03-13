@@ -117,106 +117,111 @@
       <HintPath>..\packages\Rainbow.Storage.Yaml.1.1.0\lib\net45\Rainbow.Storage.Yaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Sitecore.Analytics">
-      <HintPath>..\Lib\Sitecore\Sitecore.Analytics.dll</HintPath>
+    <Reference Include="Sitecore.Analytics, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Analytics.NoReferences.8.2.161221\lib\NET452\Sitecore.Analytics.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.Analytics.Automation">
-      <HintPath>..\Lib\Sitecore\Sitecore.Analytics.Automation.dll</HintPath>
+    <Reference Include="Sitecore.Analytics.Automation, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Analytics.Automation.NoReferences.8.2.161221\lib\NET452\Sitecore.Analytics.Automation.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.Analytics.Core, Version=8.0.5401.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Sitecore\Sitecore.Analytics.Core.dll</HintPath>
+    <Reference Include="Sitecore.Analytics.Core, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Analytics.Core.NoReferences.8.2.161221\lib\NET452\Sitecore.Analytics.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.Analytics.Model, Version=8.0.5401.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Sitecore\Sitecore.Analytics.Model.dll</HintPath>
+    <Reference Include="Sitecore.Analytics.Model, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Analytics.Model.NoReferences.8.2.161221\lib\NET452\Sitecore.Analytics.Model.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.Analytics.Outcome">
-      <HintPath>..\Lib\Sitecore\Sitecore.Analytics.Outcome.dll</HintPath>
+    <Reference Include="Sitecore.Analytics.Outcome, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Analytics.Outcome.NoReferences.8.2.161221\lib\NET452\Sitecore.Analytics.Outcome.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.Cintel">
-      <HintPath>..\Lib\Sitecore\Sitecore.Cintel.dll</HintPath>
+    <Reference Include="Sitecore.Cintel, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Cintel.NoReferences.8.2.161221\lib\NET452\Sitecore.Cintel.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.Commerce">
-      <HintPath>..\Lib\Sitecore\Sitecore.Commerce.dll</HintPath>
+    <Reference Include="Sitecore.Commerce, Version=8.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Commerce.NoReferences.8.2.161221\lib\NET452\Sitecore.Commerce.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Commerce.Connect.CommerceServer">
       <HintPath>..\Lib\Sitecore\Sitecore.Commerce.Connect.CommerceServer.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.Commerce.Engine.Connect">
+    <Reference Include="Sitecore.Commerce.Engine.Connect, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Sitecore\Sitecore.Commerce.Engine.Connect.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.Commerce.Remote">
+    <Reference Include="Sitecore.Commerce.Remote, Version=8.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Sitecore\Sitecore.Commerce.Remote.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.ContentSearch">
-      <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.ContentSearch.Analytics">
-      <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.Analytics.dll</HintPath>
+    <Reference Include="Sitecore.ContentSearch, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.ContentSearch.NoReferences.8.2.161221\lib\NET452\Sitecore.ContentSearch.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.ContentSearch.Linq">
-      <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.Linq.dll</HintPath>
+    <Reference Include="Sitecore.ContentSearch.Analytics, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.ContentSearch.Analytics.NoReferences.8.2.161221\lib\NET452\Sitecore.ContentSearch.Analytics.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.ContentSearch.LuceneProvider">
-      <HintPath>..\Lib\Sitecore\Sitecore.ContentSearch.LuceneProvider.dll</HintPath>
+    <Reference Include="Sitecore.ContentSearch.Linq, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.ContentSearch.Linq.NoReferences.8.2.161221\lib\NET452\Sitecore.ContentSearch.Linq.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.LuceneProvider, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.ContentSearch.LuceneProvider.NoReferences.8.2.161221\lib\NET452\Sitecore.ContentSearch.LuceneProvider.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Forms.Mvc, Version=8.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Sitecore\Sitecore.Forms.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.Kernel">
-      <HintPath>..\Lib\Sitecore\Sitecore.Kernel.dll</HintPath>
+      <HintPath>..\packages\Sitecore.Forms.Mvc.NoReferences.8.2.161129\lib\NET452\Sitecore.Forms.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.Mvc">
-      <HintPath>..\Lib\Sitecore\Sitecore.Mvc.dll</HintPath>
+    <Reference Include="Sitecore.Kernel, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Kernel.NoReferences.8.2.161221\lib\NET452\Sitecore.Kernel.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.Mvc.Analytics">
-      <HintPath>..\Lib\Sitecore\Sitecore.Mvc.Analytics.dll</HintPath>
+    <Reference Include="Sitecore.Mvc, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Mvc.NoReferences.8.2.161221\lib\NET452\Sitecore.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.Social, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Sitecore\Sitecore.Social.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.Social.Client.Mvc">
-      <HintPath>..\Lib\Sitecore\Sitecore.Social.Client.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.Social.Domain">
-      <HintPath>..\Lib\Sitecore\Sitecore.Social.Domain.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.Social.Facebook">
-      <HintPath>..\Lib\Social\Sitecore.Social.Facebook.dll</HintPath>
+    <Reference Include="Sitecore.Mvc.Analytics, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Mvc.Analytics.NoReferences.8.2.161221\lib\NET452\Sitecore.Mvc.Analytics.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.Social.Facebook.Api">
-      <HintPath>..\Lib\Social\Sitecore.Social.Facebook.Api.dll</HintPath>
+    <Reference Include="Sitecore.Social, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Social.NoReferences.8.2.161221\lib\NET452\Sitecore.Social.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.Social.Infrastructure, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Sitecore\Sitecore.Social.Infrastructure.dll</HintPath>
+    <Reference Include="Sitecore.Social.Client.Mvc, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Social.Client.Mvc.NoReferences.8.2.161221\lib\NET452\Sitecore.Social.Client.Mvc.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.Social.NetworkProviders">
-      <HintPath>..\Lib\Sitecore\Sitecore.Social.NetworkProviders.dll</HintPath>
+    <Reference Include="Sitecore.Social.Domain, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Social.Domain.NoReferences.8.2.161221\lib\NET452\Sitecore.Social.Domain.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sitecore.Social.Facebook, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Social.Facebook.NoReferences.8.2.161221\lib\NET452\Sitecore.Social.Facebook.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sitecore.Social.Facebook.Api, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Social.Facebook.Api.NoReferences.8.2.161221\lib\NET452\Sitecore.Social.Facebook.Api.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sitecore.Social.Infrastructure, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Social.Infrastructure.NoReferences.8.2.161221\lib\NET452\Sitecore.Social.Infrastructure.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sitecore.Social.NetworkProviders, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Social.NetworkProviders.NoReferences.8.2.161221\lib\NET452\Sitecore.Social.NetworkProviders.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.WFFM.Abstractions, Version=8.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Sitecore\Sitecore.WFFM.Abstractions.dll</HintPath>
+      <HintPath>..\packages\Sitecore.WFFM.Abstractions.NoReferences.8.2.161129\lib\NET452\Sitecore.WFFM.Abstractions.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
