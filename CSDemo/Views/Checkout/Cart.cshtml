@@ -95,7 +95,7 @@
                                     </table>
                                 </div>
 
-                                    <a href="/categories" class="btn btn-inverse">Continue Shopping</a>
+                                <a href="/categories" class="btn btn-inverse">Continue Shopping</a>
                                     <a href="/cart" class="btn btn-inverse update-cart">Update Shopping Cart</a>
 
                             }
@@ -104,7 +104,7 @@
                                 <h2>Your cart is empty. Why not add something?</h2>
 
 
-                                    <a href="/categories" class="btn btn-inverse">Continue Shopping</a>
+                                <a href="/categories" class="btn btn-inverse">Continue Shopping</a>
                             }
 
 
@@ -126,7 +126,6 @@
                                 </p>
                             }
                         }
-
                         <div class="products-order shopping-cart">
                             <div class="table-responsive">
                                 <table class="table table-products">
@@ -165,12 +164,12 @@
                             </div>
                         }
                         <div class="clearfix">
-                            @if (shoppingCart != null && shoppingCart.Total > 0
-                    && (totalAmountSpentWithinAMonth + shoppingCart.GrandTotal <= maxAllowedTopendWithinAMonth && Sitecore.Context.User.Name.Contains("customer3"))
-                    && (shoppingCart.TotalWeight <= maxAllowedWeight && Sitecore.Context.User.Name.Contains("customer3")))
+
+                            @if (shoppingCart != null && shoppingCart.Total > 0 && !(Sitecore.Context.User.Name.Contains("customer3") && (shoppingCart.TotalWeight > maxAllowedWeight || totalAmountSpentWithinAMonth + shoppingCart.GrandTotal > maxAllowedTopendWithinAMonth)))
                             {
                                 <a href="/checkout" class="btn btn-primary btn-lg pull-right ">Checkout</a>
                             }
+
 
                         </div>
                     </form>

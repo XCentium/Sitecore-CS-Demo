@@ -106,13 +106,13 @@ namespace CSDemo.Controllers
                         products = products.Where(p => p.IsForFemales).ToList();
                         break;
                     case "321":
-                         products = products.Where(p => !p.IsKosher).ToList();
+                         products = products.Where(p => p.GlutenFree).ToList();
                         break;
                     case "211":
                         products = products.Where(p => !p.IsForMales).ToList();
                         break;
                     case "122":
-                        products = products.Where(p => !p.IsForMales).ToList();
+                        products = products.Where(p => !p.IsForFemales).ToList();
                         break;
                     case "123222":
                         products = products.Where(p => p.IsKosher & p.IsForMales).ToList();
@@ -124,7 +124,7 @@ namespace CSDemo.Controllers
                         products = products.Where(p => !p.IsKosher & p.IsForMales).ToList();
                         break;
                     case "321111":
-                        products = products.Where(p => !p.IsKosher & p.IsForMales).ToList();
+                        products = products.Where(p => !p.IsKosher & p.IsForFemales).ToList();
                         break;
                 }   
             }

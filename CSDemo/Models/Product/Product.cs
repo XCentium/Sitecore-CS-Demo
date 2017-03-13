@@ -224,6 +224,9 @@ namespace CSDemo.Models.Product
         [SitecoreField("female")]
         public virtual bool IsForMales { get; set; }
 
+        [SitecoreField("gluten free")]
+        public virtual bool GlutenFree { get; set; }
+
         [SitecoreField("weight")]
         public virtual decimal Weight { get; set; }
 
