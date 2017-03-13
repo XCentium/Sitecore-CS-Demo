@@ -39,56 +39,14 @@ namespace CSDemo.Controllers
                 {
                     foreach (var product in featuredProduct.Products)
                     {
-                        if (products.Count < MaxNumberOfProductsToShow)
-                        {
-                            if (!products.Exists(t => t.ID == product.ID))
-                                products.Add(product);
-                        }
+                        if (!products.Exists(t => t.ID == product.ID))
+                            products.Add(product);
                     }
                 }
             }
             catch (Exception ex)
             {
                 Sitecore.Diagnostics.Log.Error(ex.Message, ex);
-            }
-
-            // Code for Keefe demo, delete after
-            var showProdutFilter = RenderingContext.Current.Rendering.Parameters[Constants.QueryStrings.ShowProductType];
-            Sitecore.Diagnostics.Log.Info("CS DEMO: " + Constants.QueryStrings.ShowProductType + " is set to "+ showProdutFilter, this);
-            if (!string.IsNullOrWhiteSpace(showProdutFilter))
-            {
-                Sitecore.Diagnostics.Log.Info("CS DEMO: ShowProductType is set to " + showProdutFilter, showProdutFilter);
-                switch (showProdutFilter.ToLower())
-                {
-                    case "kosher":
-                        products = products.Where(p=>p.IsKosher).ToList();
-                        break;
-                    case "male":
-                        products = products.Where(p => p.IsForMales).ToList();
-                        break;
-                    case "female":
-                        products = products.Where(p => p.IsForFemales).ToList();
-                        break;
-                }
-            }
-
-            var hideProdutFilter = RenderingContext.Current.Rendering.Parameters[Constants.QueryStrings.HideProductType];
-            Sitecore.Diagnostics.Log.Info("CS DEMO: " + Constants.QueryStrings.HideProductType + " is set to " + hideProdutFilter, this);
-            if (!string.IsNullOrWhiteSpace(hideProdutFilter))
-            {
-                Sitecore.Diagnostics.Log.Info("Keefe Log: HideProductType is set to " + hideProdutFilter, hideProdutFilter);
-                switch (showProdutFilter.ToLower())
-                {
-                    case "kosher":
-                        products = products.Where(p => !p.IsKosher).ToList();
-                        break;
-                    case "male":
-                        products = products.Where(p => !p.IsForMales).ToList();
-                        break;
-                    case "female":
-                        products = products.Where(p => !p.IsForFemales).ToList();
-                        break;
-                }
             }
 
             var iid = Request.QueryString["iid"];
@@ -131,7 +89,7 @@ namespace CSDemo.Controllers
 
 
             // Code for Keefe demo, delete after
-
+            products = products.Take(MaxNumberOfProductsToShow).ToList();
             return View(products);
         }
 
