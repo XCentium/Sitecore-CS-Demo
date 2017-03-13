@@ -1,0 +1,24 @@
+﻿---
+ID: 417f8d52-2b3b-426b-bfa8-d74bc08e3229
+Parent: 32dadfb6-77b0-4a08-904c-1f8293d54c18
+Template: 2c7e608f-5450-4f6c-a990-b53526e7d35f
+Path: /sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/XCentiumCSDemo/Payment Configuration
+DB: master
+SharedFields:
+- ID: ee2d99c3-35c0-4467-8532-0e2aa960bb87
+  Hint: Payment Options
+  Type: Multilist
+  Value: |
+    {3C86B4A2-7D72-4110-A697-82D6CD0B6619}
+    {C6E45321-A7CD-4992-AAE7-95A5F04F8BC0}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161210T062402Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin

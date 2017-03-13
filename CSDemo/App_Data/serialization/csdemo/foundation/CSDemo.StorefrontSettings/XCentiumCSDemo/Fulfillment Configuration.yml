@@ -1,0 +1,25 @@
+﻿---
+ID: 5450fe61-bf5f-40a9-ba69-a678865c13e5
+Parent: 32dadfb6-77b0-4a08-904c-1f8293d54c18
+Template: a2a80c92-826a-4928-beed-6e46fff31919
+Path: /sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/XCentiumCSDemo/Fulfillment Configuration
+DB: master
+SharedFields:
+- ID: 0452eb98-bc28-4fd8-a3b4-533f26c62705
+  Hint: Fulfillment Options
+  Type: Multilist
+  Value: {1CA75E23-86D1-4089-B7A4-346E96E66161}
+- ID: 769b63db-453f-44e6-aa90-cbc916e47f7d
+  Hint: Allow items to be delivered Individually
+  Value: 1
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161209T140442Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin

@@ -1,0 +1,21 @@
+﻿---
+ID: 9cb310da-e7d3-4a74-b05a-9a84a366941e
+Parent: 78c77ff8-119e-43b6-a030-b73351a6a512
+Template: 99f8905d-4a87-4eb8-9f8b-a9bebfb3add6
+Path: /sitecore/layout/Renderings/XBlogMVC/Callouts/TagList
+DB: master
+SharedFields:
+- ID: 51b435bc-f7b9-478a-9c51-52916af96ff5
+  Hint: Path
+  Value: /Components/XBlogMVC/Renderings/Views/Callouts/TagList.cshtml
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20140925T095158
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\zmalmquist
