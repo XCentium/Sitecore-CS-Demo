@@ -149,6 +149,7 @@ namespace CSDemo.Models.Product
         /// <summary>
         /// </summary>
         /// <param name="model"></param>
+        /// <param name="includeVariants"></param>
         /// <returns></returns>
         internal static CategoryProductViewModel GetCategoryProducts(PaginationViewModel model, bool includeVariants = true)
         {
@@ -158,10 +159,11 @@ namespace CSDemo.Models.Product
             var category = new Category();
             categoryProductVm.CategoryMenulist = GetCategoryMenuList(model.CategoryId);
 
-            var searchedItem = GetSearchResultItemById(model.CategoryId);
-            if (searchedItem != null)
+           // var searchedItem = GetSearchResultItemById(model.CategoryId);
+            var catItem = Sitecore.Context.Database.GetItem(new ID(model.CategoryId));
+            if (catItem != null)
             {
-                var catItem = searchedItem.GetItem();
+               // var catItem = searchedItem.GetItem();
                 category = catItem.GlassCast<Category>();
                 if (catItem.HasChildren)
                 {
@@ -430,38 +432,42 @@ namespace CSDemo.Models.Product
                 if (catParentItem != null)
                 {
 
-                    var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
-                    try
-                    {
-                        var culture = Context.Language.CultureInfo;
-                        using (var context = index.CreateSearchContext())
-                        {
+                    var children = catParentItem.GetChildren().Where(x => x.TemplateName == "GeneralCategory").ToList();
 
-                            var queryable = context.GetQueryable<SearchResultItem>()
-                                    .Where(x => x.Language == Context.Language.Name);
-                            var result =
-                                queryable.Where(
-                                    x =>
-                                        (x.TemplateName == "GeneralCategory") && x.Path.Contains(catParentItem.Paths.Path) 
-                                         ).ToList();
+                    return children;
 
-                            if (result != null && result.Any())
-                            {
-                                foreach (var r in result)
-                                {
-                                    output.Add(r.GetItem());
-                                   
-                                }
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
-                       
-                    }
+                    //var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
+                    //try
+                    //{
+                    //    var culture = Context.Language.CultureInfo;
+                    //    using (var context = index.CreateSearchContext())
+                    //    {
 
-                    return output;
+                    //        var queryable = context.GetQueryable<SearchResultItem>()
+                    //                .Where(x => x.Language == Context.Language.Name);
+                    //        var result =
+                    //            queryable.Where(
+                    //                x =>
+                    //                    (x.TemplateName == "GeneralCategory") && x.Path.Contains(catParentItem.Paths.Path) 
+                    //                     ).ToList();
+
+                    //        if (result != null && result.Any())
+                    //        {
+                    //            foreach (var r in result)
+                    //            {
+                    //                output.Add(r.GetItem());
+
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
+
+                    //}
+
+                    //return output;
                 }
             }
             catch (Exception ex)
@@ -945,42 +951,56 @@ namespace CSDemo.Models.Product
 
                 foreach (var catalogId in catalogs)
                 {
+
+
                     var catalog = Sitecore.Context.Database.GetItem(new ID(catalogId));
-                    if (catalog != null)
+                    if (catalog != null && catalog.HasChildren)
                     {
-                        var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
-                        try
+                        var catChildren = catalog.Axes.GetDescendants().Where(x => x.TemplateName == "GeneralCategory").ToList();
+                        if (catChildren.Any())
                         {
-                            var culture = Context.Language.CultureInfo;
-                            using (var context = index.CreateSearchContext())
+                            foreach (var catChild in catChildren)
                             {
-
-                                var queryable = context.GetQueryable<SearchResultItem>()
-                                        .Where(x => x.Language == Context.Language.Name);
-                                var result =
-                                    queryable.Where(
-                                        x =>
-                                            (x.Name.Contains(categoryName) 
-                                            && x.Path.Contains(catalog.Paths.Path) 
-                                            &&
-                                             x.TemplateName == "GeneralCategory")).ToList();
-
-                                if (result != null && result.Any())
+                                if (catChild.Name.ToLower() == categoryName.ToLower())
                                 {
-                                    foreach (var r in result)
-                                    {
-                                        if (r.Name.ToLower() == categoryName.ToLower()){
-                                            categoryChildIds.Add(r.ItemId.ToString());
-                                        }
-                                    }
+                                    categoryChildIds.Add(catChild.ID.ToString());
                                 }
                             }
                         }
-                        catch (Exception ex)
-                        {
-                            Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
-                            return string.Empty;
-                        }
+
+                        //var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
+                        //try
+                        //{
+                        //    var culture = Context.Language.CultureInfo;
+                        //    using (var context = index.CreateSearchContext())
+                        //    {
+
+                        //        var queryable = context.GetQueryable<SearchResultItem>()
+                        //                .Where(x => x.Language == Context.Language.Name);
+                        //        var result =
+                        //            queryable.Where(
+                        //                x =>
+                        //                    (x.Name.Contains(categoryName) 
+                        //                    && x.Path.Contains(catalog.Paths.Path) 
+                        //                    &&
+                        //                     x.TemplateName == "GeneralCategory")).ToList();
+
+                        //        if (result != null && result.Any())
+                        //        {
+                        //            foreach (var r in result)
+                        //            {
+                        //                if (r.Name.ToLower() == categoryName.ToLower()){
+                        //                    categoryChildIds.Add(r.ItemId.ToString());
+                        //                }
+                        //            }
+                        //        }
+                        //    }
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
+                        //    return string.Empty;
+                        //}
 
                     }
                 }

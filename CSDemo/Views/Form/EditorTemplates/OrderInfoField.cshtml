@@ -6,7 +6,7 @@
 }
 else
 {
-    <p>Order #@Html.Label(Model.Order.OrderId ?? "Empty")</p>
+    <p>Order #@Html.Label(Model.Order.TrackingNumber ?? "Empty")</p>
     <p>Date: @Html.Label(Model.Order.OrderDate ?? "Empty")</p>
     <p>Name: @Html.Label(Model.Order.Billing.FirstName + Model.Order.Billing.LastName ?? "Empty")</p>
 }

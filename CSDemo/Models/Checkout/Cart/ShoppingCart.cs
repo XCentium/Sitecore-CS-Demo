@@ -1,5 +1,6 @@
 ﻿#region
 
+using Glass.Mapper.Sc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,8 @@ namespace CSDemo.Models.Checkout.Cart
         {
             get
             {
-                var totalWeight = CartItems.Sum(i => Product.Product.GetProduct(i.ProductId).Weight);
+                var context = new SitecoreContext();
+                var totalWeight = CartItems.Sum(i => context.GetItem<Product.Product>(new Guid(i.ProductId)).Weight);
                 return totalWeight;
             }
         }
