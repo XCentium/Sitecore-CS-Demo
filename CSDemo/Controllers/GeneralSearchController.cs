@@ -291,24 +291,7 @@ namespace CSDemo.Controllers
                         Uri = p.Uri
                     });
 
-                // Code for Keefe demo, delete after
-                var productTypeFilter = RenderingContext.Current.Rendering.Parameters[Constants.QueryStrings.ShowProductType];
-                if (!string.IsNullOrWhiteSpace(productTypeFilter))
-                {
-                    Sitecore.Diagnostics.Log.Info("Keefe Log: ShowProductType is " + productTypeFilter, productTypeFilter);
-                    switch (productTypeFilter.ToLower()) {
-                        case "kosher":
-                            searchResults.Where(item => item["kosher"] == "1");
-                            break;
-                        case "male":
-                            searchResults.Where(item => item["male"] == "1");
-                            break;
-                        case "female":
-                            searchResults.Where(item => item["female"] == "1");
-                            break;
-                    }
-                }
-                // Code for Keefe demo, delete after
+               
 
                 searchResults = searchManager.AddSearchOptionsToQuery<CustomCommerceSearchResultItem>(searchResults,
                     searchOptions);

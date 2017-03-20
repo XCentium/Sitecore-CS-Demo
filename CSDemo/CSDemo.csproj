@@ -231,11 +231,12 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core">
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Sitecore\System.Web.Optimization.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -293,20 +294,6 @@
     </Compile>
     <Compile Include="App_Start\GlassMapperSc.cs" />
     <Compile Include="App_Start\GlassMapperScCustom.cs" />
-    <Compile Include="CatalogTool\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CatalogTool\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="CatalogTool\Index.aspx.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CatalogTool\Index.aspx.designer.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Configuration\Actions\HideCertainProducts.cs" />
     <Compile Include="Configuration\Actions\ShowCertainProducts.cs" />
     <Compile Include="Configuration\Conditions\ContactEmailCheck.cs" />
@@ -355,7 +342,6 @@
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
-    <Compile Include="Controllers\InmateController.cs" />
     <Compile Include="Controllers\MarqueeController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\PageController.cs" />
@@ -574,8 +560,6 @@
     <Content Include="Assets\js\SmoothScroll.js" />
     <Content Include="Assets\js\twitterFetcher_min.js" />
     <Content Include="Assets\js\typeahead.js" />
-    <Content Include="CatalogTool\Default.aspx" />
-    <Content Include="CatalogTool\Index.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="App_Config\Include\z.Glass.Mapper.Sc.ViewRender.config.exclude" />
@@ -621,8 +605,6 @@
     </Content>
     <Content Include="packages.config" />
     <Content Include="Web.config" />
-    <Content Include="Views\Inmate\InmateSelector.cshtml" />
-    <Content Include="Views\Product\ProductSong.cshtml" />
     <Content Include="Views\Form\EditorTemplates\CaptchaField.cshtml" />
     <Content Include="Views\Form\EditorTemplates\CheckboxField.cshtml" />
     <Content Include="Views\Form\EditorTemplates\CheckboxListField.cshtml" />
@@ -716,9 +698,6 @@
     <Content Include="Views\Checkout\Reviewy.cshtml" />
     <Content Include="Views\Product\GeoTargetedProducts.cshtml" />
     <Content Include="Views\Product\ProductDefault.cshtml" />
-    <Content Include="Views\Product\ProductDetailCeramic.cshtml" />
-    <Content Include="Views\Product\ProductDetailGlassTiles.cshtml" />
-    <Content Include="Views\Product\ProductDetailGlassTilesNew.cshtml" />
     <Content Include="Views\Product\DealerOrderingSystem.cshtml" />
     <Content Include="Views\Product\SalesQuote.cshtml" />
     <Content Include="Views\Product\QuickOrderSystem.cshtml" />

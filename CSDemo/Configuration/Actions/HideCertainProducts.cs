@@ -10,7 +10,7 @@ namespace CSDemo.Configuration.Actions
         public override void Apply(T ruleContext)
         {
             string key = Constants.QueryStrings.HideProductType;
-            Log.Info("CS DEMO: Evaluating Keefe Product Type Rule for " + key, this);
+            Log.Info("CS DEMO: Evaluating Product Type Rule for " + key, this);
             
             if (string.IsNullOrWhiteSpace(ruleContext.Reference.Settings.Parameters))
             {

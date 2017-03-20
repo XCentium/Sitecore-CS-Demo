@@ -2,35 +2,7 @@
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Product.Product>
 @if (Model.DefinitionName != null)
 {
-
-    switch (Model.DefinitionName.ToLower())
-    {
-        case "ceramicproduct":
-            @Html.Partial("~/Views/Product/ProductDetailCeramic.cshtml", Model)
-            break;
-
-        case "glasstiles":
-            @Html.Partial("~/Views/Product/ProductDetailGlassTiles.cshtml", Model)
-            break;
-
-        case "glasstilesnew":
-            @Html.Partial("~/Views/Product/ProductDetailGlassTilesNew.cshtml", Model)
-            break;
-
-        case "song":
-            @Html.Partial("~/Views/Product/Productsong.cshtml", Model)
-            break;
-
-
-        default:
-            @Html.Partial("~/Views/Product/ProductDefault.cshtml", Model)
-
-            break;
-
-
-    }
-
-
+     @Html.Partial("~/Views/Product/ProductDefault.cshtml", Model)
 }
 else
 {
