@@ -49,14 +49,17 @@
     </Reference>
     <Reference Include="CommerceMessageManager">
       <HintPath>..\Lib\CommerceServer\CommerceMessageManager.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="CommerceServer.Core.Catalog, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\CommerceServer\CommerceServer.Core.Catalog.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="CommerceServer.Core.CrossTier, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\CommerceServer\CommerceServer.Core.CrossTier.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="CommerceServer.Core.Orders.CrossTier, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -66,6 +69,7 @@
     <Reference Include="CommerceServer.Core.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\CommerceServer\CommerceServer.Core.Runtime.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Facebook">
       <HintPath>..\Lib\Social\Facebook.dll</HintPath>
@@ -143,7 +147,7 @@
     </Reference>
     <Reference Include="Sitecore.Commerce, Version=8.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sitecore.Commerce.NoReferences.8.2.161221\lib\NET452\Sitecore.Commerce.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Commerce.Connect.CommerceServer">
       <HintPath>..\Lib\Sitecore\Sitecore.Commerce.Connect.CommerceServer.dll</HintPath>

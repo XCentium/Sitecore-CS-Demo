@@ -775,7 +775,7 @@
                 dataType: "json",
                 success: function (result) {
                     if (result.d == true) {
-                        showActionMessage("Shipping Applied");
+                        showActionMessage("Shipping Information Applied");
                         redirectPage(thisObj.attr("href"));
                     } else {
                         showActionMessageFixed("Error! Please try again");
@@ -1026,10 +1026,8 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result) {
-
                     if (result.d == true) {
                         showActionMessage("Payment Method Applied");
-
                         redirectPage(thisObj.attr("href"));
                     } else {
                         showActionMessageFixed("Error! Please try again");
@@ -1235,10 +1233,13 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result) {
-
-                    showActionMessage("Shipping Method Applied");
-
-                    redirectPage(thisObj.attr("href"));
+                    if (result.d == true) {
+                        showActionMessage("Shipping Method Applied");
+                        redirectPage(thisObj.attr("href"));
+                    } else {
+                        showActionMessageFixed("Error! Please try again");
+                        return false;
+                    }
                 },
                 error: function (error) {
                     console.log(error);

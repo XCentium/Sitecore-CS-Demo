@@ -41,7 +41,7 @@ namespace CSDemo.Models.Checkout.Cart
         public string DefaultCartName { get; set; }
         private readonly InventoryServiceProvider _inventoryServiceProvider = new InventoryServiceProvider();
         private readonly PricingServiceProvider _pricingServiceProvider = new PricingServiceProvider();
-        private readonly CartServiceProvider _serviceProvider = new CommerceCartServiceProvider();
+        private readonly CartServiceProvider _cartServiceProvider = new CartServiceProvider();
 
         private readonly PaymentServiceProvider _paymentServiceProvider = new PaymentServiceProvider();
         private readonly OrderServiceProvider _orderServiceProvider = new OrderServiceProvider();
@@ -113,7 +113,7 @@ namespace CSDemo.Models.Checkout.Cart
             {
                 info.Refresh = true;
             }
-            var cartResult = _serviceProvider.AddCartLines(request);
+            var cartResult = _cartServiceProvider.AddCartLines(request);
 
             // add cart to cache
             var cart = cartResult.Cart as CommerceCart;
@@ -229,7 +229,7 @@ namespace CSDemo.Models.Checkout.Cart
         /// <returns></returns>
         private CommerceCart GetCart(string userName, bool refreshCart = false)
         {
-            
+
             var request = new LoadCartByNameRequest(ShopName, DefaultCartName, userName);
             var info = CartRequestInformation.Get(request);
             if (info == null)
@@ -240,7 +240,7 @@ namespace CSDemo.Models.Checkout.Cart
             {
                 info.Refresh = refreshCart;
             }
-            var result = _serviceProvider.LoadCart(request);
+            var result = _cartServiceProvider.LoadCart(request);
             return result.Cart as CommerceCart;
         }
 
@@ -457,12 +457,12 @@ namespace CSDemo.Models.Checkout.Cart
                 : (cart.Total as CommerceTotal).Subtotal;
             shoppingCart.Total = cart.LineItemCount;
 
-           
+
             var commerceTotal = (CommerceTotal)cart.Total;
 
             shoppingCart.LineDiscount = commerceTotal.LineItemDiscountAmount;
             shoppingCart.OrderLevelDiscountAmount = commerceTotal.OrderLevelDiscountAmount;
-            
+
             shoppingCart.Shipping = commerceTotal == null ? 0.00m : commerceTotal.ShippingTotal;
             shoppingCart.Tax = cart.Total.TaxTotal.Amount == null ? 0.00m : cart.Total.TaxTotal.Amount;
             shoppingCart.GrandTotal = cart.Total.Amount == null ? 0.00m : cart.Total.Amount;
@@ -563,59 +563,36 @@ namespace CSDemo.Models.Checkout.Cart
         /// <summary>
         /// Apply Shipping and Billing to Cart
         /// </summary>
-        /// <param name="firstname"></param>
-        /// <param name="lastname"></param>
-        /// <param name="email"></param>
-        /// <param name="company"></param>
-        /// <param name="address"></param>
-        /// <param name="addressline1"></param>
-        /// <param name="city"></param>
-        /// <param name="country"></param>
-        /// <param name="fax"></param>
-        /// <param name="phone"></param>
-        /// <param name="zip"></param>
-        /// <param name="firstname2"></param>
-        /// <param name="lastname2"></param>
-        /// <param name="email2"></param>
-        /// <param name="company2"></param>
-        /// <param name="address2"></param>
-        /// <param name="addressline12"></param>
-        /// <param name="city2"></param>
-        /// <param name="country2"></param>
-        /// <param name="fax2"></param>
-        /// <param name="phone2"></param>
-        /// <param name="zip2"></param>
+        /// <param name="shippingAddress"></param>
         /// <returns></returns>
         internal bool ApplyShippingToCart(Address shippingAddress)
         {
-
-            var visitorId = GetVisitorId();
-
             var cart = GetCustomerCart();
 
-            var shipping = new CommerceParty();
-
-            shipping.ExternalId =  "0";
-            shipping.Name = Constants.Products.ShippingAddress;
-            shipping.PartyId = "0";
-
-            shipping.FirstName = shippingAddress.FirstName;
-            shipping.LastName = shippingAddress.LastName;
-            shipping.Address1 = shippingAddress.Address1;
-            shipping.Address2 = shippingAddress.Address2;
-            shipping.City = shippingAddress.City;
-            shipping.State = shippingAddress.State;
-            shipping.Company = shippingAddress.Company;
-            shipping.Email = shippingAddress.Email;
-            shipping.FaxNumber = shippingAddress.FaxNumber;
-            shipping.Country = shippingAddress.Country;
-            shipping.CountryCode = shippingAddress.CountryCode;
-            shipping.ZipPostalCode = shippingAddress.ZipPostalCode;
+            var shipping = new CommerceParty
+            {
+                ExternalId = "0",
+                Name = Constants.Products.ShippingAddress,
+                PartyId = "0",
+                FirstName = shippingAddress.FirstName,
+                LastName = shippingAddress.LastName,
+                Address1 = shippingAddress.Address1,
+                Address2 = shippingAddress.Address2,
+                City = shippingAddress.City,
+                State = shippingAddress.State,
+                Company = shippingAddress.Company,
+                Email = shippingAddress.Email,
+                FaxNumber = shippingAddress.FaxNumber,
+                Country = shippingAddress.Country,
+                CountryCode = shippingAddress.CountryCode,
+                ZipPostalCode = shippingAddress.ZipPostalCode
+            };
 
             try
             {
                 var cartParties = cart.Parties.ToList();
                 var partyList = new List<Party> { shipping };
+
                 cartParties.AddRange(partyList);
                 cart.Parties = cartParties.AsReadOnly();
 
@@ -695,7 +672,7 @@ namespace CSDemo.Models.Checkout.Cart
 
 
             var shipping = new CommerceParty();
-           
+
             shipping.ExternalId = "0";
             shipping.Name = Constants.Products.ShippingAddress;
             shipping.PartyId = "0";
@@ -727,7 +704,7 @@ namespace CSDemo.Models.Checkout.Cart
         {
             var parties = this.GetPartieByName(cart, partyName);
             var request = new Sitecore.Commerce.Services.Carts.RemovePartiesRequest(cart, parties);
-            var response = this._serviceProvider.RemoveParties(request);
+            var response = this._cartServiceProvider.RemoveParties(request);
             if (response.Success)
             {
                 return response.Cart as CommerceCart;
@@ -793,7 +770,7 @@ namespace CSDemo.Models.Checkout.Cart
                 return cart;
             }
             var request = new UpdatePartiesRequest(cart, parties.Cast<Party>().ToList());
-            var result = _serviceProvider.UpdateParties(request);
+            var result = _cartServiceProvider.UpdateParties(request);
             return result.Cart as CommerceCart;
         }
 
@@ -835,7 +812,7 @@ namespace CSDemo.Models.Checkout.Cart
         public CommerceCart AddPartyToCart([NotNull] CommerceCart cart, [NotNull] CommerceParty party)
         {
             var request = new AddPartiesRequest(cart, new List<Party> { party });
-            var result = _serviceProvider.AddParties(request);
+            var result = _cartServiceProvider.AddParties(request);
             return result.Cart as CommerceCart;
         }
 
@@ -846,27 +823,23 @@ namespace CSDemo.Models.Checkout.Cart
         /// <returns></returns>
         internal bool AddShippingMethodToCart(string shippingMethodId)
         {
-
             var shippingData = shippingMethodId.Split('|');
-
             var cart = GetCustomerCart();
 
-            // add shipping info
-            var addShippingInfoResult = new AddShippingInfoResult { Success = false };
-
-            // Shipping methods
-            var shippingMethodList = new List<ShippingMethodInputModelItem>();
-            var shippingMethod = new ShippingMethodInputModelItem
+            // prepare shipping methods list with chosen shipping method
+            var shippingMethodList = new List<ShippingMethodInputModelItem>
             {
-                ShippingMethodID = shippingData[0],
-                ShippingMethodName = shippingData[1],
-                ShippingPreferenceType = "1",
-                PartyID = "0"
+                new ShippingMethodInputModelItem
+                    {
+                        ShippingMethodID = shippingData[0],
+                        ShippingMethodName = shippingData[1],
+                        ShippingPreferenceType = "1",
+                        PartyID = "0"
+                    }
             };
 
-            shippingMethodList.Add(shippingMethod);
+            //prepare shipping list - items to be shipped
             var internalShippingList = shippingMethodList.ToShippingInfoList();
-
             var orderPreferenceType = InputModelExtension.GetShippingOptionType("1");
 
             if (orderPreferenceType != ShippingOptionType.DeliverItemsIndividually)
@@ -877,33 +850,26 @@ namespace CSDemo.Models.Checkout.Cart
                 }
             }
 
-            // clear cart from cache
-            ClearCartFromCache();
-
             var shipments = new List<ShippingInfo>();
             shipments.AddRange(internalShippingList);
+
+            //update cart with shipping info
             var addShippingInfoRequest = new Sitecore.Commerce.Engine.Connect.Services.Carts.AddShippingInfoRequest(cart, shipments, orderPreferenceType);
-            addShippingInfoResult = _serviceProvider.AddShippingInfo(addShippingInfoRequest);
+            var addShippingInfoResult = _cartServiceProvider.AddShippingInfo(addShippingInfoRequest);
             if (!addShippingInfoResult.Success)
             {
                 return false;
-
             }
 
+            //update cart in cache
             if (addShippingInfoResult.Success && addShippingInfoResult.Cart != null)
             {
-                AddCartToCache(addShippingInfoResult.Cart as CommerceCart);
+                UpdateCartInCache(addShippingInfoResult.Cart as CommerceCart);
             }
 
+            //return true if cart has been updated
             var updatedCart = GetCustomerCart();
-
-            if (updatedCart == null)
-            {
-                return false;
-
-            }
-
-            return true;
+            return updatedCart != null;
         }
 
         /// <summary>
@@ -988,36 +954,32 @@ namespace CSDemo.Models.Checkout.Cart
         /// </summary>
         internal bool ApplyNewPaymentMethodToCart(Payment cartPayment)
         {
-            var billingParty = new CommerceParty();
-
-            billingParty.ExternalId = "0";
-            billingParty.Name = Constants.Products.BillingAddress;
-            billingParty.PartyId = "0";
-
-            billingParty.FirstName = cartPayment.BillingAddress.FirstName;
-            billingParty.LastName = cartPayment.BillingAddress.LastName;
-            billingParty.Address1 = cartPayment.BillingAddress.Address1;
-            billingParty.Address2 = cartPayment.BillingAddress.Address2;
-            billingParty.City = cartPayment.BillingAddress.City;
-            billingParty.State = cartPayment.BillingAddress.State;
-            billingParty.Company = cartPayment.BillingAddress.Company;
-            billingParty.Email = cartPayment.BillingAddress.Email;
-            billingParty.FaxNumber = cartPayment.BillingAddress.FaxNumber;
-            billingParty.Country = cartPayment.BillingAddress.Country;
-            billingParty.CountryCode = cartPayment.BillingAddress.CountryCode;
-            billingParty.ZipPostalCode = cartPayment.BillingAddress.ZipPostalCode;
-
+            var billingParty = new CommerceParty
+            {
+                ExternalId = "0",
+                Name = Constants.Products.BillingAddress,
+                PartyId = "0",
+                FirstName = cartPayment.BillingAddress.FirstName,
+                LastName = cartPayment.BillingAddress.LastName,
+                Address1 = cartPayment.BillingAddress.Address1,
+                Address2 = cartPayment.BillingAddress.Address2,
+                City = cartPayment.BillingAddress.City,
+                State = cartPayment.BillingAddress.State,
+                Company = cartPayment.BillingAddress.Company,
+                Email = cartPayment.BillingAddress.Email,
+                FaxNumber = cartPayment.BillingAddress.FaxNumber,
+                Country = cartPayment.BillingAddress.Country,
+                CountryCode = cartPayment.BillingAddress.CountryCode,
+                ZipPostalCode = cartPayment.BillingAddress.ZipPostalCode
+            };
+            
+            // Add billing party to cart
             var updatedCart = GetCustomerCart();
-
-            var payments = new List<PaymentInfo>();
-
-            // Add billing party
-            List<Party> parties = updatedCart.Parties.ToList();
+            var parties = updatedCart.Parties.ToList();
             parties.Add(billingParty);
             updatedCart.Parties = parties.AsSafeReadOnly();
 
-            // Add payment info
-            var addPaymentInfoResult = new AddPaymentInfoResult { Success = false };
+            // prepare payment info
             var federatedPaymentModel = new FederatedPaymentInputModelItem
             {
                 CardToken = cartPayment.Token,
@@ -1027,15 +989,17 @@ namespace CSDemo.Models.Checkout.Cart
 
             var federatedPayment = federatedPaymentModel.ToCreditCardPaymentInfo();
             federatedPayment.PartyID = billingParty.PartyId;
-            payments.Add(federatedPayment);
 
-            var addPaymentInfoRequest = new AddPaymentInfoRequest(updatedCart, payments);
-            addPaymentInfoResult = _serviceProvider.AddPaymentInfo(addPaymentInfoRequest);
+            var payments = new List<PaymentInfo> {federatedPayment};
+
+            //add payment info to cart
+            var addPaymentInfoResult = _cartServiceProvider.AddPaymentInfo(new AddPaymentInfoRequest(updatedCart, payments));
             if (!addPaymentInfoResult.Success)
             {
                 return false;
             }
 
+            //update cart in cache
             updatedCart = addPaymentInfoResult.Cart as CommerceCart;
             UpdateCartInCache(updatedCart);
 
@@ -1073,7 +1037,7 @@ namespace CSDemo.Models.Checkout.Cart
             payments.Add(federatedPayment);
 
             var addPaymentInfoRequest = new AddPaymentInfoRequest(updatedCart, payments);
-            addPaymentInfoResult = _serviceProvider.AddPaymentInfo(addPaymentInfoRequest);
+            addPaymentInfoResult = _cartServiceProvider.AddPaymentInfo(addPaymentInfoRequest);
             if (!addPaymentInfoResult.Success)
             {
                 return false;
@@ -1100,7 +1064,7 @@ namespace CSDemo.Models.Checkout.Cart
             creditCardInfo.PartyID = party.ExternalId;
             creditCardInfo.Amount = cart.Total.Amount;
             var paymentRequest = new AddPaymentInfoRequest(cart, new List<PaymentInfo> { creditCardInfo });
-            var paymentResult = _serviceProvider.AddPaymentInfo(paymentRequest);
+            var paymentResult = _cartServiceProvider.AddPaymentInfo(paymentRequest);
             var req = CartRequestInformation.Get(paymentRequest);
             if (req == null)
             {
@@ -1131,7 +1095,7 @@ namespace CSDemo.Models.Checkout.Cart
             {
                 info.Refresh = false;
             }
-            var removeResult = _serviceProvider.RemovePaymentInfo(removePaymentRequest);
+            var removeResult = _cartServiceProvider.RemovePaymentInfo(removePaymentRequest);
             return removeResult.Cart as CommerceCart;
             ;
         }
@@ -1159,7 +1123,7 @@ namespace CSDemo.Models.Checkout.Cart
             }
 
             updatedCart.Email = "testorder@mail.com";
-           
+
             var submitVisitorOrderRequest = new SubmitVisitorOrderRequest(updatedCart);
             submitVisitorOrderResult = _orderServiceProvider.SubmitVisitorOrder(submitVisitorOrderRequest);
 
@@ -1281,7 +1245,7 @@ namespace CSDemo.Models.Checkout.Cart
             {
                 info.Refresh = true;
             }
-            var cartResult = _serviceProvider.RemoveCartLines(request);
+            var cartResult = _cartServiceProvider.RemoveCartLines(request);
             return cartResult.Cart as CommerceCart;
         }
 
@@ -1342,7 +1306,7 @@ namespace CSDemo.Models.Checkout.Cart
             {
                 info.Refresh = true;
             }
-            var cartResult = _serviceProvider.UpdateCartLines(updateRequest);
+            var cartResult = _cartServiceProvider.UpdateCartLines(updateRequest);
             return cartResult.Cart as CommerceCart;
         }
 
@@ -1381,7 +1345,7 @@ namespace CSDemo.Models.Checkout.Cart
             if ((userCart.ShopName == anonymousCart.ShopName) && (userCart.ExternalId != anonymousCart.ExternalId))
             {
                 var mergeCartRequest = new MergeCartRequest(anonymousCart, userCart);
-                var result = _serviceProvider.MergeCart(mergeCartRequest);
+                var result = _cartServiceProvider.MergeCart(mergeCartRequest);
                 var updateCartRequest = new UpdateCartLinesRequest(result.Cart, anonymousCart.Lines);
                 var info = CartRequestInformation.Get(updateCartRequest);
                 if (info == null)
@@ -1392,8 +1356,8 @@ namespace CSDemo.Models.Checkout.Cart
                 {
                     info.Refresh = true;
                 }
-                result = _serviceProvider.UpdateCartLines(updateCartRequest);
-                _serviceProvider.DeleteCart(new DeleteCartRequest(anonymousCart));
+                result = _cartServiceProvider.UpdateCartLines(updateCartRequest);
+                _cartServiceProvider.DeleteCart(new DeleteCartRequest(anonymousCart));
                 return result.Cart as CommerceCart;
             }
             return userCart;
@@ -1464,21 +1428,22 @@ namespace CSDemo.Models.Checkout.Cart
             ClearCartFromCache();
             var request = new AddPromoCodeRequest(cart, promoCode);
 
-            result = ((CommerceCartServiceProvider)_serviceProvider).AddPromoCode(request);
+            result = ((CommerceCartServiceProvider)_cartServiceProvider).AddPromoCode(request);
 
             if (result.Success && result.Cart != null)
             {
                 AddCartToCache(result.Cart as CommerceCart);
 
                 return true;
-            } else
+            }
+            else
             {
                 AddCartToCache(cart);
                 return false;
             }
 
 
-            
+
 
             //////  -----------------------------------------------
             ////AddPromoCodeResult result = new AddPromoCodeResult { Success = false };
@@ -1528,7 +1493,7 @@ namespace CSDemo.Models.Checkout.Cart
 
         public IEnumerable<PaymentMethod> GetPaymentMethods(PaymentOption paymentOption)
         {
-            if(paymentOption == null) { paymentOption = GetPaymentOptions().FirstOrDefault(); }
+            if (paymentOption == null) { paymentOption = GetPaymentOptions().FirstOrDefault(); }
             var result = new GetPaymentMethodsResult { Success = false };
             var cartResult = this.GetCustomerCart();
 
@@ -1617,10 +1582,10 @@ namespace CSDemo.Models.Checkout.Cart
             }
 
             var request = new AddPaymentInfoRequest(cart, payments);
-            result = _serviceProvider.AddPaymentInfo(request);
+            result = _cartServiceProvider.AddPaymentInfo(request);
             if (!result.Success)
             {
-               return false;
+                return false;
             }
             UpdateCartInCache(cart);
             return true;
@@ -1667,7 +1632,8 @@ namespace CSDemo.Models.Checkout.Cart
                 //var cartCache = CommerceTypeLoader.CreateInstance<CartCacheHelper>();
                 //cartCache.InvalidateCartCache(visitorContext.GetCustomerId());
             }
-            else {
+            else
+            {
 
                 ret = "There was an error! - ";
 
@@ -1696,7 +1662,7 @@ namespace CSDemo.Models.Checkout.Cart
 
             //var partyList = new List<Party> { billingParty, shippingParty };
             //var addPartiesRequest = new AddPartiesRequest(cart, partyList);
-            //var addPartiesResult = _serviceProvider.AddParties(addPartiesRequest);
+            //var addPartiesResult = _cartServiceProvider.AddParties(addPartiesRequest);
 
             // add shipping info
             var addShippingInfoResult = new AddShippingInfoResult { Success = false };
@@ -1737,7 +1703,7 @@ namespace CSDemo.Models.Checkout.Cart
             var shipments = new List<ShippingInfo>();
             shipments.AddRange(internalShippingList);
             var addShippingInfoRequest = new Sitecore.Commerce.Engine.Connect.Services.Carts.AddShippingInfoRequest(cart, shipments, orderPreferenceType);
-            addShippingInfoResult = _serviceProvider.AddShippingInfo(addShippingInfoRequest);
+            addShippingInfoResult = _cartServiceProvider.AddShippingInfo(addShippingInfoRequest);
             if (!addShippingInfoResult.Success)
             {
                 msg = addShippingInfoResult.SystemMessages[0].Message;
@@ -1779,7 +1745,7 @@ namespace CSDemo.Models.Checkout.Cart
             payments.Add(federatedPayment);
 
             var addPaymentInfoRequest = new AddPaymentInfoRequest(updatedCart, payments);
-            addPaymentInfoResult = _serviceProvider.AddPaymentInfo(addPaymentInfoRequest);
+            addPaymentInfoResult = _cartServiceProvider.AddPaymentInfo(addPaymentInfoRequest);
             if (!addPaymentInfoResult.Success)
             {
                 msg = addPaymentInfoResult.SystemMessages[0].Message;
@@ -1840,11 +1806,11 @@ namespace CSDemo.Models.Checkout.Cart
             //var billingParty = new CommerceParty() { ExternalId = visitorId, PartyId = "{F73904C0-2A45-4A2F-A99BF934ABDCFC99}", FirstName = "Joe", LastName = "Smith", Address1 = "123 Street", City = "Ottawa", State = "Ontario", Country = "Canada" };
             //var shippingParty = new CommerceParty() { ExternalId = visitorId, PartyId = "{294B7DD1-7397-4322-996CE87E592EF621}", FirstName = "Jane", LastName = "Smith", Address1 = "234 Street", City = "Toronto", State = "Ontario", Country = "Canada" };
             var billingParty = new CommerceParty() { ExternalId = "0", Name = "Billing", PartyId = "0", FirstName = "Joe", LastName = "Smith", Address1 = "123 Street", City = "Ottawa", State = "ON", Country = "Canada", ZipPostalCode = "12345", CountryCode = "CA" };
-            var shippingParty = new CommerceParty() { ExternalId = "0", Name="Shipping", PartyId = "0", FirstName = "Jane", LastName = "Smith", Address1 = "234 Street", City = "Toronto", State = "ON", Country = "Canada", ZipPostalCode = "12345", CountryCode = "CA" };
+            var shippingParty = new CommerceParty() { ExternalId = "0", Name = "Shipping", PartyId = "0", FirstName = "Jane", LastName = "Smith", Address1 = "234 Street", City = "Toronto", State = "ON", Country = "Canada", ZipPostalCode = "12345", CountryCode = "CA" };
 
             //var partyList = new List<Party> { billingParty, shippingParty };
             //var addPartiesRequest = new AddPartiesRequest(cart, partyList);
-            //var addPartiesResult = _serviceProvider.AddParties(addPartiesRequest);
+            //var addPartiesResult = _cartServiceProvider.AddParties(addPartiesRequest);
 
             // add shipping info
             var addShippingInfoResult = new AddShippingInfoResult { Success = false };
@@ -1857,7 +1823,8 @@ namespace CSDemo.Models.Checkout.Cart
 
             // Shipping methods
             var shippingMethodList = new List<ShippingMethodInputModelItem>();
-            var shippingMethod = new ShippingMethodInputModelItem {
+            var shippingMethod = new ShippingMethodInputModelItem
+            {
                 ShippingMethodID = "e14965b9-306a-43c4-bffc-3c67be8726fa",
                 ShippingMethodName = "Ground",
                 ShippingPreferenceType = "1",
@@ -1883,7 +1850,7 @@ namespace CSDemo.Models.Checkout.Cart
             var shipments = new List<ShippingInfo>();
             shipments.AddRange(internalShippingList);
             var addShippingInfoRequest = new Sitecore.Commerce.Engine.Connect.Services.Carts.AddShippingInfoRequest(cart, shipments, orderPreferenceType);
-            addShippingInfoResult = _serviceProvider.AddShippingInfo(addShippingInfoRequest);
+            addShippingInfoResult = _cartServiceProvider.AddShippingInfo(addShippingInfoRequest);
             if (!addShippingInfoResult.Success)
             {
                 msg = addShippingInfoResult.SystemMessages[0].Message;
@@ -1905,7 +1872,7 @@ namespace CSDemo.Models.Checkout.Cart
             var payments = new List<PaymentInfo>();
 
             var miniCart = GetMiniCart();
-            
+
             // Add billing party
             List<Party> parties = updatedCart.Parties.ToList();
             parties.Add(billingParty);
@@ -1913,7 +1880,8 @@ namespace CSDemo.Models.Checkout.Cart
 
             // Add payment info
             var addPaymentInfoResult = new AddPaymentInfoResult { Success = false };
-            var federatedPaymentModel = new FederatedPaymentInputModelItem {
+            var federatedPaymentModel = new FederatedPaymentInputModelItem
+            {
                 CardToken = "fdc99443-2c41-04e3-17ac-a9bbda610f88",
                 Amount = updatedCart.Total.Amount,
                 CardPaymentAcceptCardPrefix = "paypal"
@@ -1924,7 +1892,7 @@ namespace CSDemo.Models.Checkout.Cart
             payments.Add(federatedPayment);
 
             var addPaymentInfoRequest = new AddPaymentInfoRequest(updatedCart, payments);
-            addPaymentInfoResult = _serviceProvider.AddPaymentInfo(addPaymentInfoRequest);
+            addPaymentInfoResult = _cartServiceProvider.AddPaymentInfo(addPaymentInfoRequest);
             if (!addPaymentInfoResult.Success)
             {
                 msg = addPaymentInfoResult.SystemMessages[0].Message;
@@ -1953,7 +1921,7 @@ namespace CSDemo.Models.Checkout.Cart
             {
                 var order = submitVisitorOrderResult.Order as CommerceOrder;
                 orderId = submitVisitorOrderResult.Order.OrderID;
-               var commerceOrderId = order.OrderID;
+                var commerceOrderId = order.OrderID;
 
                 // clear cart from cache
                 ClearCartFromCache();
@@ -1985,7 +1953,7 @@ namespace CSDemo.Models.Checkout.Cart
 
             var partyList = new List<Party> { billingParty, shippingParty };
             var addPartiesRequest = new AddPartiesRequest(cart, partyList);
-            var addPartiesResult = _serviceProvider.AddParties(addPartiesRequest);
+            var addPartiesResult = _cartServiceProvider.AddParties(addPartiesRequest);
 
             // add shipping info
 
@@ -1999,10 +1967,10 @@ namespace CSDemo.Models.Checkout.Cart
             .AsReadOnly()
             };
             //var addRequest = new AddShippingInfoRequest(cart, new List<ShippingInfo> { shippingInfo });
-            //var addResult = _serviceProvider.AddShippingInfo(request);
+            //var addResult = _cartServiceProvider.AddShippingInfo(request);
 
             var addShippingInfoRequest = new Sitecore.Commerce.Engine.Connect.Services.Carts.AddShippingInfoRequest(cart, new List<ShippingInfo> { shippingInfo }, ShippingOptionType.ShipToAddress);
-            var addShippingInfoResult = _serviceProvider.AddShippingInfo(addShippingInfoRequest);
+            var addShippingInfoResult = _cartServiceProvider.AddShippingInfo(addShippingInfoRequest);
 
 
             // Add Payment info
@@ -2021,7 +1989,7 @@ namespace CSDemo.Models.Checkout.Cart
             payments.Add(federatedPayment);
 
             var addPaymentInfoRequest = new AddPaymentInfoRequest(cart, payments);
-            var addPaymentInfoResult = _serviceProvider.AddPaymentInfo(addPaymentInfoRequest);
+            var addPaymentInfoResult = _cartServiceProvider.AddPaymentInfo(addPaymentInfoRequest);
             if (!addPaymentInfoResult.Success)
             {
 
@@ -2115,7 +2083,7 @@ namespace CSDemo.Models.Checkout.Cart
             var order = result.Order; var orderId = order.OrderID;
 
 
-            return false; 
+            return false;
         }
 
     }
