@@ -15,11 +15,11 @@ namespace CSDemo.Models.Checkout.Cart
 
         public int Total { get; set; }
 
-        public Decimal Shipping { get; set; }
+        public decimal Shipping { get; set; }
 
         public string Currency { get; set; }
 
-        public Decimal LineTotal { get; set; }
+        public decimal LineTotal { get; set; }
 
         public decimal TotalWeight
         {
@@ -30,16 +30,16 @@ namespace CSDemo.Models.Checkout.Cart
             }
         }
 
-        private Decimal _productsTotal;
-        public Decimal ProductsTotal
+        private decimal _productsTotal;
+        public decimal ProductsTotal
         {
 
             get
             {
-                if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { return this.LineTotal > 0 ? (decimal)0.90 * this.GetDiscount() + this.LineTotal : this.GetDiscount() + this.LineTotal; }
-                if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { return this.LineTotal > 0 ? (decimal)0.75 * this.GetDiscount() + this.LineTotal : this.GetDiscount() + this.LineTotal; }
+                if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { return LineTotal > 0 ? (decimal)0.90 * GetDiscount() + LineTotal : GetDiscount() + LineTotal; }
+                if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { return LineTotal > 0 ? (decimal)0.75 * GetDiscount() + LineTotal : GetDiscount() + LineTotal; }
 
-                return this.GetDiscount() + this.LineTotal;
+                return GetDiscount() + LineTotal;
             }
 
             set
@@ -49,21 +49,21 @@ namespace CSDemo.Models.Checkout.Cart
         }
 
 
-        public Decimal Tax { get; set; }
+        public decimal Tax { get; set; }
 
-        private Decimal _grandTotal;
+        private decimal _grandTotal;
 
-        public Decimal GrandTotal
+        public decimal GrandTotal
         {
 
             get
             {
-                if (this._grandTotal > 0)
+                if (_grandTotal > 0)
                 {
-                    return (this._grandTotal > (this.LineTotal + this.Tax + this.Shipping)) ? this.LineTotal + this.Tax + this.Shipping : this._grandTotal;
+                    return (_grandTotal > (LineTotal + Tax + Shipping)) ? LineTotal + Tax + Shipping : _grandTotal;
 
                 }
-                return this.LineTotal + this.Tax + this.Shipping;
+                return LineTotal + Tax + Shipping;
             }
 
 
@@ -74,11 +74,11 @@ namespace CSDemo.Models.Checkout.Cart
 
         }
 
-        private Decimal _discount;
+        private decimal _discount;
 
-        public Decimal Discount
+        public decimal Discount
         {
-            get { return this.GetDiscount(); }
+            get { return GetDiscount(); }
             set { _discount = value; }
         }
 
@@ -87,15 +87,15 @@ namespace CSDemo.Models.Checkout.Cart
 
         public ShoppingCart()
         {
-            this.Discount = 0.00m;
-            this.Currency = "USD";
-            this.Shipping = 0.00m;
-            this.Tax = 0.00m;
-            this.GrandTotal = 0.00m;
+            Discount = 0.00m;
+            Currency = "USD";
+            Shipping = 0.00m;
+            Tax = 0.00m;
+            GrandTotal = 0.00m;
 
         }
 
-        public Decimal GetDiscount()
+        public decimal GetDiscount()
         {
             var discount = 0.00m;
 
@@ -105,7 +105,7 @@ namespace CSDemo.Models.Checkout.Cart
 
                 //  return cartToTal - LineTotal;
 
-                return this.LineDiscount + OrderLevelDiscountAmount;
+                return LineDiscount + OrderLevelDiscountAmount;
             }
 
             return discount;

@@ -444,20 +444,19 @@ namespace CSDemo.Models.Checkout.Cart
         /// <returns></returns>
         public ShoppingCart GetMiniCart(bool cartFromCommServer = false)
         {
-            if (Sitecore.Context.IsLoggedIn &&
+            if (Context.IsLoggedIn &&
                 !Context.User.Name.ToLower().Contains(Constants.Commerce.CommerceUserDomain.ToLower())) return new ShoppingCart();
 
-            var cart = cartFromCommServer == true ? GetCart(GetVisitorId(), true) : GetCustomerCart();
+            var cart = cartFromCommServer ? GetCart(GetVisitorId(), true) : GetCustomerCart();
             var shoppingCartTotal = cart.Total as CommerceTotal;
             var shoppingCart = new ShoppingCart();
-            if (cart == null || shoppingCartTotal == null) return shoppingCart;
+            if (shoppingCartTotal == null) return shoppingCart;
 
             shoppingCart.LineTotal = cart.Total as CommerceTotal == null
                 ? 0
                 : (cart.Total as CommerceTotal).Subtotal;
             shoppingCart.Total = cart.LineItemCount;
-
-
+            
             var commerceTotal = (CommerceTotal)cart.Total;
 
             shoppingCart.LineDiscount = commerceTotal.LineItemDiscountAmount;
@@ -467,20 +466,17 @@ namespace CSDemo.Models.Checkout.Cart
             shoppingCart.Tax = cart.Total.TaxTotal.Amount == null ? 0.00m : cart.Total.TaxTotal.Amount;
             shoppingCart.GrandTotal = cart.Total.Amount == null ? 0.00m : cart.Total.Amount;
 
-            if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { shoppingCart.LineTotal = shoppingCart.LineTotal > 0 ? (decimal)0.90 * shoppingCart.LineTotal : shoppingCart.LineTotal; }
-            if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { shoppingCart.LineTotal = shoppingCart.LineTotal > 0 ? (decimal)0.75 * shoppingCart.LineTotal : shoppingCart.LineTotal; }
+            if (Context.User.IsInRole("CommerceUsers\\Dealer")) { shoppingCart.LineTotal = shoppingCart.LineTotal > 0 ? (decimal)0.90 * shoppingCart.LineTotal : shoppingCart.LineTotal; }
+            if (Context.User.IsInRole("CommerceUsers\\Retailer")) { shoppingCart.LineTotal = shoppingCart.LineTotal > 0 ? (decimal)0.75 * shoppingCart.LineTotal : shoppingCart.LineTotal; }
 
-            if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { shoppingCart.GrandTotal = shoppingCart.GrandTotal > 0 ? (decimal)0.90 * shoppingCart.GrandTotal : shoppingCart.GrandTotal; }
-            if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { shoppingCart.GrandTotal = shoppingCart.GrandTotal > 0 ? (decimal)0.75 * shoppingCart.GrandTotal : shoppingCart.GrandTotal; }
-
-
+            if (Context.User.IsInRole("CommerceUsers\\Dealer")) { shoppingCart.GrandTotal = shoppingCart.GrandTotal > 0 ? (decimal)0.90 * shoppingCart.GrandTotal : shoppingCart.GrandTotal; }
+            if (Context.User.IsInRole("CommerceUsers\\Retailer")) { shoppingCart.GrandTotal = shoppingCart.GrandTotal > 0 ? (decimal)0.75 * shoppingCart.GrandTotal : shoppingCart.GrandTotal; }
 
             var cartItems = new List<CartItem>();
             if (cart.LineItemCount > 0)
             {
                 foreach (CustomCommerceCartLine cartLine in cart.Lines)
                 {
-
                     var cartItem = new CartItem();
                     var product = cartLine.Product as CommerceCartProduct;
                     cartItem.ProductName = product.DisplayName;
@@ -492,7 +488,6 @@ namespace CSDemo.Models.Checkout.Cart
                         if (item != null)
                         {
                             cartItem.ProductId = item.ID.ToString();
-
                             cartItem.ImageUrl = (!string.IsNullOrEmpty(item[Constants.Products.VariantImage1])) ? item[Constants.Products.VariantImage1] : ProductHelper.GetFirstImageFromProductItem(item);
 
                             // If it is a variant and there is an image for the variant, lets use that.
@@ -508,7 +503,6 @@ namespace CSDemo.Models.Checkout.Cart
                                 }
                             }
 
-
                             cartItem.Category = item.Parent.Name;
                         }
                         else
@@ -522,8 +516,6 @@ namespace CSDemo.Models.Checkout.Cart
                     cartItem.UnitPrice = product.Price.Amount;
                     cartItem.SubTotal = cartLine.Total.Amount;
                     cartItem.ExternalId = cartLine.ExternalCartLineId;
-
-
 
                     if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { cartItem.UnitPrice = cartItem.UnitPrice > 0 ? (decimal)0.90 * cartItem.UnitPrice : cartItem.UnitPrice; }
                     if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { cartItem.UnitPrice = cartItem.UnitPrice > 0 ? (decimal)0.75 * cartItem.UnitPrice : cartItem.UnitPrice; }

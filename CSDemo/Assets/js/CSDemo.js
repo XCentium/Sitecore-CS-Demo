@@ -972,12 +972,12 @@
 
             event.preventDefault();
 
-
             var radioVal = $(":radio[name='optionsRadios']:checked").val();
             var radioIdx = $(":radio[name='optionsRadios']:checked").index(":radio[name='optionsRadios']");
 
             $('#nounceData').val(accessCode);
             // save data 
+
             saveFormData("#payment-form", "payment_form");
 
             var formValues = $("#payment-form").values();

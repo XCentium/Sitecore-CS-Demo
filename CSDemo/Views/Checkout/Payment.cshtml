@@ -22,11 +22,9 @@
     var paymentMethods = cartHelper.GetPaymentMethods(null);
     var token = cartHelper.GetPaymentClientToken();
     var client = cartHelper.GetPaymentClient();
-    ShoppingCart shoppingCart = cartHelper.GetMiniCart(true);
+    var shoppingCart = cartHelper.GetMiniCart(true);
 
-    var grandtotal = String.Format("{0:0.00}", shoppingCart.GrandTotal);
-
-    var abc = 123;
+    var grandtotal = string.Format("{0:0.00}", shoppingCart.GrandTotal);
 }
 <!-- ==========================
     MY ACCOUNT - START
