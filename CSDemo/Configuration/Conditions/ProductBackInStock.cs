@@ -6,10 +6,8 @@ using Sitecore.Commerce.Entities.Inventory;
 using Sitecore.Configuration;
 using Sitecore.Diagnostics;
 using Sitecore.Rules.Conditions;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace CSDemo.Configuration.Conditions
 {
@@ -20,7 +18,7 @@ namespace CSDemo.Configuration.Conditions
             var provider = (InventoryAutomationProvider)Factory.CreateObject("inventoryAutomationProvider", true);
             if (provider == null)
             {
-                Sitecore.Diagnostics.Log.Error("XC Products Back ini Stock: Unable to get inventoryAutomationProvider.", this);
+                Log.Error("XC Products Back in Stock: Unable to get inventoryAutomationProvider.", this);
                 return false;
             }
 

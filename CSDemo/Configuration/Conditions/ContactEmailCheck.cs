@@ -7,7 +7,6 @@ namespace CSDemo.Configuration.Conditions
 {
     public class ContactEmailCheck<T> : IntegerComparisonCondition<T> where T : RuleContext
     {
-
         protected override bool Execute(T ruleContext)
         {
             if (ruleContext == null) return false;

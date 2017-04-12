@@ -3,20 +3,17 @@
 using CSDemo.Models.Account;
 using CSDemo.Models.Checkout.Cart;
 using CSDemo.Models.Product;
-using Glass.Mapper.Sc;
 using Newtonsoft.Json;
 using Sitecore.Analytics;
 using Sitecore.Analytics.Data.Items;
 using Sitecore.Data;
-using Sitecore.Data.Items;
-using Sitecore.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
-
+using CSDemo.Helpers;
 
 #endregion
 
@@ -64,7 +61,7 @@ namespace CSDemo.AJAX
             RegisterGoal(Constants.Marketing.SubmitOrderGoalId, contextItemId);
 
             if (!Sitecore.Context.User.IsAuthenticated) return ret;
-            decimal total = 0;
+            decimal total;
             decimal.TryParse(orderTotal, out total);
             var newStatus = UserStatus.GetStatus(total);
             var user = Sitecore.Context.User;
@@ -85,9 +82,8 @@ namespace CSDemo.AJAX
                     if (currentStatus.Amount < newStatus.Amount)
                         user.Profile.Comment = newStatus.Name;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-
                     return ret;
                 }
             }
@@ -128,10 +124,10 @@ namespace CSDemo.AJAX
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public bool ApplyPaymentMethodToCart(string paymentExternalID, string nameoncard, string creditcard,
+        public bool ApplyPaymentMethodToCart(string paymentExternalId, string nameoncard, string creditcard,
             string expmonth, string expyear, string ccv)
         {
-            return CartHelper.ApplyPaymentMethodToCart(paymentExternalID, nameoncard, creditcard, expmonth, expyear, ccv);
+            return CartHelper.ApplyPaymentMethodToCart(paymentExternalId, nameoncard, creditcard, expmonth, expyear, ccv);
         }
 
         [WebMethod(EnableSession = true)]
@@ -179,20 +175,6 @@ namespace CSDemo.AJAX
             return CartHelper.CompleteACheckout4(nounce);
         }
 
-        //[WebMethod(EnableSession = true)]
-        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        //public bool SetPaymentMethodToCart(PaymentInputModel inputModel)
-        //{
-        //    return CartHelper.SetPaymentMethods(inputModel);
-        //}
-
-        //[WebMethod(EnableSession = true)]
-        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        //public bool SetPaymentMethodToCart(PaymentInputModel inputModel)
-        //{
-        //    return CartHelper.SetPaymentMethods(inputModel);
-        //}
-
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public bool RemoveFromCart(string externalId)
@@ -211,7 +193,6 @@ namespace CSDemo.AJAX
         public bool UpdateCartList(List<CurrentCartItem> currentCartItems)
         {
             // check if user is logged in and not commerce customer, if true, return false
-
             var ret = false;
 
             foreach (var c in currentCartItems)
@@ -223,7 +204,7 @@ namespace CSDemo.AJAX
                     q = "0";
                 }
 
-                if (q.All(Char.IsDigit))
+                if (q.All(char.IsDigit))
                 {
                     ret = CartHelper.UpdateCartItem(c.ExternalId, q);
                 }
@@ -287,8 +268,7 @@ namespace CSDemo.AJAX
 
             return true;
         }
-
-            
+    
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public bool ClearSessionTimeOutCookies()
@@ -303,49 +283,40 @@ namespace CSDemo.AJAX
             return true;
         }
 
-                
-        //[ScriptMethod(UseHttpGet = true,ResponseFormat = ResponseFormat.Json)]
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public object GetProductsResult(string query)
         {
             var products = new List<object>();
-            
             var productsResult = ProductHelper.GetProductsByName(query);
 
-            if (productsResult != null && productsResult.Any())
+            if (productsResult == null || !productsResult.Any())
+                return new {success = true, total = products.Count, products};
+
+            foreach (var product in productsResult)
             {
-                foreach (var product in productsResult)
-                {
-                    products.Add(new {Id = product.Id, CategoryName = product.CategoryName, CatalogId = product.CatalogId, Guid = product.Guid, Title  = product.Title, Price = product.Price, CatalogName = product.CatalogName, ImageSrc= product.ImageSrc, VariantId = product.VariantId });
-                  
-                }
+                products.Add(new {product.Id, product.CategoryName, product.CatalogId, product.Guid, product.Title, product.Price, product.CatalogName, product.ImageSrc, product.VariantId });
             }
 
-            return new { success = true, total = products.Count , products = products };
+            return new { success = true, total = products.Count , products };
         }
 
                         
-        //[ScriptMethod(UseHttpGet = true,ResponseFormat = ResponseFormat.Json)]
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public object GetCategoriesResult(string query)
         {
             var categories = new List<object>();
-
-            //return "aaaa,bbbb,ccccc,dd,eeeee,fff,gggggg hhh".Split(',').ToList();
-            
             var categoriesResult = ProductHelper.GetCategoriesByName(query);
 
-            if (categoriesResult != null && categoriesResult.Any())
-            {
-                foreach (var product in categoriesResult)
-                {
-                    categories.Add(new {Id = product.Id, CatalogId = product.CatalogId, Guid = product.Guid, Title  = product.Title, Price = product.Price, CatalogName = product.CatalogName, ImageSrc= product.ImageSrc});
-                  
-                }
-            }
+            if (categoriesResult == null || !categoriesResult.Any())
+                return new {success = true, total = categories.Count, products = categories};
 
+            foreach (var product in categoriesResult)
+            {
+                categories.Add(new {product.Id, product.CatalogId, product.Guid, product.Title, product.Price, product.CatalogName, product.ImageSrc});
+                  
+            }
             return new { success = true, total = categories.Count , products = categories };
         }
 
@@ -356,14 +327,9 @@ namespace CSDemo.AJAX
         {
             var categories = new List<object>();
             var products = new List<object>();
-
             var catalogId = ProductHelper.GetSiteRootCatalogId();
-
             var catalogName = ProductHelper.GetSiteRootCatalogName();
-
             var categoryId = ProductHelper.GetItemIdsFromName(category, catalogId);
-
-
             var categoryItem = Sitecore.Context.Database.GetItem(new ID(categoryId));
 
             if (categoryItem != null && categoryItem.HasChildren)
@@ -375,11 +341,11 @@ namespace CSDemo.AJAX
                                 
                 if (subCategories.Count >0 && subCategories.Any())
                 {
-                    foreach (Item subCategory in subCategories)
+                    foreach (var subCategory in subCategories)
                     {
-                        var gsubCategory = subCategory.GlassCast<Category>();
+                        var gsubCategory = GlassHelper.Cast<Category>(subCategory);
 
-                        if(gsubCategory.DefinitionName == "GeneralCategory")
+                        if (gsubCategory.DefinitionName == "GeneralCategory")
                         {
                             categories.Add(new {text = subCategory.Name, value = subCategory.Name  });
                         }
@@ -390,29 +356,22 @@ namespace CSDemo.AJAX
                     categoryItem.GetChildren()
                         .Where(x => x.TemplateName != Constants.Products.GeneralCategoryTemplateName).ToList();
 
-                                
-                if (subProducts.Count >0 && subProducts.Any())
+                if (subProducts.Count <= 0 || !subProducts.Any())
+                    return new {success = true, id = category, categories, products};
+
+                foreach (var subProduct in subProducts)
                 {
-                    foreach (var subProduct in subProducts)
-                    {
-                        var gsubProduct = subProduct.GlassCast<Product>();
+                    var gsubProduct = GlassHelper.Cast<Product>(subProduct);
 
-                        if(gsubProduct.DefinitionName  != "GeneralCategory")
-                        {
+                    if (gsubProduct.DefinitionName == "GeneralCategory") continue;
+                        
+                    var guid = ID.Parse(gsubProduct.ID).ToString();
 
-                            //products.Add(new {text = gsubProduct.Title, value = gsubProduct.Title  });
-
-                            var guid = Sitecore.Data.ID.Parse(gsubProduct.ID).ToString();
-
-                            //var prodid = gsubProduct.ProductId;
-
-                            products.Add(new {cat = catalogId, text = gsubProduct.Title, pid = gsubProduct.ProductId, pguid = guid, img = gsubProduct.FirstImage, price = gsubProduct.Price, catName = catalogName });
-                        }
-                    }
+                    products.Add(new {cat = catalogId, text = gsubProduct.Title, pid = gsubProduct.ProductId, pguid = guid, img = gsubProduct.FirstImage, price = gsubProduct.Price, catName = catalogName });
                 }
             }
 
-            return new { success = true, id = category , categories = categories, products = products };
+            return new { success = true, id = category , categories, products };
         }
 
 
@@ -437,10 +396,6 @@ namespace CSDemo.AJAX
                     Sitecore.Diagnostics.Log.Error($"Unable to register goal with ID {goalId}. Make sure everything is deployed and published correctly.", this);
                 }
                 var goal = new PageEventItem(goalItem);
-                if (goal == null)
-                {
-                    Sitecore.Diagnostics.Log.Error($"Unable to register page event goal with ID {goalId}. Make sure everything is deployed and published correctly.", this);
-                }
                 var pageEventsRow = Tracker.Current.CurrentPage.Register(goal);
 
                 pageEventsRow.Data = "Product added to cart - "

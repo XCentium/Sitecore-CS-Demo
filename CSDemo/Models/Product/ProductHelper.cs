@@ -18,6 +18,7 @@ using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Commerce.Services.Payments;
 using Sitecore.Commerce.Services.Shipping;
 using Sitecore.ContentSearch;
+using Sitecore.ContentSearch.Linq;
 using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data;
 using Sitecore.Data.Items;
@@ -1011,12 +1012,11 @@ namespace CSDemo.Models.Product
         /// <param name="query"></param>
         /// <param name="searchFor">Search for either product or category</param>
         /// <returns></returns>
-        public static List<SearchResultItem> GetSearchResultItemByNameOrId(string query, string searchFor = "products")
+        public static IEnumerable<SearchHit<SearchResultItem>> GetSearchResultItemByNameOrId(string query, string searchFor = "products")
         {
             var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
             try
             {
-                var culture = Context.Language.CultureInfo;
                 using (var context = index.CreateSearchContext())
                 {
                                             
@@ -1028,14 +1028,18 @@ namespace CSDemo.Models.Product
                         return
                             queryable.Where(
                                 x =>
-                                    (x.Name.Contains(query) && x.Path.Contains("/sitecore/commerce/catalog") &&
-                                     x.TemplateName != "GeneralCategory")).Take(5).ToList();
+                                    (x.Name.Contains(query) || x["_displayname"].Contains(query)) &&
+                                    x.Path.Contains("/sitecore/commerce/catalog") &&
+                                    x["_latestversion"] == "1" &&
+                                    x.TemplateName != "GeneralCategory").Page(0,5).GetResults().ToList();
                     }
                     return
                         queryable.Where(
                             x =>
-                                (x.Name.Contains(query) && x.Path.Contains("/sitecore/commerce/catalog") &&
-                                 x.TemplateName == "GeneralCategory")).Take(5).ToList();
+                                (x.Name.Contains(query) && 
+                                 x.Path.Contains("/sitecore/commerce/catalog") &&
+                                 x.TemplateName == "GeneralCategory") &&
+                                 x["_latestversion"] == "1").Page(0,5).GetResults().ToList();
                 }
             }
             catch (Exception ex)
@@ -1063,8 +1067,8 @@ namespace CSDemo.Models.Product
                 {
                     try
                     {
-                        var productItem = searchResultItem.GetItem();
-                        var product = productItem.GlassCast<Product>(); //TODO: refactor
+                        var productItem = searchResultItem.Document.GetItem();
+                        var product = GlassHelper.Cast<Product>(productItem);
                         var parentName = productItem.Parent.Name;
 
                         if (product.ProductId != null)
@@ -1104,7 +1108,8 @@ namespace CSDemo.Models.Product
                 {
                     try
                     {
-                        var category = searchResultItem.GetItem().GlassCast<Category>(); //todo: refactor
+                        var item = searchResultItem.Document.GetItem();
+                        var category = GlassHelper.Cast<Category>(item);
 
                         if (category.Name != null)
                         {

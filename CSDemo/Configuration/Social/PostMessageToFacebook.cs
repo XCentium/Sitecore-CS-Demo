@@ -6,22 +6,12 @@ using Sitecore.Analytics.Automation.Data;
 using Sitecore.Analytics.Tracking;
 using Sitecore.Commerce.Automation.MarketingAutomation;
 using Sitecore.Configuration;
-using Sitecore.Data;
 using Sitecore.Diagnostics;
-using Sitecore.Links;
-using Sitecore.Sites;
 using Sitecore.Social.Connector.Facets.Contact.SocialProfile;
-
-using Sitecore.Social.Facebook.Api.Builders;
-using Sitecore.Social.Facebook.Api.Model;
-using Sitecore.Social.Facebook.MessagePosting.Providers;
-using Sitecore.Social.Facebook.Networks.Messages;
-using Sitecore.Social.MessagePosting.Providers;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using System.Web;
 
 namespace CSDemo.Configuration.Social
 {
@@ -42,22 +32,20 @@ namespace CSDemo.Configuration.Social
 
         #endregion
 
-
-
         public AutomationActionResult Execute(AutomationActionContext context)
         {
             Assert.ArgumentNotNull(context, "context");
             var contact = context.Contact;
             if (contact == null)
             {
-                Sitecore.Diagnostics.Log.Error("Facebook Post Error: Unable to get the contact.", this);
+                Log.Error("Facebook Post Error: Unable to get the contact.", this);
                 return AutomationActionResult.Continue; ;
             }
 
             var fbConfigItem = context.Action.Database.GetItem(Constants.Social.FacebookAppConfigItemId);
             if (fbConfigItem == null)
             {
-                Sitecore.Diagnostics.Log.Error("Facebook Post Error: Unable to get the FacebookAppConfigItemId.", this);
+                Log.Error("Facebook Post Error: Unable to get the FacebookAppConfigItemId.", this);
                 return AutomationActionResult.Continue; 
             }
             var appId = fbConfigItem["Application ID"];
@@ -66,10 +54,9 @@ namespace CSDemo.Configuration.Social
             var products = GetBackInStockProducts(contact, context.AutomationStateContext);
             if (products == null || !products.Any())
             {
-                Sitecore.Diagnostics.Log.Error("Facebook Post Error: Unable to get product info.", this);
+                Log.Error("Facebook Post Error: Unable to get product info.", this);
                 return AutomationActionResult.Continue;
             }
-            
 
             var firstName = GetContactFirsName(contact);
             if (string.IsNullOrWhiteSpace(firstName))
@@ -83,8 +70,8 @@ namespace CSDemo.Configuration.Social
             //    return AutomationActionResult.Continue;
             //}
             var fb = new FacebookClient(appId, appSecret); //FacebookClient((string)accessToken["access_token"]); 
+            const string defaultDomain = "http://csdemo.xcentium.net";
 
-            var defaultDomain = "http://csdemo.xcentium.net";
             foreach (var product in products)
             {
                 dynamic messagePost = new ExpandoObject();
@@ -110,7 +97,7 @@ namespace CSDemo.Configuration.Social
                 }
                 catch (Exception ex)
                 {
-                    Sitecore.Diagnostics.Log.Error("Facebook Post Error: Unable to post message to facebook. " + ex.Message, this);
+                    Log.Error("Facebook Post Error: Unable to post message to facebook. " + ex.Message, this);
                 }
             }
             return AutomationActionResult.Continue;
@@ -120,19 +107,17 @@ namespace CSDemo.Configuration.Social
         {
             if (contact == null || !contact.Identifiers.Identifier.ToLower().Contains("facebook")) return null;
             
-            if (contact == null || !contact.Facets.ContainsKey("SocialProfile"))
+            if (!contact.Facets.ContainsKey("SocialProfile"))
             {
-                Sitecore.Diagnostics.Log.Error("Facebook Post Error: Unable to get the SocialProfile.", this);
+                Log.Error("Facebook Post Error: Unable to get the SocialProfile.", this);
                 return null;
             }
 
 
             var socialProfileFacet = contact.GetFacet<ISocialProfileFacet>("SocialProfile");
-
-            var test = socialProfileFacet.Networks as IEnumerable<NetworkElement>;
-            if (socialProfileFacet == null || socialProfileFacet.Networks == null || !socialProfileFacet.Networks.Contains("Facebook"))
+            if (socialProfileFacet.Networks == null || !socialProfileFacet.Networks.Contains("Facebook"))
             {
-                Sitecore.Diagnostics.Log.Error("Facebook Post Error: Facebook network does not exist in this contact's profile.", this);
+                Log.Error("Facebook Post Error: Facebook network does not exist in this contact's profile.", this);
                 return null;
             }
 
@@ -140,7 +125,7 @@ namespace CSDemo.Configuration.Social
             var fbNetwork = socialProfileFacet.Networks["Facebook"];
             if (fbNetwork == null)
             {
-                Sitecore.Diagnostics.Log.Error("Facebook Post Error: Facebook network is null.", this);
+                Log.Error("Facebook Post Error: Facebook network is null.", this);
                 return null;
             }
             var firstname = fbNetwork.Fields["first_name"].Value;
@@ -154,7 +139,7 @@ namespace CSDemo.Configuration.Social
             var provider = (InventoryAutomationProvider)Factory.CreateObject("inventoryAutomationProvider", true);
             if (provider == null)
             {
-                Sitecore.Diagnostics.Log.Error("Facebook Post Error: Unable to get inventoryAutomationProvider.", this);
+                Log.Error("Facebook Post Error: Unable to get inventoryAutomationProvider.", this);
                 return null;
             }
 
@@ -165,14 +150,14 @@ namespace CSDemo.Configuration.Social
                 return null;
             }
             var cartHelper = new CartHelper("XCentiumCSDemo");
-            string productId = string.Empty;
             var products = new List<Product>();
+
             foreach (var notification in notificationRequests)
             {
                 var stockInfo = cartHelper.GetProductStockInformation(notification.Product.ProductId, Settings.GetSetting("Site_XCentiumCSDemo_Catalog", "Adventure Works Catalog"));
                 if (stockInfo != null && stockInfo.Status != null && stockInfo.Status.Name == "InStock")
                 {
-                    productId = stockInfo.Product.ProductId;
+                    var productId = stockInfo.Product.ProductId;
                     var product = Product.GetProduct(productId);
                     if (product == null || string.IsNullOrWhiteSpace(product.Title)) continue;
                     products.Add(product);

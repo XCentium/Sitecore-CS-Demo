@@ -15,9 +15,10 @@ namespace CSDemo.Configuration.Conditions
            
             var automationRuleContext = ruleContext as AutomationRuleContext;
             if (automationRuleContext == null) return false;
-            var contact = automationRuleContext.Contact;
 
-            decimal lastPurchaseAmount = Order.GetLastOrderAmount(contact);
+            var contact = automationRuleContext.Contact;
+            var lastPurchaseAmount = Order.GetLastOrderAmount(contact);
+
             switch (GetOperator())
             {
                 case ConditionOperator.Equal:

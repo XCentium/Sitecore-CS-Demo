@@ -1,9 +1,6 @@
-﻿using CSDemo.Models.Account;
-using Sitecore;
-using Sitecore.Analytics.Automation.Rules.Workflows;
+﻿using Sitecore;
 using Sitecore.Diagnostics;
 using Sitecore.Rules;
-using Sitecore.Rules.Conditions;
 using System.Web;
 
 namespace CSDemo.Configuration.Conditions
@@ -19,7 +16,7 @@ namespace CSDemo.Configuration.Conditions
             if (ruleContext == null) return false;
             var currentInmateId = HttpContext.Current.Request.QueryString["iid"];
             Log.Info("CS DEMO: checking inmate id from querystring:" + currentInmateId, this);
-            int inmateIdInt = 0;
+            int inmateIdInt;
             var conditionResult = !string.IsNullOrWhiteSpace(currentInmateId) && int.TryParse(currentInmateId, out inmateIdInt) 
                 && inmateIdInt == InmateId;
             Log.Info("CS DEMO: Inmate ID check condition result:" + conditionResult, this);

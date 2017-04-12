@@ -9,13 +9,13 @@ namespace CSDemo.Configuration.Actions
 
         public override void Apply(T ruleContext)
         {
-            string key = Constants.QueryStrings.ShowProductType;
+            var key = Constants.QueryStrings.ShowProductType;
             Log.Info("CS DEMO: Evaluating Product Type Rule for " + key, this);
             
             if (string.IsNullOrWhiteSpace(ruleContext.Reference.Settings.Parameters))
             {
                 ruleContext.Reference.Settings.Parameters =
-                key + "=" + this.ProductType.ToString();
+                key + "=" + ProductType;
                 return;
             }
             var parameters = Sitecore.Web.WebUtil.ParseQueryString(
@@ -28,9 +28,10 @@ namespace CSDemo.Configuration.Actions
                     break;
                 }
             }
-            parameters[key] = ProductType.ToString();
+            parameters[key] = ProductType;
             ruleContext.Reference.Settings.Parameters =
-            Sitecore.Web.WebUtil.BuildQueryString(parameters, false);
+            Sitecore.Web.WebUtil.BuildQueryString(parameters, false);
+
         }
     }
 }

@@ -1,21 +1,16 @@
 ﻿using CSDemo.Models.Account;
 using CSDemo.Models.Checkout.Cart;
 using CSDemo.Models.Product;
-using Sitecore.Forms.Mvc.Interfaces;
 using Sitecore.Forms.Mvc.ViewModels;
 using Sitecore.Web;
-using Sitecore.WFFM.Abstractions.Actions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace CSDemo.Configuration.WFFM
 {
-    public class OrderInfoField : ValuedFieldViewModel<string>, IFieldResult
+    public class OrderInfoField : ValuedFieldViewModel<string>
     {
-        private string _value;
         private OrderDetailViewModel _order;
         public OrderDetailViewModel Order
         {
@@ -24,8 +19,8 @@ namespace CSDemo.Configuration.WFFM
                 if (_order != null)
                     return _order;
 
-                CartHelper cartHelper = new CartHelper();
-                OrderDetailViewModel customerOrderDetail = ProductHelper.GetCustomerOrderDetail(this.OrderId, cartHelper);
+                var cartHelper = new CartHelper();
+                var customerOrderDetail = ProductHelper.GetCustomerOrderDetail(OrderId, cartHelper);
 
                 if (customerOrderDetail != null)
                     _order = customerOrderDetail;
@@ -36,21 +31,15 @@ namespace CSDemo.Configuration.WFFM
 
         public OrderDetailViewModel GetOrderInfo()
         {
-            CartHelper cartHelper = new CartHelper();
-            return ProductHelper.GetCustomerOrderDetail(this.OrderId, cartHelper);
-        }
-
-        public override ControlResult GetResult()
-        {
-            return base.GetResult();
+            var cartHelper = new CartHelper();
+            return ProductHelper.GetCustomerOrderDetail(OrderId, cartHelper);
         }
 
         public string OrderId
         {
             get
             {
-                string orderId = WebUtil.GetUrlName(1);
-
+                var orderId = WebUtil.GetUrlName(1);
                 orderId = orderId.Replace(" ", "-");
 
                 return orderId;
@@ -62,16 +51,8 @@ namespace CSDemo.Configuration.WFFM
         {
             get
             {
-                List<string> output = new List<string>();
-                var customerOrderDetail = Order;
-
-                output.Add("Order #" + Order.TrackingNumber);
-                
-                return String.Join(Environment.NewLine, output);
-            }
-            set
-            {
-                this._value = value;
+                var output = new List<string> {"Order #" + Order.TrackingNumber};
+                return string.Join(Environment.NewLine, output);
             }
         }
     }

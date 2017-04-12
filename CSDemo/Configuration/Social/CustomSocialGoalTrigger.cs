@@ -1,5 +1,4 @@
-﻿using Castle.Core.Internal;
-using Sitecore.Analytics.Automation;
+﻿using Sitecore.Analytics.Automation;
 using Sitecore.Diagnostics;
 
 namespace CSDemo.Configuration.Social

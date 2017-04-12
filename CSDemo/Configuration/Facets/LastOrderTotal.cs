@@ -6,24 +6,24 @@ namespace CSDemo.Configuration.Facets
     [Serializable]
     public class LastOrderTotal : Facet, ILastOrderTotal
     {
-        public static readonly string _FACET_NAME = "LastOrderTotal";
-        private const string _UPDATED_NAME = "LastUpdated";
+        public static readonly string FacetName = "LastOrderTotal";
+        private const string UpdatedName = "LastUpdated";
 
         public LastOrderTotal()
         {
-            EnsureAttribute<decimal>(_FACET_NAME);
-            EnsureAttribute<DateTime>(_UPDATED_NAME);
+            EnsureAttribute<decimal>(FacetName);
+            EnsureAttribute<DateTime>(UpdatedName);
         }
 
         public decimal Amount
         {
             get
             {
-                return GetAttribute<decimal>(_FACET_NAME);
+                return GetAttribute<decimal>(FacetName);
             }
             set
             {
-                SetAttribute(_FACET_NAME, value);
+                SetAttribute(FacetName, value);
             }
         }
 
@@ -31,11 +31,11 @@ namespace CSDemo.Configuration.Facets
         {
             get
             {
-                return GetAttribute<DateTime>(_UPDATED_NAME);
+                return GetAttribute<DateTime>(UpdatedName);
             }
             set
             {
-                SetAttribute(_UPDATED_NAME, value);
+                SetAttribute(UpdatedName, value);
             }
         }
     }
