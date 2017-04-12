@@ -14,10 +14,10 @@ namespace CSDemo.Models.Product
 
         public CategoriesViewModel()
         {
-            this.Image = string.Empty;
-            this.Url = string.Empty;
-            this.Name = string.Empty;
-            this.ItemId = string.Empty;
+            Image = string.Empty;
+            Url = string.Empty;
+            Name = string.Empty;
+            ItemId = string.Empty;
         }
 
     }

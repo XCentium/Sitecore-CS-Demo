@@ -19,7 +19,6 @@ using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 using Sitecore.SecurityModel;
 using System;
-using CSDemo.Configuration;
 
 #endregion
 
@@ -280,7 +279,7 @@ namespace CSDemo.Controllers
             var searchIndex = searchManager.GetIndex(catalogName);
             using (var context = searchIndex.CreateSearchContext())
             {
-                IQueryable<CustomCommerceSearchResultItem> searchResults = context.GetQueryable<CustomCommerceSearchResultItem>()
+                var searchResults = context.GetQueryable<CustomCommerceSearchResultItem>()
                     .Where(item => item.Content.Contains(keyword) || item.ProductTags.Contains(keyword))
                     .Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product)
                     .Where(item => item.CatalogName == catalogName)
@@ -295,7 +294,7 @@ namespace CSDemo.Controllers
 
                 searchResults = searchManager.AddSearchOptionsToQuery<CustomCommerceSearchResultItem>(searchResults,
                     searchOptions);
-                SearchResults<CustomCommerceSearchResultItem> results = searchResults.GetResults();
+                var results = searchResults.GetResults();
                 var response = SearchResponse.CreateFromSearchResultsItems(searchOptions, results);
                 return response;
             }

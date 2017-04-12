@@ -8,7 +8,6 @@ using Glass.Mapper.Sc;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 using System.Linq;
-using Sitecore.Diagnostics;
 using Sitecore.Mvc.Extensions;
 
 #endregion

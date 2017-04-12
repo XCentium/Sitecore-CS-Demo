@@ -6,7 +6,6 @@ using Sitecore.Data.Items;
 using Sitecore.Mvc.Extensions;
 using Sitecore.Mvc.Presentation;
 using Sitecore.Web;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -55,7 +54,7 @@ namespace CSDemo.Controllers
                    lon = Tracker.Current.Interaction.GeoData.Longitude;
                }
 
-            LocationInformation userLocation = new LocationInformation
+            var userLocation = new LocationInformation
             {
                 Latitude = lat,
                 Longitude = lon
@@ -65,7 +64,7 @@ namespace CSDemo.Controllers
         }
 
         public bool IsLocationValid(LocationInformation location) {
-            bool isValid = false;
+            var isValid = false;
 
             if ( (location.Latitude != null && location.Latitude != 0) &&
                  (location.Longitude != null && location.Longitude != 0)  )
@@ -80,9 +79,9 @@ namespace CSDemo.Controllers
         {
             var storeFolderItem = GetDatasourceItem();
             if (storeFolderItem == null) { return null; }
-            IEnumerable<Store> stores = storeFolderItem.Children.Select(c => c.GlassCast<Store>());
+            var stores = storeFolderItem.Children.Select(c => c.GlassCast<Store>());
  
-            LocationInformation userLocation = GetUserLocation();
+            var userLocation = GetUserLocation();
             const int numberOfStroresToShow = 4; // MG: Create a jira issue to make this a setting
             if (!IsLocationValid(userLocation))
             {
@@ -119,7 +118,7 @@ namespace CSDemo.Controllers
                 return null;
             }
 
-            Product model = ProductHelper.GetProductByNameAndCategory(productId, string.Empty);
+            var model = ProductHelper.GetProductByNameAndCategory(productId, string.Empty);
 
             return View(model.Stores);
         }

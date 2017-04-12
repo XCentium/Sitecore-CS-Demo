@@ -234,7 +234,7 @@ namespace CSDemo.Controllers
         {
             if (ModelState.IsValid)
             {
-                NotificationSigneupInput inputModel = new NotificationSigneupInput()
+                var inputModel = new NotificationSigneupInput()
                 {
                     CatalogName = model.CatalogName,
                     Email = Context.User.Profile.Email,

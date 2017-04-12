@@ -1,5 +1,11 @@
 ﻿#region
 
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Net;
+using System.Runtime.Serialization;
 using CSDemo.Contracts;
 using CSDemo.Contracts.Product;
 using CSDemo.Models.Checkout.Cart;
@@ -21,12 +27,7 @@ using Sitecore.Commerce.Services.Inventory;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net;
-using System.Runtime.Serialization;
+using Log = Sitecore.Diagnostics.Log;
 
 #endregion
 
@@ -52,7 +53,7 @@ namespace CSDemo.Models.Product
 
                 try
                 {
-                    var url = string.Format(Constants.Products.AlsoBoughtProductsUrl, this.ProductId);
+                    var url = string.Format(Constants.Products.AlsoBoughtProductsUrl, ProductId);
 
                     var syncClient = new WebClient();
 
@@ -60,7 +61,7 @@ namespace CSDemo.Models.Product
                 }
                 catch (Exception ex)
                 {
-                    Sitecore.Diagnostics.Log.Error(ex.Message, ex, this);
+                    Log.Error(ex.Message, ex, this);
                 }
 
                 if (string.IsNullOrEmpty(response)) yield return null;
@@ -71,7 +72,7 @@ namespace CSDemo.Models.Product
                     if (result.Messages == null) yield return null;
                     foreach (var message in result.Messages)
                     {
-                        Sitecore.Diagnostics.Log.Warn(message, this);
+                        Log.Warn(message, this);
                     }
                     yield return null;
                 }
@@ -95,7 +96,7 @@ namespace CSDemo.Models.Product
                 List<Product> relatedProducts = new List<Product>();
                 var contextProductItem = Context.Database.GetItem(new ID(ID));
                 if (contextProductItem == null) return relatedProducts;
-                RelationshipField control = contextProductItem.Fields[Product.Fields.RelationshipList];
+                RelationshipField control = contextProductItem.Fields[Fields.RelationshipList];
                 if (control == null) return relatedProducts;
                 IEnumerable<Item> productRelationshipTargets = control.GetProductRelationshipsTargets();
                 IEnumerable<Item> relationshipTargets = productRelationshipTargets as Item[] ?? productRelationshipTargets.ToArray();
@@ -111,11 +112,11 @@ namespace CSDemo.Models.Product
         {
             get
             {
-                var info = (NumberFormatInfo)Sitecore.Context.Language.CultureInfo.NumberFormat.Clone();
+                var info = (NumberFormatInfo)Context.Language.CultureInfo.NumberFormat.Clone();
                 info.CurrencySymbol = Constants.Commerce.DefaultCurrencyCode;
                 info.CurrencyPositivePattern = 3;
-                if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { return Price > 0 ? ((decimal)0.90 * Price).ToString("C", info) : Price.ToString("C", info); }
-                if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { return Price > 0 ? ((decimal)0.75 * Price).ToString("C", info) : Price.ToString("C", info); }
+                if (Context.User.IsInRole("CommerceUsers\\Dealer")) { return Price > 0 ? ((decimal)0.90 * Price).ToString("C", info) : Price.ToString("C", info); }
+                if (Context.User.IsInRole("CommerceUsers\\Retailer")) { return Price > 0 ? ((decimal)0.75 * Price).ToString("C", info) : Price.ToString("C", info); }
                 return Price.ToString("C", info);
             }
         }
@@ -124,9 +125,9 @@ namespace CSDemo.Models.Product
         {
             get
             {
-                var cultureInfo = Sitecore.Context.Culture;
-                if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { return Price > 0 ? ((decimal)0.90 * Price).ToString("c", cultureInfo) : Price.ToString("c", cultureInfo); }
-                if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { return Price > 0 ? ((decimal)0.75 * Price).ToString("c", cultureInfo) : Price.ToString("c", cultureInfo); }
+                var cultureInfo = Context.Culture;
+                if (Context.User.IsInRole("CommerceUsers\\Dealer")) { return Price > 0 ? ((decimal)0.90 * Price).ToString("c", cultureInfo) : Price.ToString("c", cultureInfo); }
+                if (Context.User.IsInRole("CommerceUsers\\Retailer")) { return Price > 0 ? ((decimal)0.75 * Price).ToString("c", cultureInfo) : Price.ToString("c", cultureInfo); }
                 return Price.ToString("c", cultureInfo);
             }
         }
@@ -178,7 +179,7 @@ namespace CSDemo.Models.Product
             {
                 foreach (var message in result.SystemMessages)
                 {
-                    Sitecore.Diagnostics.Log.Error(message.Message, message);
+                    Log.Error(message.Message, message);
                 }
             }
         }
@@ -194,15 +195,15 @@ namespace CSDemo.Models.Product
         {
             var altImages = new List<string>();
 
-            if (!string.IsNullOrEmpty(this.Image1)) { altImages.Add(this.Image1); }
-            if (!string.IsNullOrEmpty(this.Image2)) { altImages.Add(this.Image2); }
-            if (!string.IsNullOrEmpty(this.Image3)) { altImages.Add(this.Image3); }
+            if (!string.IsNullOrEmpty(Image1)) { altImages.Add(Image1); }
+            if (!string.IsNullOrEmpty(Image2)) { altImages.Add(Image2); }
+            if (!string.IsNullOrEmpty(Image3)) { altImages.Add(Image3); }
 
             return altImages;
         }
 
         [SitecoreField(Fields.Stores)]
-        public IEnumerable<CSDemo.Models.Store.Store> Stores { get; set; }
+        public IEnumerable<Store.Store> Stores { get; set; }
 
         #endregion
 
@@ -294,7 +295,7 @@ namespace CSDemo.Models.Product
             get
             {
 
-                return this.Images.ElementAt(0).Src;
+                return Images.ElementAt(0).Src;
             }
 
         }
@@ -454,9 +455,9 @@ namespace CSDemo.Models.Product
             if (zipCode == "N/A")
             {
                 zipCode = "90292";
-                Sitecore.Diagnostics.Log.Warn("Using default sample zip 90292.", zipCode);
+                Log.Warn("Using default sample zip 90292.", zipCode);
             }
-            Sitecore.Diagnostics.Log.Info(string.Format("The zip code is set to {0}.", zipCode), zipCode);
+            Log.Info(string.Format("The zip code is set to {0}.", zipCode), zipCode);
             if (string.IsNullOrWhiteSpace(zipCode)) yield return null;
             var response = string.Empty;
 
@@ -470,7 +471,7 @@ namespace CSDemo.Models.Product
             }
             catch (Exception ex)
             {
-                Sitecore.Diagnostics.Log.Error(ex.Message, ex);
+                Log.Error(ex.Message, ex);
             }
 
             if (string.IsNullOrEmpty(response)) yield return null;
@@ -481,7 +482,7 @@ namespace CSDemo.Models.Product
                 if (result.Messages == null) yield return null;
                 foreach (var message in result.Messages)
                 {
-                    Sitecore.Diagnostics.Log.Warn(message, result);
+                    Log.Warn(message, result);
                 }
                 yield return null;
             }

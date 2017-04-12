@@ -1,11 +1,9 @@
 ﻿using Glass.Mapper.Sc.Configuration.Attributes;
 using Newtonsoft.Json;
-using Sitecore.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Web;
 
 namespace CSDemo.Models.Store
 {

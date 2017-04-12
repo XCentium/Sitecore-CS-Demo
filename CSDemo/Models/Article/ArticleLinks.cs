@@ -2,7 +2,6 @@
 using CSDemo.Contracts.Article;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
-using Sitecore.Data.Items;
 using System;
 using System.Collections.Generic;
 

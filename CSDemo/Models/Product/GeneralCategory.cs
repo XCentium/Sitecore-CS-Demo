@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
+using CSDemo.Contracts;
 using CSDemo.Contracts.Product;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using Glass.Mapper.Sc.Fields;
-using CSDemo.Contracts;
 
 namespace CSDemo.Models.Product
 {

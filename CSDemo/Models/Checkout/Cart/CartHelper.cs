@@ -28,8 +28,6 @@ using AddPartiesRequest = Sitecore.Commerce.Services.Carts.AddPartiesRequest;
 using UpdatePartiesRequest = Sitecore.Commerce.Services.Carts.UpdatePartiesRequest;
 using Sitecore.Commerce.Services.Payments;
 using Sitecore.Commerce.Entities.Payments;
-using System.Diagnostics.CodeAnalysis;
-using Sitecore.Commerce.Entities.Orders;
 using WebGrease.Css.Extensions;
 using Sitecore.Commerce.Entities.Shipping;
 

@@ -18,8 +18,8 @@ namespace CSDemo.Models.Product
             : base(productId, priceTypeIds)
         {
             Assert.ArgumentNotNull(catalogName, "catalogName");
-            this.ProductCatalogName = catalogName;
-            this.IncludeVariantPrices = false;
+            ProductCatalogName = catalogName;
+            IncludeVariantPrices = false;
         }
 
         /// <summary>

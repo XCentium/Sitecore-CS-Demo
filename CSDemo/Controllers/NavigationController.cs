@@ -19,7 +19,7 @@ namespace CSDemo.Controllers
 
         public ActionResult MainNavigation()
         {
-            List<NavigationItem> navigationItems = new List<NavigationItem>();
+            var navigationItems = new List<NavigationItem>();
 
             // TBD: fill up a view model
             var datasource = RenderingContext.Current.Rendering.DataSource;

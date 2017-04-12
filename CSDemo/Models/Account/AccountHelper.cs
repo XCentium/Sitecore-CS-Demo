@@ -259,7 +259,7 @@ namespace CSDemo.Models.Account
 
                             using (new SecurityDisabler())
                             {
-                                profile.FullName = string.Format("{0} {1}", customer.FirstName, customer.LastName).Trim();
+                                profile.FullName = $"{customer.FirstName} {customer.LastName}".Trim();
                             }
                             profile.Save();
 
@@ -579,8 +579,8 @@ namespace CSDemo.Models.Account
                 ExternalId = emptyCustomer.ExternalId,
                 Name = newCustomerName,
                 IsDisabled = false,
-                Shops = new ReadOnlyCollection<string>(new string[1] {Sitecore.Context.Site.Name}),
-                Users = new ReadOnlyCollection<string>(new string[1] {loggedInUserName})
+                Shops = new ReadOnlyCollection<string>(new[] {Sitecore.Context.Site.Name}),
+                Users = new ReadOnlyCollection<string>(new[] {loggedInUserName})
             };
 
 

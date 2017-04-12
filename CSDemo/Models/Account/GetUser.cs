@@ -29,7 +29,6 @@ namespace CSDemo.Models.Account
         /// <param name="args">The arguments.</param>
         public override void Process(ServicePipelineArgs args)
         {
-            var request = (GetUserRequest)args.Request;
             var result = (GetUserResult)args.Result;
 
             base.Process(args);
@@ -51,7 +50,7 @@ namespace CSDemo.Models.Account
         /// </summary>
         /// <param name="commerceUser">The commerce user to update.</param>
         /// <param name="userProfile">The user profile of the user.</param>
-        protected void UpdateCustomer(Sitecore.Commerce.Entities.Customers.CommerceUser commerceUser, Sitecore.Security.UserProfile userProfile)
+        protected void UpdateCustomer(Sitecore.Commerce.Entities.Customers.CommerceUser commerceUser, UserProfile userProfile)
         {
             commerceUser.ExternalId = userProfile["user_id"];
             Assert.IsNotNullOrEmpty(commerceUser.ExternalId, "commerceUser.ExternalId");

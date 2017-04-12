@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using CSDemo.Configuration;
 using Glass.Mapper.Sc;
 using Sitecore;
 using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.SearchTypes;
-using Sitecore.Data;
-using Sitecore.Data.Items;
-using Sitecore.Diagnostics;
+using Log = Sitecore.Diagnostics.Log;
 
 namespace CSDemo.Models.Blog
 {
@@ -20,16 +17,13 @@ namespace CSDemo.Models.Blog
         internal static List<BlogAuthor> GetAuthors()
         {
             var authors = new List<BlogAuthor>();
-
-            var authorsPath = Constants.Blog.AuthorsPath;
-
-            Item authorParent = Sitecore.Context.Database.GetItem(authorsPath);
+            const string authorsPath = Constants.Blog.AuthorsPath;
+            var authorParent = Context.Database.GetItem(authorsPath);
 
             if (authorParent != null && authorParent.HasChildren)
             {
-                authors.AddRange(authorParent.Children.Select(c=>c.GlassCast<BlogAuthor>())); 
+                authors.AddRange(authorParent.Children.Select(c => c.GlassCast<BlogAuthor>())); 
             }
-
 
             return authors;
         }
@@ -37,16 +31,13 @@ namespace CSDemo.Models.Blog
         internal static List<BlogCategory> GetCategories()
         {
             var categories = new List<BlogCategory>();
-
-            var categoriesPath = Constants.Blog.CategoriesPath;
-
-            Item categoriesParent = Sitecore.Context.Database.GetItem(categoriesPath);
+            const string categoriesPath = Constants.Blog.CategoriesPath;
+            var categoriesParent = Context.Database.GetItem(categoriesPath);
 
             if (categoriesParent != null && categoriesParent.HasChildren)
             {
                 categories.AddRange(categoriesParent.Children.Select(c => c.GlassCast<BlogCategory>()));
             }
-
 
             return categories;
         }
@@ -54,16 +45,13 @@ namespace CSDemo.Models.Blog
         internal static List<BlogTag> GetTags()
         {
             var tags = new List<BlogTag>();
-
-            var tagsPath = Constants.Blog.TagsPath;
-
-            Item tagsParent = Sitecore.Context.Database.GetItem(tagsPath);
+            const string tagsPath = Constants.Blog.TagsPath;
+            var tagsParent = Context.Database.GetItem(tagsPath);
 
             if (tagsParent != null && tagsParent.HasChildren)
             {
                 tags.AddRange(tagsParent.Children.Select(c => c.GlassCast<BlogTag>()));
             }
-
 
             return tags;
         }
@@ -74,18 +62,20 @@ namespace CSDemo.Models.Blog
             var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
             try
             {
-                var culture = Context.Language.CultureInfo;
                 using (var context = index.CreateSearchContext())
                 {
                     var queryable = context.GetQueryable<SearchResultItem>()
                         .Where(x => x.Language == Context.Language.Name);
+
                     var searchResultItem = queryable.Where(
                         x => x.TemplateName == Constants.Blog.BlogTemplate).ToList();
+
                     if (searchResultItem.Any())
                     {
                         var blogs = new List<Blog>();
                         blogs.AddRange(searchResultItem.Select(x=>x.GetItem().GlassCast<Blog>()));
-                        int ctr = 0;
+                        var ctr = 0;
+
                         foreach (var blog in blogs)
                         {
                             if (blog.Category != null && blog.Category.Any())
@@ -104,7 +94,7 @@ namespace CSDemo.Models.Blog
             }
             catch (Exception ex)
             {
-                Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
+                Log.Error(ex.StackTrace, ex);
             }
 
             return 0;

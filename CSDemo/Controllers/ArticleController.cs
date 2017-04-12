@@ -48,7 +48,7 @@ namespace CSDemo.Controllers
 
             Sitecore.Data.Fields.ReferenceField droplinkFld = contextItem.Fields["Article link"];
 
-            Item articleLinksItem = droplinkFld.TargetItem;
+            var articleLinksItem = droplinkFld.TargetItem;
 
 
 
@@ -91,7 +91,7 @@ namespace CSDemo.Controllers
 
             Sitecore.Data.Fields.ReferenceField droplinkFld = contextItem.Fields["Accordion"];
 
-            Item accordionItem = droplinkFld.TargetItem;
+            var accordionItem = droplinkFld.TargetItem;
 
             var model = accordionItem.GlassCast<Accordion>();
 

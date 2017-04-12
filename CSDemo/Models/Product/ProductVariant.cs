@@ -20,9 +20,9 @@ namespace CSDemo.Models.Product
         {
             var altImages = new List<string>();
 
-            if (!string.IsNullOrEmpty(this.Image1)) { altImages.Add(this.Image1); }
-            if (!string.IsNullOrEmpty(this.Image2)) { altImages.Add(this.Image2); }
-            if (!string.IsNullOrEmpty(this.Image3)) { altImages.Add(this.Image3); }
+            if (!string.IsNullOrEmpty(Image1)) { altImages.Add(Image1); }
+            if (!string.IsNullOrEmpty(Image2)) { altImages.Add(Image2); }
+            if (!string.IsNullOrEmpty(Image3)) { altImages.Add(Image3); }
 
             return altImages;
         }

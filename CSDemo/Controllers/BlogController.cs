@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using CSDemo.Models.Page;
 using Glass.Mapper.Sc;
-using Sitecore.Data.Items;
 using Sitecore.Mvc.Controllers;
 using CSDemo.Models.Blog;
 using Sitecore.Mvc.Presentation;
@@ -119,7 +116,7 @@ namespace CSDemo.Controllers
 
             if (renderingItem != null)
             {
-                HomePage homePage = renderingItem.GlassCast<HomePage>();
+                var homePage = renderingItem.GlassCast<HomePage>();
 
                 if (homePage != null)
                 {

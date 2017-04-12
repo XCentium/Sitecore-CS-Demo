@@ -45,7 +45,7 @@
         public struct Commerce
         {
             public const string DefaultCurrencyCode = "USD";
-            public static string[] DefaultPriceTypeIds = new string[2] { "List", "Adjusted" };
+            public static string[] DefaultPriceTypeIds = { "List", "Adjusted" };
             public const string Departments = "Departments";
             public const string CategoryDepartments = "categories/departments";
             public const string ProductBaseTemplateId = "{225F8638-2611-4841-9B89-19A5440A1DA1}";

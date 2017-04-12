@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using CSDemo.Contracts.Blog;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
-using Sitecore.Data.Items;
 using Glass.Mapper.Sc.Fields;
 
 namespace CSDemo.Models.Blog

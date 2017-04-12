@@ -1,6 +1,10 @@
 ﻿#region
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using CSDemo.Configuration;
+using CSDemo.Helpers;
 using CSDemo.Models.Account;
 using CSDemo.Models.Checkout.Cart;
 using CSDemo.Models.Page;
@@ -18,12 +22,8 @@ using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Links;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using CSDemo.Helpers;
 using Convert = System.Convert;
-
+using Log = Sitecore.Diagnostics.Log;
 
 #endregion
 
@@ -122,7 +122,7 @@ namespace CSDemo.Models.Product
                 }
                 catch (Exception ex)
                 {
-                    Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
+                    Log.Error(ex.StackTrace, ex);
                 }
             }
             return categories;
@@ -147,7 +147,7 @@ namespace CSDemo.Models.Product
             }
             catch (Exception ex)
             {
-                Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
+                Log.Error(ex.StackTrace, ex);
             }
             return null;
         }
@@ -459,7 +459,7 @@ namespace CSDemo.Models.Product
                     }
                     catch (Exception ex)
                     {
-                        Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
+                        Log.Error(ex.StackTrace, ex);
                        
                     }
 
@@ -468,7 +468,7 @@ namespace CSDemo.Models.Product
             }
             catch (Exception ex)
             {
-                Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
+                Log.Error(ex.StackTrace, ex);
             }
             return null;
         }
@@ -498,7 +498,7 @@ namespace CSDemo.Models.Product
             }
             catch (Exception ex)
             {
-                Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
+                Log.Error(ex.StackTrace, ex);
             }
             return string.Empty;
         }
@@ -513,7 +513,6 @@ namespace CSDemo.Models.Product
             var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
             try
             {
-                var culture = Context.Language.CultureInfo;
                 using (var context = index.CreateSearchContext())
                 {
                     var queryable = context.GetQueryable<SearchResultItem>()
@@ -525,7 +524,7 @@ namespace CSDemo.Models.Product
             }
             catch (Exception ex)
             {
-                Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
+                Log.Error(ex.StackTrace, ex);
             }
             return null;
         }
@@ -546,15 +545,11 @@ namespace CSDemo.Models.Product
             var orderDetails = new List<OrderDetailViewModel>();
             var orders = cartHelper.GetOrders(cartHelper.GetVisitorId(), cartHelper.ShopName);
 
-
-
             if (orders != null)
             {
                 foreach (var order in orders.OrderHeaders)
                 {
-                    var orderDetail = new OrderDetailViewModel();
-                    var fullOrderDetail = GetCustomerOrderDetail(order.ExternalId, cartHelper);
-                    
+                    var fullOrderDetail = GetCustomerOrderDetail(order.ExternalId, cartHelper);                   
                     orderDetails.Add(fullOrderDetail);
                 }
                 ordersViewModel.Orders = orderDetails;
@@ -639,7 +634,7 @@ namespace CSDemo.Models.Product
             }
             catch (Exception ex)
             {
-                Sitecore.Diagnostics.Log.Error(ex.Message, ex);
+                Log.Error(ex.Message, ex);
             }
             return resp;
         }
@@ -693,7 +688,7 @@ namespace CSDemo.Models.Product
             }
             catch (Exception ex)
             {
-                Sitecore.Diagnostics.Log.Error(ex.Message, ex);
+                Log.Error(ex.Message, ex);
             }
             return resp;
         }
@@ -788,7 +783,7 @@ namespace CSDemo.Models.Product
             }
             catch (Exception ex)
             {
-                Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
+                Log.Error(ex.StackTrace, ex);
             }
             return null;
         }
@@ -903,7 +898,7 @@ namespace CSDemo.Models.Product
                                     }
                                     catch (Exception ex)
                                     {
-                                        Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
+                                        Log.Error(ex.StackTrace, ex);
 
                                     }
                                 }
@@ -976,7 +971,7 @@ namespace CSDemo.Models.Product
                         }
                         catch (Exception ex)
                         {
-                            Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
+                            Log.Error(ex.StackTrace, ex);
                             return string.Empty;
                         }
 
@@ -1036,21 +1031,16 @@ namespace CSDemo.Models.Product
                                     (x.Name.Contains(query) && x.Path.Contains("/sitecore/commerce/catalog") &&
                                      x.TemplateName != "GeneralCategory")).Take(5).ToList();
                     }
-                    else
-                    {
-                                                
-
-                        return
-                            queryable.Where(
-                                x =>
-                                    (x.Name.Contains(query) && x.Path.Contains("/sitecore/commerce/catalog") &&
-                                     x.TemplateName == "GeneralCategory")).Take(5).ToList();
-                    }
+                    return
+                        queryable.Where(
+                            x =>
+                                (x.Name.Contains(query) && x.Path.Contains("/sitecore/commerce/catalog") &&
+                                 x.TemplateName == "GeneralCategory")).Take(5).ToList();
                 }
             }
             catch (Exception ex)
             {
-                Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
+                Log.Error(ex.StackTrace, ex);
             }
             return null;
         }
@@ -1090,7 +1080,7 @@ namespace CSDemo.Models.Product
                     }
                     catch (Exception ex)
                     {
-                        Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
+                        Log.Error(ex.StackTrace, ex);
                     }
                 }
             }
@@ -1132,7 +1122,7 @@ namespace CSDemo.Models.Product
                     }
                     catch (Exception ex)
                     {
-                        Sitecore.Diagnostics.Log.Error(ex.StackTrace, ex);
+                        Log.Error(ex.StackTrace, ex);
                     }
                 }
             }

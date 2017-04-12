@@ -1,13 +1,13 @@
 #region
 
+using System;
+using System.Collections.Generic;
 using CSDemo.Contracts;
 using CSDemo.Contracts.Product;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using Glass.Mapper.Sc.Fields;
 using Sitecore.Data.Items;
-using System;
-using System.Collections.Generic;
 
 #endregion
 
@@ -16,7 +16,7 @@ namespace CSDemo.Models.Product
 
 
     [SitecoreType(AutoMap = true)]
-    public partial class Category : ICategory, IEditableBase
+    public class Category : ICategory, IEditableBase
     {
         #region Properties
         [SitecoreId]
@@ -69,7 +69,7 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.Images)]
         public IEnumerable<Image> Images { get; set; }
 
-        public IEnumerable<CSDemo.Models.Product.Product> Products { get; set; }
+        public IEnumerable<Product> Products { get; set; }
 
         public int TestInt2 { get; set; }
 
