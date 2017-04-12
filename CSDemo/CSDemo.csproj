@@ -352,6 +352,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\GeneralSearchController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Helpers\GlassHelper.cs" />
     <Compile Include="Models\Account\AccountHelper.cs" />
     <Compile Include="Models\Account\Address.cs" />
     <Compile Include="Models\Account\GetUser.cs" />

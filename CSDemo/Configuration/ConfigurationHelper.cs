@@ -1,5 +1,4 @@
-﻿using System;
-using Sitecore;
+﻿using Sitecore;
 using Sitecore.Configuration;
 using Sitecore.Mvc.Extensions;
 

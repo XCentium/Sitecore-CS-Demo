@@ -8,7 +8,6 @@ using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities.Customers;
 using Sitecore.Commerce.Services.Customers;
 using Sitecore.Data.Items;
-using Sitecore.Diagnostics;
 using Sitecore.Security.Accounts;
 using Sitecore.Security.Authentication;
 using Sitecore.SecurityModel;
@@ -17,7 +16,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-
 
 #endregion
 
@@ -37,8 +35,8 @@ namespace CSDemo.Models.Account
 
         public AccountHelper(CartHelper cartHelper, CustomerServiceProvider customerServiceProvider)
         {
-            this.CartHelper = cartHelper;
-            this._customerServiceProvider = customerServiceProvider;
+            CartHelper = cartHelper;
+            _customerServiceProvider = customerServiceProvider;
         }
 
         /// <summary>
@@ -50,17 +48,14 @@ namespace CSDemo.Models.Account
         /// <returns></returns>
         public virtual bool Login(string userName, string password, bool persistent)
         {
-            string anonymousUserId = CartHelper.GetVisitorId();
-
+            var anonymousUserId = CartHelper.GetVisitorId();
             var isLoggedIn = AuthenticationManager.Login(userName, password, persistent);
 
             if (isLoggedIn)
             {
                 UpdateContactProfile();
-
                 CartHelper.MergeCarts(anonymousUserId);
             }
-
             SetUserCatalogCookie();
 
             return isLoggedIn;
@@ -71,27 +66,23 @@ namespace CSDemo.Models.Account
         /// </summary>
         private void SetUserCatalogCookie()
         {
-
             Cookie.Set(Constants.Commerce.CommerceUserLoggedIn, Constants.Common.True);
-
             var catalogOptions = GetLoggedInCustomerCatalogOptions();
 
-            if (!string.IsNullOrEmpty(catalogOptions))
+            if (string.IsNullOrEmpty(catalogOptions)) return;
+
+            Cookie.Set(Constants.Commerce.UserCatalogOptions, catalogOptions);
+
+            // if more than one set the cookie options
+            if (catalogOptions.Contains(Constants.Common.PipeStringSeparator))
             {
-                Cookie.Set(Constants.Commerce.UserCatalogOptions, catalogOptions);
-
-                // if more than one set the cookie options
-                if (catalogOptions.Contains(Constants.Common.PipeStringSeparator))
-                {
-                    Cookie.Set(Constants.Commerce.UserSelectedCatalogId, "");
-                    Cookie.Set(Constants.Commerce.UserSelectedCatalogPostfix, "");
-                }
-                else
-                {
-                    // if it is just one catalog, get the ID and set the cookie
-                    SetUserCatalogChoice(catalogOptions);
-
-                }
+                Cookie.Set(Constants.Commerce.UserSelectedCatalogId, "");
+                Cookie.Set(Constants.Commerce.UserSelectedCatalogPostfix, "");
+            }
+            else
+            {
+                // if it is just one catalog, get the ID and set the cookie
+                SetUserCatalogChoice(catalogOptions);
             }
         }
 
@@ -100,24 +91,23 @@ namespace CSDemo.Models.Account
         {
             // if it is just one catalog, get the ID and set the cookie
             var catalogItem = ProductHelper.GetCatalogItemByName(catalogName);
-            if (catalogItem != null)
-            {
-                Cookie.Set(Constants.Commerce.UserSelectedCatalogId, catalogItem.ID.ToString());
-                if (catalogItem.HasChildren)
-                {
-                    // get the first child and check if if has a postfix starting with (
-                    foreach (Item child in catalogItem.Children)
-                    {
-                        var firstChild = child.Name;
-                        if (firstChild.Contains("("))
-                        {
-                            var postFix = firstChild.Substring(firstChild.IndexOf("(", StringComparison.Ordinal));
-                            Cookie.Set(Constants.Commerce.UserSelectedCatalogPostfix, postFix);
-                        }
-                        break;
-                    }
 
+            if (catalogItem == null) return;
+
+            Cookie.Set(Constants.Commerce.UserSelectedCatalogId, catalogItem.ID.ToString());
+
+            if (!catalogItem.HasChildren) return;
+            
+            // get the first child and check if if has a postfix starting with (
+            foreach (Item child in catalogItem.Children)
+            {
+                var firstChild = child.Name;
+                if (firstChild.Contains("("))
+                {
+                    var postFix = firstChild.Substring(firstChild.IndexOf("(", StringComparison.Ordinal));
+                    Cookie.Set(Constants.Commerce.UserSelectedCatalogPostfix, postFix);
                 }
+                break;
             }
         }
 
@@ -134,17 +124,13 @@ namespace CSDemo.Models.Account
                 if (!string.IsNullOrEmpty(GetCommerceUserId(Sitecore.Context.User.Name)))
                 {
                     var user = Sitecore.Context.User;
-                    Sitecore.Security.UserProfile profile = user.Profile;
-
+                    var profile = user.Profile;
                     var userName = user.LocalName;
-                    string userDomain = user.GetDomainName();
-
-                    CommerceUser customer = GetUser(Sitecore.Context.User.Name);
+                    var customer = GetUser(Sitecore.Context.User.Name);
 
                     if (customer.UserName != null)
                     {
-
-                        if (Sitecore.Analytics.Tracker.Current.Contact != null)
+                        if (Tracker.Current.Contact != null)
                         {
                             // Update email information Faucet
                             var emailFacet = Tracker.Current.Contact.GetFacet<IContactEmailAddresses>(Constants.Account.FacetEmail);
@@ -152,13 +138,12 @@ namespace CSDemo.Models.Account
                             //Check if an work email address already exists for the contact
                             if (!emailFacet.Entries.Contains(Constants.Account.PersonalEmail))
                             {
-                                IEmailAddress email = emailFacet.Entries.Create(Constants.Account.PersonalEmail);
+                                var email = emailFacet.Entries.Create(Constants.Account.PersonalEmail);
                                 email.SmtpAddress = customer.Email.Trim();
-
                             }
                             else
                             {
-                                IEmailAddress email = emailFacet.Entries[Constants.Account.PersonalEmail];
+                                var email = emailFacet.Entries[Constants.Account.PersonalEmail];
                                 email.SmtpAddress = customer.Email.Trim();
                             }
                             emailFacet.Preferred = Constants.Account.PersonalEmail;
@@ -178,16 +163,16 @@ namespace CSDemo.Models.Account
 
                                 using (new SecurityDisabler())
                                 {
-                                    profile.FullName = string.Format("{0} {1}", customer.FirstName, customer.LastName).Trim();
+                                    profile.FullName = $"{customer.FirstName} {customer.LastName}".Trim();
                                 }
-                                profile.Save();
 
+                                profile.Save();
                             }
                             else
                             {
                                 if (!string.IsNullOrEmpty(profile.FullName.Trim()) && profile.FullName.Trim().Contains(" "))
                                 {
-                                    string[] names = profile.FullName.Trim().Split(' ');
+                                    var names = profile.FullName.Trim().Split(' ');
                                     personalFacet.FirstName = names[0];
                                     personalFacet.Surname = names[1];
                                 }
@@ -203,21 +188,19 @@ namespace CSDemo.Models.Account
                             }
 
                             var pictureFacet = Tracker.Current.Contact.GetFacet<IContactPicture>(Constants.Account.FacetPicture);
-                            string photoPath = Constants.Account.CustomerPhotoPath + user.LocalName;
+                            var photoPath = Constants.Account.CustomerPhotoPath + user.LocalName;
                             MediaItem photoItem = Sitecore.Context.Database.GetItem(photoPath);
 
-                            if (photoItem != null)
-                            {
-                                var stream = photoItem.GetMediaStream();
-                                var memoryStream = new MemoryStream();
-                                if (stream != null)
-                                {
-                                    stream.CopyTo(memoryStream);
-                                    pictureFacet.Picture = memoryStream.ToArray();
-                                    pictureFacet.MimeType = photoItem.MimeType;
-                                }
-                            }
+                            if (photoItem == null) return;
 
+                            var stream = photoItem.GetMediaStream();
+                            var memoryStream = new MemoryStream();
+
+                            if (stream == null) return;
+
+                            stream.CopyTo(memoryStream);
+                            pictureFacet.Picture = memoryStream.ToArray();
+                            pictureFacet.MimeType = photoItem.MimeType;
                         }
                     }
 
@@ -235,17 +218,14 @@ namespace CSDemo.Models.Account
             if (!string.IsNullOrEmpty(GetCommerceUserId(user.Name)))
             {
 
-                Sitecore.Security.UserProfile profile = user.Profile;
-
+                var profile = user.Profile;
                 var userName = user.LocalName;
-                string userDomain = user.GetDomainName();
-
-                CommerceUser customer = GetUser(user.Name);
+                var customer = GetUser(user.Name);
 
                 if (customer.UserName != null)
                 {
 
-                    if (Sitecore.Analytics.Tracker.Current.Contact != null)
+                    if (Tracker.Current.Contact != null)
                     {
                         // Update email information Faucet
                         var emailFacet = Tracker.Current.Contact.GetFacet<IContactEmailAddresses>(Constants.Account.FacetEmail);
@@ -253,13 +233,13 @@ namespace CSDemo.Models.Account
                         //Check if an work email address already exists for the contact
                         if (!emailFacet.Entries.Contains(Constants.Account.PersonalEmail))
                         {
-                            IEmailAddress email = emailFacet.Entries.Create(Constants.Account.PersonalEmail);
+                            var email = emailFacet.Entries.Create(Constants.Account.PersonalEmail);
                             email.SmtpAddress = customer.Email.Trim();
 
                         }
                         else
                         {
-                            IEmailAddress email = emailFacet.Entries[Constants.Account.PersonalEmail];
+                            var email = emailFacet.Entries[Constants.Account.PersonalEmail];
                             email.SmtpAddress = customer.Email.Trim();
                         }
                         emailFacet.Preferred = Constants.Account.PersonalEmail;
@@ -288,7 +268,7 @@ namespace CSDemo.Models.Account
                         {
                             if (!string.IsNullOrEmpty(profile.FullName.Trim()) && profile.FullName.Trim().Contains(" "))
                             {
-                                string[] names = profile.FullName.Trim().Split(' ');
+                                var names = profile.FullName.Trim().Split(' ');
                                 personalFacet.FirstName = names[0];
                                 personalFacet.Surname = names[1];
                             }
@@ -304,7 +284,7 @@ namespace CSDemo.Models.Account
                         }
 
                         var pictureFacet = Tracker.Current.Contact.GetFacet<IContactPicture>(Constants.Account.FacetPicture);
-                        string photoPath = Constants.Account.CustomerPhotoPath + user.LocalName;
+                        var photoPath = Constants.Account.CustomerPhotoPath + user.LocalName;
                         MediaItem photoItem = Sitecore.Context.Database.GetItem(photoPath);
 
                         if (photoItem != null)
@@ -336,11 +316,8 @@ namespace CSDemo.Models.Account
         public virtual CommerceUser GetUser(string userName)
         {
             var request = new GetUserRequest(userName);
-
-            var result = this._customerServiceProvider.GetUser(request);
-
-
-            CommerceUser usr = UpdateUserCustomerInfo(userName, result.CommerceUser);
+            var result = _customerServiceProvider.GetUser(request);
+            UpdateUserCustomerInfo(userName, result.CommerceUser);
 
             return result.CommerceUser;
         }
@@ -357,14 +334,11 @@ namespace CSDemo.Models.Account
         {
             commerceUser.ExternalId = GetCommerceUserId(userName);
 
-            if (!string.IsNullOrEmpty(commerceUser.ExternalId))
-            {
-                if (commerceUser.Customers == null || commerceUser.Customers.Count == 0)
-                {
-                    var customers = new List<string>() { commerceUser.ExternalId };
-                    commerceUser.Customers = customers.AsReadOnly();
-                }
-            }
+            if (string.IsNullOrEmpty(commerceUser.ExternalId) ||
+                (commerceUser.Customers != null && commerceUser.Customers.Count != 0)) return commerceUser;
+
+            var customers = new List<string>() { commerceUser.ExternalId };
+            commerceUser.Customers = customers.AsReadOnly();
 
             return commerceUser;
         }
@@ -378,51 +352,43 @@ namespace CSDemo.Models.Account
         {
 
             var user = User.FromName(userName, true);
-            Sitecore.Security.UserProfile profile = user.Profile;
+            var profile = user.Profile;
             var commerceUserId = user.Profile.GetCustomProperty(Constants.Commerce.CommerceCustomerId);
-            if (string.IsNullOrEmpty(commerceUserId))
+
+            if (!string.IsNullOrEmpty(commerceUserId)) return commerceUserId;
+
+            commerceUserId = profile[Constants.Commerce.CommerceUserId];
+
+            if (string.IsNullOrEmpty(commerceUserId)) return commerceUserId;
+
+            // Create custom profile for scommerce_customer_id
+            // reload the profile
+            using (new UserSwitcher(user))
             {
-                commerceUserId = profile[Constants.Commerce.CommerceUserId];
-                if (!string.IsNullOrEmpty(commerceUserId))
-                {
-                    // Create custom profile for scommerce_customer_id
-                    // reload the profile
-                    using (new Sitecore.Security.Accounts.UserSwitcher(user))
-                    {
-                        user.Profile.SetCustomProperty(Constants.Commerce.CommerceCustomerId, commerceUserId);
-                        user.Profile.Save();
-                        user.Profile.Reload();
-                    }
-                }
+                user.Profile.SetCustomProperty(Constants.Commerce.CommerceCustomerId, commerceUserId);
+                user.Profile.Save();
+                user.Profile.Reload();
             }
 
-
             return commerceUserId;
-
         }
 
         internal string GetLoggedInCustomerCatalogOptions()
         {
+            if (!Sitecore.Context.User.IsAuthenticated) return string.Empty;
 
-            if (Sitecore.Context.User.IsAuthenticated)
+            var userName = Sitecore.Context.User.Name;
+            var user = User.FromName(userName, true);
+            var profile = user.Profile;
+            var commerceCatalogSet = profile[Constants.Commerce.CommerceUserCatalogSetId];
+
+            //commerceCatalogSet = "{22222222-2222-2222-2222-222222222222}";
+            if (!string.IsNullOrEmpty(commerceCatalogSet) && commerceCatalogSet.Contains(Constants.Common.Dash))
             {
-                string userName = Sitecore.Context.User.Name;
-                var user = User.FromName(userName, true);
-                Sitecore.Security.UserProfile profile = user.Profile;
-
-                var commerceCatalogSet = profile[Constants.Commerce.CommerceUserCatalogSetId];
-
-                //              commerceCatalogSet = "{22222222-2222-2222-2222-222222222222}";
-
-                if (!string.IsNullOrEmpty(commerceCatalogSet) && commerceCatalogSet.Contains(Constants.Common.Dash))
-                {
-                    return GetCatalogNamesFromCatalogSet(commerceCatalogSet);
-                }
-
+                return GetCatalogNamesFromCatalogSet(commerceCatalogSet);
             }
 
-
-            return String.Empty;
+            return string.Empty;
         }
 
 
@@ -430,18 +396,15 @@ namespace CSDemo.Models.Account
         {
             if (!string.IsNullOrEmpty(commerceCatalogSet))
             {
-
                 var commerceCatalogSetItem = Sitecore.Context.Database.GetItem(commerceCatalogSet);
-                if (commerceCatalogSetItem != null)
+
+                if (commerceCatalogSetItem == null) return string.Empty;
+
+                var commerceCatalogNames = commerceCatalogSetItem[Constants.Account.CatalogSetField];
+                if (!string.IsNullOrEmpty(commerceCatalogNames))
                 {
-                    var commerceCatalogNames = commerceCatalogSetItem[Constants.Account.CatalogSetField];
-
-                    if (!string.IsNullOrEmpty(commerceCatalogNames))
-                    {
-                        return commerceCatalogNames;
-                    }
+                    return commerceCatalogNames;
                 }
-
             }
             return string.Empty;
         }
@@ -453,40 +416,6 @@ namespace CSDemo.Models.Account
         internal string GetCurrentCustomerCatalogIds()
         {
            return ProductHelper.GetSiteRootCatalogId();
-
-            //if (Sitecore.Context.User.IsAuthenticated && Sitecore.Context.Database.Name != "core")
-            //{
-            //    try
-            //    {
-
-            //        var cataLogId = Cookie.Get(Constants.Commerce.UserSelectedCatalogId) != null ? Cookie.Get(Constants.Commerce.UserSelectedCatalogId).Value : null;
-
-            //        if (cataLogId != null && !string.IsNullOrEmpty(cataLogId))
-            //        {
-            //            return cataLogId;
-            //        }
-
-            //        string userName = Sitecore.Context.User.Name;
-            //        var user = User.FromName(userName, true);
-            //        Sitecore.Security.UserProfile profile = user.Profile;
-
-            //        var commerceCatalogSet = profile[Constants.Commerce.CommerceUserCatalogSetId];
-
-            //        if (!string.IsNullOrEmpty(commerceCatalogSet) && commerceCatalogSet.Contains(Constants.Common.Dash))
-            //        {
-            //            return GetCatalogIdsFromCatalogSet(commerceCatalogSet);
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-
-            //        Sitecore.Diagnostics.Log.Error("CatalogId Error", ex, this);
-            //    }
-
-            //}
-
-       //     return ProductHelper.GetSiteRootCatalogId();
-
         }
 
         private string GetCatalogIdsFromCatalogSet(string commerceCatalogSet)
@@ -502,7 +431,7 @@ namespace CSDemo.Models.Account
                     if (!string.IsNullOrEmpty(commerceCatalogNames))
                     {
                         var catalogIds = new List<string>();
-                        string[] catalogNames = commerceCatalogNames.Split(Constants.Common.PipeSeparator);
+                        var catalogNames = commerceCatalogNames.Split(Constants.Common.PipeSeparator);
 
                         foreach (var catalogName in catalogNames)
                         {
@@ -529,8 +458,7 @@ namespace CSDemo.Models.Account
         public virtual CommerceCustomer GetCustomer(string userExternalId)
         {
             var request = new GetCustomerRequest(userExternalId);
-
-            var result = this._customerServiceProvider.GetCustomer(request);
+            var result = _customerServiceProvider.GetCustomer(request);
 
             if (result.Success)
             {
@@ -538,7 +466,6 @@ namespace CSDemo.Models.Account
             }
 
             throw new ApplicationException(result.SystemMessages.Any() ? result.SystemMessages[0].Message : Constants.Account.Error);
-
         }
 
         /// <summary>
@@ -573,10 +500,7 @@ namespace CSDemo.Models.Account
             if (userName.Contains("@") && !userName.Contains("\\"))
             {
                 var matches = UserManager.GetUsers().Where(usr => usr.Profile.Email.Equals(userName)).ToList();
-                if (matches != null)
-                {
-                    userName = matches[0].Name;
-                }
+                userName = matches[0].Name;
             }
 
             var defaultDomain = Sitecore.Commerce.Connect.CommerceServer.Configuration.CommerceServerSitecoreConfig.Current.DefaultCommerceUsersDomain;
@@ -596,18 +520,15 @@ namespace CSDemo.Models.Account
         /// <returns></returns>
         public virtual bool AddCustomerAddress(Address customerAddress)
         {
-
-
-            CommerceUser commerceUser = this.GetUser(Sitecore.Context.User.Name);
+            var commerceUser = GetUser(Sitecore.Context.User.Name);
 
             if (commerceUser.UserName != null)
             {
-                var user = Sitecore.Security.Accounts.User.FromName(Sitecore.Context.User.Name, true);
-                Sitecore.Security.UserProfile profile = user.Profile;
+                User.FromName(Sitecore.Context.User.Name, true);
 
                 var created = DateTime.Now;
-
                 var customer = new CommerceCustomer { ExternalId = commerceUser.ExternalId };
+
                 var party = new CommerceParty
                 {
                     ExternalId = Guid.NewGuid().ToString("B"),
@@ -626,18 +547,14 @@ namespace CSDemo.Models.Account
 
                 try
                 {
+                    var newCustomerName =
+                        $"{customerAddress.Company.Trim()}.{customerAddress.LastName.Trim()}.{customerAddress.FirstName.Trim()}.{created}";
 
-                    var newCustomerName = string.Format("{0}.{1}.{2}.{3}", customerAddress.Company.Trim(), customerAddress.LastName.Trim(), customerAddress.FirstName.Trim(), created);
-
-                    CommerceCustomer newCustomer = CreateCustomer(customer, newCustomerName, party, party, Sitecore.Context.User.LocalName);
-
+                    CreateCustomer(customer, newCustomerName, party, party, Sitecore.Context.User.LocalName);
                 }
                 catch (Exception)
                 {
-
                     return false;
-                    throw;
-
                 }
 
             }
@@ -662,10 +579,10 @@ namespace CSDemo.Models.Account
                 ExternalId = emptyCustomer.ExternalId,
                 Name = newCustomerName,
                 IsDisabled = false,
-                Shops = new ReadOnlyCollection<string>(new string[1] { Sitecore.Context.Site.Name })
+                Shops = new ReadOnlyCollection<string>(new string[1] {Sitecore.Context.Site.Name}),
+                Users = new ReadOnlyCollection<string>(new string[1] {loggedInUserName})
             };
 
-            customer.Users = new ReadOnlyCollection<string>(new string[1] { loggedInUserName });
 
             var request = new CreateCustomerRequest(customer);
             var result = cust.CreateCustomer(request);
@@ -674,12 +591,11 @@ namespace CSDemo.Models.Account
             {
                 var parties = new List<Sitecore.Commerce.Entities.Party> { billToParty, shipToParty };
                 var addPartiesRequest = new AddPartiesRequest(result.CommerceCustomer, parties);
-                var addPartiesResult = cust.AddParties(addPartiesRequest);
+                cust.AddParties(addPartiesRequest);
                 return result.CommerceCustomer;
             }
 
             throw new ApplicationException(result.SystemMessages.Any() ? result.SystemMessages[0].Message : Constants.Account.Error);
-
         }
 
         /// <summary>
@@ -690,8 +606,7 @@ namespace CSDemo.Models.Account
         {
 
             var addresses = new List<Address>();
-
-            CommerceUser commerceUser = this.GetUser(Sitecore.Context.User.Name);
+            var commerceUser = GetUser(Sitecore.Context.User.Name);
 
             if (commerceUser.UserName != null)
             {
@@ -701,39 +616,14 @@ namespace CSDemo.Models.Account
                 var request = new GetPartiesRequest(customer);
                 try
                 {
-
-                    var result = this._customerServiceProvider.GetParties(request);
-                    if (request != null || result != null)
+                    var result = _customerServiceProvider.GetParties(request);
                     {
                         var partyList = result.Success && result.Parties != null ? (result.Parties).Cast<CommerceParty>() : new List<CommerceParty>();
-                        if (partyList != null)
+
+                        addresses.AddRange(partyList.Select(party => new Address
                         {
-                            foreach (var party in partyList)
-                            {
-
-                                addresses.Add(new Address
-                                {
-                                    AddressName = party.Name,
-                                    Id = party.ExternalId,
-                                    FirstName = party.FirstName,
-                                    LastName = party.LastName,
-                                    Company = party.Company,
-                                    Address1 = party.Address1,
-                                    Address2 = party.Address2,
-                                    City = party.City,
-                                    State = party.State,
-                                    Zip = party.ZipPostalCode,
-                                    Country = party.Country,
-                                    PartyId = party.PartyId,
-                                    CountryCode = party.CountryCode,
-                                    Phone = party.PhoneNumber,
-                                    Fax = party.FaxNumber,
-                                    Email = party.Email,
-                                    IsMain = party.IsPrimary
-
-                                });
-                            }
-                        }
+                            AddressName = party.Name, Id = party.ExternalId, FirstName = party.FirstName, LastName = party.LastName, Company = party.Company, Address1 = party.Address1, Address2 = party.Address2, City = party.City, State = party.State, Zip = party.ZipPostalCode, Country = party.Country, PartyId = party.PartyId, CountryCode = party.CountryCode, Phone = party.PhoneNumber, Fax = party.FaxNumber, Email = party.Email, IsMain = party.IsPrimary
+                        }));
                     }
                 }
                 catch (Exception ex)
@@ -750,14 +640,13 @@ namespace CSDemo.Models.Account
         {
             var user = Sitecore.Context.User;
             var commerceProfile = user.GetCommerceProfileModel();
-            if (commerceProfile != null && commerceProfile.AddressList != null)
+
+            if (commerceProfile?.AddressList != null)
             {
-                return CSDemo.Models.Address.GetMultiple(commerceProfile.AddressList.InnerList());
+                return Models.Address.GetMultiple(commerceProfile.AddressList.InnerList());
             }
-            else
-            {
-                return new List<CSDemo.Models.Address>();  //{ new CSDemo.Models.Address() };
-            }
+
+            return new List<Models.Address>();  //{ new CSDemo.Models.Address() };
         }
 
         internal string GetCurrentCustomerCatalogPostFix()
