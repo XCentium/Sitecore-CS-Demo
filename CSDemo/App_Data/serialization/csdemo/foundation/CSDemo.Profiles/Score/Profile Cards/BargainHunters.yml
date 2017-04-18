@@ -1,0 +1,38 @@
+﻿---
+ID: e74704ac-a9b3-4910-be7f-98f9398a808e
+Parent: 7707156c-aa49-4e66-9cee-58b6d53fed78
+Template: 0fc09ea4-8d87-4b0e-a5c9-8076ae863d9c
+Path: /sitecore/system/Marketing Control Panel/Profiles/Score/Profile Cards/BargainHunters
+DB: master
+SharedFields:
+- ID: 709b879b-7264-49c7-8864-e254d9129302
+  Hint: Image
+  Value: "<image mediaid=\"{09C77BD0-9022-4867-A75A-4C45176AFCFD}\" />"
+- ID: 85970ab7-22ea-4206-be86-c0167178860b
+  Hint: Profile Card Value
+  Value: |
+    <tracking>
+      <profile id="{9311296F-1A3D-4E58-AED1-0A6B4B1E654B}" name="Score">
+        <key name="CampingTools" value="2" />
+        <key name="ClimbingTools" value="2" />
+        <key name="ClothingCamping" value="2" />
+        <key name="ClothingClimbing" value="2" />
+        <key name="Hiking" value="2" />
+        <key name="SalesAndBargains" value="5" />
+      </profile>
+    </tracking>
+Languages:
+- Language: en
+  Fields:
+  - ID: a26fc256-1db0-44aa-ba3d-1c830bf882a2
+    Hint: Name
+    Value: BargainHunters
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170417T225150Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin
