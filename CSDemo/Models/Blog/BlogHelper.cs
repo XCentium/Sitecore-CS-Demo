@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using CSDemo.Configuration;
+using CSDemo.Helpers;
 using Glass.Mapper.Sc;
 using Sitecore;
 using Sitecore.ContentSearch;
+using Sitecore.ContentSearch.Linq;
 using Sitecore.ContentSearch.SearchTypes;
 using Log = Sitecore.Diagnostics.Log;
 
@@ -36,7 +38,7 @@ namespace CSDemo.Models.Blog
 
             if (categoriesParent != null && categoriesParent.HasChildren)
             {
-                categories.AddRange(categoriesParent.Children.Select(c => c.GlassCast<BlogCategory>()));
+                categories.AddRange(categoriesParent.Children.Select(c => c.GlassCast<BlogCategory>())); //todo: refactor
             }
 
             return categories;
@@ -100,5 +102,64 @@ namespace CSDemo.Models.Blog
             return 0;
 
         }
+
+        internal static List<Blog> GetBlogArticlesByName(string query)
+        {
+            var blogList = new List<Blog>();
+            var blogs = GetSearchResultItemByNameOrId(query);
+
+            if (blogs == null) return blogList;
+
+            foreach (var searchResultItem in blogs)
+            {
+                try
+                {
+                    var blogItem = searchResultItem.Document.GetItem();
+                    var blog = GlassHelper.Cast<Blog>(blogItem);
+
+                    if (!string.IsNullOrWhiteSpace(blog.Title))
+                    {
+                        blogList.Add(new Blog { ID = blog.ID, Title = blog.Title, Url = blog.Url });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex.StackTrace, ex);
+                }
+            }
+
+            return blogList;
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public static IEnumerable<SearchHit<SearchResultItem>> GetSearchResultItemByNameOrId(string query)
+        {
+            var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
+            try
+            {
+                using (var context = index.CreateSearchContext())
+                {
+                    var queryable = context.GetQueryable<SearchResultItem>()
+                            .Where(x => x.Language == Context.Language.Name);
+
+                    return
+                        queryable.Where(
+                            x =>
+                                x.Name.Contains(query) &&
+                                x["_latestversion"] == "1" &&
+                                x.Path.Contains(Context.Site.StartPath + "/blogs") &&
+                                x.TemplateName == "Blog Post").Page(0, 5).GetResults().ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.StackTrace, ex);
+            }
+            return null;
+        }
+
     }
 }

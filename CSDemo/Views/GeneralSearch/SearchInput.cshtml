@@ -10,8 +10,9 @@
             </span>
         </div>
     
-        <div style="margin-left: 10px" id="typeaheadCategoryResult"></div>
-        <div style="margin-left: 10px" id="typeaheadProductsResult"></div>
+        <div id="typeaheadProductsResult"></div>
+        <div id="typeaheadCategoryResult"></div>
+        <div id="typeaheadBlogArticlesResult"></div>
     }
 
 <script>
@@ -22,102 +23,78 @@ window.jQuery ||
 <script type="text/javascript">
     
     $(document).ready(function () {
-
         $("#searchInputBox").keyup(function () {
-            console.log($(this).val());
-
             var queryVal = $(this).val();
-            //var inputMinLength = 1;
             var data = "query:'" + queryVal + "'";
 
-            $("#typeaheadCategoryResult").html("");
-            $("#typeaheadProductsResult").html("");
+            $("#typeaheadCategoryResult,#typeaheadProductsResult,#typeaheadBlogArticlesResult").html("");
 
-            if (queryVal.length > 1) {
-
-                $("#typeaheadCategoryResult").html("");
-
-                $.ajax({
-                    type: "POST",
-                    url: "/AJAX/cart.asmx/GetCategoriesResult ",
-                    data: "{" + data + "}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (result) {
-                    
-                        var output = result.d;
-
-                        // console.log(output);
-
-                        var products = output.products;
-
-                        $("#typeaheadCategoryResult").html("");
-
-                        if (products && products.length > 0) {
-
-                            console.log(products);
-
-                            var tableHtml = "";
-
-                            var rcnt = 0;
-                            var catImages = [];
-
-                            $.each(products, function (i, el) {
-
-                                // preload image
-                                catImages[rcnt] = new Image();
-                                catImages[rcnt].src = el.ImageSrc + "?as=1&h=56&w=40";
-
-                                tableHtml += "<tr>" +
-                                    "<td>" +
-                                    "<a href='/categories/" + el.Title + "'>" + el.Title + "</a>" +
-                                    "</td>" +
-                                    "<td>" +
-                                    "<img src='" + el.ImageSrc + "?as=1&h=56&w=40' />" +
-
-                                    "</td>" +
-                                    "</tr>";
-                                rcnt++;
-                            });
-
-                            $("#typeaheadCategoryResult").html("");
-
-                            if (rcnt>0){
-                                tableHtml = "<h5>Categories:</h5><table class='table table-bordered table-hover'>" + tableHtml + "</table>";
-
-                                $("#typeaheadCategoryResult").append(tableHtml);
-
-                            }
-
-                            
-
-                        }
-
-                        GetProductsTypeahead(queryVal);
-
-                    },
-                    error: function (error) {
-
-                        console.log(error);
-
-                    }
-
-                });
-
-            }
-
+            GetProductsTypeahead(queryVal);
         });
 
     });
 
-    function GetProductsTypeahead(queryVal) {
-        
+    function GetCategoriesTypeahead(queryVal) {
         var data = "query:'" + queryVal + "'";
 
-        $("#typeaheadProductsResult").html("");
+        if (queryVal.length > 1) {
+            $("#typeaheadCategoryResult").html("");
+
+            $.ajax({
+                type: "POST",
+                url: "/AJAX/cart.asmx/GetCategoriesResult ",
+                data: "{" + data + "}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    console.log("categ");
+                    console.log(result);
+                    $("#typeaheadCategoryResult").html("");
+
+                    var output = result.d;
+                    var categories = output.categories;
+
+                    if (categories && categories.length > 0) {
+                        var listHtml = "";
+                        var rcnt = 0;
+
+                        $.each(categories,
+                            function (i, el) {
+                                listHtml +=
+                                    "<li>" +
+                                    "<a href='" +
+                                    el.Url +
+                                    "'>" +
+                                    el.Title +
+                                    "</a>" +
+                                    "</li>";
+                                rcnt++;
+                            });
+
+                        if (rcnt > 0) {
+                            listHtml = "<h5>Categories</h5><ul class='search categories'>" + listHtml + "</ul>";
+
+                            $("#typeaheadCategoryResult").append(listHtml);
+                            $("#typeaheadCategoryResult").show();
+                        }
+                    } else {
+                        $("#typeaheadCategoryResult").hide();
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                },
+                complete: function () {
+                    GetBlogArticlesTypeahead(queryVal);
+                }
+            });
+        }
+    }
+
+    function GetProductsTypeahead(queryVal) {
+        var data = "query:'" + queryVal + "'";
 
         if (queryVal.length > 1) {
-
             $.ajax({
                 type: "POST",
                 url: "/AJAX/cart.asmx/GetProductsResult",
@@ -125,66 +102,100 @@ window.jQuery ||
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result) {
+                    $("#typeaheadProductsResult").html("");
 
                     var output = result.d;
-
-                    // console.log(output);
-
                     var products = output.products;
-                    $("#typeaheadProductsResult").html("");
+
                     if (products && products.length > 0) {
-
-                        console.log(products);
-
-                        //alert("Building product table"); CategoryName
-
-                        var tableHtml = "";
-                        var cnt = 1000;
+                        var listHtml = "";
+                        var cnt = 0;
                         var prodImages = [];
 
-                        $.each(products, function (i, el) {
-                            var param = escape(el.Id + "|||" + el.CategoryName + "|||" + el.CatalogId + "|||" + el.Guid + "|||" + el.ImageSrc + "|||" + el.Price + "|||" + el.Title + "|||" + el.CatalogName);
-                            // preload image
-                            prodImages[cnt] = new Image();
-                            prodImages[cnt].src = el.ImageSrc + "?as=1&h=56&w=40";
+                        $.each(products,
+                            function (i, el) {
+                                // preload image
+                                prodImages[cnt] = new Image();
+                                prodImages[cnt].src = el.ImageSrc + "?as=1&h=100&w=100";
 
-                            tableHtml += "<tr>" +
-                                "<td>" +
-                                "<a href='/categories/" + el.CategoryName + "/" + el.Id + "'>" + el.Title + "</a>" +
-                                "</td>" +
-                                "<td>" +
-                                "<img src='" + el.ImageSrc + "?as=1&h=56&w=40' />" +
-                                "</td>" + 
-                                "<td>$" +
-                                el.Price +
-                                "</td>" +
-                                //"<td>" +
-                                //param +
-                                //"</td>" +
-                                "</tr>";
+                                listHtml +=
+                                    "<li>" +
+                                    "<img src='" +
+                                    prodImages[cnt].src +
+                                    "' />" +
+                                    "<div class='details'><a href='" +
+                                    el.Url +
+                                    "'>" +
+                                    el.Title +
+                                    "</a>" +
+                                    "<span>" +
+                                    el.Price.toFixed(2) + " USD" +
+                                    "</span></div>" +
+                                    "<div style='clear: both;'></div>" +
+                                    "</li>";
 
                                 cnt++;
-                        });
+                            });
 
-                        $("#typeaheadProductsResult").html("");
-
-                        tableHtml = "<h5>Products:</h5><table class='table table-bordered table-hover'>" + tableHtml + "</table>";
-
-                        $("#typeaheadProductsResult").append(tableHtml);
-
+                        if (cnt > 0) {
+                            listHtml = "<h5>Products</h5><ul class='search products'>" + listHtml + "</ul>";
+                            $("#typeaheadProductsResult").append(listHtml);
+                            $("#typeaheadProductsResult").show();
+                        }
+                    } else {
+                        $("#typeaheadProductsResult").hide();
                     }
-
-
-
                 },
                 error: function (error) {
-
                     console.log(error);
-
+                },
+                complete: function () {
+                    GetCategoriesTypeahead(queryVal);
                 }
-
             });
+        }
+    }
 
+    function GetBlogArticlesTypeahead(queryVal) {
+        var data = "query:'" + queryVal + "'";
+
+        if (queryVal.length > 1) {
+            $.ajax({
+                type: "POST",
+                url: "/AJAX/cart.asmx/GetBlogArticlesResult",
+                data: "{" + data + "}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    $("#typeaheadBlogArticlesResult").html("");
+                    console.log(result);
+
+                    var output = result.d;
+                    var blogs = output.blogs;
+
+                    if (blogs && blogs.length > 0) {
+                        var listHtml = "";
+                        var rcnt = 0;
+
+                        $.each(blogs, function (i, el) {
+                            listHtml +=
+                                "<li>" +
+                                "<a href='" + el.Url + "'>" + el.Title + "</a>" +
+                                "</li>";
+                            rcnt++;
+                        });
+
+                        if (rcnt > 0) {
+                            listHtml = "<h5>Blogs</h5><ul class='search articles'>" + listHtml + "</ul>";
+
+                            $("#typeaheadBlogArticlesResult").append(listHtml);
+                        }
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
         }
     }
 </script>

@@ -12,5 +12,6 @@ namespace CSDemo.Models.Product
         public string ImageSrc { get; set; }
         public string CategoryName { get; set; }
         public string VariantId { get; set; }
+        public string Url { get; set; }
     }
 }

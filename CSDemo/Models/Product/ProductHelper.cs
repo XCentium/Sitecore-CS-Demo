@@ -1079,7 +1079,7 @@ namespace CSDemo.Models.Product
                                 var child = productItem.Children.FirstOrDefault();
                                 variantId = child.Name;
                             }
-                            productList.Add(new ProductMini {Id = product.ProductId, CategoryName = parentName, CatalogId = catalogId, Guid = ID.Parse(product.ID).ToString(), Title  = product.Title, Price = product.Price, CatalogName = catalogName, ImageSrc= product.FirstImage, VariantId= variantId });
+                            productList.Add(new ProductMini {Id = product.ProductId, CategoryName = parentName, CatalogId = catalogId, Guid = ID.Parse(product.ID).ToString(), Title  = product.Title, Price = product.Price, CatalogName = catalogName, ImageSrc= product.FirstImage, VariantId= variantId, Url = product.Url});
                         }
                     }
                     catch (Exception ex)
@@ -1091,15 +1091,11 @@ namespace CSDemo.Models.Product
 
             return productList;
         }
-
-
+        
 
         internal static List<ProductMini> GetCategoriesByName(string query)
         {
-                        
-            var catalogId = GetSiteRootCatalogId();
-            var catalogName = GetSiteRootCatalogName();
-            var productList = new List<ProductMini>();
+            var categoryList = new List<ProductMini>();
             var categories = GetSearchResultItemByNameOrId(query, "categories");
 
             if (categories != null && categories.Any())
@@ -1113,16 +1109,7 @@ namespace CSDemo.Models.Product
 
                         if (category.Name != null)
                         {
-                            var imageSrc = string.Empty;
-
-                            if (category.Images != null && category.Images.Any())
-                            {
-                                var firstImage = category.Images.ElementAt(0);
-
-                                if (firstImage != null) imageSrc = firstImage.Src;
-                            }
-
-                            productList.Add(new ProductMini {Id = category.ID.ToString(), CatalogId = catalogId, Guid = ID.Parse(category.ID).ToString(), Title  = category.Name, Price = 0.00m, CatalogName = catalogName, ImageSrc= imageSrc});
+                            categoryList.Add(new ProductMini {Title  = category.Name, Url = category.Url});
                         }
                     }
                     catch (Exception ex)
@@ -1132,7 +1119,7 @@ namespace CSDemo.Models.Product
                 }
             }
 
-            return productList;
+            return categoryList;
         }
 
     }

@@ -5821,3 +5821,98 @@ footer.navbar a:hover {
 		content:"" !important;
 	}
 }
+
+/*Search Type Ahead*/
+
+#global-search-input h5 {
+    text-transform: uppercase;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#global-search-input ul.search:before,
+#global-search-input ul.search:after {
+    display: block;
+}
+
+#typeaheadProductsResult img {
+    width: 100px;
+}
+
+#typeaheadCategoryResult, #typeaheadBlogArticlesResult, #typeaheadProductsResult {
+    float: left;
+    padding-left: 15px;
+}
+
+#typeaheadCategoryResult, #typeaheadBlogArticlesResult {
+    width: 30%;
+}
+
+#typeaheadProductsResult {
+    width: 40%;
+}
+
+#global-search-input ul.search {
+    list-style-type: none;
+}
+
+    #global-search-input ul.search li {
+        opacity: initial;
+        max-width: none;
+    }
+
+        #global-search-input ul.search li a {
+            padding-left: 0;
+            font-weight: normal;
+            color: #c8244f;
+        }
+
+#typeaheadCategoryResult ul.search li a:hover {
+    text-decoration: underline;
+}
+
+#global-search-input ul.search.categories,
+#global-search-input ul.search.articles {
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+    overflow: hidden;
+    padding-right: 10px;
+}
+
+    #global-search-input ul.search.categories li a,
+    #global-search-input ul.search.articles li a {
+        margin: 10px 0;
+        text-align: left;
+    }
+
+    #global-search-input ul.search.products {
+        /*padding-left: 10px;*/
+    }
+
+#global-search-input ul.search.products li {
+    width: 100%;
+    display: block;
+}
+
+    #global-search-input ul.search.products li > img {
+        float: left;
+    }
+
+    #global-search-input ul.search.products li a {
+        width: 100%;
+        float: left;
+    }
+
+    #global-search-input ul.search.products li > div {
+        float: left;
+    }
+
+        #global-search-input ul.search.products li > div.details {
+            float: left;
+            width: 100%;
+            max-width: 250px;
+            text-align: left;
+            padding-left: 30px;
+        }

@@ -14,6 +14,7 @@ using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
 using CSDemo.Helpers;
+using CSDemo.Models.Blog;
 
 #endregion
 
@@ -295,13 +296,30 @@ namespace CSDemo.AJAX
 
             foreach (var product in productsResult)
             {
-                products.Add(new {product.Id, product.CategoryName, product.CatalogId, product.Guid, product.Title, product.Price, product.CatalogName, product.ImageSrc, product.VariantId });
+                products.Add(new {product.Id, product.CategoryName, product.CatalogId, product.Guid, product.Title, product.Price, product.CatalogName, product.ImageSrc, product.VariantId, product.Url });
             }
 
             return new { success = true, total = products.Count , products };
         }
 
-                        
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public object GetBlogArticlesResult(string query)
+        {
+            var blogs = new List<object>();
+            var blogResult = BlogHelper.GetBlogArticlesByName(query);
+
+            if (blogResult == null || !blogResult.Any())
+                return new { success = true, total = blogs.Count, blogs };
+
+            foreach (var article in blogResult)
+            {
+                blogs.Add(new { article.ID, article.Title, article.Url });
+            }
+
+            return new { success = true, total = blogs.Count, blogs };
+        }
+
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public object GetCategoriesResult(string query)
@@ -312,12 +330,12 @@ namespace CSDemo.AJAX
             if (categoriesResult == null || !categoriesResult.Any())
                 return new {success = true, total = categories.Count, products = categories};
 
-            foreach (var product in categoriesResult)
+            foreach (var category in categoriesResult)
             {
-                categories.Add(new {product.Id, product.CatalogId, product.Guid, product.Title, product.Price, product.CatalogName, product.ImageSrc});
+                categories.Add(new { category.Title, category.Url});
                   
             }
-            return new { success = true, total = categories.Count , products = categories };
+            return new { success = true, total = categories.Count , categories };
         }
 
 

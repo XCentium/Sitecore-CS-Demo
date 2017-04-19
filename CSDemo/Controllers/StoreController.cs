@@ -52,7 +52,13 @@ namespace CSDemo.Controllers
                {
                    lat = Tracker.Current.Interaction.GeoData.Latitude;
                    lon = Tracker.Current.Interaction.GeoData.Longitude;
-               }
+
+                   Sitecore.Diagnostics.Log.Info($"GetUserLocation() - Lat={lat}, Long={lon}", this);
+            }
+            else
+            {
+                Sitecore.Diagnostics.Log.Error("GetUserLocation() - Tracker is null.", this);
+            }
 
             var userLocation = new LocationInformation
             {
