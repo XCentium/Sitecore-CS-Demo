@@ -5860,6 +5860,7 @@ footer.navbar a:hover {
     #global-search-input ul.search li {
         opacity: initial;
         max-width: none;
+        margin-bottom: 10px;
     }
 
         #global-search-input ul.search li a {
@@ -5894,6 +5895,7 @@ footer.navbar a:hover {
 #global-search-input ul.search.products li {
     width: 100%;
     display: block;
+    margin-bottom: 10px;
 }
 
     #global-search-input ul.search.products li > img {
@@ -5906,7 +5908,7 @@ footer.navbar a:hover {
     }
 
     #global-search-input ul.search.products li > div {
-        float: left;
+        /*float: left;*/
     }
 
         #global-search-input ul.search.products li > div.details {
