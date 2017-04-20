@@ -218,8 +218,7 @@ namespace CSDemo.AJAX
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public bool ApplyPromoCode(string promoCode)
         {
-            if(string.IsNullOrEmpty(promoCode.Trim())) return false;
-            return CartHelper.ApplyPromoCode(promoCode);
+            return !string.IsNullOrEmpty(promoCode.Trim()) && CartHelper.ApplyPromoCode(promoCode);
         }
 
 

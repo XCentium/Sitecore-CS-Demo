@@ -477,7 +477,7 @@ namespace CSDemo.Models.Product
             if (string.IsNullOrEmpty(response)) yield return null;
 
             var result = JsonConvert.DeserializeObject<ComplementaryProductResult>(response);
-            if (!result.IsSuccessful)
+            if (result == null || !result.IsSuccessful)
             {
                 if (result.Messages == null) yield return null;
                 foreach (var message in result.Messages)

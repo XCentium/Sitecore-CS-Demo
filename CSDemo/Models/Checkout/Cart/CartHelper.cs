@@ -37,13 +37,12 @@ namespace CSDemo.Models.Checkout.Cart
     {
         public string ShopName { get; set; }
         public string DefaultCartName { get; set; }
+
         private readonly InventoryServiceProvider _inventoryServiceProvider = new InventoryServiceProvider();
         private readonly PricingServiceProvider _pricingServiceProvider = new PricingServiceProvider();
         private readonly CartServiceProvider _cartServiceProvider = new CartServiceProvider();
-
         private readonly PaymentServiceProvider _paymentServiceProvider = new PaymentServiceProvider();
         private readonly OrderServiceProvider _orderServiceProvider = new OrderServiceProvider();
-        // 
         private readonly ContactFactory _contactFactory = new ContactFactory();
         private readonly AccountHelper _accountService;
 
@@ -117,7 +116,6 @@ namespace CSDemo.Models.Checkout.Cart
             var cart = cartResult.Cart as CommerceCart;
             UpdateCartInCache(cart);
 
-
             return cartResult.Cart as CommerceCart;
         }
 
@@ -148,11 +146,12 @@ namespace CSDemo.Models.Checkout.Cart
         /// <param name="customerId"></param>
         private void CreateCustomerCartCookie(string customerId)
         {
-            var CookieExpirationInDays = 365;
-            var CookieName = Constants.Cart.CookieName;
-            var cartCookie = HttpContext.Current.Request.Cookies[CookieName] ?? new HttpCookie(CookieName);
+            const int cookieExpirationInDays = 365;
+            const string cookieName = Constants.Cart.CookieName;
+            var cartCookie = HttpContext.Current.Request.Cookies[cookieName] ?? new HttpCookie(cookieName);
+
             cartCookie.Values[Constants.Cart.VisitorID] = customerId;
-            cartCookie.Expires = DateTime.Now.AddDays(CookieExpirationInDays);
+            cartCookie.Expires = DateTime.Now.AddDays(cookieExpirationInDays);
             HttpContext.Current.Response.Cookies.Add(cartCookie);
         }
 
@@ -281,12 +280,15 @@ namespace CSDemo.Models.Checkout.Cart
                     variantId = GetRealDataFromVirtual(variantId, 0);
                 }
             }
-            var commerceInventoryProduct = new CommerceInventoryProduct();
-            commerceInventoryProduct.ProductId = productId;
-            commerceInventoryProduct.CatalogName = catalogName;
+
+            var commerceInventoryProduct = new CommerceInventoryProduct
+            {
+                ProductId = productId,
+                CatalogName = catalogName
+            };
+
             if (!string.IsNullOrEmpty(variantId)) { commerceInventoryProduct.VariantId = variantId; }
-            var products = new List<InventoryProduct>();
-            products.Add(commerceInventoryProduct);
+            var products = new List<InventoryProduct> {commerceInventoryProduct};
 
             var stockInfoRequest = new GetStockInformationRequest(ShopName, products, StockDetailsLevel.All);
             var stockInfoResult = _inventoryServiceProvider.GetStockInformation(stockInfoRequest);
@@ -301,12 +303,10 @@ namespace CSDemo.Models.Checkout.Cart
         /// <returns></returns>
         private string GetRealDataFromVirtual(string virtualCatalogId, int position)
         {
-            var virtualData = virtualCatalogId.Replace(")", String.Empty).Split('(');
+            var virtualData = virtualCatalogId.Replace(")", string.Empty).Split('(');
 
             return virtualData[position];
-
         }
-
 
         /// <summary>
         /// Update Stock Information
@@ -400,18 +400,20 @@ namespace CSDemo.Models.Checkout.Cart
         /// <returns></returns>
         public string GetAnonymousUserId()
         {
-            var VisitorTrackingCookieName = Constants.Cart.VisitorTrackingCookieName;
-            var VisitorIdKeyName = Constants.Cart.VisitorIdKeyName;
-            var VisitorCookieExpiryInDays = 1;
-            var visitorCookie = HttpContext.Current.Request.Cookies[VisitorTrackingCookieName] ??
-                                new HttpCookie(VisitorTrackingCookieName);
-            if (string.IsNullOrEmpty(visitorCookie.Values[VisitorIdKeyName]))
+            const string visitorTrackingCookieName = Constants.Cart.VisitorTrackingCookieName;
+            const string visitorIdKeyName = Constants.Cart.VisitorIdKeyName;
+            const int visitorCookieExpiryInDays = 1;
+            var visitorCookie = HttpContext.Current.Request.Cookies[visitorTrackingCookieName] ??
+                                new HttpCookie(visitorTrackingCookieName);
+
+            if (string.IsNullOrEmpty(visitorCookie.Values[visitorIdKeyName]))
             {
-                visitorCookie.Values[VisitorIdKeyName] = Guid.NewGuid().ToString("D");
+                visitorCookie.Values[visitorIdKeyName] = Guid.NewGuid().ToString("D");
             }
-            visitorCookie.Expires = DateTime.Now.AddDays(VisitorCookieExpiryInDays);
+
+            visitorCookie.Expires = DateTime.Now.AddDays(visitorCookieExpiryInDays);
             HttpContext.Current.Response.SetCookie(visitorCookie);
-            return visitorCookie.Values[VisitorIdKeyName];
+            return visitorCookie.Values[visitorIdKeyName];
         }
 
 
@@ -515,11 +517,11 @@ namespace CSDemo.Models.Checkout.Cart
                     cartItem.SubTotal = cartLine.Total.Amount;
                     cartItem.ExternalId = cartLine.ExternalCartLineId;
 
-                    if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { cartItem.UnitPrice = cartItem.UnitPrice > 0 ? (decimal)0.90 * cartItem.UnitPrice : cartItem.UnitPrice; }
-                    if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { cartItem.UnitPrice = cartItem.UnitPrice > 0 ? (decimal)0.75 * cartItem.UnitPrice : cartItem.UnitPrice; }
+                    if (Context.User.IsInRole("CommerceUsers\\Dealer")) { cartItem.UnitPrice = cartItem.UnitPrice > 0 ? (decimal)0.90 * cartItem.UnitPrice : cartItem.UnitPrice; }
+                    if (Context.User.IsInRole("CommerceUsers\\Retailer")) { cartItem.UnitPrice = cartItem.UnitPrice > 0 ? (decimal)0.75 * cartItem.UnitPrice : cartItem.UnitPrice; }
 
-                    if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { cartItem.SubTotal = cartItem.SubTotal > 0 ? (decimal)0.90 * cartItem.SubTotal : cartItem.SubTotal; }
-                    if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { cartItem.SubTotal = cartItem.SubTotal > 0 ? (decimal)0.75 * cartItem.SubTotal : cartItem.SubTotal; }
+                    if (Context.User.IsInRole("CommerceUsers\\Dealer")) { cartItem.SubTotal = cartItem.SubTotal > 0 ? (decimal)0.90 * cartItem.SubTotal : cartItem.SubTotal; }
+                    if (Context.User.IsInRole("CommerceUsers\\Retailer")) { cartItem.SubTotal = cartItem.SubTotal > 0 ? (decimal)0.75 * cartItem.SubTotal : cartItem.SubTotal; }
 
 
                     if (string.IsNullOrEmpty(cartItem.ImageUrl))
@@ -545,8 +547,8 @@ namespace CSDemo.Models.Checkout.Cart
         /// <returns></returns>
         private bool CustomerHasCookie(string customerId)
         {
-            var CookieName = Constants.Cart.CookieName;
-            var cartCookie = HttpContext.Current.Request.Cookies[CookieName];
+            const string cookieName = Constants.Cart.CookieName;
+            var cartCookie = HttpContext.Current.Request.Cookies[cookieName];
             return cartCookie != null && cartCookie.Values[Constants.Cart.VisitorID] == customerId;
         }
 
@@ -633,52 +635,50 @@ namespace CSDemo.Models.Checkout.Cart
         {
 
             var visitorId = GetVisitorId();
-
             var cart = GetCustomerCart();
-
             var billingParty = new CommerceParty() { ExternalId = "0", Name = "Billing", PartyId = "0", FirstName = "Joe", LastName = "Smith", Address1 = "123 Street", City = "Ottawa", State = "ON", Country = "Canada", ZipPostalCode = "12345", CountryCode = "CA" };
             var shippingParty = new CommerceParty() { ExternalId = "0", Name = "Shipping", PartyId = "0", FirstName = "Jane", LastName = "Smith", Address1 = "234 Street", City = "Toronto", State = "ON", Country = "Canada", ZipPostalCode = "12345", CountryCode = "CA" };
 
             //----------------------------------------------------------
 
-            var billing = new CommerceParty();
-            billing.ExternalId = "0";
-            billing.PartyId = "1";
-            billing.Name = Constants.Products.BillingAddress;
+            var billing = new CommerceParty
+            {
+                ExternalId = "0",
+                PartyId = "1",
+                Name = Constants.Products.BillingAddress,
+                FirstName = firstname,
+                LastName = lastname,
+                Address1 = address,
+                Address2 = addressline1,
+                City = city,
+                State = state,
+                Company = company,
+                Email = email,
+                FaxNumber = fax,
+                Country = countryName,
+                CountryCode = country,
+                ZipPostalCode = zip
+            };
 
-            billing.FirstName = firstname;
-            billing.LastName = lastname;
-            billing.Address1 = address;
-            billing.Address2 = addressline1;
-            billing.City = city;
-            billing.State = state;
-            billing.Company = company;
-
-            billing.Email = email;
-            billing.FaxNumber = fax;
-            billing.Country = countryName;
-            billing.CountryCode = country;
-            billing.ZipPostalCode = zip;
-
-
-            var shipping = new CommerceParty();
-
-            shipping.ExternalId = "0";
-            shipping.Name = Constants.Products.ShippingAddress;
-            shipping.PartyId = "0";
-
-            shipping.FirstName = firstname2;
-            shipping.LastName = lastname2;
-            shipping.Address1 = address2;
-            shipping.Address2 = addressline12;
-            shipping.City = city2;
-            shipping.State = state2;
-            shipping.Company = company2;
-            shipping.Email = email2;
-            shipping.FaxNumber = fax2;
-            shipping.Country = countryName2;
-            shipping.CountryCode = country2;
-            shipping.ZipPostalCode = zip2;
+            var shipping = new CommerceParty
+            {
+                ExternalId = "0",
+                Name = Constants.Products.ShippingAddress,
+                PartyId = "0",
+                FirstName = firstname2,
+                LastName = lastname2,
+                Address1 = address2,
+                Address2 = addressline12,
+                City = city2,
+                State = state2,
+                Company = company2,
+                Email = email2,
+                FaxNumber = fax2,
+                Country = countryName2,
+                CountryCode = country2,
+                ZipPostalCode = zip2
+            };
+            
 
             var cartParties = cart.Parties.ToList();
             var partyList = new List<Party> { shipping };
@@ -692,9 +692,9 @@ namespace CSDemo.Models.Checkout.Cart
 
         private CommerceCart RemoveParties(CommerceCart cart, string partyName)
         {
-            var parties = this.GetPartieByName(cart, partyName);
+            var parties = GetPartieByName(cart, partyName);
             var request = new Sitecore.Commerce.Services.Carts.RemovePartiesRequest(cart, parties);
-            var response = this._cartServiceProvider.RemoveParties(request);
+            var response = _cartServiceProvider.RemoveParties(request);
             if (response.Success)
             {
                 return response.Cart as CommerceCart;
@@ -705,9 +705,9 @@ namespace CSDemo.Models.Checkout.Cart
 
         protected virtual List<Party> GetPartieByName(CommerceCart cart, string name)
         {
-            List<Party> partyList = new List<Party>();
+            var partyList = new List<Party>();
 
-            foreach (Party party in cart.Parties)
+            foreach (var party in cart.Parties)
             {
                 if (party is CommerceParty)
                 {
@@ -734,17 +734,11 @@ namespace CSDemo.Models.Checkout.Cart
         /// <param name="updatedCart"></param>
         private void UpdateCartInCache(CommerceCart updatedCart)
         {
-            // clear cart cache and add updated cart to cache
+            //clear and update only if cart is valid
+            if (updatedCart == null || updatedCart.Properties[Constants.Cart.BasketErrors] != null) return;
+            
             ClearCartFromCache();
-            // add cart to cache
-            if (updatedCart == null || updatedCart.Properties[Constants.Cart.BasketErrors] != null)
-            {
-                // no cart OR _basket_errors present
-            }
-            else
-            {
-                AddCartToCache(updatedCart);
-            }
+            AddCartToCache(updatedCart);
         }
 
         /// <summary>
@@ -1009,7 +1003,7 @@ namespace CSDemo.Models.Checkout.Cart
             var payments = new List<PaymentInfo>();
 
             // Add billing party
-            List<Party> parties = updatedCart.Parties.ToList();
+            var parties = updatedCart.Parties.ToList();
             parties.Add(billingParty);
             updatedCart.Parties = parties.AsSafeReadOnly();
 
@@ -1186,7 +1180,7 @@ namespace CSDemo.Models.Checkout.Cart
                 req.Refresh = true;
             }
             var submitResult = provider.SubmitVisitorOrder(submitRequest);
-            SubmitVisitorOrderResult visitorOrderResult = new SubmitVisitorOrderResult();
+            var visitorOrderResult = new SubmitVisitorOrderResult();
             return submitResult;
         }
 
@@ -1254,8 +1248,10 @@ namespace CSDemo.Models.Checkout.Cart
                 // if current new quantity is greater tnan current, Add new-current to cart
                 // if less remove the item and add new
                 var cart = ChangeCartItemQuantity(externalId, quantity);
-                ClearCartFromCache();
-                AddCartToCache(cart);
+                if (cart != null)
+                {
+                    UpdateCartInCache(cart);
+                }
                 return true;
             }
             catch (Exception ex)
@@ -1412,120 +1408,55 @@ namespace CSDemo.Models.Checkout.Cart
         /// <returns></returns>
         internal bool ApplyPromoCode(string promoCode)
         {
-
-            AddPromoCodeResult result = new AddPromoCodeResult { Success = false };
             var cart = GetCustomerCart();
-            ClearCartFromCache();
             var request = new AddPromoCodeRequest(cart, promoCode);
 
-            result = ((CommerceCartServiceProvider)_cartServiceProvider).AddPromoCode(request);
+            var cartService = new CommerceCartServiceProvider();
+            var result = cartService.AddPromoCode(request);
+            //var result = ((CommerceCartServiceProvider)_cartServiceProvider).AddPromoCode(request);
 
-            if (result.Success && result.Cart != null)
-            {
-                AddCartToCache(result.Cart as CommerceCart);
+            if (!result.Success || result.Cart == null) return false;
 
-                return true;
-            }
-            else
-            {
-                AddCartToCache(cart);
-                return false;
-            }
-
-
-
-
-            //////  -----------------------------------------------
-            ////AddPromoCodeResult result = new AddPromoCodeResult { Success = false };
-
-            //// get cart
-            //var cart = GetCustomerCart();
-            //if (cart == null) return result.Success;
-
-
-            //var request = new AddPromoCodeRequest(cart, promoCode);
-            //var info = CartRequestInformation.Get(request);
-            //if (info == null)
-            //{
-            //    info = new CartRequestInformation(request, true);
-            //}
-            //else
-            //{
-            //    info.Refresh = true;
-            //}
-
-            //var provider = new CommerceCartServiceProvider();
-            //result = provider.AddPromoCode(request);
-            //if (result.Success && result.Cart != null)
-            //{
-            //    AddCartToCache(result.Cart as CommerceCart);
-            //}
-
-            //return result.Success;
-
+            UpdateCartInCache(result.Cart as CommerceCart);
+            return true;
         }
 
         public IEnumerable<PaymentOption> GetPaymentOptions()
         {
-            var result = new GetPaymentOptionsResult { Success = false };
             var cartResult = GetCustomerCart();
-
             var request = new GetPaymentOptionsRequest(ShopName, cartResult);
-            result = _paymentServiceProvider.GetPaymentOptions(request);
+            var result = _paymentServiceProvider.GetPaymentOptions(request);
 
-            if (!result.Success)
-            {
-                return null;
-            }
-
-            return result.PaymentOptions.ToList();
+            return !result.Success ? null : result.PaymentOptions.ToList();
         }
 
         public IEnumerable<PaymentMethod> GetPaymentMethods(PaymentOption paymentOption)
         {
             if (paymentOption == null) { paymentOption = GetPaymentOptions().FirstOrDefault(); }
-            var result = new GetPaymentMethodsResult { Success = false };
-            var cartResult = this.GetCustomerCart();
 
+            var cartResult = GetCustomerCart();
             var request = new Sitecore.Commerce.Engine.Connect.Services.Payments.GetPaymentMethodsRequest(cartResult, paymentOption);
-            result = _paymentServiceProvider.GetPaymentMethods(request);
+            var result = _paymentServiceProvider.GetPaymentMethods(request);
 
-            if (!result.Success)
-            {
-                return null;
-            }
-
-            return result.PaymentMethods.ToList();
+            return !result.Success ? null : result.PaymentMethods.ToList();
         }
 
 
         public string GetPaymentClientToken()
         {
-            var result = new PaymentClientTokenResult { Success = false };
             var request = new ServiceProviderRequest();
-            result = _paymentServiceProvider.RunPipeline<ServiceProviderRequest, PaymentClientTokenResult>("commerce.payments.getClientToken", request);
+            var result = _paymentServiceProvider.RunPipeline<ServiceProviderRequest, PaymentClientTokenResult>("commerce.payments.getClientToken", request);
 
-            if (!result.Success)
-            {
-                return string.Empty;
-            }
-
-            return result.ClientToken;
+            return !result.Success ? string.Empty : result.ClientToken;
         }
 
 
         public PaymentClientTokenResult GetPaymentClient()
         {
-            var result = new PaymentClientTokenResult { Success = false };
             var request = new ServiceProviderRequest();
-            result = _paymentServiceProvider.RunPipeline<ServiceProviderRequest, PaymentClientTokenResult>("commerce.payments.getClientToken", request);
+            var result = _paymentServiceProvider.RunPipeline<ServiceProviderRequest, PaymentClientTokenResult>("commerce.payments.getClientToken", request);
 
-            if (!result.Success)
-            {
-                return null;
-            }
-
-            return result;
+            return !result.Success ? null : result;
         }
 
         public bool SetPaymentMethods(PaymentInputModel inputModel)
@@ -1534,15 +1465,14 @@ namespace CSDemo.Models.Checkout.Cart
             inputModel.BillingAddress.ExternalId = billingGuid;
             inputModel.BillingAddress.PartyId = billingGuid;
 
-            var result = new AddPaymentInfoResult { Success = false };
             var response = GetCustomerCart();
-
             var payments = new List<PaymentInfo>();
             var cart = (CommerceCart)response;
+
             if (inputModel.CreditCardPayment != null && !string.IsNullOrEmpty(inputModel.CreditCardPayment.PaymentMethodID) && inputModel.BillingAddress != null)
             {
-                CommerceParty billingParty = inputModel.BillingAddress.ToParty();
-                List<Party> parties = cart.Parties.ToList();
+                var billingParty = inputModel.BillingAddress.ToParty();
+                var parties = cart.Parties.ToList();
                 parties.Add(billingParty);
                 cart.Parties = parties.AsSafeReadOnly();
 
@@ -1551,8 +1481,8 @@ namespace CSDemo.Models.Checkout.Cart
 
             if (inputModel.FederatedPayment != null && !string.IsNullOrEmpty(inputModel.FederatedPayment.CardToken) && inputModel.BillingAddress != null)
             {
-                CommerceParty billingParty = inputModel.BillingAddress.ToParty();
-                List<Party> parties = cart.Parties.ToList();
+                var billingParty = inputModel.BillingAddress.ToParty();
+                var parties = cart.Parties.ToList();
                 parties.Add(billingParty);
                 cart.Parties = parties.AsSafeReadOnly();
 
@@ -1572,23 +1502,19 @@ namespace CSDemo.Models.Checkout.Cart
             }
 
             var request = new AddPaymentInfoRequest(cart, payments);
-            result = _cartServiceProvider.AddPaymentInfo(request);
+            var result = _cartServiceProvider.AddPaymentInfo(request);
+
             if (!result.Success)
             {
                 return false;
             }
             UpdateCartInCache(cart);
             return true;
-
         }
 
         public string SubmitOrder(SubmitOrderInputModel inputModel)
         {
-            var ret = string.Empty;
-            SubmitVisitorOrderResult errorResult = new SubmitVisitorOrderResult { Success = false };
-
             var response = GetCustomerCart();
-
             var cart = (CommerceCart)response;
 
             if (cart.Lines.Count == 0)
@@ -1611,7 +1537,8 @@ namespace CSDemo.Models.Checkout.Cart
                 req.Refresh = true;
             }
 
-            errorResult = _orderServiceProvider.SubmitVisitorOrder(request);
+            var errorResult = _orderServiceProvider.SubmitVisitorOrder(request);
+            string ret;
             if (errorResult.Success && errorResult.Order != null && errorResult.CartWithErrors == null)
             {
                 // clear cart cache
@@ -1637,11 +1564,8 @@ namespace CSDemo.Models.Checkout.Cart
         }
         internal bool CompleteACheckout4(string nounce)
         {
-            var msg = string.Empty;
-
             // Get visitor identifier
             var visitorId = GetVisitorId();
-
             var cart = GetCustomerCart();
 
             // add billing and shipping parties 
@@ -1694,6 +1618,8 @@ namespace CSDemo.Models.Checkout.Cart
             shipments.AddRange(internalShippingList);
             var addShippingInfoRequest = new Sitecore.Commerce.Engine.Connect.Services.Carts.AddShippingInfoRequest(cart, shipments, orderPreferenceType);
             addShippingInfoResult = _cartServiceProvider.AddShippingInfo(addShippingInfoRequest);
+
+            string msg;
             if (!addShippingInfoResult.Success)
             {
                 msg = addShippingInfoResult.SystemMessages[0].Message;
@@ -1717,7 +1643,7 @@ namespace CSDemo.Models.Checkout.Cart
             var miniCart = GetMiniCart();
 
             // Add billing party
-            List<Party> parties = updatedCart.Parties.ToList();
+            var parties = updatedCart.Parties.ToList();
             parties.Add(billingParty);
             updatedCart.Parties = parties.AsSafeReadOnly();
 
@@ -1776,10 +1702,7 @@ namespace CSDemo.Models.Checkout.Cart
 
             }
 
-
-
             return false;
-
         }
 
 
@@ -1789,7 +1712,6 @@ namespace CSDemo.Models.Checkout.Cart
 
             // Get visitor identifier
             var visitorId = GetVisitorId();
-
             var cart = GetCustomerCart();
 
             // add billing and shipping parties 
@@ -1864,7 +1786,7 @@ namespace CSDemo.Models.Checkout.Cart
             var miniCart = GetMiniCart();
 
             // Add billing party
-            List<Party> parties = updatedCart.Parties.ToList();
+            var parties = updatedCart.Parties.ToList();
             parties.Add(billingParty);
             updatedCart.Parties = parties.AsSafeReadOnly();
 
@@ -1988,7 +1910,7 @@ namespace CSDemo.Models.Checkout.Cart
 
             // Submit the order
             var msg = string.Empty;
-            SubmitVisitorOrderResult submitVisitorOrderResult = new SubmitVisitorOrderResult { Success = false };
+            var submitVisitorOrderResult = new SubmitVisitorOrderResult { Success = false };
 
             if (cart.Lines.Count == 0)
             {
