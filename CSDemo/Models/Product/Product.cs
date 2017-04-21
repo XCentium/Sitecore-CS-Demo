@@ -8,6 +8,7 @@ using System.Net;
 using System.Runtime.Serialization;
 using CSDemo.Contracts;
 using CSDemo.Contracts.Product;
+using CSDemo.Helpers;
 using CSDemo.Models.Checkout.Cart;
 using Glass.Mapper.Sc;
 using Glass.Mapper.Sc.Configuration;
@@ -477,26 +478,43 @@ namespace CSDemo.Models.Product
             if (string.IsNullOrEmpty(response)) yield return null;
 
             var result = JsonConvert.DeserializeObject<ComplementaryProductResult>(response);
-            if (result == null || !result.IsSuccessful)
+
+            if (result != null)
             {
-                if (result.Messages == null) yield return null;
-                foreach (var message in result.Messages)
+                if (!result.IsSuccessful)
                 {
-                    Log.Warn(message, result);
+                    if (result.Messages == null)
+                    {
+                        yield return null;
+                    }
+                    else { 
+                        foreach (var message in result.Messages)
+                        {
+                            Log.Warn(message, result);
+                        }
+                    }
                 }
-                yield return null;
+
+                if (result.ProductIds == null || !result.ProductIds.Any())
+                {
+                    yield return null;
+                }
+                else
+                {
+                    foreach (var productId in result.ProductIds)
+                    {
+                        var productResult = ProductHelper.GetItemByProductId(productId);
+
+                        if (productResult == null) continue;
+
+                        var productItem = productResult.GetItem();
+                        yield return GlassHelper.Cast<Product>(productItem);
+                    }
+                }
             }
-            if (result.ProductIds == null || !result.ProductIds.Any()) yield return null;
-            foreach (var productId in result.ProductIds)
+            else
             {
-                var productResult = ProductHelper.GetItemByProductId(productId);
-                if (productResult != null)
-                {
-                    var productItem = productResult.GetItem();
-                    yield return productItem.GlassCast<Product>();
-                }
-
-
+                yield return null;
             }
         }
         #endregion

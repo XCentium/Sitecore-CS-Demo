@@ -605,6 +605,7 @@
     </None>
     <None Include="Properties\PublishProfiles\Ola.DebugNew.pubxml" />
     <None Include="Properties\PublishProfiles\Vasiliy Local.pubxml" />
+    <Content Include="Tools\emailTest.aspx" />
     <Content Include="Views\Blog\FeaturedBlogs.cshtml">
       <SubType>Code</SubType>
     </Content>
