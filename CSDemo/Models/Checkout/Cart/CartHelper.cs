@@ -24,12 +24,14 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web;
+using CSDemo.Configuration;
 using AddPartiesRequest = Sitecore.Commerce.Services.Carts.AddPartiesRequest;
 using UpdatePartiesRequest = Sitecore.Commerce.Services.Carts.UpdatePartiesRequest;
 using Sitecore.Commerce.Services.Payments;
 using Sitecore.Commerce.Entities.Payments;
 using WebGrease.Css.Extensions;
 using Sitecore.Commerce.Entities.Shipping;
+using Sitecore.Commerce.Services.Shipping;
 
 namespace CSDemo.Models.Checkout.Cart
 {
@@ -288,7 +290,7 @@ namespace CSDemo.Models.Checkout.Cart
             };
 
             if (!string.IsNullOrEmpty(variantId)) { commerceInventoryProduct.VariantId = variantId; }
-            var products = new List<InventoryProduct> {commerceInventoryProduct};
+            var products = new List<InventoryProduct> { commerceInventoryProduct };
 
             var stockInfoRequest = new GetStockInformationRequest(ShopName, products, StockDetailsLevel.All);
             var stockInfoResult = _inventoryServiceProvider.GetStockInformation(stockInfoRequest);
@@ -456,7 +458,7 @@ namespace CSDemo.Models.Checkout.Cart
                 ? 0
                 : (cart.Total as CommerceTotal).Subtotal;
             shoppingCart.Total = cart.LineItemCount;
-            
+
             var commerceTotal = (CommerceTotal)cart.Total;
 
             shoppingCart.LineDiscount = commerceTotal.LineItemDiscountAmount;
@@ -678,7 +680,7 @@ namespace CSDemo.Models.Checkout.Cart
                 CountryCode = country2,
                 ZipPostalCode = zip2
             };
-            
+
 
             var cartParties = cart.Parties.ToList();
             var partyList = new List<Party> { shipping };
@@ -736,7 +738,7 @@ namespace CSDemo.Models.Checkout.Cart
         {
             //clear and update only if cart is valid
             if (updatedCart == null || updatedCart.Properties[Constants.Cart.BasketErrors] != null) return;
-            
+
             ClearCartFromCache();
             AddCartToCache(updatedCart);
         }
@@ -956,7 +958,7 @@ namespace CSDemo.Models.Checkout.Cart
                 CountryCode = cartPayment.BillingAddress.CountryCode,
                 ZipPostalCode = cartPayment.BillingAddress.ZipPostalCode
             };
-            
+
             // Add billing party to cart
             var updatedCart = GetCustomerCart();
             var parties = updatedCart.Parties.ToList();
@@ -974,7 +976,7 @@ namespace CSDemo.Models.Checkout.Cart
             var federatedPayment = federatedPaymentModel.ToCreditCardPaymentInfo();
             federatedPayment.PartyID = billingParty.PartyId;
 
-            var payments = new List<PaymentInfo> {federatedPayment};
+            var payments = new List<PaymentInfo> { federatedPayment };
 
             //add payment info to cart
             var addPaymentInfoResult = _cartServiceProvider.AddPaymentInfo(new AddPaymentInfoRequest(updatedCart, payments));
@@ -1998,5 +2000,28 @@ namespace CSDemo.Models.Checkout.Cart
             return false;
         }
 
+        public GetShippingMethodsResult GetShippingMethods()
+        {
+            try
+            {
+                var shippingService = new ShippingServiceProvider();
+                var shippingOption = new ShippingOption
+                {
+                    ShippingOptionType = new ShippingOptionType(1, "Ship To Address"),
+                    ShopName = ConfigurationHelper.StoreName()
+                };
+
+                var request =
+                    new Sitecore.Commerce.Engine.Connect.Services.Shipping.GetShippingMethodsRequest(shippingOption,
+                        null, GetCustomerCart());
+
+                return shippingService.GetShippingMethods(request);
+            }
+            catch (Exception ex)
+            {
+                Sitecore.Diagnostics.Log.Error("Error in CartHelper.GetShippingMethods", ex);
+                return null;
+            }
+        }
     }
 }

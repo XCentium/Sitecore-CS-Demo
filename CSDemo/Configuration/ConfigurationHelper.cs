@@ -23,5 +23,9 @@ namespace CSDemo.Configuration
             return $"sitecore_{Context.Database.Name.ToLower()}_index";
         }
 
+        public static string StoreName()
+        {
+            return "XCentiumCSDemo";
+        }
     }
 }
