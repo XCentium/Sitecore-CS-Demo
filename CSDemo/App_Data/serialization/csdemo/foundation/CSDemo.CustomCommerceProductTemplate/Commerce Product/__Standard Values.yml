@@ -97,7 +97,10 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20130521T133141
+      Value: 20130521T203141Z
+    - ID: 4391dd60-9ecb-44a8-b550-ceb6a96f43d8
+      Hint: SortId
+      Value: 0
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
       Value: sitecore\admin

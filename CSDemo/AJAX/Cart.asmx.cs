@@ -56,6 +56,13 @@ namespace CSDemo.AJAX
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public bool SaveProductSortIds(List<string> products, Guid categoryId)
+        {
+            return ProductHelper.SaveProductSortIds(products, categoryId);
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string SubmitOrder(string contextItemId, string orderTotal)
         {
             string ret = CartHelper.SubmitCart();
@@ -261,7 +268,7 @@ namespace CSDemo.AJAX
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string GetProductsByCategory(Guid categoryId)
         {
-            var products = ProductHelper.GetProductsByCategory(categoryId);
+            var products = ProductHelper.GetProductsByCategory(categoryId).OrderBy(p => p.SortId).ThenBy(p => p.Title);
             var productsresult = JsonConvert.SerializeObject(products);
 
             return productsresult;

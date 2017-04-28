@@ -1,0 +1,24 @@
+﻿---
+ID: 4391dd60-9ecb-44a8-b550-ceb6a96f43d8
+Parent: 616cad27-50c7-424b-b907-4b929cd9fc29
+Template: 455a3e98-a627-4b40-8035-e683a0331ac7
+Path: /sitecore/templates/Commerce/Catalog/Commerce Product/Commerce/SortId
+DB: master
+SharedFields:
+- ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
+  Hint: Type
+  Value: Integer
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 383
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170428T041128Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin

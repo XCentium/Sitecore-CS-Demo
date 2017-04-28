@@ -219,7 +219,7 @@ namespace CSDemo.Models.Product
                     model.TotalPages = (long)Math.Ceiling((double)model.TotalItems / model.PageSize);
 
                     // do sorting
-                    if (!string.IsNullOrEmpty(model.OrderBy))
+                    if (model.OrderBy != null)
                     {
                         switch (model.OrderBy)
                         {
@@ -237,6 +237,9 @@ namespace CSDemo.Models.Product
                                 break;
                             case Constants.Products.OrderByPriceDesc:
                                 catChildren = catChildren.OrderByDescending(x => x.ListPrice).ToList();
+                                break;
+                            default:
+                                catChildren = catChildren.OrderBy(x => x.SortId).ThenBy(x => x.Title).ToList();
                                 break;
                         }
                     }
@@ -793,7 +796,7 @@ namespace CSDemo.Models.Product
             {
                 using (var context = index.CreateSearchContext())
                 {
-                    var categoryIdString = categoryId.ToString().ToLower().Replace("-",string.Empty);
+                    var categoryIdString = categoryId.ToString().ToLower().Replace("-", string.Empty);
 
                     var products = context.GetQueryable<SearchResultItem>()
                         .Where(x => x.Language == Context.Language.Name &&
@@ -1192,5 +1195,37 @@ namespace CSDemo.Models.Product
             return categoryList;
         }
 
+        public static bool SaveProductSortIds(List<string> products, Guid categoryId)
+        {
+            var isSuccess = false;
+
+            try
+            {
+                if (products != null)
+                {
+                    for (var ctr = 0; ctr < products.Count; ctr++)
+                    {
+                        var prodId = products[ctr];
+                        var prodItem = GetItemByName(prodId).GetItem();
+
+                        if (prodItem != null)
+                        {
+                            prodItem.Editing.BeginEdit();
+                            prodItem.Fields["SortId"].Value = ctr.ToString();
+                            prodItem.Editing.EndEdit();
+                        }
+                    }
+                }
+
+                isSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error in ProductHelper.SaveProductSortIds", ex);
+            }
+
+
+            return isSuccess;
+        }
     }
 }

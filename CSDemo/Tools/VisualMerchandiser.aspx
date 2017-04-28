@@ -19,9 +19,13 @@
 
     <style>
         body {
-            min-width: 1000px;
+            min-width: 700px;
             width: auto !important;
-            width: 1000px;
+            width: 700px;
+        }
+
+        h3 {
+            font-size: 18px;
         }
 
         #products {
@@ -88,7 +92,7 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-    <div class="container" style="max-width: 1000px;">
+    <div class="container" style="max-width: 700px;">
         <div class="row">
             <div id="products">
                 <%--<div class="product col-sm-4" data-id="dubes-1">
@@ -359,7 +363,26 @@
                 }
             },
             SaveProductPositions: function () {
-                alert(vm.sortable.toArray());
+                var productIds = vm.sortable.toArray();
+                var selectedCategoryId = vm.GetCategoryId();
+
+                if (productIds !== "" && productIds != null && selectedCategoryId !== "" && selectedCategoryId != null) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/AJAX/cart.asmx/SaveProductSortIds",
+                        data: JSON.stringify({ products: productIds, categoryId: selectedCategoryId }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        async: true,
+                        success: function (result) {
+                            alert("Save successful.");
+                        },
+                        error: function (error) {
+                            console.log(error);
+                            alert("Save failed. Please try again.");
+                        }
+                    });
+                }
             },
             InitSortable: function () {
                 //init sortable grid

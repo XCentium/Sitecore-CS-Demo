@@ -46,6 +46,9 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.UnitOfMeasure)]
         public virtual IEnumerable<UnitOfMeasure> Units { get; set; }
 
+        [SitecoreField(Fields.SortId), DataMember]
+        public virtual int SortId { get; set; }
+
         public IEnumerable<Product> AlsoBoughtProducts
         {
             get
@@ -401,7 +404,7 @@ namespace CSDemo.Models.Product
             public const string StoneColor = "StoneColor";
             public const string GlassColor = "GlassColor";
             public const string Stores = "Store Location";
-
+            public const string SortId = "SortId";
         }
 
         #endregion
