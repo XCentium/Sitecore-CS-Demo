@@ -448,6 +448,13 @@
     <Compile Include="Models\Store\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\CustomLinkProvider.cs" />
+    <Compile Include="Tools\VisualMerchandiser.aspx.cs">
+      <DependentUpon>VisualMerchandiser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tools\VisualMerchandiser.aspx.designer.cs">
+      <DependentUpon>VisualMerchandiser.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AJAX\Cart.asmx" />
@@ -605,7 +612,8 @@
     </None>
     <None Include="Properties\PublishProfiles\Ola.DebugNew.pubxml" />
     <None Include="Properties\PublishProfiles\Vasiliy Local.pubxml" />
-    <Content Include="Tools\emailTest.aspx" />
+    <Content Include="Tools\EmailTester.aspx" />
+    <Content Include="Tools\VisualMerchandiser.aspx" />
     <Content Include="Views\Blog\FeaturedBlogs.cshtml">
       <SubType>Code</SubType>
     </Content>

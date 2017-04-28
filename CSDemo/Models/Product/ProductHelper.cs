@@ -44,10 +44,10 @@ namespace CSDemo.Models.Product
             if (productItem == null) return;
 
             var trackingField = new TrackingField(productItem.Fields[Constants.Products.TrackingFieldId]);
-            
+
             // Process the tracking profiles associated with this product
             TrackingFieldProcessor.ProcessProfiles(Tracker.Current.Interaction, trackingField);
-            
+
             // Finally score the profile and update this visitor's pattern
             var trackerProfiles = Tracker.Current.Interaction.Profiles;
 
@@ -103,6 +103,25 @@ namespace CSDemo.Models.Product
         }
 
         /// <summary>
+        /// Function to get all catalog categories
+        /// </summary>
+        /// <returns>List of Categories</returns>
+        public static List<Category> GetCategories()
+        {
+            try
+            {
+                const string templateName = "GeneralCategory";
+                return GetSearchResultItemsByTemplate(templateName).Select(c => c.Document.GetItem().GlassCast<Category>()).ToList();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.StackTrace, ex);
+            }
+
+            return new List<Category>();
+        }
+
+        /// <summary>
         /// </summary>
         /// <param name="categoryIDs"></param>
         /// <returns></returns>
@@ -153,13 +172,36 @@ namespace CSDemo.Models.Product
             return null;
         }
 
+        public static IEnumerable<SearchHit<SearchResultItem>> GetSearchResultItemsByTemplate(string templateName)
+        {
+            var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
+            try
+            {
+                using (var context = index.CreateSearchContext())
+                {
+                    return context.GetQueryable<SearchResultItem>()
+                        .Where(x => x.Language == Context.Language.Name &&
+                        x["_latestversion"] == "1" &&
+                        x.Path.Contains("/sitecore/commerce/catalog") &&
+                        x.TemplateName == templateName &&
+                        string.Equals(x.TemplateName, templateName, StringComparison.CurrentCultureIgnoreCase)
+                        ).GetResults().ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.StackTrace, ex);
+            }
+            return null;
+        }
+
         /// <summary>
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         internal static CategoryProductViewModel GetCategoryProducts(PaginationViewModel model, bool includeVariants = true)
         {
-            var categoryProductVm = new CategoryProductViewModel {PaginationViewModel = model};
+            var categoryProductVm = new CategoryProductViewModel { PaginationViewModel = model };
             var category = new Category();
             categoryProductVm.CategoryMenulist = GetCategoryMenuList(model.CategoryId);
 
@@ -395,24 +437,24 @@ namespace CSDemo.Models.Product
 
 
                             // need to rewrite to boost performance
-                          //  var i = 0;
-                         //   if (2 < i)
-                         //   {
-                                var categoryChildern = category.GetChildren();
-                                c.ProductsCount = categoryChildern.Count();
-                                var pList = new List<ProductMenulistViewModel>();
-                                foreach (Item categoryChild in categoryChildern)
+                            //  var i = 0;
+                            //   if (2 < i)
+                            //   {
+                            var categoryChildern = category.GetChildren();
+                            c.ProductsCount = categoryChildern.Count();
+                            var pList = new List<ProductMenulistViewModel>();
+                            foreach (Item categoryChild in categoryChildern)
+                            {
+                                if (categoryChild.TemplateID.ToString() != Constants.Products.CategoriesTemplateId)
                                 {
-                                    if (categoryChild.TemplateID.ToString() != Constants.Products.CategoriesTemplateId)
-                                    {
-                                        var p = new ProductMenulistViewModel();
-                                        p.Name = categoryChild.DisplayName;
-                                        p.Url = LinkManager.GetItemUrl(categoryChild);
-                                        pList.Add(p);
-                                    }
+                                    var p = new ProductMenulistViewModel();
+                                    p.Name = categoryChild.DisplayName;
+                                    p.Url = LinkManager.GetItemUrl(categoryChild);
+                                    pList.Add(p);
                                 }
-                                c.ProductMenulistViewModel = pList;
-                          //  }
+                            }
+                            c.ProductMenulistViewModel = pList;
+                            //  }
                             categoryMenulistViewModel.Add(c);
                         }
                     }
@@ -449,7 +491,7 @@ namespace CSDemo.Models.Product
                             var result =
                                 queryable.Where(
                                     x =>
-                                        (x.TemplateName == "GeneralCategory") && x.Path.Contains(catParentItem.Paths.Path) 
+                                        (x.TemplateName == "GeneralCategory") && x.Path.Contains(catParentItem.Paths.Path)
                                          ).ToList();
 
                             if (result.Any())
@@ -461,7 +503,7 @@ namespace CSDemo.Models.Product
                     catch (Exception ex)
                     {
                         Log.Error(ex.StackTrace, ex);
-                       
+
                     }
 
                     return output;
@@ -550,7 +592,7 @@ namespace CSDemo.Models.Product
             {
                 foreach (var order in orders.OrderHeaders)
                 {
-                    var fullOrderDetail = GetCustomerOrderDetail(order.ExternalId, cartHelper);                   
+                    var fullOrderDetail = GetCustomerOrderDetail(order.ExternalId, cartHelper);
                     orderDetails.Add(fullOrderDetail);
                 }
                 ordersViewModel.Orders = orderDetails;
@@ -649,12 +691,12 @@ namespace CSDemo.Models.Product
             var orderLines = new List<OrderLine>();
             foreach (var cartLine in lines)
             {
-                var line = (CommerceCartLine) cartLine;
+                var line = (CommerceCartLine)cartLine;
                 var orderLine = new OrderLine();
                 orderLine.UnitPrice = line.Product.Price.Amount.ToString(Constants.Products.CurrencyFormat);
                 orderLine.Quantity = line.Quantity;
                 orderLine.SubTotal =
-                    (line.Product.Price.Amount*line.Quantity).ToString(Constants.Products.CurrencyFormat);
+                    (line.Product.Price.Amount * line.Quantity).ToString(Constants.Products.CurrencyFormat);
                 var product = line.Product as CommerceCartProduct;
                 if (product != null)
                 {
@@ -715,7 +757,7 @@ namespace CSDemo.Models.Product
                 if (productVariants.Any())
                 {
                     var theVariants = new List<ProductVariant>();
-                    
+
                     for (var i = 0; i < productVariants.Count(); i++)
                     {
                         productVariants[i] = UpdateVariantProperties(productVariants[i], product, cartHelper);
@@ -744,6 +786,33 @@ namespace CSDemo.Models.Product
             return product;
         }
 
+        internal static List<Product> GetProductsByCategory(Guid categoryId)
+        {
+            var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
+            try
+            {
+                using (var context = index.CreateSearchContext())
+                {
+                    var categoryIdString = categoryId.ToString().ToLower().Replace("-",string.Empty);
+
+                    var products = context.GetQueryable<SearchResultItem>()
+                        .Where(x => x.Language == Context.Language.Name &&
+                        x["_latestversion"] == "1" &&
+                        x["commercesearchitemtype"] == "product" &&
+                        x["commerceancestorids"] == categoryIdString &&
+                        x.Path.Contains("/sitecore/commerce/catalog")
+                        ).GetResults().ToList();
+
+                    return products.Select(p => p.Document.GetItem().GlassCast<Product>()).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.StackTrace, ex);
+            }
+            return null;
+        }
+
         internal static ProductVariant UpdateVariantProperties(ProductVariant productVariant, Product product,
             CartHelper cartHelper)
         {
@@ -770,7 +839,7 @@ namespace CSDemo.Models.Product
         /// <returns></returns>
         internal static SearchResultItem GetItemByName(string productId)
         {
-            var index = ContentSearchManager.GetIndex($"sitecore_{(Context.Database==null || Context.Database.Name.ToLower() == "core"? "master":Context.Database.Name)}_index");
+            var index = ContentSearchManager.GetIndex($"sitecore_{(Context.Database == null || Context.Database.Name.ToLower() == "core" ? "master" : Context.Database.Name)}_index");
             try
             {
                 using (var context = index.CreateSearchContext())
@@ -954,8 +1023,8 @@ namespace CSDemo.Models.Product
                                 var result =
                                     queryable.Where(
                                         x =>
-                                            (x.Name.Contains(categoryName) 
-                                            && x.Path.Contains(catalog.Paths.Path) 
+                                            (x.Name.Contains(categoryName)
+                                            && x.Path.Contains(catalog.Paths.Path)
                                             &&
                                              x.TemplateName == "GeneralCategory")).ToList();
 
@@ -963,7 +1032,8 @@ namespace CSDemo.Models.Product
                                 {
                                     foreach (var r in result)
                                     {
-                                        if (r.Name.ToLower() == categoryName.ToLower()){
+                                        if (r.Name.ToLower() == categoryName.ToLower())
+                                        {
                                             categoryChildIds.Add(r.ItemId.ToString());
                                         }
                                     }
@@ -1019,7 +1089,7 @@ namespace CSDemo.Models.Product
             {
                 using (var context = index.CreateSearchContext())
                 {
-                                            
+
                     var queryable = context.GetQueryable<SearchResultItem>()
                             .Where(x => x.Language == Context.Language.Name);
                     if (searchFor == "products")
@@ -1031,15 +1101,15 @@ namespace CSDemo.Models.Product
                                     (x.Name.Contains(query) || x["_displayname"].Contains(query)) &&
                                     x.Path.Contains("/sitecore/commerce/catalog") &&
                                     x["_latestversion"] == "1" &&
-                                    x.TemplateName != "GeneralCategory").Page(0,5).GetResults().ToList();
+                                    x.TemplateName != "GeneralCategory").Page(0, 5).GetResults().ToList();
                     }
                     return
                         queryable.Where(
                             x =>
-                                (x.Name.Contains(query) && 
+                                (x.Name.Contains(query) &&
                                  x.Path.Contains("/sitecore/commerce/catalog") &&
                                  x.TemplateName == "GeneralCategory") &&
-                                 x["_latestversion"] == "1").Page(0,5).GetResults().ToList();
+                                 x["_latestversion"] == "1").Page(0, 5).GetResults().ToList();
                 }
             }
             catch (Exception ex)
@@ -1052,7 +1122,7 @@ namespace CSDemo.Models.Product
 
         internal static List<ProductMini> GetProductsByName(string query)
         {
-                        
+
             var catalogId = GetSiteRootCatalogId();
 
             var catalogName = GetSiteRootCatalogName();
@@ -1079,7 +1149,7 @@ namespace CSDemo.Models.Product
                                 var child = productItem.Children.FirstOrDefault();
                                 variantId = child.Name;
                             }
-                            productList.Add(new ProductMini {Id = product.ProductId, CategoryName = parentName, CatalogId = catalogId, Guid = ID.Parse(product.ID).ToString(), Title  = product.Title, Price = product.Price, CatalogName = catalogName, ImageSrc= product.FirstImage, VariantId= variantId, Url = product.Url});
+                            productList.Add(new ProductMini { Id = product.ProductId, CategoryName = parentName, CatalogId = catalogId, Guid = ID.Parse(product.ID).ToString(), Title = product.Title, Price = product.Price, CatalogName = catalogName, ImageSrc = product.FirstImage, VariantId = variantId, Url = product.Url });
                         }
                     }
                     catch (Exception ex)
@@ -1091,7 +1161,7 @@ namespace CSDemo.Models.Product
 
             return productList;
         }
-        
+
 
         internal static List<ProductMini> GetCategoriesByName(string query)
         {
@@ -1109,7 +1179,7 @@ namespace CSDemo.Models.Product
 
                         if (category.Name != null)
                         {
-                            categoryList.Add(new ProductMini {Title  = category.Name, Url = category.Url});
+                            categoryList.Add(new ProductMini { Title = category.Name, Url = category.Url });
                         }
                     }
                     catch (Exception ex)

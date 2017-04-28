@@ -259,6 +259,16 @@ namespace CSDemo.AJAX
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string GetProductsByCategory(Guid categoryId)
+        {
+            var products = ProductHelper.GetProductsByCategory(categoryId);
+            var productsresult = JsonConvert.SerializeObject(products);
+
+            return productsresult;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public bool SetUserCatalogChoice(string catalogName)
         {
 
