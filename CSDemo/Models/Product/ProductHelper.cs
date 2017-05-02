@@ -789,6 +789,34 @@ namespace CSDemo.Models.Product
             return product;
         }
 
+        internal static int GetProductViewCount(Guid productId, string productName)
+        {
+            var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetAnayticsIndex());
+            try
+            {
+                using (var context = index.CreateSearchContext())
+                {
+                    var productIdIdString = productId.ToString().ToLower().Replace("-", string.Empty);
+
+                    var productViews = context.GetQueryable<SearchResultItem>()
+                        .Where(x => 
+                        x["visitpage.url"].Contains(productName.ToLower()) &&
+                        x["visitpageevent.name"] == "view product" &&
+                        x["type"] == "visitpageevent"
+                        ).GetResults().ToList();
+
+
+                    return productViews.Count;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.StackTrace, ex);
+            }
+
+            return 0;
+        }
+
         internal static List<Product> GetProductsByCategory(Guid categoryId)
         {
             var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
@@ -805,6 +833,7 @@ namespace CSDemo.Models.Product
                         x["commerceancestorids"] == categoryIdString &&
                         x.Path.Contains("/sitecore/commerce/catalog")
                         ).GetResults().ToList();
+
 
                     return products.Select(p => p.Document.GetItem().GlassCast<Product>()).ToList();
                 }
@@ -1221,7 +1250,7 @@ namespace CSDemo.Models.Product
             }
             catch (Exception ex)
             {
-                Log.Error("Error in ProductHelper.SaveProductSortIds", ex);
+                Log.Error("Error in ProductHelper.SaveProductSortIds; ex.message = " + ex.Message, ex);
             }
 
 

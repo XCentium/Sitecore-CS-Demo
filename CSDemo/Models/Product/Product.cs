@@ -520,6 +520,10 @@ namespace CSDemo.Models.Product
                 yield return null;
             }
         }
+
+        [DataMember]
+        public int ViewCount => ProductHelper.GetProductViewCount(ID, ProductId);
+
         #endregion
     }
 }

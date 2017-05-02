@@ -268,7 +268,7 @@
                 </div>
                 <div class="col-sm-12">
                     <div class="product-body">
-                        <h3 style="height: 52px;">{Title}</h3>
+                        <h3 style="height: 52px;">{Title} ({ViewCount})</h3>
                         <div class="product-labels">
                         </div>
 
@@ -306,7 +306,7 @@
                 cmbCategories.Items.Add(new ListItem{Text = category.Name, Value = category.ID.ToString(), Selected = (ctr == 0)});
                 ctr++;
             }
-
+           
             base.OnLoad(e);
         }
     </script>
@@ -354,6 +354,7 @@
                         newProduct = newProduct.replace("{Title}", prod.Title);
                         newProduct = newProduct.replace("{Price}", prod.Price.toFixed(2));
                         newProduct = newProduct.replace("{Description}", prod.Description);
+                        newProduct = newProduct.replace("{ViewCount}", prod.ViewCount);
 
                         products += newProduct;
                     }
@@ -375,7 +376,11 @@
                         dataType: "json",
                         async: true,
                         success: function (result) {
-                            alert("Save successful.");
+                            if (result.d) {
+                                alert("Save successful.");
+                            } else {
+                                alert("Save failed. Please try again.");
+                            }
                         },
                         error: function (error) {
                             console.log(error);
