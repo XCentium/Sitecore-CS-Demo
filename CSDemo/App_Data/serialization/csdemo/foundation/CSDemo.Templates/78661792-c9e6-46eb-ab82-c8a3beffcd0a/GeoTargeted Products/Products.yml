@@ -1,19 +1,19 @@
 ﻿---
-ID: 895715b6-12af-41dc-98d7-ef648973b2cd
-Parent: e3257359-01d7-4956-9a11-77c513d19a01
+ID: af1b0832-15a3-48e3-8bcf-e6890cef3a6c
+Parent: 7a8372ed-b74f-4892-987e-ace6c9d25f39
 Template: 455a3e98-a627-4b40-8035-e683a0331ac7
-Path: /sitecore/templates/CSDemo/Components/Blogs/Featured Blogs/Featured Blogs Section/Featured Blogs
+Path: /sitecore/templates/CSDemo/Components/Product/GeoTargeted Products/GeoTargeted Products/Products
 DB: master
 SharedFields:
 - ID: 1eb8ae32-e190-44a6-968d-ed904c794ebf
   Hint: Source
-  Value: StartSearchLocation={0DE95AE4-41AB-4D01-9EB0-67441B7C2450}&Filter=_templatename:Blog Post
+  Value: StartSearchLocation={08BFB57F-DAC9-4B11-90C5-5D19647899EF}&Filter=commercesearchitemtype:Product|parsedlanguage:english
 - ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
   Hint: Type
   Value: Multilist with Search
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
-  Value: 200
+  Value: 100
 Languages:
 - Language: en
   Versions:
@@ -21,4 +21,4 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160304T193656Z
+      Value: 20160301T182159Z

@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using CSDemo.Helpers;
+using Sitecore.Data;
 
 #endregion
 
@@ -116,8 +117,31 @@ namespace CSDemo.Controllers
 
         public ActionResult GeoTargetedProducts()
         {
-            var geoTargetedProducts = Product.GetGeoTargetedProducts(Tracker.Current.Interaction.GeoData.AreaCode).ToList();
-            return View(geoTargetedProducts);
+            Sitecore.Diagnostics.Log.Info("CS DEMO: Starting Geo Targeted products.", this);
+            var geoProducts = new GeoTargetedProducts();
+
+            try
+            {
+                var datasourceId = RenderingContext.CurrentOrNull.Rendering.DataSource;
+                var item = ID.IsID(datasourceId) ? Context.Database.GetItem(datasourceId) : null;
+
+                if (item == null)
+                {
+                    geoProducts.Products =
+                        Product.GetGeoTargetedProducts(Tracker.Current.Interaction.GeoData.AreaCode).ToList();
+                    geoProducts.Title = "Based On Your Location You Might Be Interested In";
+
+                    return View(geoProducts);
+                }
+
+                geoProducts = GlassHelper.Cast<GeoTargetedProducts>(item);
+            }
+            catch (Exception ex)
+            {
+                Sitecore.Diagnostics.Log.Error(ex.Message, ex);
+            }
+
+            return View(geoProducts);
         }
 
         public ActionResult Categories()

@@ -409,6 +409,7 @@
     <Compile Include="Contracts\Product\IPersonalizedProducts.cs" />
     <Compile Include="Contracts\Product\IUnitOfMeasure.cs" />
     <Compile Include="Contracts\Product\IUnitOfMeasureEnumeration.cs" />
+    <Compile Include="Models\Product\GeoTargetedProducts.cs" />
     <Compile Include="Models\Product\NotificationSigneupInput.cs" />
     <Compile Include="Models\Product\PaginationViewModel.cs" />
     <Compile Include="Models\Product\PersonalizedProducts.cs" />
@@ -448,6 +449,13 @@
     <Compile Include="Models\Store\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\CustomLinkProvider.cs" />
+    <Compile Include="Tools\ItemTester.aspx.cs">
+      <DependentUpon>ItemTester.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tools\ItemTester.aspx.designer.cs">
+      <DependentUpon>ItemTester.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Tools\VisualMerchandiser.aspx.cs">
       <DependentUpon>VisualMerchandiser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -613,6 +621,7 @@
     <None Include="Properties\PublishProfiles\Ola.DebugNew.pubxml" />
     <None Include="Properties\PublishProfiles\Vasiliy Local.pubxml" />
     <Content Include="Tools\EmailTester.aspx" />
+    <Content Include="Tools\ItemTester.aspx" />
     <Content Include="Tools\VisualMerchandiser.aspx" />
     <Content Include="Views\Blog\FeaturedBlogs.cshtml">
       <SubType>Code</SubType>

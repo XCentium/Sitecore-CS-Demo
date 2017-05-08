@@ -1,0 +1,20 @@
+﻿---
+ID: 9a11603f-65de-4ab4-abee-a9916bf030bd
+Parent: a05c2234-612c-4317-bc7a-9236802596f4
+Template: a05c2234-612c-4317-bc7a-9236802596f4
+Path: /sitecore/templates/CSDemo/Components/Product/GeoTargeted Products/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160301T182207Z
+    - ID: 52c360b4-61f6-43e5-8cab-3f72f923e31a
+      Hint: Title
+      Value: Based On Your Location You Might Be Interested In
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
