@@ -1,0 +1,25 @@
+﻿---
+ID: dfa06c95-0dc2-439b-b667-ab6adb1513bd
+Parent: a094c9e8-57d1-4cc7-a2a3-8e4a6284fb7b
+Template: 602425a0-bac0-48ab-906d-9b29b58380d4
+Path: /sitecore/content/FamousSmoke/Components/Featured Blogs/Featured Blogs - Logged In
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170509T210710Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin
+    - ID: 895715b6-12af-41dc-98d7-ef648973b2cd
+      Hint: Featured Blogs
+      Type: Multilist with Search
+      Value: |
+        {7FD68C57-CAD5-43F9-A291-C718FE8169CB}
+        {D1868223-1A09-4A1D-860C-8A48B5F95D1B}
+        {146E4EDA-CA1F-4CE0-9F39-471435BE33AC}
+        {2A3EADAC-2B6F-495A-802C-DB74ADD5EE2C}

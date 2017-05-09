@@ -117,7 +117,28 @@ SharedFields:
         </r>
         <r uid="{A3A18A55-709C-456D-91AD-8ED1CB073EC3}" p:after="r[@uid='{A385C37F-E0C8-4638-A692-2A78D53281E9}']" s:ds="{E31CE2F8-4DAB-4B7A-B493-98E7F92E8A8C}" s:id="{A5821B00-DB71-4098-90B5-22B1B89C6B1E}" s:par="" s:ph="page-body" />
         <r uid="{9519FACB-C021-4C1C-9C58-C4780B528F32}" p:after="r[@uid='{A3A18A55-709C-456D-91AD-8ED1CB073EC3}']" s:ds="{960B18B8-0011-4352-A8AB-BBC9FFC2C561}" s:id="{CD0E1B2B-4D8F-4053-9F70-13E10D11F534}" s:par="" s:ph="page-body" />
-        <r uid="{2D0E3D75-55AF-4598-9C1E-58CFCD763FD2}" p:after="r[@uid='{9519FACB-C021-4C1C-9C58-C4780B528F32}']" s:id="{6AA3BBED-0499-4A7F-92EA-71D3CA54CBD0}" s:ph="page-body" />
+        <r uid="{2D0E3D75-55AF-4598-9C1E-58CFCD763FD2}" p:after="r[@uid='{9519FACB-C021-4C1C-9C58-C4780B528F32}']" s:id="{6AA3BBED-0499-4A7F-92EA-71D3CA54CBD0}" s:ph="page-body">
+          <rls>
+            <ruleset>
+              <rule uid="{83260986-DD95-45C9-A9A6-40F8099F098C}" s:name="Logged In">
+                <conditions>
+                  <condition uid="DA6D85BA5BA74E5E922ECAFF21CEFD66" s:id="{EA0642FA-500B-4B2F-B264-765E771C516F}" s:except="true" />
+                </conditions>
+                <actions>
+                  <action uid="05577AC8A33F46E5BECC047E4D09A787" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{DFA06C95-0DC2-439B-B667-AB6ADB1513BD}" />
+                </actions>
+              </rule>
+              <rule uid="{00000000-0000-0000-0000-000000000000}" s:name="Default">
+                <conditions>
+                  <condition uid="FB5C138360FC4707AEA746EEC2A447B8" s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                </conditions>
+                <actions>
+                  <action uid="BFEDEE1B92634A7DA5CAD17378F06911" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{D17B3E41-3B76-4C64-931B-110CA0B50E7A}" />
+                </actions>
+              </rule>
+            </ruleset>
+          </rls>
+        </r>
       </d>
     </r>
 Languages:

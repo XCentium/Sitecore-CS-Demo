@@ -1,0 +1,14 @@
+﻿---
+ID: a094c9e8-57d1-4cc7-a2a3-8e4a6284fb7b
+Parent: 63f06509-7f89-4d1e-992e-864aedcc5f31
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+Path: /sitecore/content/FamousSmoke/Components/Featured Blogs
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170509T210619Z

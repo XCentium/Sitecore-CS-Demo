@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using CSDemo.Helpers;
 using CSDemo.Models.Page;
 using Glass.Mapper.Sc;
 using Sitecore.Mvc.Controllers;
@@ -111,19 +112,29 @@ namespace CSDemo.Controllers
         {
             var model = new List<Blog>();
 
-            var renderingItem = RenderingContext.Current.Rendering.Item; // csdemo >> home
-
-
-            if (renderingItem != null)
+            if (string.IsNullOrWhiteSpace(RenderingContext.Current.Rendering.DataSource))
             {
-                var homePage = renderingItem.GlassCast<HomePage>();
+                var renderingItem = RenderingContext.Current.Rendering.Item; // csdemo >> home
+                if (renderingItem == null) return View(model);
 
-                if (homePage != null)
+                var homePage = GlassHelper.Cast<HomePage>(renderingItem);
+                if (homePage == null) return View(model);
+
+                var featuredBlogs = homePage.FeaturedBlogs.ToList();
+                if (featuredBlogs.Any())
                 {
-                    var featuredBlogs = homePage.FeaturedBlogs.ToList();
-                    if (featuredBlogs.Any())
+                    model = featuredBlogs;
+                }
+            }
+            else
+            {
+                var featuredBlogs = Sitecore.Context.Database.GetItem(RenderingContext.Current.Rendering.DataSource);
+                if (featuredBlogs != null)
+                {
+                    var blogs = GlassHelper.Cast<FeaturedBlogs>(featuredBlogs);
+                    if (blogs != null && blogs.Blogs.Any())
                     {
-                        model = featuredBlogs;
+                        model = blogs.Blogs.ToList();
                     }
                 }
             }
