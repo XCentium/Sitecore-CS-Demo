@@ -1,0 +1,14 @@
+﻿---
+ID: c3bc894b-e1f4-462f-95ec-b9f3ceab0bed
+Parent: c28340c7-6155-4eb4-adf6-ae7c6aecd21d
+Template: 3936f488-9a41-4d9f-940f-895b81014522
+Path: /sitecore/content/FamousSmoke/Components/User Statuses/Gold
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160831T191258Z

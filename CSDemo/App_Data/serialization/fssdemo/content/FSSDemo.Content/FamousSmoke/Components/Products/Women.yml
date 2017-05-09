@@ -1,0 +1,27 @@
+﻿---
+ID: b30b5379-40a3-4045-896e-163c8d66133e
+Parent: 5dd6e34e-2163-4310-a3bd-ceb0aee7ba4b
+Template: e619e625-3af2-463b-9204-92cb08205b93
+Path: /sitecore/content/FamousSmoke/Components/Products/Women
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160319T001413Z
+    - ID: 6ad435a4-d499-4f83-9dd1-fb350322bbd1
+      Hint: CouponCodeDescription
+      Value: For limited time only. Enjoy 25% off using this coupon code.
+    - ID: 7aa7edb7-dfbd-4117-a31a-ad9128c9c84b
+      Hint: Products
+      Type: Multilist with Search
+      Value: |
+        {B3C4B5F2-C1A8-43D8-B242-524B2D71492A}
+        {F5F49F83-1334-47D6-A813-BFD8C4163594}
+        {7A3E7A41-E897-4E99-9132-C721B17B7353}
+    - ID: c1ac14a6-3ece-432d-8e0c-a6732525f0cf
+      Hint: CouponCode
+      Value: BG-2006-25

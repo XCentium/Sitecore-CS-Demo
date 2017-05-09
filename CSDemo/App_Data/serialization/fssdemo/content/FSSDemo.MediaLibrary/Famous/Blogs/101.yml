@@ -1,0 +1,14 @@
+﻿---
+ID: ba915ffb-1afa-482e-8336-cb6d6c1499b5
+Parent: ca0d6f09-d4bb-444a-b20c-71d8aa58182b
+Template: fe5dd826-48c6-436d-b87a-7c4210c7413b
+Path: /sitecore/media library/Images/Famous/Blogs/101
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170505T191447Z

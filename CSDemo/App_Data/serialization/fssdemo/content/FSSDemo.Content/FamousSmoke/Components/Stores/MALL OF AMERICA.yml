@@ -1,0 +1,32 @@
+﻿---
+ID: 1f4dc95b-e419-4fac-8d1f-0eba825c7971
+Parent: 4a78ec4c-7ef4-475e-80c7-618054d63467
+Template: b6ee1aec-38eb-4072-aefb-35a29e1af90d
+Path: /sitecore/content/FamousSmoke/Components/Stores/MALL OF AMERICA
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 1f3f1da5-d03c-447a-bf68-45a22b7eef82
+      Hint: State
+      Value: MN
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160525T195610Z
+    - ID: 31aac6bf-3d86-44ea-b8c5-ad646b6f21ad
+      Hint: Title
+      Value: MALL OF AMERICA
+    - ID: 3a45e699-fe76-4ce5-a177-5841e0cdc9d2
+      Hint: City
+      Value: BLOOMINGTON
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
+    - ID: 9f7d91b0-572b-4f25-ac87-091fb74b4ff1
+      Hint: Street
+      Value: 210 SOUTH BLVD
+    - ID: aac119fd-49ee-4c11-9d64-0c5a6c2e0922
+      Hint: Zip
+      Value: 55425

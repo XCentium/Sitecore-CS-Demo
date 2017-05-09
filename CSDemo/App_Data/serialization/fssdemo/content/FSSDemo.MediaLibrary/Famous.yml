@@ -1,0 +1,21 @@
+﻿---
+ID: 29e22fc6-07a0-4cfe-9966-0606e9a464dd
+Parent: 15451229-7534-44ef-815d-d93d6170bfcb
+Template: fe5dd826-48c6-436d-b87a-7c4210c7413b
+Path: /sitecore/media library/Images/Famous
+DB: master
+SharedFields:
+- ID: dec8d2d5-e3cf-48b6-a653-8e69e2716641
+  Hint: __Security
+  Value: ar|retail\author|pe|+item:create|+item:read|+item:rename|+item:delete|+item:write|^*|+item:admin|pd|+item:create|+item:read|+item:rename|+item:delete|+item:write|^*|+item:admin|
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170324T114405Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

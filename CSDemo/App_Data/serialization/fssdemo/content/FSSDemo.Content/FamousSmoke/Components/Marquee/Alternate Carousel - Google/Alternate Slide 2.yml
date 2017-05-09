@@ -1,0 +1,22 @@
+﻿---
+ID: fd3408b1-fe6c-4e10-8357-9bafc28f9ff4
+Parent: b0aba3db-9956-4857-a6d4-0d1cc189d240
+Template: 6d36df55-60e5-4591-899c-efccaf83579a
+Path: /sitecore/content/FamousSmoke/Components/Marquee/Alternate Carousel - Google/Alternate Slide 2
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160316T204017Z
+    - ID: 35d787ae-0f1f-412a-a570-d5a79018ebb8
+      Hint: Image
+      Value: "<image mediaid=\"{A6FE86CB-D5AE-4E6E-9A15-A88ACDF1EF4A}\" />"
+    - ID: 8ef3659b-8284-4484-9b7e-6fff97496411
+      Hint: Content
+      Value: |
+        <br/><br/>
+        <h1 class="border animation top-to-bottom">Alternate version, triggered by Google Ad</h1>

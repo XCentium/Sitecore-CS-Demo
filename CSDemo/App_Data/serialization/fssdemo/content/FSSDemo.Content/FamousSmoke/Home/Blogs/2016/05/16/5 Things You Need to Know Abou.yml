@@ -1,0 +1,78 @@
+﻿---
+ID: 7e3d0694-4a36-4941-9ebc-046bb020111a
+Parent: 2d6223b1-222a-4f59-9d47-1c002920247c
+Template: fee031c4-e8e3-49cb-b7b6-3e9afa33d5be
+Path: /sitecore/content/FamousSmoke/Home/Blogs/2016/05/16/5 Things You Need to Know About Making Premium Cigars
+DB: master
+SharedFields:
+- ID: b0a67b2a-8b07-4e0b-8809-69f751709806
+  Hint: __Tracking
+  Type: Tracking
+  Value: |
+    <tracking>
+      <profile id="{9311296F-1A3D-4E58-AED1-0A6B4B1E654B}" name="Score">
+        <key name="CampingTools" value="2" />
+        <key name="ClimbingTools" value="2" />
+        <key name="ClothingCamping" value="0" />
+        <key name="ClothingClimbing" value="0" />
+        <key name="Hiking" value="0" />
+        <key name="SalesAndBargains" value="4" />
+      </profile>
+    </tracking>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 06b84f39-cf71-446a-81aa-30e76febe4a5
+      Hint: Author
+      Value: {C8AA60E8-F51B-461B-BEC2-BE189049BB7C}
+    - ID: 0e02704d-0afd-4102-8d99-9241a8b03c89
+      Hint: Category
+      Value: {79B34C87-58DC-4493-B5AD-837367D94420}
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160516T061117Z
+    - ID: 2779a63d-dd7f-4e0f-96c0-4066f90b6a8d
+      Hint: Summary
+      Value: "<span style=\"color: #777777; background-color: #ffffff;\">Cigar making dates back hundreds of years and is truly a fascinating thing to witness. Now I&rsquo;m not talking about just &ldquo;rolling&rdquo; cigars because that&rsquo;s one tenth of one percent of what goes on in the entire cigar making process.</span>"
+    - ID: 39e1df71-9e59-4dca-a4c1-ec588bc554ec
+      Hint: Thumb
+      Value: "<image mediaid=\"{BAAD60A0-16B0-4C39-B9F9-9A961D5312DA}\" alt=\"\" height=\"231\" width=\"300\" hspace=\"\" vspace=\"\" />"
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
+    - ID: 9608e520-ef16-49fc-bd92-75cc101e5fec
+      Hint: Publish Date
+      Value: 20160516T061117Z
+    - ID: 9821df39-a4bc-476b-baef-2a2922c7a8c3
+      Hint: Title
+      Value: 5 Things You Need to Know About…Making Premium Cigars
+    - ID: da2c062a-087b-488b-8505-c5e4f52d6e4b
+      Hint: Main
+      Value: "<image mediaid=\"{BAAD60A0-16B0-4C39-B9F9-9A961D5312DA}\" />"
+    - ID: f148b76b-8bc2-4a5b-89f1-9e5e42ed7f85
+      Hint: Body
+      Value: |
+        <p style="color: #777777; background-color: #ffffff; margin-right: 0px; margin-bottom: 25px; margin-left: 0px; padding: 0px; border: 0px;">Cigar making dates back hundreds of years and is truly a fascinating thing to witness. Now I&rsquo;m not talking about just &ldquo;rolling&rdquo; cigars because that&rsquo;s one tenth of one percent of what goes on in the entire cigar making process. From the time seeds are planted, to the time the cigars are placed into the box and sealed, there are literally hundreds of things that happen along the way. Now, some of those facts you are aware of&hellip; but, I have to think that there are &ldquo;some&rdquo; things that are pretty damned interesting about creating a cigar that you just may not be aware of. I&rsquo;ve had the opportunity and the pleasure of hanging out with many a cigar maker as well as visiting the factories and the fields in Latin America and I&rsquo;ve learned some pretty cool stuff about this pastime we love. So, I now present to you, five pretty-cool things about the cigar world you may not actually know&hellip;</p>
+        <h3 style="color: #444444; background-color: #ffffff; margin: 50px 0px 25px; padding: 0px; border: 0px;"><span style="color: #000000; margin: 0px; padding: 0px; border: 0px;">#1. THINKING INSIDE THE BOX</span>&hellip;</h3>
+        <p style="color: #777777; background-color: #ffffff; margin: 0px 0px 25px; padding: 0px; border: 0px;">I get asked this ALL of the time &ndash;&nbsp;<span style="color: #000000; margin: 0px; padding: 0px; border: 0px;"><em style="margin: 0px; padding: 0px; border: 0px;">Why are there box-pressed cigars&hellip; is there any benefit to them other than they won&rsquo;t roll off your desk?</em></span>&nbsp;Originally referred to as Cuban box-pressed, (and now square or box-pressed), this method of creating a cigar actually does have a purpose. While typical rounded sticks are placed into cigar molds that have cylinder shaped slots, box-pressed cigars are placed into molds with squared-off slots, then the molds are stacked and placed into a press. The purpose? The square-pressed method actually opens up more canals or channels between the leaves within the cigar, which creates better airflow and a cigar that burns and draws better with each puff. The Padron 75<span style="margin: 0px; padding: 0px; border: 0px;">th</span>&nbsp;Anniversary, Oliva Baptiste, Rocky Patel Decade, La Flor Dominica and&nbsp;<a href="https://www.famous-smoke.com/brand/new+world+by+aj+fernandez+cigars" target="_blank" style="color: #f56650; margin: 0px; padding: 0px; border: 0px;">New World by AJ Fernandez are just a few</a>.</p>
+        <div id="attachment_17351" class="wp-caption aligncenter" style="color: #777777; background-color: #ffffff; width: 383px; margin: 0px auto; padding: 0px; border: 0px;"><a href="https://www.famous-smoke.com/f75+by+padron+robusto+cigars/item+52195" target="_blank" rel="attachment wp-att-17351" style="color: #f56650; margin: 0px; padding: 0px; border: 0px;"><img class="wp-image-17351" src="https://www.famous-smoke.com/cigaradvisor/wp-content/uploads/2016/11/CI-FPA-F75M-400.jpg" alt="buy Padron Anniversary premium cigars" width="373" height="373" srcset="https://www.famous-smoke.com/cigaradvisor/wp-content/uploads/2016/11/CI-FPA-F75M-400.jpg 400w, https://www.famous-smoke.com/cigaradvisor/wp-content/uploads/2016/11/CI-FPA-F75M-400-150x150.jpg 150w, https://www.famous-smoke.com/cigaradvisor/wp-content/uploads/2016/11/CI-FPA-F75M-400-300x300.jpg 300w" sizes="(max-width: 373px) 100vw, 373px" style="height: auto; width: 383px; margin: 0px; padding: 0px; border: 0px none;" /></a>
+        <p class="wp-caption-text" style="color: #000000; margin: 10px 0px 25px; padding: 0px; border: 0px; text-align: center;"><span style="margin: 0px; padding: 0px; border: 0px;">The F75 by Padron, a box-pressed beauty of a smoke that&rsquo;s based of the 1926 Serie blend.</span></p>
+        </div>
+        <h3 style="color: #444444; background-color: #ffffff; margin: 50px 0px 25px; padding: 0px; border: 0px;">#2.&nbsp;THAT&rsquo;S A LOADED QUESTION&hellip;</h3>
+        <p style="color: #777777; background-color: #ffffff; margin: 0px 0px 25px; padding: 0px; border: 0px;"><span style="color: #000000; margin: 0px; padding: 0px; border: 0px;"><em style="margin: 0px; padding: 0px; border: 0px;">What does it actually mean that a cigar is front loaded with a certain kind of tobacco?</em></span>&nbsp;You hear this a lot, for instance: &ldquo;this cigar is front loaded with ligero.&rdquo; I asked this question to my friend, Jose Blanco (now) of EP Carrillo, wanting to know how do they make it where a hand rolled stick hits you hard in the first half-inch with pepper, spice and a wallop of early oomph? He said that the stronger leaves like ligero are bunched with the tip of those leaves being pointed to the head of the cigar. So when the compressed leaves are concentrated a half-inch or so at the tip, you get that initial blast of strength and flavor. But after that, the cigar begins to round out as the leaf is distributed equally throughout the rest of the cigar.</p>
+        <h3 style="color: #444444; background-color: #ffffff; margin: 50px 0px 25px; padding: 0px; border: 0px;"><span style="color: #000000; margin: 0px; padding: 0px; border: 0px;">#3. FREEZING YOUR BUTT OFF</span>&hellip;</h3>
+        <p style="color: #777777; background-color: #ffffff; margin: 0px 0px 25px; padding: 0px; border: 0px;">Cigar leaves are delicate things and are susceptible to a variety of nature&rsquo;s nasties like certain kinds of molds and fungus, as well as&nbsp;<a href="http://www.cigarinspector.com/cigar-tips/what-are-tobacco-beetles-and-how-do-you-fight-them" target="_blank" style="color: #f56650; margin: 0px; padding: 0px; border: 0px;">plant eating bugs like the tobacco beetle</a>&nbsp;along with their microscopic eggs. So in order to ensure that these organisms won&rsquo;t live inside the tobacco you will be placing into your humidor, and better yet, into your mouth, many factories now place pallet loads of boxed cigars into deep freezers for several days, killing any once living organisms that would certainly ruin your smoking pleasure. Note: the boxes aren&rsquo;t removed and immediately put back into room temperature, but placed into colder rooms, bringing the leaf back slowly to avoid condensation, preventing the leaves from cracking or splitting.</p>
+        <div id="attachment_17350" class="wp-caption aligncenter" style="color: #777777; background-color: #ffffff; width: 655px; margin: 0px auto; padding: 0px; border: 0px;"><img class="wp-image-17350" src="https://www.famous-smoke.com/cigaradvisor/wp-content/uploads/2016/11/Lasioderma_serricorne01.jpg" alt="beetles in premium cigars" width="645" height="440" srcset="https://www.famous-smoke.com/cigaradvisor/wp-content/uploads/2016/11/Lasioderma_serricorne01.jpg 896w, https://www.famous-smoke.com/cigaradvisor/wp-content/uploads/2016/11/Lasioderma_serricorne01-300x205.jpg 300w, https://www.famous-smoke.com/cigaradvisor/wp-content/uploads/2016/11/Lasioderma_serricorne01-768x524.jpg 768w, https://www.famous-smoke.com/cigaradvisor/wp-content/uploads/2016/11/Lasioderma_serricorne01-150x102.jpg 150w" sizes="(max-width: 645px) 100vw, 645px" style="height: auto; width: 655px; margin: 0px; padding: 0px; border: 0px none;" />
+        <p class="wp-caption-text" style="color: #000000; margin: 10px 0px 25px; padding: 0px; border: 0px; text-align: center;"><span style="margin: 0px; padding: 0px; border: 0px;">The cigar beetle, aka&nbsp;<em style="margin: 0px; padding: 0px; border: 0px;">Lasioderma serricorne</em>. Gross, right? Putting premium cigars in the deep freeze is what helps kill &rsquo;em off.</span></p>
+        </div>
+        <h3 style="color: #444444; background-color: #ffffff; margin: 50px 0px 25px; padding: 0px; border: 0px;"><span style="color: #000000; margin: 0px; padding: 0px; border: 0px;">#4. I CALL RE-DO</span>&hellip;</h3>
+        <p style="color: #777777; background-color: #ffffff; margin: 0px 0px 25px; padding: 0px; border: 0px;">When the torcedor finishes rolling each cigar, he places them on a shelf above his workbench for the supervisor to inspect his work. They&rsquo;re sorted into various piles to assure the wrapper leaf colors stay together and are placed into the same boxes. But they are also inspected to assure that they are rolled for top quality &ndash; no soft spots, blemished wrappers, large veins, not too hard or too soft, etc. For a long time, many of the cigars that weren&rsquo;t quite up to snuff were pulled aside and labeled as &ldquo;seconds&rdquo; and then placed into bundles, selling at a much cheaper price. But in the past few years, many of the factories have become a bit stricter with quality, as profit margins depend on it. Many rollers these days are now paid per finished cigar, so &ndash; if the stick is not acceptable, the roller now must take it apart and re-roll it until the supervisor gives it the thumbs up. This has become a great way to assure high quality on every cigar sold.</p>
+        <h3 style="color: #444444; background-color: #ffffff; margin: 50px 0px 25px; padding: 0px; border: 0px;"><span style="color: #000000; margin: 0px; padding: 0px; border: 0px;">#5. WOOD YOU BELIEVE</span>&hellip;</h3>
+        <p style="color: #777777; background-color: #ffffff; margin: 0px 0px 25px; padding: 0px; border: 0px;">There&rsquo;s nothing like cracking open an attractive wooden box filled with your favorite smokes, then taking a nice deep whiff of that wonderfully sweet cedar. But you may have noticed recently that a lot of manufacturers are coming out with new packing other than cedar wooden boxes,&nbsp;<a href="https://www.famous-smoke.com/elite+level+starter+kit/item+53326" target="_blank" style="color: #f56650; margin: 0px; padding: 0px; border: 0px;">such as plastic cylinder humijars</a>, paper wrapped bundles and boxes made from cardboard covered with paper and embossed graphics. While it is true that cigars packaged in wood boxes are the more expensive route to create, that&rsquo;s not the reason for some manufacturers moving towards alternative packaging. It seems that deforestation is a real problem among the Latin American cigar producing nations and trees and forests are now being carefully protected by their governments. So, with earth friendliness in mind, the cigar makers really have no choice but to seek out other packaging methods in order to conform to environmental concerns. A few brands that are available in nice humijars with some really cool graphics and designs are&nbsp;<a href="https://www.famous-smoke.com/laranja+reserva+volta+cigars/item+54026" target="_blank" style="color: #f56650; margin: 0px; padding: 0px; border: 0px;">Erik Espinosa&rsquo;s Laranja Reserva Volta</a>, VUDU by J. Fuego, and&nbsp;<a href="https://www.famous-smoke.com/brand/seven+deadly+sins+cigars" target="_blank" style="color: #f56650; margin: 0px; padding: 0px; border: 0px;">7 Deadly Sins</a>.</p>
+        <p style="color: #777777; background-color: #ffffff; margin: 0px 0px 25px; padding: 0px; border: 0px;">&nbsp;</p>
+        <p style="color: #777777; background-color: #ffffff; margin: 0px 0px 25px; padding: 0px; border: 0px;">So there you have it, five pretty interesting facts about the world of premium cigars that you may not have known&hellip; but hey, NOW you do and you&rsquo;ll sound like a total tobacco scholar around your herfing buddies. I&rsquo;d love to hear you thoughts in the comment section below!</p>
+    - ID: fe842158-1c63-48ac-91cd-85bf89f473c9
+      Hint: Tags
+      Value: {161707AC-7259-47B4-8058-106A826A9386}|{12E3029D-4404-4D40-ADAA-FD308CF9181C}

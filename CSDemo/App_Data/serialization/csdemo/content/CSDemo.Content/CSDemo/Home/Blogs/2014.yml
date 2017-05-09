@@ -1,0 +1,17 @@
+﻿---
+ID: 70df0e5a-f207-4313-b8c6-5208d89003b0
+Parent: 58015ab2-e58a-4879-81dd-46efc4b7fe91
+Template: adb6ca4f-03ef-4f47-b9ac-9ce2ba53ff97
+Path: /sitecore/content/CSDemo/Home/Blogs/2014
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170418T231543Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin

@@ -5,9 +5,15 @@ Template: 99f8905d-4a87-4eb8-9f8b-a9bebfb3add6
 Path: /sitecore/layout/Renderings/CSDemo/Checkout/Shipping
 DB: master
 SharedFields:
+- ID: 36e3e51c-5e13-4938-a07a-0dbd877a5640
+  Hint: Form Controller Name
+  Value: CSDemo.Controllers.CheckoutController
 - ID: 51b435bc-f7b9-478a-9c51-52916af96ff5
   Hint: Path
   Value: /Views/Checkout/Shipping.cshtml
+- ID: 8fc23a62-6b1f-4b6a-b910-30d38df54617
+  Hint: Form Controller Action
+  Value: Shipping
 Languages:
 - Language: en
   Versions:

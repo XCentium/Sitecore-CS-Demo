@@ -1,0 +1,22 @@
+﻿---
+ID: ea73e1cb-7da5-456b-94ce-2d417dd7ca4b
+Parent: c6294450-5f5f-4ba9-b0e0-cbf243ead5d3
+Template: 6d36df55-60e5-4591-899c-efccaf83579a
+Path: /sitecore/content/FamousSmoke/Components/Marquee/Alternate Carousel - Logged In/Alternate Slide 2
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160316T204017Z
+    - ID: 35d787ae-0f1f-412a-a570-d5a79018ebb8
+      Hint: Image
+      Value: "<image mediaid=\"{8353DFAD-9E1E-4249-AC17-CE6D5D470EA5}\" />"
+    - ID: 8ef3659b-8284-4484-9b7e-6fff97496411
+      Hint: Content
+      Value: |
+        <br/><br/>
+        <h1 class="border animation top-to-bottom">Alternate version, triggered by Logged In (registered)</h1>

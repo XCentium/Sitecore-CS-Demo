@@ -474,6 +474,10 @@
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.John-Local.config">
+      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
     <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Release.config">
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
@@ -603,7 +607,9 @@
     <Content Include="App_Config\Include\Unicorn\Unicorn.UI.config" />
     <Content Include="App_Config\Include\zCSDemo\CSDemo.GeneralSearch.config" />
     <Content Include="App_Config\Include\zCSDemo\CSDemo.LinkOveride.config" />
-    <Content Include="App_Config\Include\zCSDemo\CSDemo.Main.config" />
+    <Content Include="App_Config\Include\zCSDemo\CSDemo.Main.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Config\Include\zCSDemo\CSDemo.PatternMatchFix.config" />
     <Content Include="App_Config\Include\zCSDemo\CSDemo.Serialization.config">
       <TransformOnBuild>true</TransformOnBuild>
@@ -738,6 +744,9 @@
   <ItemGroup>
     <Folder Include="Models\InputModels\" />
     <Folder Include="Models\Social\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

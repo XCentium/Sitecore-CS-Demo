@@ -1,0 +1,17 @@
+﻿---
+ID: e6941dc1-d03b-4e5a-a30a-28abb0b8656e
+Parent: b34175e5-a95a-4159-bf25-bbe42c0ead6f
+Template: a05c2234-612c-4317-bc7a-9236802596f4
+Path: /sitecore/content/FamousSmoke/Components/Featured Products/Boots Campaign Products
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160831T184147Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo

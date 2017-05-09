@@ -3837,12 +3837,13 @@ footer.navbar a:hover {
 	color:#FFFFFF;
 	text-align:center;
 	width:100%;
-	font-size:56px;
+	font-size:36px;
 	text-transform:uppercase;
 	letter-spacing:3px;
 	font-weight:900;
 	margin-top:-41px;
 	transition:all 0.3s ease-in;
+    padding: 0 55px;
 }
 
 .categories .category .category-title span {

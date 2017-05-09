@@ -1,0 +1,28 @@
+﻿---
+ID: c803eade-e720-4c3e-8ef8-7a478c82c8ec
+Parent: d9ffa325-f47e-4541-bb42-33f224958e95
+Template: 0a2a31a0-a3b8-493c-b5fe-1935e1723f52
+Path: /sitecore/content/FamousSmoke/Components/Navigation/Popular/Humidors
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170504T155037Z
+    - ID: 28100e2e-3cf3-4ee9-b446-b7f7f0780484
+      Hint: Links
+      Type: Multilist with Search
+      Value: |
+        {461E3184-8095-4455-8172-FB8A39FF1D88}
+        {C276BAAE-6477-4AEF-8B97-9DFCB19D73B5}
+        {F815FE32-D51C-45E5-B49C-307DD9D17D6D}
+        {1DCF6700-66F9-4FAE-BEFE-A23D15572CE9}
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin
+    - ID: 7c445b60-6911-46b6-966a-736a76c7f549
+      Hint: Title
+      Value: Humidors

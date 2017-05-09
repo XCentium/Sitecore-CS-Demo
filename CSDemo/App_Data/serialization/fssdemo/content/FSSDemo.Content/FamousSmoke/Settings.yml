@@ -1,0 +1,14 @@
+﻿---
+ID: 3c5e6b3c-d30c-4845-84d3-bf4721e2a025
+Parent: 28e399f3-c123-4971-b93f-55bf0f3432be
+Template: a21b890e-c798-469c-8727-0f2c525787f3
+Path: /sitecore/content/FamousSmoke/Settings
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T161000Z

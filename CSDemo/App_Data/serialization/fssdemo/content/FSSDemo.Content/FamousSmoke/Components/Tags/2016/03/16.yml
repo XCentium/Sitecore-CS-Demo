@@ -1,0 +1,17 @@
+﻿---
+ID: 56fb6c84-bb0d-444f-9aad-4e2f5e65188b
+Parent: 7dfa22c9-1a3c-4dc0-ac5d-0220eb7162ef
+Template: adb6ca4f-03ef-4f47-b9ac-9ce2ba53ff97
+Path: /sitecore/content/FamousSmoke/Components/Tags/2016/03/16
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160317T002357Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Anonymous

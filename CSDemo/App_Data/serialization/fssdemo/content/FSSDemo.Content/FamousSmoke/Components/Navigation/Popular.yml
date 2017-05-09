@@ -1,0 +1,20 @@
+﻿---
+ID: d9ffa325-f47e-4541-bb42-33f224958e95
+Parent: 6f3c9d41-e10f-48a6-9686-fd50f7ad9230
+Template: 338f84ba-3cdf-466e-8fb2-54ca845715d5
+Path: /sitecore/content/FamousSmoke/Components/Navigation/Popular
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T210541Z
+    - ID: 525e09fb-d3cd-4cdb-b78c-1929bf4588d8
+      Hint: Link
+      Value: "<link text=\"Popular\" linktype=\"external\" url=\"#\" anchor=\"\" target=\"\" />"
+    - ID: eb2b469b-8798-46df-aa28-f89727a6dd10
+      Hint: Mega Menu Image
+      Value: "<image mediaid=\"{8C760226-926D-4A65-A422-E029A090F108}\" />"

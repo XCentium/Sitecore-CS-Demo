@@ -1,0 +1,20 @@
+﻿---
+ID: 161707ac-7259-47b4-8058-106a826a9386
+Parent: 6ce6e7c8-2ddc-4f5e-b43b-c89c8942b61d
+Template: 8b11616f-f9f1-4dc0-bf8a-80d6026e8ad3
+Path: /sitecore/content/Data/Blogs/Tags/Cigars
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170505T192847Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin
+    - ID: 6957ae02-3c36-46b9-8e6b-f4a279a63b13
+      Hint: Tag Name
+      Value: Cigars

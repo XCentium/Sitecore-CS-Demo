@@ -1,0 +1,28 @@
+﻿---
+ID: 3b987535-73db-4f13-8719-6631c84f2190
+Parent: d9ffa325-f47e-4541-bb42-33f224958e95
+Template: 0a2a31a0-a3b8-493c-b5fe-1935e1723f52
+Path: /sitecore/content/FamousSmoke/Components/Navigation/Popular/Cigars
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170504T154911Z
+    - ID: 28100e2e-3cf3-4ee9-b446-b7f7f0780484
+      Hint: Links
+      Type: Multilist with Search
+      Value: |
+        {694E85B9-A6B0-4958-8AF6-73C45445534F}
+        {9C0C1B93-8972-4E6D-B5F5-D6A6E3BABF89}
+        {C821E6A3-35D8-4F10-98BC-0B0CE9D49031}
+        {3A3D3A03-271A-49FF-81BE-5501839613D6}
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin
+    - ID: 7c445b60-6911-46b6-966a-736a76c7f549
+      Hint: Title
+      Value: Cigars

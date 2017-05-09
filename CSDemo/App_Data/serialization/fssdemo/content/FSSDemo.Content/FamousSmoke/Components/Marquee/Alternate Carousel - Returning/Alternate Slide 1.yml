@@ -1,0 +1,22 @@
+﻿---
+ID: 13558390-e568-442f-bf1d-203e6196b3f4
+Parent: 4ee8d42a-4211-44a4-bf0e-7816f0bb509e
+Template: 6d36df55-60e5-4591-899c-efccaf83579a
+Path: /sitecore/content/FamousSmoke/Components/Marquee/Alternate Carousel - Returning Visit/Alternate Slide 1
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160316T203924Z
+    - ID: 35d787ae-0f1f-412a-a570-d5a79018ebb8
+      Hint: Image
+      Value: "<image mediaid=\"{EB5A6F00-AB05-470F-8102-1C454D90AAAF}\" />"
+    - ID: 8ef3659b-8284-4484-9b7e-6fff97496411
+      Hint: Content
+      Value: |
+        <br/><br/>
+        <h1 class="border animation top-to-bottom">Alternate version, triggered by Return Visit (anonymous)</h1>

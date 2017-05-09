@@ -1,0 +1,17 @@
+﻿---
+ID: 19bb2200-b8aa-4665-9174-041e4d29f42c
+Parent: 9ae25136-b093-4478-a7a8-47e42a6c4d1a
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+Path: /sitecore/content/FamousSmoke/Components/Articles/Article Links Data
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161102T152324Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

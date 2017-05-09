@@ -1,0 +1,22 @@
+﻿---
+ID: 4a78ec4c-7ef4-475e-80c7-618054d63467
+Parent: 63f06509-7f89-4d1e-992e-864aedcc5f31
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+Path: /sitecore/content/FamousSmoke/Components/Stores
+DB: master
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Type: TreelistEx
+  Value: {B6EE1AEC-38EB-4072-AEFB-35A29E1AF90D}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160512T005702Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

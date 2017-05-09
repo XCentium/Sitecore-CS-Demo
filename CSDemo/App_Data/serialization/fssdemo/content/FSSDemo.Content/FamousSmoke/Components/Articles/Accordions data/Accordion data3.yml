@@ -1,0 +1,27 @@
+﻿---
+ID: 5b5a4d53-ffa1-4dea-a2b7-5edd9aa7f5d8
+Parent: 84d1c1f0-b4ed-4422-8927-8d8d4b2dfb96
+Template: aba6553f-b590-4c60-bb42-f3c8b29d8bb5
+Path: /sitecore/content/FamousSmoke/Components/Articles/Accordions data/Accordion data3
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 0c5f5824-6766-4575-bc8c-a09bb7f64b7e
+      Hint: Title
+      Value: Accordion data3
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161101T185157Z
+    - ID: 50ccf1b8-ba38-4173-998d-04c4475de382
+      Hint: Body
+      Value: |
+        <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        </ul>
+        
