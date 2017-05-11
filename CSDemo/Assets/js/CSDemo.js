@@ -1154,7 +1154,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result) {
-
+                    console.log(result);
                     var orderId = result.d;
                     Cookies.set("orderConfirmationID", orderId, { expires: 7 });
                     showActionMessage("Order Submitted!");

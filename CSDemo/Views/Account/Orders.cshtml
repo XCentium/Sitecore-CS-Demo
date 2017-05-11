@@ -37,7 +37,7 @@
                                 <th class="col-xs-3">Status</th>
                                 <th class="col-xs-1"></th>
                             </tr>
-                            @if (Model != null) { 
+                            @if (Model != null && Model.Orders != null) { 
                                 foreach(var order in Model.Orders){
                                     <tr>
                                         <td><a href="~/account/orders/@order.OrderId">#@order.TrackingNumber</a></td>

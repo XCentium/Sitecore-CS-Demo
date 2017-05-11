@@ -16,7 +16,6 @@ using Sitecore.Commerce.Services.Carts;
 using Sitecore.Commerce.Services.Customers;
 using Sitecore.Commerce.Services.Inventory;
 using Sitecore.Commerce.Services.Orders;
-using Sitecore.Commerce.Services.Prices;
 using Sitecore.Commerce.Engine.Connect.Pipelines.Arguments;
 using Sitecore.Commerce.Services;
 using System;
@@ -24,7 +23,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web;
-using CSDemo.Configuration;
 using AddPartiesRequest = Sitecore.Commerce.Services.Carts.AddPartiesRequest;
 using UpdatePartiesRequest = Sitecore.Commerce.Services.Carts.UpdatePartiesRequest;
 using Sitecore.Commerce.Services.Payments;
@@ -41,7 +39,6 @@ namespace CSDemo.Models.Checkout.Cart
         public string DefaultCartName { get; set; }
 
         private readonly InventoryServiceProvider _inventoryServiceProvider = new InventoryServiceProvider();
-        private readonly PricingServiceProvider _pricingServiceProvider = new PricingServiceProvider();
         private readonly CartServiceProvider _cartServiceProvider = new CartServiceProvider();
         private readonly PaymentServiceProvider _paymentServiceProvider = new PaymentServiceProvider();
         private readonly OrderServiceProvider _orderServiceProvider = new OrderServiceProvider();
@@ -102,7 +99,7 @@ namespace CSDemo.Models.Checkout.Cart
 
             // get userID
             var visitorId = GetVisitorId();
-            var request = new AddCartLinesRequest(GetCart(visitorId, false), new[] { cartItem });
+            var request = new AddCartLinesRequest(GetCart(visitorId), new[] { cartItem });
             var info = CartRequestInformation.Get(request);
             if (info == null)
             {
@@ -192,21 +189,20 @@ namespace CSDemo.Models.Checkout.Cart
         ///     Delete Customer Cart Cookie
         /// </summary>
         /// <param name="id"></param>
-        private bool DeleteCustomerCartCookie(string id)
+        private void DeleteCustomerCartCookie(string id)
         {
-            var CookieName = Constants.Cart.CookieName;
-            var cartCookie = HttpContext.Current.Request.Cookies[CookieName];
+            const string cookieName = Constants.Cart.CookieName;
+            var cartCookie = HttpContext.Current.Request.Cookies[cookieName];
             if (cartCookie == null)
             {
-                return false;
+                return;
             }
             // Render cookie invalid
-            HttpContext.Current.Response.Cookies.Remove(CookieName);
+            HttpContext.Current.Response.Cookies.Remove(cookieName);
             cartCookie.Expires = DateTime.Now.AddDays(-10);
             cartCookie.Values[Constants.Cart.VisitorID] = null;
             cartCookie.Value = null;
             HttpContext.Current.Response.SetCookie(cartCookie);
-            return true;
         }
 
         /// <summary>
@@ -464,7 +460,7 @@ namespace CSDemo.Models.Checkout.Cart
             shoppingCart.LineDiscount = commerceTotal.LineItemDiscountAmount;
             shoppingCart.OrderLevelDiscountAmount = commerceTotal.OrderLevelDiscountAmount;
 
-            shoppingCart.Shipping = commerceTotal == null ? 0.00m : commerceTotal.ShippingTotal;
+            shoppingCart.Shipping = commerceTotal?.ShippingTotal ?? 0.00m;
             shoppingCart.Tax = cart.Total.TaxTotal.Amount == null ? 0.00m : cart.Total.TaxTotal.Amount;
             shoppingCart.GrandTotal = cart.Total.Amount == null ? 0.00m : cart.Total.Amount;
 
@@ -1092,16 +1088,9 @@ namespace CSDemo.Models.Checkout.Cart
         /// <returns></returns>
         internal string SubmitCart()
         {
-            var ret = string.Empty;
-
             // Get visitor identifier
             var visitorId = GetVisitorId();
-
             var updatedCart = GetCustomerCart();
-
-            var msg = string.Empty;
-
-            var submitVisitorOrderResult = new SubmitVisitorOrderResult { Success = false };
 
             if (updatedCart.Lines.Count == 0)
             {
@@ -1111,30 +1100,32 @@ namespace CSDemo.Models.Checkout.Cart
             updatedCart.Email = "testorder@mail.com";
 
             var submitVisitorOrderRequest = new SubmitVisitorOrderRequest(updatedCart);
-            submitVisitorOrderResult = _orderServiceProvider.SubmitVisitorOrder(submitVisitorOrderRequest);
+            var submitVisitorOrderResult = _orderServiceProvider.SubmitVisitorOrder(submitVisitorOrderRequest);
 
-            var orderId = string.Empty;
-
-            if (submitVisitorOrderResult.Success && submitVisitorOrderResult.Order != null && submitVisitorOrderResult.CartWithErrors == null)
+            if (submitVisitorOrderResult.Success && submitVisitorOrderResult.Order != null 
+                && submitVisitorOrderResult.CartWithErrors == null)
             {
                 var order = submitVisitorOrderResult.Order as CommerceOrder;
-                orderId = submitVisitorOrderResult.Order.OrderID;
-                var commerceOrderId = order.OrderID;
+                if (order != null)
+                {
+                    var orderId = order.OrderID;
 
-                // clear cart from cache
-                ClearCartFromCache();
+                    // clear cart from cache
+                    ClearCartFromCache();
 
-                // Get order details
-                var getVisitorOrderRequest = new GetVisitorOrderRequest(orderId, visitorId, ShopName);
-                var getVisitorOrderResult = _orderServiceProvider.GetVisitorOrder(getVisitorOrderRequest);
+                    // Get order details
+                    var getVisitorOrderRequest = new GetVisitorOrderRequest(orderId, visitorId, ShopName);
+                    var getVisitorOrderResult = _orderServiceProvider.GetVisitorOrder(getVisitorOrderRequest);
 
-                // return commerceOrderId;
-
-                return getVisitorOrderResult.Order.TrackingNumber;
-
+                    // return commerceOrderId;
+                    return getVisitorOrderResult.Order.TrackingNumber;
+                }
             }
 
-            return "Error in cart! Order not submitted.";
+            var error = submitVisitorOrderResult?.SystemMessages[0]?.Message ?? "NULL";
+            Sitecore.Diagnostics.Log.Error("CartHelper.SubmitCart Error, error = " + error, new Exception());
+
+            return "Error in cart! Order not submitted. Error = " + error;
         }
 
         /// <summary>
@@ -2008,7 +1999,7 @@ namespace CSDemo.Models.Checkout.Cart
                 var shippingOption = new ShippingOption
                 {
                     ShippingOptionType = new ShippingOptionType(1, "Ship To Address"),
-                    ShopName = ConfigurationHelper.StoreName()
+                    ShopName = ShopName
                 };
 
                 var request =

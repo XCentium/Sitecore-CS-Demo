@@ -1,0 +1,21 @@
+﻿---
+ID: a054622d-d2c2-4b93-a4f8-08b7405e0073
+Parent: c3ea8198-149a-4dfc-a62e-4cdf2380e8b7
+Template: 0771b0a2-5bcf-4f87-91de-13474618b6bf
+Path: /sitecore/system/Marketing Control Panel/Profiles/FSS/Pattern Cards
+DB: master
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 1100
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170509T044713Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin

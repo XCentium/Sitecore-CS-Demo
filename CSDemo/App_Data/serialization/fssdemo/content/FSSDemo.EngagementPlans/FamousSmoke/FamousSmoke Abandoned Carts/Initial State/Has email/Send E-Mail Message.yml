@@ -1,13 +1,13 @@
 ﻿---
-ID: ee0025fd-602e-42f7-9f2a-3afeb7e78dc2
-Parent: 0d03863d-d1f6-4299-a675-e9f707f1119f
+ID: d781da96-60f8-4894-ba50-5fd6765f7447
+Parent: e83c5ddb-c2d2-4abc-9bc2-24e1cae335f3
 Template: 8c5ead00-5f68-4310-ab0c-84f283b5ee0a
-Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CSDemo/XCentiumCSDemo Abandoned Carts/Initial State/Has email/Send E-Mail Message
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/FamousSmoke/FamousSmoke Abandoned Carts/Initial State/Has email/Send E-Mail Message
 DB: master
 SharedFields:
 - ID: 1507131d-cee3-49e9-af32-de5403a37b49
   Hint: Parameters
-  Value: AutomationActionDescription=Abandoned cart&Subject=Abandoned cart&Content=%3cp%3eHello!%3c%2fp%3e%0a%3cp%3eWe%27ve+noticed+that+you+were+interested+in+a+few+products+from+our+XC+Demo+website.%26nbsp%3bPlease+let+us+know%2c+if+we+can+help+answer+any+questions+for+you!+%3c%2fp%3e%0a%3cp%3eOur+Customer+Service%26nbsp%3bis+a+very+effective+-+(feel+free+to+call).%3c%2fp%3e%0a%3cp%3eCheers!%3c%2fp%3e&FixedEmail=&FromName=Web Dev&FromEmail=web.dev@xcentium.com&BaseSiteURL=http://csdemo.xcentium.net
+  Value: AutomationActionDescription=Famous Smoke - Abandoned Cart Notification&Subject=Famous Smoke - Abandoned Cart Notification&Content=%3cp%3eHello!%3c%2fp%3e%0a%3cp%3eWe%27ve+noticed+that+you+were+interested+in+a+few+products+from+our+Famous+Smoke+website.%26nbsp%3bPlease+let+us+know%2c+if+we+can+help+answer+any+questions+for+you!+%3c%2fp%3e%0a%3cp%3eOur+Customer+Service%26nbsp%3bis+a+very+effective+-+(feel+free+to+call).%3c%2fp%3e%0a%3cp%3eCheers!%3c%2fp%3e&FixedEmail=&FromName=Famous Smoke Web Dev&FromEmail=web.dev@xcentium.com&BaseSiteURL=http://fssdemo.xcentium.net
 - ID: 3f72bc07-de92-483e-a724-d430769d9ba4
   Hint: Designer ID
   Value: c03cf4ff-806f-4fcb-a75e-4d2d21026a8a

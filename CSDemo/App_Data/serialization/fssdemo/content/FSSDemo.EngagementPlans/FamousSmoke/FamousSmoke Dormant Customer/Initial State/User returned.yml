@@ -1,0 +1,51 @@
+﻿---
+ID: b9163ae9-18bb-44ba-a388-3cb48520438d
+Parent: aea6bcb4-6c1f-4a9d-a177-d4a18bfc3e77
+Template: 0a43a0fe-7e0e-49ef-95d4-e3de34f4f175
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/FamousSmoke/FamousSmoke Dormant Customer/Initial State/User returned
+DB: master
+SharedFields:
+- ID: 21f3482b-bb14-4555-ba5d-af20d400d5b9
+  Hint: Rule
+  Type: Rules
+  Value: |
+    <ruleset>
+      <rule uid="{12216422-7462-4426-B7BF-635604D97EED}">
+        <conditions>
+          <condition id="{2ACD2616-DAC5-450D-8CDF-63F08F1AC9A1}" uid="E011D2D2EBDC495AAF415461BF55B1FD" Number="1" />
+        </conditions>
+      </rule>
+    </ruleset>
+- ID: 3f72bc07-de92-483e-a724-d430769d9ba4
+  Hint: Designer ID
+  Value: 4cdbd1eb-ca25-424b-8a6d-a1fb529bca0d
+- ID: 7642ed71-348b-4b88-8634-cc7b28949472
+  Hint: Origin ID
+  Value: 00000000-0000-0000-0000-000000000000
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 0
+- ID: d2368879-c784-4031-9b79-6a3bf3cb444e
+  Hint: Next state
+  Value: 53b15bf4-e1e9-4f91-aaa2-5ecd343cc946
+- ID: e13dcd09-d9bb-43c9-8d7d-438c79d714ca
+  Hint: Evaluate
+  Value: {B81C1F4C-8B83-44D9-902F-448463DBCCBC}
+Languages:
+- Language: en
+  Fields:
+  - ID: 06f2d72a-1924-4b9a-ba1e-186ce4e57efd
+    Hint: Description
+    Value: Has the user visited the website within a given time?
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: User returned?
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160309T015217Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo

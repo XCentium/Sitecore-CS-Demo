@@ -1,16 +1,16 @@
 ﻿---
-ID: ee0025fd-602e-42f7-9f2a-3afeb7e78dc2
-Parent: 0d03863d-d1f6-4299-a675-e9f707f1119f
+ID: 1dd41411-36a7-47dd-82f2-0c2b4a21a3d5
+Parent: c669916d-be80-4d2e-a865-c07a18281453
 Template: 8c5ead00-5f68-4310-ab0c-84f283b5ee0a
-Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CSDemo/XCentiumCSDemo Abandoned Carts/Initial State/Has email/Send E-Mail Message
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/FamousSmoke/FamousSmoke Incentive Program/Initial State/Has email/Send E-Mail Message
 DB: master
 SharedFields:
 - ID: 1507131d-cee3-49e9-af32-de5403a37b49
   Hint: Parameters
-  Value: AutomationActionDescription=Abandoned cart&Subject=Abandoned cart&Content=%3cp%3eHello!%3c%2fp%3e%0a%3cp%3eWe%27ve+noticed+that+you+were+interested+in+a+few+products+from+our+XC+Demo+website.%26nbsp%3bPlease+let+us+know%2c+if+we+can+help+answer+any+questions+for+you!+%3c%2fp%3e%0a%3cp%3eOur+Customer+Service%26nbsp%3bis+a+very+effective+-+(feel+free+to+call).%3c%2fp%3e%0a%3cp%3eCheers!%3c%2fp%3e&FixedEmail=&FromName=Web Dev&FromEmail=web.dev@xcentium.com&BaseSiteURL=http://csdemo.xcentium.net
+  Value: AutomationActionDescription=Famous Smoke - A Token of Appreciation!&Subject=Famous Smoke - A Token of Appreciation!&Content=%3cp%3eHello!%3c%2fp%3e%0a%3cp%3e%26nbsp%3bWe+realize+that+you+have+many+options+when+shopping+for+outdoor+gear+and+appreciate+that+you+chose+us.+As+a+token+of+appreciation%2c+please+use+the+following+coupon+on+your+next+purchase+to+get+20%25+off%3a+%3cstrong%3e12345ABC.%3c%2fstrong%3e%3c%2fp%3e%0a%3cp%3e%3cstrong%3e%26nbsp%3bCheers!%3c%2fstrong%3e%3c%2fp%3e&FixedEmail=&FromName=Famous Smoke Web Dev&FromEmail=web.dev@xcentium.com&BaseSiteURL=http://fssdemo.xcentium.net
 - ID: 3f72bc07-de92-483e-a724-d430769d9ba4
   Hint: Designer ID
-  Value: c03cf4ff-806f-4fcb-a75e-4d2d21026a8a
+  Value: c2032b40-ce2d-41ad-8906-0b09563a178e
 - ID: 7642ed71-348b-4b88-8634-cc7b28949472
   Hint: Origin ID
   Value: bc62a688-ae9e-4462-abd4-73e28782d74a
@@ -37,4 +37,7 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160212T025544Z
+      Value: 20160621T193624Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo

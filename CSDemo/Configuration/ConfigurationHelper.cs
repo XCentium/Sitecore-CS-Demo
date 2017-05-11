@@ -27,10 +27,5 @@ namespace CSDemo.Configuration
         {
             return "sitecore_analytics_index";
         }
-
-        public static string StoreName()
-        {
-            return "XCentiumCSDemo";
-        }
     }
 }

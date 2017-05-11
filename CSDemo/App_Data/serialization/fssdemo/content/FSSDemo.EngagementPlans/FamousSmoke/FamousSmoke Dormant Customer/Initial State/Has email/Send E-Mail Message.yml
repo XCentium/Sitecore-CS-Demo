@@ -1,16 +1,16 @@
 ﻿---
-ID: ee0025fd-602e-42f7-9f2a-3afeb7e78dc2
-Parent: 0d03863d-d1f6-4299-a675-e9f707f1119f
+ID: 225bc278-0ad4-41ab-a485-b64f02c6a4c2
+Parent: 10d0e518-7579-4e63-9e24-9edeac1d8667
 Template: 8c5ead00-5f68-4310-ab0c-84f283b5ee0a
-Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CSDemo/XCentiumCSDemo Abandoned Carts/Initial State/Has email/Send E-Mail Message
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/FamousSmoke/FamousSmoke Dormant Customer/Initial State/Has email/Send E-Mail Message
 DB: master
 SharedFields:
 - ID: 1507131d-cee3-49e9-af32-de5403a37b49
   Hint: Parameters
-  Value: AutomationActionDescription=Abandoned cart&Subject=Abandoned cart&Content=%3cp%3eHello!%3c%2fp%3e%0a%3cp%3eWe%27ve+noticed+that+you+were+interested+in+a+few+products+from+our+XC+Demo+website.%26nbsp%3bPlease+let+us+know%2c+if+we+can+help+answer+any+questions+for+you!+%3c%2fp%3e%0a%3cp%3eOur+Customer+Service%26nbsp%3bis+a+very+effective+-+(feel+free+to+call).%3c%2fp%3e%0a%3cp%3eCheers!%3c%2fp%3e&FixedEmail=&FromName=Web Dev&FromEmail=web.dev@xcentium.com&BaseSiteURL=http://csdemo.xcentium.net
+  Value: AutomationActionDescription=Famous Smoke - We've misssed you!&Subject=Famous Smoke - We've misssed you!&Content=%3cp%3eHi+there%2c+%3c%2fp%3e%0a%3cp%3eWe%27ve+noticed+you+haven%27t+come+back+to+website+in+a+while.+We+have+some+new+products+that+you+might+be+interested+in.+%3ca+href%3d%22%7e%2flink.aspx%3f_id%3d49B9F3E265CC48F59A9635EFD0C752D8%26amp%3b_z%3dz%22%3eCheck+it+out!%3c%2fa%3e%3c%2fp%3e&FixedEmail=&FromName=Famous Smoke Web Dev&FromEmail=web.dev@xcentium.com&BaseSiteURL=http://fssdemo.xcentium.net
 - ID: 3f72bc07-de92-483e-a724-d430769d9ba4
   Hint: Designer ID
-  Value: c03cf4ff-806f-4fcb-a75e-4d2d21026a8a
+  Value: e066e2e6-9317-4ad1-afc6-6cd29f27c7da
 - ID: 7642ed71-348b-4b88-8634-cc7b28949472
   Hint: Origin ID
   Value: bc62a688-ae9e-4462-abd4-73e28782d74a
@@ -37,4 +37,7 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160212T025544Z
+      Value: 20160309T015221Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
