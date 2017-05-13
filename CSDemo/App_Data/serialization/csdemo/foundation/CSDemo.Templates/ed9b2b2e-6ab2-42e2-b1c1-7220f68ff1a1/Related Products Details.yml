@@ -1,0 +1,14 @@
+﻿---
+ID: d25a88d0-ea56-4dd3-bee4-e997165f43a7
+Parent: ed9b2b2e-6ab2-42e2-b1c1-7220f68ff1a1
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/CSDemo/Components/Product/Related Products/Related Products Details
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170513T030706Z

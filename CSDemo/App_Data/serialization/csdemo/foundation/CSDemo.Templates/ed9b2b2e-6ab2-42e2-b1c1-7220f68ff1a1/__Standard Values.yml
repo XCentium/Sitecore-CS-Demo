@@ -1,0 +1,17 @@
+﻿---
+ID: 7f9f7bb9-3e6b-4993-9656-bb10bc28f380
+Parent: ed9b2b2e-6ab2-42e2-b1c1-7220f68ff1a1
+Template: ed9b2b2e-6ab2-42e2-b1c1-7220f68ff1a1
+Path: /sitecore/templates/CSDemo/Components/Product/Related Products/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170513T031214Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin

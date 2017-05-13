@@ -34,6 +34,18 @@ Languages:
   Versions:
   - Version: 1
     Fields:
+    - ID: 04bf00db-f5fb-41f7-8ab7-22408372a981
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s" p:p="1">
+          <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r uid="{F7E80756-5F6F-4B1E-8176-40AAAAE29D7D}" p:before="*" s:id="{A4460595-566F-4A24-9745-2E6584FE7E78}" s:ph="page-body" />
+            <r uid="{8BEA443C-2377-4A73-880E-068368CEDFF2}">
+              <p:d />
+            </r>
+          </d>
+        </r>
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
       Value: 20160229T092605Z

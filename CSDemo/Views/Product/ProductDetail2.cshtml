@@ -1,0 +1,20 @@
+﻿@using System.Linq
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Product.Product>
+@if (Model.DefinitionName != null)
+{
+     @Html.Partial("~/Views/Product/ProductDefault2.cshtml", Model)
+}
+else
+{
+    <section class="content products">
+        <div class="container">
+            <h2>
+                Product not found! (Product Detail 2)
+            </h2>
+
+            <h3>
+                The product you are looking for does not exist in your current catalog or the path may be incorrect. (Product Detail 2)
+            </h3>
+        </div>
+    </section>
+}

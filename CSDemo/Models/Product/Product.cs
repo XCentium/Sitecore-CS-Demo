@@ -68,10 +68,14 @@ namespace CSDemo.Models.Product
                     Log.Error(ex.Message, ex, this);
                 }
 
-                if (string.IsNullOrEmpty(response)) yield return null;
+                //return fallback if empty response
+                var fallbackAlsoBoughtProducts = GetAlsoBoughtProductsFallback();
+
+                if (string.IsNullOrEmpty(response) && fallbackAlsoBoughtProducts == null)
+                    yield return null;
 
                 var result = JsonConvert.DeserializeObject<ComplementaryProductResult>(response);
-                if (!result.IsSuccessful)
+                if (!result.IsSuccessful && fallbackAlsoBoughtProducts == null)
                 {
                     if (result.Messages == null) yield return null;
                     foreach (var message in result.Messages)
@@ -80,31 +84,85 @@ namespace CSDemo.Models.Product
                     }
                     yield return null;
                 }
-                if (result.ProductIds == null || !result.ProductIds.Any()) yield return null;
-                foreach (var productId in result.ProductIds)
+
+                if (result.ProductIds != null && result.ProductIds.Any())
                 {
-                    var productResult = ProductHelper.GetItemByProductId(productId);
-                    if (productResult != null)
+                    foreach (var productId in result.ProductIds)
                     {
-                        var productItem = productResult.GetItem();
-                        yield return productItem.GlassCast<Product>();
+                        var productResult = ProductHelper.GetItemByProductId(productId);
+                        if (productResult != null)
+                        {
+                            var productItem = productResult.GetItem();
+                            yield return productItem.GlassCast<Product>();
+                        }
+                    }
+                }
+
+                if (fallbackAlsoBoughtProducts != null && fallbackAlsoBoughtProducts.Any())
+                {
+                    foreach (var product in fallbackAlsoBoughtProducts)
+                    {
+                        yield return product;
                     }
                 }
             }
+        }
+
+        public IEnumerable<Product> GetAlsoBoughtProductsFallback()
+        {
+            var fallbackComponentPath = Context.Site.RootPath + "/Components/RelatedProducts/Related Products Fallback";
+            var fallbackItem = Context.Database.GetItem(fallbackComponentPath);
+
+            if (fallbackItem != null)
+            {
+                var fallback = GlassHelper.Cast<RelatedProductsFallback>(fallbackItem);
+
+                if (fallback != null)
+                {
+                    return fallback.AlsoBoughtProducts.ToList();
+                }
+            }
+
+            return null;
+        }
+
+        public IEnumerable<Product> GetRelatedProductsFallback()
+        {
+            var fallbackComponentPath = Context.Site.RootPath + "/Components/RelatedProducts/Related Products Fallback";
+            var fallbackItem = Context.Database.GetItem(fallbackComponentPath);
+
+            if (fallbackItem != null)
+            {
+                var fallback = GlassHelper.Cast<RelatedProductsFallback>(fallbackItem);
+
+                if (fallback != null)
+                {
+                    return fallback.RelatedProducts.ToList();
+                }
+            }
+
+            return null;
         }
 
         public IEnumerable<Product> RelatedProducts
         {
             get
             {
-                List<Product> relatedProducts = new List<Product>();
+                var relatedProducts = new List<Product>();
                 var contextProductItem = Context.Database.GetItem(new ID(ID));
+
                 if (contextProductItem == null) return relatedProducts;
+
                 RelationshipField control = contextProductItem.Fields[Fields.RelationshipList];
                 if (control == null) return relatedProducts;
-                IEnumerable<Item> productRelationshipTargets = control.GetProductRelationshipsTargets();
-                IEnumerable<Item> relationshipTargets = productRelationshipTargets as Item[] ?? productRelationshipTargets.ToArray();
-                if (productRelationshipTargets == null || !relationshipTargets.Any()) return relatedProducts;
+
+                var productRelationshipTargets = control.GetProductRelationshipsTargets();
+                var relationshipTargets = productRelationshipTargets as Item[] ?? productRelationshipTargets.ToArray();
+
+                //if 0, do fallback
+                if (productRelationshipTargets == null || !relationshipTargets.Any())
+                    return GetRelatedProductsFallback();
+
                 relatedProducts.AddRange(relationshipTargets.Select(t => t.GlassCast<Product>()).Where(t => t != null));
                 return relatedProducts;
             }

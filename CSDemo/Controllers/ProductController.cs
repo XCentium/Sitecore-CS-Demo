@@ -274,6 +274,12 @@ namespace CSDemo.Controllers
             return View(product);
         }
 
+        public ActionResult ProductDetail2()
+        {
+            var product = GetProduct();
+            return View(product);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult VisitorSignupForStockNotification(Product model)
