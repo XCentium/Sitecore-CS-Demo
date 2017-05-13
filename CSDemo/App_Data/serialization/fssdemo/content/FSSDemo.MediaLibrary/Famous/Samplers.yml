@@ -1,0 +1,14 @@
+﻿---
+ID: a05872f6-5a13-426b-8be3-7a4c0ee7402c
+Parent: 29e22fc6-07a0-4cfe-9966-0606e9a464dd
+Template: fe5dd826-48c6-436d-b87a-7c4210c7413b
+Path: /sitecore/media library/Images/Famous/Samplers
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170512T210304Z

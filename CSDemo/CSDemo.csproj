@@ -413,6 +413,7 @@
     <Compile Include="Models\Product\NotificationSigneupInput.cs" />
     <Compile Include="Models\Product\PaginationViewModel.cs" />
     <Compile Include="Models\Product\PersonalizedProducts.cs" />
+    <Compile Include="Models\Product\ProductSampler.cs" />
     <Compile Include="Models\Product\ProductHelper.cs" />
     <Compile Include="App_Start\Initializer.cs" />
     <Compile Include="Models\Checkout\Cart\CartItem.cs" />
@@ -659,6 +660,7 @@
     <Content Include="Views\Form\Index.cshtml" />
     <Content Include="Views\Form\SuccessRedirect.cshtml" />
     <Content Include="Views\Form\Web.config" />
+    <Content Include="Views\Product\ProductSampler.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

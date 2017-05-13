@@ -1,0 +1,169 @@
+﻿@model List<CSDemo.Models.Product.ProductSampler>
+
+<style>
+    section.product-sampler {
+        padding: 20px;
+    }
+
+    .group {
+        padding: 20px;
+    }
+
+    .group img{
+        float: left;
+    }
+
+    .group .desc {
+        float: left;
+        width: 700px;
+        margin: 0 20px;
+        height: 100px;
+    }
+
+    .group .price {
+        height: 100px;
+        float: left;
+        padding: 40px 0;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .group > h3 {
+        margin-top: 0;
+        font-size: 18px;
+        color: white;
+        padding: 10px;
+        background-color: black;
+    }
+
+    .group > div > div span {
+        display: block;
+    }
+
+    .group > button {
+        width: 100px;
+        float: left;
+    }
+
+    .group .select {
+        padding: 30px 0 0 20px;
+        width: 100px;
+        float: left;
+    }
+
+    .group button {
+        padding: 5px 20px;
+    }
+
+    .sampler-image {
+        max-width: 1600px;
+        width: 100%;
+        padding: 20px 0;
+        height: 300px;
+    }
+</style>
+
+
+<section class="product-sampler container">
+    <div class="row">
+        <h1>Build Your Own Sampler!</h1>
+        @if (Model != null)
+        {
+            <div class="control">
+                <select id="sampler" class="select">
+                    @for (var ctr = 0; ctr < Model.Count; ctr++)
+                    {
+                        var sampler = Model[ctr];
+                        var selected = ctr <= 0 ? "selected" : "";
+                        <option value="@sampler.ID" @selected>@sampler.Title</option>
+                    }
+                </select>
+            </div>
+
+            <div class="products-samplers row">
+                @for (var ctrProducts = 0; ctrProducts < Model.Count; ctrProducts++)
+                {
+                    var sampler = Model[ctrProducts];
+                    var hidden = ctrProducts > 0 ? "display:none;" : "";
+
+                    <div class="products-sampler" id="@sampler.ID" style="@hidden">
+                        <img class="sampler-image img-responsive" src="@sampler.Image.Src"/>
+                        <h2 class="sampler-title">@sampler.Title</h2>
+                        <div class="group group1 clearfix">
+                            <h3>Group 1</h3>
+                            @for (var ctr = 0; sampler.Group1Products != null && ctr < sampler.Group1Products.Count(); ctr++)
+                            {
+                                var product = sampler.Group1Products.ToList()[ctr];
+
+                                <div data-id="@product.ID" class="clearfix">
+                                    <img src="@product.FirstImage?w=100&h=100"/>
+                                    <div class="desc">
+                                        <h3>@product.Title</h3>
+                                        <span class="description">@product.Description.Substring(0, product.Description.IndexOf(".") + 1)</span>
+                                    </div>
+                                    <div class="price">Normally @product.Price.ToString("C")</div>
+                                    <div class="select">
+                                        <button value="Select">Select</button>
+                                    </div>
+                                </div>
+                                <br/>
+                            }
+                        </div>
+
+                        <div class="group group2">
+                            <h3>Group 2</h3>
+                            @for (var ctr = 0; sampler.Group2Products != null && ctr < sampler.Group2Products.Count(); ctr++)
+                            {
+                                var product = sampler.Group2Products.ToList()[ctr];
+
+                                <div data-id="@product.ID" class="clearfix">
+                                    <img src="@product.FirstImage?w=100&h=100"/>
+                                    <div class="desc">
+                                        <h3>@product.Title</h3>
+                                        <span class="description">@product.Description.Substring(0, product.Description.IndexOf(".") + 1)</span>
+                                    </div>
+                                    <div class="price">Normally @product.Price.ToString("C")</div>
+                                    <div class="select">
+                                        <button value="Select">Select</button>
+                                    </div>
+                                </div>
+                                <br/>
+                            }
+                        </div>
+
+                        <div class="group group3">
+                            <h3>Group 3</h3>
+                            @for (var ctr = 0; sampler.Group3Products != null && ctr < sampler.Group3Products.Count(); ctr++)
+                            {
+                                var product = sampler.Group3Products.ToList()[ctr];
+
+                                <div data-id="@product.ID" class="clearfix">
+                                    <img src="@product.FirstImage?w=100&h=100"/>
+                                    <div class="desc">
+                                        <h3>@product.Title</h3>
+                                        <span class="description">@product.Description.Substring(0, product.Description.IndexOf(".") + 1)</span>
+                                    </div>
+                                    <div class="price">Normally @product.Price.ToString("C")</div>
+                                    <div class="select">
+                                        <button value="Select">Select</button>
+                                    </div>
+                                </div>
+                                <br/>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>
+
+<script>
+    $("document").ready(function() {
+        $("#sampler").on("change", function () {
+            $(".products-sampler").hide();
+            var $id = $("#sampler").val();
+            $("#" + $id).show();
+        });
+    });
+</script>

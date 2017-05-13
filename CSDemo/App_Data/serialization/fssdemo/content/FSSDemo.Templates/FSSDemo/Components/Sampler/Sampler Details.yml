@@ -1,0 +1,14 @@
+﻿---
+ID: 207db029-ae3c-4fe8-8f51-cf577e782fe4
+Parent: 78fecd47-b806-4cc2-ba8c-15ca77b1c51e
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/FSSDemo/Components/Sampler/Sampler Details
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170512T204643Z

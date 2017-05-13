@@ -57,6 +57,28 @@ namespace CSDemo.Controllers
             return View(products);
         }
 
+        public ActionResult ProductSampler()
+        {
+            Sitecore.Diagnostics.Log.Info("FSS DEMO: Starting Product Sampler.", this);
+
+            try
+            {
+                var datasourceId = RenderingContext.Current.Rendering.DataSource;
+                if (string.IsNullOrWhiteSpace(datasourceId)) throw new ArgumentException("Product Sampler Datasource is not set.");
+
+                var productSamplerFolder = Context.Database.GetItem(datasourceId);
+                var productSamplers = productSamplerFolder.Children.Select(GlassHelper.Cast<ProductSampler>).ToList();
+                
+                return View(productSamplers);
+            }
+            catch (Exception ex)
+            {
+                Sitecore.Diagnostics.Log.Error(ex.Message, ex);
+            }
+
+            return View();
+        }
+
         public ActionResult DealerOrderingSystem()
         {
             return View();
@@ -109,7 +131,7 @@ namespace CSDemo.Controllers
             }
             catch (Exception ex)
             {
-                Sitecore.Diagnostics.Log.Error(ex.Message,ex,this);
+                Sitecore.Diagnostics.Log.Error(ex.Message, ex, this);
             }
 
             return personalizedProducts?.Products != null ? View(personalizedProducts.Products) : View(empty);
@@ -214,7 +236,7 @@ namespace CSDemo.Controllers
 
 
                 var categoryId = (!string.IsNullOrEmpty(cid)) ? cid : ProductHelper.GetItemIdsFromName(categoryName, _userCatalogIds);
-                if(categoryId == "") { categoryId = (!string.IsNullOrEmpty(cid)) ? cid : ProductHelper.GetItemIdsFromName(categoryName.Replace(" ","-"), _userCatalogIds); }
+                if (categoryId == "") { categoryId = (!string.IsNullOrEmpty(cid)) ? cid : ProductHelper.GetItemIdsFromName(categoryName.Replace(" ", "-"), _userCatalogIds); }
 
                 if (!string.IsNullOrEmpty(categoryId))
                 {
@@ -358,7 +380,7 @@ namespace CSDemo.Controllers
                     {
                         categoryId = categoryId + _catalogPostFix;
                     }
-                    
+
                     Response.Redirect($"/categories/{categoryId}/{productId}");
                     Response.End();
                 }

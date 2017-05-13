@@ -1,0 +1,14 @@
+﻿---
+ID: c523c24c-4bb2-45dd-83f1-26596e808acf
+Parent: 4a1252af-c494-43b9-9c17-850b1dbb7f3e
+Template: 0437fee2-44c9-46a6-abe9-28858d9fee8c
+Path: /sitecore/templates/FSSDemo/Components
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170512T204510Z
