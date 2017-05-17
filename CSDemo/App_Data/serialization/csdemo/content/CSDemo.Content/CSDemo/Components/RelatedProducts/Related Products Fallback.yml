@@ -1,0 +1,34 @@
+﻿---
+ID: 40d932e4-3c35-4ad4-8708-7228765fa55b
+Parent: f4912257-69b4-416e-a4ac-b9214ff842ab
+Template: ed9b2b2e-6ab2-42e2-b1c1-7220f68ff1a1
+Path: /sitecore/content/CSDemo/Components/RelatedProducts/Related Products Fallback
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170513T031440Z
+    - ID: bfabd1ba-e8cd-40f8-a6fe-16dfe2b22687
+      Hint: AlsoBoughtProducts
+      Type: Multilist with Search
+      Value: |
+        {27D98AA2-677E-459F-9D7C-4F059EF526D6}
+        {4B0808BE-1B6C-4050-A44E-5F1A85F87675}
+        {7FF19981-9A81-4F52-92BD-301361EE5363}
+        {2936D7BD-73CF-4989-87DF-7B6530A6A7E5}
+        {ADDD5574-D5A9-465E-8698-618245A1D802}
+        {8A8380EF-9B6E-495D-9623-A05974F6302F}
+    - ID: cf3121cc-ec4c-421a-80bd-ffa31bca5f91
+      Hint: RelatedProducts
+      Type: Multilist with Search
+      Value: |
+        {AB5FF7F0-636E-4E91-9C23-ECDC3B8AB9D4}
+        {3CA760F2-1CF4-42B1-B510-8B318C332B6E}
+        {14DDD7DD-C196-43F2-AF46-DB45ADFB7CD3}
+        {DF004069-1CBD-41B8-A146-AE8513F8DA42}
+        {2FADA848-C7FA-40F2-955B-B635F4175DBB}
+        {8FFC7552-F801-4D41-8AD3-8BF83CC9A301}
