@@ -1,0 +1,18 @@
+﻿---
+ID: e9be2bc1-7178-4a44-b2a8-ab3f87844b00
+Parent: a81ac5f2-2513-4bab-9de4-639034585090
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+Path: /sitecore/content/XCinemaDemo/Components/Cinemas
+DB: master
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 250
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170516T232752Z

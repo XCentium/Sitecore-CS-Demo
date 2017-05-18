@@ -1,0 +1,32 @@
+﻿---
+ID: 9ee0c85c-3d52-4d09-bdf8-13f18f3b16d8
+Parent: 0de95ae4-41ab-4d01-9eb0-67441b7c2450
+Template: d5e5858b-4bed-4666-88c0-6de55e088ccc
+Path: /sitecore/content/XCinemaDemo
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T160920Z
+    - ID: 39fd34cc-0daf-49fe-b103-70f7bf36a65f
+      Hint: Phone Number
+      Value: 555 123 1234
+    - ID: 6488fe35-2e12-4396-a26d-7180d3701450
+      Hint: email
+      Value: help@xcentium.net
+    - ID: 8254f343-7298-4618-9167-f850519e7e5d
+      Hint: Tagline
+      Value: XC Demosite
+    - ID: 96a811ba-4aab-4005-a75f-aa2a242941e2
+      Hint: PreTitle
+      Value: XCinema Demo
+    - ID: d0ee52ae-22ad-4bad-afae-6902cb2827fc
+      Hint: Catalog
+      Value: {05DEFEF2-81AB-4924-B1C2-0A52C0E20C37}
+    - ID: fb1f3432-d97f-4168-83e9-da4fafa53065
+      Hint: Title
+      Value: Demo

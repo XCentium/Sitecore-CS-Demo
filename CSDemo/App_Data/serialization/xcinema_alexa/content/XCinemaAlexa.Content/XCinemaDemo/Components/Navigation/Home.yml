@@ -1,0 +1,20 @@
+﻿---
+ID: f2468711-c737-4471-a19c-52213ce2dffa
+Parent: 8c2cdc8d-49cc-4429-8a18-e02f92e000c0
+Template: 338f84ba-3cdf-466e-8fb2-54ca845715d5
+Path: /sitecore/content/XCinemaDemo/Components/Navigation/Home
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T184338Z
+    - ID: 525e09fb-d3cd-4cdb-b78c-1929bf4588d8
+      Hint: Link
+      Value: "<link id=\"{05C23D5D-1313-48A7-A174-D53B09939893}\" querystring=\"\" target=\"\" text=\"\" anchor=\"\" title=\"\" class=\"\" url=\"/FamousSmoke/Home\" linktype=\"internal\" />"
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

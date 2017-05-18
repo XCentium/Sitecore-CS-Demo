@@ -1,0 +1,30 @@
+﻿---
+ID: 09151ed6-7584-4c60-abdd-ea14420143b1
+Parent: 30a56f42-6442-4e03-9ddf-e567580b7446
+Template: 78661792-c9e6-46eb-ab82-c8a3beffcd0a
+Path: /sitecore/content/XCinemaDemo/Components/GeoTargeted Products/GeoTargeted Products
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170505T222758Z
+    - ID: 52c360b4-61f6-43e5-8cab-3f72f923e31a
+      Hint: Title
+      Value: Products You Might Be Interested In
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin
+    - ID: af1b0832-15a3-48e3-8bcf-e6890cef3a6c
+      Hint: Products
+      Type: Multilist with Search
+      Value: |
+        {DE0F0F07-90CA-44CB-AD09-CE778E93238C}
+        {D09B6B38-CE90-4634-8FD2-4C7C4F6CFD9A}
+        {611E0C0E-F157-4781-B917-E2AD0760C49B}
+        {17688472-E1A0-4925-99C0-6BC09494C400}
+        {C32F523B-601F-4220-8171-8B157A9FE348}
+        {E3B3F76C-FD57-4823-B803-6384C9E6AAED}

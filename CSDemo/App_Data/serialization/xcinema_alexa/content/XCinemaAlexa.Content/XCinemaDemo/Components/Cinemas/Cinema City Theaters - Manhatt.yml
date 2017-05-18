@@ -1,0 +1,29 @@
+﻿---
+ID: ed4968f9-7cec-4938-b69b-2dfd39ecf7f7
+Parent: e9be2bc1-7178-4a44-b2a8-ab3f87844b00
+Template: 8d93d0d4-0410-4b67-8012-9260a319bfe2
+Path: /sitecore/content/XCinemaDemo/Components/Cinemas/Cinema City Theaters - Manhattan Beach
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 153f0d33-d707-4d4e-bbcb-c60267b8a549
+      Hint: Zipcode
+      Value: 90266
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170516T232922Z
+    - ID: 2da3870e-86e0-48b4-99a0-7f3522dcceac
+      Hint: Latitude
+      Value: 33.885357
+    - ID: 36715ce6-456c-4dea-8980-bc37c06cb219
+      Hint: Longitude
+      Value: -118.407898
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin
+    - ID: e8cacaaf-4798-4c2e-a4ea-766face91cd1
+      Hint: Name
+      Value: Cinema City Theaters - Manhattan Beach

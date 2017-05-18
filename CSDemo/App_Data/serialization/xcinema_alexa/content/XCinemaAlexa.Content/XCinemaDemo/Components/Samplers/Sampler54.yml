@@ -1,0 +1,47 @@
+﻿---
+ID: b0120472-f299-4522-a29a-a2a3eee6a66e
+Parent: 7d2e63b9-f1f3-4e59-8180-7f1014afabc6
+Template: 78fecd47-b806-4cc2-ba8c-15ca77b1c51e
+Path: /sitecore/content/XCinemaDemo/Components/Samplers/Sampler54
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 01c79e18-b96d-47ee-ba66-524e44f460ec
+      Hint: Group3Products
+      Type: Multilist with Search
+      Value: |
+        {E81E32DE-1352-49D8-92F8-7D29794327E7}
+        {E7D1A8F7-BA8F-4A71-8503-DA1DF7421710}
+        {DFAFA29C-D466-4F0B-898E-BAD4D462345F}
+        {B1819529-1C53-4923-A903-16C2F368463B}
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170512T205422Z
+    - ID: 30ea9f45-4ee3-4113-9d53-94e39f252a66
+      Hint: Image
+      Value: "<image mediaid=\"{200E92F1-CA8B-4DF6-B4F7-E8DB065D724A}\" />"
+    - ID: 4d2baaa1-b4c8-4bf4-8ebb-c27954acd438
+      Hint: Price
+      Value: 54
+    - ID: 931a85db-0844-4345-9d3e-1bcaeb1e19e8
+      Hint: Name
+      Value: Shakespeare's Best - $54
+    - ID: cd515ea2-712f-4444-930f-56d0bf94eed7
+      Hint: Group1Products
+      Type: Multilist with Search
+      Value: |
+        {92769795-401D-4FE6-AA18-93F3A32A8681}
+        {4931B663-246C-48FB-9B36-10C8D41CD05B}
+        {3F4E5BC6-B0FE-4A51-9829-59AA64DA4724}
+        {D7AEA234-7DE1-4309-A2DB-D2412F175C36}
+    - ID: ef0bd3ac-efd5-4fe3-8a73-f1fd0c5e01fd
+      Hint: Group2Products
+      Type: Multilist with Search
+      Value: |
+        {B1819529-1C53-4923-A903-16C2F368463B}
+        {3AC9995D-0083-43B6-B539-A85705209540}
+        {DFAFA29C-D466-4F0B-898E-BAD4D462345F}
+        {E7D1A8F7-BA8F-4A71-8503-DA1DF7421710}

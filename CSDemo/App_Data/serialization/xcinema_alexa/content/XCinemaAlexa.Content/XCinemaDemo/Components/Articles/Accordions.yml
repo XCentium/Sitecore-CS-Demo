@@ -1,0 +1,17 @@
+﻿---
+ID: 6facf165-7002-4703-994c-1b97a88079fe
+Parent: 17383e93-5c7a-443e-a689-adf2143c74fa
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+Path: /sitecore/content/XCinemaDemo/Components/Articles/Accordions
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161102T152219Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

@@ -1,0 +1,20 @@
+﻿---
+ID: 34d3ed5b-4243-40dc-9961-d03f0795ec5d
+Parent: d83e5ba5-22ee-4fea-842a-9b32f02c1953
+Template: e619e625-3af2-463b-9204-92cb08205b93
+Path: /sitecore/content/XCinemaDemo/Components/Products/Sports
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160318T234334Z
+    - ID: 6ad435a4-d499-4f83-9dd1-fb350322bbd1
+      Hint: CouponCodeDescription
+      Value: This couponcode willsave you 15% today on climbing products
+    - ID: c1ac14a6-3ece-432d-8e0c-a6732525f0cf
+      Hint: CouponCode
+      Value: CLIMB-2016

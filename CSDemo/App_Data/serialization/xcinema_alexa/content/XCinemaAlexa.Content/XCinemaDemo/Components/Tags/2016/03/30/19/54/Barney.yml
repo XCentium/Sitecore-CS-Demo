@@ -1,0 +1,20 @@
+﻿---
+ID: 7290fe5c-b499-4cdf-9564-647a455af1ec
+Parent: 85557625-8fdf-4a51-a2a4-eb0bc6c5ef69
+Template: 3c937b2d-ea5e-4cb0-8fbd-1799bfa30475
+Path: /sitecore/content/XCinemaDemo/Components/Tags/2016/03/30/19/54/Barney
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160330T195430Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\customer88
+    - ID: b5620c00-330b-479e-9b54-57857040e1e0
+      Hint: Tag Name
+      Value: Barney

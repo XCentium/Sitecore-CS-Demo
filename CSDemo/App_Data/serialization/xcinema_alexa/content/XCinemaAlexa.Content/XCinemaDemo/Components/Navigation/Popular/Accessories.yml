@@ -1,0 +1,28 @@
+﻿---
+ID: ab5db6f2-1e22-4b2c-b548-b2d3654fe8c3
+Parent: c8879aa4-4fbc-4f40-89c5-cb72cb92d104
+Template: 0a2a31a0-a3b8-493c-b5fe-1935e1723f52
+Path: /sitecore/content/XCinemaDemo/Components/Navigation/Popular/Accessories
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170504T155026Z
+    - ID: 28100e2e-3cf3-4ee9-b446-b7f7f0780484
+      Hint: Links
+      Type: Multilist with Search
+      Value: |
+        {C9779F3F-4303-431F-B259-38E2E1112018}
+        {67A0882A-BBC2-40AA-AB96-3C8F50B5C773}
+        {F25166CF-9965-454B-8A9E-E38DA54516DC}
+        {67CD7D9E-6653-4D0E-A7B6-C2E0F4640E13}
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin
+    - ID: 7c445b60-6911-46b6-966a-736a76c7f549
+      Hint: Title
+      Value: Accessories

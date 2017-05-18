@@ -1,0 +1,25 @@
+﻿---
+ID: 744dc55f-4d76-4a77-b835-489ee5182ddc
+Parent: de50b3ab-6c02-49f5-903d-519152437092
+Template: 602425a0-bac0-48ab-906d-9b29b58380d4
+Path: /sitecore/content/XCinemaDemo/Components/Featured Blogs/Featured Blogs - Default
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170509T210652Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin
+    - ID: 895715b6-12af-41dc-98d7-ef648973b2cd
+      Hint: Featured Blogs
+      Type: Multilist with Search
+      Value: |
+        {413EE15A-F5FE-4419-B9C1-61DCE746755E}
+        {0B7F3FF5-F657-47C9-8DB0-DD87F6DA0892}
+        {FEE3B684-942E-44B6-8221-9C127E665BB7}
+        {7E3D0694-4A36-4941-9EBC-046BB020111A}

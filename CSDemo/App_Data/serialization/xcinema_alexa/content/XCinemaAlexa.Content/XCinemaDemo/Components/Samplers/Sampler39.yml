@@ -1,0 +1,47 @@
+﻿---
+ID: 95a5cf38-49bf-4812-8593-535bd535ca8d
+Parent: 7d2e63b9-f1f3-4e59-8180-7f1014afabc6
+Template: 78fecd47-b806-4cc2-ba8c-15ca77b1c51e
+Path: /sitecore/content/XCinemaDemo/Components/Samplers/Sampler39
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 01c79e18-b96d-47ee-ba66-524e44f460ec
+      Hint: Group3Products
+      Type: Multilist with Search
+      Value: |
+        {CC0A9EEB-7172-47B1-A482-7F566B861211}
+        {7F5376B0-79C4-4CB2-BE4C-9CD597962E76}
+        {C709C667-C2EF-46D0-B412-290EDC571517}
+        {E97F3127-FDA0-4746-A365-0B3C38FD5A33}
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170512T205422Z
+    - ID: 30ea9f45-4ee3-4113-9d53-94e39f252a66
+      Hint: Image
+      Value: "<image mediaid=\"{200E92F1-CA8B-4DF6-B4F7-E8DB065D724A}\" />"
+    - ID: 4d2baaa1-b4c8-4bf4-8ebb-c27954acd438
+      Hint: Price
+      Value: 40
+    - ID: 931a85db-0844-4345-9d3e-1bcaeb1e19e8
+      Hint: Name
+      Value: Best Sellers - $40
+    - ID: cd515ea2-712f-4444-930f-56d0bf94eed7
+      Hint: Group1Products
+      Type: Multilist with Search
+      Value: |
+        {2FADA848-C7FA-40F2-955B-B635F4175DBB}
+        {89645581-3B33-410E-813F-4DB87B986A56}
+        {B1C754CE-4913-4EF4-A4FD-BD984398DE02}
+        {97B1D8AD-818F-4945-B085-66D3BD23334E}
+    - ID: ef0bd3ac-efd5-4fe3-8a73-f1fd0c5e01fd
+      Hint: Group2Products
+      Type: Multilist with Search
+      Value: |
+        {DAE499DE-62DE-44AE-91B8-1C36930AC903}
+        {29FAE381-088B-4E2D-8396-7DA5E9DD312A}
+        {261E663E-2FC3-4043-B7A4-3E67FCC96A5A}
+        {A857446A-1661-4704-9677-15F037C9D7F9}

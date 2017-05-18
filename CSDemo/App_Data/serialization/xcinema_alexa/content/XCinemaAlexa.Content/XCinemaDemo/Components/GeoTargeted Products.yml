@@ -1,0 +1,14 @@
+﻿---
+ID: 30a56f42-6442-4e03-9ddf-e567580b7446
+Parent: a81ac5f2-2513-4bab-9de4-639034585090
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+Path: /sitecore/content/XCinemaDemo/Components/GeoTargeted Products
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170505T222725Z

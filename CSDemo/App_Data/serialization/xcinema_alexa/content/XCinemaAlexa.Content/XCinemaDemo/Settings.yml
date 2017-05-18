@@ -1,0 +1,18 @@
+﻿---
+ID: 28b51cfd-fffa-4565-99c9-a65a3145b8c6
+Parent: 9ee0c85c-3d52-4d09-bdf8-13f18f3b16d8
+Template: a21b890e-c798-469c-8727-0f2c525787f3
+Path: /sitecore/content/XCinemaDemo/Settings
+DB: master
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 300
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T161000Z

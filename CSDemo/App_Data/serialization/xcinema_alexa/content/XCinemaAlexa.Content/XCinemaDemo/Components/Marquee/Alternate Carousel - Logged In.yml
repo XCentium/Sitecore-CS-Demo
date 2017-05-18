@@ -1,0 +1,25 @@
+﻿---
+ID: 48f76359-69ab-43d4-a603-279a8101e437
+Parent: 83c56f40-69ef-488c-a53e-c1a348fa4e7a
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+Path: /sitecore/content/XCinemaDemo/Components/Marquee/Alternate Carousel - Logged In
+DB: master
+SharedFields:
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: apps/32x32/direction-1.png
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Type: TreelistEx
+  Value: {6D36DF55-60E5-4591-899C-EFCCAF83579A}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160226T205207Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

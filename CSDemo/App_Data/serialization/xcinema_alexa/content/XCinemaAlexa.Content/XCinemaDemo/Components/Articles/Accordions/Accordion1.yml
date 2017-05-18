@@ -1,0 +1,24 @@
+﻿---
+ID: d29fbc02-3d51-4fed-8549-bd2b65e6aea8
+Parent: 6facf165-7002-4703-994c-1b97a88079fe
+Template: 99c91ac0-33c0-4720-a15b-92c5dfc5829e
+Path: /sitecore/content/XCinemaDemo/Components/Articles/Accordions/Accordion1
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161101T185517Z
+    - ID: 6c94edd4-00ab-4678-8073-82fe77a17282
+      Hint: Title
+      Value: Accordion1
+    - ID: d299fccf-a4be-4c4e-85fa-42e740e7fd69
+      Hint: Data
+      Type: Multilist
+      Value: |
+        {C66E52B1-A8A6-4BC9-AB05-AFC810CEB687}
+        {B88DEC83-A981-45B1-B596-63E9CEEDFB09}
+        {8D142542-2EF0-4CFB-8180-25111FAB51E2}

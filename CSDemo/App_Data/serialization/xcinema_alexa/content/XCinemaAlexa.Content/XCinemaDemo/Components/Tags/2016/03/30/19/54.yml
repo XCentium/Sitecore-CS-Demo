@@ -1,0 +1,17 @@
+﻿---
+ID: 85557625-8fdf-4a51-a2a4-eb0bc6c5ef69
+Parent: 5c50b425-8d51-4fb3-9679-af8a4405d376
+Template: adb6ca4f-03ef-4f47-b9ac-9ce2ba53ff97
+Path: /sitecore/content/XCinemaDemo/Components/Tags/2016/03/30/19/54
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160330T195430Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\customer88

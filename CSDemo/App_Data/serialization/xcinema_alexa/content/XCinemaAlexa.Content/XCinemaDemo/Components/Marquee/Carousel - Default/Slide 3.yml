@@ -1,0 +1,20 @@
+﻿---
+ID: 0cfa069e-2fe2-49f8-a79e-b0ba6cd1626f
+Parent: de25c198-6dfc-46f4-81c5-bb7d6e352103
+Template: 6d36df55-60e5-4591-899c-efccaf83579a
+Path: /sitecore/content/XCinemaDemo/Components/Marquee/Carousel - Default/Slide 3
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160330T212043Z
+    - ID: 35d787ae-0f1f-412a-a570-d5a79018ebb8
+      Hint: Image
+      Value: "<image mediaid=\"{8353DFAD-9E1E-4249-AC17-CE6D5D470EA5}\" />"
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo

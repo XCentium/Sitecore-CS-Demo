@@ -1,0 +1,21 @@
+﻿---
+ID: d4f3b3de-feb7-458f-b3da-dac650ed9bb9
+Parent: 493b4773-b786-4ffd-8f50-74f2053661ce
+Template: e55834fb-7c93-44a2-87c0-62beba282ced
+Path: /sitecore/content/XCinemaDemo/Home/Product catalog
+DB: master
+SharedFields:
+- ID: 2882072b-e310-406b-8dd9-b22c9ea4a0f3
+  Hint: CategoryDatasource
+  Value: /sitecore/Commerce/Catalog Management/Catalogs/XCinemaCatalog
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170512T160108Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin

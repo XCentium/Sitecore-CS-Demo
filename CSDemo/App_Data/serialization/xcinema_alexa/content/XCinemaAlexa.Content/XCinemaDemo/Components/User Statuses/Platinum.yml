@@ -1,0 +1,24 @@
+﻿---
+ID: 2d36cb92-d45c-4feb-a9bb-1b2fee37bf8b
+Parent: 5be419c8-4c05-4313-be7e-a13b88605ba0
+Template: 3936f488-9a41-4d9f-940f-895b81014522
+Path: /sitecore/content/XCinemaDemo/Components/User Statuses/Platinum
+DB: master
+SharedFields:
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: Applications/16x16/star_grey.png
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160901T013448Z
+    - ID: d61d3d94-869d-4968-90c0-89e916af76f3
+      Hint: Spending Amount
+      Value: 1000
+    - ID: f8f5c80a-4c82-45b4-a601-60d61d88ca1d
+      Hint: Badge
+      Value: "<image mediaid=\"{2A62FD98-C09C-4708-95DB-2EEFFEF8964D}\" />"

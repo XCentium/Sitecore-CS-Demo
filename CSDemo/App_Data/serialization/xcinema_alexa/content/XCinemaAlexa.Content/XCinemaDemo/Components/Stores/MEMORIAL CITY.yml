@@ -1,0 +1,35 @@
+﻿---
+ID: 565a914d-dcff-4a77-afa0-1bbab975a808
+Parent: 14f8d11e-01ce-4fab-8eb9-d13e96560e55
+Template: b6ee1aec-38eb-4072-aefb-35a29e1af90d
+Path: /sitecore/content/XCinemaDemo/Components/Stores/MEMORIAL CITY
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 1f3f1da5-d03c-447a-bf68-45a22b7eef82
+      Hint: State
+      Value: TX
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160525T195047Z
+    - ID: 31aac6bf-3d86-44ea-b8c5-ad646b6f21ad
+      Hint: Title
+      Value: MEMORIAL CITY
+    - ID: 3a45e699-fe76-4ce5-a177-5841e0cdc9d2
+      Hint: City
+      Value: HOUSTON
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo
+    - ID: 8814e342-c661-4211-8961-83a56ad24e6c
+      Hint: Country
+      Value: US
+    - ID: 9f7d91b0-572b-4f25-ac87-091fb74b4ff1
+      Hint: Street
+      Value: 900 GESSNER RD
+    - ID: aac119fd-49ee-4c11-9d64-0c5a6c2e0922
+      Hint: Zip
+      Value: 77024

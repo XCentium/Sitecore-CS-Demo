@@ -1,0 +1,60 @@
+﻿---
+ID: 7c9d23eb-89bd-446c-9d23-b686069a3f3c
+Parent: 7056ea52-84ff-45f3-b1da-e6469de15126
+Template: b3d2832f-2fbf-4466-9d95-d3a0c6476362
+Path: /sitecore/content/XCinemaDemo/Home/Categories/*/*
+DB: master
+SharedFields:
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: Apps/32x32/File (1).png
+- ID: b0a67b2a-8b07-4e0b-8809-69f751709806
+  Hint: __Tracking
+  Type: Tracking
+  Value: |
+    <tracking>
+      <event id="{B7949A07-DDD5-4C18-929E-78767B03D6F8}" name="View Product" />
+    </tracking>
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s" p:p="1">
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r uid="{63223E3A-7BE4-4C4F-A69F-29C0F4CD44EA}">
+          <p:d />
+        </r>
+        <r uid="{8BEA443C-2377-4A73-880E-068368CEDFF2}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:id="{A4460595-566F-4A24-9745-2E6584FE7E78}" s:ph="page-body" />
+        <r uid="{DF21C606-F751-4108-BEE5-0473B6B9FC9B}" p:after="r[@uid='{8BEA443C-2377-4A73-880E-068368CEDFF2}']" s:ds="" s:id="{78AD0B43-99B6-4DF0-9F35-82A469106E3E}" s:par="" s:ph="page-body" />
+        <r uid="{33368EB6-9F98-49D4-9900-135F61F0E987}" p:after="r[@uid='{DF21C606-F751-4108-BEE5-0473B6B9FC9B}']" s:id="{9196EE6C-26DA-451D-843A-AF5B60195030}" s:ph="page-body" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 04bf00db-f5fb-41f7-8ab7-22408372a981
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s" p:p="1">
+          <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r uid="{F7E80756-5F6F-4B1E-8176-40AAAAE29D7D}" p:before="*" s:id="{A4460595-566F-4A24-9745-2E6584FE7E78}" s:ph="page-body" />
+            <r uid="{8BEA443C-2377-4A73-880E-068368CEDFF2}">
+              <p:d />
+            </r>
+          </d>
+        </r>
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160229T092605Z
+    - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
+      Hint: Page Title
+      Value: Product Detail
+    - ID: 55a55b4d-d866-4df7-9821-46e9f9cf3ee3
+      Hint: Title
+      Value: 
+    - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
+      Hint: Meta Description
+      Value: * Page

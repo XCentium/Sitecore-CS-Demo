@@ -1,0 +1,47 @@
+﻿---
+ID: de8c7b34-13c6-4da8-86d1-cdaa9eb12c8c
+Parent: 7d2e63b9-f1f3-4e59-8180-7f1014afabc6
+Template: 78fecd47-b806-4cc2-ba8c-15ca77b1c51e
+Path: /sitecore/content/XCinemaDemo/Components/Samplers/Sampler99
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 01c79e18-b96d-47ee-ba66-524e44f460ec
+      Hint: Group3Products
+      Type: Multilist with Search
+      Value: |
+        {5F51A864-8573-4121-BD7F-A0F69499FCA4}
+        {5C9873BD-ED8E-4816-A532-9616986C2E6D}
+        {E9EA08D1-F3C5-4F2D-BDAF-A47F0880C321}
+        {D790DD24-358F-4F15-9314-70D6739A4388}
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170512T205422Z
+    - ID: 30ea9f45-4ee3-4113-9d53-94e39f252a66
+      Hint: Image
+      Value: "<image mediaid=\"{200E92F1-CA8B-4DF6-B4F7-E8DB065D724A}\" />"
+    - ID: 4d2baaa1-b4c8-4bf4-8ebb-c27954acd438
+      Hint: Price
+      Value: 99
+    - ID: 931a85db-0844-4345-9d3e-1bcaeb1e19e8
+      Hint: Name
+      Value: Luxury Collection - $99
+    - ID: cd515ea2-712f-4444-930f-56d0bf94eed7
+      Hint: Group1Products
+      Type: Multilist with Search
+      Value: |
+        {DD9D68E9-0C5E-487F-9C07-BD7E58D1FD0D}
+        {D3C54437-CA11-4351-BAF0-5B30EF60205D}
+        {87611726-B554-4E97-8E8F-255E8FD53ACB}
+        {E5870647-DB5D-4EA2-ADF2-DE31271967C4}
+    - ID: ef0bd3ac-efd5-4fe3-8a73-f1fd0c5e01fd
+      Hint: Group2Products
+      Type: Multilist with Search
+      Value: |
+        {4931B663-246C-48FB-9B36-10C8D41CD05B}
+        {92769795-401D-4FE6-AA18-93F3A32A8681}
+        {3F4E5BC6-B0FE-4A51-9829-59AA64DA4724}
+        {D7AEA234-7DE1-4309-A2DB-D2412F175C36}

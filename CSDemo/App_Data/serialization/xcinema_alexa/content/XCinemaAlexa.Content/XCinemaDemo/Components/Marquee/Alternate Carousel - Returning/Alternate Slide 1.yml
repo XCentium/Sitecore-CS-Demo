@@ -1,0 +1,22 @@
+﻿---
+ID: 0c346fc8-ff4f-45bc-8128-cd37149bf3f8
+Parent: d81f1373-89da-4920-9bba-19c843377017
+Template: 6d36df55-60e5-4591-899c-efccaf83579a
+Path: /sitecore/content/XCinemaDemo/Components/Marquee/Alternate Carousel - Returning Visit/Alternate Slide 1
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160316T203924Z
+    - ID: 35d787ae-0f1f-412a-a570-d5a79018ebb8
+      Hint: Image
+      Value: "<image mediaid=\"{EB5A6F00-AB05-470F-8102-1C454D90AAAF}\" />"
+    - ID: 8ef3659b-8284-4484-9b7e-6fff97496411
+      Hint: Content
+      Value: |
+        <br/><br/>
+        <h1 class="border animation top-to-bottom">Alternate version, triggered by Return Visit (anonymous)</h1>

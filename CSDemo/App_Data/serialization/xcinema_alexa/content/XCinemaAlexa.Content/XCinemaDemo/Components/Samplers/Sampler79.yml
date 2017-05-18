@@ -1,0 +1,47 @@
+﻿---
+ID: cf100a77-5b4b-40b4-972a-f68202365d83
+Parent: 7d2e63b9-f1f3-4e59-8180-7f1014afabc6
+Template: 78fecd47-b806-4cc2-ba8c-15ca77b1c51e
+Path: /sitecore/content/XCinemaDemo/Components/Samplers/Sampler79
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 01c79e18-b96d-47ee-ba66-524e44f460ec
+      Hint: Group3Products
+      Type: Multilist with Search
+      Value: |
+        {E1B6EC8F-7879-41D3-A737-958297D74D38}
+        {53F716FE-4D5D-4DD7-B416-7848D42BC51B}
+        {F6AC9C0D-8D58-4DE3-841B-4456F23FC4F6}
+        {0BE06269-2AE5-4D20-BAF2-659F75A4123E}
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170512T205422Z
+    - ID: 30ea9f45-4ee3-4113-9d53-94e39f252a66
+      Hint: Image
+      Value: "<image mediaid=\"{200E92F1-CA8B-4DF6-B4F7-E8DB065D724A}\" />"
+    - ID: 4d2baaa1-b4c8-4bf4-8ebb-c27954acd438
+      Hint: Price
+      Value: 79
+    - ID: 931a85db-0844-4345-9d3e-1bcaeb1e19e8
+      Hint: Name
+      Value: Humidor Combo - $79
+    - ID: cd515ea2-712f-4444-930f-56d0bf94eed7
+      Hint: Group1Products
+      Type: Multilist with Search
+      Value: |
+        {2936D7BD-73CF-4989-87DF-7B6530A6A7E5}
+        {14DDD7DD-C196-43F2-AF46-DB45ADFB7CD3}
+        {81EAC7B8-26FF-4C59-9E65-4E4ADE9A6997}
+        {00146A5A-5C34-4897-A924-267B1275837C}
+    - ID: ef0bd3ac-efd5-4fe3-8a73-f1fd0c5e01fd
+      Hint: Group2Products
+      Type: Multilist with Search
+      Value: |
+        {06F39086-47D5-41AC-8485-4ADC497634F6}
+        {76B29783-9D95-4290-8F3C-ED332D434BE9}
+        {5F208FBE-C385-4F90-9EE5-DDB076859BE5}
+        {CFF44FAC-FC9F-4778-BB41-87828815ED9A}

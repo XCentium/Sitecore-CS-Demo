@@ -1,0 +1,27 @@
+﻿---
+ID: 7fae1368-1425-42a4-b1fa-4a78825bd1be
+Parent: d83e5ba5-22ee-4fea-842a-9b32f02c1953
+Template: e619e625-3af2-463b-9204-92cb08205b93
+Path: /sitecore/content/XCinemaDemo/Components/Products/DealSeeker
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160318T234428Z
+    - ID: 6ad435a4-d499-4f83-9dd1-fb350322bbd1
+      Hint: CouponCodeDescription
+      Value: This coupon code will save you 15% today on camping products.
+    - ID: 7aa7edb7-dfbd-4117-a31a-ad9128c9c84b
+      Hint: Products
+      Type: Multilist with Search
+      Value: |
+        {EB561570-B386-4040-80CF-33CAF605F7D8}
+        {01ABFA3E-3B79-40E5-BDB5-7A750397F25C}
+        {38C543BB-2C7C-4CC1-94DA-84C4D124B16C}
+    - ID: c1ac14a6-3ece-432d-8e0c-a6732525f0cf
+      Hint: CouponCode
+      Value: CAMP-2016

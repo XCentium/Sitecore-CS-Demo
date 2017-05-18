@@ -1,0 +1,22 @@
+﻿---
+ID: 15815c7d-cb4f-4f8c-8845-dea5077a52d0
+Parent: c8c9ee29-e5d4-4b5f-b1f4-a7e3efe9d425
+Template: 6d36df55-60e5-4591-899c-efccaf83579a
+Path: /sitecore/content/XCinemaDemo/Components/Marquee/Alternate Carousel - Google/Alternate Slide 1
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160316T203924Z
+    - ID: 35d787ae-0f1f-412a-a570-d5a79018ebb8
+      Hint: Image
+      Value: "<image mediaid=\"{1DDF56B8-A1F3-4F3E-8BD1-D800DD12237D}\" />"
+    - ID: 8ef3659b-8284-4484-9b7e-6fff97496411
+      Hint: Content
+      Value: |
+        <br/><br/>
+        <h1 class="border animation top-to-bottom">Alternate version, triggered by Google Ad</h1>

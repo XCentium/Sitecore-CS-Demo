@@ -1,0 +1,25 @@
+﻿---
+ID: 8c50fc89-1f51-4814-b593-2d72534f8727
+Parent: 4915a387-95be-4560-be86-8061d6ce1a5b
+Template: accac364-430f-482d-8ea9-c4e1cca7f03a
+Path: /sitecore/content/XCinemaDemo/Components/Articles/Article Links/Article link1
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161101T185740Z
+    - ID: 66c22597-2013-4509-8529-ec705a371697
+      Hint: Title
+      Value: Article link1
+    - ID: e6c800e4-1e61-48a3-847f-d98cf056355b
+      Hint: Article links
+      Type: Multilist
+      Value: |
+        {C9048415-EEF0-4B96-91C1-CBA44C16D45C}
+        {5837EE1D-1A3D-4A32-AF7C-28781039DF1E}
+        {5AF42615-81A2-40AC-8A70-9B1150458C9C}
+        {72BD3668-0D1D-43F6-9B32-F8E9C0045740}

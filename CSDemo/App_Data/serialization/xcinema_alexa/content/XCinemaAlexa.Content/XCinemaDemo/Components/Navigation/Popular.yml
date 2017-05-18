@@ -1,0 +1,20 @@
+﻿---
+ID: c8879aa4-4fbc-4f40-89c5-cb72cb92d104
+Parent: 8c2cdc8d-49cc-4429-8a18-e02f92e000c0
+Template: 338f84ba-3cdf-466e-8fb2-54ca845715d5
+Path: /sitecore/content/XCinemaDemo/Components/Navigation/Popular
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160304T210541Z
+    - ID: 525e09fb-d3cd-4cdb-b78c-1929bf4588d8
+      Hint: Link
+      Value: "<link text=\"Popular\" linktype=\"external\" url=\"#\" anchor=\"\" target=\"\" />"
+    - ID: eb2b469b-8798-46df-aa28-f89727a6dd10
+      Hint: Mega Menu Image
+      Value: "<image mediaid=\"{8C760226-926D-4A65-A422-E029A090F108}\" />"

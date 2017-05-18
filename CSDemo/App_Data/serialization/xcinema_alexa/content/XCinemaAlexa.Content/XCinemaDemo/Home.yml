@@ -1,0 +1,197 @@
+﻿---
+ID: 493b4773-b786-4ffd-8f50-74f2053661ce
+Parent: 9ee0c85c-3d52-4d09-bdf8-13f18f3b16d8
+Template: 27707ef4-ea14-439a-ba20-dbd16605ae04
+Path: /sitecore/content/XCinemaDemo/Home
+DB: master
+SharedFields:
+- ID: b0a67b2a-8b07-4e0b-8809-69f751709806
+  Hint: __Tracking
+  Type: Tracking
+  Value: |
+    <tracking>
+      <event id="{F358D040-256F-4FC6-B2A1-739ACA2B2983}" name="Campaign" />
+    </tracking>
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 0
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s" p:p="1">
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r uid="{546A314C-A42E-4C0F-892F-C6796486247C}">
+          <p:d />
+        </r>
+        <r uid="{AF6A3953-C35E-4517-B345-AC7F3003C6E2}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:ds="{D0C1EE95-79EA-440D-9A63-86BFA428E5CF}" s:id="{8040BB2A-3983-4156-A3BA-A37A8FE5F6E8}" s:par="" s:ph="page-jumbotron">
+          <rls>
+            <ruleset>
+              <rule uid="{1425F891-97D2-44D0-B9E0-9ABE7ADE9142}" s:name="Google Ad Campaign">
+                <conditions>
+                  <condition uid="5C1F15156D474F22B4C2DC25CC2528A6" s:id="{D379525C-4DE6-4738-89ED-60CC0B8F91E5}" s:CampaignId="{7D45BB89-C044-4C02-97F0-E69CE6F797A9}" />
+                </conditions>
+                <actions>
+                  <action uid="3870EA2F51E541CF83A352C051334C77" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{B0ABA3DB-9956-4857-A6D4-0D1CC189D240}" />
+                </actions>
+              </rule>
+              <rule uid="{73D61D55-F927-426A-8F8B-0545F0F98B91}" s:name="FB Campaign">
+                <conditions>
+                  <condition uid="33FC935BFE63459F8B2B8E65D3607BA2" s:id="{D379525C-4DE6-4738-89ED-60CC0B8F91E5}" s:CampaignId="{0BFFAF94-F523-452A-9F2A-1FA3292D4647}" />
+                </conditions>
+                <actions>
+                  <action uid="6E0182CCFED44186BDE11FD4C9BA297E" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{D6246338-91B9-4D07-85B2-34C215DCDB11}" />
+                </actions>
+              </rule>
+              <rule uid="{251E4AF2-7CFA-417C-8979-7B21A9A689EB}" s:name="Logged In">
+                <actions>
+                  <action uid="03CF879B1EA6444A8E5E69B4073533B0" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{C6294450-5F5F-4BA9-B0E0-CBF243EAD5D3}" />
+                </actions>
+                <conditions>
+                  <condition uid="78C5C62E11CC4324A2127C07681FF407" s:id="{EA0642FA-500B-4B2F-B264-765E771C516F}" s:except="true" />
+                </conditions>
+              </rule>
+              <rule uid="{EBB1CAC9-162E-4D9E-A5B7-0D2680069FC4}" s:name="Return Visit">
+                <actions>
+                  <action uid="780FEFB5FCC14A27996ADA0C505F009A" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{4EE8D42A-4211-44A4-BF0E-7816F0BB509E}" />
+                </actions>
+                <conditions>
+                  <and uid="FBAC0D06A08041A1AE599654E470B6F7">
+                    <condition uid="29BE1C00FA024EA2A4E13CFCFB8A2AF0" s:id="{9A4BEB4B-4B0F-4392-A798-124CEC8AADA4}" s:rulesid="{3E15BE1E-C1B2-4884-8F5A-291F3EF61A00}" />
+                    <condition uid="F7B6AA8DC4084BFA99994A224A74A162" s:id="{EA0642FA-500B-4B2F-B264-765E771C516F}" />
+                  </and>
+                </conditions>
+              </rule>
+              <rule uid="{00000000-0000-0000-0000-000000000000}" s:name="Default">
+                <conditions>
+                  <condition uid="6AFE113D86EC41A4821E1E3E41C762D0" s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                </conditions>
+                <actions>
+                  <action uid="35D45B620E31439D996C846E04A93700" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{D0C1EE95-79EA-440D-9A63-86BFA428E5CF}" />
+                </actions>
+              </rule>
+            </ruleset>
+          </rls>
+        </r>
+        <r uid="{6729DA82-1F38-4D16-9957-E29D38D34488}" p:after="r[@uid='{AF6A3953-C35E-4517-B345-AC7F3003C6E2}']" s:ds="{E6941DC1-D03B-4E5A-A30A-28ABB0B8656E}" s:id="{AB9DF062-ECC5-4FE2-A63B-93971BB0C388}" s:par="" s:ph="page-body" />
+        <r uid="{D88FBB9E-6A2F-487D-9A0B-D24B401E4E5F}" p:after="r[@uid='{6729DA82-1F38-4D16-9957-E29D38D34488}']" s:id="{1616599D-7D76-4ABD-957B-7DCAC84C01B2}" s:ph="page-body" />
+        <r uid="{89440489-11CE-45B1-8411-08E14ECF5604}" p:after="r[@uid='{D88FBB9E-6A2F-487D-9A0B-D24B401E4E5F}']" s:id="{839E8618-D080-4802-A0E8-BE682C3AF542}" s:ph="page-body" />
+        <r uid="{A385C37F-E0C8-4638-A692-2A78D53281E9}" p:after="r[@uid='{89440489-11CE-45B1-8411-08E14ECF5604}']" s:ds="" s:id="{27FCD6DB-011A-4A6E-B04A-0AEB168B78F9}" s:par="" s:ph="page-body">
+          <rls>
+            <ruleset>
+              <rule uid="{E7310019-0853-4D93-8B7D-2F2433CF9545}" s:name="Campers">
+                <conditions>
+                  <condition uid="151116A86FC04F4981E736A1C13744FB" s:id="{6426B5B4-83E9-4E24-BA97-43293A10B47D}" s:ProfileName="Score" s:PatternName="Campers" />
+                </conditions>
+                <actions>
+                  <action uid="3313ECB9C995499291C353A33D152D79" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{56B6A07F-A6FD-47E8-A5F9-3BC3422B35A5}" />
+                </actions>
+              </rule>
+              <rule uid="{B749E881-002E-4C04-A6E8-9BED97A451B5}" s:name="Climbers">
+                <conditions>
+                  <condition uid="3CFDEE977835466A8AB7551AEAD65642" s:id="{6426B5B4-83E9-4E24-BA97-43293A10B47D}" s:ProfileName="Score" s:PatternName="Climbers" />
+                </conditions>
+                <actions>
+                  <action uid="03EECFBC50AC4E34B8A918379ADE9920" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{3CCF2551-53D6-4018-B599-9B36DFC3D5EE}" />
+                </actions>
+              </rule>
+              <rule uid="{521DD000-2E50-4534-B165-9D56BB064642}" s:name="Bargain Hunters">
+                <conditions>
+                  <condition uid="65CC4BEC52474AD69546D18455AA1826" s:id="{6426B5B4-83E9-4E24-BA97-43293A10B47D}" s:ProfileName="Score" s:PatternName="BargainHunters" />
+                </conditions>
+                <actions>
+                  <action uid="5F947340D80544339727F162F68109B7" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{AEA9A1B0-8FD3-4C16-9612-866F4FB31BCD}" />
+                </actions>
+              </rule>
+              <rule uid="{00000000-0000-0000-0000-000000000000}" s:name="Default">
+                <conditions>
+                  <condition uid="B449D9298E6441EB80135B2F2D498B77" s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                </conditions>
+                <actions>
+                  <action uid="71B50328D61B42198D8E99EF32ACEB9E" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{56B6A07F-A6FD-47E8-A5F9-3BC3422B35A5}" />
+                  <action uid="54BCFF32855E41FFA75F6683AFD23807" s:id="{25F351A1-712D-45F8-857D-8AD95BB2ACE9}" />
+                </actions>
+              </rule>
+            </ruleset>
+          </rls>
+        </r>
+        <r uid="{A3A18A55-709C-456D-91AD-8ED1CB073EC3}" p:after="r[@uid='{A385C37F-E0C8-4638-A692-2A78D53281E9}']" s:ds="{E31CE2F8-4DAB-4B7A-B493-98E7F92E8A8C}" s:id="{A5821B00-DB71-4098-90B5-22B1B89C6B1E}" s:par="" s:ph="page-body" />
+        <r uid="{9519FACB-C021-4C1C-9C58-C4780B528F32}" p:after="r[@uid='{A3A18A55-709C-456D-91AD-8ED1CB073EC3}']" s:ds="{960B18B8-0011-4352-A8AB-BBC9FFC2C561}" s:id="{CD0E1B2B-4D8F-4053-9F70-13E10D11F534}" s:par="" s:ph="page-body" />
+        <r uid="{2D0E3D75-55AF-4598-9C1E-58CFCD763FD2}" p:after="r[@uid='{9519FACB-C021-4C1C-9C58-C4780B528F32}']" s:id="{6AA3BBED-0499-4A7F-92EA-71D3CA54CBD0}" s:ph="page-body">
+          <rls>
+            <ruleset>
+              <rule uid="{83260986-DD95-45C9-A9A6-40F8099F098C}" s:name="Logged In">
+                <conditions>
+                  <condition uid="DA6D85BA5BA74E5E922ECAFF21CEFD66" s:id="{EA0642FA-500B-4B2F-B264-765E771C516F}" s:except="true" />
+                </conditions>
+                <actions>
+                  <action uid="05577AC8A33F46E5BECC047E4D09A787" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{DFA06C95-0DC2-439B-B667-AB6ADB1513BD}" />
+                </actions>
+              </rule>
+              <rule uid="{00000000-0000-0000-0000-000000000000}" s:name="Default">
+                <conditions>
+                  <condition uid="FB5C138360FC4707AEA746EEC2A447B8" s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                </conditions>
+                <actions>
+                  <action uid="BFEDEE1B92634A7DA5CAD17378F06911" s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}" s:DataSource="{D17B3E41-3B76-4C64-931B-110CA0B50E7A}" />
+                </actions>
+              </rule>
+            </ruleset>
+          </rls>
+        </r>
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 04bf00db-f5fb-41f7-8ab7-22408372a981
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s" p:p="1">
+          <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r uid="{145E6EB5-62F1-4216-969E-EB272B9A868D}" p:before="*" s:ds="" s:id="{AB9DF062-ECC5-4FE2-A63B-93971BB0C388}" s:par="" s:ph="page-body" />
+            <r uid="{6729DA82-1F38-4D16-9957-E29D38D34488}">
+              <p:d />
+            </r>
+            <r uid="{85FD2542-CA0E-4B06-87B9-52E8B44C3445}" p:after="r[@uid='{89440489-11CE-45B1-8411-08E14ECF5604}']" s:ds="{E31CE2F8-4DAB-4B7A-B493-98E7F92E8A8C}" s:id="{A5821B00-DB71-4098-90B5-22B1B89C6B1E}" s:par="" s:ph="page-body" />
+            <r uid="{A3A18A55-709C-456D-91AD-8ED1CB073EC3}">
+              <p:d />
+            </r>
+            <r uid="{9519FACB-C021-4C1C-9C58-C4780B528F32}">
+              <p:d />
+            </r>
+          </d>
+        </r>
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160216T160952Z
+    - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
+      Hint: Page Title
+      Value: Home
+    - ID: 895715b6-12af-41dc-98d7-ef648973b2cd
+      Hint: Featured Blogs
+      Type: Multilist with Search
+      Value: |
+        {413EE15A-F5FE-4419-B9C1-61DCE746755E}
+        {7FD68C57-CAD5-43F9-A291-C718FE8169CB}
+        {FEE3B684-942E-44B6-8221-9C127E665BB7}
+        {2A3EADAC-2B6F-495A-802C-DB74ADD5EE2C}
+    - ID: c1f479fe-39e3-4851-bdbf-3ac347a44c2d
+      Hint: Categories
+      Type: Multilist with Search
+      Value: |
+        {8DE4D92F-AA47-4D21-85C7-1B07C757DA47}
+        {BE7EAA47-98DE-4FC5-BD3E-BB26042D2DC8}
+        {B918CF41-69F6-4BE9-866A-827363727F5F}
+    - ID: f7a94e99-fb47-4133-9355-3f65e9071fb0
+      Hint: Products
+      Type: Multilist with Search
+      Value: |
+        {AD071DDE-AB43-49F4-840F-F67E06263E14}
+        {B1A2E403-06A0-41F5-9910-C62491F0ADAA}
+    - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
+      Hint: Meta Description
+      Value: Home Page

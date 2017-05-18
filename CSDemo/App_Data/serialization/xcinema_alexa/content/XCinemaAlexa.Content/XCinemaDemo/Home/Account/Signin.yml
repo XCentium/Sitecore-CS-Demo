@@ -1,0 +1,38 @@
+﻿---
+ID: f9788e14-e4c8-4e3a-8138-c0fb0e85fe1c
+Parent: 0eb5fb3f-c8c0-4c84-99a3-a7067dab7f38
+Template: b3d2832f-2fbf-4466-9d95-d3a0c6476362
+Path: /sitecore/content/XCinemaDemo/Home/Account/Signin
+DB: master
+SharedFields:
+- ID: b0a67b2a-8b07-4e0b-8809-69f751709806
+  Hint: __Tracking
+  Type: Tracking
+  Value: <tracking />
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s" p:p="1">
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r uid="{7C8FCD32-25B5-4AB7-BF22-D10E07BFD45B}" p:after="r[@uid='{E5A6C541-E277-499D-9CB9-DFF8CE125A23}']" s:id="{DB927E2D-F0C2-42DA-BC48-3F532BF29596}" s:ph="page-body" />
+        <r uid="{282C41FC-0534-443A-B973-1E6BFCF51665}" p:after="*[1=2]" s:ds="" s:id="{A58672D4-0B34-41B2-9CCF-5A48C275FD40}" s:par="Application=%7B98698A26-FA7E-40E4-B723-1A732B66CAF3%7D&amp;Callback URL" s:ph="/page-body/page-social-login-fb" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160227T021120Z
+    - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
+      Hint: Page Title
+      Value: Login
+    - ID: 55a55b4d-d866-4df7-9821-46e9f9cf3ee3
+      Hint: Title
+      Value: Login
+    - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
+      Hint: Meta Description
+      Value: Login Page
