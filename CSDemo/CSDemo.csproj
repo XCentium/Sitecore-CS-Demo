@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -229,6 +230,8 @@
     </Reference>
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -451,6 +454,9 @@
     <Compile Include="Models\Store\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\CustomLinkProvider.cs" />
+    <Compile Include="services\XCommerceService.svc.cs">
+      <DependentUpon>XCommerceService.svc</DependentUpon>
+    </Compile>
     <Compile Include="Tools\ItemTester.aspx.cs">
       <DependentUpon>ItemTester.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -628,6 +634,7 @@
     </None>
     <None Include="Properties\PublishProfiles\Ola.DebugNew.pubxml" />
     <None Include="Properties\PublishProfiles\Vasiliy Local.pubxml" />
+    <Content Include="services\XCommerceService.svc" />
     <Content Include="Tools\EmailTester.aspx" />
     <Content Include="Tools\ItemTester.aspx" />
     <Content Include="Tools\VisualMerchandiser.aspx" />
@@ -641,7 +648,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="packages.config" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Form\EditorTemplates\CaptchaField.cshtml" />
     <Content Include="Views\Form\EditorTemplates\CheckboxField.cshtml" />
     <Content Include="Views\Form\EditorTemplates\CheckboxListField.cshtml" />
