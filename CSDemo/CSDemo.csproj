@@ -303,6 +303,8 @@
     <Compile Include="App_Start\GlassMapperScCustom.cs" />
     <Compile Include="Configuration\Actions\HideCertainProducts.cs" />
     <Compile Include="Configuration\Actions\ShowCertainProducts.cs" />
+    <Compile Include="Configuration\ComputedFields\CommerceMovieLocationName.cs" />
+    <Compile Include="Configuration\ComputedFields\CommerceMovieName.cs" />
     <Compile Include="Configuration\Conditions\ContactEmailCheck.cs" />
     <Compile Include="Configuration\Conditions\InmateIdCheck.cs" />
     <Compile Include="Configuration\Conditions\LastPurchaseAmountCheck.cs" />
@@ -355,6 +357,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\GeneralSearchController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Configuration\ComputedFields\CommerceMovieLocationZipcode.cs" />
     <Compile Include="Helpers\GlassHelper.cs" />
     <Compile Include="Models\Account\AccountHelper.cs" />
     <Compile Include="Models\Account\Address.cs" />
@@ -454,7 +457,7 @@
     <Compile Include="Models\Store\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\CustomLinkProvider.cs" />
-    <Compile Include="services\XCommerceService.svc.cs">
+    <Compile Include="Services\XCommerceService.svc.cs">
       <DependentUpon>XCommerceService.svc</DependentUpon>
     </Compile>
     <Compile Include="Tools\ItemTester.aspx.cs">
@@ -474,6 +477,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AJAX\Cart.asmx" />
+    <Content Include="App_Config\Include\zCSDemo\AlexaDemo.Search.Index.MovieIndex.config" />
     <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.CSDemo39.config">
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
@@ -634,7 +638,7 @@
     </None>
     <None Include="Properties\PublishProfiles\Ola.DebugNew.pubxml" />
     <None Include="Properties\PublishProfiles\Vasiliy Local.pubxml" />
-    <Content Include="services\XCommerceService.svc" />
+    <Content Include="Services\XCommerceService.svc" />
     <Content Include="Tools\EmailTester.aspx" />
     <Content Include="Tools\ItemTester.aspx" />
     <Content Include="Tools\VisualMerchandiser.aspx" />

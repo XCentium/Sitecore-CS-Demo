@@ -23,6 +23,12 @@ namespace CSDemo.Configuration
             return $"sitecore_{Context.Database.Name.ToLower()}_index";
         }
 
+        public static string GetSearchIndexMovies()
+        {
+            //commerce_alexa_movies_master_index
+            return $"commerce_alexa_movies_master_index";
+        }
+
         public static string GetAnayticsIndex()
         {
             return "sitecore_analytics_index";

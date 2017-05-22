@@ -65,6 +65,8 @@
             public const string CouponMessage = "CouponMessage";
             public const string UserSelectedCatalogPostfix = "UserSelectedCatalogPostfix";
 
+            public const string MovieLocationId = "LocationId";
+            public const string MovieVariantTempalteId = "{B859F8B4-5F14-4380-A3DD-1C442D5BF700}";
         }
         public struct Marketing
         {
