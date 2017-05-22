@@ -6,6 +6,7 @@ using CSDemo.Contracts.Product;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using Glass.Mapper.Sc.Fields;
+using Sitecore;
 using Sitecore.Commerce.Entities.Inventory;
 
 #endregion
@@ -25,6 +26,18 @@ namespace CSDemo.Models.Product
             if (!string.IsNullOrEmpty(Image3)) { altImages.Add(Image3); }
 
             return altImages;
+        }
+
+        public string Location
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(LocationId)) return string.Empty;
+
+                var locationItem = Context.Database.GetItem(LocationId);
+
+                return locationItem == null ? string.Empty : locationItem.DisplayName;
+            }
         }
 
         #endregion
@@ -63,6 +76,15 @@ namespace CSDemo.Models.Product
 
         [SitecoreField(Fields.Image3)]
         public virtual string Image3 { get; set; }
+
+        [SitecoreField(Fields.LocationId)]
+        public virtual string LocationId { get; set; }
+
+        [SitecoreField(Fields.ShowDate)]
+        public virtual string ShowDate { get; set; }
+
+        [SitecoreField(Fields.ShowTime)]
+        public virtual string ShowTime { get; set; }
         #endregion
         #region Fields
         public struct Fields
@@ -75,6 +97,9 @@ namespace CSDemo.Models.Product
             public const string Image1 = "Variant_Image1";
             public const string Image2 = "Variant_Image2";
             public const string Image3 = "Variant_Image3";
+            public const string LocationId = "LocationId";
+            public const string ShowDate = "ShowDate";
+            public const string ShowTime = "ShowTime";
         }
         #endregion 
 

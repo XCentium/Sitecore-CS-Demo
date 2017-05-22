@@ -1,0 +1,43 @@
+﻿---
+ID: 91b706d6-71a6-4501-a064-d18cb1521058
+Parent: 0d827674-87b0-40fc-b2c6-338885d1b4b2
+Template: 8c5ead00-5f68-4310-ab0c-84f283b5ee0a
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/XCinemaDemo/XCinemaDemo New Order Placed/Dormant User Plan/True/Copy Visitor to Another Plan
+DB: master
+SharedFields:
+- ID: 1507131d-cee3-49e9-af32-de5403a37b49
+  Hint: Parameters
+  Value: AutomationActionDescription=Initial State&AutomationStateItemId=9aff5669-f5c5-4495-a07f-506eb3375d74&AutomationStateDesignerId=
+- ID: 3f72bc07-de92-483e-a724-d430769d9ba4
+  Hint: Designer ID
+  Value: e148bb36-7770-4445-9584-d32e0189b074
+- ID: 7642ed71-348b-4b88-8634-cc7b28949472
+  Hint: Origin ID
+  Value: 3da5a471-b155-44b6-99cc-be531e9fea60
+- ID: 8728a037-47d3-4180-b754-87926eda7ae8
+  Hint: Editor
+  Value: /sitecore/shell/default.aspx?xmlcontrol=CopyVisitorToAnotherPlan
+- ID: a291a22b-99e2-46bb-a27b-8ec744275396
+  Hint: Type
+  Value: Sitecore.Analytics.Automation.AutomationActions.CopyContactToAnotherPlanAction,Sitecore.Analytics.Automation
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 0
+Languages:
+- Language: en
+  Fields:
+  - ID: 06f2d72a-1924-4b9a-ba1e-186ce4e57efd
+    Hint: Description
+    Value: 
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Copy Visitor to Another Plan
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160621T193004Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\csdemo

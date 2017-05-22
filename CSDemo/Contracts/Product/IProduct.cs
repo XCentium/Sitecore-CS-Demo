@@ -50,6 +50,7 @@ namespace CSDemo.Contracts.Product
         string DefaultVariant { get; set; }
         VariantBox VariantBox { get; set; }
         VariantSize VariantSize { get; set; }
+        VariantShowing VariantShowing { get; set; }
         UnitOfMeasure UnitOfMeasure { get; set; }
         IEnumerable<ProductTag> ProductTags { get; set; }
         string Image1 { get; set; }

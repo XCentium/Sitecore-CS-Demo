@@ -61,12 +61,22 @@ namespace CSDemo.Services
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(order?.MovieVariantId) 
+                    || string.IsNullOrWhiteSpace(order?.NoOfTickets)
+                    || string.IsNullOrWhiteSpace(order?.CustomerEmailAddress))
+                {
+                    throw new ArgumentException("Argument errror. Please check required fields.");
+                }
+
 
             }
             catch (Exception ex)
             {
-                order.IsOrderSuccessful = false;
-                order.Message = ex.Message;
+                if (order != null)
+                {
+                    order.IsOrderSuccessful = false;
+                    order.Message = ex.Message;
+                }
 
                 Log.Error($"CSDemo.Services.XCommerceService.BuyMovie, Error = {ex.Message}", ex);
             }
@@ -78,6 +88,10 @@ namespace CSDemo.Services
         //1] will it enable anonymous buying? if so, the email address will need to be sent at least to send the tickets to
         //2] address? name?
         //3] username in system if not anonymous
+        //4] payment details
+        //5] phase 1 - movieId, qty, email address (payment will be faked)
+        //6] add payment
+        //7] add items are digital items (no physical)
 
         public static IEnumerable<SearchHit<SearchResultItem>> GetMoviesByZipcode(string zipcode)
         {

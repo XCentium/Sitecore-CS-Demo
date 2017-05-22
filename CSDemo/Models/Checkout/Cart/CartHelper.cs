@@ -30,6 +30,7 @@ using Sitecore.Commerce.Entities.Payments;
 using WebGrease.Css.Extensions;
 using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Commerce.Services.Shipping;
+using Sitecore.Diagnostics;
 
 namespace CSDemo.Models.Checkout.Cart
 {
@@ -815,14 +816,14 @@ namespace CSDemo.Models.Checkout.Cart
                     {
                         ShippingMethodID = shippingData[0],
                         ShippingMethodName = shippingData[1],
-                        ShippingPreferenceType = "1",
+                        ShippingPreferenceType = "3",
                         PartyID = "0"
                     }
             };
 
             //prepare shipping list - items to be shipped
             var internalShippingList = shippingMethodList.ToShippingInfoList();
-            var orderPreferenceType = InputModelExtension.GetShippingOptionType("1");
+            var orderPreferenceType = InputModelExtension.GetShippingOptionType("3");
 
             if (orderPreferenceType != ShippingOptionType.DeliverItemsIndividually)
             {
@@ -835,11 +836,16 @@ namespace CSDemo.Models.Checkout.Cart
             var shipments = new List<ShippingInfo>();
             shipments.AddRange(internalShippingList);
 
+            //add email address
+            cart.Email = cart.Parties[0].Email;
+            shipments[0].Properties["ElectronicDeliveryEmail"] = cart.Email;
+
             //update cart with shipping info
             var addShippingInfoRequest = new Sitecore.Commerce.Engine.Connect.Services.Carts.AddShippingInfoRequest(cart, shipments, orderPreferenceType);
             var addShippingInfoResult = _cartServiceProvider.AddShippingInfo(addShippingInfoRequest);
             if (!addShippingInfoResult.Success)
             {
+                Log.Error($"CartHelper.AddShippingMethodToCart, Error={addShippingInfoResult.SystemMessages[0].Message}", addShippingInfoResult.SystemMessages[0]);
                 return false;
             }
 
@@ -1998,7 +2004,7 @@ namespace CSDemo.Models.Checkout.Cart
                 var shippingService = new ShippingServiceProvider();
                 var shippingOption = new ShippingOption
                 {
-                    ShippingOptionType = new ShippingOptionType(1, "Ship To Address"),
+                    ShippingOptionType = new ShippingOptionType(3, "Electronic Delivery"),
                     ShopName = ShopName
                 };
 

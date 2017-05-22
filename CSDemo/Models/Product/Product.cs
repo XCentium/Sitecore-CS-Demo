@@ -370,6 +370,9 @@ namespace CSDemo.Models.Product
         [DataMember]
         public virtual VariantSize VariantSize { get; set; }
 
+        [DataMember]
+        public virtual VariantShowing VariantShowing { get; set; }
+
         [SitecoreField(Fields.UnitOfMeasure)]
         public virtual UnitOfMeasure UnitOfMeasure { get; set; }
 

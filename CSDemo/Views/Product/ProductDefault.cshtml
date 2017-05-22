@@ -299,6 +299,26 @@
                                                         </div>
                                                     </div>
                                                 }
+                                                @if (Model.VariantShowing != null)
+                                                {
+                                                    <div class="col-md-3 col-sm-4">
+                                                        <div class="product-showing">
+                                                            <div class="form-inline">
+                                                                <div class="form-group">
+                                                                    <label>Show Times:</label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <select name="ProductShowTime" id="ProductShowTime" data-objid="#ProductShowTime" data-num="@Model.VariantProdId" class="form-control ProductShowTime">
+                                                                        @foreach (var lines in Model.VariantShowing.VariantShowingLines)
+                                                                        {
+                                                                            <option value="@lines.VariantId">@lines.Value</option>
+                                                                        }
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
                                                 @if (!isInStock)
                                                 {
                                                     clickCmd = "out-of-stock";

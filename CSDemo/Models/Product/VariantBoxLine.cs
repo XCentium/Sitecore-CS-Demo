@@ -8,5 +8,6 @@
         public string Price { get; set; }
         public string Images { get; set; }
 
+        public string Showing { get; set; }
     }
 }

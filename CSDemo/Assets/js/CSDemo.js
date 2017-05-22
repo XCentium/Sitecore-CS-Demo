@@ -447,13 +447,13 @@
     });
 
     $(".add-to-cart").click(function () {
-
+        
         if ($(this).data("formid") && $(this).data("contextitemid")) { addProductToCart($(this).data("formid"), $(this).data("contextitemid")); }
 
     });
 
     function addItemToCart(quantity, productId, catalogName, variantId, contextItemId) {
-
+        debugger;
         $.ajax({
             type: "POST",
             url: "/AJAX/cart.asmx/AddProductToCart",
@@ -1272,6 +1272,12 @@
 
     });
 
+    $(".ProductShowTime").change(function () {
+
+        if ($(this).data("objid") && $(this).data("num")) { doProductShowtimeChange($(this).data("objid"), $(this).data("num")); }
+
+    });
+
     
     $(".variantcolorrectangle").click(function () {
 
@@ -1312,6 +1318,32 @@
 
         // process color's default value
         doProductColorChange(objValue, num);
+    }
+
+    function doProductShowtimeChange(objId, num) {
+        debugger;
+        var obj = $(objId);
+        var objText = $(objId + " option:selected").text();
+        var objValue = $(objId + " option:selected").val();
+
+        var classToHide = ".ProductShowTime" + num;
+
+        var idToShow = "#" + objText + "ProductShowTime" + num;
+
+        var ulToShow = "#ul_" + objText + "ProductShowTime" + num;
+
+        // hide all ProductColor with class   ProductColor + num
+        $(classToHide).hide();
+
+        // show only ProductColor with ID ProductColor + num + Obj.Value
+        $(idToShow).show();
+
+        // show only ProductColor with ID ProductColor + num + Obj.Value
+        $(ulToShow).show();
+
+        // Set first value of item to show as selected
+        $(idToShow + " option:selected").prop("selected", false);
+        $(idToShow + " option:first").attr("selected", "selected");
     }
 
     function doProductColorChange(objValue, num) {

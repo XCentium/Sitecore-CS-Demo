@@ -292,6 +292,7 @@ namespace CSDemo.Models.Product
             {
                 var variantBox = new VariantBox();
                 var variantBoxLines = new List<VariantBoxLine>();
+
                 if (product.ProductVariants != null)
                     foreach (var productVariant in product.ProductVariants)
                     {
@@ -308,16 +309,22 @@ namespace CSDemo.Models.Product
                                 !string.IsNullOrEmpty(productVariant.ListPrice)
                                     ? decimal.Parse(productVariant.ListPrice)
                                         .ToString(Constants.Products.CurrencyDecimalFormat, cultureInfo)
-                                    : "0.00"
+                                    : "0.00",
+                            Showing = !string.IsNullOrEmpty(productVariant.ShowTime) && !string.IsNullOrEmpty(productVariant.ShowDate) && !string.IsNullOrEmpty(productVariant.Location)
+                                ? $"{productVariant.ShowTime.Trim()}"
+                                : string.Empty
                         };
 
                         variantBoxLines.Add(variantBoxLine);
                     }
-                variantBoxLines.OrderBy(s => s.Size).ThenBy(c => c.Color);
+                variantBoxLines.OrderBy(s => s.Size).ThenBy(c => c.Color).ThenBy(c => c.Showing);
                 variantBox.VariantBoxLines = variantBoxLines;
                 product.VariantBox = variantBox;
+
                 var variantSize = new VariantSize();
                 var variantColors = new List<VariantColor>();
+                var variantShowing = new VariantShowing();
+
                 // get size
                 var availSizes =
                     variantBoxLines.Where(s => s.Size != Constants.Common.Empty)
@@ -325,38 +332,58 @@ namespace CSDemo.Models.Product
                         .Select(g => g.First())
                         .OrderBy(s => s.Size)
                         .ThenBy(c => c.Color)
+                        .ThenBy(c => c.Showing)
                         .ToList();
+
+                var availColors =
+                    variantBoxLines.Where(c => c.Color != Constants.Common.Empty)
+                        .GroupBy(c => c.Color)
+                        .Select(g => g.First())
+                        .OrderBy(c => c.Color)
+                        .ToList();
+
+                var availShows =
+                    variantBoxLines.Where(c => c.Showing != Constants.Common.Empty)
+                        .Select(c => c)
+                        .OrderBy(c => c.Showing)
+                        .ToList();
+
                 if (availSizes.Any())
                 {
                     var variantSizeLines = new List<VariantSizeLine>();
                     var pos = 0;
                     foreach (var s in availSizes)
                     {
-                        var variantSizeLine = new VariantSizeLine();
-                        variantSizeLine.Size = s.Size;
-                        variantSizeLine.Value = string.Format(Constants.Products.VariantColorLineFormat, s.VariantID,
-                            s.Price, s.Images);
+                        var variantSizeLine = new VariantSizeLine
+                        {
+                            Size = s.Size,
+                            Value = string.Format(Constants.Products.VariantColorLineFormat, s.VariantID,
+                                s.Price, s.Images)
+                        };
                         variantSizeLines.Add(variantSizeLine);
                         // set default variant
                         if (pos < 1)
                         {
                             product.DefaultVariant = s.VariantID;
                         }
+
                         // build the colors for the current size
-                        var availColors =
+                        var availColors2 =
                             variantBoxLines.Where(t => t.Size.Equals(s.Size) && s.Color != Constants.Common.Empty)
                                 .GroupBy(c => c.Color)
                                 .Select(g => g.First())
-                                .OrderBy(c => c.Color)
+                                .OrderBy(c => c.Color).ThenBy(c => c.Color)
                                 .ToList();
-                        if (availColors.Any())
+                        if (availColors2.Any())
                         {
-                            var variantColor = new VariantColor();
-                            variantColor.Name = string.Format(Constants.Products.VariantColorNameFormat, s.Size,
-                                Constants.Products.VariantColorName);
-                            variantColor.Display = pos == 0
-                                ? Constants.Products.VariantColorDisplay
-                                : Constants.Products.VariantColorDisplayNone;
+                            var variantColor = new VariantColor
+                            {
+                                Name = string.Format(Constants.Products.VariantColorNameFormat, s.Size,
+                                    Constants.Products.VariantColorName),
+                                Display = pos == 0
+                                    ? Constants.Products.VariantColorDisplay
+                                    : Constants.Products.VariantColorDisplayNone
+                            };
                             var variantColorLines = new List<VariantColorLine>();
                             foreach (var c in availColors)
                             {
@@ -375,15 +402,9 @@ namespace CSDemo.Models.Product
                     product.VariantSize = variantSize;
                     product.VariantColors = variantColors;
                 }
-                else
+                else if (availColors.Any())
                 {
                     // No sizes, let us focus on color
-                    var availColors =
-                        variantBoxLines.Where(c => c.Color != Constants.Common.Empty)
-                            .GroupBy(c => c.Color)
-                            .Select(g => g.First())
-                            .OrderBy(c => c.Color)
-                            .ToList();
                     if (availColors.Any())
                     {
                         var pos = 0;
@@ -393,10 +414,12 @@ namespace CSDemo.Models.Product
                         var variantColorLines = new List<VariantColorLine>();
                         foreach (var c in availColors)
                         {
-                            var variantColorLine = new VariantColorLine();
-                            variantColorLine.Color = c.Color;
-                            variantColorLine.Value = string.Format(Constants.Products.VariantColorLineFormat,
-                                c.VariantID, c.Price, c.Images);
+                            var variantColorLine = new VariantColorLine
+                            {
+                                Color = c.Color,
+                                Value = string.Format(Constants.Products.VariantColorLineFormat,
+                                    c.VariantID, c.Price, c.Images)
+                            };
                             variantColorLines.Add(variantColorLine);
                             if (pos < 1)
                             {
@@ -407,6 +430,36 @@ namespace CSDemo.Models.Product
                         variantColor.VariantColorLines = variantColorLines;
                         variantColors.Add(variantColor);
                         product.VariantColors = variantColors;
+                    }
+                }
+                else if (availShows.Any())
+                {
+                    // No sizes, No color, let us focus on show dates (movie)
+                    if (availShows.Any())
+                    {
+                        var variantShowingLines = new List<VariantShowingLine>();
+                        var pos = 0;
+                        
+                        foreach (var c in availShows)
+                        {
+                            var variantShowingLine = new VariantShowingLine
+                            {
+                                Location = c.Showing,
+                                ShowDate = c.Showing,
+                                Value = c.Showing,
+                                VariantId = c.VariantID
+                            };
+                            variantShowingLines.Add(variantShowingLine);
+
+                            if (pos < 1)
+                            {
+                                product.DefaultVariant = c.VariantID;
+                            }
+                            pos++;
+                        }
+
+                        variantShowing.VariantShowingLines = variantShowingLines;
+                        product.VariantShowing = variantShowing;
                     }
                 }
             }

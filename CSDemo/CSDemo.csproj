@@ -445,7 +445,9 @@
     <Compile Include="Models\Product\VariantBoxLine.cs" />
     <Compile Include="Models\Product\VariantColor.cs" />
     <Compile Include="Models\Product\VariantColorLine.cs" />
+    <Compile Include="Models\Product\VariantShowing.cs" />
     <Compile Include="Models\Product\VariantSize.cs" />
+    <Compile Include="Models\Product\VariantShowingLine.cs" />
     <Compile Include="Models\Product\VariantSizeLine.cs" />
     <Compile Include="Models\GeneralSearch\CustomCommerceSearchResultItem.cs" />
     <Compile Include="Configuration\CommerceProductTags.cs" />
@@ -478,6 +480,7 @@
   <ItemGroup>
     <Content Include="AJAX\Cart.asmx" />
     <Content Include="App_Config\Include\zCSDemo\AlexaDemo.Search.Index.MovieIndex.config" />
+    <Content Include="App_Config\Include\Glass.Mapper.Sc.Start.config" />
     <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.CSDemo39.config">
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
@@ -603,7 +606,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="App_Config\Include\z.Glass.Mapper.Sc.ViewRender.config.exclude" />
-    <Content Include="App_Config\Include\Glass.Mapper.Sc.Start.config" />
     <Content Include="App_Config\Include\Glass.Mapper.Sc.config" />
     <Content Include="App_Config\Include\Glass.Mapper.Sc.CodeFirst.config.exclude" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.AutoPublish.config" />
