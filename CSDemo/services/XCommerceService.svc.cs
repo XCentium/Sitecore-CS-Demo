@@ -6,7 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using CSDemo.Configuration;
-using CSDemo.Helpers;
+using CSDemo.Models.Checkout.Cart;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using Sitecore;
 using Sitecore.ContentSearch;
@@ -61,21 +61,27 @@ namespace CSDemo.Services
         {
             try
             {
+                int orderQty;
+
                 if (string.IsNullOrWhiteSpace(order?.MovieVariantId) 
                     || string.IsNullOrWhiteSpace(order?.NoOfTickets)
-                    || string.IsNullOrWhiteSpace(order?.CustomerEmailAddress))
+                    || string.IsNullOrWhiteSpace(order?.CustomerEmailAddress)
+                    || !int.TryParse(order.NoOfTickets, out orderQty))
                 {
                     throw new ArgumentException("Argument errror. Please check required fields.");
                 }
 
+                const string shopName = "XCinemaDemo";
+                var cartHelper = new CartHelper(shopName);
 
+                order = cartHelper.QuickBuyMovie(order);
             }
             catch (Exception ex)
             {
                 if (order != null)
                 {
                     order.IsOrderSuccessful = false;
-                    order.Message = ex.Message;
+                    order.Message = $"CSDemo.Services.XCommerceService.BuyMovie, Error = {ex.Message}";
                 }
 
                 Log.Error($"CSDemo.Services.XCommerceService.BuyMovie, Error = {ex.Message}", ex);
@@ -90,7 +96,7 @@ namespace CSDemo.Services
         //3] username in system if not anonymous
         //4] payment details
         //5] phase 1 - movieId, qty, email address (payment will be faked)
-        //6] add payment
+        //6] how to get payent processed? user has to have payment info registered for "One click buy"
         //7] add items are digital items (no physical)
 
         public static IEnumerable<SearchHit<SearchResultItem>> GetMoviesByZipcode(string zipcode)
@@ -170,5 +176,9 @@ namespace CSDemo.Services
         public bool IsOrderSuccessful { get; set; }
         [DataMember]
         public string Message { get; set; }
+        [DataMember]
+        public string OrderNo { get; set; }
+        [DataMember]
+        public DateTime OrderDateTime { get; set; }
     }
 }

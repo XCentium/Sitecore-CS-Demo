@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web;
+using CSDemo.Services;
 using AddPartiesRequest = Sitecore.Commerce.Services.Carts.AddPartiesRequest;
 using UpdatePartiesRequest = Sitecore.Commerce.Services.Carts.UpdatePartiesRequest;
 using Sitecore.Commerce.Services.Payments;
@@ -30,7 +31,10 @@ using Sitecore.Commerce.Entities.Payments;
 using WebGrease.Css.Extensions;
 using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Commerce.Services.Shipping;
+using Sitecore.Data;
 using Sitecore.Diagnostics;
+using Braintree;
+using PaymentMethod = Sitecore.Commerce.Entities.Payments.PaymentMethod;
 
 namespace CSDemo.Models.Checkout.Cart
 {
@@ -111,6 +115,12 @@ namespace CSDemo.Models.Checkout.Cart
                 info.Refresh = true;
             }
             var cartResult = _cartServiceProvider.AddCartLines(request);
+
+            if (!cartResult.Success)
+            {
+                Log.Error($"CartHelper.AddToCart, Error={cartResult.SystemMessages[0].Message}", cartResult);
+                return null;
+            }
 
             // add cart to cache
             var cart = cartResult.Cart as CommerceCart;
@@ -806,58 +816,71 @@ namespace CSDemo.Models.Checkout.Cart
         /// <returns></returns>
         internal bool AddShippingMethodToCart(string shippingMethodId)
         {
-            var shippingData = shippingMethodId.Split('|');
-            var cart = GetCustomerCart();
-
-            // prepare shipping methods list with chosen shipping method
-            var shippingMethodList = new List<ShippingMethodInputModelItem>
+            try
             {
-                new ShippingMethodInputModelItem
+                var shippingData = shippingMethodId.Split('|');
+                var cart = GetCustomerCart();
+
+                // prepare shipping methods list with chosen shipping method
+                var shippingMethodList = new List<ShippingMethodInputModelItem>
+                {
+                    new ShippingMethodInputModelItem
                     {
                         ShippingMethodID = shippingData[0],
                         ShippingMethodName = shippingData[1],
                         ShippingPreferenceType = "3",
                         PartyID = "0"
                     }
-            };
+                };
 
-            //prepare shipping list - items to be shipped
-            var internalShippingList = shippingMethodList.ToShippingInfoList();
-            var orderPreferenceType = InputModelExtension.GetShippingOptionType("3");
+                //prepare shipping list - items to be shipped
+                var internalShippingList = shippingMethodList.ToShippingInfoList();
+                var orderPreferenceType = InputModelExtension.GetShippingOptionType("3");
 
-            if (orderPreferenceType != ShippingOptionType.DeliverItemsIndividually)
-            {
-                foreach (var shipping in internalShippingList)
+                if (orderPreferenceType != ShippingOptionType.DeliverItemsIndividually)
                 {
-                    shipping.LineIDs = (from CommerceCartLine lineItem in cart.Lines select lineItem.ExternalCartLineId).ToList().AsReadOnly();
+                    foreach (var shipping in internalShippingList)
+                    {
+                        shipping.LineIDs = (from CommerceCartLine lineItem in cart.Lines
+                                            select lineItem.ExternalCartLineId).ToList().AsReadOnly();
+                    }
                 }
+
+                var shipments = new List<ShippingInfo>();
+                shipments.AddRange(internalShippingList);
+
+                //add email address
+                cart.Email = cart.Parties[0].Email;
+                shipments[0].Properties["ElectronicDeliveryEmail"] = cart.Email;
+
+                //update cart with shipping info
+                var addShippingInfoRequest =
+                    new Sitecore.Commerce.Engine.Connect.Services.Carts.AddShippingInfoRequest(cart, shipments,
+                        orderPreferenceType);
+                var addShippingInfoResult = _cartServiceProvider.AddShippingInfo(addShippingInfoRequest);
+                if (!addShippingInfoResult.Success)
+                {
+                    Log.Error(
+                        $"CartHelper.AddShippingMethodToCart, Error={addShippingInfoResult.SystemMessages[0].Message}",
+                        addShippingInfoResult.SystemMessages[0]);
+                    return false;
+                }
+
+                //update cart in cache
+                if (addShippingInfoResult.Success && addShippingInfoResult.Cart != null)
+                {
+                    UpdateCartInCache(addShippingInfoResult.Cart as CommerceCart);
+                }
+
+                //return true if cart has been updated
+                var updatedCart = GetCustomerCart();
+                return updatedCart != null;
             }
-
-            var shipments = new List<ShippingInfo>();
-            shipments.AddRange(internalShippingList);
-
-            //add email address
-            cart.Email = cart.Parties[0].Email;
-            shipments[0].Properties["ElectronicDeliveryEmail"] = cart.Email;
-
-            //update cart with shipping info
-            var addShippingInfoRequest = new Sitecore.Commerce.Engine.Connect.Services.Carts.AddShippingInfoRequest(cart, shipments, orderPreferenceType);
-            var addShippingInfoResult = _cartServiceProvider.AddShippingInfo(addShippingInfoRequest);
-            if (!addShippingInfoResult.Success)
+            catch (Exception ex)
             {
-                Log.Error($"CartHelper.AddShippingMethodToCart, Error={addShippingInfoResult.SystemMessages[0].Message}", addShippingInfoResult.SystemMessages[0]);
+                Log.Error("CartHelper.AddShippingMethodToCart. Error = " + ex.Message, ex);
                 return false;
             }
-
-            //update cart in cache
-            if (addShippingInfoResult.Success && addShippingInfoResult.Cart != null)
-            {
-                UpdateCartInCache(addShippingInfoResult.Cart as CommerceCart);
-            }
-
-            //return true if cart has been updated
-            var updatedCart = GetCustomerCart();
-            return updatedCart != null;
         }
 
         /// <summary>
@@ -1103,12 +1126,12 @@ namespace CSDemo.Models.Checkout.Cart
                 return "No items in cart";
             }
 
-            updatedCart.Email = "testorder@mail.com";
+            updatedCart.Email = "john.montes@xcentium.com";
 
             var submitVisitorOrderRequest = new SubmitVisitorOrderRequest(updatedCart);
             var submitVisitorOrderResult = _orderServiceProvider.SubmitVisitorOrder(submitVisitorOrderRequest);
 
-            if (submitVisitorOrderResult.Success && submitVisitorOrderResult.Order != null 
+            if (submitVisitorOrderResult.Success && submitVisitorOrderResult.Order != null
                 && submitVisitorOrderResult.CartWithErrors == null)
             {
                 var order = submitVisitorOrderResult.Order as CommerceOrder;
@@ -1678,7 +1701,7 @@ namespace CSDemo.Models.Checkout.Cart
                 msg = "No items in cart";
             }
 
-            updatedCart.Email = "testorder@mail.com";
+            updatedCart.Email = "john.montes@xcentium.com";
             // GetCart(string userName, bool refreshCart = false)
             var submitVisitorOrderRequest = new SubmitVisitorOrderRequest(updatedCart);
             submitVisitorOrderResult = _orderServiceProvider.SubmitVisitorOrder(submitVisitorOrderRequest);
@@ -1821,7 +1844,7 @@ namespace CSDemo.Models.Checkout.Cart
                 msg = "No items in cart";
             }
 
-            updatedCart.Email = "testorder@mail.com";
+            updatedCart.Email = "john.montes@xcentium.com";
             // GetCart(string userName, bool refreshCart = false)
             var submitVisitorOrderRequest = new SubmitVisitorOrderRequest(updatedCart);
             submitVisitorOrderResult = _orderServiceProvider.SubmitVisitorOrder(submitVisitorOrderRequest);
@@ -2019,6 +2042,290 @@ namespace CSDemo.Models.Checkout.Cart
                 Sitecore.Diagnostics.Log.Error("Error in CartHelper.GetShippingMethods", ex);
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Built for Alexa POC, simulates a "One Click Purchase" that doesn't involve manual checkout process. WIll be made more generic next time.
+        /// Reused what I can but created own process since most of the existing methods involve pushing/pulling cart in cache which gets lost due to session
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public MovieOrder QuickBuyMovie(MovieOrder order)
+        {
+            try
+            {
+                int orderQty;
+
+                //0 - validate
+                if (string.IsNullOrWhiteSpace(order.MovieVariantId) || string.IsNullOrWhiteSpace(order.CustomerEmailAddress)
+                    || !int.TryParse(order.NoOfTickets, out orderQty) || orderQty < 1)
+                {
+                    throw new ArgumentException("One or more required parameters are incorrect.");
+                }
+
+                //1 - find movie
+                var movieVariantItem = Context.Database.GetItem(new ID(order.MovieVariantId));
+                if (movieVariantItem == null) throw new Exception($"Cannot find movie variant item = {order.MovieVariantId}.");
+                var price = string.IsNullOrWhiteSpace(movieVariantItem["listprice"]) ? 0 : decimal.Parse(movieVariantItem["listprice"]);
+                var totalPrice = orderQty * price;
+
+                var movieItem = movieVariantItem.Parent;
+                if (movieItem == null) throw new Exception($"Cannot find movie item for variant {order.MovieVariantId}.");
+
+                //create own cart
+                var customerId = GetVisitorId(); //TODO: for anon for now
+                var cart = GetCart(customerId, true);
+                var productId = movieItem.Name;
+                var productVariantId = movieVariantItem.Name;
+                const string catalogName = "XCinemaCatalog";
+
+                //2 - add items to cart
+                //AddToCart(cartLineItem);
+
+                var cartItem = new CommerceCartLine(catalogName, productId, productVariantId, uint.Parse(orderQty.ToString()));
+
+                // update stock in formation
+                // push cart to commerce server
+                UpdateStockInformation(cartItem, catalogName);
+
+                var request = new AddCartLinesRequest(cart, new[] { cartItem });
+                var info = CartRequestInformation.Get(request);
+                if (info == null)
+                {
+                    info = new CartRequestInformation(request, true);
+                }
+                else
+                {
+                    info.Refresh = true;
+                }
+
+                var cartResult = _cartServiceProvider.AddCartLines(request);
+                if (!cartResult.Success)
+                {
+                    throw new Exception("AddProductToCart failed.");
+                }
+                cart = (CommerceCart)cartResult.Cart;
+
+                //3 - add shipping info
+                //ApplyShippingToCart(address)
+
+                var address = new Address
+                {
+                    Email = order.CustomerEmailAddress,
+                    FirstName = order.CustomerUsername,
+                    LastName = "",
+                    Address1 = "123 Street", //TODO: remove hard coded address
+                    City = "New York",
+                    State = "NY",
+                    ZipPostalCode = "10009",
+                    CountryCode = "US"
+                };
+
+                var shipping = new CommerceParty
+                {
+                    ExternalId = "0",
+                    Name = Constants.Products.ShippingAddress,
+                    PartyId = "0",
+                    FirstName = address.FirstName,
+                    LastName = address.LastName,
+                    Address1 = address.Address1,
+                    Address2 = address.Address2,
+                    City = address.City,
+                    State = address.State,
+                    Company = address.Company,
+                    Email = address.Email,
+                    FaxNumber = address.FaxNumber,
+                    Country = address.Country,
+                    CountryCode = address.CountryCode,
+                    ZipPostalCode = address.ZipPostalCode
+                };
+
+                var cartParties = cart.Parties.ToList();
+                var partyList = new List<Party> { shipping };
+
+                cartParties.AddRange(partyList);
+                cart.Parties = cartParties.AsReadOnly();
+
+                if (cart.Shipping == null || cart.Parties.Count <= 0) throw new Exception($"ApplyShippingToCart failed. Error=line item count = 0");
+
+                //4 - add shipping method
+                //AddShippingMethodToCart
+
+                const string shippingMethodId = "e14965b9-306a-43c4-bffc-3c67be8726fa|Ground"; //ground shipping until digital delivery gets sorted out
+                var shippingData = shippingMethodId.Split('|');
+
+                // prepare shipping methods list with chosen shipping method
+                var shippingMethodList = new List<ShippingMethodInputModelItem>
+                {
+                    new ShippingMethodInputModelItem
+                    {
+                        ShippingMethodID = shippingData[0],
+                        ShippingMethodName = shippingData[1],
+                        ShippingPreferenceType = "3",
+                        PartyID = "0"
+                    }
+                };
+
+                //prepare shipping list - items to be shipped
+                var internalShippingList = shippingMethodList.ToShippingInfoList();
+                var orderPreferenceType = InputModelExtension.GetShippingOptionType("3");
+
+                if (orderPreferenceType != ShippingOptionType.DeliverItemsIndividually)
+                {
+                    foreach (var shippingItem in internalShippingList)
+                    {
+                        shippingItem.LineIDs = (from CommerceCartLine lineItem in cart.Lines
+                                                select lineItem.ExternalCartLineId).ToList().AsReadOnly();
+                    }
+                }
+
+                var shipments = new List<ShippingInfo>();
+                shipments.AddRange(internalShippingList);
+
+                //add email address
+                cart.Email = cart.Parties[0].Email;
+                shipments[0].Properties["ElectronicDeliveryEmail"] = cart.Email;
+
+                //update cart with shipping info
+                var addShippingInfoRequest =
+                    new Sitecore.Commerce.Engine.Connect.Services.Carts.AddShippingInfoRequest(cart, shipments,
+                        orderPreferenceType);
+                var addShippingInfoResult = _cartServiceProvider.AddShippingInfo(addShippingInfoRequest);
+
+                //var addShippingMethodToCartRet = AddShippingMethodToCart(shippingMethodId);
+                if (!addShippingInfoResult.Success) throw new Exception($"AddShippingMethodToCart failed. Error= {addShippingInfoResult.SystemMessages[0].Message}");
+                cart = (CommerceCart)addShippingInfoResult.Cart;
+
+                //5 - add payment info
+                //ApplyNewPaymentMethodToCart(payment)
+
+                //GET NEW PAYMENT TOKEN
+                var token = GetPaymentClientToken();
+                var client = GetPaymentClient();
+
+                //from vault
+                const string paymentMethodToken = "44xmdp"; //generated manually for now, must be made using the site and reused later
+                const string paymentCustomerId = "666210196";
+
+                var paymentRequest = new TransactionRequest
+                {
+                    Amount = totalPrice,
+                    PaymentMethodToken = paymentMethodToken,
+                    CustomerId = paymentCustomerId,
+                    Options = new TransactionOptionsRequest
+                    {
+                        SubmitForSettlement = true
+                    }
+                };
+
+                var gateway = new BraintreeGateway
+                {
+                    Environment = Braintree.Environment.SANDBOX,
+                    MerchantId = "6g8gknscwvxrr2gt",
+                    PublicKey = "kwfq3qv9tjs6s5k6",
+                    PrivateKey = "0180dfd3844dee50a0593aa0b25d44b7"
+                };
+                var result = gateway.Transaction.Sale(paymentRequest);
+
+                if (!result.IsSuccess()) throw new Exception($"payment request failed. Error = {result.Errors.DeepAll()[0].Message}");
+
+                var paymentToken = result.Target.Id;
+                var paymentAuthToken = result.Target.ProcessorAuthorizationCode;
+
+                var payment = new Payment   
+                {
+                    BillingAddress = address,
+                    CardPrefix = "paypal",
+                    Token = paymentMethodToken
+                };
+
+                var billingParty = new CommerceParty
+                {
+                    ExternalId = "0",
+                    Name = Constants.Products.BillingAddress,
+                    PartyId = "0",
+                    FirstName = address.FirstName,
+                    LastName = address.LastName,
+                    Address1 = address.Address1,
+                    Address2 = address.Address2,
+                    City = address.City,
+                    State = address.State,
+                    Company = address.Company,
+                    Email = address.Email,
+                    FaxNumber = address.FaxNumber,
+                    Country = address.Country,
+                    CountryCode = address.CountryCode,
+                    ZipPostalCode = address.ZipPostalCode
+                };
+
+                // Add billing party to cart
+                var parties = cart.Parties.ToList();
+                parties.Add(billingParty);
+                cart.Parties = parties.AsSafeReadOnly();
+
+                // prepare payment info
+                var federatedPaymentModel = new FederatedPaymentInputModelItem
+                {
+                    CardToken = payment.Token,
+                    Amount = cart.Total.Amount,
+                    CardPaymentAcceptCardPrefix = payment.CardPrefix
+                };
+
+                var federatedPayment = federatedPaymentModel.ToCreditCardPaymentInfo();
+                federatedPayment.PartyID = billingParty.PartyId;
+                federatedPayment.AuthorizationResult = paymentAuthToken;
+
+                var payments = new List<PaymentInfo> { federatedPayment };
+
+                //add payment info to cart
+                var addPaymentInfoResult = _cartServiceProvider.AddPaymentInfo(new AddPaymentInfoRequest(cart, payments));
+                if (!addPaymentInfoResult.Success) throw new Exception($"ApplyNewPaymentMethodToCart failed. Error={addPaymentInfoResult.SystemMessages[0].Message}");
+                cart = (CommerceCart)addPaymentInfoResult.Cart;
+
+                //6 - submit cart for payment
+                //var orderNo = SubmitCart();
+                string orderNo = null;
+
+                cart.Email = "john.montes@xcentium.com";
+
+                var submitVisitorOrderRequest = new SubmitVisitorOrderRequest(cart);
+                var submitVisitorOrderResult = _orderServiceProvider.SubmitVisitorOrder(submitVisitorOrderRequest);
+
+                if (!submitVisitorOrderResult.Success) throw new Exception($"SubmitVisitorOrder failed. Error={submitVisitorOrderResult.SystemMessages[0].Message}");
+
+                var visitorOrder = submitVisitorOrderResult.Order as CommerceOrder;
+                if (visitorOrder != null)
+                {
+                    var orderId = visitorOrder.OrderID;
+
+                    // Get order details
+                    var getVisitorOrderRequest = new GetVisitorOrderRequest(orderId, customerId, ShopName);
+                    var getVisitorOrderResult = _orderServiceProvider.GetVisitorOrder(getVisitorOrderRequest);
+
+                    // return commerceOrderId;
+                    orderNo = getVisitorOrderResult.Order.TrackingNumber;
+                }
+
+                //return message
+                if (string.IsNullOrWhiteSpace(orderNo) || orderNo.ToUpper().Contains("ERROR"))
+                {
+                    order.IsOrderSuccessful = false;
+                    order.Message = orderNo;
+                }
+
+                order.IsOrderSuccessful = true;
+                order.OrderNo = orderNo;
+                order.Message = "successful";
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"CartHelper.QuickBuy, Error={ex.Message}", ex);
+
+                order.IsOrderSuccessful = false;
+                order.Message = $"CartHelper.QuickBuy, Error={ex.Message}";
+            }
+
+            return order;
         }
     }
 }
