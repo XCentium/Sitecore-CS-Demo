@@ -8,7 +8,10 @@ SharedFields:
 - ID: 0452eb98-bc28-4fd8-a3b4-533f26c62705
   Hint: Fulfillment Options
   Type: Multilist
-  Value: {1CA75E23-86D1-4089-B7A4-346E96E66161}
+  Value: |
+    {1CA75E23-86D1-4089-B7A4-346E96E66161}
+    {13372399-0C90-4827-B4DD-CA69B7EE3F94}
+    {5B8EC4C9-020D-4F2E-B38B-74FD6441EADF}
 - ID: 769b63db-453f-44e6-aa90-cbc916e47f7d
   Hint: Allow items to be delivered Individually
   Value: 1

@@ -1,0 +1,14 @@
+﻿---
+ID: cfd09dbd-7201-45b7-9a22-85ca34c39439
+Parent: 8d93d0d4-0410-4b67-8012-9260a319bfe2
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/XCinemaDemo/Components/Cinema/Cinema Details
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170516T231650Z

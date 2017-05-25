@@ -640,6 +640,7 @@
     <None Include="Properties\PublishProfiles\CTP5.pubxml" />
     <None Include="Properties\PublishProfiles\DEV Local.pubxml" />
     <None Include="Properties\PublishProfiles\Diego Local.pubxml" />
+    <None Include="Properties\PublishProfiles\John-AlexaPOC.pubxml" />
     <None Include="Properties\PublishProfiles\keefe.pubxml">
       <SubType>Designer</SubType>
     </None>

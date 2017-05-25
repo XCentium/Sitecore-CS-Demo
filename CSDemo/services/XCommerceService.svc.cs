@@ -22,7 +22,7 @@ namespace CSDemo.Services
     {
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json)]
-        public List<Movie> GetMovies(string zipcode)
+        public List<Movie> GetShowTimes(string zipcode, int hours)
         {
             var movies = new List<Movie>();
 
@@ -33,8 +33,13 @@ namespace CSDemo.Services
                     throw new ArgumentException("zipcode is null or empty");
                 }
 
+                //check hours and move to default 3 if <= 0
+                hours = hours <= 0 ? 3 : hours;
+
                 var moviesSearchResults = GetMoviesByZipcode(zipcode);
-                return moviesSearchResults.Select(m => new Movie
+
+                return moviesSearchResults
+                    .Select(m => new Movie
                 {
                     Title = m.Document.Fields[Movie.Fields.MovieName]?.ToString(),
                     CinemaName = m.Document.Fields[Movie.Fields.CinemaName]?.ToString(),
@@ -45,11 +50,13 @@ namespace CSDemo.Services
                     CinemaZipcode = m.Document.Fields[Movie.Fields.CinemaZipCode]?.ToString(),
                     Id = new Guid(m.Document.Fields[Movie.Fields.VariantId].ToString()).ToString()
                 })
+                    .Where(m => DateTime.Parse(DateTime.Today.ToShortDateString() + " " + m.ShowTime.ToString()) >= DateTime.Now 
+                        && DateTime.Parse(DateTime.Today.ToShortDateString() + " " + m.ShowTime.ToString()) <= DateTime.Now.AddHours(hours))
                     .OrderBy(m => m.Title).ThenBy(m => m.CinemaName).ThenBy(m => m.ShowDate).ThenBy(m => m.ShowTime).ToList();
             }
             catch (Exception ex)
             {
-                Log.Error($"CSDemo.Services.XCommerceService.GetMovies, Error = {ex.Message}", ex);
+                Log.Error($"CSDemo.Services.XCommerceService.GetShowTimes, Error = {ex.Message}", ex);
             }
 
             return movies;

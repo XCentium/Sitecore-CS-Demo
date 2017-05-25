@@ -1,0 +1,14 @@
+﻿---
+ID: 0c45aaa3-bd6b-46a1-a7c9-59f6963fe97f
+Parent: 1580cc38-3991-473f-b96d-5dfa4f4dbb4e
+Template: 0437fee2-44c9-46a6-abe9-28858d9fee8c
+Path: /sitecore/templates/XCinemaDemo/Components
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170516T231515Z
