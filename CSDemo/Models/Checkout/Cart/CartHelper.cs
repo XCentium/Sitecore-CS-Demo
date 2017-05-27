@@ -2199,44 +2199,13 @@ namespace CSDemo.Models.Checkout.Cart
                 //5 - add payment info
                 //ApplyNewPaymentMethodToCart(payment)
 
-                //GET NEW PAYMENT TOKEN
-                var token = GetPaymentClientToken();
-                var client = GetPaymentClient();
-
-                //from vault
+                //VAULT METHOD
                 const string paymentMethodToken = "44xmdp"; //generated manually for now, must be made using the site and reused later
-                const string paymentCustomerId = "666210196";
-
-                var paymentRequest = new TransactionRequest
-                {
-                    Amount = totalPrice,
-                    PaymentMethodToken = paymentMethodToken,
-                    CustomerId = paymentCustomerId,
-                    Options = new TransactionOptionsRequest
-                    {
-                        SubmitForSettlement = true
-                    }
-                };
-
-                var gateway = new BraintreeGateway
-                {
-                    Environment = Braintree.Environment.SANDBOX,
-                    MerchantId = "6g8gknscwvxrr2gt",
-                    PublicKey = "kwfq3qv9tjs6s5k6",
-                    PrivateKey = "0180dfd3844dee50a0593aa0b25d44b7"
-                };
-                var result = gateway.Transaction.Sale(paymentRequest);
-
-                if (!result.IsSuccess()) throw new Exception($"payment request failed. Error = {result.Errors.DeepAll()[0].Message}");
-
-                var paymentToken = result.Target.Id;
-                var paymentAuthToken = result.Target.ProcessorAuthorizationCode;
-
                 var payment = new Payment   
                 {
                     BillingAddress = address,
                     CardPrefix = "paypal",
-                    Token = paymentMethodToken
+                    Token = $"vault|{paymentMethodToken}" //indicate use of Vault token, must use modified braintree plugin on CommerceAuthoring
                 };
 
                 var billingParty = new CommerceParty
@@ -2266,14 +2235,13 @@ namespace CSDemo.Models.Checkout.Cart
                 // prepare payment info
                 var federatedPaymentModel = new FederatedPaymentInputModelItem
                 {
-                    CardToken = payment.Token,
+                    CardToken = payment.Token, 
                     Amount = cart.Total.Amount,
                     CardPaymentAcceptCardPrefix = payment.CardPrefix
                 };
 
                 var federatedPayment = federatedPaymentModel.ToCreditCardPaymentInfo();
                 federatedPayment.PartyID = billingParty.PartyId;
-                federatedPayment.AuthorizationResult = paymentAuthToken;
 
                 var payments = new List<PaymentInfo> { federatedPayment };
 
@@ -2316,6 +2284,7 @@ namespace CSDemo.Models.Checkout.Cart
                 order.IsOrderSuccessful = true;
                 order.OrderNo = orderNo;
                 order.Message = "successful";
+                order.OrderDateTime = DateTime.UtcNow.ToString("dd-MMM-yyyy hh:mm:ss tt");
             }
             catch (Exception ex)
             {

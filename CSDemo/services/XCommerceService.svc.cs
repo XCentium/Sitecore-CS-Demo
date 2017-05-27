@@ -186,6 +186,6 @@ namespace CSDemo.Services
         [DataMember]
         public string OrderNo { get; set; }
         [DataMember]
-        public DateTime OrderDateTime { get; set; }
+        public string OrderDateTime { get; set; }
     }
 }

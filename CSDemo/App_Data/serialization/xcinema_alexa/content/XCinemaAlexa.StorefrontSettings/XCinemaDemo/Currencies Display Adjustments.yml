@@ -1,0 +1,14 @@
+﻿---
+ID: 83262bfe-0dbc-44a0-80f9-979fdf90059a
+Parent: 17f73e15-2112-49a6-b044-141122eea8ee
+Template: 128c8948-5304-473e-93d1-914cc5f29b90
+Path: /sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/XCinemaDemo/Currencies Display Adjustments
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20161205T113151Z
