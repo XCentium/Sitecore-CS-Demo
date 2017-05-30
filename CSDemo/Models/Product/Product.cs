@@ -123,7 +123,7 @@ namespace CSDemo.Models.Product
                 }
             }
 
-            return null;
+            return new List<Product>(); ;
         }
 
         public IEnumerable<Product> GetRelatedProductsFallback()
@@ -141,7 +141,7 @@ namespace CSDemo.Models.Product
                 }
             }
 
-            return null;
+            return new List<Product>();
         }
 
         public IEnumerable<Product> RelatedProducts
