@@ -468,23 +468,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AJAX\Cart.asmx" />
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.CSDemo39.config">
-      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Diego Local.config">
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Debug.config">
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
     <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.John-Local.config">
-      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Release.config">
-      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.csDemo.config">
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
@@ -618,16 +606,15 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Config\Include\zCSDemo\CSDemo.Social.config" />
-    <None Include="Properties\PublishProfiles\CSDemo39.pubxml" />
-    <None Include="Properties\PublishProfiles\CTP4B.pubxml" />
-    <None Include="Properties\PublishProfiles\CTP5.pubxml" />
-    <None Include="Properties\PublishProfiles\DEV Local.pubxml" />
-    <None Include="Properties\PublishProfiles\Diego Local.pubxml" />
-    <None Include="Properties\PublishProfiles\keefe.pubxml">
-      <SubType>Designer</SubType>
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.John-Prod-CSDemo39.config">
+      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="Properties\PublishProfiles\Ola.DebugNew.pubxml" />
-    <None Include="Properties\PublishProfiles\Vasiliy Local.pubxml" />
+    <None Include="App_Config\Include\zCSDemo\CSDemo.Serialization.Release.config">
+      <DependentUpon>CSDemo.Serialization.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="Properties\PublishProfiles\John-Prod-CSDemo39.pubxml" />
     <Content Include="Tools\EmailTester.aspx" />
     <Content Include="Tools\ItemTester.aspx" />
     <Content Include="Tools\VisualMerchandiser.aspx" />
@@ -640,7 +627,9 @@
     <Content Include="Views\web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Views\Form\EditorTemplates\CaptchaField.cshtml" />
     <Content Include="Views\Form\EditorTemplates\CheckboxField.cshtml" />
@@ -688,10 +677,6 @@
     <Content Include="Assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Assets\fonts\glyphicons-halflings-regular.eot" />
-    <None Include="Properties\PublishProfiles\csDemo.pubxml" />
-    <None Include="Properties\PublishProfiles\DebuLocal.pubxml" />
-    <None Include="Properties\PublishProfiles\Release Test.pubxml" />
-    <None Include="Properties\PublishProfiles\XcCommerce112Demo.pubxml" />
     <Content Include="Views\Checkout\Cart.cshtml" />
     <Content Include="Views\Checkout\Checkout.cshtml" />
     <Content Include="Views\Checkout\Shipping.cshtml" />
@@ -709,7 +694,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Signoff.cshtml" />
     <Content Include="Views\Product\CategoryProducts.cshtml" />
-    <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
     <Content Include="Views\Page\Article.cshtml" />
     <Content Include="Views\Page\Footer.cshtml" />
     <Content Include="Views\Page\Header.cshtml" />
@@ -724,7 +708,6 @@
     <Content Include="Views\Page\Layouts\Styles.cshtml" />
     <Content Include="Views\Product\SpecialtySelectedForYou.cshtml" />
     <Content Include="Views\Product\ComplementaryProducts.cshtml" />
-    <None Include="Properties\PublishProfiles\xccommerce113demo.pubxml" />
     <Content Include="Views\Product\VisitorStockNotificationSignup.cshtml" />
     <Content Include="Views\Account\AddAddress.cshtml" />
     <Content Include="Views\Account\AddressDetail.cshtml" />
@@ -757,12 +740,6 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
-  <PropertyGroup Label="SlowCheetah">
-    <SlowCheetahToolsPath>$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\..\packages\SlowCheetah.2.5.15\tools\))</SlowCheetahToolsPath>
-    <SlowCheetah_EnableImportFromNuGet Condition=" '$(SlowCheetah_EnableImportFromNuGet)'=='' ">true</SlowCheetah_EnableImportFromNuGet>
-    <SlowCheetah_NuGetImportPath Condition=" '$(SlowCheetah_NuGetImportPath)'=='' ">$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\Properties\SlowCheetah\SlowCheetah.Transforms.targets ))</SlowCheetah_NuGetImportPath>
-    <SlowCheetahTargets Condition=" '$(SlowCheetah_EnableImportFromNuGet)'=='true' and Exists('$(SlowCheetah_NuGetImportPath)') ">$(SlowCheetah_NuGetImportPath)</SlowCheetahTargets>
-  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
@@ -790,8 +767,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.SlowCheetah.3.0.61\build\Microsoft.VisualStudio.SlowCheetah.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.SlowCheetah.3.0.61\build\Microsoft.VisualStudio.SlowCheetah.targets'))" />
   </Target>
-  <Import Project="$(SlowCheetahTargets)" Condition="Exists('$(SlowCheetahTargets)')" Label="SlowCheetah" />
+  <Import Project="..\packages\Microsoft.VisualStudio.SlowCheetah.3.0.61\build\Microsoft.VisualStudio.SlowCheetah.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.SlowCheetah.3.0.61\build\Microsoft.VisualStudio.SlowCheetah.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

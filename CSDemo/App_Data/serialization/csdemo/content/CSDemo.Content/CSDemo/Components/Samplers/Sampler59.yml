@@ -1,0 +1,50 @@
+﻿---
+ID: c0dfd691-05bd-44c7-b251-e36a72e99ebb
+Parent: b4b8abac-875f-425e-8a00-b7f90ffb124f
+Template: 50bd0984-584a-444e-bb4c-d046c0093b9e
+Path: /sitecore/content/CSDemo/Components/Samplers/Sampler59
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170530T203118Z
+    - ID: 433be094-d56c-4f74-b702-0ba2fdc46bef
+      Hint: Image
+      Value: "<image mediaid=\"{AF341CF5-11ED-4410-A830-236787951590}\" />"
+    - ID: 4bb391fa-9b13-4f11-be96-46b4ec127a7c
+      Hint: Group3Products
+      Type: Multilist with Search
+      Value: |
+        {33910939-0C8E-467F-9447-8608235B303E}
+        {130F4A73-4278-426B-B585-F81F4B452926}
+        {B57979F7-C349-4BA8-B1F3-E7E4DD59B535}
+        {86759495-F028-4163-BF37-D4E15BAFA78B}
+        {E43C60D0-0F86-4881-A129-B7A6BE795076}
+    - ID: 6b6e1896-b167-47f8-b046-90d66d37be58
+      Hint: Name
+      Value: Sampler59
+    - ID: 8ce7966b-1f2c-4d30-a8e3-52340c93444d
+      Hint: Group1Products
+      Type: Multilist with Search
+      Value: |
+        {130F4A73-4278-426B-B585-F81F4B452926}
+        {B57979F7-C349-4BA8-B1F3-E7E4DD59B535}
+        {02A21058-549A-4D3A-BC61-2825E75A39ED}
+        {E3FDF429-DA6A-47B7-80EC-84F91505E6C7}
+        {E43C60D0-0F86-4881-A129-B7A6BE795076}
+    - ID: aea5d485-07f5-4920-9bb2-e3f86fd85177
+      Hint: Group2Products
+      Type: Multilist with Search
+      Value: |
+        {130F4A73-4278-426B-B585-F81F4B452926}
+        {E43C60D0-0F86-4881-A129-B7A6BE795076}
+        {02A21058-549A-4D3A-BC61-2825E75A39ED}
+        {894B16BA-5C4A-4DC3-A882-5890CB1BF466}
+        {E3FDF429-DA6A-47B7-80EC-84F91505E6C7}
+    - ID: ec1a65f7-08d2-4413-9df4-11be2db1f506
+      Hint: Price
+      Value: 59

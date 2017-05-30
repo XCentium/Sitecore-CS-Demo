@@ -1,0 +1,39 @@
+﻿---
+ID: 066814cc-fdae-47c8-9328-59780ef052eb
+Parent: 49b9f3e2-65cc-48f5-9a96-35efd0c752d8
+Template: b3d2832f-2fbf-4466-9d95-d3a0c6476362
+Path: /sitecore/content/CSDemo/Home/Samplers
+DB: master
+SharedFields:
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: People/32x32/cubes.png
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s" p:p="1">
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r uid="{63223E3A-7BE4-4C4F-A69F-29C0F4CD44EA}">
+          <p:d />
+        </r>
+        <r uid="{1AA82886-1518-4AA3-BAA6-36B975907622}" p:after="r[@uid='{786ECE31-95BE-42A4-BD3B-7FC824D276EF}']" s:ds="{B4B8ABAC-875F-425E-8A00-B7F90FFB124F}" s:id="{85917508-837B-4ACD-B787-2219164AD1F5}" s:par="" s:ph="page-body" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160219T171521Z
+    - ID: 4d027ffa-64cf-4502-8c87-f5195ff18d76
+      Hint: Page Title
+      Value: Build your own Sampler!
+    - ID: 55a55b4d-d866-4df7-9821-46e9f9cf3ee3
+      Hint: Title
+      Value: $name
+    - ID: fbefdcf0-c9de-473a-aab7-e043d2e335ba
+      Hint: Meta Description
+      Value: Sampler Builder
