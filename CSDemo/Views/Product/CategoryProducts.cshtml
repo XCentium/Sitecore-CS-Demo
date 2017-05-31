@@ -250,8 +250,16 @@
                                                 <i class="fa fa-star@(product.Rating > 4 ? string.Empty : "-o")"></i>
                                             </div>
                                             <span class="price">
-                                                            <ins><span id="@string.Concat("productAmount", product.VariantProdId)" class="amount">@product.ListPrice</span></ins>
-                                                        </span>
+                                                @if (product.IsOnSale && (product.Price != product.SalePrice))
+                                                {
+                                                    <ins><del class="amount sale-old-price">@product.ListPrice</del></ins>
+                                                    <ins><span id="@string.Concat("productAmount", product.VariantProdId)" class="amount">@product.SalePrice.ToString("C")</span></ins>
+                                                }
+                                                else
+                                                {
+                                                    <ins><span id="@string.Concat("productAmount", product.VariantProdId)" class="amount">@product.ListPrice</span></ins>
+                                                }
+                                            </span>
                                             <p>@product.Description</p>
                                             @Html.Partial("~/Views/Product/_ComparisonControl.cshtml", product)
                                         </div>
