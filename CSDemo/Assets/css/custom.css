@@ -5920,6 +5920,10 @@ footer.navbar a:hover {
             padding-left: 30px;
         }
 
+.sale-old-price {
+    color: #888888;
+}
+
 /*FSS DEMO*/
 .blog article.post a.ad-link p {
     background-color: #f5f5f5;

@@ -42,8 +42,16 @@
                                             <i class="fa fa-star@(featuredProduct.Rating > 3 ? string.Empty : "-o")"></i>
                                             <i class="fa fa-star@(featuredProduct.Rating > 4 ? string.Empty : "-o")"></i>
                                         </div>
+                                        @{
+                                            var isOnSale = featuredProduct.IsOnSale && (featuredProduct.Price != featuredProduct.SalePrice);
+                                            var amount = isOnSale ? featuredProduct.SalePrice.ToString("c") : featuredProduct.ListPrice;
+                                        }
                                         <span class="price">
-                                            <ins><span class="amount">@featuredProduct.ListPrice</span></ins>
+                                            @if (isOnSale)
+                                            {
+                                                <del><span class="amount sale-old-price">@featuredProduct.ListPrice</span></del>
+                                            }
+                                            <ins><span class="amount">@amount</span></ins>
                                         </span>
                                     </article>
                                 </a>
