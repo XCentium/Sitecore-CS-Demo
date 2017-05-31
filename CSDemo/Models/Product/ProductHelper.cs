@@ -1181,7 +1181,7 @@ namespace CSDemo.Models.Product
                                 var child = productItem.Children.FirstOrDefault();
                                 variantId = child.Name;
                             }
-                            productList.Add(new ProductMini { Id = product.ProductId, CategoryName = parentName, CatalogId = catalogId, Guid = ID.Parse(product.ID).ToString(), Title = product.Title, Price = product.Price, CatalogName = catalogName, ImageSrc = product.FirstImage, VariantId = variantId, Url = product.Url });
+                            productList.Add(new ProductMini { Id = product.ProductId, CategoryName = parentName, CatalogId = catalogId, Guid = ID.Parse(product.ID).ToString(), Title = product.Title, Price = product.Price, CatalogName = catalogName, ImageSrc = product.FirstImage, VariantId = variantId, Url = product.Url, IsOnSale = product.IsOnSale, SalePrice = product.SalePrice});
                         }
                     }
                     catch (Exception ex)

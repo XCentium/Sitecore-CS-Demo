@@ -312,7 +312,7 @@ namespace CSDemo.AJAX
 
             foreach (var product in productsResult)
             {
-                products.Add(new {product.Id, product.CategoryName, product.CatalogId, product.Guid, product.Title, product.Price, product.CatalogName, product.ImageSrc, product.VariantId, product.Url });
+                products.Add(new {product.Id, product.CategoryName, product.CatalogId, product.Guid, product.Title, product.Price, product.CatalogName, product.ImageSrc, product.VariantId, product.Url, IsOnSale = product.IsOnSale, SalePrice = product.SalePrice });
             }
 
             return new { success = true, total = products.Count , products };

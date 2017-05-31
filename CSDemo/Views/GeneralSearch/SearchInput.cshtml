@@ -47,8 +47,6 @@ window.jQuery ||
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result) {
-                    console.log("categ");
-                    console.log(result);
                     $("#typeaheadCategoryResult").html("");
 
                     var output = result.d;
@@ -118,6 +116,12 @@ window.jQuery ||
                                 prodImages[cnt] = new Image();
                                 prodImages[cnt].src = el.ImageSrc + "?as=1&h=100&w=100";
 
+                                var price = "<span>$" + el.Price.toFixed(2) + "</span>";
+
+                                if (el.IsOnSale && (el.Price != el.SalePrice)) {
+                                    price = '<del><span class="amount sale-old-price">$' + el.Price.toFixed(2) + '</span></del>&nbsp;&nbsp;<span>$' + el.SalePrice.toFixed(2) + '</span>';
+                                }
+
                                 listHtml +=
                                     "<li>" +
                                     "<img src='" +
@@ -127,9 +131,7 @@ window.jQuery ||
                                     el.Url +
                                     "'>" +
                                     el.Title +
-                                    "</a>" +
-                                    "<span>" +
-                                    el.Price.toFixed(2) + " USD" +
+                                    "</a>" + price +
                                     "</span></div>" +
                                     "<div style='clear: both;'></div>" +
                                     "</li>";
@@ -168,7 +170,6 @@ window.jQuery ||
                 dataType: "json",
                 success: function (result) {
                     $("#typeaheadBlogArticlesResult").html("");
-                    console.log(result);
 
                     var output = result.d;
                     var blogs = output.blogs;

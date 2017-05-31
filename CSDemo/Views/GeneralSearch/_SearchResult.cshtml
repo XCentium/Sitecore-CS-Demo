@@ -49,7 +49,14 @@
                         }
                     </div>
                     <span class="price">
-                        <ins><span class="amount">$@Model.CurrencyPrice</span></ins>
+                        @if (Model.IsOnSale)
+                        {
+                            <ins><del class="amount sale-old-price">$@Model.Price.ToString("N")</del></ins>  <ins><span class="amount">$@Model.SalePrice.ToString("N")</span></ins>
+                        }
+                        else
+                        {
+                            <ins><span class="amount">$@Model.Price.ToString("N")</span></ins> 
+                        }
                     </span>
                     <div class="product-rating">
                         <i class="fa fa-star@(Model.Rating>0 ? string.Empty:"-o" )"></i>
