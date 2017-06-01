@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using CSDemo.Configuration;
 using CSDemo.Models.Checkout.Cart;
-using Glass.Mapper.Sc.Configuration.Attributes;
 using Sitecore;
 using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.Linq;
@@ -16,12 +14,9 @@ using Sitecore.Diagnostics;
 
 namespace CSDemo.Services
 {
-    [ServiceContract(Namespace = "XCommerceService")]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class XCommerceService
+    public class XCommerceService : IXCommerceService
     {
-        [OperationContract]
-        [WebGet(ResponseFormat = WebMessageFormat.Json)]
         public List<Movie> GetShowTimes(string zipcode, int hours)
         {
             var movies = new List<Movie>();
@@ -62,8 +57,6 @@ namespace CSDemo.Services
             return movies;
         }
 
-        [OperationContract]
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         public MovieOrder BuyMovie(MovieOrder order)
         {
             try
@@ -106,7 +99,7 @@ namespace CSDemo.Services
         //6] how to get payent processed? user has to have payment info registered for "One click buy"
         //7] add items are digital items (no physical)
 
-        public static IEnumerable<SearchHit<SearchResultItem>> GetMoviesByZipcode(string zipcode)
+        private static IEnumerable<SearchHit<SearchResultItem>> GetMoviesByZipcode(string zipcode)
         {
             var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndexMovies());
             try
@@ -131,61 +124,5 @@ namespace CSDemo.Services
             }
             return null;
         }
-    }
-
-    [SitecoreType(AutoMap = true), DataContract]
-    public class Movie
-    {
-        [SitecoreField(Fields.VariantId), DataMember]
-        public string Id { get; set; }
-        [SitecoreField(Fields.MovieName), DataMember]
-        public string Title { get; set; }
-        [SitecoreField(Fields.Price), DataMember]
-        public double Price { get; set; }
-        [SitecoreField(Fields.ShowDate), DataMember]
-        public string ShowDate { get; set; }
-        [SitecoreField(Fields.ShowTime), DataMember]
-        public string ShowTime { get; set; }
-        [SitecoreField(Fields.CinemaName), DataMember]
-        public string CinemaName { get; set; }
-        [SitecoreField(Fields.CinemaZipCode), DataMember]
-        public string CinemaZipcode { get; set; }
-        [SitecoreField(Fields.CinemaId), DataMember]
-        public string CinemaId { get; set; }
-
-        public struct Fields
-        {
-            public const string VariantId = "_group";
-            public const string MovieName = "moviename";
-            public const string Price = "listprice";
-            public const string ShowDate = "showdate";
-            public const string ShowTime = "showtime";
-            public const string CinemaName = "movielocationname";
-            public const string CinemaZipCode = "moviezipcode";
-            public const string CinemaId = "locationid";
-        }
-    }
-
-    [DataContract]
-    public class MovieOrder
-    {
-        [DataMember]
-        public string MovieVariantId { get; set; }
-        [DataMember]
-        public string NoOfTickets { get; set; }
-        [DataMember]
-        public bool IsCustomerAnonymous { get; set; }
-        [DataMember]
-        public string CustomerUsername { get; set; }
-        [DataMember]
-        public string CustomerEmailAddress { get; set; }
-        [DataMember]
-        public bool IsOrderSuccessful { get; set; }
-        [DataMember]
-        public string Message { get; set; }
-        [DataMember]
-        public string OrderNo { get; set; }
-        [DataMember]
-        public string OrderDateTime { get; set; }
     }
 }
