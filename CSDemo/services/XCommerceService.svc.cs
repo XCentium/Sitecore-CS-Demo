@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using CSDemo.Configuration;
+using CSDemo.Helpers;
 using CSDemo.Models.Checkout.Cart;
+using Newtonsoft.Json;
 using Sitecore;
 using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.Linq;
@@ -23,15 +27,17 @@ namespace CSDemo.Services
 
             try
             {
-                if (string.IsNullOrWhiteSpace(zipcode))
-                {
-                    throw new ArgumentException("zipcode is null or empty");
-                }
+                Assert.IsNotNullOrEmpty(zipcode, "zipcode is null or empty");
+
+                //get nearest cinema based on user's zipcode
+                var nearestCinemaZipcode = GetNearestCinemaZipcode(zipcode);
+
+                Assert.IsNotNullOrEmpty(nearestCinemaZipcode, "nearestCinemaZipcode is null or empty");
 
                 //check hours and move to default 3 if <= 0
                 hours = hours <= 0 ? 3 : hours;
 
-                var moviesSearchResults = GetMoviesByZipcode(zipcode);
+                var moviesSearchResults = GetMoviesByZipcode(nearestCinemaZipcode);
 
                 return moviesSearchResults
                     .Select(m => new Movie
@@ -55,6 +61,60 @@ namespace CSDemo.Services
             }
 
             return movies;
+        }
+
+        private string GetNearestCinemaZipcode(string customerZipcode)
+        {
+            string cinemaZipcode = null;
+
+            var zipcodeSvcApiKey = ConfigurationHelper.GetZipcodeServiceApiKey();
+            var zipcodeSvcApiCallFormat = ConfigurationHelper.GetZipcodeServiceCallFormat();
+            var zipcodes = GetCinemaLocationZipcodes();
+
+            if (zipcodes.Contains(customerZipcode))
+            {
+                //customer is in same zip code as a cinema
+                return customerZipcode;
+            }
+
+            //find nearest
+            var zipcodeList = $"{customerZipcode},{GetCinemaLocationZipcodes()}";
+            var zipcodeSvcApiCall = zipcodeSvcApiCallFormat.Replace("{APIKEY}", zipcodeSvcApiKey)
+                .Replace("{ZIPCODES}", zipcodeList);
+
+            //do call
+            var client = new WebClient();
+            var jsonResponse = client.DownloadString(zipcodeSvcApiCall);
+
+            if (!string.IsNullOrWhiteSpace(jsonResponse))
+            {
+                //var json = JsonConvert.DeserializeObject(jsonResponse);
+                var responses = JsonConvert.DeserializeObject<List<ZipcodeServiceResponse>>(jsonResponse);
+
+                if (responses != null && responses.Any())
+                {
+                    var closest = responses.Where(c => c.ZipCode1.Contains(customerZipcode) || c.ZipCode2.Contains(customerZipcode)).OrderBy(c => c.Distance).First();
+                    cinemaZipcode = closest.ZipCode1 == customerZipcode ? closest.ZipCode2 : closest.ZipCode1;
+                }
+            }
+
+            return cinemaZipcode;
+        }
+
+        private static string GetCinemaLocationZipcodes()
+        {
+            var zipcodes = string.Empty;
+
+            const string location = "/sitecore/content/XCinemaDemo/Components/Cinemas";
+
+            var cinemasItem = Context.Database.GetItem(location);
+
+            if (cinemasItem == null) return zipcodes;
+
+            var cinemaList = GlassHelper.Cast<CinemaList>(cinemasItem);
+            if (cinemaList != null) zipcodes = cinemaList.GetZipcodes();
+
+            return zipcodes;
         }
 
         public MovieOrder BuyMovie(MovieOrder order)

@@ -464,12 +464,16 @@
     <Compile Include="Models\Store\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\CustomLinkProvider.cs" />
+    <Compile Include="Services\Cinema.cs" />
+    <Compile Include="Services\CinemaList.cs" />
     <Compile Include="Services\IXCommerceService.cs" />
     <Compile Include="Services\Movie.cs" />
     <Compile Include="Services\MovieOrder.cs" />
     <Compile Include="Services\XCommerceService.svc.cs">
       <DependentUpon>XCommerceService.svc</DependentUpon>
     </Compile>
+    <Compile Include="Services\ZipcodeServiceList.cs" />
+    <Compile Include="Services\ZipcodeServiceResponse.cs" />
     <Compile Include="Tools\ItemTester.aspx.cs">
       <DependentUpon>ItemTester.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

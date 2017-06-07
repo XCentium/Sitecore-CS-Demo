@@ -1,4 +1,5 @@
-﻿using Sitecore;
+﻿using System.Configuration;
+using Sitecore;
 using Sitecore.Configuration;
 using Sitecore.Mvc.Extensions;
 
@@ -32,6 +33,16 @@ namespace CSDemo.Configuration
         public static string GetAnayticsIndex()
         {
             return "sitecore_analytics_index";
+        }
+
+        public static string GetZipcodeServiceApiKey()
+        {
+            return ConfigurationManager.AppSettings["ZipcodeServiceApiKey"];
+        }
+
+        public static string GetZipcodeServiceCallFormat()
+        {
+            return ConfigurationManager.AppSettings["ZipcodeServiceCallFormat"];
         }
     }
 }
