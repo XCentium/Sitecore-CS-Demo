@@ -1,0 +1,14 @@
+﻿---
+ID: e80ffa48-97a2-4f44-aeef-c85a90e1e36f
+Parent: 2626bab4-7d86-4256-aa2d-6a2ef29fdb41
+Template: 0437fee2-44c9-46a6-abe9-28858d9fee8c
+Path: /sitecore/templates/CSDemo/Components/Email
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170612T174242Z

@@ -6,5 +6,6 @@ namespace CSDemo.Services
     public class Cinema
     {
         public string Zipcode { get; set; }
+        public string Name { get; set; }
     }
 }

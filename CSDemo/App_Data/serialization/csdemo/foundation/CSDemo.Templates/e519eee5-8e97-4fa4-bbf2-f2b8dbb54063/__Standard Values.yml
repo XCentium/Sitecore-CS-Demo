@@ -1,0 +1,60 @@
+﻿---
+ID: 9f064ed7-23f9-4fed-87cc-a02f26bdba26
+Parent: e519eee5-8e97-4fa4-bbf2-f2b8dbb54063
+Template: e519eee5-8e97-4fa4-bbf2-f2b8dbb54063
+Path: /sitecore/templates/CSDemo/Components/Email/OrderConfirmation/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170612T174524Z
+    - ID: 4ccf086f-6a6b-4ee0-89d1-bc652cd65b56
+      Hint: BCC
+      Value: john.montes@xcentium.com
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin
+    - ID: 7f0b32ec-e037-47a9-8b3d-6b6d23597045
+      Hint: Subject
+      Value: {SHOPNAME} - Order Confirmation
+    - ID: d1da6042-7369-4914-9530-fdcd28bf9eb1
+      Hint: From
+      Value: web.dev@xcentium.com
+    - ID: d4b435ed-e627-4a97-9091-58379a913e22
+      Hint: Body
+      Value: |
+        <h1>{SHOPNAME} Order Confirmation</h1>
+        <p>Thank you for shopping with us.</p>
+        <h2>Details</h2>
+        <p><strong>Order #{ORDER.NO}</strong></p>
+        <table style="width: 805px; height: 40px; border: 1px solid black; table-style: fixed;">
+            <tbody>
+                <tr>
+                    <td style="text-align: center; border-bottom: 1px solid black; border-right: 1px solid black;"><strong>MOVIE</strong></td>
+                    <td style="text-align: center;border-bottom: 1px solid black;border-right: 1px solid black;"><strong>LOCATION</strong></td>
+                   <td style="text-align: center;border-bottom: 1px solid black;border-right: 1px solid black;"><strong>DATE</strong></td>
+                   <td style="text-align: center;border-bottom: 1px solid black;border-right: 1px solid black;"><strong>TIME</strong></td>
+                    <td style="text-align: center;border-bottom: 1px solid black;border-right: 1px solid black;"><strong>UNIT PRICE</strong></td>
+                    <td style="text-align: center;border-bottom: 1px solid black;border-right: 1px solid black;"><strong>QTY</strong></td>
+                    <td style="text-align: center;border-bottom: 1px solid black;"><strong>SUBTOTAL</strong></td>
+                </tr>
+                <tr>
+                    <td style="width: 150px; text-align: center;border-right: 1px solid black;">{MOVIE.NAME}</td>
+                    <td style="width: 150px; text-align: center;border-right: 1px solid black;">{MOVIE.LOCATION}</td>
+                   <td style="width: 100px; text-align: center;border-right: 1px solid black;">{MOVIE.DATE}</td>
+                   <td style="width: 100px; text-align: center;border-right: 1px solid black;">{MOVIE.TIME}</td>
+                    <td style="width: 50px; text-align: center;border-right: 1px solid black;">{MOVIE.PRICE}</td>
+                    <td style="width: 50px; text-align: center;border-right: 1px solid black;">{MOVIE.QTY}</td>
+                    <td style="width: 50px; text-align: center;">{MOVIE.SUBTOTAL}<br />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Shipping: {TOTAL.SHIPPING}</strong></p>
+        <p><strong>Tax: {TOTAL.TAX}</strong></p>
+        <p><strong>Total: {TOTAL.GRAND}</strong></p>
+        <p>Have fun at the movies!</p>

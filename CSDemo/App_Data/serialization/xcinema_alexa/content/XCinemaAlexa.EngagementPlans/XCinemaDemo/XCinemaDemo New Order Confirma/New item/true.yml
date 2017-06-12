@@ -1,0 +1,51 @@
+﻿---
+ID: b3c0b8bd-cd52-4d6b-a62d-efded1cc8438
+Parent: 14c99f37-a3cb-4088-8891-a91cf0915e8f
+Template: 0a43a0fe-7e0e-49ef-95d4-e3de34f4f175
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/XCinemaDemo/XCinemaDemo New Order Confirmation/New item/true
+DB: master
+SharedFields:
+- ID: 21f3482b-bb14-4555-ba5d-af20d400d5b9
+  Hint: Rule
+  Type: Rules
+  Value: |
+    <ruleset>
+      <rule uid="{3FED0C02-5932-4A7F-909F-9538A2F23696}">
+        <conditions>
+          <condition id="{4888ABBB-F17D-4485-B14B-842413F88732}" uid="4FEEFDE768E142FD8E092AD09679FEC7" />
+        </conditions>
+      </rule>
+    </ruleset>
+- ID: 3f72bc07-de92-483e-a724-d430769d9ba4
+  Hint: Designer ID
+  Value: a5d45f83-8951-4930-aa6a-8e42c093396d
+- ID: 7642ed71-348b-4b88-8634-cc7b28949472
+  Hint: Origin ID
+  Value: 00000000-0000-0000-0000-000000000000
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 1
+- ID: d2368879-c784-4031-9b79-6a3bf3cb444e
+  Hint: Next state
+  Value: 79154bba-f6a1-4c8e-bbb3-0511db7e3694
+- ID: e13dcd09-d9bb-43c9-8d7d-438c79d714ca
+  Hint: Evaluate
+  Value: {B81C1F4C-8B83-44D9-902F-448463DBCCBC}
+Languages:
+- Language: en
+  Fields:
+  - ID: 06f2d72a-1924-4b9a-ba1e-186ce4e57efd
+    Hint: Description
+    Value: true
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: true
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20170609T214301Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\Admin

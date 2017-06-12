@@ -22,6 +22,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net.Mail;
+using System.Text;
 using System.Web;
 using CSDemo.Services;
 using AddPartiesRequest = Sitecore.Commerce.Services.Carts.AddPartiesRequest;
@@ -34,6 +36,10 @@ using Sitecore.Commerce.Services.Shipping;
 using Sitecore.Data;
 using Sitecore.Diagnostics;
 using Braintree;
+using CSDemo.Helpers;
+using Glass.Mapper.Sc.Configuration.Attributes;
+using Sitecore.Commerce.Entities.Prices;
+using Sitecore.Commerce.Multishop;
 using PaymentMethod = Sitecore.Commerce.Entities.Payments.PaymentMethod;
 
 namespace CSDemo.Models.Checkout.Cart
@@ -2066,14 +2072,13 @@ namespace CSDemo.Models.Checkout.Cart
                 //1 - find movie
                 var movieVariantItem = Context.Database.GetItem(new ID(order.MovieVariantId));
                 if (movieVariantItem == null) throw new Exception($"Cannot find movie variant item = {order.MovieVariantId}.");
-                var price = string.IsNullOrWhiteSpace(movieVariantItem["listprice"]) ? 0 : decimal.Parse(movieVariantItem["listprice"]);
-                var totalPrice = orderQty * price;
 
                 var movieItem = movieVariantItem.Parent;
                 if (movieItem == null) throw new Exception($"Cannot find movie item for variant {order.MovieVariantId}.");
 
                 //create own cart
                 var customerId = GetVisitorId(); //TODO: for anon for now
+                customerId = "{818d6e30-9e38-4437-bf3a-d59c4f55d4a8}"; //for xcCustomer1
                 var cart = GetCart(customerId, true);
                 var productId = movieItem.Name;
                 var productVariantId = movieVariantItem.Name;
@@ -2161,14 +2166,14 @@ namespace CSDemo.Models.Checkout.Cart
                     {
                         ShippingMethodID = shippingData[0],
                         ShippingMethodName = shippingData[1],
-                        ShippingPreferenceType = "3",
+                        ShippingPreferenceType = "1",
                         PartyID = "0"
                     }
                 };
 
                 //prepare shipping list - items to be shipped
                 var internalShippingList = shippingMethodList.ToShippingInfoList();
-                var orderPreferenceType = InputModelExtension.GetShippingOptionType("3");
+                var orderPreferenceType = InputModelExtension.GetShippingOptionType("1");
 
                 if (orderPreferenceType != ShippingOptionType.DeliverItemsIndividually)
                 {
@@ -2183,8 +2188,8 @@ namespace CSDemo.Models.Checkout.Cart
                 shipments.AddRange(internalShippingList);
 
                 //add email address
-                cart.Email = cart.Parties[0].Email;
-                shipments[0].Properties["ElectronicDeliveryEmail"] = cart.Email;
+                //cart.Email = cart.Parties[0].Email;
+                //shipments[0].Properties["ElectronicDeliveryEmail"] = cart.Email;
 
                 //update cart with shipping info
                 var addShippingInfoRequest =
@@ -2229,7 +2234,7 @@ namespace CSDemo.Models.Checkout.Cart
 
                 // Add billing party to cart
                 var parties = cart.Parties.ToList();
-                parties.Add(billingParty);
+                //parties.Add(billingParty); //CHANGE parties
                 cart.Parties = parties.AsSafeReadOnly();
 
                 // prepare payment info
@@ -2254,7 +2259,7 @@ namespace CSDemo.Models.Checkout.Cart
                 //var orderNo = SubmitCart();
                 string orderNo = null;
 
-                cart.Email = "john.montes@xcentium.com";
+                cart.Email = order.CustomerEmailAddress; //get email from registered user instead
 
                 var submitVisitorOrderRequest = new SubmitVisitorOrderRequest(cart);
                 var submitVisitorOrderResult = _orderServiceProvider.SubmitVisitorOrder(submitVisitorOrderRequest);
@@ -2285,6 +2290,52 @@ namespace CSDemo.Models.Checkout.Cart
                 order.OrderNo = orderNo;
                 order.Message = "successful";
                 order.OrderDateTime = DateTime.UtcNow.ToString("dd-MMM-yyyy hh:mm:ss tt");
+
+                //send order confirmation
+                const string confirmationEmailItemPath = "/sitecore/content/XCinemaDemo/Components/Email/OrderConfirmation";
+                var emailTemplateItem = Context.Database.GetItem(confirmationEmailItemPath);
+
+                if (emailTemplateItem != null)
+                {
+                    var emailTemplate = GlassHelper.Cast<Email>(emailTemplateItem);
+
+                    if (emailTemplate != null)
+                    {
+                        var movie = GlassHelper.Cast<Movie>(movieVariantItem);
+
+                        var locationItem = Context.Database.GetItem(movie.CinemaId);
+                        var location = locationItem == null ? null : GlassHelper.Cast<Cinema>(locationItem);
+
+                        var subject = emailTemplate.Subject.Replace("{SHOPNAME}", visitorOrder.ShopName);
+
+                        var movieLine = visitorOrder.Lines[0];
+                        var total = ((CommerceTotal) visitorOrder.Total);
+
+                        var body = emailTemplate.Body
+                            .Replace("{SHOPNAME}", visitorOrder.ShopName)
+                            .Replace("{ORDER.NO}", orderNo)
+                            .Replace("{MOVIE.NAME}", movieItem.DisplayName)
+                            .Replace("{MOVIE.LOCATION}", location != null ? location.Name : string.Empty)
+                            .Replace("{MOVIE.DATE}", movie.ShowDate)
+                            .Replace("{MOVIE.TIME}", movie.ShowTime)
+                            .Replace("{MOVIE.PRICE}", movieLine.Product.Price.Amount.ToString("N"))
+                            .Replace("{MOVIE.QTY}", movieLine.Quantity.ToString("N0"))
+                            .Replace("{MOVIE.SUBTOTAL}", movieLine.Total.Amount.ToString("N"))
+                            .Replace("{TOTAL.SHIPPING}", total.ShippingTotal.ToString("N"))
+                            .Replace("{TOTAL.TAX}", total.TaxTotal.Amount.ToString("N"))
+                            .Replace("{TOTAL.GRAND}", total.Amount.ToString("N"));
+
+
+                        var emailMessage = new MailMessage(emailTemplate.From, order.CustomerEmailAddress, subject,
+                            body)
+                        {
+                            BodyEncoding = Encoding.UTF8,
+                            IsBodyHtml = true
+                        };
+
+                        MainUtil.SendMail(emailMessage);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -2296,5 +2347,14 @@ namespace CSDemo.Models.Checkout.Cart
 
             return order;
         }
+    }
+
+    [SitecoreType(AutoMap = true)]
+    public class Email
+    {
+        public string From { get; set; }
+        public string Subject { get; set; }
+        public string BCC { get; set; }
+        public string Body { get; set; }
     }
 }
