@@ -56,6 +56,14 @@ namespace CSDemo.AJAX
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public bool ProcessTransaction(dynamic responseData)
+        {
+
+            return true;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public bool SaveProductSortIds(List<string> products, Guid categoryId)
         {
             return ProductHelper.SaveProductSortIds(products, categoryId);
@@ -146,12 +154,19 @@ namespace CSDemo.AJAX
 
         }
 
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public bool ApplyNewPaymentMethodToCartViaANet(Payment cartPayment)
+        {
+            return CartHelper.ApplyNewPaymentMethodToCartViaANet(cartPayment);
+        }
+
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public bool ApplyPaymentMethodToCart2(string nounceData, string cardPrefixData)
+        public bool ApplyPaymentMethodToCart2(string nonceData, string cardPrefixData)
         {
-            return CartHelper.ApplyPaymentMethodToCart2(nounceData, cardPrefixData);
+            return CartHelper.ApplyPaymentMethodToCart2(nonceData, cardPrefixData);
 
         }
 
@@ -178,9 +193,9 @@ namespace CSDemo.AJAX
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public bool SetPaymentMethodToCart2(string nounce)
+        public bool SetPaymentMethodToCart2(string nonce)
         {
-            return CartHelper.CompleteACheckout4(nounce);
+            return CartHelper.CompleteACheckout4(nonce);
         }
 
         [WebMethod(EnableSession = true)]

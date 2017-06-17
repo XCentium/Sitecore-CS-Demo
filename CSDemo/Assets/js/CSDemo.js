@@ -963,7 +963,102 @@
         event.preventDefault();
     });
 
+    $(".SubmitPaymentANet").click(function () {
 
+        submitPaymentFormDataToANet($(this));
+        event.preventDefault();
+    });
+
+    // Submits a payment via Authorize.NET.
+    function submitPaymentFormDataToANet(thisObj) {
+
+        // Validate form, if valid, save data return true or false;
+
+        if ($("#payment-form").valid()) {
+
+            event.preventDefault();
+
+            var radioVal = $(":radio[name='optionsRadios']:checked").val();
+            var radioIdx = $(":radio[name='optionsRadios']:checked").index(":radio[name='optionsRadios']");
+
+            //$('#nonceDataValueANet').val(accessCode);
+
+            // save data 
+
+            saveFormData("#payment-form", "payment_form");
+
+            var formValues = $("#payment-form").values();
+
+            console.log(formValues);
+
+            var payment = {};
+            payment.Token = $('#nonceDataValueANet').val();
+            payment.CardPrefix = $('#cardPrefixData').val();
+
+            var billing = {};
+            billing.FirstName = formValues.firstname[0];
+            billing.LastName = formValues.lastname[0];
+            billing.Address1 = formValues.address[0];
+            billing.Address2 = formValues.addressline1[0];
+            billing.City = formValues.city[0];
+            billing.State = formValues.state[0];
+            billing.Company = formValues.company[0];
+            billing.Email = formValues.email[0];
+            billing.FaxNumber = formValues.fax[0];
+            billing.Country = formValues.countryName[0];
+            billing.CountryCode = formValues.country[0];
+            billing.ZipPostalCode = formValues.zip[0];
+
+            console.log(billing);
+            payment.BillingAddress = billing;
+
+            //console.log(payment);
+
+            //console.log(JSON.stringify(payment));
+
+            var cartPayment = { "cartPayment": payment };
+            console.log(cartPayment);
+            console.log(JSON.stringify(cartPayment));
+
+
+            if (payment.Token == "") {
+                showActionMessageFixed("Please validate payment first");
+                return false;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/AJAX/cart.asmx/ApplyNewPaymentMethodToCartViaAnet",
+                data: JSON.stringify(cartPayment),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    if (result.d == true) {
+                        showActionMessage("Payment Method Applied");
+                        redirectPage(thisObj.attr("href"));
+                    } else {
+                        showActionMessageFixed("Error! Please try again");
+                        return false;
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+
+                }
+
+            });
+
+
+
+        } else {
+
+            return false;
+        }
+
+        return false;
+    }
+
+    // Submits a payment via BrainTree.
     function submitPaymentFormData(thisObj) {
 
         // Validate form, if valid, save data return true or false;
@@ -975,7 +1070,7 @@
             var radioVal = $(":radio[name='optionsRadios']:checked").val();
             var radioIdx = $(":radio[name='optionsRadios']:checked").index(":radio[name='optionsRadios']");
 
-            $('#nounceData').val(accessCode);
+            $('#nonceData').val(accessCode);
             // save data 
 
             saveFormData("#payment-form", "payment_form");

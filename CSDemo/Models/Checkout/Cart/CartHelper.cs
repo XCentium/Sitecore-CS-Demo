@@ -988,11 +988,69 @@ namespace CSDemo.Models.Checkout.Cart
             return true;
         }
 
+        /// <summary>
+        /// Apply PaymentMethod to Cart via Authorize.NET.
+        /// </summary>
+        /// <param name="cartPayment"></param>
+        /// <returns>True if successful.</returns>
+        internal bool ApplyNewPaymentMethodToCartViaANet(Payment cartPayment)
+        {
+            var billingParty = new CommerceParty
+            {
+                ExternalId = "0",
+                Name = Constants.Products.BillingAddress,
+                PartyId = "0",
+                FirstName = cartPayment.BillingAddress.FirstName,
+                LastName = cartPayment.BillingAddress.LastName,
+                Address1 = cartPayment.BillingAddress.Address1,
+                Address2 = cartPayment.BillingAddress.Address2,
+                City = cartPayment.BillingAddress.City,
+                State = cartPayment.BillingAddress.State,
+                Company = cartPayment.BillingAddress.Company,
+                Email = cartPayment.BillingAddress.Email,
+                FaxNumber = cartPayment.BillingAddress.FaxNumber,
+                Country = cartPayment.BillingAddress.Country,
+                CountryCode = cartPayment.BillingAddress.CountryCode,
+                ZipPostalCode = cartPayment.BillingAddress.ZipPostalCode
+            };
+
+            // Add billing party to cart
+            var updatedCart = GetCustomerCart();
+            var parties = updatedCart.Parties.ToList();
+            parties.Add(billingParty);
+            updatedCart.Parties = parties.AsSafeReadOnly();
+
+            // prepare payment info
+            var federatedPaymentModel = new FederatedPaymentInputModelItem
+            {
+                CardToken = cartPayment.Token,
+                Amount = updatedCart.Total.Amount,
+                CardPaymentAcceptCardPrefix = cartPayment.CardPrefix
+            };
+
+            var federatedPayment = federatedPaymentModel.ToCreditCardPaymentInfo();
+            federatedPayment.PartyID = billingParty.PartyId;
+
+            var payments = new List<PaymentInfo> { federatedPayment };
+
+            //add payment info to cart
+            var addPaymentInfoResult = _cartServiceProvider.AddPaymentInfo(new AddPaymentInfoRequest(updatedCart, payments));
+            if (!addPaymentInfoResult.Success)
+            {
+                return false;
+            }
+
+            //update cart in cache
+            updatedCart = addPaymentInfoResult.Cart as CommerceCart;
+            UpdateCartInCache(updatedCart);
+
+            return true;
+        }
 
         /// <summary>
         /// Apply PaymentMethod to Cart
         /// </summary>
-        internal bool ApplyPaymentMethodToCart2(string nounceData, string cardPrefixData)
+        internal bool ApplyPaymentMethodToCart2(string nonceData, string cardPrefixData)
         {
             var billingParty = new CommerceParty() { ExternalId = "0", Name = "Billing", PartyId = "0", FirstName = "Joe", LastName = "Smith", Address1 = "123 Street", City = "Ottawa", State = "ON", Country = "Canada", ZipPostalCode = "12345", CountryCode = "CA" };
 
@@ -1009,7 +1067,7 @@ namespace CSDemo.Models.Checkout.Cart
             var addPaymentInfoResult = new AddPaymentInfoResult { Success = false };
             var federatedPaymentModel = new FederatedPaymentInputModelItem
             {
-                CardToken = nounceData,
+                CardToken = nonceData,
                 Amount = updatedCart.Total.Amount,
                 CardPaymentAcceptCardPrefix = cardPrefixData
             };
@@ -1555,7 +1613,7 @@ namespace CSDemo.Models.Checkout.Cart
 
             return ret;
         }
-        internal bool CompleteACheckout4(string nounce)
+        internal bool CompleteACheckout4(string nonce)
         {
             // Get visitor identifier
             var visitorId = GetVisitorId();
@@ -1644,7 +1702,7 @@ namespace CSDemo.Models.Checkout.Cart
             var addPaymentInfoResult = new AddPaymentInfoResult { Success = false };
             var federatedPaymentModel = new FederatedPaymentInputModelItem
             {
-                CardToken = nounce,
+                CardToken = nonce,
                 Amount = updatedCart.Total.Amount,
                 CardPaymentAcceptCardPrefix = "paypal"
             };

@@ -653,6 +653,7 @@
     <Content Include="Views\Product\ProductSampler.cshtml" />
     <Content Include="Views\Product\ProductDetail2.cshtml" />
     <Content Include="Views\Product\ProductDefault2.cshtml" />
+    <None Include="Properties\PublishProfiles\RAH-Local.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
