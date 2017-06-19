@@ -94,7 +94,7 @@
                             <div id="billing-address-collapse" class="collapse">
                                 @if (addresses != null && addresses.Any())
                                 {
-                                    <button class="btn btn-primary addresses-toggle" type="button" data-toggle="collapse" data-target="#my-addresses-billing" aria-expanded="false" aria-controls="my-addresses-billing">My Saved Addresses</button>
+                                <button class="btn btn-primary addresses-toggle" type="button" data-toggle="collapse" data-target="#my-addresses-billing" aria-expanded="false" aria-controls="my-addresses-billing">My Saved Addresses</button>
                                 }
                                 <div id="my-addresses-billing" class="collapse">
                                     <div class="table-responsive border">
@@ -111,15 +111,15 @@
                                             {
                                                 foreach (var address in addresses)
                                                 {
-                                                    <tr>
-                                                        <td>@address.AddressName</td>
-                                                        <td>@address.FirstName @address.LastName</td>
-                                                        <td>@address.AddressLine1, @address.City</td>
-                                                        <td>@address.CountryRegionCode @address.CountryRegionName</td>
-                                                        <td>@address.TelephoneNumber</td>
-                                                        <td><a class="btn btn-primary customer-addr-data btn-sm" data-select="billing" data-formdata="@address.FirstName|@address.LastName|@address.AddressLine1|@address.AddressLine2|@address.City|@address.CountryRegionCode|@address.ZipPostalCode|@address.TelephoneNumber">Select</a></td>
+                                            <tr>
+                                                <td>@address.AddressName</td>
+                                                <td>@address.FirstName @address.LastName</td>
+                                                <td>@address.AddressLine1, @address.City</td>
+                                                <td>@address.CountryRegionCode @address.CountryRegionName</td>
+                                                <td>@address.TelephoneNumber</td>
+                                                <td><a class="btn btn-primary customer-addr-data btn-sm" data-select="billing" data-formdata="@address.FirstName|@address.LastName|@address.AddressLine1|@address.AddressLine2|@address.City|@address.CountryRegionCode|@address.ZipPostalCode|@address.TelephoneNumber">Select</a></td>
 
-                                                    </tr>
+                                            </tr>
                                                 }
                                             }
                                         </table>
@@ -207,7 +207,6 @@
                                                             <label>CVV/CVC<span class="required">*</span></label>
                                                             <input type="text" id="cvv" name="cvv" class="form-control" maxlength="4">
                                                         </div>
-
                                                     </div>
                                                     <div class="row">
                                                         @*<div class="form-group col-sm-7">
@@ -252,121 +251,64 @@
                                                 <div class="col-md-6">
                                                     <div class="show-payment">
                                                         <div class="form-group">
-                                                            <label for="creditCardPayment_Amount">Amount</label>
-                                                            <input type="text" class="form-control" name="amount" id="creditCardPayment_Amount" value="@grandtotal USD" disabled>
-                                                            <input type="hidden" value="@grandtotal" name="grandTotal" id="grandTotal" />
+                                                            <label for="amount1">Amount</label>
+                                                            <input type="text" class="form-control" name="amount1" id="amount1" value="@grandtotal USD" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button type="button" id="validatePaymentBtnANet" type="submit" style="margin-top:24px" class="btn btn-info" onclick="sendPaymentDataToANet()">Validate Payment</button>
+                                                <button type="button" id="validatePaymentBtnANet" style="margin-top:24px" class="btn btn-info" onclick="sendPaymentDataToANet()">Validate Payment</button>
                                                 <input type="hidden" name="nonceDataValueANet" id="nonceDataValueANet" value="" />
                                                 <input type="hidden" name="nonceDataDescriptorANet" id="nonceDataDescriptorANet" value="" />
-                    </form>
-                    <div class="clearfix">
-                        <a href="/checkout/review" class="btn btn-primary btn-lg pull-right SubmitPaymentANet">Continue</a>
-                    </div>
-            </div>
-        </div>
-        @*<div class="panel radio">
-                <input type="radio" name="optionsRadios" id="radio-payment-2">
-                <label for="radio-payment-2" class="collapsed" data-toggle="collapse" data-target="#parent-2" data-parent="#payment-methods" aria-controls="parent-2">Payment by Bank Transfer<span>IBAN: CZ00 0000 0000 0000 0000 0000</span></label>
-                <div id="parent-2" class="panel-collapse collapse" role="tabpanel"></div>
-            </div>*@
-        @*<div class="panel radio">
-                <input type="radio" name="optionsRadios" id="radio-payment-3">
-                <label for="radio-payment-3" class="collapsed" data-toggle="collapse" data-target="#parent-3" data-parent="#payment-methods" aria-controls="parent-3">PayPal</label>
-                <div id="parent-3" class="panel-collapse collapse" role="tabpanel"></div>
-            </div>*@
-        <div class="panel radio">
-            <input type="radio" name="optionsRadios" id="radio-payment-4" checked>
-            <label for="radio-payment-4" class="collapsed" data-toggle="collapse" data-target="#parent-4" data-parent="#payment-methods" aria-controls="parent-4">Pay via Credit Card</label>
-            <div id="parent-4" class="panel-collapse collapse in" role="tabpanel">
-                <form>
-                    <div id="dropin-container"></div>
-                </form>
-                <div class="col-md-6">
-                    <div class="show-payment">
-                        <div class="form-group">
-                            <label for="amount">Amount</label>
-                            <input type="text" class="form-control" name="amount" id="amount" value="@grandtotal USD" disabled>
-                            <input type="hidden" value="@grandtotal" name="grandTotal" id="grandTotal" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <button id="validatePaymentBtn" style="margin-top:24px" class="btn btn-info" type="submit">Validate Payment</button>
-                </div>
-                @*<div class="credit-card-form">
-                        <div class="row">
-                            <div class="form-group col-sm-9">
-                                <label>Credit Card Number<span class="required">*</span></label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="creditcard" value="" size="16">
-                                    <span class="input-group-addon" id="credit-card-img"><i class="fa fa-credit-card"></i></span>
-                                </div>
-                                <div id="credit-card-error"></div>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label>CVV/CVC<span class="required">*</span></label>
-                                <input type="text" class="form-control" maxlength="4">
-                            </div>
+                                                <div class="clearfix">
+                                                    <a href="/checkout/review" class="btn btn-primary btn-lg pull-right SubmitPaymentANet">Continue</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel radio">
+                                            <input type="radio" name="optionsRadios" id="radio-payment-4" checked>
+                                            <label for="radio-payment-4" class="collapsed" data-toggle="collapse" data-target="#parent-4" data-parent="#payment-methods" aria-controls="parent-4">Pay via Credit Card</label>
+                                            <div id="parent-4" class="panel-collapse collapse in" role="tabpanel">
+                                                <form>
+                                                    <div id="dropin-container"></div>
+                                                </form>
+                                                <div class="col-md-6">
+                                                    <div class="show-payment">
+                                                        <div class="form-group">
+                                                            <label for="creditCard_amount">Amount</label>
+                                                            <input type="text" class="form-control" name="creditCard_amount" id="creditCard_amount" value="@grandtotal USD" disabled />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <button id="validatePaymentBtn" style="margin-top:24px" class="btn btn-info" type="submit">Validate Payment</button>
+                                                </div>
+                                                <input type="hidden" name="nonceData" id="nonceData" value="" />
+                                                <input type="hidden" name="cardPrefixData" id="cardPrefixData" value="paypal" />
+                                                <div class="clearfix">
+                                                    <a href="/checkout/review" class="btn btn-primary btn-lg pull-right SubmitPayment">Continue</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="panel radio">
+                                                  <input type="radio" name="optionsRadios" id="radio-payment-2">
+                                                  <label for="radio-payment-2" class="collapsed" data-toggle="collapse" data-target="#parent-2" data-parent="#payment-methods" aria-controls="parent-2">Payment by Bank Transfer<span>IBAN: CZ00 0000 0000 0000 0000 0000</span></label>
+                                                  <div id="parent-2" class="panel-collapse collapse" role="tabpanel"></div>
+                                            </div>*@
+                                        @*<div class="panel radio">
+                                                  <input type="radio" name="optionsRadios" id="radio-payment-3">
+                                                  <label for="radio-payment-3" class="collapsed" data-toggle="collapse" data-target="#parent-3" data-parent="#payment-methods" aria-controls="parent-3">PayPal</label>
+                                                  <div id="parent-3" class="panel-collapse collapse" role="tabpanel"></div>
+                                            </div>*@
 
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-sm-7">
-                                <label>Name on Card<span class="required">*</span></label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="form-group col-sm-5 expiration-date">
-                                <label>Expiration date<span class="required">*</span></label>
-                                <div>
-                                    <select class="form-control">
-                                        <option selected disabled>MM</option>
-                                        <option>01</option>
-                                        <option>02</option>
-                                        <option>03</option>
-                                        <option>04</option>
-                                        <option>05</option>
-                                        <option>06</option>
-                                        <option>07</option>
-                                        <option>08</option>
-                                        <option>09</option>
-                                        <option>10</option>
-                                        <option>11</option>
-                                        <option>12</option>
-                                    </select>
-                                    <select class="form-control">
-                                        <option selected disabled>YY</option>
-                                        <option>15</option>
-                                        <option>16</option>
-                                        <option>17</option>
-                                        <option>18</option>
-                                        <option>19</option>
-                                        <option>20</option>
-                                        <option>21</option>
-                                        <option>22</option>
-                                        <option>23</option>
-                                        <option>24</option>
-                                    </select>
+                                        <input type="hidden" value="@grandtotal" name="grandTotal" id="grandTotal" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>*@
+                    </form>
+                </article>
             </div>
         </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    <input type="hidden" name="nonceData" id="nonceData" value="" />
-    <input type="hidden" name="cardPrefixData" id="cardPrefixData" value="paypal" />
-    <div class="clearfix">
-        <a href="/checkout/review" class="btn btn-primary btn-lg pull-right SubmitPayment">Continue</a>
-    </div>
-    </form>
-    </article>
-    </div>
-    </div>
     </div>
 </section>
 <!-- ==================
