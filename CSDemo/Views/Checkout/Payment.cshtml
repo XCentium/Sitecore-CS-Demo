@@ -192,7 +192,7 @@
                                         <div class="panel radio">
                                             <input type="radio" name="optionsRadios" id="radio-payment-1" checked>
                                             <label for="radio-payment-1" data-toggle="collapse" data-target="#parent-1" data-parent="#payment-methods" aria-controls="parent-1">Pay Via Credit Card using Authorize.NET</label>
-                                            <div id="parent-1" class="panel-collapse collapse in" role="tabpanel">
+                                            <div id="parent-1" class="panel-collapse collapse" role="tabpanel">
                                                 <div class="credit-card-form">
                                                     <div class="row">
                                                         <div class="form-group col-sm-9">
@@ -287,8 +287,8 @@
                 <div class="col-md-6">
                     <div class="show-payment">
                         <div class="form-group">
-                            <label for="creditCardPayment_Amount">Amount</label>
-                            <input type="text" class="form-control" name="amount" id="creditCardPayment_Amount" value="@grandtotal USD" disabled>
+                            <label for="amount">Amount</label>
+                            <input type="text" class="form-control" name="amount" id="amount" value="@grandtotal USD" disabled>
                             <input type="hidden" value="@grandtotal" name="grandTotal" id="grandTotal" />
                         </div>
                     </div>
