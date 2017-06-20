@@ -14,7 +14,7 @@ Languages:
       Value: 20170612T180043Z
     - ID: 7f0b32ec-e037-47a9-8b3d-6b6d23597045
       Hint: Subject
-      Value: Movie World - Order Confirmation
+      Value: Movie World - Order Confirmation (LOCAL)
     - ID: d4b435ed-e627-4a97-9091-58379a913e22
       Hint: Body
       Value: |
@@ -45,7 +45,5 @@ Languages:
                 </tr>
             </tbody>
         </table>
-        <p><strong>Shipping: {TOTAL.SHIPPING}</strong></p>
-        <p><strong>Tax: {TOTAL.TAX}</strong></p>
         <p><strong>Total: {TOTAL.GRAND}</strong></p>
         <p>Have fun at the movies!</p>

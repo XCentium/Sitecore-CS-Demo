@@ -841,7 +841,7 @@ namespace CSDemo.Models.Checkout.Cart
 
                 //prepare shipping list - items to be shipped
                 var internalShippingList = shippingMethodList.ToShippingInfoList();
-                var orderPreferenceType = InputModelExtension.GetShippingOptionType("3");
+                var orderPreferenceType = ShippingOptionType.ElectronicDelivery;
 
                 if (orderPreferenceType != ShippingOptionType.DeliverItemsIndividually)
                 {
@@ -2156,7 +2156,7 @@ namespace CSDemo.Models.Checkout.Cart
                 //4 - add shipping method
                 //AddShippingMethodToCart
 
-                const string shippingMethodId = "e14965b9-306a-43c4-bffc-3c67be8726fa|Ground"; //ground shipping until digital delivery gets sorted out
+                const string shippingMethodId = "7E077EDC-7103-460B-988F-78B0211B9261|Email"; //ground shipping until digital delivery gets sorted out
                 var shippingData = shippingMethodId.Split('|');
 
                 // prepare shipping methods list with chosen shipping method
@@ -2166,14 +2166,14 @@ namespace CSDemo.Models.Checkout.Cart
                     {
                         ShippingMethodID = shippingData[0],
                         ShippingMethodName = shippingData[1],
-                        ShippingPreferenceType = "1",
+                        ShippingPreferenceType = "3",
                         PartyID = "0"
                     }
                 };
 
                 //prepare shipping list - items to be shipped
                 var internalShippingList = shippingMethodList.ToShippingInfoList();
-                var orderPreferenceType = InputModelExtension.GetShippingOptionType("1");
+                var orderPreferenceType = ShippingOptionType.ElectronicDelivery;
 
                 if (orderPreferenceType != ShippingOptionType.DeliverItemsIndividually)
                 {
@@ -2188,8 +2188,9 @@ namespace CSDemo.Models.Checkout.Cart
                 shipments.AddRange(internalShippingList);
 
                 //add email address
-                //cart.Email = cart.Parties[0].Email;
-                //shipments[0].Properties["ElectronicDeliveryEmail"] = cart.Email;
+                cart.Email = address.Email;
+                shipments[0].Properties["ElectronicDeliveryEmail"] = cart.Email;
+                shipments[0].Properties["ElectronicDeliveryEmailContent"] = "test";
 
                 //update cart with shipping info
                 var addShippingInfoRequest =
@@ -2234,7 +2235,7 @@ namespace CSDemo.Models.Checkout.Cart
 
                 // Add billing party to cart
                 var parties = cart.Parties.ToList();
-                //parties.Add(billingParty); //CHANGE parties
+                parties.Add(billingParty); //CHANGE parties
                 cart.Parties = parties.AsSafeReadOnly();
 
                 // prepare payment info
