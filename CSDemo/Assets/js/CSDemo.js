@@ -963,6 +963,7 @@
         event.preventDefault();
     });
 
+    // Authorize.NET submission.
     $(".SubmitPaymentANet").click(function () {
 
         submitPaymentFormDataToANet($(this));

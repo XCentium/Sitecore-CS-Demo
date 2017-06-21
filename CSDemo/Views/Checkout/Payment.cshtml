@@ -233,8 +233,6 @@
                                                                 </select>
                                                                 <select id="yearList" class="form-control">
                                                                     <option selected disabled>YY</option>
-                                                                    <option>15</option>
-                                                                    <option>16</option>
                                                                     <option>17</option>
                                                                     <option>18</option>
                                                                     <option>19</option>
@@ -243,6 +241,12 @@
                                                                     <option>22</option>
                                                                     <option>23</option>
                                                                     <option>24</option>
+                                                                    <option>25</option>
+                                                                    <option>26</option>
+                                                                    <option>27</option>
+                                                                    <option>28</option>
+                                                                    <option>29</option>
+                                                                    <option>30</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -371,15 +375,34 @@
             if (response.messages.resultCode === "Error") {
                 for (var i = 0; i < response.messages.message.length; i++) {
                     console.log(response.messages.message[i].code + ": " + response.messages.message[i].text);
+                    showActionMessage("acceptJS library error! " + response.messages.message[i].text);
                 }
-                alert("acceptJS library error!");
+                
+                //alert("acceptJS library error!");
             } else {
                 console.log(response.opaqueData.dataDescriptor);
                 console.log(response.opaqueData.dataValue);
                 $('#nonceDataDescriptorANet').val(response.opaqueData.dataValue);
                 $('#nonceDataValueANet').val(response.opaqueData.dataValue);
                 $('.credit-card-form').slideToggle('slow');
+                showActionMessage("Card Validated.");
             }
         }
+
+        function actionMessageFixed(message) {
+            // alertmessage
+            $("#alertmessage").html(message);
+            $("#modalAddToCart").modal("show");
+        }
+
+        function showActionMessage(message) {
+            // alertmessage
+            actionMessageFixed("<h3>" + message + "</h3><br /><br />");
+            window.setTimeout(function () {
+                $("#modalAddToCart").modal("hide");
+            }, 1750);
+        }
+
+
     }
 </script>
