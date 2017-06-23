@@ -7,7 +7,7 @@
 @{
 
     var cartHelper = new CartHelper();
-    ShoppingCart shoppingCart = cartHelper.GetMiniCart();
+    var shoppingCart = cartHelper.GetMiniCart();
 
     var nextStatus = UserStatus.GetNextStatus(shoppingCart.ProductsTotal);
     var currentStatus = UserStatus.GetStatus(Sitecore.Context.User);
@@ -27,12 +27,12 @@
         try
         {
 
-            lineTotal = String.Format("{0:0.00}", shoppingCart.LineTotal);
-            discount = String.Format("{0:0.00}", shoppingCart.Discount);
-            shipping = String.Format("{0:0.00}", shoppingCart.Shipping);
-            tax = String.Format("{0:0.00}", shoppingCart.Tax);
-            grandtotal = String.Format("{0:0.00}", shoppingCart.GrandTotal);
-            total = String.Format("{0:0.00}", shoppingCart.ProductsTotal);
+            lineTotal = string.Format("{0:0.00}", shoppingCart.LineTotal);
+            discount = string.Format("{0:0.00}", shoppingCart.Discount);
+            shipping = string.Format("{0:0.00}", shoppingCart.Shipping);
+            tax = string.Format("{0:0.00}", shoppingCart.Tax);
+            grandtotal = string.Format("{0:0.00}", shoppingCart.GrandTotal);
+            total = string.Format("{0:0.00}", shoppingCart.ProductsTotal);
 
         }
         catch (Exception ex)
@@ -57,7 +57,7 @@
                         <form id="cart-form" name="cart-form">
                             <div class="products-order shopping-cart">
 
-                                @if (shoppingCart != null && shoppingCart.Total > 0)
+                                @if (shoppingCart.Total > 0)
                                 {
                                     <div class="table-responsive">
                                         <table class="table table-products">
@@ -67,26 +67,39 @@
                                                     <th>Product</th>
                                                     <th>Unit Price</th>
                                                     <th>Quantity</th>
+                                                    <th>Discount</th>
                                                     <th>Subtotal</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 
-                                                @foreach (CartItem cartItem in shoppingCart.CartItems)
+                                                @foreach (var cartItem in shoppingCart.CartItems)
                                                 {
-                                                    var unitPrice = String.Format("{0:0.00}", cartItem.UnitPrice);
-                                                    var subTotal = String.Format("{0:0.00}", cartItem.SubTotal);
+                                                    var unitPrice = string.Format("{0:0.00}", cartItem.UnitPrice);
+                                                    var discountAmount = string.Format("{0:0.00}", cartItem.Discount);
+                                                    var subTotal = string.Format("{0:0.00}", cartItem.Amount);
                                                     <tr>
-                                                        <td class="col-xs-1"><img src="@cartItem.ImageUrl" alt="" class="img-responsive"></td>
-                                                        <td class="col-xs-4 col-md-5"><h4><a href="/categories/@cartItem.Category/@cartItem.CsProductId">@cartItem.ProductName</a><small></small></h4></td>
-                                                        <td class="col-xs-2 text-center"><span>$@unitPrice</span></td>
-                                                        <td class="col-xs-2 col-md-1">
+                                                        <td class="col-xs-2"><img src="@cartItem.ImageUrl" alt="" class="img-responsive"></td>
+                                                        <td class="col-xs-5 col-md-5">
+                                                                <h4><a href="/categories/@cartItem.Category/@cartItem.CsProductId">@cartItem.ProductName</a><small></small></h4>
+                                                                @if (cartItem.Adjustments.Count > 0)
+                                                                {
+                                                                    <h5>Adjustments:</h5>
+                                                                }
+                                                                @for (var ctr = 0; ctr < cartItem.Adjustments.Count; ctr++)
+                                                                {
+                                                                    <span class="adjustment">@(ctr + 1) - @cartItem.Adjustments[ctr]</span><br/>
+                                                                }
+                                                        </td>
+                                                        <td class="col-xs-1 text-center"><span>$@unitPrice</span></td>
+                                                        <td class="col-xs-1 col-md-1">
                                                             <div class="form-group">
                                                                 <input type="text" name="quantity" class="form-control" value="@cartItem.Quantity"><input type="hidden" name="externalID" class="form-control" value="@cartItem.ExternalId">
                                                             </div>
                                                         </td>
-                                                        <td class="col-xs-2 text-center"><span><b>$@subTotal</b></span></td>
+                                                        <td class="col-xs-1 text-center"><span><b>$@discountAmount</b></span></td>
+                                                        <td class="col-xs-1 text-center"><span><b>$@subTotal</b></span></td>
                                                         <td class="col-xs-1 text-center"><a href="javascript:void(0)" data-externalid="@cartItem.ExternalId" class="btn btn-primary RemoveProduct"><i class="fa fa-times"></i></a></td>
                                                     </tr>
                                                 }
@@ -131,6 +144,18 @@
                                 <div class="table-responsive">
                                     <table class="table table-products">
                                         <tr>
+                                            <td style="width: 50%;">
+                                                <div class="cart-adjustments">
+                                                    @if (shoppingCart.Adjustments.Count > 0)
+                                                    {
+                                                        <h5>Cart Adjustments:</h5>
+                                                    }
+                                                    @for (var ctr = 0; ctr < shoppingCart.Adjustments.Count; ctr++)
+                                                    {
+                                                        <span class="adjustment">@(ctr + 1) - @shoppingCart.Adjustments[ctr]</span><br/>
+                                                    }
+                                                </div>
+                                            </td>
                                             <td style="border-color: white">
                                                 <ul class="list-unstyled order-total">
                                                     <li>Total products<span>$@lineTotal</span></li>

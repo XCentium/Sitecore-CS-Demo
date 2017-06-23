@@ -512,7 +512,15 @@ namespace CSDemo.Models.Checkout.Cart
                     cartItem.CsProductId = product.ProductId;
                     cartItem.Quantity = (int)cartLine.Quantity;
                     cartItem.UnitPrice = product.Price.Amount;
-                    cartItem.SubTotal = cartLine.Total.Amount;
+
+                    var total = (CommerceTotal) cartLine.Total;
+                    cartItem.SubTotal = total.Subtotal;
+                    cartItem.Amount = total.Amount;
+                    cartItem.Discount = total.LineItemDiscountAmount;
+
+                    cartItem.Adjustments = new List<string>();
+                    cartItem.Adjustments.AddRange(cartLine.Adjustments.Select(a => a.Description));
+
                     cartItem.ExternalId = cartLine.ExternalCartLineId;
 
                     if (Context.User.IsInRole("CommerceUsers\\Dealer")) { cartItem.UnitPrice = cartItem.UnitPrice > 0 ? (decimal)0.90 * cartItem.UnitPrice : cartItem.UnitPrice; }
@@ -532,6 +540,9 @@ namespace CSDemo.Models.Checkout.Cart
                     cartItems.Add(cartItem);
                 }
                 shoppingCart.CartItems = cartItems;
+
+                shoppingCart.Adjustments = new List<string>();
+                shoppingCart.Adjustments.AddRange(cart.Adjustments.Select(a => a.Description));
             }
 
             return shoppingCart;

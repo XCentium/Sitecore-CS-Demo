@@ -84,6 +84,7 @@ namespace CSDemo.Models.Checkout.Cart
 
         public decimal LineDiscount { get; internal set; }
         public decimal OrderLevelDiscountAmount { get; internal set; }
+        public List<string> Adjustments { get; set; }
 
         public ShoppingCart()
         {

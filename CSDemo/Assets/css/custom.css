@@ -5924,6 +5924,27 @@ footer.navbar a:hover {
     color: #888888;
 }
 
+.products-order.shopping-cart h4 {
+    margin-left: 0;
+}
+
+.products-order.shopping-cart h5 {
+    padding-left: 10px;
+    margin: 0;
+}
+
+.products-order.shopping-cart .adjustment {
+    width: 100%;
+    display: inline-block;
+    font-weight: normal;
+    font-size: 12px;
+    padding-left: 20px;
+}
+
+.products-order.shopping-cart .cart-adjustments {
+    min-height: 150px;
+}
+
 /*FSS DEMO*/
 .blog article.post a.ad-link p {
     background-color: #f5f5f5;
