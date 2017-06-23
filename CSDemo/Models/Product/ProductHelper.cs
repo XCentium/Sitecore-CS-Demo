@@ -16,6 +16,7 @@ using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines;
 using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Commerce.Services.Payments;
+using Sitecore.Commerce.Services.Prices;
 using Sitecore.Commerce.Services.Shipping;
 using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.Linq;
@@ -799,7 +800,7 @@ namespace CSDemo.Models.Product
                     var productIdIdString = productId.ToString().ToLower().Replace("-", string.Empty);
 
                     var productViews = context.GetQueryable<SearchResultItem>()
-                        .Where(x => 
+                        .Where(x =>
                         x["visitpage.url"].Contains(productName.ToLower()) &&
                         x["visitpageevent.name"] == "view product" &&
                         x["type"] == "visitpageevent"
@@ -1181,7 +1182,7 @@ namespace CSDemo.Models.Product
                                 var child = productItem.Children.FirstOrDefault();
                                 variantId = child.Name;
                             }
-                            productList.Add(new ProductMini { Id = product.ProductId, CategoryName = parentName, CatalogId = catalogId, Guid = ID.Parse(product.ID).ToString(), Title = product.Title, Price = product.Price, CatalogName = catalogName, ImageSrc = product.FirstImage, VariantId = variantId, Url = product.Url, IsOnSale = product.IsOnSale, SalePrice = product.SalePrice});
+                            productList.Add(new ProductMini { Id = product.ProductId, CategoryName = parentName, CatalogId = catalogId, Guid = ID.Parse(product.ID).ToString(), Title = product.Title, Price = product.Price, CatalogName = catalogName, ImageSrc = product.FirstImage, VariantId = variantId, Url = product.Url, IsOnSale = product.IsOnSale, SalePrice = product.SalePrice });
                         }
                     }
                     catch (Exception ex)
@@ -1255,6 +1256,37 @@ namespace CSDemo.Models.Product
 
 
             return isSuccess;
+        }
+
+        public static decimal GetProductSalePrice(string productId)
+        {
+            try
+            {
+                var pricingServiceProvider = new PricingServiceProvider();
+
+                // Create a GetProductPricesRequest object, specify the product's ID and do not  
+                // specify any price types. Default price type is ListPrice 
+                var catalogName = GetSiteRootCatalogName();
+                var request = new Sitecore.Commerce.Engine.Connect.Services.Prices.GetProductPricesRequest(catalogName, productId);
+
+                // Call the service provider and receive the result. 
+                var result = pricingServiceProvider.GetProductPrices(request);
+
+                // Result prices contains the list price only. 
+                if (!result.Success)
+                {
+                    throw new Exception(result.SystemMessages[0].Message);
+                }
+
+                var price = ((Sitecore.Commerce.Engine.Connect.Entities.Prices.ExtendedCommercePrice) result.Prices.First().Value).ListPrice;
+
+                return price;
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"ProductHelper.GetProductSalePrice, Error = {ex.Message}", ex);
+                return 0;
+            }
         }
     }
 }

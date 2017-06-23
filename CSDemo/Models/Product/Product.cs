@@ -39,6 +39,8 @@ namespace CSDemo.Models.Product
     {
         #region Calculated Properties
 
+        private decimal _salePrice = -1;
+
         public IEnumerable<ProductVariant> ProductVariants { get; set; }
 
         public IEnumerable<VariantColor> VariantColors { get; set; }
@@ -310,7 +312,18 @@ namespace CSDemo.Models.Product
         public virtual decimal Price { get; set; }
 
         [DataMember]
-        public virtual decimal SalePrice { get; set; }
+        public virtual decimal SalePrice
+        {
+            get
+            {
+                if (_salePrice < 0)
+                {
+                    _salePrice = ProductHelper.GetProductSalePrice(ProductId);
+                }
+
+                return _salePrice;
+            }
+        }
 
         [SitecoreField(Fields.DefinitionName), DataMember]
         public virtual string DefinitionName { get; set; }
@@ -319,13 +332,7 @@ namespace CSDemo.Models.Product
         public virtual string Description { get; set; }
 
         [DataMember]
-        public bool IsOnSale
-        {
-            get
-            {
-                return SalePrice > 0;
-            }
-        }
+        public bool IsOnSale => SalePrice < Price;
 
         [SitecoreInfo(SitecoreInfoType.Url), DataMember]
         public virtual string Url { get; set; }
