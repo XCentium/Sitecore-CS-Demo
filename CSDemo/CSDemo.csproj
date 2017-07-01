@@ -146,8 +146,8 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Commerce, Version=8.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Sitecore.Commerce.NoReferences.8.2.161221\lib\NET452\Sitecore.Commerce.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Sitecore-Commerce-821\Sitecore.Commerce.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Commerce.Connect.CommerceServer">
       <HintPath>..\Lib\Sitecore\Sitecore.Commerce.Connect.CommerceServer.dll</HintPath>
