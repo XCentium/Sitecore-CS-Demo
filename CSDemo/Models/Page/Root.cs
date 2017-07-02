@@ -48,6 +48,15 @@ namespace CSDemo.Models.Page
         [SitecoreInfo(SitecoreInfoType.Path)]
         public virtual string Path { get; set; }
 
+        [SitecoreField(Fields.RecommendationApiModelId)]
+        public virtual string RecommendationApiModelId { get; set; }
+
+        [SitecoreField(Fields.RecommendationApiBuildId)]
+        public virtual string RecommendationApiBuildId { get; set; }
+
+        [SitecoreField(Fields.RecommendationApiFbtBuildId)]
+        public virtual string RecommendationApiFbtBuildId { get; set; }
+
         [SitecoreIgnore]
         public UserStatus UserStatus { get; set; }
 
@@ -66,6 +75,9 @@ namespace CSDemo.Models.Page
             public const string Tagline = "Tagline";
             public const string PhoneNumber = "Phone Number";
             public const string Catalog = "Catalog";
+            public const string RecommendationApiModelId = "ModelId";
+            public const string RecommendationApiBuildId = "RecommendationsBuildId";
+            public const string RecommendationApiFbtBuildId = "FBTBuildId";
         }
         #endregion
     }

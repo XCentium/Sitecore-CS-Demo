@@ -353,6 +353,8 @@
     <Compile Include="Controllers\GeneralSearchController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Helpers\GlassHelper.cs" />
+    <Compile Include="Models\Recommendations\Recommendations.cs" />
+    <Compile Include="Helpers\RecommendationsHelper.cs" />
     <Compile Include="Models\Account\AccountHelper.cs" />
     <Compile Include="Models\Account\Address.cs" />
     <Compile Include="Models\Account\GetUser.cs" />
@@ -615,6 +617,7 @@
       <IsTransformFile>True</IsTransformFile>
     </None>
     <None Include="Properties\PublishProfiles\John-Prod-CSDemo39.pubxml" />
+    <Content Include="Tools\RecommendationsApiTester.aspx" />
     <Content Include="Tools\EmailTester.aspx" />
     <Content Include="Tools\ItemTester.aspx" />
     <Content Include="Tools\VisualMerchandiser.aspx" />
@@ -735,6 +738,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSDemo.Business\CSDemo.Business.csproj">
+      <Project>{7a53a1fb-a83c-4893-b7f1-8f664510fee8}</Project>
+      <Name>CSDemo.Business</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
