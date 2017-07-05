@@ -51,6 +51,9 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.AlsoBoughtProducts)]
         public virtual IEnumerable<Product> AlsoBoughtProducts { get; set; }
 
+        [SitecoreField(Fields.Override)]
+        public virtual bool Override { get; set; }
+
         #endregion
 
         #region Fieldname Mappings
@@ -59,6 +62,7 @@ namespace CSDemo.Models.Product
         {
             public const string RelatedProducts = "RelatedProducts";
             public const string AlsoBoughtProducts = "AlsoBoughtProducts";
+            public const string Override = "Override";
         }
 
         #endregion

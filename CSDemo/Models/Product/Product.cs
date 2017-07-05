@@ -51,81 +51,15 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.SortId), DataMember]
         public virtual int SortId { get; set; }
 
-        public IEnumerable<Product> AlsoBoughtProducts
+        public RelatedProductsFallback AlsoBoughtProducts
         {
             get
             {
-                var response = string.Empty;
+                var fallbackComponentPath = Context.Site.RootPath + "/Components/RelatedProducts/Related Products Fallback";
+                var fallbackItem = Context.Database.GetItem(fallbackComponentPath);
 
-                try
-                {
-                    var url = string.Format(Constants.Products.AlsoBoughtProductsUrl, ProductId);
-
-                    var syncClient = new WebClient();
-
-                    response = syncClient.DownloadString(url);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(ex.Message, ex, this);
-                }
-
-                //return fallback if empty response
-                var fallbackAlsoBoughtProducts = GetAlsoBoughtProductsFallback();
-
-                if (string.IsNullOrEmpty(response) && fallbackAlsoBoughtProducts == null)
-                    yield return null;
-
-                var result = JsonConvert.DeserializeObject<ComplementaryProductResult>(response);
-                if (!result.IsSuccessful && fallbackAlsoBoughtProducts == null)
-                {
-                    if (result.Messages == null) yield return null;
-                    foreach (var message in result.Messages)
-                    {
-                        Log.Warn(message, this);
-                    }
-                    yield return null;
-                }
-
-                if (result.ProductIds != null && result.ProductIds.Any())
-                {
-                    foreach (var productId in result.ProductIds)
-                    {
-                        var productResult = ProductHelper.GetItemByProductId(productId);
-                        if (productResult != null)
-                        {
-                            var productItem = productResult.GetItem();
-                            yield return productItem.GlassCast<Product>();
-                        }
-                    }
-                }
-
-                if (fallbackAlsoBoughtProducts != null && fallbackAlsoBoughtProducts.Any())
-                {
-                    foreach (var product in fallbackAlsoBoughtProducts)
-                    {
-                        yield return product;
-                    }
-                }
+                return fallbackItem != null ? GlassHelper.Cast<RelatedProductsFallback>(fallbackItem) : new RelatedProductsFallback();
             }
-        }
-
-        public IEnumerable<Product> GetAlsoBoughtProductsFallback()
-        {
-            var fallbackComponentPath = Context.Site.RootPath + "/Components/RelatedProducts/Related Products Fallback";
-            var fallbackItem = Context.Database.GetItem(fallbackComponentPath);
-
-            if (fallbackItem != null)
-            {
-                var fallback = GlassHelper.Cast<RelatedProductsFallback>(fallbackItem);
-
-                if (fallback != null)
-                {
-                    return fallback.AlsoBoughtProducts.ToList();
-                }
-            }
-
-            return new List<Product>(); ;
         }
 
         public IEnumerable<Product> GetRelatedProductsFallback()

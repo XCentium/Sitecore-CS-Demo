@@ -1,5 +1,10 @@
-﻿using CSDemo.Configuration;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using CSDemo.AJAX;
+using CSDemo.Configuration;
 using CSDemo.Models.Page;
+using CSDemo.Models.Product;
 using CSDemo.Models.Recommendations;
 
 namespace CSDemo.Helpers
@@ -28,6 +33,49 @@ namespace CSDemo.Helpers
             recommendations.Type = RecommendationType.UserToItem;
 
             return recommendations;
+        }
+
+        public static List<ProductMini> GetItemRecommendations(string productId, string variantId, int numberOfResults)
+        {
+            var itemId = $"{productId}_{variantId}";
+            var itemRecommendations = new List<ProductMini>();
+
+            var recommendations =  GetItemRecommendations(itemId, numberOfResults);
+
+            if (recommendations?.ItemsIds == null || recommendations.ItemsIds.Count <= 0)
+            {
+                return itemRecommendations;
+            }
+
+            //process each
+            foreach (var itemsId in recommendations.ItemsIds)
+            {
+                var itemArray = itemsId.Split('_');
+
+                var searchResultItem = ProductHelper.GetItemByProductId(itemArray[0]);
+
+                var item = searchResultItem?.GetItem();
+                if (item == null) continue;
+
+                var product = GlassHelper.Cast<Product>(item);
+
+                itemRecommendations.Add(new ProductMini
+                {
+                    SalePrice = product.SalePrice,
+                    Price = product.Price,
+                    Guid = product.ID.ToString(),
+                    Title = product.Title,
+                    IsOnSale = product.IsOnSale,
+                    Id = product.ProductId,
+                    CatalogName = product.CatalogName,
+                    VariantId = product.VariantProdId,
+                    ImageSrc = product.FirstImage,
+                    Url = $"{product.Url}?v={itemArray[1]}",
+                    Rating = product.Rating
+                });
+            }
+
+            return itemRecommendations;
         }
 
         private static Recommendations GetItemToItemRecommendations(string itemId, int numberOfResults, string buildId)

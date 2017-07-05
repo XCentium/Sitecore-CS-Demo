@@ -1,59 +1,165 @@
 ﻿@using System.Linq;
-@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<IEnumerable<CSDemo.Models.Product.Product>>
-@if (Model != null && Model.Any())
-{
-    <div class="releated-products">
-        <h2>Customers Who Bought This Also Bought</h2>
-        <div class="row grid" id="products">
-            @foreach (var product in Model)
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Product.RelatedProductsFallback>
+<div class="releated-products also-bought" style="display: none;">
+    <h2>Customers Who Bought This Also Bought</h2>
+    <div class="row grid" id="products">
+        @if (Model != null && Model.Override && Model.RelatedProducts.Any())
+        {
+            foreach (var product in Model.RelatedProducts)
             {
                 if (product != null)
                 {
                     <div class="col-sm-4 col-xs-6">
                         @using (BeginEditFrame(product, "Edit Related Product", x => x.Images, x => x.Title, x => x.CatalogName, x => x.VariantProdId, x => x.DefaultVariant, x => x.IsNew, x => x.IsOnSale, x => x.Rating, x => x.ListPrice, x => x.Brand, x => x.Description, x => x.VariantSize, x => x.VariantColors, x => x.FullDescription, x => x.DateOfIntroduction, x => x.Size, x => x.Price, x => x.DefinitionName, x => x.Categories, x => x.SortFields, x => x.ItemsPerPage, x => x.Variants))
                         {
-                        <article class="product-item">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="product-overlay">
-                                        <div class="product-mask"></div>
-                                        <a href="@product.Url" class="product-permalink"></a>
-                                        @if (product.Images != null && product.Images.Any())
-                                        {
-                                            @RenderImage(product.Images.ElementAt(0), x => x, new { Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive " }, isEditable: false)
-                                        }
-                                        else if (product.Image1 != null)
-                                        {
-                                            <img src="@product.Image1" class="img-responsive" style="width:420px;height:287px;background-color:#ffffff" />
-                                        }
-                                    </div>
-                                </div>
-                                <div class="col-sm-9">
-                                    <div class="product-body">
-                                        <h3>
-                                            <a href="@product.Url">@product.Title</a>
-                                        </h3>
-                                        
-                                        <div class="product-rating">
-                                            <i class="fa fa-star@(product.Rating>0 ? string.Empty:"-o" )"></i>
-                                            <i class="fa fa-star@(product.Rating>1 ? string.Empty:"-o" )"></i>
-                                            <i class="fa fa-star@(product.Rating>2 ? string.Empty:"-o" )"></i>
-                                            <i class="fa fa-star@(product.Rating>3 ? string.Empty:"-o" )"></i>
-                                            <i class="fa fa-star@(product.Rating>4 ? string.Empty:"-o" )"></i>
+                            <article class="product-item">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="product-overlay">
+                                            <div class="product-mask"></div>
+                                            <a href="@product.Url" class="product-permalink"></a>
+                                            @if (product.Images != null && product.Images.Any())
+                                            {
+                                                @RenderImage(product.Images.ElementAt(0), x => x, new { Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive " }, isEditable: false)
+                                            }
+                                            else if (product.Image1 != null)
+                                            {
+                                                <img src="@product.Image1" class="img-responsive" style="width: 420px; height: 287px; background-color: #ffffff" />
+                                            }
                                         </div>
-                                        <span class="price">
-                                            <ins><span class="amount">@product.Price.ToString("C")</span></ins>
-                                        </span>
-                                        <br /><br />
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <div class="product-body">
+                                            <h3>
+                                                <a href="@product.Url">@product.Title</a>
+                                            </h3>
+
+                                            <div class="product-rating">
+                                                <i class="fa fa-star@(product.Rating > 0 ? string.Empty : "-o")"></i>
+                                                <i class="fa fa-star@(product.Rating > 1 ? string.Empty : "-o")"></i>
+                                                <i class="fa fa-star@(product.Rating > 2 ? string.Empty : "-o")"></i>
+                                                <i class="fa fa-star@(product.Rating > 3 ? string.Empty : "-o")"></i>
+                                                <i class="fa fa-star@(product.Rating > 4 ? string.Empty : "-o")"></i>
+                                            </div>
+                                            <span class="price">
+                                                <ins><span class="amount">@product.Price.ToString("C")</span></ins>
+                                            </span>
+                                            <br /><br />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </article>
+                            </article>
                         }
                     </div>
                 }
             }
-
-        </div>
+        }
     </div>
-}
+</div>
+
+<script>
+    $("document").ready(function () {
+        var isOverride = @Model.Override.ToString().ToLower();
+        var hasItems = @Model.RelatedProducts.Any().ToString().ToLower();
+
+        if (isOverride) {
+            if (hasItems){
+                var $container = $(".releated-products.also-bought");
+                $container.show();
+            }
+
+            return;
+        }
+
+        $("a.variantcolorrectangle").on("click",
+            function () {
+                GetRecommendationsItemsAlsoBought();
+            });
+
+        $("select#ProductSize").on("change",
+            function () {
+                GetRecommendationsItemsAlsoBought();
+            });
+
+        //initiate first one
+        GetRecommendationsItemsAlsoBought();
+    });
+
+    function GetRecommendationsItemsAlsoBought() {
+        if (typeof productId == "undefined") {
+            return;
+        }
+
+        var $form = $("form#" + productId)[0];
+        var variantId = typeof $form.VariantId == "undefined" ? 0 : $form.VariantId.value;
+        var numberOfResults = 6;
+
+        var data = '{ "productId" : ' + JSON.stringify(productId) + ',"variantId" : ' + JSON.stringify(variantId) + ',"numberOfResults" : ' + numberOfResults + '}';
+
+        $.ajax({
+            type: "POST",
+            url: "/AJAX/products.asmx/GetProductRecommendations",
+            data: data,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                ShowRecommendationsItemsAlsoBought(result.d);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function ShowRecommendationsItemsAlsoBought(products) {
+        var $container = $(".releated-products.also-bought");
+        var $productGrid = $container.find(".grid");
+
+        if (products == null || products.length <= 0) {
+            $container.hide();
+            $productGrid.html("");
+            return;
+        }
+
+        var productHtml = "";
+        for (var ctr = 0; ctr < products.length; ctr++) {
+            var product = products[ctr];
+
+            var content = '<div class="col-sm-4 col-xs-6"> <article class="product-item"><div class="row">';
+
+            content += ' <div class="col-sm-3"><div class="product-overlay"><div class="product-mask"></div>';
+            content += '<a href="' + product.Url + '" class="product-permalink"></a>';
+            content += '<img src="' + product.ImageSrc + '?as=1&amp;h=287&amp;w=420&amp;bc=ffffff&amp;hash=852C6972D2AEB444886106F8C465B0C5BF3CE13C" class="img-responsive " alt="">';
+            content += '</div></div>';
+
+            content += '<div class="col-sm-9"><div class="product-body">';
+            content += '<h3><a href="' + product.Url + '">' + product.Title + '</a></h3>';
+
+            var starCount = parseInt(product.Rating);
+            var hasHalfStar = product.Rating % 1 == .5;
+
+            content += '<div class="product-rating">';
+            for (var ctr2 = 1; ctr2 <= 5; ctr2++) {
+                if (ctr2 <= starCount) {
+                    content += '<i class="fa fa-star"></i>';
+                }
+                else if (ctr2 == starCount + 1 && hasHalfStar) {
+                    content += '<i class="fa fa-star-half-o"></i>';
+                } else {
+                    content += '<i class="fa fa-star-o"></i>';
+                }
+            }
+            content += ' </div>';
+
+            content += '<span class="price"><ins><span class="amount">$' + product.SalePrice.toFixed(2) + '</span></ins></span>';
+            content += ' <br><br></div></div>';
+
+            content += '</div></article></div>';
+
+            productHtml += content;
+        }
+
+        $productGrid.html(productHtml);
+        $container.show();
+    }
+</script>

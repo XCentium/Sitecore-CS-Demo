@@ -16,7 +16,7 @@ namespace CSDemo.Contracts.Product
     {
         IEnumerable<ProductVariant> ProductVariants { get; set; }
         IEnumerable<VariantColor> VariantColors { get; set; }
-        IEnumerable<Models.Product.Product> AlsoBoughtProducts { get; }
+        RelatedProductsFallback AlsoBoughtProducts { get; }
         IEnumerable<Models.Product.Product> RelatedProducts { get; }
         StockInformation StockInformation { get; set; }
         string CurrencyPrice { get; }

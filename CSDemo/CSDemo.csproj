@@ -296,6 +296,10 @@
       <DependentUpon>Cart.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="AJAX\Products.asmx.cs">
+      <DependentUpon>Products.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="App_Start\GlassMapperSc.cs" />
     <Compile Include="App_Start\GlassMapperScCustom.cs" />
     <Compile Include="Configuration\Actions\HideCertainProducts.cs" />
@@ -478,6 +482,7 @@
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <Content Include="AJAX\Products.asmx" />
     <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\bootcomplete.css" />
     <Content Include="Assets\css\bootstrap.min.css" />
