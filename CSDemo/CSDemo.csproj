@@ -659,8 +659,7 @@
     <Content Include="Views\Form\SuccessRedirect.cshtml" />
     <Content Include="Views\Form\Web.config" />
     <Content Include="Views\Product\ProductSampler.cshtml" />
-    <Content Include="Views\Product\ProductDetail2.cshtml" />
-    <Content Include="Views\Product\ProductDefault2.cshtml" />
+    <Content Include="Views\Product\FrequentlyBoughtTogetherProducts.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,8 +1,8 @@
 ﻿---
-ID: cf3121cc-ec4c-421a-80bd-ffa31bca5f91
+ID: b80e8585-f370-4bd4-a2b6-22f862d5e485
 Parent: d25a88d0-ea56-4dd3-bee4-e997165f43a7
 Template: 455a3e98-a627-4b40-8035-e683a0331ac7
-Path: /sitecore/templates/CSDemo/Components/Product/Related Products/Related Products Details/RelatedProducts
+Path: /sitecore/templates/CSDemo/Components/Product/Related Products/Related Products Details/FrequentlyBoughtTogetherProducts
 DB: master
 SharedFields:
 - ID: 1eb8ae32-e190-44a6-968d-ed904c794ebf
@@ -13,7 +13,7 @@ SharedFields:
   Value: Multilist with Search
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
-  Value: 400
+  Value: 600
 Languages:
 - Language: en
   Versions:
@@ -21,7 +21,7 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20170513T030706Z
+      Value: 20170705T223440Z
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
       Value: sitecore\Admin

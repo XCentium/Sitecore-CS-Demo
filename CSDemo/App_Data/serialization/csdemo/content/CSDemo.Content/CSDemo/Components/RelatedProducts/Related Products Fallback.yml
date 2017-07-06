@@ -15,6 +15,10 @@ Languages:
     - ID: 7c1af41c-bb6b-47ab-b76f-47074f432a0f
       Hint: Override
       Value: 
+    - ID: b80e8585-f370-4bd4-a2b6-22f862d5e485
+      Hint: FrequentlyBoughtTogetherProducts
+      Type: Multilist with Search
+      Value: {1BF8F7C1-16D5-42FD-825B-CC0897F95721}
     - ID: bfabd1ba-e8cd-40f8-a6fe-16dfe2b22687
       Hint: AlsoBoughtProducts
       Type: Multilist with Search

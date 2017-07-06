@@ -62,6 +62,18 @@ namespace CSDemo.Models.Product
             }
         }
 
+        public RelatedProductsFallback FrequentlyBoughtTogetherProducts
+        {
+            get
+            {
+                var fallbackComponentPath = Context.Site.RootPath + "/Components/RelatedProducts/Related Products Fallback";
+                var fallbackItem = Context.Database.GetItem(fallbackComponentPath);
+
+                return fallbackItem != null ? GlassHelper.Cast<RelatedProductsFallback>(fallbackItem) : new RelatedProductsFallback();
+            }
+        }
+
+
         public IEnumerable<Product> GetRelatedProductsFallback()
         {
             var fallbackComponentPath = Context.Site.RootPath + "/Components/RelatedProducts/Related Products Fallback";
