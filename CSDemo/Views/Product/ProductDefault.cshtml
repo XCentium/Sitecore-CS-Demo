@@ -1,4 +1,5 @@
 ﻿@using System.Linq
+@using CSDemo.Models.Account
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Product.Product>
 @if (Model != null)
 {
@@ -397,6 +398,8 @@
     @Html.Partial("~/Views/Product/FrequentlyBoughtTogetherProducts.cshtml", Model.FrequentlyBoughtTogetherProducts)
 
     @Html.Partial("~/Views/Product/ComplementaryProducts.cshtml", Model.AlsoBoughtProducts)
+        
+    @Html.Partial("~/Views/Product/UserRecommendedProducts.cshtml", Model.UserRecommendedProducts)
 
     @*@if (Model.GeoTargetedProducts != null)
             {
@@ -407,5 +410,6 @@
 
     <script>
         var productId = "@Model.ProductId";
+        var commerceUserId = "@AccountHelper.GetCommerceUserId().Replace("{",string.Empty).Replace("}", string.Empty).ToUpper()";
     </script>
 }

@@ -25,12 +25,18 @@ namespace CSDemo.Helpers
             return recommendations;
         }
 
-        public static Recommendations GetUserRecommendations(string userId, int numberOfResults)
+        public static List<ProductMini> GetUserRecommendations(string userId, int numberOfResults)
         {
-            var recommendations = GetUserToItemRecommendations(userId, numberOfResults, GetSiteRecommendationsApiBuildId());
-            recommendations.Type = RecommendationType.UserToItem;
+            var itemRecommendations = new List<ProductMini>();
 
-            return recommendations;
+            var recommendations = GetUserToItemRecommendations(userId, numberOfResults, GetSiteRecommendationsApiBuildId());
+
+            if (recommendations?.ItemsIds == null || recommendations.ItemsIds.Count <= 0)
+            {
+                return itemRecommendations;
+            }
+
+            return recommendations.ItemsIds.Select(GetProductFromApiProductId).ToList();
         }
 
         public static List<ProductMini> GetItemRecommendations(string productId, string variantId, int numberOfResults)
@@ -45,35 +51,6 @@ namespace CSDemo.Helpers
                 return itemRecommendations;
             }
 
-            ////process each
-            //foreach (var itemsId in recommendations.ItemsIds)
-            //{
-            //    var itemArray = itemsId.Split('_');
-
-            //    var searchResultItem = ProductHelper.GetItemByProductId(itemArray[0]);
-
-            //    var item = searchResultItem?.GetItem();
-            //    if (item == null) continue;
-
-            //    var product = GlassHelper.Cast<Product>(item);
-
-            //    itemRecommendations.Add(new ProductMini
-            //    {
-            //        SalePrice = product.SalePrice,
-            //        Price = product.Price,
-            //        Guid = product.ID.ToString(),
-            //        Title = product.Title,
-            //        IsOnSale = product.IsOnSale,
-            //        Id = product.ProductId,
-            //        CatalogName = product.CatalogName,
-            //        VariantId = product.VariantProdId,
-            //        ImageSrc = product.FirstImage,
-            //        Url = $"{product.Url}?v={itemArray[1]}",
-            //        Rating = product.Rating
-            //    });
-            //}
-
-            //return itemRecommendations;
             return recommendations.ItemsIds.Select(GetProductFromApiProductId).ToList();
         }
 
@@ -88,34 +65,6 @@ namespace CSDemo.Helpers
             {
                 return itemRecommendations;
             }
-
-            //process each
-            //foreach (var itemsId in recommendations.ItemsIds)
-            //{
-            //    var itemArray = itemsId.Split('_');
-
-            //    var searchResultItem = ProductHelper.GetItemByProductId(itemArray[0]);
-
-            //    var item = searchResultItem?.GetItem();
-            //    if (item == null) continue;
-
-            //    var product = GlassHelper.Cast<Product>(item);
-
-            //    itemRecommendations.Add(new ProductMini
-            //    {
-            //        SalePrice = product.SalePrice,
-            //        Price = product.Price,
-            //        Guid = product.ID.ToString(),
-            //        Title = product.Title,
-            //        IsOnSale = product.IsOnSale,
-            //        Id = product.ProductId,
-            //        CatalogName = product.CatalogName,
-            //        VariantId = product.VariantProdId,
-            //        ImageSrc = product.FirstImage,
-            //        Url = $"{product.Url}?v={itemArray[1]}",
-            //        Rating = product.Rating
-            //    });
-            //}
 
             return recommendations.ItemsIds.Select(GetProductFromApiProductId).ToList();
         }

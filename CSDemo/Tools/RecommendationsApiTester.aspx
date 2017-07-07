@@ -64,11 +64,11 @@
             result.Append("--------------");
             result.Append(space);
 
-            if (items.ItemsIds != null)
+            if (items.Count > 0)
             {
-                foreach (var itemId in items.ItemsIds)
+                foreach (var item in items)
                 {
-                    result.Append(itemId);
+                    result.Append(item.Id);
                     result.Append(space);
                 }
             }

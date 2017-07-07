@@ -31,3 +31,7 @@ Languages:
       Value: |
         {130F4A73-4278-426B-B585-F81F4B452926}
         {B57979F7-C349-4BA8-B1F3-E7E4DD59B535}
+    - ID: f5224c91-9da5-46ef-ada1-60b9b20b7c3f
+      Hint: UserRecommendedProducts
+      Type: Multilist with Search
+      Value: {5875F0D3-DD4A-4060-82F4-DA5AF7D3EEAA}

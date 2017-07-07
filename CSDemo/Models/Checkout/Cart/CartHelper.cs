@@ -1362,7 +1362,7 @@ namespace CSDemo.Models.Checkout.Cart
             var ret = string.Empty;
             if (Context.User.IsAuthenticated)
             {
-                var uid = _accountService.GetCommerceUserId(Context.User.Name);
+                var uid = AccountHelper.GetCommerceUserId(Context.User.Name);
                 if (string.IsNullOrEmpty(uid))
                 {
                     return Constants.Cart.AnonUserActionDenied;

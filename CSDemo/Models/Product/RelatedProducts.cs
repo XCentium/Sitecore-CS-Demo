@@ -54,6 +54,9 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.FrequentlyBoughtTogetherProducts)]
         public virtual IEnumerable<Product> FrequentlyBoughtTogetherProducts { get; set; }
 
+        [SitecoreField(Fields.UserRecommendedProducts)]
+        public virtual IEnumerable<Product> UserRecommendedProducts { get; set; }
+
         [SitecoreField(Fields.Override)]
         public virtual bool Override { get; set; }
 
@@ -66,6 +69,7 @@ namespace CSDemo.Models.Product
             public const string RelatedProducts = "RelatedProducts";
             public const string AlsoBoughtProducts = "AlsoBoughtProducts";
             public const string FrequentlyBoughtTogetherProducts = "FrequentlyBoughtTogetherProducts";
+            public const string UserRecommendedProducts = "UserRecommendedProducts";
             
             public const string Override = "Override";
         }

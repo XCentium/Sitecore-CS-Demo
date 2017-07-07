@@ -42,7 +42,7 @@ namespace CSDemo.Controllers
                 var usr = new AccountHelper();
                 var userName = usr.GetAccountName(model.Email);
 
-                var uid = usr.GetCommerceUserId(userName);
+                var uid = AccountHelper.GetCommerceUserId(userName);
 
                 if (string.IsNullOrEmpty(uid))
                 {

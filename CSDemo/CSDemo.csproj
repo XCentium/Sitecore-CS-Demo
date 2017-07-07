@@ -622,6 +622,7 @@
       <IsTransformFile>True</IsTransformFile>
     </None>
     <None Include="Properties\PublishProfiles\John-Prod-CSDemo39.pubxml" />
+    <Content Include="Tools\UserProfileUpdater.aspx" />
     <Content Include="Tools\RecommendationsApiTester.aspx" />
     <Content Include="Tools\EmailTester.aspx" />
     <Content Include="Tools\ItemTester.aspx" />
@@ -660,6 +661,7 @@
     <Content Include="Views\Form\Web.config" />
     <Content Include="Views\Product\ProductSampler.cshtml" />
     <Content Include="Views\Product\FrequentlyBoughtTogetherProducts.cshtml" />
+    <Content Include="Views\Product\UserRecommendedProducts.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -34,5 +34,12 @@ namespace CSDemo.AJAX
         {
             return RecommendationsHelper.GetFrequentlyBoughtTogetherRecommendations(productId, variantId, numberOfResults);
         }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<ProductMini> GetProductsRecommendationsForUser(string userId, int numberOfResults = 10)
+        {
+            return RecommendationsHelper.GetUserRecommendations(userId, numberOfResults);
+        }
     }
 }

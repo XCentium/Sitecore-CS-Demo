@@ -343,12 +343,19 @@ namespace CSDemo.Models.Account
             return commerceUser;
         }
 
+        public static string GetCommerceUserId()
+        {
+            var userName = Sitecore.Context.GetUserName();
+
+            return GetCommerceUserId(userName);
+        }
+
         /// <summary>
         /// Get CommerceuserID of a customer
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        internal string GetCommerceUserId(string userName)
+        public static string GetCommerceUserId(string userName)
         {
 
             var user = User.FromName(userName, true);

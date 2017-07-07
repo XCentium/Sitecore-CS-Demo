@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
+using System.Web.Mvc;
 using CSDemo.Contracts;
 using CSDemo.Contracts.Product;
 using CSDemo.Helpers;
@@ -73,7 +74,17 @@ namespace CSDemo.Models.Product
             }
         }
 
+        public RelatedProductsFallback UserRecommendedProducts
+        {
+            get
+            {
+                var fallbackComponentPath = Context.Site.RootPath + "/Components/RelatedProducts/Related Products Fallback";
+                var fallbackItem = Context.Database.GetItem(fallbackComponentPath);
 
+                return fallbackItem != null ? GlassHelper.Cast<RelatedProductsFallback>(fallbackItem) : new RelatedProductsFallback();
+            }
+        }
+        
         public IEnumerable<Product> GetRelatedProductsFallback()
         {
             var fallbackComponentPath = Context.Site.RootPath + "/Components/RelatedProducts/Related Products Fallback";
