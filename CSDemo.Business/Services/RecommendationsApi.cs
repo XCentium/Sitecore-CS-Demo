@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json;
 
 namespace CSDemo.Business.Services
@@ -116,6 +118,60 @@ namespace CSDemo.Business.Services
             return errorMsg;
 
         }
+
+        public RecommendedItemSetInfoList SendEventUpdate(string modelId, string buildId, string productId, string productVariantId, uint qty, 
+            decimal price, string customerId, DateTime orderDateTime, RecommendationsApiEventType eventType)
+        {
+            var uri = BaseUri + "/models/" + modelId + "/usage/events";
+            var apiProductId = productId + "_" + (string.IsNullOrWhiteSpace(productVariantId) ? "0" : productVariantId);
+            var timestamp = orderDateTime.ToUniversalTime().ToString("yyyy/MM/ddThh:mm:ss");
+            var apiCustomerId = customerId.ToUpper().Replace("{", string.Empty).Replace("}", string.Empty);
+
+            //data
+            var usage = new RecommendationApiUsageData
+            {
+                userId = apiCustomerId,
+                buildId = int.Parse(buildId),
+                events = new List<RecommendationApiUsage>
+                {
+                    new RecommendationApiUsage
+                    {
+                        eventType = eventType.ToString(),
+                        itemId = apiProductId,
+                        timestamp = timestamp,
+                        count = qty,
+                        unitPrice = (float) price
+                    }
+                }
+            };
+
+            var byteData = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(usage));
+
+            HttpResponseMessage response;
+            using (var content = new ByteArrayContent(byteData))
+            {
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                response = _httpClient.PostAsync(uri, content).Result;
+            }
+            
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(
+                    $"Error {response.StatusCode}: Failed to send {eventType} event for modelId {modelId}, buildId {buildId}, Reason: {ExtractErrorInfo(response)}");
+            }
+
+            var jsonString = response.Content.ReadAsStringAsync().Result;
+            var recommendedItemSetInfoList = JsonConvert.DeserializeObject<RecommendedItemSetInfoList>(jsonString);
+
+            return recommendedItemSetInfoList;
+        }
+    }
+
+    public enum RecommendationsApiEventType
+    {
+        Purchase = 0,
+        Click,
+        AddToCart
     }
 
     [DataContract]
@@ -164,5 +220,36 @@ namespace CSDemo.Business.Services
         [DataMember]
         [JsonProperty("metadata")]
         public string Metadata { get; set; }
+    }
+
+    [DataContract]
+    public class RecommendationApiUsageData
+    {
+        [DataMember]
+        public string userId { get; set; }
+        [DataMember]
+        public int buildId { get; set; }
+        [DataMember]
+        public IEnumerable<RecommendationApiUsage> events
+        {
+            get;
+            set;
+        }
+
+    }
+
+    [DataContract]
+    public class RecommendationApiUsage
+    {
+        [DataMember]
+        public string eventType { get; set; }
+        [DataMember]
+        public string itemId { get; set; }
+        [DataMember]
+        public string timestamp { get; set; }
+        [DataMember]
+        public uint count { get; set; }
+        [DataMember]
+        public float unitPrice { get; set; }
     }
 }

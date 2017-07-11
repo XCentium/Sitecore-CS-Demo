@@ -23,6 +23,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web;
+using CSDemo.Business.Services;
+using CSDemo.Configuration;
+using CSDemo.Helpers;
 using AddPartiesRequest = Sitecore.Commerce.Services.Carts.AddPartiesRequest;
 using UpdatePartiesRequest = Sitecore.Commerce.Services.Carts.UpdatePartiesRequest;
 using Sitecore.Commerce.Services.Payments;
@@ -1127,6 +1130,9 @@ namespace CSDemo.Models.Checkout.Cart
                     // Get order details
                     var getVisitorOrderRequest = new GetVisitorOrderRequest(orderId, visitorId, ShopName);
                     var getVisitorOrderResult = _orderServiceProvider.GetVisitorOrder(getVisitorOrderRequest);
+
+                    //update recommendations API builds
+                    RecommendationsHelper.SendPurchaseEvent(order);
 
                     // return commerceOrderId;
                     return getVisitorOrderResult.Order.TrackingNumber;

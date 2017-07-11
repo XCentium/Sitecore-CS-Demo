@@ -33,6 +33,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Lib\Sitecore\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Logging">
+      <HintPath>..\Lib\Sitecore\Sitecore.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />

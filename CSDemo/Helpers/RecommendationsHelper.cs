@@ -1,9 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using CSDemo.Business.Services;
 using CSDemo.Configuration;
+using CSDemo.Models.Account;
 using CSDemo.Models.Page;
 using CSDemo.Models.Product;
 using CSDemo.Models.Recommendations;
+using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
+using Sitecore.Commerce.Entities.Carts;
+using Sitecore.Diagnostics;
 
 namespace CSDemo.Helpers
 {
@@ -168,6 +175,31 @@ namespace CSDemo.Helpers
             var rootItem = Sitecore.Context.Database.GetItem(Sitecore.Context.Site.ContentStartPath);
 
             return rootItem == null ? null : GlassHelper.Cast<Root>(rootItem);
+        }
+
+        public static void SendPurchaseEvent(CommerceOrder order)
+        {
+            try
+            {
+                var api = new RecommendationsApi(ConfigurationHelper.GetRecommendationsApiKey(),
+                    ConfigurationHelper.GetRecommendationsApiBaseUri());
+
+                var customerId = AccountHelper.GetCommerceUserId();
+                var modelId = GetSiteRecommendationsApiModelId();
+
+                foreach (var line in order.Lines)
+                {
+                    var product = (CommerceCartProduct)line.Product;
+                    var price = (CommercePrice)line.Product.Price;
+
+                    api.SendEventUpdate(modelId, GetSiteRecommendationsApiBuildId(), product.ProductId, product.ProductVariantId, line.Quantity, price.ListPrice, customerId, order.Created, RecommendationsApiEventType.Purchase);
+                    api.SendEventUpdate(modelId, GetSiteRecommendationsApiFbtBuildId(), product.ProductId, product.ProductVariantId, line.Quantity, price.ListPrice, customerId, order.Created, RecommendationsApiEventType.Purchase);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error($"RecommendationsHelper.SendPurchaseEvent. Error = {e.Message}", e);
+            }
         }
     }
 }
