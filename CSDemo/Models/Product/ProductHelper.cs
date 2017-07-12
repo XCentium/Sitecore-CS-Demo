@@ -1134,6 +1134,7 @@ namespace CSDemo.Models.Product
                                     (x.Name.Contains(query) || x["_displayname"].Contains(query)) &&
                                     x.Path.Contains("/sitecore/commerce/catalog") &&
                                     x["_latestversion"] == "1" &&
+                                    x["catalogname"] == GetSiteRootCatalogName() &&
                                     x.TemplateName != "GeneralCategory").Page(0, 5).GetResults().ToList();
                     }
                     return
@@ -1142,6 +1143,7 @@ namespace CSDemo.Models.Product
                                 (x.Name.Contains(query) &&
                                  x.Path.Contains("/sitecore/commerce/catalog") &&
                                  x.TemplateName == "GeneralCategory") &&
+                                 x["catalogname"] == GetSiteRootCatalogName() &&
                                  x["_latestversion"] == "1").Page(0, 5).GetResults().ToList();
                 }
             }
