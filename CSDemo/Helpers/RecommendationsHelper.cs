@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using CSDemo.Business.Services;
 using CSDemo.Configuration;
@@ -9,7 +8,6 @@ using CSDemo.Models.Page;
 using CSDemo.Models.Product;
 using CSDemo.Models.Recommendations;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
-using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Diagnostics;
 
 namespace CSDemo.Helpers
@@ -48,6 +46,8 @@ namespace CSDemo.Helpers
 
         public static List<ProductMini> GetItemRecommendations(string productId, string variantId, int numberOfResults)
         {
+            variantId = string.IsNullOrWhiteSpace(variantId) ? "0" : variantId;
+
             var itemId = $"{productId}_{variantId}";
             var itemRecommendations = new List<ProductMini>();
 
@@ -63,6 +63,8 @@ namespace CSDemo.Helpers
 
         internal static List<ProductMini> GetFrequentlyBoughtTogetherRecommendations(string productId, string variantId, int numberOfResults)
         {
+            variantId = string.IsNullOrWhiteSpace(variantId) ? "0" : variantId;
+
             var itemId = $"{productId}_{variantId}";
             var itemRecommendations = new List<ProductMini>();
 

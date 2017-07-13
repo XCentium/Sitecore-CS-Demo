@@ -3,14 +3,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-
                 <h2>Quick Order</h2>
 
                 <form>
                     <div>
-                        <div id="inmateBox1" style="margin-bottom:2px">
-                            <input type="text" class="form-control inmateBox1" name="inmateBox1" id="inmateBox1" autocomplete="off" placeholder="Inmate#" />
-                        </div>					
                         <div id="productSBox1">
                             <input type="text" class="form-control productSearchBox1" name="productSearchBox1" id="productSearchBox1" autocomplete="off" placeholder="Type product SKU#" />
                         </div>
@@ -40,103 +36,24 @@
                         </table>
 
                     </div>
-<hr>
-                    <div>
-                        <div id="inmateBox2" style="margin-bottom:2px">
-                            <input type="text" class="form-control inmateBox2" name="inmateBox2" id="inmateBox2" autocomplete="off" placeholder="Inmate#" />
-                        </div>					
-                        <div id="productSBox2">
-                            <input type="text" class="form-control productSearchBox2" name="productSearchBox2" id="productSearchBox2" autocomplete="off" placeholder="Type product SKU#" />
-                        </div>
-                        <div id="list-box2" style="display: none">
-                            <table class="table table-bordered" id="productsToAdd2">
-                                <thead>
-                                    <tr>
-                                        <th>Action</th>
-                                        <th>Product</th>
-                                        <th>Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-
-                        <hr />
-                        <table class="table table-bordered" id="productsAdded2">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-
-                    </div>
-<hr>
-                    <div>
-                        <div id="inmateBox3" style="margin-bottom:2px">
-                            <input type="text" class="form-control inmateBox3" name="inmateBox3" id="inmateBox3" autocomplete="off" placeholder="Inmate#" />
-                        </div>					
-                        <div id="productSBox3">
-                            <input type="text" class="form-control productSearchBox3" name="productSearchBox3" id="productSearchBox3" autocomplete="off" placeholder="Type product SKU#" />
-                        </div>
-                        <div id="list-box3" style="display: none">
-                            <table class="table table-bordered" id="productsToAdd3">
-                                <thead>
-                                    <tr>
-                                        <th>Action</th>
-                                        <th>Product</th>
-                                        <th>Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-
-                        <hr />
-                        <table class="table table-bordered" id="productsAdded3">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-
-                    </div>
-					
-					</form>
-
+                </form>
             </div>
         </div>
     </div>
 </section>
 
 <style>
-  
     #custom-templates .empty-message {
-  
         padding: 5px 10px;
- 
         text-align: center;
-
-}
-
+    }
 </style>
 
 <script src="~/Assets/js/typeahead.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-
         $("#productSearchBox1").keyup(function () {
-            console.log($(this).val());
- 
             var queryVal = $(this).val();
-            //var inputMinLength = 1;
             var data = "query:'" + queryVal + "'";
 
             $.ajax({
@@ -148,20 +65,13 @@
                 dataType: "json",
                 success: function (result) {
                     hideListBox1();
+
                     var output = result.d;
-
-                    // console.log(output);
-
                     var products = output.products;
 
                     if (products && products.length > 0) {
-
-                        //console.log(products);
-
                         $("#list-box1").show();
-                        //alert("Building product table");
                         $.each(products, function (i, el) {
-
                             var param = escape(el.Id + "|||" + el.CatalogId + "|||" + el.Guid + "|||" + el.ImageSrc + "|||" + el.Price + "|||" + el.Title + "|||" + el.CatalogName + "|||" + el.VariantId);
                             $("#productsToAdd1 tbody").append(
                                 "<tr>"
@@ -170,275 +80,74 @@
                                 + "<td>$" + el.Price + "</td>"
                                 + "</tr>"
                             );
-
                         });
-
                     }
-
-                    //console.log(categories);
-                    //console.log(products);
-
-                    //console.log(result.d);
-
                 },
                 error: function (error) {
-
                     console.log(error);
-
                 }
-
             });
-
         });
-
-		$("#productSearchBox2").keyup(function () {
-            console.log($(this).val());
- 
-            var queryVal = $(this).val();
-            //var inputMinLength = 1;
-            var data = "query:'" + queryVal + "'";
-
-            $.ajax({
-                type: "POST",
-                url: "/AJAX/cart.asmx/GetProductsResult",
-                data: "{" + data + "}",
-                contentType: "application/json; charset=utf-8",
-                cache: false,
-                dataType: "json",
-                success: function (result) {
-                    hideListBox2();
-                    var output = result.d;
-
-                    // console.log(output);
-
-                    var products = output.products;
-
-                    if (products && products.length > 0) {
-
-                        //console.log(products);
-
-                        $("#list-box2").show();
-                        //alert("Building product table");
-                        $.each(products, function (i, el) {
-
-                            var param = escape(el.Id + "|||" + el.CatalogId + "|||" + el.Guid + "|||" + el.ImageSrc + "|||" + el.Price + "|||" + el.Title + "|||" + el.CatalogName + "|||" + el.VariantId);
-                            $("#productsToAdd2 tbody").append(
-                                "<tr>"
-                                + "<td><input class='btn btn-primary' type='button' value='Select'  onclick='AddToSelectedList2(\"" + param + "\");hideListBox2();' /></td>"
-                                + "<td><img style='max-width:75px' src='" + el.ImageSrc + "?w=75' /><br/>" + el.Title + "<br/>" + el.Id + "</td>"
-                                + "<td>$" + el.Price + "</td>"
-                                + "</tr>"
-                            );
-
-                        });
-
-                    }
-
-                    //console.log(categories);
-                    //console.log(products);
-
-                    //console.log(result.d);
-
-                },
-                error: function (error) {
-
-                    console.log(error);
-
-                }
-
-            });
-
-        });
-
-
-        $("#productSearchBox3").keyup(function () {
-            console.log($(this).val());
- 
-            var queryVal = $(this).val();
-            //var inputMinLength = 1;
-            var data = "query:'" + queryVal + "'";
-
-            $.ajax({
-                type: "POST",
-                url: "/AJAX/cart.asmx/GetProductsResult",
-                data: "{" + data + "}",
-                contentType: "application/json; charset=utf-8",
-                cache: false,
-                dataType: "json",
-                success: function (result) {
-                    hideListBox3();
-                    var output = result.d;
-
-                    // console.log(output);
-
-                    var products = output.products;
-
-                    if (products && products.length > 0) {
-
-                        //console.log(products);
-
-                        $("#list-box3").show();
-                        //alert("Building product table");
-                        $.each(products, function (i, el) {
-
-                            var param = escape(el.Id + "|||" + el.CatalogId + "|||" + el.Guid + "|||" + el.ImageSrc + "|||" + el.Price + "|||" + el.Title + "|||" + el.CatalogName + "|||" + el.VariantId);
-                            $("#productsToAdd3 tbody").append(
-                                "<tr>"
-                                + "<td><input class='btn btn-primary' type='button' value='Select'  onclick='AddToSelectedList3(\"" + param + "\");hideListBox3();' /></td>"
-                                + "<td><img style='max-width:75px' src='" + el.ImageSrc + "?w=75' /><br/>" + el.Title + "<br/>" + el.Id + "</td>"
-                                + "<td>$" + el.Price + "</td>"
-                                + "</tr>"
-                            );
-
-                        });
-
-                    }
-
-                    //console.log(categories);
-                    //console.log(products);
-
-                    //console.log(result.d);
-
-                },
-                error: function (error) {
-
-                    console.log(error);
-
-                }
-
-            });
-
-        });
-
-		
-		
     });
 </script>
 <script>
-    
     function hideListBox1() {
-
         $("#productsToAdd1 > tbody").html("");
         $("#list-box1").hide();
     }
- 
+
     function AddToSelectedList1(productData) {
-
-        console.log(productData);
-
         var original = productData;
 
         productData = unescape(productData);
 
         var productDataArr = productData.split("|||");
 
+        var total = $("#productsAdded1 tbody tr").length;
+        var count = total <= 0 ? 1 : $("#productsAdded1 tbody tr").eq(total - 1).find("input.prodQuantuty").data("count") + 1;
 
         $("#productsAdded1 tbody").append(
             "<tr>"
             + "<td><img style='max-width:75px' src='" + productDataArr[3] + "?w=75' /><br/>" + productDataArr[0] + "</td>"
-            + "<td><input name='quantity' id='" + productDataArr[2] + "' type='number' min='1' max='1000000' value = '1' class='form-control prodQuantuty' data-proddata='" + productData + "'  /></td>"
-            + "<td><input class='btn btn-primary' type='button' value='Add to Cart'   onclick=\"AddToCart('" + original + "',this.form.quantity.value);\" />&nbsp;&nbsp;&nbsp;<input class='btn btn-primary' type='button' value='-'  onclick=\"$(this).closest('tr').remove();\" /></td>"
+            + "<td><input name='quantity' id='quantity" + count + "' type='number' min='1' max='1000000' value = '1' class='form-control prodQuantuty' data-proddata='" + productData + "' data-count='" + count + "'  /></td>"
+            + "<td><input class='btn btn-primary' type='button' value='Add to Cart'   onclick=\"AddToCart('" + original + "', this.form.quantity" + count + ".value);\" />&nbsp;&nbsp;&nbsp;<input class='btn btn-primary' type='button' value='Remove'  onclick=\"$(this).closest('tr').remove();\" /></td>"
             + "</tr>"
         );
 
     }
 
-    
-    function hideListBox2() {
-
-        $("#productsToAdd2 > tbody").html("");
-        $("#list-box2").hide();
-    }
- 
-    function AddToSelectedList2(productData) {
-
-        console.log(productData);
-
-        var original = productData;
-
-        productData = unescape(productData);
-
-        var productDataArr = productData.split("|||");
-
-
-        $("#productsAdded2 tbody").append(
-            "<tr>"
-            + "<td><img style='max-width:75px' src='" + productDataArr[3] + "?w=75' /><br/>" + productDataArr[0] + "</td>"
-            + "<td><input name='quantity' id='" + productDataArr[2] + "' type='number' min='1' max='1000000' value = '1' class='form-control prodQuantuty' data-proddata='" + productData + "'  /></td>"
-            + "<td><input class='btn btn-primary' type='button' value='Add to Cart'   onclick=\"AddToCart('" + original + "',this.form.quantity.value);\" />&nbsp;&nbsp;&nbsp;<input class='btn btn-primary' type='button' value='-'  onclick=\"$(this).closest('tr').remove();\" /></td>"
-            + "</tr>"
-        );
-
-    }
-
-    
-    function hideListBox3() {
-
-        $("#productsToAdd3 > tbody").html("");
-        $("#list-box3").hide();
-    }
- 
-    function AddToSelectedList3(productData) {
-
-        console.log(productData);
-
-        var original = productData;
-
-        productData = unescape(productData);
-
-        var productDataArr = productData.split("|||");
-
-
-        $("#productsAdded3 tbody").append(
-            "<tr>"
-            + "<td><img style='max-width:75px' src='" + productDataArr[3] + "?w=75' /><br/>" + productDataArr[0] + "</td>"
-            + "<td><input name='quantity' id='" + productDataArr[2] + "' type='number' min='1' max='1000000' value = '1' class='form-control prodQuantuty' data-proddata='" + productData + "'  /></td>"
-            + "<td><input class='btn btn-primary' type='button' value='Add to Cart'   onclick=\"AddToCart('" + original + "',this.form.quantity.value);\" />&nbsp;&nbsp;&nbsp;<input class='btn btn-primary' type='button' value='-'  onclick=\"$(this).closest('tr').remove();\" /></td>"
-            + "</tr>"
-        );
-
-    }
-	
-	
     function removeExtraCategoryDropDowns(categoryId) {
-
         if (categoryId) {
-
             var totalSelect = $(".CategoryListBox1").length;
             var toRemove = categoryId.split("_").length - 1;
-
             var diff = toRemove - totalSelect;
 
             if (diff < 0) {
-
                 $('#categoriesBox1 > .CategoryListBox1').slice(diff).remove();
             }
         }
     }
 
     function AddToCart(productData, boxid) {
-
         productData = unescape(productData);
-
 
         var quantity = boxid;
         var productDataArr = productData.split("|||");
         console.log(productData);
         console.log(productDataArr);
+
         var productId = productDataArr[0];
         var catalogName = productDataArr[6];
         var contextItemId = productDataArr[2];
         var variantId = productDataArr[7];
 
         addProductToCart(quantity, productId, catalogName, variantId, contextItemId);
+
         $("#productsAdded1 tbody").html();
-
         refresh();
-
     }
 
     function addProductToCart(quantity, productId, catalogName, variantId, contextItemId) {
-
         $.ajax({
             type: "POST",
             url: "/AJAX/cart.asmx/AddProductToCart",
@@ -446,12 +155,10 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (result) {
-
                 if (result.d == "") {
 
 
                 }
-
             },
             error: function (error) {
                 console.log(error);
@@ -462,7 +169,6 @@
     }
 
     function refresh() {
-
         setTimeout(function () {
             location.reload();
         }, 1000);

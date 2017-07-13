@@ -146,13 +146,14 @@
                                         <tr>
                                             <td style="width: 50%;">
                                                 <div class="cart-adjustments">
-                                                    @if (shoppingCart.Adjustments.Count > 0)
+                                                    @if (shoppingCart != null && shoppingCart.Adjustments != null && shoppingCart.Adjustments.Count > 0)
                                                     {
                                                         <h5>Cart Adjustments:</h5>
-                                                    }
-                                                    @for (var ctr = 0; ctr < shoppingCart.Adjustments.Count; ctr++)
-                                                    {
-                                                        <span class="adjustment">@(ctr + 1) - @shoppingCart.Adjustments[ctr]</span><br/>
+
+                                                        for (var ctr = 0; ctr < shoppingCart.Adjustments.Count; ctr++)
+                                                        {
+                                                            <span class="adjustment">@(ctr + 1) - @shoppingCart.Adjustments[ctr]</span><br/>
+                                                        }
                                                     }
                                                 </div>
                                             </td>
