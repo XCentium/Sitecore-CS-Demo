@@ -1131,8 +1131,8 @@ namespace CSDemo.Models.Checkout.Cart
                     var getVisitorOrderRequest = new GetVisitorOrderRequest(orderId, visitorId, ShopName);
                     var getVisitorOrderResult = _orderServiceProvider.GetVisitorOrder(getVisitorOrderRequest);
 
-                    //update recommendations API builds
-                    RecommendationsHelper.SendPurchaseEvent(order);
+                    //update recommendations API builds [Disabled for now]
+                    //RecommendationsHelper.SendPurchaseEvent(order);
 
                     // return commerceOrderId;
                     return getVisitorOrderResult.Order.TrackingNumber;
