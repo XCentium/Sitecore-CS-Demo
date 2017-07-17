@@ -51,7 +51,7 @@
         float: left;
     }
 
-    .group button {
+    .group button, #AddToCart {
         padding: 5px 20px;
     }
 
@@ -60,6 +60,18 @@
         width: 100%;
         padding: 20px 0;
         height: 300px;
+    }
+
+    .product.selected {
+        padding: 5px;
+    }
+
+    .product.selected {
+        background-color: #E87169;
+    }
+
+    .select.add {
+        text-align: center;
     }
 </style>
 
@@ -95,7 +107,7 @@
                             {
                                 var product = sampler.Group1Products.ToList()[ctr];
 
-                                <div data-id="@product.ID" class="clearfix">
+                                <div id="1_@product.ID" class="clearfix product">
                                     <img src="@product.FirstImage?w=100&h=100"/>
                                     <div class="desc">
                                         <h3>@product.Title</h3>
@@ -103,7 +115,7 @@
                                     </div>
                                     <div class="price">Normally @product.Price.ToString("C")</div>
                                     <div class="select">
-                                        <button value="Select">Select</button>
+                                        <button value="Select" data-id="group1|1_@product.ID">Select</button>
                                     </div>
                                 </div>
                                 <br/>
@@ -116,7 +128,7 @@
                             {
                                 var product = sampler.Group2Products.ToList()[ctr];
 
-                                <div data-id="@product.ID" class="clearfix">
+                                <div id="2_@product.ID" class="clearfix product">
                                     <img src="@product.FirstImage?w=100&h=100"/>
                                     <div class="desc">
                                         <h3>@product.Title</h3>
@@ -124,7 +136,7 @@
                                     </div>
                                     <div class="price">Normally @product.Price.ToString("C")</div>
                                     <div class="select">
-                                        <button value="Select">Select</button>
+                                        <button value="Select" data-id="group2|2_@product.ID">Select</button>
                                     </div>
                                 </div>
                                 <br/>
@@ -137,7 +149,7 @@
                             {
                                 var product = sampler.Group3Products.ToList()[ctr];
 
-                                <div data-id="@product.ID" class="clearfix">
+                                <div id="3_@product.ID" class="clearfix product">
                                     <img src="@product.FirstImage?w=100&h=100"/>
                                     <div class="desc">
                                         <h3>@product.Title</h3>
@@ -145,11 +157,15 @@
                                     </div>
                                     <div class="price">Normally @product.Price.ToString("C")</div>
                                     <div class="select">
-                                        <button value="Select">Select</button>
+                                        <button value="Select" data-id="group3|3_@product.ID">Select</button>
                                     </div>
                                 </div>
                                 <br/>
                             }
+                        </div>
+                        
+                        <div class="select add">
+                            <button id="AddToCart" value="Add to Cart">Add to Cart for $@sampler.Price</button>
                         </div>
                     </div>
                 }
@@ -164,6 +180,30 @@
             $(".products-sampler").hide();
             var $id = $("#sampler").val();
             $("#" + $id).show();
+        });
+
+        $(".group .select button").on("click", function () {
+            var data = $(this).data("id").split("|");
+
+            if (data == null || data.length < 2) {
+                return;
+            }
+
+            var groupId = data[0];
+            var selectedId = data[1];
+
+            $("div." + groupId + " .product").removeClass("selected");
+            $("#" + selectedId).addClass("selected");
+        });
+
+        $("#AddToCart").on("click", function() {
+            var selectedCount = $(".product.selected").length;
+            if (selectedCount < 3) {
+                alert("You must choose " + (3 - selectedCount) + " more before adding to cart.");
+                return;
+            }
+
+            alert("Added to cart!");
         });
     });
 </script>
