@@ -417,6 +417,7 @@
             url: "/AJAX/cart.asmx/CheckIfCommerceActionsAllowed",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
+            async: false,
             success: function (result) {
                 if (result.d == "") {
 
