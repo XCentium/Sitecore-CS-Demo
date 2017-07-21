@@ -4,6 +4,10 @@ Parent: 461bcc39-770b-484c-a179-7f2de86e67a0
 Template: fe5dd826-48c6-436d-b87a-7c4210c7413b
 Path: /sitecore/media library/CSDemo/Navigation
 DB: master
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 400
 Languages:
 - Language: en
   Versions:

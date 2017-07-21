@@ -15,6 +15,11 @@
         <!-- GEO TARGETED PRODUCT - START -->
         @foreach (var product in Model.Products)
         {
+            if (product == null || product.Images == null)
+            {
+                continue; //some geo targeted results retun errors.
+            }
+
             <div class="col-xs-4">
                 @using (BeginEditFrame(product, "Edit Metadata", x => x.Images, x => x.Title))
                 {
