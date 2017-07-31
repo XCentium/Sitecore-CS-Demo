@@ -1459,6 +1459,8 @@
     ///FOR QUICK BUY
     $(document).ready(function () {
         $(".quickbuy").on("click", function () {
+            if (commerceActionAllowed === false) { showDisallowedMessage(); return false; }
+
             $("#loadingAnimation").show();
            
             $.ajax({
@@ -1488,7 +1490,9 @@
             });
          });
 
-        $(".quickbuy-product").on("click", function() {
+        $(".quickbuy-product").on("click", function () {
+            if (commerceActionAllowed === false) { showDisallowedMessage(); return false; }
+
             //get product to add
             var $selected = $(".add-to-cart:visible").eq(0);
             var formId = $selected.data("formid");
