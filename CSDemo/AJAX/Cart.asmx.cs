@@ -416,6 +416,21 @@ namespace CSDemo.AJAX
             return CartHelper.ExpressCheckout();
         }
 
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public object ExpressCheckoutWithAddProduct(string quantity, string productId, string catalogName, string variantId, string contextItemId)
+        {
+            var ret = CartHelper.AddProductToCart(quantity, productId, catalogName, variantId);
+
+            if (ret != null && ret.ToUpper().Contains("ERROR"))
+            {
+                return new {success = false};
+            }
+
+            RegisterGoal(Constants.Marketing.AddToCartGoalId, contextItemId);
+            return CartHelper.ExpressCheckout();
+        }
+
 
         #region Private Helpers
 

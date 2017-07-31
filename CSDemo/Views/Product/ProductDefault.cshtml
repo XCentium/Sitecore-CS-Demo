@@ -255,9 +255,10 @@
                                         </div>
                                     }
                                 </div>
-                                @if (Model.VariantSize != null)
-                                {
-                                    <div class="col-md-3 col-sm-4">
+                               
+                                <div class="col-md-3 col-sm-4">
+                                    @if (Model.VariantSize != null)
+                                    {
                                         <div class="product-size">
                                             <div class="form-inline">
                                                 <div class="form-group">
@@ -273,11 +274,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                }
-                                @if (Model.VariantColors != null && Model.VariantColors.Any())
-                                {
-                                    <div class="col-md-3 col-sm-4">
+                                        
+                                    }
+                                </div>
+                               
+                                <div class="col-md-3 col-sm-4">
+                                    @if (Model.VariantColors != null && Model.VariantColors.Any())
+                                    {
                                         <div class="product-color">
                                             <div class="form-inline">
                                                 <div class="form-group">
@@ -290,16 +293,16 @@
                                                         <ul id="ul_@string.Concat(variantColor.Name, Model.VariantProdId)" style="display: @variantColor.Display" data-num="@Model.VariantProdId" class="variantcolorlist @string.Concat("ProductColor", Model.VariantProdId) ProductColor">
                                                             @foreach (var color in variantColor.VariantColorLines)
                                                             {
-                                                                <li><a href="#" data-num="@Model.VariantProdId" data-vname="@variantColor.Name" data-val="@color.Value" class="variantcolorrectangle" style="background-color: @color.Color.Replace(" ","")">&nbsp;</a></li>
+                                                                <li><a href="#" data-num="@Model.VariantProdId" data-vname="@variantColor.Name" data-val="@color.Value" class="variantcolorrectangle" style="background-color: @color.Color.Replace(" ", "")">&nbsp;</a></li>
                                                             }
                                                         </ul>
                                                     }
 
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                }
+                                        </div>   
+                                    }
+                                </div>
                                 @if (!isInStock)
                                 {
                                     clickCmd = "out-of-stock";
@@ -318,8 +321,13 @@
                                             <a href="javascript:void(0)" data-formid="@Model.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(Model.ID).ToString()" class="btn btn-primary variant_btn variant_btn_@prodVariant.VariantId @clickCmd" style="display: none"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         }
                                     }
-
                                 </div>
+                                @if (Sitecore.Context.User.IsAuthenticated && isInStock) { 
+                                    <div class="col-md-12 col-sm-12">
+                                        <a href="#" class="btn btn-primary btn-lg pull-right quickbuy-product">Buy with 1-Click Checkout</a>
+                                        <span style="float: right; display: block; margin: 5px 10px; font-size: 16px; color: #777777;"> - or - </span>
+                                    </div>
+                                }
                             </div>
                             <div id="linkkit">
                                 <!-- AddToAny BEGIN -->

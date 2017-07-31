@@ -1458,13 +1458,55 @@
 
     ///FOR QUICK BUY
     $(document).ready(function () {
-         $(".quickbuy").on("click", function () {
+        $(".quickbuy").on("click", function () {
             $("#loadingAnimation").show();
            
             $.ajax({
                 type: "POST",
                 url: "/AJAX/cart.asmx/ExpressCheckout",
-                //data: JSON.stringify(cartPayment),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    console.log(result);
+                    if (result.d.success) {
+                        var orderId = result.d.orderId;
+
+                        Cookies.set("orderConfirmationID", orderId, { expires: 7 });
+                        redirectPage("/Checkout/thank-you");
+                    } else {
+                        $("#loadingAnimation").hide();
+
+                        showActionMessageFixed("Error! Please try again");
+                        return false;
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                    $("#loadingAnimation").hide();
+                }
+
+            });
+         });
+
+        $(".quickbuy-product").on("click", function() {
+            //get product to add
+            var $selected = $(".add-to-cart:visible").eq(0);
+            var formId = $selected.data("formid");
+            var contextItemId = $selected.data("contextitemid");
+
+            var form = document.getElementById(formId);
+            var quantity = form.Quantity.value;
+            var productId = form.ProductId.value;
+            var catalogName = form.CatalogName.value;
+            var variantId = form.VariantId.value;
+
+            //add product + quick buy
+            $("#loadingAnimation").show();
+           
+            $.ajax({
+                type: "POST",
+                url: "/AJAX/cart.asmx/ExpressCheckoutWithAddProduct",
+                data:"{quantity:'" + quantity + "', productId:'" + productId + "', catalogName:'" + catalogName + "', variantId:'" + variantId + "', contextItemId:'" + contextItemId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result) {
