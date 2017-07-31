@@ -23,9 +23,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web;
-using CSDemo.Business.Services;
 using CSDemo.Configuration;
-using CSDemo.Helpers;
 using AddPartiesRequest = Sitecore.Commerce.Services.Carts.AddPartiesRequest;
 using UpdatePartiesRequest = Sitecore.Commerce.Services.Carts.UpdatePartiesRequest;
 using Sitecore.Commerce.Services.Payments;
@@ -33,6 +31,7 @@ using Sitecore.Commerce.Entities.Payments;
 using WebGrease.Css.Extensions;
 using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Commerce.Services.Shipping;
+using Sitecore.Diagnostics;
 
 namespace CSDemo.Models.Checkout.Cart
 {
@@ -1140,7 +1139,7 @@ namespace CSDemo.Models.Checkout.Cart
             }
 
             var error = submitVisitorOrderResult?.SystemMessages[0]?.Message ?? "NULL";
-            Sitecore.Diagnostics.Log.Error("CartHelper.SubmitCart Error, error = " + error, new Exception());
+            Log.Error("CartHelper.SubmitCart Error, error = " + error, new Exception());
 
             return "Error in cart! Order not submitted. Error = " + error;
         }
@@ -2030,6 +2029,89 @@ namespace CSDemo.Models.Checkout.Cart
                 Sitecore.Diagnostics.Log.Error("Error in CartHelper.GetShippingMethods", ex);
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Submits cart with existing line items using default shipping, billing and payment info (tokenized)
+        /// </summary>
+        /// <returns></returns>
+        public object ExpressCheckout()
+        {
+            var result = new { success = false, orderId = string.Empty };
+
+            try
+            {
+                //0 - validate cart
+                var cart = GetCustomerCart();
+                if (cart == null)
+                {
+                    throw new ArgumentException("Cannot find cart.");
+                }
+
+                if (cart.LineItemCount <= 0)
+                {
+                    throw new ArgumentException("There are no items in the cart.");
+                }
+
+                if (Context.User.Name.ToUpper().Contains("ANONYMOUS"))
+                {
+                    throw new Exception("You have to be logged in to use Express Checkout.");
+                }
+
+                //1 - add product if needed
+                //AddToCart(new CartLineItem());
+
+                //3 - add shipping info
+                var user = new AccountHelper().GetUser(Context.User.Name);
+                var address = new Address //TODO:  update on prod, for demo only
+                {
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Address1 = "1234 NY Street",
+                    City = "New York",
+                    State = "NY",
+                    ZipPostalCode = "10009",
+                    CountryCode = "US"
+                };
+
+                if (!ApplyShippingToCart(address))
+                    throw new Exception("ApplyShippingToCart failed.");
+
+                //4 - add shipping method
+                const string shippingMethodId = "e14965b9-306a-43c4-bffc-3c67be8726fa|Ground"; //TODO: update on prod, for demo only
+               
+                if (!AddShippingMethodToCart(shippingMethodId))
+                    throw new Exception("AddShippingMethodToCart failed.");
+
+                //5 - add payment info
+                //VAULT METHOD
+                var paymentMethodToken = ConfigurationHelper.GetBraintreeVaultPaymentToken();  //TODO: update on prod, for demo only
+                var payment = new Payment
+                {
+                    BillingAddress = address,
+                    CardPrefix = "paypal",
+                    Token = $"vault|{paymentMethodToken}" //indicate use of Vault token, must use modified braintree plugin on CommerceAuthoring
+                };
+
+                if (!ApplyNewPaymentMethodToCart(payment))
+                    throw new Exception("ApplyNewPaymentMethodToCart failed.");
+
+
+                //6 - submit
+                var submitCartResult = SubmitCart();
+
+                if (!submitCartResult.Contains("Error")) { 
+                    result = new { success = true, orderId = submitCartResult };
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"CartHelper.ExpressCheckout(), Error={ex.Message}", ex);
+            }
+
+            return result;
         }
     }
 }

@@ -409,6 +409,13 @@ namespace CSDemo.AJAX
         }
 
 
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public object ExpressCheckout()
+        {
+            return CartHelper.ExpressCheckout();
+        }
+
 
         #region Private Helpers
 

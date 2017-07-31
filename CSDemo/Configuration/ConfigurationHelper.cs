@@ -38,5 +38,10 @@ namespace CSDemo.Configuration
         {
             return ConfigurationManager.AppSettings["RecommendationsApiBaseUri"];
         }
+
+        public static string GetBraintreeVaultPaymentToken()
+        {
+            return ConfigurationManager.AppSettings["BrainTreeVaultPaymentToken"];
+        }
     }
 }

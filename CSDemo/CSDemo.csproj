@@ -546,6 +546,7 @@
     <Content Include="Assets\images\image1.jpg" />
     <Content Include="Assets\images\image2.jpg" />
     <Content Include="Assets\images\image3.png" />
+    <Content Include="Assets\images\loader.gif" />
     <Content Include="Assets\images\lookbook-1.png" />
     <Content Include="Assets\images\lookbook-2.png" />
     <Content Include="Assets\images\map.jpg" />

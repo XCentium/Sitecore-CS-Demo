@@ -1456,9 +1456,39 @@
         showActionMessageFixed("Loaded! Please add email and other mandatory data");
     });
 
+    ///FOR QUICK BUY
+    $(document).ready(function () {
+         $(".quickbuy").on("click", function () {
+            $("#loadingAnimation").show();
+           
+            $.ajax({
+                type: "POST",
+                url: "/AJAX/cart.asmx/ExpressCheckout",
+                //data: JSON.stringify(cartPayment),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    console.log(result);
+                    if (result.d.success) {
+                        var orderId = result.d.orderId;
 
+                        Cookies.set("orderConfirmationID", orderId, { expires: 7 });
+                        redirectPage("/Checkout/thank-you");
+                    } else {
+                        $("#loadingAnimation").hide();
 
+                        showActionMessageFixed("Error! Please try again");
+                        return false;
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                    $("#loadingAnimation").hide();
+                }
 
+            });
+        });
+    });
 })(window, jQuery);
 
 

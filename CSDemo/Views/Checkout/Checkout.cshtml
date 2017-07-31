@@ -46,104 +46,110 @@
                     
                     <form id="checkout-form">
                         <h3>Shipping Information</h3>
-                    <div class="products-order checkout billing-information">
-                    @if (addresses != null && addresses.Any())
-                    {
-                        <button class="btn btn-primary addresses-toggle" type="button" data-toggle="collapse" data-target="#my-addresses-billing" aria-expanded="false" aria-controls="my-addresses-billing">My Saved Addresses</button>
-                    }
-                    <div id="my-addresses-billing" class="collapse">
-                        <div class="table-responsive border">
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>Company</th>
-                                    <th>Name</th>
-                                    <th>Address</th>
-                                    <th>Country</th>
-                                    <th>Phone</th>
-                                    <th></th>
-                                </tr>
-                                @if (addresses != null && addresses.Any())
-                                {
-                                    foreach (var address in addresses)
-                                    {
+                        <div class="products-order checkout billing-information">
+                            @if (addresses != null && addresses.Any())
+                            {
+                                <button class="btn btn-primary addresses-toggle" type="button" data-toggle="collapse" data-target="#my-addresses-billing" aria-expanded="false" aria-controls="my-addresses-billing">My Saved Addresses</button>
+                            }
+                            <div id="my-addresses-billing" class="collapse">
+                                <div class="table-responsive border">
+                                    <table class="table table-bordered">
                                         <tr>
-                                            <td>@address.AddressName</td>
-                                            <td>@address.FirstName @address.LastName</td>
-                                            <td>@address.AddressLine1, @address.City</td>
-                                            <td>@address.CountryRegionCode @address.CountryRegionName</td>
-                                            <td>@address.TelephoneNumber</td>
-                                            <td><a class="btn btn-primary customer-addr-data btn-sm" data-select="billing" data-formdata="@address.FirstName|@address.LastName|@address.AddressLine1|@address.AddressLine2|@address.City|@address.CountryRegionCode|@address.ZipPostalCode|@address.TelephoneNumber">Select</a></td>
+                                            <th>Company</th>
+                                            <th>Name</th>
+                                            <th>Address</th>
+                                            <th>Country</th>
+                                            <th>Phone</th>
+                                            <th></th>
                                         </tr>
-                                    }
-                                }
+                                        @if (addresses != null && addresses.Any())
+                                        {
+                                            foreach (var address in addresses)
+                                            {
+                                                <tr>
+                                                    <td>@address.AddressName</td>
+                                                    <td>@address.FirstName @address.LastName</td>
+                                                    <td>@address.AddressLine1, @address.City</td>
+                                                    <td>@address.CountryRegionCode @address.CountryRegionName</td>
+                                                    <td>@address.TelephoneNumber</td>
+                                                    <td><a class="btn btn-primary customer-addr-data btn-sm" data-select="billing" data-formdata="@address.FirstName|@address.LastName|@address.AddressLine1|@address.AddressLine2|@address.City|@address.CountryRegionCode|@address.ZipPostalCode|@address.TelephoneNumber">Select</a></td>
+                                                </tr>
+                                            }
+                                        }
 
-                            </table>
-                        </div>
-                    </div>
+                                    </table>
+                                </div>
+                            </div>
 
-                    <div class="row">
-                    <div class="form-group col-sm-6">
-                        <label>First Name <span class="required">*</span></label>
-                        <input type="text" name="firstname" id="firstname" class="form-control" required/>
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label>Last Name <span class="required">*</span></label>
-                        <input type="text" name="lastname" id="lastname" class="form-control" required/>
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label>Email address <span class="required">*</span></label>
-                        <input type="email" name="email" id="email" class="form-control" required>
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label>Company</label>
-                        <input type="text" name="company" id="company" class="form-control">
-                    </div>
-                    <div class="form-group col-sm-12">
-                        <label>Address <span class="required">*</span></label>
-                        <input type="text" name="address" id="address" class="form-control" required>
-                    </div>
-                    <div class="form-group col-sm-12">
-                        <input type="text" name="addressline1" id="addressline1" class="form-control">
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label>City <span class="required">*</span></label>
-                        <input type="text" name="city" id="city" class="form-control" required>
-                    </div>                    
-                    <div class="form-group col-sm-6">                  
-                        <label>State <span class="required">*</span></label>                  
-                        <input type="text" name="state" id="state" class="form-control" required>              
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label>ZIP / Postal Code <span class="required">*</span></label>
-                        <input type="text" name="zip" id="zip" class="form-control" required>
-                    </div>
-                    <div class="form-group col-sm-6">
-                    <label>Country <span class="required">*</span></label>
-                    <select class="form-control" name="country" id="country" required onchange="this.form.countryName.value = $('#country option:selected').text();">
-                    <option value="CA" selected="selected">Canada</option>
-                    <option value="US">United States</option>
-                    </select>
-                        <input type="hidden" id="countryName" name="countryName" value="Canada" />                        
-                    </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-6">
-                            <label>Phone <span class="required">*</span></label>
-                            <input type="text" name="phone" id="phone" class="form-control" required>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <label>First Name <span class="required">*</span></label>
+                                    <input type="text" name="firstname" id="firstname" class="form-control" required/>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>Last Name <span class="required">*</span></label>
+                                    <input type="text" name="lastname" id="lastname" class="form-control" required/>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>Email address <span class="required">*</span></label>
+                                    <input type="email" name="email" id="email" class="form-control" required>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>Company</label>
+                                    <input type="text" name="company" id="company" class="form-control">
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <label>Address <span class="required">*</span></label>
+                                    <input type="text" name="address" id="address" class="form-control" required>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <input type="text" name="addressline1" id="addressline1" class="form-control">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>City <span class="required">*</span></label>
+                                    <input type="text" name="city" id="city" class="form-control" required>
+                                </div>                    
+                                <div class="form-group col-sm-6">                  
+                                    <label>State <span class="required">*</span></label>                  
+                                    <input type="text" name="state" id="state" class="form-control" required>              
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>ZIP / Postal Code <span class="required">*</span></label>
+                                    <input type="text" name="zip" id="zip" class="form-control" required>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>Country <span class="required">*</span></label>
+                                    <select class="form-control" name="country" id="country" required onchange="this.form.countryName.value = $('#country option:selected').text();">
+                                        <option value="CA" selected="selected">Canada</option>
+                                        <option value="US">United States</option>
+                                    </select>
+                                    <input type="hidden" id="countryName" name="countryName" value="Canada" />                        
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <label>Phone <span class="required">*</span></label>
+                                    <input type="text" name="phone" id="phone" class="form-control" required>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>Fax</label>
+                                    <input type="text" name="fax" id="fax" class="form-control">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>Additional information</label>
+                                    <textarea name="information" id="information" class="form-control"></textarea>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group col-sm-6">
-                            <label>Fax</label>
-                            <input type="text" name="fax" id="fax" class="form-control">
-                        </div>
-                        <div class="form-group col-sm-6">
-                            <label>Additional information</label>
-                            <textarea name="information" id="information" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    </div>
 
                         <div class="clearfix">
                             <a href="/checkout/shipping" class="btn btn-primary btn-lg pull-right SubmitCheckout">Continue</a>
+                            
+                            @if(Sitecore.Context.User.IsAuthenticated)
+                            {
+                                <span style="float: right; display: block; margin: 5px 10px; font-size: 16px; color: #777777;"> - or - </span>
+                                <a href="#" class="btn btn-primary btn-lg pull-right quickbuy">Buy with 1-Click Checkout</a>
+                            }
                         </div>
                     </form>
 
