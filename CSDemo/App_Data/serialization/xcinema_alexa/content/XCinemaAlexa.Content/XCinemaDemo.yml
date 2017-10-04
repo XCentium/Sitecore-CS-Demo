@@ -15,6 +15,9 @@ Languages:
     - ID: 39fd34cc-0daf-49fe-b103-70f7bf36a65f
       Hint: Phone Number
       Value: 555 123 1234
+    - ID: 453a59c1-1a8e-48c6-afcb-52ab91e72dc2
+      Hint: RecommendationsBuildId
+      Value: 1658689
     - ID: 6488fe35-2e12-4396-a26d-7180d3701450
       Hint: email
       Value: help@xcentium.net
@@ -24,9 +27,12 @@ Languages:
     - ID: 96a811ba-4aab-4005-a75f-aa2a242941e2
       Hint: PreTitle
       Value: XCinema Demo
+    - ID: c440d64e-5be2-47ec-8787-ac12e6b53109
+      Hint: ModelId
+      Value: 580d0e1b-467f-4ed1-8b2e-a17a1b2428fb
     - ID: d0ee52ae-22ad-4bad-afae-6902cb2827fc
       Hint: Catalog
-      Value: {05DEFEF2-81AB-4924-B1C2-0A52C0E20C37}
+      Value: {D95C74EF-6B0A-4854-97BC-E89C6D8E7B5B}
     - ID: fb1f3432-d97f-4168-83e9-da4fafa53065
       Hint: Title
       Value: Demo
