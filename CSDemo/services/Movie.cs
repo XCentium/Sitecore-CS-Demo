@@ -22,6 +22,8 @@ namespace CSDemo.Services
         public string CinemaZipcode { get; set; }
         [SitecoreField(Fields.CinemaId), DataMember]
         public string CinemaId { get; set; }
+        [DataMember]
+        public int Rating { get; set; }
 
         public struct Fields
         {

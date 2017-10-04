@@ -14,5 +14,21 @@ namespace CSDemo.Services
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json)]
         List<Movie> GetShowTimes(string zipcode, int hours);
+
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json)]
+        List<Movie> GetRecommendationsByUser(string userEmailAddress);
+
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json)]
+        List<Movie> GetRecommendationsByMovie(string sampleMovieName);
+
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json)]
+        List<Movie> GetRecommendationsByRatings();
+
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json)]
+        string GetMovieDescription(string movieVariantId);
     }
 }
