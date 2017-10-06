@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.ServiceModel.Activation;
@@ -11,16 +12,22 @@ using Newtonsoft.Json;
 using Sitecore;
 using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.Linq;
-using Sitecore.ContentSearch.Linq.Extensions;
 using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Diagnostics;
-using Sitecore.Mvc.Common;
+using Sitecore.Sites;
 
 namespace CSDemo.Services
 {
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class XCommerceService : IXCommerceService
     {
+        private void GetSiteContextSwitcher()
+        {
+            var targetSiteContext = SiteContext.GetSite("XCinemaDemo");
+            
+            var x = new SiteContextSwitcher(targetSiteContext); 
+        }
+
         public List<Movie> GetShowTimes(string zipcode, int hours)
         {
             var movies = new List<Movie>();
@@ -70,14 +77,14 @@ namespace CSDemo.Services
             try
             {
                 Assert.IsNotNullOrEmpty(userEmailAddress, "userEmailAddress is null or empty");
-
+                GetSiteContextSwitcher();
                 var moviesSearchResults = GetRecommendedMoviesByUser(userEmailAddress);
 
                 movies = moviesSearchResults
                     .Select(m => new Movie
                     {
-                        Title = m.Document.Fields[Movie.Fields.MovieName]?.ToString(),
-                        Id = new Guid(m.Document.Fields[Movie.Fields.VariantId].ToString()).ToString()
+                        Title = m.Title,
+                        Id = GetMovieVariantId(m.Guid)
                     })
                     .Distinct(new MovieComparer()).Take(5).ToList();
             }
@@ -89,6 +96,15 @@ namespace CSDemo.Services
             return movies;
         }
 
+        private static string GetMovieVariantId(string itemId)
+        {
+            var item = Context.Database.GetItem(Sitecore.Data.ID.Parse(itemId));
+
+            var variants = item?.GetChildren();
+
+            return (variants != null && variants.Count > 0) ? variants[0].ID.ToString() : string.Empty;
+        }
+
         public List<Movie> GetRecommendationsByMovie(string sampleMovieName)
         {
             var movies = new List<Movie>();
@@ -97,13 +113,14 @@ namespace CSDemo.Services
             {
                 Assert.IsNotNullOrEmpty(sampleMovieName, "sampleMovieName is null or empty");
 
+                GetSiteContextSwitcher();
                 var moviesSearchResults = GetRecommendedMoviesByMovie(sampleMovieName);
 
                 movies = moviesSearchResults
                     .Select(m => new Movie
                     {
-                        Title = m.Document.Fields[Movie.Fields.MovieName]?.ToString(),
-                        Id = new Guid(m.Document.Fields[Movie.Fields.VariantId].ToString()).ToString()
+                        Title = m.Title,
+                        Id = GetMovieVariantId(m.Guid)
                     })
                     .Distinct(new MovieComparer()).Take(5).ToList();
             }
@@ -284,24 +301,15 @@ namespace CSDemo.Services
             return null;
         }
 
-        private static IEnumerable<SearchHit<SearchResultItem>> GetRecommendedMoviesByUser(string userEmailAddress)
+        private static List<ProductMini> GetRecommendedMoviesByUser(string userEmailAddress)
         {
-            //TODO: add actual implementation for Recommended Movies by User
-            var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndexMovies());
             try
             {
-                using (var context = index.CreateSearchContext())
-                {
+                //get list of movies
+                var userId = ConfigurationManager.AppSettings["MovieWorldUserId"];
+                var list = RecommendationsHelper.GetUserRecommendations(userId, 5);
 
-                    var queryable = context.GetQueryable<SearchResultItem>()
-                        .Where(x => x.Language == Context.Language.Name);
-
-                    return
-                        queryable.Where(
-                            x =>
-                                x["_latestversion"] == "1" &&
-                                x.TemplateName == "MovieVariant").GetResults().ToList();
-                }
+                return list;
             }
             catch (Exception ex)
             {
@@ -310,24 +318,15 @@ namespace CSDemo.Services
             return null;
         }
 
-        private static IEnumerable<SearchHit<SearchResultItem>> GetRecommendedMoviesByMovie(string sampleMovieName)
+        private static List<ProductMini> GetRecommendedMoviesByMovie(string sampleMovieName)
         {
-            //TODO: add actual implementation for Recommended Movies by Movie
-            var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndexMovies());
             try
             {
-                using (var context = index.CreateSearchContext())
-                {
+                //get list of movies
+                var movieId = ConfigurationManager.AppSettings["MovieWorldMovieId"];
+                var list = RecommendationsHelper.GetItemRecommendations(movieId, "0", 5);
 
-                    var queryable = context.GetQueryable<SearchResultItem>()
-                        .Where(x => x.Language == Context.Language.Name);
-
-                    return
-                        queryable.Where(
-                            x =>
-                                x["_latestversion"] == "1" &&
-                                x.TemplateName == "MovieVariant").GetResults().ToList();
-                }
+                return list;
             }
             catch (Exception ex)
             {

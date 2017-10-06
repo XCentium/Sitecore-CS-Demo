@@ -44,5 +44,20 @@ namespace CSDemo.Configuration
         {
             return ConfigurationManager.AppSettings["ZipcodeServiceCallFormat"];
         }
+
+        public static string GetRecommendationsApiKey()
+        {
+            return ConfigurationManager.AppSettings["RecommendationsApiKey"];
+        }
+
+        public static string GetRecommendationsApiBaseUri()
+        {
+            return ConfigurationManager.AppSettings["RecommendationsApiBaseUri"];
+        }
+
+        public static string GetBraintreeVaultPaymentToken()
+        {
+            return ConfigurationManager.AppSettings["BrainTreeVaultPaymentToken"];
+        }
     }
 }

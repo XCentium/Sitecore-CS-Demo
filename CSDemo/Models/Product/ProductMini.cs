@@ -13,5 +13,8 @@ namespace CSDemo.Models.Product
         public string CategoryName { get; set; }
         public string VariantId { get; set; }
         public string Url { get; set; }
+        public decimal SalePrice { get; set; }
+        public bool IsOnSale { get; set; }
+        public decimal Rating { get; set; }
     }
 }

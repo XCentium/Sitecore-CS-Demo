@@ -234,6 +234,7 @@
     </Reference>
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
@@ -364,6 +365,7 @@
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Configuration\ComputedFields\CommerceMovieLocationZipcode.cs" />
     <Compile Include="Helpers\GlassHelper.cs" />
+    <Compile Include="Helpers\RecommendationsHelper.cs" />
     <Compile Include="Models\Account\AccountHelper.cs" />
     <Compile Include="Models\Account\Address.cs" />
     <Compile Include="Models\Account\GetUser.cs" />
@@ -460,6 +462,7 @@
     <Compile Include="Models\ProfileExtensions.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\Recommendations\Recommendations.cs" />
     <Compile Include="Models\Store\LocationInformation.cs" />
     <Compile Include="Models\Store\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -469,6 +472,7 @@
     <Compile Include="Services\IXCommerceService.cs" />
     <Compile Include="Services\Movie.cs" />
     <Compile Include="Services\MovieOrder.cs" />
+    <Compile Include="Services\RecommendationsApi.cs" />
     <Compile Include="Services\XCommerceService.svc.cs">
       <DependentUpon>XCommerceService.svc</DependentUpon>
     </Compile>
