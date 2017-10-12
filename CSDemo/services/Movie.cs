@@ -35,6 +35,7 @@ namespace CSDemo.Services
             public const string CinemaName = "movielocationname";
             public const string CinemaZipCode = "moviezipcode";
             public const string CinemaId = "locationid";
+            public static string Rating = "rating";
         }
     }
 }

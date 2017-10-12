@@ -143,11 +143,11 @@ namespace CSDemo.Services
                 return moviesSearchResults
                     .Select(m => new Movie
                     {
-                        Title = m.Document.Fields[Movie.Fields.MovieName]?.ToString(),
-                        Rating = (new Random(DateTime.Now.Second)).Next(8, 10),
-                        Id = new Guid(m.Document.Fields[Movie.Fields.VariantId].ToString()).ToString()
+                        Title = m.Document.Fields["_displayname"]?.ToString(),
+                        Rating = int.Parse(m.Document.Fields[Movie.Fields.Rating]?.ToString())
+                        //Id = new Guid(m.Document.Fields[Movie.Fields.VariantId].ToString()).ToString()
                     })
-                    .OrderBy(m => m.Rating).Distinct(new MovieComparer()).Take(5).ToList();
+                    .OrderByDescending(m => m.Rating).Distinct(new MovieComparer()).Take(5).ToList();
             }
             catch (Exception ex)
             {
@@ -337,21 +337,19 @@ namespace CSDemo.Services
 
         private static IEnumerable<SearchHit<SearchResultItem>> GetRecommendedMoviesByRating()
         {
-            //TODO: add actual implementation for Recommended Movies by Rating
-            var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndexMovies());
+            var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetProductSearchIndex());
             try
             {
                 using (var context = index.CreateSearchContext())
                 {
 
                     var queryable = context.GetQueryable<SearchResultItem>()
-                        .Where(x => x.Language == Context.Language.Name);
+                        .Where(x => x.Language == Context.Language.Name && x.TemplateName == "Movie");
 
                     return
                         queryable.Where(
                             x =>
-                                x["_latestversion"] == "1" &&
-                                x.TemplateName == "MovieVariant").GetResults().ToList();
+                                x["_latestversion"] == "1").GetResults().ToList();
                 }
             }
             catch (Exception ex)
