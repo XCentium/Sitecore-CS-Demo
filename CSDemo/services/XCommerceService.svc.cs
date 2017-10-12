@@ -145,7 +145,6 @@ namespace CSDemo.Services
                     {
                         Title = m.Document.Fields["_displayname"]?.ToString(),
                         Rating = int.Parse(m.Document.Fields[Movie.Fields.Rating]?.ToString())
-                        //Id = new Guid(m.Document.Fields[Movie.Fields.VariantId].ToString()).ToString()
                     })
                     .OrderByDescending(m => m.Rating).Distinct(new MovieComparer()).Take(5).ToList();
             }
@@ -318,12 +317,14 @@ namespace CSDemo.Services
             return null;
         }
 
-        private static List<ProductMini> GetRecommendedMoviesByMovie(string sampleMovieName)
+        private static List<ProductMini> GetRecommendedMoviesByMovie(string movieVariantId)
         {
             try
             {
                 //get list of movies
-                var movieId = ConfigurationManager.AppSettings["MovieWorldMovieId"];
+                //var movieId = ConfigurationManager.AppSettings["MovieWorldMovieId"];
+                var movieId = ProductHelper.GetMovieId(movieVariantId);
+
                 var list = RecommendationsHelper.GetItemRecommendations(movieId, "0", 5);
 
                 return list;

@@ -1355,5 +1355,28 @@ namespace CSDemo.Models.Product
 
             return searchTerm;
         }
+
+        public static string GetMovieId(string movieVariantId)
+        {
+            var movieId = string.Empty;
+
+            try
+            {
+                //1 - find movie
+                var movieVariantItem = Context.Database.GetItem(new ID(movieVariantId));
+                if (movieVariantItem == null) throw new Exception($"Cannot find movie variant item = {movieVariantId}.");
+
+                var movieItem = movieVariantItem.Parent;
+                if (movieItem == null) throw new Exception($"Cannot find movie item for variant {movieVariantId}.");
+
+                movieId = movieItem.Name;
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"ProductHelper.GetMovieDescription(), Error={ex.Message}", ex);
+            }
+
+            return movieId;
+        }
     }
 }

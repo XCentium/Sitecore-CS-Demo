@@ -21,7 +21,7 @@ namespace CSDemo.Services
 
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json)]
-        List<Movie> GetRecommendationsByMovie(string sampleMovieName);
+        List<Movie> GetRecommendationsByMovie(string movieVariantId);
 
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json)]
