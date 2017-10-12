@@ -360,6 +360,19 @@ namespace CSDemo.Services
             }
             return null;
         }
+
+        public GetMovieTwitterSentimentsResponse GetMovieTwitterSentiments(string movieVariantId)
+        {
+            try
+            {
+                return TextAnalysisApi.GetMovieTwitterSentiments(movieVariantId);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.StackTrace, ex);
+            }
+            return null;
+        }
     }
 
     internal class MovieComparer : IEqualityComparer<Movie>

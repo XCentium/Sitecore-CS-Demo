@@ -30,5 +30,9 @@ namespace CSDemo.Services
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json)]
         string GetMovieDescription(string movieVariantId);
+
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json)]
+        GetMovieTwitterSentimentsResponse GetMovieTwitterSentiments(string movieVariantId);
     }
 }

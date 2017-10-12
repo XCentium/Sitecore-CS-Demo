@@ -1328,11 +1328,32 @@ namespace CSDemo.Models.Product
             catch (Exception ex)
             {
                 Log.Error($"ProductHelper.GetMovieDescription(), Error={ex.Message}", ex);
-
-                description = "Error in getting description";
             }
 
             return description;
+        }
+
+        public static string GetMovieSearchTerm(string movieVariantId)
+        {
+            var searchTerm = string.Empty;
+
+            try
+            {
+                //1 - find movie
+                var movieVariantItem = Context.Database.GetItem(new ID(movieVariantId));
+                if (movieVariantItem == null) throw new Exception($"Cannot find movie variant item = {movieVariantId}.");
+
+                var movieItem = movieVariantItem.Parent;
+                if (movieItem == null) throw new Exception($"Cannot find movie item for variant {movieVariantId}.");
+
+                searchTerm = movieItem["searchterms"];
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"ProductHelper.GetMovieDescription(), Error={ex.Message}", ex);
+            }
+
+            return searchTerm;
         }
     }
 }
