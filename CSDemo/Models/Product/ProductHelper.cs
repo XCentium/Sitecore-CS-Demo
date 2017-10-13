@@ -670,7 +670,7 @@ namespace CSDemo.Models.Product
             {
                 orderDetail.OrderId = commerceOrderHead.OrderID;
                 orderDetail.TrackingNumber = commerceOrderHead.TrackingNumber;
-                orderDetail.OrderDate = commerceOrderHead.Created.ToString(Constants.Products.DateTimeFormat);
+                orderDetail.OrderDate = commerceOrderHead.OrderDate.ToString(Constants.Products.DateFormat);
                 orderDetail.NumberofItems = commerceOrderHead.LineItemCount;
                 var commerceTotal = commerceOrderHead.Total as CommerceTotal;
                 if (commerceTotal != null)

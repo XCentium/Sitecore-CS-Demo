@@ -137,7 +137,7 @@
             public const string VariantIdFormat = "_{0}";
             public const string CurrencyFormat = "C2";
             public const string CurrencyDecimalFormat = "c";
-            public const string DateFormat = "MMMM dd, yyyy hh:mm";
+            public const string DateFormat = "MMMM dd, yyyy";
             public const string DateTimeFormat = "MMMM dd, yyyy hh:mm";
             public const string VariantColorName = "ProductColor";
             public const string VariantColorDisplay = "Block";
