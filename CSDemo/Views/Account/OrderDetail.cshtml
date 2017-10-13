@@ -68,10 +68,20 @@
                                 <div class="box">
                                     <h4>Shipping Address</h4>
                                     <ul class="list-unstyled">
-                                        <li><b>@Model.Shipping.FirstName @Model.Shipping.LastName</b></li>
-                                        <li>@Model.Shipping.Address1</li>
-                                        <li>@Model.Shipping.ZipPostalCode @Model.Shipping.City</li>
-                                        <li>@Model.Shipping.Country</li>
+                                        @if (string.IsNullOrWhiteSpace(Model.Shipping.Address1))
+                                        {
+                                            <li>@Model.ShippingMethod</li>
+                                            <li>&nbsp;</li>
+                                            <li>&nbsp;</li>
+                                            <li>&nbsp;</li>
+                                        }
+                                        else
+                                        {
+                                            <li><b>@Model.Shipping.FirstName @Model.Shipping.LastName</b></li>
+                                            <li>@Model.Shipping.Address1</li>
+                                            <li>@Model.Shipping.ZipPostalCode @Model.Shipping.City</li>
+                                            <li>@Model.Shipping.Country</li>
+                                        }
                                     </ul>
                                 </div>
                             </div>
@@ -100,7 +110,7 @@
                                         <li><b>Phone: </b>@Model.Billing.PhoneNumber @Model.Shipping.PhoneNumber</li>
                                     </ul>
                                     <h5>Addition information:</h5>
-                                    <p>.</p>
+                                    <p style="min-height: 68px;">.</p>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +132,7 @@
                                         <tbody>
                                             @foreach (var line in Model.OrderLines)
                                             {
-                                                
+
                                                 <tr>
                                                     <td class="col-xs-1"><img src="@line.ImageUrl" alt="" class="img-responsive"></td>
                                                     <td class="col-xs-4 col-md-5"><h4><a href="@line.Url">@line.ProductName</h4></td>

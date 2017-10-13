@@ -114,7 +114,7 @@ namespace CSDemo.Models.Account
         /// <summary>
         /// Update a user profile in Sitecore
         /// </summary>
-        internal void UpdateContactProfile()
+        public void UpdateContactProfile()
         {
             if (Sitecore.Context.User.IsAuthenticated)
             {

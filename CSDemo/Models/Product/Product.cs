@@ -75,6 +75,12 @@ namespace CSDemo.Models.Product
                     yield return null;
 
                 var result = JsonConvert.DeserializeObject<ComplementaryProductResult>(response);
+
+                if (result == null)
+                {
+                    yield return null;
+                }
+
                 if (!result.IsSuccessful && fallbackAlsoBoughtProducts == null)
                 {
                     if (result.Messages == null) yield return null;

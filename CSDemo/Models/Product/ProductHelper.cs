@@ -683,8 +683,15 @@ namespace CSDemo.Models.Product
                 orderDetail.OrderStatus = commerceOrderHead.Status;
                 orderDetail.UserId = commerceOrderHead.UserId;
                 orderDetail.ExternalId = commerceOrderHead.ExternalId;
-                orderDetail.Billing = commerceOrderHead.Parties.ElementAt(1) as CommerceParty;
-                orderDetail.Shipping = commerceOrderHead.Parties.ElementAt(0) as CommerceParty;
+
+                var billing =
+                    commerceOrderHead.Parties.FirstOrDefault(p => ((CommerceParty) p).Name == Constants.Products.BillingAddress);
+                var shipping =
+                    commerceOrderHead.Parties.FirstOrDefault(p => ((CommerceParty)p).Name == Constants.Products.ShippingAddress);
+
+                orderDetail.Billing = billing != null ? billing as CommerceParty : new CommerceParty();
+                orderDetail.Shipping = shipping != null ? shipping as CommerceParty : new CommerceParty();
+
                 if (orderDetail.Billing == null)
                 {
                     orderDetail.Billing = new CommerceParty();
@@ -695,8 +702,8 @@ namespace CSDemo.Models.Product
                 }
                 else
                 {
-                    orderDetail.Email = orderDetail.Shipping.Email;
-                    orderDetail.Phone = orderDetail.Shipping.PhoneNumber;
+                    orderDetail.Email = orderDetail.Billing.Email;
+                    orderDetail.Phone = orderDetail.Billing.PhoneNumber;
                 }
                 if (commerceOrderHead.Payment.ElementAtOrDefault(0) != null)
                 {

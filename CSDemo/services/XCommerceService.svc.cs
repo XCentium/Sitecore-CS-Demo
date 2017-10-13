@@ -24,8 +24,8 @@ namespace CSDemo.Services
         private void GetSiteContextSwitcher()
         {
             var targetSiteContext = SiteContext.GetSite("XCinemaDemo");
-            
-            var x = new SiteContextSwitcher(targetSiteContext); 
+
+            var x = new SiteContextSwitcher(targetSiteContext);
         }
 
         public List<Movie> GetShowTimes(string zipcode, int hours)
@@ -140,13 +140,16 @@ namespace CSDemo.Services
             {
                 var moviesSearchResults = GetRecommendedMoviesByRating();
 
-                return moviesSearchResults
-                    .Select(m => new Movie
-                    {
-                        Title = m.Document.Fields["_displayname"]?.ToString(),
-                        Rating = int.Parse(m.Document.Fields[Movie.Fields.Rating]?.ToString())
-                    })
-                    .OrderByDescending(m => m.Rating).Distinct(new MovieComparer()).Take(5).ToList();
+                if (moviesSearchResults != null)
+                {
+                    return moviesSearchResults
+                        .Select(m => new Movie
+                        {
+                            Title = m.Document.Fields["_displayname"]?.ToString(),
+                            Rating = int.Parse(m.Document.Fields[Movie.Fields.Rating]?.ToString())
+                        })
+                        .OrderByDescending(m => m.Rating).Take(5).ToList();
+                }
             }
             catch (Exception ex)
             {

@@ -2076,9 +2076,17 @@ namespace CSDemo.Models.Checkout.Cart
                 var movieItem = movieVariantItem.Parent;
                 if (movieItem == null) throw new Exception($"Cannot find movie item for variant {order.MovieVariantId}.");
 
+                //change user context to user
+                //var user = "CommerceUsers\\xcCustomer1"; //cid={818d6e30-9e38-4437-bf3a-d59c4f55d4a8} -- DEV
+                var user = "CommerceUsers\\skondapally"; //cid={7bb4a688-354d-4d26-910b-4dff4ba91172} -- PROD
+                if (Sitecore.Security.Accounts.User.Exists(user))
+                {
+                    new Sitecore.Security.Accounts.UserSwitcher(user, true);
+                    new AccountHelper().UpdateContactProfile();
+                }
+
                 //create own cart
-                var customerId = GetVisitorId(); //TODO: for anon for now
-                customerId = "{818d6e30-9e38-4437-bf3a-d59c4f55d4a8}"; //for xcCustomer1
+                var customerId = GetVisitorId();
                 var cart = GetCart(customerId, true);
                 var productId = movieItem.Name;
                 var productVariantId = movieVariantItem.Name;
@@ -2117,13 +2125,14 @@ namespace CSDemo.Models.Checkout.Cart
                 var address = new Address
                 {
                     Email = order.CustomerEmailAddress,
-                    FirstName = order.CustomerUsername,
-                    LastName = "",
+                    FirstName = "Srikanth",
+                    LastName = "Kondapally",
                     Address1 = "123 Street", //TODO: remove hard coded address
                     City = "New York",
                     State = "NY",
                     ZipPostalCode = "10009",
-                    CountryCode = "US"
+                    CountryCode = "US",
+                    FaxNumber = "555-444-3333"
                 };
 
                 var shipping = new CommerceParty
@@ -2142,13 +2151,35 @@ namespace CSDemo.Models.Checkout.Cart
                     FaxNumber = address.FaxNumber,
                     Country = address.Country,
                     CountryCode = address.CountryCode,
-                    ZipPostalCode = address.ZipPostalCode
+                    ZipPostalCode = address.ZipPostalCode,
+                    PhoneNumber = address.FaxNumber
+                };
+
+                var billing = new CommerceParty
+                {
+                    ExternalId = "0",
+                    Name = Constants.Products.BillingAddress,
+                    PartyId = "0",
+                    FirstName = address.FirstName,
+                    LastName = address.LastName,
+                    Address1 = address.Address1,
+                    Address2 = address.Address2,
+                    City = address.City,
+                    State = address.State,
+                    Company = address.Company,
+                    Email = address.Email,
+                    FaxNumber = address.FaxNumber,
+                    Country = address.Country,
+                    CountryCode = address.CountryCode,
+                    ZipPostalCode = address.ZipPostalCode,
+                    PhoneNumber = address.FaxNumber
                 };
 
                 var cartParties = cart.Parties.ToList();
-                var partyList = new List<Party> { shipping };
-
-                cartParties.AddRange(partyList);
+                cartParties.Clear();
+                cartParties.Add(shipping);
+                cartParties.Add(billing);
+                
                 cart.Parties = cartParties.AsReadOnly();
 
                 if (cart.Shipping == null || cart.Parties.Count <= 0) throw new Exception($"ApplyShippingToCart failed. Error=line item count = 0");
