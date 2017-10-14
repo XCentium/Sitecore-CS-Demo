@@ -46,6 +46,8 @@ namespace CSDemo.Services
 
                 var moviesSearchResults = GetMoviesByZipcode(nearestCinemaZipcode);
 
+                var endsOnNextDay = DateTime.Now.AddHours(hours).Day > DateTime.Now.Day;
+
                 return moviesSearchResults
                     .Select(m => new Movie
                     {
@@ -58,8 +60,11 @@ namespace CSDemo.Services
                         CinemaZipcode = m.Document.Fields[Movie.Fields.CinemaZipCode]?.ToString(),
                         Id = new Guid(m.Document.Fields[Movie.Fields.VariantId].ToString()).ToString()
                     })
-                    .Where(m => DateTime.Parse(DateTime.Today.ToShortDateString() + " " + m.ShowTime.ToString()) >= DateTime.Now
+                    .Where(m => (DateTime.Parse(DateTime.Today.ToShortDateString() + " " + m.ShowTime.ToString()) >= DateTime.Now
                         && DateTime.Parse(DateTime.Today.ToShortDateString() + " " + m.ShowTime.ToString()) <= DateTime.Now.AddHours(hours))
+                        || (endsOnNextDay && ((DateTime.Parse(DateTime.Today.AddDays(1).ToShortDateString() + " " + m.ShowTime.ToString()) >= DateTime.Now
+                                               && DateTime.Parse(DateTime.Today.AddDays(1).ToShortDateString() + " " + m.ShowTime.ToString()) <= DateTime.Now.AddHours(hours))))
+                        )
                     .OrderBy(m => m.Title).ThenBy(m => m.CinemaName).ThenBy(m => m.ShowDate).ThenBy(m => m.ShowTime).ToList();
             }
             catch (Exception ex)
