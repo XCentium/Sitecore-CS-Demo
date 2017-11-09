@@ -1,0 +1,54 @@
+﻿using KeefePOC.Interfaces.Repositories;
+using KeefePOC.Interfaces.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using KeefePOC.Models;
+
+namespace KeefePOC.Services
+{
+    public class KeefeDataService : IDataService
+    {
+        readonly IFacilityRepository facilityRepo;
+        readonly IProgramRepository programRepo;
+        readonly IInmateRepository inmateRepo;
+
+        public KeefeDataService(IFacilityRepository facilityRepository, IProgramRepository programRepository, IInmateRepository inmateRepository)
+        {
+            this.facilityRepo = facilityRepository;
+            this.programRepo = programRepository;
+            this.inmateRepo = inmateRepository;
+        }
+
+        public List<Facility> GetFacilities(string programId)
+        {
+            return facilityRepo.GetFacilities(programId);
+        }
+
+        public Facility GetFacility(string facilityId)
+        {
+            return facilityRepo.GetFacility(facilityId);
+        }
+
+        public Inmate GetInmate(string facilityId, string programId)
+        {
+            return inmateRepo.GetInmate(facilityId, programId);
+        }
+
+        public List<Inmate> GetInmates(string facilityId)
+        {
+            return inmateRepo.GetInmates(facilityId);
+        }
+
+        public Program GetProgram(string id)
+        {
+            return programRepo.GetProgram(id);
+        }
+
+        public List<Program> GetPrograms()
+        {
+            return programRepo.GetPrograms();
+        }
+    }
+}
