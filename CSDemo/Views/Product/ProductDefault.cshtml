@@ -364,12 +364,12 @@
                 <li role="presentation" class="active">
                     <a href="#description" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="true">Description</a>
                 </li>
-                @if (Model.MoreInfo.Trim().Length > 0)
+                @*@if (Model.MoreInfo.Trim().Length > 0)
                 {
                     <li role="presentation" class="">
                         <a href="#moreinfo" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">More Info</a>
                     </li>
-                }
+                }*@
                 <li role="presentation" class="">
                     <a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">Reviews</a>
                 </li>
@@ -378,12 +378,12 @@
                 <div role="tabpanel" class="tab-pane active" id="description">
                     @Editable(Model, x => x.FullDescription)
                 </div>
-                @if (Model.MoreInfo.Trim().Length > 0)
+                @*@if (Model.MoreInfo.Trim().Length > 0)
                 {
                     <div role="tabpanel" class="tab-pane in" id="moreinfo">
                         @Editable(Model, x => x.MoreInfo)
                     </div>
-                }
+                }*@
                 <div role="tabpanel" class="tab-pane in" id="reviews">
                     <div class="comments-reviews">
                         <!-- Begin: Intense Debate Scripting (comments service) -->

@@ -321,8 +321,12 @@ namespace CSDemo.Controllers
                 foreach (var id in ids.AsEnumerable().Reverse())
                 {
                     var item = Context.Database.GetItem(ConfigurationHelper.GetSiteSettingInfo("Wildcard"));
-                    SearchForProduct(item, id, products);
-                    if (products.Count > MaxNumberOfProductsToShow) break;
+
+					if (item != null)
+					{
+						SearchForProduct(item, id, products);
+						if (products.Count > MaxNumberOfProductsToShow) break;
+					}
                 }
             }
             return products;
