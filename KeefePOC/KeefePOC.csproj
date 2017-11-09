@@ -48,6 +48,7 @@
     <Compile Include="Models\Facility.cs" />
     <Compile Include="Models\Inmate.cs" />
     <Compile Include="Models\Program.cs" />
+    <Compile Include="Models\State.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DemoFacilityRepository.cs" />
     <Compile Include="Repositories\DemoInmateRepository.cs" />

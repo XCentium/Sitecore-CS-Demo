@@ -8,6 +8,8 @@ namespace KeefePOC.Interfaces.Repositories
 {
     public interface IProgramRepository
     {
+        List<State> GetStates();
+
         List<Program> GetPrograms();
         List<Program> GetPrograms(string state);
 

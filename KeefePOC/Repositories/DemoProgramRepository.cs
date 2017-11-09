@@ -11,10 +11,14 @@ namespace KeefePOC.Repositories
 {
     public class DemoProgramRepository : IProgramRepository
     {
+        List<State> DemoStates = new List<State>();
         List<Program> DemoPrograms = new List<Program>();
 
         public DemoProgramRepository()
         {
+            DemoStates.Add(new State() { Code = "CA", Name = "California" });
+            DemoStates.Add(new State() { Code = "OH", Name = "Ohio" });
+
             DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA Facility", State = "CA", ProgramType = ProgramType.Jail });
             DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH Facility", State = "OH", ProgramType = ProgramType.Jail });
 
@@ -39,6 +43,11 @@ namespace KeefePOC.Repositories
         public List<Program> GetPrograms(string stateCode)
         {
             return DemoPrograms.Where(s => s.State.Equals(stateCode, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
+
+        public List<State> GetStates()
+        {
+            return DemoStates;
         }
     }
 }
