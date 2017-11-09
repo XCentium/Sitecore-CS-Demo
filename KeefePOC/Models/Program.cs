@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KeefePOC.Models.Enumerations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +9,10 @@ namespace KeefePOC.Models
     public class Program
     {
         public string Name { get; set; }
+
+        public string State { get; set; }
+
+        public ProgramType ProgramType { get; set; }
 
         public Guid CatalogId { get; set; }
 

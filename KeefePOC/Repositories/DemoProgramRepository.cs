@@ -1,5 +1,6 @@
 ﻿using KeefePOC.Interfaces.Repositories;
 using KeefePOC.Models;
+using KeefePOC.Models.Enumerations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,14 @@ namespace KeefePOC.Repositories
 
         public DemoProgramRepository()
         {
-            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA" });
-            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH" });
-            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe Music" });
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA Facility", State = "CA", ProgramType = ProgramType.Jail });
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH Facility", State = "OH", ProgramType = ProgramType.Jail });
+
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA Hospital", State = "CA", ProgramType = ProgramType.Hospital });
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH Hospital", State = "OH", ProgramType = ProgramType.Hospital });
+
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA Music", State = "CA", ProgramType = ProgramType.Doc });
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH Music", State = "OH", ProgramType = ProgramType.Doc });
 
         }
 
@@ -28,6 +34,11 @@ namespace KeefePOC.Repositories
         public List<Program> GetPrograms()
         {
             return DemoPrograms;
+        }
+
+        public List<Program> GetPrograms(string stateCode)
+        {
+            return DemoPrograms.Where(s => s.State.Equals(stateCode, StringComparison.OrdinalIgnoreCase)).ToList();
         }
     }
 }

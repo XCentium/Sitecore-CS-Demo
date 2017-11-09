@@ -44,6 +44,7 @@
     <Compile Include="Interfaces\Repositories\IInmateRepository.cs" />
     <Compile Include="Interfaces\Repositories\IProgramRepository.cs" />
     <Compile Include="Interfaces\Services\IDataService.cs" />
+    <Compile Include="Models\Enumerations.cs" />
     <Compile Include="Models\Facility.cs" />
     <Compile Include="Models\Inmate.cs" />
     <Compile Include="Models\Program.cs" />

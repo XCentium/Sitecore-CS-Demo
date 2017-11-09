@@ -31,11 +31,11 @@ namespace KeefePOC.Services
             return facilityRepo.GetFacility(facilityId);
         }
 
-        public Inmate GetInmate(string facilityId, string programId)
+        public Inmate GetInmate(string facilityId, int inmateId)
         {
-            return inmateRepo.GetInmate(facilityId, programId);
+            return inmateRepo.GetInmate(facilityId, inmateId);
         }
-
+        
         public List<Inmate> GetInmates(string facilityId)
         {
             return inmateRepo.GetInmates(facilityId);
@@ -49,6 +49,16 @@ namespace KeefePOC.Services
         public List<Program> GetPrograms()
         {
             return programRepo.GetPrograms();
+        }
+
+        public List<Program> GetPrograms(string state)
+        {
+            return programRepo.GetPrograms(state);
+        }
+
+        public List<Inmate> SearchInmates(string facilityId, Inmate searchRequest)
+        {
+            return inmateRepo.SearchInmates(facilityId, searchRequest);
         }
     }
 }
