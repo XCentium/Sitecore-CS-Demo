@@ -350,6 +350,7 @@
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\LandingPageController.cs" />
     <Compile Include="Controllers\MarqueeController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\PageController.cs" />
@@ -663,6 +664,7 @@
     <Content Include="Views\Product\ProductSampler.cshtml" />
     <Content Include="Views\Product\FrequentlyBoughtTogetherProducts.cshtml" />
     <Content Include="Views\Product\UserRecommendedProducts.cshtml" />
+    <Content Include="Views\LandingPage\Home.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
