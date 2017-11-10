@@ -7,19 +7,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using KeefePOC.Models;
+using Sitecore.Data.Items;
 
 namespace CSDemo.Controllers
 {
     public class LandingPageController : Controller
     {
         IDataService dataService = new KeefeDataService(new DemoFacilityRepository(), new DemoProgramRepository(), new DemoInmateRepository());
+		const string ProgramTemplateId = "{3D80C537-D7A4-4DBB-9C1B-B2B810F0A2C8}";
+		const string FacilityTemplateId = "{E2232845-B8A5-4651-BA44-0CB1ED54AA9E}";
+		const string ProgramLocation = "/sitecore/content/Global Configuration/Programs";
+		const string FacilityLocation = "/sitecore/content/Global Configuration/Facilities";
 
-        //public LandingPageController(IDataService dataService)
-        //{
-        //    this.dataService = dataService;
-        //}
-        // GET: LandingPage
-        public ActionResult Home()
+		//public LandingPageController(IDataService dataService)
+		//{
+		//    this.dataService = dataService;
+		//}
+		// GET: LandingPage
+		public ActionResult Home()
         {
             var states = dataService.GetStates();
             var model = new HomeViewModel(states);
@@ -46,8 +52,26 @@ namespace CSDemo.Controllers
 
         public ActionResult GetPrograms(string state)
         {
-            var result = dataService.GetPrograms(state);
-            return Json(result, JsonRequestBehavior.AllowGet);
+
+			// Get this from sitecore now.
+			List<Program> programs = new List<Program>();
+			var programItem = Sitecore.Context.Database.GetItem(ProgramLocation);
+
+
+			//if null: check if the data is published to web db. Also add isActive check
+			if (programItem != null)
+			{
+				foreach (Item program in programItem.Children)
+				{
+					if (program["State"] == state)
+					{
+						programs.Add(new Program() { Name = program["Name"] });
+					}
+				}
+			}
+
+			//var result = dataService.GetPrograms(state);
+            return Json(programs, JsonRequestBehavior.AllowGet);
         }
     }
 }
