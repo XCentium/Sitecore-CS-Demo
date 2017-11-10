@@ -8,10 +8,13 @@ namespace KeefePOC.Models
     public class Facility
     {
         public string Name { get; set; }
-        public string Address { get; set; }
-        public string City { get; set; }
+		public string ExternalId { get; set; }
+        public string AddressLine1 { get; set; }
+		public string AddressLine2 { get; set; }
+		public string City { get; set; }
         public string State { get; set; }
         public string Zipcode { get; set; }
-        public bool HIPPAA { get; set; }
+		public string Country { get; set; }
+		public bool IsHippa { get; set; }
     }
 }

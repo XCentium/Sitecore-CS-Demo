@@ -19,14 +19,14 @@ namespace KeefePOC.Repositories
             DemoStates.Add(new State() { Code = "CA", Name = "California" });
             DemoStates.Add(new State() { Code = "OH", Name = "Ohio" });
 
-            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA Facility", State = "CA", ProgramType = ProgramType.Jail });
-            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH Facility", State = "OH", ProgramType = ProgramType.Jail });
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA Facility", State = "CA", ProgramType = ProgramType.Jail, ExternalId = "1" });
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH Facility", State = "OH", ProgramType = ProgramType.Jail, ExternalId = "2" });
 
-            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA Hospital", State = "CA", ProgramType = ProgramType.Hospital });
-            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH Hospital", State = "OH", ProgramType = ProgramType.Hospital });
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA Hospital", State = "CA", ProgramType = ProgramType.Hospital, ExternalId = "3" });
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH Hospital", State = "OH", ProgramType = ProgramType.Hospital, ExternalId = "4" });
 
-            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA Music", State = "CA", ProgramType = ProgramType.Doc });
-            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH Music", State = "OH", ProgramType = ProgramType.Doc });
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA Music", State = "CA", ProgramType = ProgramType.Doc, ExternalId = "5" });
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH Music", State = "OH", ProgramType = ProgramType.Doc, ExternalId = "6" });
 
         }
 

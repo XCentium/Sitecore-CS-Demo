@@ -20,5 +20,11 @@ namespace KeefePOC.Models
         public List<object> PurchaserWhitelist { get; set; } 
 
         public List<Facility> Facilities { get; set; }
-    }
+
+		public string ExternalId { get; set; }
+		public bool IsActive { get; set; }
+
+
+
+	}
 }
