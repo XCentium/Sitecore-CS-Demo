@@ -1,39 +1,74 @@
-﻿
+﻿@model CSDemo.Models.LandingPage.HomeViewModel
+
 <div style="width:680px;height: 192px;padding:15px;margin-top:10px;border:1px solid #cccccc;margin-left:auto;margin-right: auto">
-	<table width="100%" border="0" align="center" cellpadding="5" cellspacing="0">
-		<tbody>
-			<tr>
-				<td>
-					<span class="style1">Shop Now! </span><br>
-					Select a State, then a Securepak Program
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<form id="form2" name="form2" method="post" action="index.html">
-						<table width="100%" border="0" align="center" cellpadding="2" cellspacing="0">
-							<tbody>
-								<tr>
-									<td align="left">State</td>
-								</tr>
-								<tr>
-									<td>
-										<select name="State" id="State" onchange="document.location = 'index.html?State='+this[this.selectedIndex].value">
-											<option value="">Choose a State</option>											
-											<option value="CA">
-												California
-											</option>																						
-											<option value="OH">
-												Ohio
-											</option>											
-										</select>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</form>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+    <table width="100%" border="0" align="center" cellpadding="5" cellspacing="0">
+        <tbody>
+            <tr>
+                <td>
+                    <span class="style1">Shop Now! </span><br>
+                    Select a State, then a Securepak Program
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                    <form id="form2" name="form2" method="post" action="index.html">
+                        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    @Html.LabelFor(m => m.SelectedState)
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DropDownListFor(m => m.SelectedState, Model.States, "Choose a State")
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody id="programSelector" style="display: none;">
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(m => m.SelectedProgram)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DropDownListFor(m => m.SelectedProgram, Model.Programs, "Choose a program")
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        var stateMenu = $("#SelectedState");
+        var programsMenu = $("#SelectedProgram");
+
+        stateMenu.on("change", function () {
+
+            if (stateMenu.val() === "") {
+                $("#programSelector").hide();
+                return;
+            }
+
+            programsMenu.empty("option");
+            programsMenu.append("<option value=''>Choose a Program");
+
+            $("#programSelector").show();
+
+
+            $.get("/api/sitecore/landingpage/getprograms?state=" + stateMenu.val(), function (result) {
+                $.each(result, function (idx, val) {
+                    console.log(val)
+                    programsMenu.append('<option value="' + val.Code + '">' + val.Name + '</option>')
+                })
+            });
+        })
+    });
+</script>

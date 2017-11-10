@@ -9,6 +9,8 @@ namespace KeefePOC.Interfaces.Services
 {
     public interface IDataService
     {
+        List<State> GetStates();
+
         List<Program> GetPrograms();
         List<Program> GetPrograms(string state);
         Program GetProgram(string id);

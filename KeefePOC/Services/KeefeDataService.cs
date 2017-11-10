@@ -56,6 +56,11 @@ namespace KeefePOC.Services
             return programRepo.GetPrograms(state);
         }
 
+        public List<State> GetStates()
+        {
+            return programRepo.GetStates();
+        }
+
         public List<Inmate> SearchInmates(string facilityId, Inmate searchRequest)
         {
             return inmateRepo.SearchInmates(facilityId, searchRequest);
