@@ -626,6 +626,7 @@
       <DependentUpon>CSDemo.Serialization.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <Content Include="App_Config\Include\zKeefeMusic\Keefe.Main.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\John-Local.pubxml" />
     <None Include="Properties\PublishProfiles\John-Prod-CSDemo39.pubxml" />
