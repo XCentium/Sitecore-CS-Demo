@@ -19,15 +19,15 @@ namespace KeefePOC.Repositories
             DemoStates.Add(new State() { Code = "CA", Name = "California" });
             DemoStates.Add(new State() { Code = "OH", Name = "Ohio" });
 
-            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA Facility", State = "CA", ProgramType = ProgramType.Jail, ExternalId = "1" });
-            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH Facility", State = "OH", ProgramType = ProgramType.Jail, ExternalId = "2" });
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA Program 1", State = "CA", ProgramType = ProgramType.Jail, ExternalId = "1" });
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA Program 2", State = "CA", ProgramType = ProgramType.Hospital, ExternalId = "2" });
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA Program 3", State = "CA", ProgramType = ProgramType.Hospital, ExternalId = "3" });
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA Music Program", State = "CA", ProgramType = ProgramType.Doc, ExternalId = "4" });
 
-            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA Hospital", State = "CA", ProgramType = ProgramType.Hospital, ExternalId = "3" });
-            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH Hospital", State = "OH", ProgramType = ProgramType.Hospital, ExternalId = "4" });
-
-            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe CA Music", State = "CA", ProgramType = ProgramType.Doc, ExternalId = "5" });
-            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH Music", State = "OH", ProgramType = ProgramType.Doc, ExternalId = "6" });
-
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH Program 1", State = "OH", ProgramType = ProgramType.Jail, ExternalId = "5" });
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH Program 2", State = "OH", ProgramType = ProgramType.Hospital, ExternalId = "6" });
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH Program 3", State = "OH", ProgramType = ProgramType.Hospital, ExternalId = "7" });
+            DemoPrograms.Add(new Program() { CatalogId = Guid.NewGuid(), Name = "Keefe OH Music Program", State = "OH", ProgramType = ProgramType.Doc, ExternalId = "8" });
         }
 
         public Program GetProgram(string id)

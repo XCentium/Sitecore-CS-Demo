@@ -131,7 +131,8 @@ namespace CSDemo.Controllers
 								newItem["Postal Code"] = program.Zipcode;
 								newItem["Country"] = "USA";
 								newItem["HIPPA Facility"] = program.IsHippa == true ? "1" : "0" ;
-							}
+                                newItem["Facility Type"] = program.FacilityType.ToString();
+                            }
 						}
 					}
 					catch (InvalidItemNameException e)

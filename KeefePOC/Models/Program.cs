@@ -8,6 +8,7 @@ namespace KeefePOC.Models
 {
     public class Program
     {
+        public string Id { get; set; }
         public string Name { get; set; }
 
         public string State { get; set; }
@@ -24,7 +25,7 @@ namespace KeefePOC.Models
 		public string ExternalId { get; set; }
 		public bool IsActive { get; set; }
 
-
+        public string ProgramHomePage { get; set; }
 
 	}
 }

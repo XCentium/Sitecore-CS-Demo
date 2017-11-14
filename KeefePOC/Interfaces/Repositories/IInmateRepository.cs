@@ -10,7 +10,8 @@ namespace KeefePOC.Interfaces.Repositories
     public interface IInmateRepository
     {
         List<Inmate> GetInmates(string facilityId);
-        Inmate GetInmate(string facilityId, int inmateNumber);
+        Inmate GetInmate(string facilityId, string inmateNumber);
+        List<Inmate> SearchInmates(Inmate request);
         List<Inmate> SearchInmates(string facilityId,Inmate request);
     }
 }
