@@ -101,7 +101,9 @@
                                     <td>
                                         <button type="submit" id="searchButton">Save and Start Shopping</button>
                                         <input type="hidden" id="facilityId" value="@Model.SelectedFacility.Id" />
-                                        <input type="hidden" name="SelectedInmate" id="SelectedInmate" value="@Model.SelectedInmate.InmateNumber" />
+                                        @Html.HiddenFor(m => m.SelectedFacility.Id)
+                                        @Html.HiddenFor(m => m.SelectedInmate.Id)
+                                        <input type="hidden" name="SelectedInmateId" id="SelectedInmateId" value="@Model.SelectedInmate.InmateNumber" />
                                     </td>
                                 </tr>
                             </tbody>

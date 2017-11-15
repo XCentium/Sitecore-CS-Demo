@@ -54,7 +54,7 @@ namespace CSDemo.Controllers
         public ActionResult SaveInmate(SelectInmateViewModel model)
         {
             // TODO: save inmate to session
-            var inmate = dataService.GetInmate(model.SelectedFacility.Id, model.SelectedInmate.Id);
+            var inmate = dataService.GetInmate(model.SelectedFacility.Id, model.SelectedInmateId);
             Session["SELECTED_INMATE"] = inmate;
 
             return Redirect("/");

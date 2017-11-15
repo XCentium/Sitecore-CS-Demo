@@ -359,6 +359,7 @@
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\GeneralSearchController.cs" />
+    <Compile Include="Controllers\SelectedInmateController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Helpers\GlassHelper.cs" />
     <Compile Include="Models\InmateSearch\InmateSearchViewModel.cs" />
@@ -460,6 +461,7 @@
     <Compile Include="Models\ProfileExtensions.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\SelectedInmate\SelectedInmateViewModel.cs" />
     <Compile Include="Models\Store\LocationInformation.cs" />
     <Compile Include="Models\Store\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -676,6 +678,8 @@
     <Content Include="Views\LandingPage\Home.cshtml" />
     <Content Include="Views\InmateSearch\Home.cshtml" />
     <Content Include="Views\InmateSearch\SelectInmate.cshtml" />
+    <Content Include="Views\SelectedInmate\Home.cshtml" />
+    <Content Include="Views\SelectedInmate\Empty.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

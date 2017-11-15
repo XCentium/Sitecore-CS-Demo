@@ -11,5 +11,7 @@ namespace CSDemo.Models.InmateSearch
         public Program SelectedProgram { get; set; }
         public Facility SelectedFacility { get; set; }
         public KeefePOC.Models.Inmate SelectedInmate { get; set; }
+
+        public string SelectedInmateId { get; set; }
     }
 }
