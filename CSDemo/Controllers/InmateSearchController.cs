@@ -32,7 +32,8 @@ namespace CSDemo.Controllers
         {
             // TODO: validate inmate
 
-            var url = Url.Action("SelectInmate", new { facilityId = model.SelectedFacility.Id, inmateId = model.InmateNumber });
+
+            var url = string.Concat("/inmate-confirmation?facilityId=", model.SelectedFacility.Id, "&inmateId=", model.SelectedInmateId);
             return Redirect(url);
         }
 
@@ -53,7 +54,8 @@ namespace CSDemo.Controllers
         public ActionResult SaveInmate(SelectInmateViewModel model)
         {
             // TODO: save inmate to session
-
+            var inmate = dataService.GetInmate(model.SelectedFacility.Id, model.SelectedInmate.Id);
+            Session["SELECTED_INMATE"] = inmate;
 
             return Redirect("/");
         }

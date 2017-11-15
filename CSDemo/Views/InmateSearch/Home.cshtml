@@ -6,7 +6,7 @@
             <tr>
                 <td>
 
-                    @using (Html.BeginForm("SelectInmate", "InmateSearch", FormMethod.Get, new { id = "inmateForm" }))
+                    @using (Html.BeginForm("SearchInmate", "InmateSearch", FormMethod.Post, new { id = "inmateForm" }))
                     {
                         <table width="100%" border="0" align="center" cellpadding="2" cellspacing="0">
                             <tbody id="inmateSelector">
@@ -120,7 +120,17 @@
                 inmatesResult.empty();
 
                 $.each(result, function (idx, val) {
-                    inmatesResult.append('<button type="button" onclick="selectInmate(this)" value="' + val.Id + '">' + val.Id + '</button> ' + val.FullName + '<br />')
+                    var inmateResult = '<button type="button" onclick="selectInmate(this)" value="' + val.Id + '">' + val.Id + '</button> ';
+                    @if (!Model.SelectedFacility.IsHippa)
+                    {
+                        <text>
+                    inmateResult += val.FullName;
+                    </text>
+                    }
+
+                    inmateResult += '<br />';
+
+                    inmatesResult.append(inmateResult);
                 })
 
                 inmatesResult.show();
