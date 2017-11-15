@@ -45,20 +45,26 @@ namespace CSDemo.Controllers
                 return View(refreshModel);
             }
 
+            var program = Sitecore.Context.Database.GetItem(model.SelectedProgram);
+            Sitecore.Data.Fields.LinkField linkField = program.Fields["Program Home Page"];
+            var redirectUrl = linkField.GetFriendlyUrl();
+
             if (!string.IsNullOrEmpty(model.SelectedHospital))
             {
-                // redirect to hospital
-                return Content("TODO: Redirect to hospital landing page: " + model.SelectedHospital);
+                var finalUrl = string.Concat(redirectUrl, "/inmate-selector?facilityId=", model.SelectedHospital);
+                return Redirect(finalUrl);
             }
 
             if (!string.IsNullOrEmpty(model.SelectedInstitution))
             {
-                // redirect to hospital
-                return Content("TODO: Redirect to institution landing page: " + model.SelectedInstitution);
+                var finalUrl = string.Concat(redirectUrl, "/inmate-selector?facilityId=", model.SelectedInstitution);
+                return Redirect(finalUrl);
             }
-
-
-            return Content("TODO: Redirect to shopping page for inmate: " + model.SelectedInmate);
+            else
+            {
+                var finalUrl = string.Concat(redirectUrl, "/inmate-selector?inmateId=", model.SelectedInmate);
+                return Redirect(finalUrl);
+            }
         }
 
         public ActionResult GetPrograms(string state)
@@ -67,7 +73,6 @@ namespace CSDemo.Controllers
             List<Program> programs = new List<Program>();
             var programItem = Sitecore.Context.Database.GetItem(ProgramLocation);
 
-
             //if null: check if the data is published to web db. Also add isActive check
             if (programItem != null)
             {
@@ -75,16 +80,12 @@ namespace CSDemo.Controllers
                 {
                     if (program["State"] == state)
                     {
-                        var model = new Program() { Id = program.ID.Guid.ToString(), Name = program["Name"], ProgramHomePage = program["Program Home Page"] };
-                        model.ProgramType = (ProgramType)Enum.Parse(typeof(ProgramType), program["Program Type"]);
+                        var model = new Program(program);
                         programs.Add(model);
                     }
                 }
             }
-
-            //var result = dataService.GetPrograms(state);
-            // return Json(programs, JsonRequestBehavior.AllowGet);
-
+            
             var converted = JsonConvert.SerializeObject(programs);
             return Content(converted, "application/json");
         }
@@ -97,15 +98,9 @@ namespace CSDemo.Controllers
             var facilityList = new List<Facility>();
             foreach (var item in linkField.GetItems())
             {
-                var model = new Facility();
-                model.Id = item.ID.Guid.ToString();
-                model.Name = item["Name"];
-                model.ExternalId = item["External ID"];
-                model.FacilityType = (FacilityType)Enum.Parse(typeof(FacilityType), item["Facility Type"]);
+                var model = new Facility(item);
                 facilityList.Add(model);
             }
-
-            // return Json(facilityList, JsonRequestBehavior.AllowGet);
 
             var converted = JsonConvert.SerializeObject(facilityList);
             return Content(converted, "application/json");

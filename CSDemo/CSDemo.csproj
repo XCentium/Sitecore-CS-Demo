@@ -352,6 +352,7 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ImportController.cs" />
+    <Compile Include="Controllers\InmateSearchController.cs" />
     <Compile Include="Controllers\LandingPageController.cs" />
     <Compile Include="Controllers\MarqueeController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
@@ -360,6 +361,8 @@
     <Compile Include="Controllers\GeneralSearchController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Helpers\GlassHelper.cs" />
+    <Compile Include="Models\InmateSearch\InmateSearchViewModel.cs" />
+    <Compile Include="Models\InmateSearch\SelectInmateViewModel.cs" />
     <Compile Include="Models\LandingPage\HomeViewModel.cs" />
     <Compile Include="Models\Recommendations\Recommendations.cs" />
     <Compile Include="Helpers\RecommendationsHelper.cs" />
@@ -671,6 +674,8 @@
     <Content Include="Views\Product\FrequentlyBoughtTogetherProducts.cshtml" />
     <Content Include="Views\Product\UserRecommendedProducts.cshtml" />
     <Content Include="Views\LandingPage\Home.cshtml" />
+    <Content Include="Views\InmateSearch\Home.cshtml" />
+    <Content Include="Views\InmateSearch\SelectInmate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

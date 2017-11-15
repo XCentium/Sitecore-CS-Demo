@@ -1,0 +1,140 @@
+﻿@model CSDemo.Models.InmateSearch.SelectInmateViewModel
+
+<div style="width:680px;padding:15px;margin: 10px auto;border:1px solid #cccccc;">
+    <table width="100%" border="0" align="center" cellpadding="5" cellspacing="0">
+        <tbody>
+            <tr>
+                <td>
+
+                    @using (Html.BeginForm("SaveInmate", "InmateSearch", FormMethod.Post, new { id = "inmateForm" }))
+                    {
+                        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="0">
+                            <tbody id="inmateSelector">
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(m => m.SelectedInmate.InmateNumber)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(m => m.SelectedInmate.InmateNumber)
+
+                                    </td>
+                                </tr>
+         
+                                    <tr>
+                                        <td>
+                                            <strong>or</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(m => m.SelectedInmate.FirstName)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(m => m.SelectedInmate.FirstName)
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(m => m.SelectedInmate.MiddleName)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(m => m.SelectedInmate.MiddleName)
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(m => m.SelectedInmate.LastName)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(m => m.SelectedInmate.LastName)
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(m => m.SelectedInmate.Tier)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.TextBoxFor(m => m.SelectedInmate.Tier)
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(m => m.SelectedInmate.Block)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.TextBoxFor(m => m.SelectedInmate.Block)
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(m => m.SelectedInmate.Cell)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.TextBoxFor(m => m.SelectedInmate.Cell)
+
+                                        </td>
+                                    </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <button type="submit" id="searchButton">Save and Start Shopping</button>
+                                        <input type="hidden" id="facilityId" value="@Model.SelectedFacility" />
+                                        <input type="hidden" name="SelectedInmate" id="SelectedInmate" value="@Model.SelectedInmate.InmateNumber" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <tr>
+                                    <td id="inmatesResult" style="display:none;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div id="loadingIndicator">
+                            <img src="~/Assets/images/loader.gif" alt="Loading image" />
+                        </div>
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    var selectInmate = function (sender) {
+        $("#SelectedInmate").val($(sender).val());
+        $("#inmateForm").submit();
+    }
+
+
+    $(function () {
+        var programForm = $("#inmateForm");
+                var inmateSection = $("#inmateSelector");
+        var inmatesResult = $("#inmatesResult");
+
+        var loading = $("#loadingIndicator");
+
+    });
+</script>
