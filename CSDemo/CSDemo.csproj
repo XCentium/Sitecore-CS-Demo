@@ -305,6 +305,7 @@
     <Compile Include="App_Start\GlassMapperScCustom.cs" />
     <Compile Include="Configuration\Actions\HideCertainProducts.cs" />
     <Compile Include="Configuration\Actions\ShowCertainProducts.cs" />
+    <Compile Include="Configuration\CommerceProductGroups.cs" />
     <Compile Include="Configuration\Conditions\ContactEmailCheck.cs" />
     <Compile Include="Configuration\Conditions\InmateIdCheck.cs" />
     <Compile Include="Configuration\Conditions\LastPurchaseAmountCheck.cs" />
@@ -361,6 +362,7 @@
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Helpers\GlassHelper.cs" />
     <Compile Include="Models\LandingPage\HomeViewModel.cs" />
+    <Compile Include="Models\Product\ProductGroups.cs" />
     <Compile Include="Models\Recommendations\Recommendations.cs" />
     <Compile Include="Helpers\RecommendationsHelper.cs" />
     <Compile Include="Models\Account\AccountHelper.cs" />
@@ -487,6 +489,7 @@
       <IsTransformFile>True</IsTransformFile>
     </None>
     <Content Include="AJAX\Products.asmx" />
+    <Content Include="App_Config\Include\zKeefeMusic\Keefe.GeneralSearch.config" />
     <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\bootcomplete.css" />
     <Content Include="Assets\css\bootstrap.min.css" />

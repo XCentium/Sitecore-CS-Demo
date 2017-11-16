@@ -24,6 +24,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using CSDemo.Configuration;
+using CSDemo.Models.Page;
 using AddPartiesRequest = Sitecore.Commerce.Services.Carts.AddPartiesRequest;
 using UpdatePartiesRequest = Sitecore.Commerce.Services.Carts.UpdatePartiesRequest;
 using Sitecore.Commerce.Services.Payments;
@@ -31,6 +32,10 @@ using Sitecore.Commerce.Entities.Payments;
 using WebGrease.Css.Extensions;
 using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Commerce.Services.Shipping;
+using Sitecore.ContentSearch;
+using Sitecore.ContentSearch.Linq;
+using Sitecore.ContentSearch.SearchTypes;
+using Sitecore.Data;
 using Sitecore.Diagnostics;
 
 namespace CSDemo.Models.Checkout.Cart
@@ -2112,6 +2117,223 @@ namespace CSDemo.Models.Checkout.Cart
             }
 
             return result;
+        }
+
+        public ValidatePurchaseResult ValidatePurchase(string productId, int qty)
+        {
+            var result = new ValidatePurchaseResult
+            {
+                ProductId = productId,
+                Quantity = qty
+            };
+
+            try
+            {
+                var summary = GetProductGroupsSummaryByCart();
+
+                if (summary == null || summary.Count <= 0)
+                {
+                    result.Message = "No Product Group Summary.";
+                    return result;
+                }
+
+                var product = ProductHelper.GetCommerceItemByProductId(productId);
+
+                if (product == null)
+                {
+                    result.Message = "Product not found.";
+                    return result;
+                }
+
+                if (!string.IsNullOrWhiteSpace(product["commerceproductgroupids"]))
+                {
+                    var productGroupIds = product["commerceproductgroupids"].Split('|');
+                    var productGroupdIdGuids = productGroupIds.Select(i => Guid.Parse(i));
+
+                    //remove all entries in summary not associated to product
+                    summary = summary.Where(s => productGroupdIdGuids.Contains(s.Id)).ToList();
+
+                    var isOverWeight = false;
+                    var isOverPriced = false;
+
+                    foreach (var productGroupId in productGroupIds)
+                    {
+                        foreach (var groupSummary in summary)
+                        {
+                            if (groupSummary.Id == Guid.Parse(productGroupId))
+                            {
+                                groupSummary.PriceTotal += qty * decimal.Parse(product["listprice"]);
+                                groupSummary.WeightTotal += !string.IsNullOrWhiteSpace(product["weight"]) ? qty * double.Parse(product["weight"]) : 0;
+
+                                if (!isOverPriced)
+                                    isOverPriced =  groupSummary.PriceTotal > groupSummary.PriceLimit;
+
+                                if (!isOverWeight)
+                                    isOverWeight = groupSummary.WeightTotal > groupSummary.WeightLimit;
+                            }
+                        }
+                    }
+
+                    result.ProductGroups = summary;
+                    result.Message = isOverPriced ? "Price Limit reached|" : string.Empty;
+                    result.Message += isOverWeight ? "Weight Limit reached" : string.Empty;
+                    result.IsValidForPurchase = !isOverPriced && !isOverWeight;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"CartHelper.IsValidForPurchase(), Error = {ex.Message}", ex);
+            }
+
+            return result;
+        }
+
+        public static List<ProductGroup> GetProductGroupsSummaryByCart()
+        {
+            var summary = new List<ProductGroup>();
+
+            try
+            {
+                //get all products in cart
+                var cart = new CartHelper().GetCustomerCart();
+                var cartLines = cart.Lines;
+
+                if (cartLines == null || cartLines.Count <= 0) return summary;
+
+                summary = GetProductGroupsByStorefront(Context.Site.RootPath);
+
+                if (summary == null || summary.Count <= 0) return summary;
+
+                //for each product, get all groups
+                foreach (var cartLine in cartLines)
+                {
+                    var product = ProductHelper.GetCommerceItemByProductId(cartLine.Product.ProductId);
+
+                    if (!string.IsNullOrWhiteSpace(product?["commerceproductgroupids"]))
+                    {
+                        var productGroupIds = product["commerceproductgroupids"].Split('|');
+
+                        foreach (var productGroupId in productGroupIds)
+                        {
+                            foreach (var groupSummary in summary)
+                            {
+                                if (groupSummary.Id == Guid.Parse(productGroupId))
+                                {
+                                    groupSummary.PriceTotal += cartLine.Total.Amount;
+                                    groupSummary.WeightTotal += !string.IsNullOrWhiteSpace(product["weight"]) ? cartLine.Quantity * double.Parse(product["weight"]) : 0;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"CartHelper.GetProductGroupsSummaryByCart(), Error = {ex.Message}", ex);
+            }
+
+            return summary;
+        }
+
+        /// <summary>
+        /// Returns List of Product Groups for the site with configured limits
+        /// </summary>
+        /// <param name="storefront"></param>
+        /// <returns></returns>
+        public static List<ProductGroup> GetProductGroupsByStorefront(string storefrontRootPath)
+        {
+            var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
+            try
+            {
+                using (var context = index.CreateSearchContext())
+                {
+                    var searchHits = context.GetQueryable<SearchResultItem>()
+                        .Where(x => x.Language == Context.Language.Name
+                                    //&& x.Version == "1"
+                                    && x.TemplateName == "Product Group Setting"
+                                    && x.Path.Contains(storefrontRootPath.ToLower())
+                                    ).GetResults().ToList();
+
+                    var groupSummaries = new List<ProductGroup>();
+
+                    foreach (var searchHit in searchHits)
+                    {
+                        var item = searchHit.Document;
+
+                        var productGroupString = item["ProductGroups"];
+
+                        if (!string.IsNullOrWhiteSpace(productGroupString))
+                        {
+                            var productGroups = productGroupString.Split('|');
+
+                            foreach (var productGroup in productGroups)
+                            {
+                                var groupSummary = new ProductGroup
+                                {
+                                    Id = Guid.Parse(productGroup),
+                                    Name = GetProductGroupName(Guid.Parse(productGroup)),
+                                    SettingsName = item.Name,
+                                    PriceLimit = string.IsNullOrWhiteSpace(item["PriceLimit"]) ? 0 : decimal.Parse(item["PriceLimit"]),
+                                    PriceTotal = 0,
+                                    WeightLimit = string.IsNullOrWhiteSpace(item["WeightLimit"]) ? 0 : double.Parse(item["WeightLimit"]),
+                                    WeightTotal = 0
+                                };
+
+                                groupSummaries.Add(groupSummary);
+                            }
+                        }
+
+                    }
+
+                    return groupSummaries;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"CartHelper.GetProductGroupLimits(), Error = {ex.Message}", ex);
+            }
+
+            return new List<ProductGroup>();
+        }
+
+        private static string GetProductGroupName(Guid productGroupId)
+        {
+            try
+            {
+                var item = Context.Database.Items.GetItem(ID.Parse(productGroupId));
+
+                if (item != null)
+                {
+                    return item.DisplayName;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"CartHelper.GetProductGroupName(), Error = {ex.Message}", ex);
+            }
+
+            return string.Empty;
+        }
+
+        public class ProductGroup
+        {
+            public Guid Id { get; set; }
+            public string Name { get; set; }
+            public string SettingsName { get; set; }
+            public double WeightLimit { get; set; }
+            public double WeightTotal { get; set; }
+            public decimal PriceLimit { get; set; }
+            public decimal PriceTotal { get; set; }
+        }
+
+        public class ValidatePurchaseResult
+        {
+            public string ProductId { get; set; }
+            public List<ProductGroup> ProductGroups { get; set; }
+            public bool IsValidForPurchase { get; set; }
+            public string Message { get; set; }
+            public int Quantity { get; set; }
         }
     }
 }
