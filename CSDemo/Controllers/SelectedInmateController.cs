@@ -31,5 +31,12 @@ namespace CSDemo.Controllers
             model.SelectedInmate = inmate;
             return View(model);
         }
+
+        [HttpPost]
+        public ActionResult CancelOrder()
+        {
+            Session["Selected_INMATE"] = null;
+            return Redirect("/");
+        }
     }
 }

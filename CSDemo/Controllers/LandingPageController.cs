@@ -62,7 +62,7 @@ namespace CSDemo.Controllers
             }
             else
             {
-                var finalUrl = string.Concat(redirectUrl, "/inmate-selector?inmateId=", model.SelectedInmate);
+                var finalUrl = string.Concat(redirectUrl, "/inmate-confirmation?inmateId=", model.SelectedInmate);
                 return Redirect(finalUrl);
             }
         }
@@ -85,7 +85,7 @@ namespace CSDemo.Controllers
                     }
                 }
             }
-            
+
             var converted = JsonConvert.SerializeObject(programs);
             return Content(converted, "application/json");
         }
