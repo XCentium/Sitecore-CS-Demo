@@ -400,6 +400,17 @@ ul.variantcolorlist {
     color:#454545;
 }
 
+#loadingIndicator {
+    display: none;
+    margin: 0px auto;
+    text-align: center;
+    padding: 15px 0;
+}
+
+#loadingIndicator img {
+    width: 100px;
+}
+
 <<<<<<< Updated upstream
 .badge{
     display:inline-block !important;

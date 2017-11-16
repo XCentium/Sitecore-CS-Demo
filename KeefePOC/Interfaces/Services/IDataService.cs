@@ -19,7 +19,8 @@ namespace KeefePOC.Interfaces.Services
         Facility GetFacility(string facilityId);
 
         List<Inmate> GetInmates(string facilityId);
-        Inmate GetInmate(string facilityId, int inmateNumber);
+        Inmate GetInmate(string facilityId, string inmateNumber);
+        List<Inmate> SearchInmates(Inmate searchRequest);
         List<Inmate> SearchInmates(string facilityId, Inmate searchRequest);
     }
 }

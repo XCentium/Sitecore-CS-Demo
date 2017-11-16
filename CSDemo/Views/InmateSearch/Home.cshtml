@@ -1,0 +1,141 @@
+﻿@model CSDemo.Models.InmateSearch.InmateSearchViewModel
+
+<div style="width:680px;padding:15px;margin: 10px auto;border:1px solid #cccccc;">
+    <table width="100%" border="0" align="center" cellpadding="5" cellspacing="0">
+        <tbody>
+            <tr>
+                <td>
+
+                    @using (Html.BeginForm("SearchInmate", "InmateSearch", FormMethod.Post, new { id = "inmateForm" }))
+                    {
+                        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="0">
+                            <tbody id="inmateSelector">
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(m => m.InmateNumber)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.InmateNumber)
+
+                                    </td>
+                                </tr>
+                                @if (!Model.SelectedFacility.IsHippa)
+                                {
+                                    <tr>
+                                        <td>
+                                            <strong>or</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(m => m.FirstName)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.TextBoxFor(m => m.FirstName)
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(m => m.MiddleName)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.TextBoxFor(m => m.MiddleName)
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(m => m.LastName)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.TextBoxFor(m => m.LastName)
+
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        <button type="button" id="searchButton">Find</button>
+                                        @Html.HiddenFor(m => m.SelectedFacility.Id)
+                                        @Html.HiddenFor(m => m.SelectedInmateId)
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <tr>
+                                    <td id="inmatesResult" style="display:none;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div id="loadingIndicator">
+                            <img src="~/Assets/images/loader.gif" alt="Loading image" />
+                        </div>
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    var selectInmate = function (sender) {
+        $("#SelectedInmateId").val($(sender).val());
+        $("#inmateForm").submit();
+    }
+
+
+    $(function () {
+        var programForm = $("#inmateForm");
+        var inmateSection = $("#inmateSelector");
+        var inmatesResult = $("#inmatesResult");
+
+        var loading = $("#loadingIndicator");
+
+
+        $("#searchButton").on("click", function () {
+            var data = {
+                firstName: $("#FirstName").val(),
+                @if (!Model.SelectedFacility.IsHippa)
+                    {
+                    <text>
+                        middleName: $("#MiddleName").val(),
+                        lastName: $("#LastName").val(),
+                        inmateNumber: $("#InmateNumber").val()
+
+                    </text>
+                    }
+                }
+
+            $.get("/api/sitecore/landingpage/SearchInmates", data, function (result) {
+                inmatesResult.empty();
+
+                $.each(result, function (idx, val) {
+                    var inmateResult = '<button type="button" onclick="selectInmate(this)" value="' + val.Id + '">' + val.Id + '</button> ';
+                    @if (!Model.SelectedFacility.IsHippa)
+                    {
+                        <text>
+                    inmateResult += val.FullName;
+                    </text>
+                    }
+
+                    inmateResult += '<br />';
+
+                    inmatesResult.append(inmateResult);
+                })
+
+                inmatesResult.show();
+                loading.hide();
+            });
+        })
+    });
+</script>

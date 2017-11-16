@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KeefePOC.Models;
+using KeefePOC.Models.Enumerations;
 
 namespace KeefePOC.Repositories
 {
@@ -14,15 +15,16 @@ namespace KeefePOC.Repositories
 
         public DemoFacilityRepository()
         {
-            DemoFacilities.Add(new Facility() { Name = "Facility 1", ExternalId = "1", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Santa Ana", State = "CA", Zipcode = "92705" });
-            DemoFacilities.Add(new Facility() { Name = "Facility 2", ExternalId = "2", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Anytown", State = "CA", Zipcode = "92705" });
-            DemoFacilities.Add(new Facility() { Name = "Facility 3", ExternalId = "3", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Anytown", State = "CA", Zipcode = "92705" });
-            DemoFacilities.Add(new Facility() { Name = "Facility 4", ExternalId = "4", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Anytown", State = "Ca", Zipcode = "92705" });
-            DemoFacilities.Add(new Facility() { Name = "Facility 5", ExternalId = "5", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Anytown", State = "TX", Zipcode = "12345" });
-            DemoFacilities.Add(new Facility() { Name = "Facility 6", ExternalId = "6", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Anytown", State = "TX", Zipcode = "12345" });
-            DemoFacilities.Add(new Facility() { Name = "Facility 7", ExternalId = "7", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Anytown", State = "TX", Zipcode = "12345" });
-            DemoFacilities.Add(new Facility() { Name = "Facility 8", ExternalId = "8", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Anytown", State = "TX", Zipcode = "12345" });
-            DemoFacilities.Add(new Facility() { Name = "Facility 9", ExternalId = "9", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Anytown", State = "TX", Zipcode = "12345" });
+            DemoFacilities.Add(new Facility() { Name = "CA Hospital Facility 1", ExternalId = "CAHOSP1", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Santa Ana", State = "CA", Zipcode = "92705", FacilityType = FacilityType.Hospital });
+            DemoFacilities.Add(new Facility() { Name = "CA Hospital Facility 2", ExternalId = "CAHOSP2", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Anytown", State = "CA", Zipcode = "92705", FacilityType = FacilityType.Hospital });
+            DemoFacilities.Add(new Facility() { Name = "CA Jail Facility 1", ExternalId = "CAJAIL1", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Anytown", State = "CA", Zipcode = "92705", FacilityType = FacilityType.Jail });
+            DemoFacilities.Add(new Facility() { Name = "CA Jail Facility 2", ExternalId = "CAJAIL2", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Anytown", State = "CA", Zipcode = "92705", FacilityType = FacilityType.Jail });
+            DemoFacilities.Add(new Facility() { Name = "CA Jail Facility 3", ExternalId = "CAJAIL3", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Anytown", State = "CA", Zipcode = "12345", FacilityType = FacilityType.Jail });
+            DemoFacilities.Add(new Facility() { Name = "CA Other Facility 1", ExternalId = "CAOTHER1", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Anytown", State = "CA", Zipcode = "12345", FacilityType = FacilityType.Other });
+            DemoFacilities.Add(new Facility() { Name = "OH Hospital Facility 1", ExternalId = "OHHOSP1", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Anytown", State = "OH", Zipcode = "12345", FacilityType = FacilityType.Hospital });
+            DemoFacilities.Add(new Facility() { Name = "OH Hospital Facility 2", ExternalId = "OHHOSP2", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Anytown", State = "OH", Zipcode = "12345", FacilityType = FacilityType.Hospital });
+            DemoFacilities.Add(new Facility() { Name = "OH Jail Facility 1", ExternalId = "OHJAIL1", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Anytown", State = "OH", Zipcode = "12345", FacilityType = FacilityType.Jail });
+            DemoFacilities.Add(new Facility() { Name = "OH Jail Facility 2", ExternalId = "OHJAIL2", AddressLine1 = "123 Fake St", AddressLine2 = "Line 2", City = "Anytown", State = "OH", Zipcode = "12345", FacilityType = FacilityType.Jail });
         }
 
         public List<Facility> GetFacilities(string programId)
