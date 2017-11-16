@@ -22,11 +22,8 @@
                                     </td>
                                 </tr>
          
-                                    <tr>
-                                        <td>
-                                            <strong>or</strong>
-                                        </td>
-                                    </tr>
+                                @if (Model.SelectedFacility != null && !Model.SelectedFacility.IsHippa)
+                                { 
                                     <tr>
                                         <td>
                                             @Html.LabelFor(m => m.SelectedInmate.FirstName)
@@ -60,7 +57,7 @@
 
                                         </td>
                                     </tr>
-
+                                }
                                     <tr>
                                         <td>
                                             @Html.LabelFor(m => m.SelectedInmate.Tier)
@@ -88,6 +85,7 @@
                                     <tr>
                                         <td>
                                             @Html.LabelFor(m => m.SelectedInmate.Cell)
+                                            test
                                         </td>
                                     </tr>
                                     <tr>

@@ -1,6 +1,7 @@
 ﻿using CSDemo.Models.InmateSearch;
 using CSDemo.Models.LandingPage;
 using KeefePOC.Interfaces.Services;
+using KeefePOC.Models;
 using KeefePOC.Repositories;
 using KeefePOC.Services;
 using System;
@@ -41,11 +42,19 @@ namespace CSDemo.Controllers
         {
             var model = new SelectInmateViewModel();
 
-            var inmate = dataService.GetInmate(facilityId, inmateId);
-            model.SelectedInmate = inmate;
-
-            var facility = Sitecore.Context.Database.GetItem(facilityId);
-            model.SelectedFacility = new KeefePOC.Models.Facility(facility);
+            if (string.IsNullOrEmpty(facilityId))
+            {
+                var inmate = dataService.GetInmate(inmateId);
+                model.SelectedInmate = inmate;
+                model.SelectedFacility = new Facility();
+            }
+            else
+            {
+                var inmate = dataService.GetInmate(facilityId, inmateId);
+                model.SelectedInmate = inmate;
+                var facility = Sitecore.Context.Database.GetItem(facilityId);
+                model.SelectedFacility = new KeefePOC.Models.Facility(facility);
+            }
 
             return View(model);
         }
@@ -54,7 +63,16 @@ namespace CSDemo.Controllers
         public ActionResult SaveInmate(SelectInmateViewModel model)
         {
             // TODO: save inmate to session
-            var inmate = dataService.GetInmate(model.SelectedFacility.Id, model.SelectedInmateId);
+            Inmate inmate;
+            if (model.SelectedFacility == null || string.IsNullOrEmpty(model.SelectedFacility.Id))
+            {
+                inmate = dataService.GetInmate(model.SelectedInmateId);
+            }
+            else
+            {
+                inmate = dataService.GetInmate(model.SelectedFacility.Id, model.SelectedInmateId);
+            }
+
             Session["SELECTED_INMATE"] = inmate;
 
             return Redirect("/");
