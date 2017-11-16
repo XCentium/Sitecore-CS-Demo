@@ -71,5 +71,10 @@ namespace KeefePOC.Services
         {
             return inmateRepo.SearchInmates(facilityId, searchRequest);
         }
-    }
+
+		public List<string> GetBlacklistedItemsForInmate(string inmateId)
+		{
+			return inmateRepo.GetBlacklistedItemsForInmate(inmateId);
+		}
+	}
 }
