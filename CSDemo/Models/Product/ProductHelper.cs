@@ -23,6 +23,7 @@ using Sitecore.ContentSearch.Linq;
 using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data;
 using Sitecore.Data.Items;
+using Sitecore.Diagnostics;
 using Sitecore.Links;
 using Convert = System.Convert;
 using Log = Sitecore.Diagnostics.Log;
@@ -567,6 +568,30 @@ namespace CSDemo.Models.Product
                     return
                         queryable.FirstOrDefault(
                             x => string.Equals(x.Name, productId, StringComparison.CurrentCultureIgnoreCase));
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.StackTrace, ex);
+            }
+            return null;
+        }
+
+        internal static SearchResultItem GetCommerceItemByProductId(string productId)
+        {
+            var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetProductSearchIndex());
+            try
+            {
+                using (var context = index.CreateSearchContext())
+                {
+                    var queryable = context.GetQueryable<SearchResultItem>()
+                        .Where(x => x.Language == Context.Language.Name
+                        && x["commercesearchitemtype"] == "product"
+                        && x["catalogname"] == GetSiteRootCatalogName()
+                        && x["productid"] == productId.ToLower()
+                        ).GetResults().ToList();
+
+                    return queryable.Count > 0 ? queryable[0].Document : null;
                 }
             }
             catch (Exception ex)
@@ -1288,6 +1313,35 @@ namespace CSDemo.Models.Product
             {
                 Log.Error($"ProductHelper.GetProductSalePrice, Error = {ex.Message}", ex);
                 return 0;
+            }
+        }
+
+        public static List<Guid> GetProductGroups(Item productItem)
+        {
+            try
+            {
+                Assert.ArgumentNotNull(productItem?.Parent, "productItem.Parent");
+                var productCategoryItem = productItem.Parent;
+
+                var db = Sitecore.Configuration.Factory.GetDatabase("master");
+                Assert.ArgumentNotNull(db, "Database");
+
+                //get all groups
+                var groupItem = db.GetItem("/sitecore/content/Global Configuration/Product Groups");
+
+                Assert.ArgumentNotNull(groupItem, "groupItem");
+
+                var group = GlassHelper.Cast<ProductGroups>(groupItem);
+
+                Assert.ArgumentNotNull(group, "group");
+
+                return group.Groups.Where(g => g.ProductCategories.Any(c => c.ID == productCategoryItem.ID.ToGuid()))
+                    .Select(g => g.ID).ToList();
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"ProductHelper.GetProductGroups, Error = {ex.Message}", ex);
+                return new List<Guid>();
             }
         }
     }

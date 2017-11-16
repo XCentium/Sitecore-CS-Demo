@@ -24,6 +24,11 @@ namespace CSDemo.Configuration
             return $"sitecore_{Context.Database.Name.ToLower()}_index";
         }
 
+        public static string GetProductSearchIndex()
+        {
+            return $"commerce_products_{Context.Database.Name.ToLower()}_index";
+        }
+
         public static string GetAnayticsIndex()
         {
             return "sitecore_analytics_index";

@@ -1,273 +1,300 @@
-﻿@model CSDemo.Models.LandingPage.HomeViewModel
+﻿@using Sitecore.Mvc;
+@model CSDemo.Models.LandingPage.HomeViewModel
 
-<div style="width:680px;padding:15px;margin: 10px auto;border:1px solid #cccccc;">
-    <table width="100%" border="0" align="center" cellpadding="5" cellspacing="0">
-        <tbody>
-            <tr>
-                <td>
-                    <span class="style1">Shop Now! </span><br>
-                    Select a State, then a Securepak Program
-                </td>
-            </tr>
-            <tr>
-                <td>
+<div id="page-wrapper">
 
-                    @using (Html.BeginForm("SelectProgram", "LandingPage", FormMethod.Post, new { id = "programForm" }))
-                    {
-                        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="0">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        @Html.LabelFor(m => m.SelectedState)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.DropDownListFor(m => m.SelectedState, Model.States, "Choose a State")
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody id="programSelector" style="display: none;">
-                                <tr>
-                                    <td>
-                                        @Html.LabelFor(m => m.SelectedProgram)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.DropDownListFor(m => m.SelectedProgram, Model.Programs, "Choose a program")
+	<section class="content account">
+		<div class="container">
+			<div class="row">
+				<P><FONT size=2><FONT color=#0000a0></FONT></FONT></P>
+				<P><FONT size=2><FONT color=#0000a0><IMG src="https://www.accesscatalog.com/homepage/images/Access_Header.jpg" width="690"><BR></FONT></FONT></P>
+				<P><FONT size=2><FONT color=#0000a0>Access Securepak</FONT><FONT color=#0000a0>&#174;</FONT></FONT></FONT></STRONG> is the most comprehensive custom package program in the correctional industry. Access Securepak<FONT size=1>&#174;</FONT> is a program designed to allow family members and friends to send packages to inmates. Access Securepak<FONT size=1>&#174;</FONT> was developed to eliminate contraband and greatly reduce the time and labor required to process packages.</P>
+				<P>As an affiliate of Keefe Group, you will benefit from the market and product expertise we have been offering since 1975.</P>
+				<P>For over 30 years, Keefe Group has been the industry leader in the packaging and distribution of high quality products and services to correctional facilities.</P>
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody style="margin: 15px 0;">
-                                <tr>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-md-6" id="hospitalSelector" style="display: none;">
+			</div>
+			<div class="row">
+				<div style="padding:15px;margin: 10px auto;border:1px solid #cccccc;">
+					<table width="100%" border="0" align="center" cellpadding="5" cellspacing="0">
+						<tbody>
+							<tr>
+								<td>
+									<span class="style1">Shop Now! </span><br>
+									Select a State, then a Securepak Program
+								</td>
+							</tr>
+							<tr>
+								<td>
 
-                                                If you are purchasing a package for a patient in one of the following hospitals, please select from the list below to begin shopping.
-                                                <br />
-                                                @Html.DropDownListFor(m => m.SelectedHospital, Model.Hospitals, "Select a Hospital")
-                                            </div>
+									@using (Html.BeginForm("SelectProgram", "LandingPage", FormMethod.Post, new { id = "programForm" }))
+									{
+										<table width="100%" border="0" align="center" cellpadding="2" cellspacing="0">
+											<tbody>
+												<tr>
+													<td>
+														@Html.LabelFor(m => m.SelectedState)
+													</td>
+												</tr>
+												<tr>
+													<td>
+														@Html.DropDownListFor(m => m.SelectedState, Model.States, "Choose a State")
+													</td>
+												</tr>
+											</tbody>
+											<tbody id="programSelector" style="display: none;">
+												<tr>
+													<td>
+														@Html.LabelFor(m => m.SelectedProgram)
+													</td>
+												</tr>
+												<tr>
+													<td>
+														@Html.DropDownListFor(m => m.SelectedProgram, Model.Programs, "Choose a program")
 
-                                            <div class="col-md-6" id="institutionSelector" style="display: none;">
-                                                If you are purchasing a package for inmates in one of the below locations, please select a facility from the drop down list below to begin shopping.
-                                                <br />
-                                                @Html.DropDownListFor(m => m.SelectedInstitution, Model.Institutions, "Select an Institution")
+													</td>
+												</tr>
+											</tbody>
+											<tbody style="margin: 15px 0;">
+												<tr>
+													<td>
+														<div class="row">
+															<div class="col-md-6" id="hospitalSelector" style="display: none;">
 
-                                            </div>
-                                        </div>
-                                    </td>
-                            </tbody>
-                            <tbody id="inmateSelector" style="display: none;">
-                                <tr id="facilityInmatesMessage" style="display:none;">
-                                    <td colspan="3">
-                                        <p><strong>INMATES AT INSTITUTIONS OTHER THAN THOSE LISTED ABOVE</strong></p>
+																If you are purchasing a package for a patient in one of the following hospitals, please select from the list below to begin shopping.
+																<br />
+																@Html.DropDownListFor(m => m.SelectedHospital, Model.Hospitals, "Select a Hospital")
+															</div>
 
-                                        <p>If you are purchasing a package for an inmate located in a facility other than those listed above, enter the requested information below to locate the inmate and begin shopping.</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.LabelFor(m => m.InmateNumber)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.TextBoxFor(m => m.InmateNumber)
+															<div class="col-md-6" id="institutionSelector" style="display: none;">
+																If you are purchasing a package for inmates in one of the below locations, please select a facility from the drop down list below to begin shopping.
+																<br />
+																@Html.DropDownListFor(m => m.SelectedInstitution, Model.Institutions, "Select an Institution")
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>or</strong>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.LabelFor(m => m.FirstName)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.TextBoxFor(m => m.FirstName)
+															</div>
+														</div>
+													</td>
+											</tbody>
+											<tbody id="inmateSelector" style="display: none;">
+												<tr id="facilityInmatesMessage" style="display:none;">
+													<td colspan="3">
+														<p><strong>INMATES AT INSTITUTIONS OTHER THAN THOSE LISTED ABOVE</strong></p>
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.LabelFor(m => m.MiddleName)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.TextBoxFor(m => m.MiddleName)
+														<p>If you are purchasing a package for an inmate located in a facility other than those listed above, enter the requested information below to locate the inmate and begin shopping.</p>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														@Html.LabelFor(m => m.InmateNumber)
+													</td>
+												</tr>
+												<tr>
+													<td>
+														@Html.TextBoxFor(m => m.InmateNumber)
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.LabelFor(m => m.LastName)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.TextBoxFor(m => m.LastName)
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<strong>or</strong>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														@Html.LabelFor(m => m.FirstName)
+													</td>
+												</tr>
+												<tr>
+													<td>
+														@Html.TextBoxFor(m => m.FirstName)
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <button type="button" id="searchButton">Find</button>
-                                        <input type="hidden" name="SelectedInmate" id="SelectedInmate" />
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                                <tr>
-                                    <td id="inmatesResult" style="display:none;"></td>
-                                </tr>
-                            </tbody>
-                        </table>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														@Html.LabelFor(m => m.MiddleName)
+													</td>
+												</tr>
+												<tr>
+													<td>
+														@Html.TextBoxFor(m => m.MiddleName)
 
-                        <div id="loadingIndicator">
-                            <img src="~/Assets/images/loader.gif" alt="Loading image" />
-                        </div>
-                    }
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														@Html.LabelFor(m => m.LastName)
+													</td>
+												</tr>
+												<tr>
+													<td>
+														@Html.TextBoxFor(m => m.LastName)
 
-<script type="text/javascript">
-    var selectInmate = function (sender) {
-        $("#SelectedInmate").val($(sender).val());
-        $("#programForm").submit();
-    }
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<button type="button" id="searchButton">Find</button>
+														<input type="hidden" name="SelectedInmate" id="SelectedInmate" />
+													</td>
+												</tr>
+											</tbody>
+											<tbody>
+												<tr>
+													<td id="inmatesResult" style="display:none;"></td>
+												</tr>
+											</tbody>
+										</table>
 
+										<div id="loadingIndicator">
+											<img src="~/Assets/images/loader.gif" alt="Loading image" />
+										</div>
+									}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 
-    $(function () {
-        var programForm = $("#programForm");
-        var stateMenu = $("#SelectedState");
-        var programsMenu = $("#SelectedProgram");
-        var facilitiesMenu = $("#SelectedFacility");
-        var hospitalsMenu = $("#SelectedHospital");
-        var institutionsMenu = $("#SelectedInstitution");
-        var facilityInmatesMessage = $("#facilityInmatesMessage");
-
-        var programSection = $("#programSelector");
-        var hospitalSection = $("#hospitalSelector");
-        var institutionSection = $("#institutionSelector");
-        var inmateSection = $("#inmateSelector");
-
-        var inmatesResult = $("#inmatesResult");
-
-        var loading = $("#loadingIndicator");
+			</div>
+		</div>
+	</section>
+				
 
 
-        $("#searchButton").on("click", function () {
-            var data = {
-                firstName: $("#FirstName").val(),
-                middleName: $("#MiddleName").val(),
-                lastName: $("#LastName").val(),
-                inmateNumber: $("#InmateNumber").val()
-            }
 
-            $.get("/api/sitecore/landingpage/SearchInmates", data, function (result) {
-                inmatesResult.empty();
 
-                $.each(result, function (idx, val) {
-                    inmatesResult.append('<button type="button" onclick="selectInmate(this)" value="' + val.Id + '">' + val.Id + '</button> ' + val.FullName + '<br />')
-                })
+				
+			</div>
 
-                inmatesResult.show();
-                loading.hide();
-            });
-        })
 
-        hospitalsMenu.on("change", function () {
-            if (hospitalsMenu.val() === "") return;
 
-            programForm.submit();
-        });
+			<script type="text/javascript">
+				var selectInmate = function (sender) {
+					$("#SelectedInmate").val($(sender).val());
+					$("#programForm").submit();
+				}
 
-        institutionsMenu.on("change", function () {
-            if (institutionsMenu.val() === "") return;
 
-            programForm.submit();
-        })
+				$(function () {
+					var programForm = $("#programForm");
+					var stateMenu = $("#SelectedState");
+					var programsMenu = $("#SelectedProgram");
+					var facilitiesMenu = $("#SelectedFacility");
+					var hospitalsMenu = $("#SelectedHospital");
+					var institutionsMenu = $("#SelectedInstitution");
+					var facilityInmatesMessage = $("#facilityInmatesMessage");
 
-        programsMenu.on("change", function () {
-            if (programsMenu.val() === "") {
-                facilitiesSection.hide();
-                inmateSection.hide();
-                return;
-            }
+					var programSection = $("#programSelector");
+					var hospitalSection = $("#hospitalSelector");
+					var institutionSection = $("#institutionSelector");
+					var inmateSection = $("#inmateSelector");
 
-            loading.show();
+					var inmatesResult = $("#inmatesResult");
 
-            $.get("/api/sitecore/landingpage/GetProgramFacilities?programId=" + programsMenu.val(), function (result) {
-                hospitalsMenu.empty("option");
-                hospitalsMenu.append("<option value=''>Select a Hospital");
+					var loading = $("#loadingIndicator");
 
-                institutionsMenu.empty("option");
-                institutionsMenu.append("<option value=''>Select an Institution");
 
-                if (result.length > 0) {
-                    facilityInmatesMessage.show();
+					$("#searchButton").on("click", function () {
+						var data = {
+							firstName: $("#FirstName").val(),
+							middleName: $("#MiddleName").val(),
+							lastName: $("#LastName").val(),
+							inmateNumber: $("#InmateNumber").val()
+						}
 
-                    $.each(result, function (idx, val) {
-                        if (val.FacilityType === "Hospital") {
-                            hospitalsMenu.append('<option value="' + val.Id + '">' + val.Name + '</option>');
-                            hospitalSection.show();
-                        } else {
-                            institutionsMenu.append('<option value="' + val.Id + '">' + val.Name + '</option>');
-                            institutionSection.show();
-                        }
-                    })
-                } else {
-                    facilityInmatesMessage.hide();
-                    hospitalSection.hide();
-                    institutionSection.hide();
-                }
+						$.get("/api/sitecore/landingpage/SearchInmates", data, function (result) {
+							inmatesResult.empty();
 
-                inmateSection.show();
-                loading.hide();
-            });
-        });
+							$.each(result, function (idx, val) {
+								inmatesResult.append('<button type="button" onclick="selectInmate(this)" value="' + val.Id + '">' + val.Id + '</button> ' + val.FullName + '<br />')
+							})
 
-        var loadState = function () {
-            if (stateMenu.val() === "") {
-                programSection.hide();
-                hospitalSection.hide();
-                institutionSection.hide();
-                inmateSection.hide();
-                return;
-            }
+							inmatesResult.show();
+							loading.hide();
+						});
+					})
 
-            loading.show();
+					hospitalsMenu.on("change", function () {
+						if (hospitalsMenu.val() === "") return;
 
-            programsMenu.empty("option");
-            programsMenu.append("<option value=''>Choose a Program");
+						programForm.submit();
+					});
 
-            $.get("/api/sitecore/landingpage/getprograms?state=" + stateMenu.val(), function (result) {
-                $.each(result, function (idx, val) {
-                    programsMenu.append('<option value="' + val.Id + '">' + val.ProgramType.toUpperCase() + " - " + val.Name + '</option>')
-                })
+					institutionsMenu.on("change", function () {
+						if (institutionsMenu.val() === "") return;
 
-                programSection.show();
-                loading.hide();
-            });
-        }
+						programForm.submit();
+					})
 
-        stateMenu.on("change", function () {
-            loadState();
-        })
+					programsMenu.on("change", function () {
+						if (programsMenu.val() === "") {
+							facilitiesSection.hide();
+							inmateSection.hide();
+							return;
+						}
 
-        if (stateMenu.val() !== "") {
-            loadState();
-        }
-    });
-</script>
+						loading.show();
+
+						$.get("/api/sitecore/landingpage/GetProgramFacilities?programId=" + programsMenu.val(), function (result) {
+							hospitalsMenu.empty("option");
+							hospitalsMenu.append("<option value=''>Select a Hospital");
+
+							institutionsMenu.empty("option");
+							institutionsMenu.append("<option value=''>Select an Institution");
+
+							if (result.length > 0) {
+								facilityInmatesMessage.show();
+
+								$.each(result, function (idx, val) {
+									if (val.FacilityType === "Hospital") {
+										hospitalsMenu.append('<option value="' + val.Id + '">' + val.Name + '</option>');
+										hospitalSection.show();
+									} else {
+										institutionsMenu.append('<option value="' + val.Id + '">' + val.Name + '</option>');
+										institutionSection.show();
+									}
+								})
+							} else {
+								facilityInmatesMessage.hide();
+								hospitalSection.hide();
+								institutionSection.hide();
+							}
+
+							inmateSection.show();
+							loading.hide();
+						});
+					});
+
+					var loadState = function () {
+						if (stateMenu.val() === "") {
+							programSection.hide();
+							hospitalSection.hide();
+							institutionSection.hide();
+							inmateSection.hide();
+							return;
+						}
+
+						loading.show();
+
+						programsMenu.empty("option");
+						programsMenu.append("<option value=''>Choose a Program");
+
+						$.get("/api/sitecore/landingpage/getprograms?state=" + stateMenu.val(), function (result) {
+							$.each(result, function (idx, val) {
+								programsMenu.append('<option value="' + val.Id + '">' + val.ProgramType.toUpperCase() + " - " + val.Name + '</option>')
+							})
+
+							programSection.show();
+							loading.hide();
+						});
+					}
+
+					stateMenu.on("change", function () {
+						loadState();
+					})
+
+					if (stateMenu.val() !== "") {
+						loadState();
+					}
+				});
+			</script>
