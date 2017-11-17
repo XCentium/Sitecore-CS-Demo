@@ -170,14 +170,9 @@ $RECYCLE.BIN/
 /.vs/config
 # XcCommerce112Demo Excludes
 CSDemo/App_Config/Include/zCSDemo/XcCommerce112Demo.Serialization.config
-<<<<<<< Updated upstream
 CSDemo.CustomLaunchPad
 CSDemo.CustomLaunchPad
 /CSDemo/App_Data/serialization.zip
 /CSDemo/Properties/PublishProfiles/Deployment.pubxml
-=======
-/CSDemo
-database/mongo
->>>>>>> Stashed changes
 database/mongo/
 .vs/

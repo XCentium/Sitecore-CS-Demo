@@ -362,6 +362,7 @@
     <Compile Include="Controllers\GeneralSearchController.cs" />
     <Compile Include="Controllers\SelectedInmateController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Controllers\WidgetsController.cs" />
     <Compile Include="Helpers\GlassHelper.cs" />
     <Compile Include="Models\InmateSearch\InmateSearchViewModel.cs" />
     <Compile Include="Models\InmateSearch\SelectInmateViewModel.cs" />
@@ -466,6 +467,7 @@
     <Compile Include="Models\SelectedInmate\SelectedInmateViewModel.cs" />
     <Compile Include="Models\Store\LocationInformation.cs" />
     <Compile Include="Models\Store\Store.cs" />
+    <Compile Include="Models\Widgets\ExtraContentWidgetModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\CustomLinkProvider.cs" />
     <Compile Include="Tools\ItemTester.aspx.cs">
@@ -683,6 +685,7 @@
     <Content Include="Views\InmateSearch\SelectInmate.cshtml" />
     <Content Include="Views\SelectedInmate\Home.cshtml" />
     <Content Include="Views\SelectedInmate\Empty.cshtml" />
+    <Content Include="Views\Widgets\ExtraContentWidget.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

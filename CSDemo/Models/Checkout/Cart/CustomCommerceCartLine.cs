@@ -70,8 +70,12 @@ namespace CSDemo.Models.Checkout.Cart
                     {
                         var productImageItem = Sitecore.Context.Database.GetItem(id);
 
-                        var imageUrl = "/~/media/" + productImageItem.ID.ToShortID() + ".ashx";
-                        this._images.Add(imageUrl);
+						if (productImageItem != null)
+						{
+
+							var imageUrl = "/~/media/" + productImageItem.ID.ToShortID() + ".ashx";
+							this._images.Add(imageUrl);
+						}
                     }
                 }
 

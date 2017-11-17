@@ -25,7 +25,7 @@ namespace CSDemo.Models.Account
         public static UserStatus GetStatus(decimal amount)
         {
             var statuses = GetAllStatuses();
-            if (!statuses.Any()) return null;
+            if (statuses == null) return null;
             var userStatus = new UserStatus { Amount = 0, Name = string.Empty };
             foreach (var status in statuses)
             {
