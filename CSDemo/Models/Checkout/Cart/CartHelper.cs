@@ -46,7 +46,7 @@ namespace CSDemo.Models.Checkout.Cart
         public string DefaultCartName { get; set; }
 
         private readonly InventoryServiceProvider _inventoryServiceProvider = new InventoryServiceProvider();
-        private readonly CartServiceProvider _cartServiceProvider = new CartServiceProvider();
+        private readonly CartServiceProvider _cartServiceProvider = new KeefePOC.Pipelines.Providers.CartServiceProvider();
         private readonly PaymentServiceProvider _paymentServiceProvider = new PaymentServiceProvider();
         private readonly OrderServiceProvider _orderServiceProvider = new OrderServiceProvider();
         private readonly ContactFactory _contactFactory = new ContactFactory();
@@ -116,6 +116,10 @@ namespace CSDemo.Models.Checkout.Cart
             {
                 info.Refresh = true;
             }
+
+			// for testing
+			request.Properties.Add("InmateNumber", "123451");
+
             var cartResult = _cartServiceProvider.AddCartLines(request);
 
             // add cart to cache

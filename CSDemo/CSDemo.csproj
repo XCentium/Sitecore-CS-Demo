@@ -637,6 +637,7 @@
       <IsTransformFile>True</IsTransformFile>
     </None>
     <Content Include="App_Config\Include\zKeefeMusic\Keefe.Main.config" />
+    <Content Include="App_Config\Include\zKeefeMusic\Keefe.Sitecore.Commerce.Carts.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\John-Local.pubxml" />
     <None Include="Properties\PublishProfiles\John-Prod-CSDemo39.pubxml" />
