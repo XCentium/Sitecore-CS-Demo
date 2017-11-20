@@ -1,1 +1,151 @@
-﻿
+﻿@*//-----------------------------------------------------------------------
+    // Copyright 2016 Sitecore Corporation A/S
+    // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+    // except in compliance with the License. You may obtain a copy of the License at
+    //       http://www.apache.org/licenses/LICENSE-2.0
+    //
+    // Unless required by applicable law or agreed to in writing, software distributed under the
+    // License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    // either express or implied. See the License for the specific language governing permissions
+    // and limitations under the License.
+    // -------------------------------------------------------------------------------------------*@
+
+
+@model CSDemo.Models.Account.RegisterUserInputModel
+@{
+    bool isNewUser = Model == null || string.IsNullOrEmpty(Model.FirstName);
+}
+
+
+@using (Ajax.BeginForm("Register", "Account", null, new AjaxOptions { HttpMethod = "Post" }, new { @id = "RegisterForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+        <!-- CONTENT CONTAINER -->
+    <div class="container">
+        <div id="" class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>&nbsp;</p>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.UserName)<span class="required">*</span><br />
+                            @Html.TextBoxFor(m => m.UserName)
+
+                            @Html.ValidationMessageFor(m => m.UserName)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FirstName)<span class="required">*</span><br />
+                            @Html.TextBoxFor(m => m.FirstName)
+
+                            @Html.ValidationMessageFor(m => m.FirstName)
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.LastName)<span class="required">*</span><br />
+                            @Html.TextBoxFor(m => m.LastName)
+
+
+                            @Html.ValidationMessageFor(m => m.LastName)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password)<span class="required">*</span><br />
+                            @Html.PasswordFor(m => m.Password)
+
+
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ConfirmPassword)<span class="required">*</span><br />
+                            @Html.PasswordFor(m => m.ConfirmPassword)
+
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button type="submit" id="registerButton" data-loading-text="Loading..." class="btn btn-success">Create User</button>
+                        </div>
+                        
+                        <div id="loadingIndicator">
+                            <img src="~/Assets/images/loader.gif" alt="Loading image" />
+                        </div>
+
+                        <p id="errorMessage" class="text-danger" style="text-transform: capitalize"></p>
+                        <p id="successMessage" style="display: none;">
+                            Your account was created successfully! You may now <a href="/login">Login to your account</a>.
+                        </p>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    var errorMessage = $("#errorMessage");
+    var successMessage = $("#successMessage");
+    var loadingIndicator = $("#loadingIndicator");
+    
+    $("#RegisterForm").on("submit", function (e) {
+        successMessage.hide();
+        errorMessage.hide();
+        e.preventDefault();
+
+        if (!$("#RegisterForm").valid()) return;
+
+        loadingIndicator.show();
+
+        var email = $("#UserName");
+        var firstName = $("#FirstName");
+        var lastName = $("#LastName");
+        var password = $("#Password");
+        var confirmPassword = $("#ConfirmPassword");
+
+        var data = {
+            UserName: email.val(),
+            FirstName: firstName.val(),
+            LastName: lastName.val(),
+            Password: password.val(),
+            ConfirmPassword: confirmPassword.val()
+        };
+
+        $.ajax({
+            method: "POST",
+            url: "/api/sitecore/Account/Register",
+            data: data,
+            success: function (result) {
+                loadingIndicator.hide();
+                console.log(result);
+
+                if (result.HasErrors) {
+                    errorMessage.html(result.Errors[0]);
+                    errorMessage.show();
+                } else {
+                    successMessage.show();
+
+                    email.val("");
+                    firstName.val("");
+                    lastName.val("");
+                    password.val("");
+                    confirmPassword.val("");
+                }
+            },
+            error: function (result) {
+                loadingIndicator.hide();
+                errorMessage.html(result);
+                errorMessage.show();
+            }
+        });
+    })
+</script>
