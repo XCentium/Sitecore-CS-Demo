@@ -13,6 +13,8 @@ namespace KeefePOC.Interfaces.Repositories
         Inmate GetInmate(string inmateNumber);
         Inmate GetInmate(string facilityId, string inmateNumber);
         List<Inmate> SearchInmates(Inmate request);
-        List<Inmate> SearchInmates(string facilityId, Inmate request);
+        List<Inmate> SearchInmates(string facilityId,Inmate request);
+		List<string> GetBlacklistedItemsForInmate(string inmateId);
+		
     }
 }

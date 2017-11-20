@@ -1,0 +1,19 @@
+﻿@using Glass.Mapper.Sc.Web.Mvc
+
+@model CSDemo.Models.Widgets.ExtraContentWidgetModel
+
+@{
+	try
+	{
+		if (@Model.ExtraContent != null)
+		{
+			<div class="group no-margin">
+				@Html.Raw(@Model.ExtraContent);
+			</div>
+		}
+	}
+	catch (Exception ex)
+	{
+		throw;	
+	}
+}

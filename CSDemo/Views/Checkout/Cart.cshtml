@@ -2,7 +2,8 @@
 @using Sitecore.Mvc;
 @using CSDemo.Models.Checkout.Cart
 @using CSDemo.Models.Account
-@using System.Linq
+@using Sitecore
+
 
 @{
 
@@ -50,6 +51,11 @@
 
 <section class="content account">
     <div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				@Html.Sitecore().Placeholder("cart-promo-banner")
+			</div>
+			</div>
         <div class="row">
             <div class="col-sm-12">
                 <article class="account-content">

@@ -27,7 +27,24 @@ namespace KeefePOC.Repositories
             return DemoInmates.First();
         }
 
-        public Inmate GetInmate(string facilityId, string inmateNumber)
+		public List<string> GetBlacklistedItemsForInmate(string inmateId)
+		{
+			BlackListedProductsForInmateModel model = new BlackListedProductsForInmateModel();
+			model.PopulateSampleData();
+
+			foreach(var item in model.Blacklist)
+			{
+				if(string.Equals(item.InmateId, inmateId))
+				{
+					return item.Products;
+				}
+			}
+
+			return new List<string>();
+
+		}
+
+		public Inmate GetInmate(string facilityId, string inmateNumber)
         {
             return DemoInmates.First();
         }

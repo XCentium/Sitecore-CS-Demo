@@ -363,6 +363,7 @@
     <Compile Include="Controllers\GeneralSearchController.cs" />
     <Compile Include="Controllers\SelectedInmateController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Controllers\WidgetsController.cs" />
     <Compile Include="Helpers\GlassHelper.cs" />
     <Compile Include="Models\Account\RegisterUserInputModel.cs" />
     <Compile Include="Models\InmateSearch\InmateSearchViewModel.cs" />
@@ -470,6 +471,7 @@
     <Compile Include="Models\SelectedInmate\SelectedInmateViewModel.cs" />
     <Compile Include="Models\Store\LocationInformation.cs" />
     <Compile Include="Models\Store\Store.cs" />
+    <Compile Include="Models\Widgets\ExtraContentWidgetModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\CustomLinkProvider.cs" />
     <Compile Include="Tools\ItemTester.aspx.cs">
@@ -639,6 +641,7 @@
       <IsTransformFile>True</IsTransformFile>
     </None>
     <Content Include="App_Config\Include\zKeefeMusic\Keefe.Main.config" />
+    <Content Include="App_Config\Include\zKeefeMusic\Keefe.Sitecore.Commerce.Carts.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\John-Local.pubxml" />
     <None Include="Properties\PublishProfiles\John-Prod-CSDemo39.pubxml" />
@@ -687,6 +690,7 @@
     <Content Include="Views\InmateSearch\SelectInmate.cshtml" />
     <Content Include="Views\SelectedInmate\Home.cshtml" />
     <Content Include="Views\SelectedInmate\Empty.cshtml" />
+    <Content Include="Views\Widgets\ExtraContentWidget.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
