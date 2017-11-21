@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Sitecore.Commerce;
 using Sitecore.Commerce.Services.Carts;
+using Sitecore.Commerce.Pipelines;
+using Sitecore.Commerce.Services;
 
 namespace KeefePOC.Pipelines.Providers
 {
@@ -19,6 +21,12 @@ namespace KeefePOC.Pipelines.Providers
 				return this.RunPipeline<CartLinesRequest, CartResult>("commerce.carts.addCartLines", (CartLinesRequest)request);
 			}
 
+			return result;
+		}
+
+		public ServiceProviderResult ViewCart(ServiceProviderRequest request)
+		{
+			var result = this.RunPipeline<ServiceProviderRequest, ServiceProviderResult>("keef.commerce.carts.viewcartvalidation", request);			
 			return result;
 		}
 	}

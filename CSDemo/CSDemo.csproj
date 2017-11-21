@@ -365,6 +365,7 @@
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\WidgetsController.cs" />
     <Compile Include="Helpers\GlassHelper.cs" />
+    <Compile Include="Rules\Conditions\PreTaxTotal.cs" />
     <Compile Include="Models\Account\RegisterUserInputModel.cs" />
     <Compile Include="Models\InmateSearch\InmateSearchViewModel.cs" />
     <Compile Include="Models\InmateSearch\SelectInmateViewModel.cs" />
@@ -474,6 +475,7 @@
     <Compile Include="Models\Widgets\ExtraContentWidgetModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\CustomLinkProvider.cs" />
+    <Compile Include="Rules\Conditions\TotalItemsCondition.cs" />
     <Compile Include="Tools\ItemTester.aspx.cs">
       <DependentUpon>ItemTester.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
