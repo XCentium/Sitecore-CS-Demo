@@ -1,4 +1,6 @@
 ﻿using System.Configuration;
+using CSDemo.Helpers;
+using CSDemo.Models.Page;
 using Sitecore;
 using Sitecore.Configuration;
 using Sitecore.Mvc.Extensions;
@@ -47,6 +49,15 @@ namespace CSDemo.Configuration
         public static string GetBraintreeVaultPaymentToken()
         {
             return ConfigurationManager.AppSettings["BrainTreeVaultPaymentToken"];
+        }
+
+        public static Root GetSiteRoot()
+        {
+            // Fetch the start item from Site definition
+
+            var rootItem = Sitecore.Context.Database.GetItem(Sitecore.Context.Site.ContentStartPath);
+
+            return rootItem == null ? null : GlassHelper.Cast<Root>(rootItem);
         }
     }
 }

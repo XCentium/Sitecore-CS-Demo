@@ -151,32 +151,23 @@ namespace CSDemo.Helpers
 
         private static string GetSiteRecommendationsApiFbtBuildId()
         {
-            var root = GetSiteRoot();
+            var root = ConfigurationHelper.GetSiteRoot();
 
             return root.RecommendationApiFbtBuildId;
         }
 
         private static string GetSiteRecommendationsApiBuildId()
         {
-            var root = GetSiteRoot();
+            var root = ConfigurationHelper.GetSiteRoot();
 
             return root.RecommendationApiBuildId;
         }
 
         private static string GetSiteRecommendationsApiModelId()
         {
-            var root = GetSiteRoot();
+            var root = ConfigurationHelper.GetSiteRoot();
 
             return root.RecommendationApiModelId;
-        }
-
-        internal static Root GetSiteRoot()
-        {
-            // Fetch the start item from Site definition
-
-            var rootItem = Sitecore.Context.Database.GetItem(Sitecore.Context.Site.ContentStartPath);
-
-            return rootItem == null ? null : GlassHelper.Cast<Root>(rootItem);
         }
 
         public static void SendPurchaseEvent(CommerceOrder order)

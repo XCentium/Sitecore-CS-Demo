@@ -2137,7 +2137,8 @@ namespace CSDemo.Models.Checkout.Cart
 
                 if (summary == null || summary.Count <= 0)
                 {
-                    result.Message = "No Product Group Summary.";
+                    result.Message = "No Product Group Summary OR No items in cart";
+                    result.IsValidForPurchase = true;
                     return result;
                 }
 
@@ -2252,11 +2253,13 @@ namespace CSDemo.Models.Checkout.Cart
             {
                 using (var context = index.CreateSearchContext())
                 {
+                    var siteRoot = ConfigurationHelper.GetSiteRoot();
+
                     var searchHits = context.GetQueryable<SearchResultItem>()
                         .Where(x => x.Language == Context.Language.Name
                                     //&& x.Version == "1"
                                     && x.TemplateName == "Product Group Setting"
-                                    && x.Path.Contains(storefrontRootPath.ToLower())
+                                    && x.Parent == Sitecore.Data.ID.Parse(siteRoot.ProgramId)
                                     ).GetResults().ToList();
 
                     var groupSummaries = new List<ProductGroup>();
@@ -2265,27 +2268,22 @@ namespace CSDemo.Models.Checkout.Cart
                     {
                         var item = searchHit.Document;
 
-                        var productGroupString = item["ProductGroups"];
+                        var productGroup = item["ProductGroup"];
 
-                        if (!string.IsNullOrWhiteSpace(productGroupString))
+                        if (!string.IsNullOrWhiteSpace(productGroup))
                         {
-                            var productGroups = productGroupString.Split('|');
-
-                            foreach (var productGroup in productGroups)
+                            var groupSummary = new ProductGroup
                             {
-                                var groupSummary = new ProductGroup
-                                {
-                                    Id = Guid.Parse(productGroup),
-                                    Name = GetProductGroupName(Guid.Parse(productGroup)),
-                                    SettingsName = item.Name,
-                                    PriceLimit = string.IsNullOrWhiteSpace(item["PriceLimit"]) ? 0 : decimal.Parse(item["PriceLimit"]),
-                                    PriceTotal = 0,
-                                    WeightLimit = string.IsNullOrWhiteSpace(item["WeightLimit"]) ? 0 : double.Parse(item["WeightLimit"]),
-                                    WeightTotal = 0
-                                };
+                                Id = Guid.Parse(productGroup),
+                                Name = GetProductGroupName(Guid.Parse(productGroup)),
+                                SettingsName = item.Name,
+                                PriceLimit = string.IsNullOrWhiteSpace(item["PriceLimit"]) ? 0 : decimal.Parse(item["PriceLimit"]),
+                                PriceTotal = 0,
+                                WeightLimit = string.IsNullOrWhiteSpace(item["WeightLimit"]) ? 0 : double.Parse(item["WeightLimit"]),
+                                WeightTotal = 0
+                            };
 
-                                groupSummaries.Add(groupSummary);
-                            }
+                            groupSummaries.Add(groupSummary);
                         }
 
                     }
