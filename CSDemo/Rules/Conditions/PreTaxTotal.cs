@@ -23,7 +23,7 @@ namespace KeefePOC.Rules.Conditions
 				CartHelper c = new CartHelper();
 				var cart = c.GetMiniCart();
 
-				var cellValue = cart.GrandTotal;
+				var cellValue = cart.LineTotal;
 				
 				switch (base.GetOperator())
 				{
