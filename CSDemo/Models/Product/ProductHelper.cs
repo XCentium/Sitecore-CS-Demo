@@ -217,6 +217,41 @@ namespace CSDemo.Models.Product
                 {
                     var catChildren = catItem.GetChildren().Select(x => x.GlassCast<Product>()).ToList(); //todo: refactor
 
+                    //filter by inmate restrictions
+                    if (catChildren.Count > 0)
+                    {
+                        //catChildren = 
+                        //    catChildren
+                        //    .Where(c => c.RestrictionFemale == InmateHelper.IsRestrictedFemale())
+                        //    .Where(c => c.RestrictionMale == InmateHelper.IsRestrictedFemale())
+                        //    .Where(c => c.RestrictionGlutenFree == InmateHelper.IsRestrictedGlutenFree())
+                        //    .Where(c => c.RestrictionKosher == InmateHelper.IsRestrictedKosher())
+                        //    .Where(c => c.RestrictionSugarFree == InmateHelper.IsRestrictedSugarFree())
+                        //    .ToList();
+
+                        //TODO: refactor
+                        if (InmateHelper.IsRestrictedMale())
+                        {
+                            catChildren = catChildren.Where(item => item.RestrictionMale).ToList();
+                        }
+                        if (InmateHelper.IsRestrictedFemale())
+                        {
+                            catChildren = catChildren.Where(item => item.RestrictionFemale).ToList();
+                        }
+                        if (InmateHelper.IsRestrictedSugarFree())
+                        {
+                            catChildren = catChildren.Where(item => item.RestrictionSugarFree).ToList();
+                        }
+                        if (InmateHelper.IsRestrictedKosher())
+                        {
+                            catChildren = catChildren.Where(item => item.RestrictionKosher).ToList();
+                        }
+                        if (InmateHelper.IsRestrictedGlutenFree())
+                        {
+                            catChildren = catChildren.Where(item => item.RestrictionGlutenFree).ToList();
+                        }
+                    }
+
                     model.TotalItems = catChildren.Count();
                     model.TotalPages = (long)Math.Ceiling((double)model.TotalItems / model.PageSize);
 
@@ -445,21 +480,48 @@ namespace CSDemo.Models.Product
                             //  var i = 0;
                             //   if (2 < i)
                             //   {
-                            var categoryChildern = category.GetChildren();
-                            c.ProductsCount = categoryChildern.Count();
-                            var pList = new List<ProductMenulistViewModel>();
-                            foreach (Item categoryChild in categoryChildern)
+                            var categoryChildern = category
+                                .GetChildren()
+                                .Where(i => i.TemplateID.ToString() != Constants.Products.CategoriesTemplateId)
+                                .Select(GlassHelper.Cast<Product>).ToList();
+
+                            //TODO: refactor
+                            //filter based on restriction 
+                            if (categoryChildern.Count > 0)
                             {
-                                if (categoryChild.TemplateID.ToString() != Constants.Products.CategoriesTemplateId)
+                                //TODO: refactor
+                                if (InmateHelper.IsRestrictedMale())
                                 {
-                                    var p = new ProductMenulistViewModel();
-                                    p.Name = categoryChild.DisplayName;
-                                    p.Url = LinkManager.GetItemUrl(categoryChild);
-                                    pList.Add(p);
+                                    categoryChildern = categoryChildern.Where(item => item.RestrictionMale).ToList();
+                                }
+                                if (InmateHelper.IsRestrictedFemale())
+                                {
+                                    categoryChildern = categoryChildern.Where(item => item.RestrictionFemale).ToList();
+                                }
+                                if (InmateHelper.IsRestrictedSugarFree())
+                                {
+                                    categoryChildern = categoryChildern.Where(item => item.RestrictionSugarFree).ToList();
+                                }
+                                if (InmateHelper.IsRestrictedKosher())
+                                {
+                                    categoryChildern = categoryChildern.Where(item => item.RestrictionKosher).ToList();
+                                }
+                                if (InmateHelper.IsRestrictedGlutenFree())
+                                {
+                                    categoryChildern = categoryChildern.Where(item => item.RestrictionGlutenFree).ToList();
                                 }
                             }
+
+                            c.ProductsCount = categoryChildern.Count();
+
+                            var pList = categoryChildern.Select(categoryChild => new ProductMenulistViewModel
+                                {
+                                    Name = categoryChild.Title,
+                                    Url = categoryChild.Url
+                                })
+                                .ToList();
+
                             c.ProductMenulistViewModel = pList;
-                            //  }
                             categoryMenulistViewModel.Add(c);
                         }
                     }
@@ -498,6 +560,8 @@ namespace CSDemo.Models.Product
                                     x =>
                                         (x.TemplateName == "GeneralCategory") && x.Path.Contains(catParentItem.Paths.Path)
                                          ).ToList();
+
+
 
                             if (result.Any())
                             {

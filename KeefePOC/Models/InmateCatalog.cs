@@ -51,5 +51,32 @@ namespace KeefePOC.Models
 		public List<string> Products; 
 	}
 
+    public class InmateProductRestrictions
+    {
+        public List<string> Restrictions;
 
+        public InmateProductRestrictions()
+        {
+            Restrictions = new List<string>();
+        }
+
+        public void PopulateSampleData(string inmateId)
+        {
+            switch (inmateId)
+            {
+                case "123451":
+                    Restrictions.Add("male");
+                    break;
+                case "123452":
+                    Restrictions.Add("female");
+                    break;
+                case "123453":
+                    Restrictions.Add("kosher");
+                    Restrictions.Add("glutenfree");
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }

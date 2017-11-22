@@ -365,6 +365,7 @@
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\WidgetsController.cs" />
     <Compile Include="Helpers\GlassHelper.cs" />
+    <Compile Include="Helpers\InmateHelper.cs" />
     <Compile Include="Rules\Conditions\PreTaxTotal.cs" />
     <Compile Include="Models\Account\RegisterUserInputModel.cs" />
     <Compile Include="Models\InmateSearch\InmateSearchViewModel.cs" />
@@ -503,7 +504,9 @@
       <IsTransformFile>True</IsTransformFile>
     </None>
     <Content Include="AJAX\Products.asmx" />
-    <Content Include="App_Config\Include\zKeefeMusic\Keefe.GeneralSearch.config" />
+    <Content Include="App_Config\Include\zKeefeMusic\Keefe.GeneralSearch.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\bootcomplete.css" />
     <Content Include="Assets\css\bootstrap.min.css" />

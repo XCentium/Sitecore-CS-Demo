@@ -1,9 +1,6 @@
 ﻿using KeefePOC.Interfaces.Repositories;
 using KeefePOC.Interfaces.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using KeefePOC.Models;
 
 
@@ -81,5 +78,10 @@ namespace KeefePOC.Services
 		{
 			return inmateRepo.GetBlacklistedItemsForInmate(inmateId);
 		}
-	}
+
+        public List<string> GetProductRestrictionsForInmate(string inmateId)
+        {
+            return inmateRepo.GetProductRestrictionsForInmate(inmateId);
+        }
+    }
 }

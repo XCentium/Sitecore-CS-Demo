@@ -44,7 +44,15 @@ namespace KeefePOC.Repositories
 
 		}
 
-		public Inmate GetInmate(string facilityId, string inmateNumber)
+        public List<string> GetProductRestrictionsForInmate(string inmateId)
+        {
+            var model = new InmateProductRestrictions();
+            model.PopulateSampleData(inmateId);
+
+            return model.Restrictions;
+        }
+
+        public Inmate GetInmate(string facilityId, string inmateNumber)
         {
             return DemoInmates.First();
         }
