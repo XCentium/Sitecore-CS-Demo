@@ -6,6 +6,7 @@ using Sitecore.Analytics;
 using Sitecore.Analytics.Model.Entities;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities.Customers;
+using Sitecore.Commerce.Services;
 using Sitecore.Commerce.Services.Customers;
 using Sitecore.Data.Items;
 using Sitecore.Security.Accounts;
@@ -16,6 +17,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Web.Security;
 
 #endregion
 
@@ -97,7 +99,7 @@ namespace CSDemo.Models.Account
             Cookie.Set(Constants.Commerce.UserSelectedCatalogId, catalogItem.ID.ToString());
 
             if (!catalogItem.HasChildren) return;
-            
+
             // get the first child and check if if has a postfix starting with (
             foreach (Item child in catalogItem.Children)
             {
@@ -422,7 +424,7 @@ namespace CSDemo.Models.Account
         /// <returns></returns>
         internal string GetCurrentCustomerCatalogIds()
         {
-           return ProductHelper.GetSiteRootCatalogId();
+            return ProductHelper.GetSiteRootCatalogId();
         }
 
         private string GetCatalogIdsFromCatalogSet(string commerceCatalogSet)
@@ -586,8 +588,8 @@ namespace CSDemo.Models.Account
                 ExternalId = emptyCustomer.ExternalId,
                 Name = newCustomerName,
                 IsDisabled = false,
-                Shops = new ReadOnlyCollection<string>(new[] {Sitecore.Context.Site.Name}),
-                Users = new ReadOnlyCollection<string>(new[] {loggedInUserName})
+                Shops = new ReadOnlyCollection<string>(new[] { Sitecore.Context.Site.Name }),
+                Users = new ReadOnlyCollection<string>(new[] { loggedInUserName })
             };
 
 
@@ -629,7 +631,23 @@ namespace CSDemo.Models.Account
 
                         addresses.AddRange(partyList.Select(party => new Address
                         {
-                            AddressName = party.Name, Id = party.ExternalId, FirstName = party.FirstName, LastName = party.LastName, Company = party.Company, Address1 = party.Address1, Address2 = party.Address2, City = party.City, State = party.State, Zip = party.ZipPostalCode, Country = party.Country, PartyId = party.PartyId, CountryCode = party.CountryCode, Phone = party.PhoneNumber, Fax = party.FaxNumber, Email = party.Email, IsMain = party.IsPrimary
+                            AddressName = party.Name,
+                            Id = party.ExternalId,
+                            FirstName = party.FirstName,
+                            LastName = party.LastName,
+                            Company = party.Company,
+                            Address1 = party.Address1,
+                            Address2 = party.Address2,
+                            City = party.City,
+                            State = party.State,
+                            Zip = party.ZipPostalCode,
+                            Country = party.Country,
+                            PartyId = party.PartyId,
+                            CountryCode = party.CountryCode,
+                            Phone = party.PhoneNumber,
+                            Fax = party.FaxNumber,
+                            Email = party.Email,
+                            IsMain = party.IsPrimary
                         }));
                     }
                 }
@@ -660,5 +678,46 @@ namespace CSDemo.Models.Account
         {
             return Cookie.Get(Constants.Commerce.UserSelectedCatalogPostfix) != null ? Cookie.Get(Constants.Commerce.UserSelectedCatalogPostfix).Value : null;
         }
+
+
+        public virtual CreateUserResult RegisterUser(string shopName, RegisterUserInputModel inputModel)
+        {
+            CreateUserResult result;
+
+            try
+            {
+                CreateUserRequest request = new CreateUserRequest(inputModel.UserName, inputModel.Password, inputModel.UserName, shopName);
+                result = _customerServiceProvider.CreateUser(request);
+                if (!result.Success)
+                {
+                    //Helpers.LogSystemMessages(result.SystemMessages, result);
+                    return result;
+                }
+                else if ((result.Success && (result.CommerceUser == null)) && (result.SystemMessages.Count<SystemMessage>() == 0))
+                {
+                    result.Success = false;
+                    SystemMessage item = new SystemMessage
+                    {
+                        Message = "user already exists."//StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.UserAlreadyExists, true)
+                    };
+                    result.SystemMessages.Add(item);
+                }
+            }
+            catch (MembershipCreateUserException exception)
+            {
+                result = new CreateUserResult
+                {
+                    Success = false
+                };
+                SystemMessage message2 = new SystemMessage
+                {
+                    Message = "Status code: " + exception.StatusCode//ErrorCodeToString(exception.StatusCode)
+                };
+                result.SystemMessages.Add(message2);
+            }
+
+            return result;
+        }
+
     }
 }

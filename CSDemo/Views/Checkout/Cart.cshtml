@@ -7,42 +7,48 @@
 
 @{
 
-    var cartHelper = new CartHelper();
-    var shoppingCart = cartHelper.GetMiniCart();
+	var cartHelper = new CartHelper();
 
-    var nextStatus = UserStatus.GetNextStatus(shoppingCart.ProductsTotal);
-    var currentStatus = UserStatus.GetStatus(Sitecore.Context.User);
-    var reachedStatus = UserStatus.GetStatus(shoppingCart.ProductsTotal);
-    var lineTotal = "0.00";
-    var discount = "0.00";
-    var shipping = "0.00";
-    var tax = "0.00";
-    var grandtotal = "0.00";
-    var total = "0.00";
-    var totalAmountSpentWithinAMonth = Order.GetTotalAmountOrderedWithinPeriod(Sitecore.Analytics.Tracker.Current.Contact, 30);
-    var maxAllowedTopendWithinAMonth = 500;
-    var maxAllowedWeight = 20;
-    if (shoppingCart != null && shoppingCart.Total > 0)
-    {
+	if(cartHelper.ViewCartPromo())
+	{
+		Response.Redirect("/Cart Promos");
+	}
 
-        try
-        {
+	var shoppingCart = cartHelper.GetMiniCart();
 
-            lineTotal = string.Format("{0:0.00}", shoppingCart.LineTotal);
-            discount = string.Format("{0:0.00}", shoppingCart.Discount);
-            shipping = string.Format("{0:0.00}", shoppingCart.Shipping);
-            tax = string.Format("{0:0.00}", shoppingCart.Tax);
-            grandtotal = string.Format("{0:0.00}", shoppingCart.GrandTotal);
-            total = string.Format("{0:0.00}", shoppingCart.ProductsTotal);
+	var nextStatus = UserStatus.GetNextStatus(shoppingCart.ProductsTotal);
+	var currentStatus = UserStatus.GetStatus(Sitecore.Context.User);
+	var reachedStatus = UserStatus.GetStatus(shoppingCart.ProductsTotal);
+	var lineTotal = "0.00";
+	var discount = "0.00";
+	var shipping = "0.00";
+	var tax = "0.00";
+	var grandtotal = "0.00";
+	var total = "0.00";
+	var totalAmountSpentWithinAMonth = Order.GetTotalAmountOrderedWithinPeriod(Sitecore.Analytics.Tracker.Current.Contact, 30);
+	var maxAllowedTopendWithinAMonth = 500;
+	var maxAllowedWeight = 20;
+	if (shoppingCart != null && shoppingCart.Total > 0)
+	{
 
-        }
-        catch (Exception ex)
-        {
+		try
+		{
+
+			lineTotal = string.Format("{0:0.00}", shoppingCart.LineTotal);
+			discount = string.Format("{0:0.00}", shoppingCart.Discount);
+			shipping = string.Format("{0:0.00}", shoppingCart.Shipping);
+			tax = string.Format("{0:0.00}", shoppingCart.Tax);
+			grandtotal = string.Format("{0:0.00}", shoppingCart.GrandTotal);
+			total = string.Format("{0:0.00}", shoppingCart.ProductsTotal);
+
+		}
+		catch (Exception ex)
+		{
 
 
-        }
+		}
 
-    }
+	}
  }
 
 <!-- ==========================

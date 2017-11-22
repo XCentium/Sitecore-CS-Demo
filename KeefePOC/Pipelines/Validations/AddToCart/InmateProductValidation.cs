@@ -20,6 +20,12 @@ namespace KeefePOC.Pipelines.Validations.AddToCart
 		{
 			CartLinesRequest request = (CartLinesRequest)args.Request;
 
+			//if(args.Result.Success)
+			//{
+			//	args.Result.Success = false;
+			//	return;
+			//}
+
 			var inmateNumber = (string)request.Properties["InmateNumber"];
 
 			if(string.IsNullOrEmpty(inmateNumber))

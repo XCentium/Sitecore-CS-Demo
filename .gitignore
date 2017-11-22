@@ -176,3 +176,4 @@ CSDemo.CustomLaunchPad
 /CSDemo/Properties/PublishProfiles/Deployment.pubxml
 database/mongo/
 .vs/
+CSDemo/Properties/PublishProfiles/FolderProfile.pubxml

@@ -63,6 +63,7 @@
     <Compile Include="Models\State.cs" />
     <Compile Include="Pipelines\Providers\CartServiceProvider.cs" />
     <Compile Include="Pipelines\Validations\AddToCart\InmateProductValidation.cs" />
+    <Compile Include="Pipelines\Validations\ViewCart\CheckPromo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DemoFacilityRepository.cs" />
     <Compile Include="Repositories\DemoInmateRepository.cs" />

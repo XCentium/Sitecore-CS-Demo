@@ -37,6 +37,7 @@ using Sitecore.ContentSearch.Linq;
 using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data;
 using Sitecore.Diagnostics;
+using Sitecore.Commerce.Pipelines;
 
 namespace CSDemo.Models.Checkout.Cart
 {
@@ -46,7 +47,7 @@ namespace CSDemo.Models.Checkout.Cart
         public string DefaultCartName { get; set; }
 
         private readonly InventoryServiceProvider _inventoryServiceProvider = new InventoryServiceProvider();
-        private readonly CartServiceProvider _cartServiceProvider = new KeefePOC.Pipelines.Providers.CartServiceProvider();
+        private readonly KeefePOC.Pipelines.Providers.CartServiceProvider _cartServiceProvider = new KeefePOC.Pipelines.Providers.CartServiceProvider();
         private readonly PaymentServiceProvider _paymentServiceProvider = new PaymentServiceProvider();
         private readonly OrderServiceProvider _orderServiceProvider = new OrderServiceProvider();
         private readonly ContactFactory _contactFactory = new ContactFactory();
@@ -93,6 +94,16 @@ namespace CSDemo.Models.Checkout.Cart
             }
             return ret;
         }
+
+		public bool ViewCartPromo()
+		{
+			ServiceProviderRequest request = new ServiceProviderRequest();
+
+			var result =_cartServiceProvider.ViewCart(request);
+
+			return result.Success;
+			
+		}
 
         public CommerceCart AddToCart(CartLineItem cartLine)
         {
