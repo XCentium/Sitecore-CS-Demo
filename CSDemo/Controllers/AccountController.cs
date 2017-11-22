@@ -57,7 +57,10 @@ namespace CSDemo.Controllers
 
                 if (usr.Login(userName, model.Password, model.RememberMe))
                 {
-                    return Redirect(Constants.Common.ForwardSlash);
+                    if (string.IsNullOrEmpty(model.ReturnUrl))
+                        return Redirect(Constants.Common.ForwardSlash);
+                    else
+                        return Redirect(model.ReturnUrl);
                 }
 
             }

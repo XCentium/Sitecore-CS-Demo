@@ -77,6 +77,12 @@ namespace CSDemo.Models.Checkout.Cart
 
         public string AddProductToCart(string quantity, string productId, string catalogName, string variantId)
         {
+            var loggedIn = Sitecore.Context.User.IsAuthenticated;
+            if (!loggedIn)
+            {
+                return "Anonymous";
+            }
+
             var ret = string.Empty;
             // Create cart object
             var cartLineItem = new CartLineItem
@@ -95,15 +101,15 @@ namespace CSDemo.Models.Checkout.Cart
             return ret;
         }
 
-		public bool ViewCartPromo()
-		{
-			ServiceProviderRequest request = new ServiceProviderRequest();
+        public bool ViewCartPromo()
+        {
+            ServiceProviderRequest request = new ServiceProviderRequest();
 
-			var result =_cartServiceProvider.ViewCart(request);
+            var result = _cartServiceProvider.ViewCart(request);
 
-			return result.Success;
-			
-		}
+            return result.Success;
+
+        }
 
         public CommerceCart AddToCart(CartLineItem cartLine)
         {
@@ -128,8 +134,8 @@ namespace CSDemo.Models.Checkout.Cart
                 info.Refresh = true;
             }
 
-			// for testing
-			request.Properties.Add("InmateNumber", "123451");
+            // for testing
+            request.Properties.Add("InmateNumber", "123451");
 
             var cartResult = _cartServiceProvider.AddCartLines(request);
 
@@ -535,7 +541,7 @@ namespace CSDemo.Models.Checkout.Cart
                     cartItem.Quantity = (int)cartLine.Quantity;
                     cartItem.UnitPrice = product.Price.Amount;
 
-                    var total = (CommerceTotal) cartLine.Total;
+                    var total = (CommerceTotal)cartLine.Total;
                     cartItem.SubTotal = total.Subtotal;
                     cartItem.Amount = total.Amount;
                     cartItem.Discount = total.LineItemDiscountAmount;
@@ -1135,7 +1141,7 @@ namespace CSDemo.Models.Checkout.Cart
             var submitVisitorOrderRequest = new SubmitVisitorOrderRequest(updatedCart);
             var submitVisitorOrderResult = _orderServiceProvider.SubmitVisitorOrder(submitVisitorOrderRequest);
 
-            if (submitVisitorOrderResult.Success && submitVisitorOrderResult.Order != null 
+            if (submitVisitorOrderResult.Success && submitVisitorOrderResult.Order != null
                 && submitVisitorOrderResult.CartWithErrors == null)
             {
                 var order = submitVisitorOrderResult.Order as CommerceOrder;
@@ -2100,7 +2106,7 @@ namespace CSDemo.Models.Checkout.Cart
 
                 //4 - add shipping method
                 const string shippingMethodId = "e14965b9-306a-43c4-bffc-3c67be8726fa|Ground"; //TODO: update on prod, for demo only
-               
+
                 if (!AddShippingMethodToCart(shippingMethodId))
                     throw new Exception("AddShippingMethodToCart failed.");
 
@@ -2121,7 +2127,8 @@ namespace CSDemo.Models.Checkout.Cart
                 //6 - submit
                 var submitCartResult = SubmitCart();
 
-                if (!submitCartResult.Contains("Error")) { 
+                if (!submitCartResult.Contains("Error"))
+                {
                     result = new { success = true, orderId = submitCartResult };
                 }
 
@@ -2181,7 +2188,7 @@ namespace CSDemo.Models.Checkout.Cart
                                 groupSummary.WeightTotal += !string.IsNullOrWhiteSpace(product["weight"]) ? qty * double.Parse(product["weight"]) : 0;
 
                                 if (!isOverPriced)
-                                    isOverPriced =  groupSummary.PriceTotal > groupSummary.PriceLimit;
+                                    isOverPriced = groupSummary.PriceTotal > groupSummary.PriceLimit;
 
                                 if (!isOverWeight)
                                     isOverWeight = groupSummary.WeightTotal > groupSummary.WeightLimit;

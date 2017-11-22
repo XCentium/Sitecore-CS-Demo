@@ -50,6 +50,11 @@ namespace CSDemo.AJAX
         public string AddProductToCart(string quantity, string productId, string catalogName, string variantId, string contextItemId)
         {
             var ret = CartHelper.AddProductToCart(quantity, productId, catalogName, variantId);
+            if (ret == "Anonymous")
+            {
+                return ret;
+            }
+
             RegisterGoal(Constants.Marketing.AddToCartGoalId, contextItemId);
             return ret;
         }
@@ -75,7 +80,7 @@ namespace CSDemo.AJAX
             var user = Sitecore.Context.User;
             if (user.Domain.Name.ToLower() != "commerceusers") return ret;
 
-            
+
             if (newStatus == null)
                 return ret;
             var statuses = UserStatus.GetAllStatuses();
@@ -98,7 +103,7 @@ namespace CSDemo.AJAX
 
             return ret;
         }
-       
+
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public bool ApplyShippingAndBillingToCart(string firstname, string lastname, string email, string company,
@@ -254,7 +259,7 @@ namespace CSDemo.AJAX
         public string GetProducts(string[] productIds)
         {
             var products = new List<Product>();
-            foreach(var productId in productIds)
+            foreach (var productId in productIds)
             {
                 var product = Product.GetProduct(productId);
                 products.Add(product);
@@ -285,7 +290,7 @@ namespace CSDemo.AJAX
 
             return true;
         }
-    
+
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public bool ClearSessionTimeOutCookies()
@@ -308,14 +313,14 @@ namespace CSDemo.AJAX
             var productsResult = ProductHelper.GetProductsByName(query);
 
             if (productsResult == null || !productsResult.Any())
-                return new {success = true, total = products.Count, products};
+                return new { success = true, total = products.Count, products };
 
             foreach (var product in productsResult)
             {
-                products.Add(new {product.Id, product.CategoryName, product.CatalogId, product.Guid, product.Title, product.Price, product.CatalogName, product.ImageSrc, product.VariantId, product.Url, IsOnSale = product.IsOnSale, SalePrice = product.SalePrice });
+                products.Add(new { product.Id, product.CategoryName, product.CatalogId, product.Guid, product.Title, product.Price, product.CatalogName, product.ImageSrc, product.VariantId, product.Url, IsOnSale = product.IsOnSale, SalePrice = product.SalePrice });
             }
 
-            return new { success = true, total = products.Count , products };
+            return new { success = true, total = products.Count, products };
         }
 
         [WebMethod(EnableSession = true)]
@@ -344,14 +349,14 @@ namespace CSDemo.AJAX
             var categoriesResult = ProductHelper.GetCategoriesByName(query);
 
             if (categoriesResult == null || !categoriesResult.Any())
-                return new {success = true, total = categories.Count, products = categories};
+                return new { success = true, total = categories.Count, products = categories };
 
             foreach (var category in categoriesResult)
             {
-                categories.Add(new { category.Title, category.Url});
-                  
+                categories.Add(new { category.Title, category.Url });
+
             }
-            return new { success = true, total = categories.Count , categories };
+            return new { success = true, total = categories.Count, categories };
         }
 
 
@@ -372,8 +377,8 @@ namespace CSDemo.AJAX
                     categoryItem.GetChildren()
                         .Where(x => x.TemplateName == Constants.Products.GeneralCategoryTemplateName).ToList();
 
-                                
-                if (subCategories.Count >0 && subCategories.Any())
+
+                if (subCategories.Count > 0 && subCategories.Any())
                 {
                     foreach (var subCategory in subCategories)
                     {
@@ -381,7 +386,7 @@ namespace CSDemo.AJAX
 
                         if (gsubCategory.DefinitionName == "GeneralCategory")
                         {
-                            categories.Add(new {text = subCategory.Name, value = subCategory.Name  });
+                            categories.Add(new { text = subCategory.Name, value = subCategory.Name });
                         }
                     }
                 }
@@ -391,21 +396,21 @@ namespace CSDemo.AJAX
                         .Where(x => x.TemplateName != Constants.Products.GeneralCategoryTemplateName).ToList();
 
                 if (subProducts.Count <= 0 || !subProducts.Any())
-                    return new {success = true, id = category, categories, products};
+                    return new { success = true, id = category, categories, products };
 
                 foreach (var subProduct in subProducts)
                 {
                     var gsubProduct = GlassHelper.Cast<Product>(subProduct);
 
                     if (gsubProduct.DefinitionName == "GeneralCategory") continue;
-                        
+
                     var guid = ID.Parse(gsubProduct.ID).ToString();
 
-                    products.Add(new {cat = catalogId, text = gsubProduct.Title, pid = gsubProduct.ProductId, pguid = guid, img = gsubProduct.FirstImage, price = gsubProduct.Price, catName = catalogName });
+                    products.Add(new { cat = catalogId, text = gsubProduct.Title, pid = gsubProduct.ProductId, pguid = guid, img = gsubProduct.FirstImage, price = gsubProduct.Price, catName = catalogName });
                 }
             }
 
-            return new { success = true, id = category , categories, products };
+            return new { success = true, id = category, categories, products };
         }
 
 
@@ -424,7 +429,7 @@ namespace CSDemo.AJAX
 
             if (ret != null && ret.ToUpper().Contains("ERROR"))
             {
-                return new {success = false};
+                return new { success = false };
             }
 
             RegisterGoal(Constants.Marketing.AddToCartGoalId, contextItemId);
@@ -436,7 +441,8 @@ namespace CSDemo.AJAX
 
         private void RegisterGoal(string goalId, string itemId)
         {
-            try {
+            try
+            {
                 if (!Tracker.Current.IsActive)
                     Tracker.Current.StartTracking();
 
@@ -464,7 +470,7 @@ namespace CSDemo.AJAX
                 pageEventsRow.ItemId = contextItem.ID.Guid;
                 pageEventsRow.DataKey = contextItem.Paths.Path;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Sitecore.Diagnostics.Log.Error($"Unable to register goal with ID {goalId}.", ex);
             }

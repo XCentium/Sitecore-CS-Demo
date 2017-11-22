@@ -40,6 +40,7 @@
                                 <label for="RememberMe">Remember me</label>
                             </div>
                             <input type="hidden" value="false" name="RememberMe" />
+                            <input type="hidden" value="" id="ReturnUrl" name="ReturnUrl" />
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
                     </form>
@@ -62,3 +63,15 @@
 <!-- ==========================
     ACCOUNT - END
 =========================== -->
+<script type="text/javascript">
+    $(function () {
+        var getQueryString = function (field, url) {
+            var href = url ? url : window.location.href;
+            var reg = new RegExp('[?&]' + field + '=([^&#]*)', 'i');
+            var string = reg.exec(href);
+            return string ? string[1] : null;
+        };
+
+        $("#ReturnUrl").val(getQueryString("returnUrl"));
+    });
+</script>

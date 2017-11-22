@@ -468,6 +468,8 @@
                     showActionMessage("Product Added to Cart");
                     loadCart();
 
+                } else if (result.d === "Anonymous") {
+                    window.location.href = "/Account/Signin?returnUrl=" + window.location.pathname;
                 }
 
             },
