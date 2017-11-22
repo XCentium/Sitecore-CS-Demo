@@ -473,6 +473,7 @@
     <Compile Include="Models\Store\LocationInformation.cs" />
     <Compile Include="Models\Store\Store.cs" />
     <Compile Include="Models\Widgets\ExtraContentWidgetModel.cs" />
+    <Compile Include="Pipelines\Validations\AddToCart\ProductGroupValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\CustomLinkProvider.cs" />
     <Compile Include="Rules\Conditions\TotalItemsCondition.cs" />

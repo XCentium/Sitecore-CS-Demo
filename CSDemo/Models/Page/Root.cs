@@ -63,10 +63,13 @@ namespace CSDemo.Models.Page
         [SitecoreField(Fields.Catalog)]
         public virtual Item Catalog { get; set; }
 
+        [SitecoreField(Fields.Program)]
+        public virtual Guid ProgramId { get; set; }
+
         #endregion
 
 
-        #region Fields
+            #region Fields
         public struct Fields
         {
             public const string Title = "Title";
@@ -78,6 +81,7 @@ namespace CSDemo.Models.Page
             public const string RecommendationApiModelId = "ModelId";
             public const string RecommendationApiBuildId = "RecommendationsBuildId";
             public const string RecommendationApiFbtBuildId = "FBTBuildId";
+            public const string Program = "Program";
         }
         #endregion
     }
