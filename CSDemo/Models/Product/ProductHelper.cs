@@ -1408,5 +1408,71 @@ namespace CSDemo.Models.Product
                 return new List<Guid>();
             }
         }
+
+		public static List<string> GetFreeProducts()
+		{
+			//var query = "Free-";
+			var productList = new List<ProductMini>();
+
+			var catalogId = GetSiteRootCatalogId();
+
+			var catalogName = GetSiteRootCatalogName();
+
+			var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetProductSearchIndex());
+			try
+			{
+				using (var context = index.CreateSearchContext())
+				{
+
+					var queryable = context.GetQueryable<SearchResultItem>()
+							.Where(x => x.Language == Context.Language.Name);
+					
+
+						var products =
+							queryable.Where(
+								x =>
+									(x.Name.Contains("Promotional Items") || x["_displayname"].Contains("Promotional Goods")) &&
+									x.Path.Contains("/sitecore/commerce/catalog") &&
+									x["_latestversion"] == "1" &&
+									x["catalogname"] == GetSiteRootCatalogName() &&
+									x.TemplateName != "GeneralCategory").Page(0, 5).GetResults().ToList();
+
+					if (products != null && products.Any())
+					{
+						foreach (var searchResultItem in products)
+						{
+							try
+							{
+								var productItem = searchResultItem.Document.GetItem();
+								var product = GlassHelper.Cast<Product>(productItem);
+								var parentName = productItem.Parent.Name;
+
+								if (product.ProductId != null)
+								{
+									var variantId = "-1";
+									if (productItem.HasChildren)
+									{
+										var child = productItem.Children.FirstOrDefault();
+										variantId = child.Name;
+									}
+									productList.Add(new ProductMini { Id = product.ProductId, CategoryName = parentName, CatalogId = catalogId, Guid = ID.Parse(product.ID).ToString(), Title = product.Title, Price = product.Price, CatalogName = catalogName, ImageSrc = product.FirstImage, VariantId = variantId, Url = product.Url, IsOnSale = product.IsOnSale, SalePrice = product.SalePrice });
+								}
+							}
+							catch (Exception ex)
+							{
+								Log.Error(ex.StackTrace, ex);
+							}
+						}
+					}
+
+				}
+			}
+			catch (Exception ex)
+			{
+				Log.Error(ex.StackTrace, ex);
+			}
+			return null;
+
+		}
     }
 }
