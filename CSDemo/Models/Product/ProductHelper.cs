@@ -7,6 +7,7 @@ using CSDemo.Configuration;
 using CSDemo.Helpers;
 using CSDemo.Models.Account;
 using CSDemo.Models.Checkout.Cart;
+using CSDemo.Models.GeneralSearch;
 using CSDemo.Models.Page;
 using Glass.Mapper.Sc;
 using Sitecore;
@@ -217,40 +218,7 @@ namespace CSDemo.Models.Product
                 {
                     var catChildren = catItem.GetChildren().Select(x => x.GlassCast<Product>()).ToList(); //todo: refactor
 
-                    //filter by inmate restrictions
-                    if (catChildren.Count > 0)
-                    {
-                        //catChildren = 
-                        //    catChildren
-                        //    .Where(c => c.RestrictionFemale == InmateHelper.IsRestrictedFemale())
-                        //    .Where(c => c.RestrictionMale == InmateHelper.IsRestrictedFemale())
-                        //    .Where(c => c.RestrictionGlutenFree == InmateHelper.IsRestrictedGlutenFree())
-                        //    .Where(c => c.RestrictionKosher == InmateHelper.IsRestrictedKosher())
-                        //    .Where(c => c.RestrictionSugarFree == InmateHelper.IsRestrictedSugarFree())
-                        //    .ToList();
-
-                        //TODO: refactor
-                        if (InmateHelper.IsRestrictedMale())
-                        {
-                            catChildren = catChildren.Where(item => item.RestrictionMale).ToList();
-                        }
-                        if (InmateHelper.IsRestrictedFemale())
-                        {
-                            catChildren = catChildren.Where(item => item.RestrictionFemale).ToList();
-                        }
-                        if (InmateHelper.IsRestrictedSugarFree())
-                        {
-                            catChildren = catChildren.Where(item => item.RestrictionSugarFree).ToList();
-                        }
-                        if (InmateHelper.IsRestrictedKosher())
-                        {
-                            catChildren = catChildren.Where(item => item.RestrictionKosher).ToList();
-                        }
-                        if (InmateHelper.IsRestrictedGlutenFree())
-                        {
-                            catChildren = catChildren.Where(item => item.RestrictionGlutenFree).ToList();
-                        }
-                    }
+                    catChildren = ProductHelper.FilterProductsByRestrictions(catChildren);
 
                     model.TotalItems = catChildren.Count();
                     model.TotalPages = (long)Math.Ceiling((double)model.TotalItems / model.PageSize);
@@ -485,32 +453,7 @@ namespace CSDemo.Models.Product
                                 .Where(i => i.TemplateID.ToString() != Constants.Products.CategoriesTemplateId)
                                 .Select(GlassHelper.Cast<Product>).ToList();
 
-                            //TODO: refactor
-                            //filter based on restriction 
-                            if (categoryChildern.Count > 0)
-                            {
-                                //TODO: refactor
-                                if (InmateHelper.IsRestrictedMale())
-                                {
-                                    categoryChildern = categoryChildern.Where(item => item.RestrictionMale).ToList();
-                                }
-                                if (InmateHelper.IsRestrictedFemale())
-                                {
-                                    categoryChildern = categoryChildern.Where(item => item.RestrictionFemale).ToList();
-                                }
-                                if (InmateHelper.IsRestrictedSugarFree())
-                                {
-                                    categoryChildern = categoryChildern.Where(item => item.RestrictionSugarFree).ToList();
-                                }
-                                if (InmateHelper.IsRestrictedKosher())
-                                {
-                                    categoryChildern = categoryChildern.Where(item => item.RestrictionKosher).ToList();
-                                }
-                                if (InmateHelper.IsRestrictedGlutenFree())
-                                {
-                                    categoryChildern = categoryChildern.Where(item => item.RestrictionGlutenFree).ToList();
-                                }
-                            }
+                            categoryChildern = ProductHelper.FilterProductsByRestrictions(categoryChildern);
 
                             c.ProductsCount = categoryChildern.Count();
 
@@ -1407,6 +1350,94 @@ namespace CSDemo.Models.Product
                 Log.Error($"ProductHelper.GetProductGroups, Error = {ex.Message}", ex);
                 return new List<Guid>();
             }
+        }
+
+        public static IQueryable<CustomCommerceSearchResultItem> FilterProductsByRestrictions(IQueryable<CustomCommerceSearchResultItem> searchResults)
+        {
+            try
+            {
+                if (searchResults.ToList().Count > 0)
+                {
+                    searchResults = FilterByInmateRestrictions(searchResults);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error($"ProductHelper.FilterProductsByRestrictions(), Error = {e.Message}", e);
+            }
+
+            return searchResults;
+        }
+
+        public static List<Product> FilterProductsByRestrictions(List<Product> searchResults)
+        {
+            try
+            {
+                if (searchResults.Count > 0)
+                {
+                    searchResults = FilterByInmateRestrictions(searchResults);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error($"ProductHelper.FilterProductsByRestrictions(), Error = {e.Message}", e);
+            }
+
+            return searchResults;
+        }
+
+        private static IQueryable<CustomCommerceSearchResultItem> FilterByInmateRestrictions(IQueryable<CustomCommerceSearchResultItem> searchResults)
+        {
+            //TODO: refactor
+            if (InmateHelper.IsRestrictedMale())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionMale);
+            }
+            if (InmateHelper.IsRestrictedFemale())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionFemale);
+            }
+            if (InmateHelper.IsRestrictedSugarFree())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionSugarFree);
+            }
+            if (InmateHelper.IsRestrictedKosher())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionKosher);
+            }
+            if (InmateHelper.IsRestrictedGlutenFree())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionGlutenFree);
+            }
+
+            return searchResults;
+        }
+
+        private static List<Product> FilterByInmateRestrictions(List<Product> searchResults)
+        {
+            //TODO: refactor
+            if (InmateHelper.IsRestrictedMale())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionMale).ToList();
+            }
+            if (InmateHelper.IsRestrictedFemale())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionFemale).ToList();
+            }
+            if (InmateHelper.IsRestrictedSugarFree())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionSugarFree).ToList();
+            }
+            if (InmateHelper.IsRestrictedKosher())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionKosher).ToList();
+            }
+            if (InmateHelper.IsRestrictedGlutenFree())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionGlutenFree).ToList();
+            }
+
+            return searchResults;
         }
     }
 }

@@ -283,7 +283,6 @@ namespace CSDemo.Controllers
             var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
             var searchIndex = searchManager.GetIndex(ConfigurationHelper.GetProductSearchIndex());
             
-            //var searchIndex = ContentSearchManager.GetIndex(ConfigurationHelper.GetProductSearchIndex());
             using (var context = searchIndex.CreateSearchContext())
             {
                 var searchResults = context.GetQueryable<CustomCommerceSearchResultItem>()
@@ -291,39 +290,13 @@ namespace CSDemo.Controllers
                     .Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product)
                     .Where(item => item.CatalogName == catalogName)
                     .Where(item => item.Language == Sitecore.Context.Language.Name)
-                    //.Where(item => (!InmateHelper.IsRestrictedMale() || item.RestrictionMale))
-                    //.Where(item => (!InmateHelper.IsRestrictedFemale() || item.RestrictionFemale))
-                    //.Where(item => InmateHelper.IsRestrictedSugarFree() && item.RestrictionSugarFree == InmateHelper.IsRestrictedSugarFree())
-                    //.Where(item => InmateHelper.IsRestrictedKosher() && item.RestrictionKosher == InmateHelper.IsRestrictedKosher())
-                    //.Where(item => InmateHelper.IsRestrictedGlutenFree() && item.RestrictionGlutenFree == InmateHelper.IsRestrictedGlutenFree())
                     .Select(p => new CustomCommerceSearchResultItem()
                     {
                         ItemId = p.ItemId,
                         Uri = p.Uri
                     });
 
-                //TODO: refactor
-                if (InmateHelper.IsRestrictedMale())
-                {
-                    searchResults = searchResults.Where(item => item.RestrictionMale);
-                }
-                if (InmateHelper.IsRestrictedFemale())
-                {
-                    searchResults = searchResults.Where(item => item.RestrictionFemale);
-                }
-                if (InmateHelper.IsRestrictedSugarFree())
-                {
-                    searchResults = searchResults.Where(item => item.RestrictionSugarFree);
-                }
-                if (InmateHelper.IsRestrictedKosher())
-                {
-                    searchResults = searchResults.Where(item => item.RestrictionKosher);
-                }
-                if (InmateHelper.IsRestrictedGlutenFree())
-                {
-                    searchResults = searchResults.Where(item => item.RestrictionGlutenFree);
-                }
-
+                searchResults = ProductHelper.FilterProductsByRestrictions(searchResults);
                 searchResults = searchManager.AddSearchOptionsToQuery<CustomCommerceSearchResultItem>(searchResults, searchOptions);
 
                 var results = searchResults.GetResults();
