@@ -16,7 +16,7 @@ namespace KeefePOC.Models
             this.Id = facilityItem.ID.Guid.ToString();
             this.Name = facilityItem["Name"];
             this.ExternalId = facilityItem["External ID"];
-            this.FacilityType = (FacilityType)Enum.Parse(typeof(FacilityType), facilityItem["Facility Type"]);
+            //this.FacilityType = (FacilityType)Enum.Parse(typeof(FacilityType), facilityItem["Facility Type"]); TODO: fix
             Sitecore.Data.Fields.CheckboxField hippa = facilityItem.Fields["HIPPA Facility"];
             this.IsHippa = hippa.Checked;
         }

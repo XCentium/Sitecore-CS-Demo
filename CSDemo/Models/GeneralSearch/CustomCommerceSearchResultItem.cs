@@ -9,6 +9,21 @@ namespace CSDemo.Models.GeneralSearch
     public class CustomCommerceSearchResultItem : CommerceProductSearchResultItem
     {
         [IndexField("commerceproducttags")]
-        public List<string> ProductTags { get; set; } 
+        public List<string> ProductTags { get; set; }
+
+        [IndexField("male")]
+        public bool RestrictionMale { get; set; }
+
+        [IndexField("female")]
+        public bool RestrictionFemale { get; set; }
+
+        [IndexField("sugarfree")]
+        public bool RestrictionSugarFree { get; set; }
+
+        [IndexField("kosher")]
+        public bool RestrictionKosher { get; set; }
+
+        [IndexField("glutenfree")]
+        public bool RestrictionGlutenFree { get; set; }
     }
 }

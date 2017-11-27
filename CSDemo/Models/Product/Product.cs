@@ -387,6 +387,18 @@ namespace CSDemo.Models.Product
         public virtual string Album { get; set; }
         public virtual string Length { get; set; }
 
+
+        [SitecoreField(Fields.Male)]
+        public virtual bool RestrictionMale { get; set; }
+        [SitecoreField(Fields.Female)]
+        public virtual bool RestrictionFemale { get; set; }
+        [SitecoreField(Fields.Kosher)]
+        public virtual bool RestrictionKosher { get; set; }
+        [SitecoreField(Fields.GlutenFree)]
+        public virtual bool RestrictionGlutenFree { get; set; }
+        [SitecoreField(Fields.SugarFree)]
+        public virtual bool RestrictionSugarFree { get; set; }
+
         #endregion
 
         #region Fieldname Mappings
@@ -427,6 +439,11 @@ namespace CSDemo.Models.Product
             public const string GlassColor = "GlassColor";
             public const string Stores = "Store Location";
             public const string SortId = "SortId";
+            public const string Male = "Male";
+            public const string Female = "Female";
+            public const string Kosher = "Kosher";
+            public const string GlutenFree = "GlutenFree";
+            public const string SugarFree = "SugarFree";
         }
 
         #endregion

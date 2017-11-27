@@ -19,6 +19,8 @@ using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 using Sitecore.SecurityModel;
 using System;
+using CSDemo.Configuration;
+using CSDemo.Helpers;
 
 #endregion
 
@@ -133,10 +135,12 @@ namespace CSDemo.Controllers
             int pageSize, CommerceConstants.SortDirection? sortDirection)
         {
             var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
-            var searchInfo = new SearchInfo();
-                                                                    
-            searchInfo.SearchQuery = searchKeyword ?? string.Empty;                       
-            searchInfo.CatalogName = ProductHelper.GetSiteRootCatalogName();
+            var searchInfo = new SearchInfo
+            {
+                SearchQuery = searchKeyword ?? string.Empty,
+                CatalogName = ProductHelper.GetSiteRootCatalogName()
+            };
+
             var facetItem = _context.GetCurrentItem<Item>();
             searchInfo.RequiredFacets = searchManager.GetFacetFieldsForItem(facetItem);
             searchInfo.ItemsPerPage = pageSize;
@@ -275,8 +279,10 @@ namespace CSDemo.Controllers
             CommerceSearchOptions searchOptions)
         {
             Assert.ArgumentNotNullOrEmpty(catalogName, "catalogName");
+
             var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
-            var searchIndex = searchManager.GetIndex(catalogName);
+            var searchIndex = searchManager.GetIndex(ConfigurationHelper.GetProductSearchIndex());
+            
             using (var context = searchIndex.CreateSearchContext())
             {
                 var searchResults = context.GetQueryable<CustomCommerceSearchResultItem>()
@@ -290,12 +296,12 @@ namespace CSDemo.Controllers
                         Uri = p.Uri
                     });
 
-               
+                searchResults = ProductHelper.FilterProductsByRestrictions(searchResults);
+                searchResults = searchManager.AddSearchOptionsToQuery<CustomCommerceSearchResultItem>(searchResults, searchOptions);
 
-                searchResults = searchManager.AddSearchOptionsToQuery<CustomCommerceSearchResultItem>(searchResults,
-                    searchOptions);
                 var results = searchResults.GetResults();
                 var response = SearchResponse.CreateFromSearchResultsItems(searchOptions, results);
+
                 return response;
             }
         }

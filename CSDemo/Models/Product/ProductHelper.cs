@@ -7,6 +7,7 @@ using CSDemo.Configuration;
 using CSDemo.Helpers;
 using CSDemo.Models.Account;
 using CSDemo.Models.Checkout.Cart;
+using CSDemo.Models.GeneralSearch;
 using CSDemo.Models.Page;
 using Glass.Mapper.Sc;
 using Sitecore;
@@ -216,6 +217,8 @@ namespace CSDemo.Models.Product
                 if (catItem.HasChildren)
                 {
                     var catChildren = catItem.GetChildren().Select(x => x.GlassCast<Product>()).ToList(); //todo: refactor
+
+                    catChildren = ProductHelper.FilterProductsByRestrictions(catChildren);
 
                     model.TotalItems = catChildren.Count();
                     model.TotalPages = (long)Math.Ceiling((double)model.TotalItems / model.PageSize);
@@ -445,21 +448,23 @@ namespace CSDemo.Models.Product
                             //  var i = 0;
                             //   if (2 < i)
                             //   {
-                            var categoryChildern = category.GetChildren();
+                            var categoryChildern = category
+                                .GetChildren()
+                                .Where(i => i.TemplateID.ToString() != Constants.Products.CategoriesTemplateId)
+                                .Select(GlassHelper.Cast<Product>).ToList();
+
+                            categoryChildern = ProductHelper.FilterProductsByRestrictions(categoryChildern);
+
                             c.ProductsCount = categoryChildern.Count();
-                            var pList = new List<ProductMenulistViewModel>();
-                            foreach (Item categoryChild in categoryChildern)
-                            {
-                                if (categoryChild.TemplateID.ToString() != Constants.Products.CategoriesTemplateId)
+
+                            var pList = categoryChildern.Select(categoryChild => new ProductMenulistViewModel
                                 {
-                                    var p = new ProductMenulistViewModel();
-                                    p.Name = categoryChild.DisplayName;
-                                    p.Url = LinkManager.GetItemUrl(categoryChild);
-                                    pList.Add(p);
-                                }
-                            }
+                                    Name = categoryChild.Title,
+                                    Url = categoryChild.Url
+                                })
+                                .ToList();
+
                             c.ProductMenulistViewModel = pList;
-                            //  }
                             categoryMenulistViewModel.Add(c);
                         }
                     }
@@ -498,6 +503,8 @@ namespace CSDemo.Models.Product
                                     x =>
                                         (x.TemplateName == "GeneralCategory") && x.Path.Contains(catParentItem.Paths.Path)
                                          ).ToList();
+
+
 
                             if (result.Any())
                             {
@@ -1344,5 +1351,159 @@ namespace CSDemo.Models.Product
                 return new List<Guid>();
             }
         }
+
+        public static IQueryable<CustomCommerceSearchResultItem> FilterProductsByRestrictions(IQueryable<CustomCommerceSearchResultItem> searchResults)
+        {
+            try
+            {
+                if (searchResults.ToList().Count > 0)
+                {
+                    searchResults = FilterByInmateRestrictions(searchResults);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error($"ProductHelper.FilterProductsByRestrictions(), Error = {e.Message}", e);
+            }
+
+            return searchResults;
+        }
+
+        public static List<Product> FilterProductsByRestrictions(List<Product> searchResults)
+        {
+            try
+            {
+                if (searchResults.Count > 0)
+                {
+                    searchResults = FilterByInmateRestrictions(searchResults);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error($"ProductHelper.FilterProductsByRestrictions(), Error = {e.Message}", e);
+            }
+
+            return searchResults;
+        }
+
+        private static IQueryable<CustomCommerceSearchResultItem> FilterByInmateRestrictions(IQueryable<CustomCommerceSearchResultItem> searchResults)
+        {
+            //TODO: refactor
+            if (InmateHelper.IsRestrictedMale())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionMale);
+            }
+            if (InmateHelper.IsRestrictedFemale())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionFemale);
+            }
+            if (InmateHelper.IsRestrictedSugarFree())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionSugarFree);
+            }
+            if (InmateHelper.IsRestrictedKosher())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionKosher);
+            }
+            if (InmateHelper.IsRestrictedGlutenFree())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionGlutenFree);
+            }
+
+            return searchResults;
+        }
+
+        private static List<Product> FilterByInmateRestrictions(List<Product> searchResults)
+        {
+            //TODO: refactor
+            if (InmateHelper.IsRestrictedMale())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionMale).ToList();
+            }
+            if (InmateHelper.IsRestrictedFemale())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionFemale).ToList();
+            }
+            if (InmateHelper.IsRestrictedSugarFree())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionSugarFree).ToList();
+            }
+            if (InmateHelper.IsRestrictedKosher())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionKosher).ToList();
+            }
+            if (InmateHelper.IsRestrictedGlutenFree())
+            {
+                searchResults = searchResults.Where(item => item.RestrictionGlutenFree).ToList();
+            }
+
+            return searchResults;
+        }
+
+		public static List<string> GetFreeProducts()
+		{
+			//var query = "Free-";
+			var productList = new List<ProductMini>();
+
+			var catalogId = GetSiteRootCatalogId();
+
+			var catalogName = GetSiteRootCatalogName();
+
+			var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetProductSearchIndex());
+			try
+			{
+				using (var context = index.CreateSearchContext())
+				{
+
+					var queryable = context.GetQueryable<SearchResultItem>()
+							.Where(x => x.Language == Context.Language.Name);
+					
+
+						var products =
+							queryable.Where(
+								x =>
+									(x.Name.Contains("Promotional Items") || x["_displayname"].Contains("Promotional Goods")) &&
+									x.Path.Contains("/sitecore/commerce/catalog") &&
+									x["_latestversion"] == "1" &&
+									x["catalogname"] == GetSiteRootCatalogName() &&
+									x.TemplateName != "GeneralCategory").Page(0, 5).GetResults().ToList();
+
+					if (products != null && products.Any())
+					{
+						foreach (var searchResultItem in products)
+						{
+							try
+							{
+								var productItem = searchResultItem.Document.GetItem();
+								var product = GlassHelper.Cast<Product>(productItem);
+								var parentName = productItem.Parent.Name;
+
+								if (product.ProductId != null)
+								{
+									var variantId = "-1";
+									if (productItem.HasChildren)
+									{
+										var child = productItem.Children.FirstOrDefault();
+										variantId = child.Name;
+									}
+									productList.Add(new ProductMini { Id = product.ProductId, CategoryName = parentName, CatalogId = catalogId, Guid = ID.Parse(product.ID).ToString(), Title = product.Title, Price = product.Price, CatalogName = catalogName, ImageSrc = product.FirstImage, VariantId = variantId, Url = product.Url, IsOnSale = product.IsOnSale, SalePrice = product.SalePrice });
+								}
+							}
+							catch (Exception ex)
+							{
+								Log.Error(ex.StackTrace, ex);
+							}
+						}
+					}
+
+				}
+			}
+			catch (Exception ex)
+			{
+				Log.Error(ex.StackTrace, ex);
+			}
+			return null;
+
+		}
     }
 }

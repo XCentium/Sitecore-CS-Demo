@@ -1,20 +1,16 @@
 ﻿using CSDemo.Models.InmateSearch;
-using CSDemo.Models.LandingPage;
 using KeefePOC.Interfaces.Services;
 using KeefePOC.Models;
 using KeefePOC.Repositories;
 using KeefePOC.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using CSDemo.Helpers;
 
 namespace CSDemo.Controllers
 {
     public class InmateSearchController : Controller
     {
-        IDataService dataService = new KeefeDataService(new DemoFacilityRepository(), new DemoProgramRepository(), new DemoInmateRepository());
+        private readonly IDataService _dataService = new KeefeDataService(new DemoFacilityRepository(), new DemoProgramRepository(), new DemoInmateRepository());
         const string ProgramTemplateId = "{3D80C537-D7A4-4DBB-9C1B-B2B810F0A2C8}";
         const string FacilityTemplateId = "{E2232845-B8A5-4651-BA44-0CB1ED54AA9E}";
         const string ProgramLocation = "/sitecore/content/Global Configuration/Programs";
@@ -44,13 +40,13 @@ namespace CSDemo.Controllers
 
             if (string.IsNullOrEmpty(facilityId))
             {
-                var inmate = dataService.GetInmate(inmateId);
+                var inmate = _dataService.GetInmate(inmateId);
                 model.SelectedInmate = inmate;
                 model.SelectedFacility = new Facility();
             }
             else
             {
-                var inmate = dataService.GetInmate(facilityId, inmateId);
+                var inmate = _dataService.GetInmate(facilityId, inmateId);
                 model.SelectedInmate = inmate;
                 var facility = Sitecore.Context.Database.GetItem(facilityId);
                 model.SelectedFacility = new KeefePOC.Models.Facility(facility);
@@ -66,14 +62,15 @@ namespace CSDemo.Controllers
             Inmate inmate;
             if (model.SelectedFacility == null || string.IsNullOrEmpty(model.SelectedFacility.Id))
             {
-                inmate = dataService.GetInmate(model.SelectedInmateId);
+                inmate = _dataService.GetInmate(model.SelectedInmateId);
             }
             else
             {
-                inmate = dataService.GetInmate(model.SelectedFacility.Id, model.SelectedInmateId);
+                inmate = _dataService.GetInmate(model.SelectedFacility.Id, model.SelectedInmateId);
             }
 
-            Session["SELECTED_INMATE"] = inmate;
+            FacilityHelper.SaveSelectedFacility(model.SelectedFacility);
+            InmateHelper.SaveSelectedInmate(inmate);
 
             return Redirect("/");
         }
