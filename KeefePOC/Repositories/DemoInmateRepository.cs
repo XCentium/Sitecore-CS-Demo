@@ -24,7 +24,7 @@ namespace KeefePOC.Repositories
 
         public Inmate GetInmate(string inmateNumber)
         {
-            return DemoInmates.First();
+            return DemoInmates.First(i => i.InmateNumber == inmateNumber);
         }
 
 		public List<string> GetBlacklistedItemsForInmate(string inmateId)
@@ -54,7 +54,7 @@ namespace KeefePOC.Repositories
 
         public Inmate GetInmate(string facilityId, string inmateNumber)
         {
-            return DemoInmates.First();
+            return DemoInmates.First(i => i.InmateNumber == inmateNumber);
         }
 
         public List<Inmate> GetInmates(string facilityId)

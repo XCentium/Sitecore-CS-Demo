@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using KeefePOC.Models;
 using KeefePOC.Repositories;
 using KeefePOC.Services;
 
@@ -10,14 +11,23 @@ namespace CSDemo.Helpers
     {
         public static string GetSelectedInmateId()
         {
-            return HttpContext.Current?.Session["SELECTED_INMATE"]?.ToString();
+            return GetSelectedInmate()?.InmateNumber;
+        }
+
+        public static Inmate GetSelectedInmate()
+        {
+            return HttpContext.Current?.Session["SELECTED_INMATE"] as Inmate;
+        }
+
+        public static void SaveSelectedInmate(Inmate inmate)
+        {
+            HttpContext.Current.Session["SELECTED_INMATE"] = inmate;
         }
 
         public static List<string> GetProductRestrictions()
         {
-            //var inmateId = GetSelectedInmateId();
-            var inmateId = "123451"; //TODO: remove hardcoded inmateId
-
+            var inmateId = GetSelectedInmateId();
+            
             if (string.IsNullOrWhiteSpace(inmateId))
                 return new List<string>();
 
