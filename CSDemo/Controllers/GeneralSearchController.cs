@@ -289,17 +289,21 @@ namespace CSDemo.Controllers
                     .Where(item => item.Content.Contains(keyword) || item.ProductTags.Contains(keyword))
                     .Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product)
                     .Where(item => item.CatalogName == catalogName)
-                    .Where(item => item.Language == Sitecore.Context.Language.Name)
+                    .Where(item => item.Language == Sitecore.Context.Language.Name);
+
+                searchResults = ProductHelper.FilterProductsByRestrictions(searchResults);
+
+                searchResults = searchResults
                     .Select(p => new CustomCommerceSearchResultItem()
                     {
                         ItemId = p.ItemId,
                         Uri = p.Uri
                     });
 
-                searchResults = ProductHelper.FilterProductsByRestrictions(searchResults);
                 searchResults = searchManager.AddSearchOptionsToQuery<CustomCommerceSearchResultItem>(searchResults, searchOptions);
 
                 var results = searchResults.GetResults();
+
                 var response = SearchResponse.CreateFromSearchResultsItems(searchOptions, results);
 
                 return response;

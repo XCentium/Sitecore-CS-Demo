@@ -36,8 +36,14 @@ namespace KeefePOC.Models
 			c.Products = new List<string>() { "Doritos-8-oz-Nacho-Cheese-Chips" };
 			Blacklist.Add(c);
 
+		    c = new InmateCatalog();
 
-			var str = Newtonsoft.Json.JsonConvert.SerializeObject(Blacklist);			
+		    c.InmateId = "123456";
+		    c.Products = new List<string>() { "3-Musketeers-1-92-oz-Bar" };
+		    Blacklist.Add(c);
+
+
+            var str = Newtonsoft.Json.JsonConvert.SerializeObject(Blacklist);			
 		}
 	}
 
