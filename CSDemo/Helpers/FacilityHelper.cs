@@ -12,7 +12,7 @@ namespace CSDemo.Helpers
 {
     public class FacilityHelper
     {
-        public static List<Category> GetProgramProductCateogoryBlacklist()
+        public static List<Category> GetProgramProductCategoryBlacklist()
         {
             var blacklist = new List<Category>();
 
