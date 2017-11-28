@@ -1362,11 +1362,38 @@ namespace CSDemo.Models.Product
                 {
                     searchResults = FilterByFacilityBlacklist(searchResults);
                     searchResults = FilterByInmateRestrictions(searchResults);
+                    searchResults = FilterByInmateBlacklist(searchResults);
                 }
             }
             catch (Exception e)
             {
                 Log.Error($"ProductHelper.FilterProductsByRestrictions(), Error = {e.Message}", e);
+            }
+
+            return searchResults;
+        }
+
+        private static IQueryable<CustomCommerceSearchResultItem> FilterByInmateBlacklist(IQueryable<CustomCommerceSearchResultItem> searchResults)
+        {
+            try
+            {
+                if (searchResults == null || searchResults.ToList().Count <= 0)
+                    return searchResults;
+
+                var productBlacklistIds = InmateHelper.GetProductBlacklist();
+                if (productBlacklistIds != null && productBlacklistIds.Count > 0)
+                {
+                    //TODO: refactor, running to errors using .ANY with LINQ to Sitecore
+                    foreach (var productBlacklistId in productBlacklistIds)
+                    {
+                        searchResults = searchResults
+                            .Where(sr => !sr.Name.Contains(productBlacklistId.ToLower()));
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error($"ProductHelper.FilterByInmateBlacklist(), Error = {e.Message}", e);
             }
 
             return searchResults;
@@ -1380,11 +1407,38 @@ namespace CSDemo.Models.Product
                 {
                     searchResults = FilterByFacilityBlacklist(searchResults);
                     searchResults = FilterByInmateRestrictions(searchResults);
+                    searchResults = FilterByInmateBlacklist(searchResults);
                 }
             }
             catch (Exception e)
             {
                 Log.Error($"ProductHelper.FilterProductsByRestrictions(), Error = {e.Message}", e);
+            }
+
+            return searchResults;
+        }
+
+        private static List<Product> FilterByInmateBlacklist(List<Product> searchResults)
+        {
+            try
+            {
+                if (searchResults == null || searchResults.ToList().Count <= 0)
+                    return searchResults;
+
+                var productBlacklistIds = InmateHelper.GetProductBlacklist();
+                if (productBlacklistIds != null && productBlacklistIds.Count > 0)
+                {
+                    //TODO: refactor, running to errors using .ANY with LINQ to Sitecore
+                    foreach (var productBlacklistId in productBlacklistIds)
+                    {
+                        searchResults = searchResults
+                            .Where(sr => !sr.ProductId.ToLower().Contains(productBlacklistId.ToLower())).ToList();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error($"ProductHelper.FilterByInmateBlacklist(), Error = {e.Message}", e);
             }
 
             return searchResults;

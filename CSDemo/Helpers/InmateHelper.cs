@@ -27,7 +27,7 @@ namespace CSDemo.Helpers
         public static List<string> GetProductRestrictions()
         {
             var inmateId = GetSelectedInmateId();
-            
+
             if (string.IsNullOrWhiteSpace(inmateId))
                 return new List<string>();
 
@@ -68,6 +68,17 @@ namespace CSDemo.Helpers
             var restrictions = GetProductRestrictions();
 
             return restrictions != null && restrictions.Any(r => r.Contains("glutenfree"));
+        }
+
+        public static List<string> GetProductBlacklist()
+        {
+            var inmateId = GetSelectedInmateId();
+
+            if (string.IsNullOrWhiteSpace(inmateId))
+                return new List<string>();
+
+            var svc = new KeefeDataService(new DemoFacilityRepository(), new DemoProgramRepository(), new DemoInmateRepository());
+            return svc.GetBlacklistedItemsForInmate(inmateId);
         }
     }
 }

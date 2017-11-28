@@ -29,7 +29,7 @@ namespace KeefePOC.Repositories
 
 		public List<string> GetBlacklistedItemsForInmate(string inmateId)
 		{
-			BlackListedProductsForInmateModel model = new BlackListedProductsForInmateModel();
+			var model = new BlackListedProductsForInmateModel();
 			model.PopulateSampleData();
 
 			foreach(var item in model.Blacklist)
