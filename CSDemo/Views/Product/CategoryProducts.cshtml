@@ -1,11 +1,13 @@
 ﻿@using CSDemo
+@using System.Linq
+
 @inherits Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Models.Product.CategoryProductViewModel>
 
 @using System.Data.Linq
 
 @if (Model != null)
 {
-    var currentCat = 0;
+    var currentCat = 1;
 
     if (Model.CategoryMenulist != null)
     {
@@ -23,14 +25,17 @@
                     </h3>
                     <div class="collapse in" id="widget-categories-collapse" aria-expanded="true" role="tabpanel">
                         <div class="widget-body">
-
+                            
                             <ul class="list-unstyled" id="categories" role="tablist" aria-multiselectable="true">
 
-                                @foreach (var cat in Model.CategoryMenulist)
+                                @foreach (var cat in Model.CategoryMenulist.Skip(1))
                                 {
+
+
                                     var cid = Model.CategoryMenulist.Count(c => c.Name == cat.Name) > 1 ? string.Format("?cid={0}", cat.ID.ToString()) : string.Empty;
 
                                     currentCat++;
+
 
                                     var listClass = "class=collapsed";
                                     var ariaExpand = "false";
@@ -38,7 +43,9 @@
                                     if (!String.IsNullOrEmpty(cat.Name))
                                     {
 
-                                        if (cat.Name.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase))
+                                        if (cat.Name.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase) || 
+                                                        cat.ParentName.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase) || 
+                                                        (cat.ProductMenulistViewModel != null && cat.ProductMenulistViewModel.Any(c => c.Name.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase))))
                                         {
                                             listClass = " ";
                                             ariaExpand = "true";
@@ -46,22 +53,33 @@
                                         }
 
                                         var catProducts = cat.ProductMenulistViewModel;
-
+                                        if (catProducts.Any())
+                                        {
                                         <li class="panel">
-                                           
                                             <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name</a>
+
                                             <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">
 
                                                 <li><a href="@cat.Url@cid"><span class="fa fa-arrow-right"></span></a></li>
                                                     @if (catProducts != null)
                                                     {
                                                         foreach (CSDemo.Models.Product.ProductMenulistViewModel catProduct in catProducts)
-                                                        {                                                  
-                                                            <li><a href="@catProduct.Url">@catProduct.Name</a></li>
+                                                        {
+                                                            if (catProduct.Name.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase))
+                                                            {
+
+                                                                <li><a href="@catProduct.Url"><strong>@catProduct.Name</strong></a></li>
+                                                            }
+                                                            else
+                                                            {
+                                                                <li><a href="@catProduct.Url">@catProduct.Name</a></li>
+
+                                                            }
                                                         }
                                                     }
                                             </ul>
                                         </li>
+                                        }
                                     }
                                 }
                             </ul>
@@ -176,7 +194,7 @@
                                         </div>
                                         <div class="col-sm-9">
                                             <div class="product-body" style="height: 146px">
-                                                <h3>@product.Title <span>Collection</span></h3>
+                                                <h3>@product.Title </h3>
                                             </div>
                                         </div>
                                     </div>
@@ -230,7 +248,7 @@
                                     </div>
                                     <div class="col-sm-9">
                                         <div class="product-body">
-                                            <h3>@product.Title</h3>
+                                            <h3><a href="@product.Url">@product.Title</a></h3>
                                             <div class="product-labels">
                                                 @if (product.IsNew)
                                                 {
@@ -261,7 +279,7 @@
                                                 }
                                             </span>
                                             <p>@product.Description</p>
-                                            @Html.Partial("~/Views/Product/_ComparisonControl.cshtml", product)
+                                            @*@Html.Partial("~/Views/Product/_ComparisonControl.cshtml", product)*@
                                         </div>
                                     </div>
                                 </div>

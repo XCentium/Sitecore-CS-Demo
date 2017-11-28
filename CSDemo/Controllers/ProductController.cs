@@ -68,7 +68,7 @@ namespace CSDemo.Controllers
 
                 var productSamplerFolder = Context.Database.GetItem(datasourceId);
                 var productSamplers = productSamplerFolder.Children.Select(GlassHelper.Cast<ProductSampler>).ToList();
-                
+
                 return View(productSamplers);
             }
             catch (Exception ex)
@@ -189,6 +189,19 @@ namespace CSDemo.Controllers
                 var categoryName = WebUtil.GetUrlName(0);
                 var cid = Request.QueryString[Constants.Products.CategoryId];
 
+                Item item = Sitecore.Context.Item;
+                Sitecore.Data.Database contextDB = Sitecore.Configuration.Factory.GetDatabase(item.Database.Name);
+                var siteName = Sitecore.Context.Site.ContentStartPath;
+                var siteNode = contextDB.GetItem(siteName);
+                var programId = siteNode["Program"];
+                var program = contextDB.GetItem(programId);
+                var mainCategoryId = program["Catalog"];
+                if (string.IsNullOrEmpty(cid))
+                {
+                    if (categoryName.Equals("departments", StringComparison.OrdinalIgnoreCase))
+                        cid = mainCategoryId;
+                }
+
                 model.Category = categoryName;
                 model.UserCatalogIds = _userCatalogIds;
 
@@ -199,7 +212,7 @@ namespace CSDemo.Controllers
                     {
                         if (!categoryName.ToLower().Contains(_catalogPostFix.ToLower()))
                         {
-                            categoryProduct = GetCategoryProducts(cid, categoryName + _catalogPostFix);
+                            categoryProduct = GetCategoryProducts(cid, categoryName + _catalogPostFix, mainCategoryId);
 
                             if (categoryProduct != null && categoryProduct.PaginationViewModel.TotalItems > 0)
                             {
@@ -208,7 +221,7 @@ namespace CSDemo.Controllers
                         }
                     }
 
-                    categoryProduct = GetCategoryProducts(cid, categoryName);
+                    categoryProduct = GetCategoryProducts(cid, categoryName, mainCategoryId);
                 }
             }
             else
@@ -223,7 +236,7 @@ namespace CSDemo.Controllers
             return View(categoryProduct);
         }
 
-        private CategoryProductViewModel GetCategoryProducts(string cid, string categoryName)
+        private CategoryProductViewModel GetCategoryProducts(string cid, string categoryName, string mainCategoryId)
         {
             var model = new PaginationViewModel
             {
@@ -261,7 +274,7 @@ namespace CSDemo.Controllers
                     model.CurrentPage = 1;
                     model.OrderBy = string.Empty;
 
-                    return ProductHelper.GetCategoryProducts(model, false);
+                    return ProductHelper.GetCategoryProducts(model, false, mainCategoryId);
                 }
             }
 
@@ -322,11 +335,11 @@ namespace CSDemo.Controllers
                 {
                     var item = Context.Database.GetItem(ConfigurationHelper.GetSiteSettingInfo("Wildcard"));
 
-					if (item != null)
-					{
-						SearchForProduct(item, id, products);
-						if (products.Count > MaxNumberOfProductsToShow) break;
-					}
+                    if (item != null)
+                    {
+                        SearchForProduct(item, id, products);
+                        if (products.Count > MaxNumberOfProductsToShow) break;
+                    }
                 }
             }
             return products;

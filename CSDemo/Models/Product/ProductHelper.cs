@@ -28,6 +28,7 @@ using Sitecore.Diagnostics;
 using Sitecore.Links;
 using Convert = System.Convert;
 using Log = Sitecore.Diagnostics.Log;
+using Sitecore.Collections;
 
 #endregion
 
@@ -202,11 +203,14 @@ namespace CSDemo.Models.Product
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        internal static CategoryProductViewModel GetCategoryProducts(PaginationViewModel model, bool includeVariants = true)
+        internal static CategoryProductViewModel GetCategoryProducts(PaginationViewModel model, bool includeVariants = true, string mainCategoryId = "")
         {
             var categoryProductVm = new CategoryProductViewModel { PaginationViewModel = model };
             var category = new Category();
-            categoryProductVm.CategoryMenulist = GetCategoryMenuList(model.CategoryId);
+            if (mainCategoryId == "")
+                categoryProductVm.CategoryMenulist = GetCategoryMenuList(model.CategoryId);
+            else
+                categoryProductVm.CategoryMenulist = GetCategoryMenuList(mainCategoryId);
 
             var searchedItem = GetSearchResultItemById(model.CategoryId);
             if (searchedItem != null)
@@ -216,8 +220,41 @@ namespace CSDemo.Models.Product
 
                 if (catItem.HasChildren)
                 {
-                    var catChildren = catItem.GetChildren().Select(x => x.GlassCast<Product>()).ToList(); //todo: refactor
+                    var childrenList = new List<Product>();
 
+                    foreach (Item subcat in catItem.GetChildren())
+                    {
+                        if (subcat.TemplateName == "GeneralCategory")
+                        {
+                            foreach (Item prod in subcat.GetChildren())
+                            {
+                                if (prod.TemplateName == "GeneralCategory")
+                                {
+                                    foreach (Item subProd in prod.GetChildren())
+                                    {
+                                        var productItem = subProd.GlassCast<Product>();
+                                        childrenList.Add(productItem);
+                                    }
+                                }
+                                else
+                                {
+                                    var productItem = prod.GlassCast<Product>();
+                                    childrenList.Add(productItem);
+                                }
+                            }
+                        }
+                        else
+                        {
+
+                            var productItem = subcat.GlassCast<Product>();
+                            childrenList.Add(productItem);
+
+                        }
+
+                    }
+                    //var catChildren = catItem.GetChildren().Select(x => x.GlassCast<Product>()).ToList(); //todo: refactor
+
+                    var catChildren = childrenList;
                     catChildren = ProductHelper.FilterProductsByRestrictions(catChildren);
 
                     model.TotalItems = catChildren.Count();
@@ -276,6 +313,7 @@ namespace CSDemo.Models.Product
                 }
             }
             categoryProductVm.Category = category;
+            categoryProductVm.ParentCategory = category.ParentCategories;
             return categoryProductVm;
         }
 
@@ -440,6 +478,10 @@ namespace CSDemo.Models.Product
                             var c = new CategoryMenulistViewModel();
                             c.ID = category.ID.ToString();
                             c.Name = category.Name;
+                            if (category.Parent != null && !category.Parent.Name.Equals("departments", StringComparison.OrdinalIgnoreCase) && !category.Parent.Name.Equals("ca", StringComparison.OrdinalIgnoreCase))
+                                c.ParentName = category.Parent.Name;
+                            else
+                                c.ParentName = string.Empty;
                             //c.Url = LinkManager.GetItemUrl(category);
                             c.Url = "/categories/" + c.Name;
 
@@ -450,7 +492,7 @@ namespace CSDemo.Models.Product
                             //   {
                             var categoryChildern = category
                                 .GetChildren()
-                                .Where(i => i.TemplateID.ToString() != Constants.Products.CategoriesTemplateId)
+                                .Where(i => i.TemplateID.ToString() == Constants.Products.CategoriesTemplateId)
                                 .Select(GlassHelper.Cast<Product>).ToList();
 
                             categoryChildern = ProductHelper.FilterProductsByRestrictions(categoryChildern);
@@ -458,12 +500,13 @@ namespace CSDemo.Models.Product
                             c.ProductsCount = categoryChildern.Count();
 
                             var pList = categoryChildern.Select(categoryChild => new ProductMenulistViewModel
-                                {
-                                    Name = categoryChild.Title,
-                                    Url = categoryChild.Url
-                                })
+                            {
+                                Name = categoryChild.Title,
+                                Url = categoryChild.Url
+                            })
                                 .ToList();
 
+                            var count = pList.Count;
                             c.ProductMenulistViewModel = pList;
                             categoryMenulistViewModel.Add(c);
                         }
@@ -1312,7 +1355,7 @@ namespace CSDemo.Models.Product
                     throw new Exception(result.SystemMessages[0].Message);
                 }
 
-                var price = ((Sitecore.Commerce.Engine.Connect.Entities.Prices.ExtendedCommercePrice) result.Prices.First().Value).ListPrice;
+                var price = ((Sitecore.Commerce.Engine.Connect.Entities.Prices.ExtendedCommercePrice)result.Prices.First().Value).ListPrice;
 
                 return price;
             }
@@ -1440,70 +1483,70 @@ namespace CSDemo.Models.Product
             return searchResults;
         }
 
-		public static List<string> GetFreeProducts()
-		{
-			//var query = "Free-";
-			var productList = new List<ProductMini>();
+        public static List<string> GetFreeProducts()
+        {
+            //var query = "Free-";
+            var productList = new List<ProductMini>();
 
-			var catalogId = GetSiteRootCatalogId();
+            var catalogId = GetSiteRootCatalogId();
 
-			var catalogName = GetSiteRootCatalogName();
+            var catalogName = GetSiteRootCatalogName();
 
-			var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetProductSearchIndex());
-			try
-			{
-				using (var context = index.CreateSearchContext())
-				{
+            var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetProductSearchIndex());
+            try
+            {
+                using (var context = index.CreateSearchContext())
+                {
 
-					var queryable = context.GetQueryable<SearchResultItem>()
-							.Where(x => x.Language == Context.Language.Name);
-					
+                    var queryable = context.GetQueryable<SearchResultItem>()
+                            .Where(x => x.Language == Context.Language.Name);
 
-						var products =
-							queryable.Where(
-								x =>
-									(x.Name.Contains("Promotional Items") || x["_displayname"].Contains("Promotional Goods")) &&
-									x.Path.Contains("/sitecore/commerce/catalog") &&
-									x["_latestversion"] == "1" &&
-									x["catalogname"] == GetSiteRootCatalogName() &&
-									x.TemplateName != "GeneralCategory").Page(0, 5).GetResults().ToList();
 
-					if (products != null && products.Any())
-					{
-						foreach (var searchResultItem in products)
-						{
-							try
-							{
-								var productItem = searchResultItem.Document.GetItem();
-								var product = GlassHelper.Cast<Product>(productItem);
-								var parentName = productItem.Parent.Name;
+                    var products =
+                        queryable.Where(
+                            x =>
+                                (x.Name.Contains("Promotional Items") || x["_displayname"].Contains("Promotional Goods")) &&
+                                x.Path.Contains("/sitecore/commerce/catalog") &&
+                                x["_latestversion"] == "1" &&
+                                x["catalogname"] == GetSiteRootCatalogName() &&
+                                x.TemplateName != "GeneralCategory").Page(0, 5).GetResults().ToList();
 
-								if (product.ProductId != null)
-								{
-									var variantId = "-1";
-									if (productItem.HasChildren)
-									{
-										var child = productItem.Children.FirstOrDefault();
-										variantId = child.Name;
-									}
-									productList.Add(new ProductMini { Id = product.ProductId, CategoryName = parentName, CatalogId = catalogId, Guid = ID.Parse(product.ID).ToString(), Title = product.Title, Price = product.Price, CatalogName = catalogName, ImageSrc = product.FirstImage, VariantId = variantId, Url = product.Url, IsOnSale = product.IsOnSale, SalePrice = product.SalePrice });
-								}
-							}
-							catch (Exception ex)
-							{
-								Log.Error(ex.StackTrace, ex);
-							}
-						}
-					}
+                    if (products != null && products.Any())
+                    {
+                        foreach (var searchResultItem in products)
+                        {
+                            try
+                            {
+                                var productItem = searchResultItem.Document.GetItem();
+                                var product = GlassHelper.Cast<Product>(productItem);
+                                var parentName = productItem.Parent.Name;
 
-				}
-			}
-			catch (Exception ex)
-			{
-				Log.Error(ex.StackTrace, ex);
-			}
-			return null;
+                                if (product.ProductId != null)
+                                {
+                                    var variantId = "-1";
+                                    if (productItem.HasChildren)
+                                    {
+                                        var child = productItem.Children.FirstOrDefault();
+                                        variantId = child.Name;
+                                    }
+                                    productList.Add(new ProductMini { Id = product.ProductId, CategoryName = parentName, CatalogId = catalogId, Guid = ID.Parse(product.ID).ToString(), Title = product.Title, Price = product.Price, CatalogName = catalogName, ImageSrc = product.FirstImage, VariantId = variantId, Url = product.Url, IsOnSale = product.IsOnSale, SalePrice = product.SalePrice });
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Log.Error(ex.StackTrace, ex);
+                            }
+                        }
+                    }
 
-		}
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.StackTrace, ex);
+            }
+            return null;
+
+        }
     }
 }

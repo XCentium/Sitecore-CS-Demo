@@ -123,7 +123,7 @@
             public const string ImagesUrlFormat = "/~/media/{0}.ashx";
             public const string CategoryUrlFormat = "categories/{0}";
             public const string CategoriesParentId = "{4441D0B5-1080-4550-A91A-4C2C8245C986}";
-            public const string CategoriesTemplateId = "{C118EAAE-D723-4560-ABFC-917E58F46F18}";
+            public const string CategoriesTemplateId = "{06CACEA2-5767-4BE2-83FB-DE771DD52E8E}";
             public const string Title = "Title";
             public const string OrderByBrand = "Brand";
             public const string OrderByRatings = "Average rating";
