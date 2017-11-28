@@ -28,5 +28,8 @@ namespace CSDemo.Models
 		[SitecoreField("Country")]
 		public virtual string Country { get; set; }
 
+		[SitecoreField("ExternalID")]
+		public virtual string ExteernalId { get; set; }
+
 	}
 }

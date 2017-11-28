@@ -15,5 +15,6 @@
         public string CountryCode { get; set; }
         public string ZipPostalCode { get; set; }
         public string ExternalId { get; internal set; }
-    }
+		public string InmateId { get; set; }
+	}
 }
