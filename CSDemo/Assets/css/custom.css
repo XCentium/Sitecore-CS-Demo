@@ -2438,7 +2438,7 @@ article.product-item .product-labels .label.label-info {
 }
 
 #products.grid article.product-item .product-labels {
-	top:0;
+	top:50px;
 	left:0;
 }
 

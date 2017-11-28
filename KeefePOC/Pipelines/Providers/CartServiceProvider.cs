@@ -16,6 +16,8 @@ namespace KeefePOC.Pipelines.Providers
 		{
 			var result = this.RunPipeline<CartLinesRequest, CartResult>("keef.commerce.carts.validateCartLine", (CartLinesRequest)request);
 
+			var messages = result.SystemMessages;
+			var cart = result.Cart;
 			if (result.Success)
 			{
 				return this.RunPipeline<CartLinesRequest, CartResult>("commerce.carts.addCartLines", (CartLinesRequest)request);
@@ -26,7 +28,7 @@ namespace KeefePOC.Pipelines.Providers
 
 		public ServiceProviderResult ViewCart(ServiceProviderRequest request)
 		{
-			var result = this.RunPipeline<ServiceProviderRequest, ServiceProviderResult>("keef.commerce.carts.viewcartvalidation", request);			
+			var result = this.RunPipeline<ServiceProviderRequest, ServiceProviderResult>("keef.commerce.carts.viewcartvalidation", request);
 			return result;
 		}
 	}

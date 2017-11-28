@@ -7,325 +7,352 @@
 
 @if (Model != null)
 {
-    var currentCat = 1;
+	var currentCat = 1;
 
-    if (Model.CategoryMenulist != null)
-    {
+	if (Model.CategoryMenulist != null)
+	{
 
-        <section class="content products">
-        <div class="container">
+		<section class="content products">
+			<div class="container">
 
-        <h2 class="hidden">Products</h2>
-        <div class="col-sm-3">
-            <aside class="sidebar">
+				<h2 class="hidden">Products</h2>
+				<div class="col-sm-3">
+					<aside class="sidebar">
 
-                <!-- WIDGET:CATEGORIES - START -->
-                <div class="widget widget-categories">
-                    <h3><a role="button" data-toggle="collapse" href="#widget-categories-collapse" aria-expanded="true" aria-controls="widget-categories-collapse">Categories</a>
-                    </h3>
-                    <div class="collapse in" id="widget-categories-collapse" aria-expanded="true" role="tabpanel">
-                        <div class="widget-body">
-                            
-                            <ul class="list-unstyled" id="categories" role="tablist" aria-multiselectable="true">
+						<!-- WIDGET:CATEGORIES - START -->
+						<div class="widget widget-categories">
+							<h3>
+								<a role="button" data-toggle="collapse" href="#widget-categories-collapse" aria-expanded="true" aria-controls="widget-categories-collapse">Categories</a>
+							</h3>
+							<div class="collapse in" id="widget-categories-collapse" aria-expanded="true" role="tabpanel">
+								<div class="widget-body">
 
-                                @foreach (var cat in Model.CategoryMenulist.Skip(1))
-                                {
+									<ul class="list-unstyled" id="categories" role="tablist" aria-multiselectable="true">
 
-
-                                    var cid = Model.CategoryMenulist.Count(c => c.Name == cat.Name) > 1 ? string.Format("?cid={0}", cat.ID.ToString()) : string.Empty;
-
-                                    currentCat++;
+										@foreach (var cat in Model.CategoryMenulist.Skip(1))
+										{
 
 
-                                    var listClass = "class=collapsed";
-                                    var ariaExpand = "false";
-                                    var panelCollapse = "collapse";
-                                    if (!String.IsNullOrEmpty(cat.Name))
-                                    {
+											var cid = Model.CategoryMenulist.Count(c => c.Name == cat.Name) > 1 ? string.Format("?cid={0}", cat.ID.ToString()) : string.Empty;
 
-                                        if (cat.Name.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase) || 
-                                                        cat.ParentName.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase) || 
-                                                        (cat.ProductMenulistViewModel != null && cat.ProductMenulistViewModel.Any(c => c.Name.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase))))
-                                        {
-                                            listClass = " ";
-                                            ariaExpand = "true";
-                                            panelCollapse = "collapse in";
-                                        }
-
-                                        var catProducts = cat.ProductMenulistViewModel;
-                                        if (catProducts.Any())
-                                        {
-                                        <li class="panel">
-                                            <a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name</a>
-
-                                            <ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">
-
-                                                <li><a href="@cat.Url@cid"><span class="fa fa-arrow-right"></span></a></li>
-                                                    @if (catProducts != null)
-                                                    {
-                                                        foreach (CSDemo.Models.Product.ProductMenulistViewModel catProduct in catProducts)
-                                                        {
-                                                            if (catProduct.Name.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase))
-                                                            {
-
-                                                                <li><a href="@catProduct.Url"><strong>@catProduct.Name</strong></a></li>
-                                                            }
-                                                            else
-                                                            {
-                                                                <li><a href="@catProduct.Url">@catProduct.Name</a></li>
-
-                                                            }
-                                                        }
-                                                    }
-                                            </ul>
-                                        </li>
-                                        }
-                                    }
-                                }
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </aside>
-        </div>
-        <div class="col-sm-9">
-
-        @if (Model.Category.Products == null)
-        {
-            <h2>@Html.Raw(Model.Category.Description)</h2>
-            <div class="products-header">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12">
-                        <h2>This category has no products or sub-categories</h2>
-                    </div>
-                </div>
-
-            </div>
-        }
-        else
-        {
+											currentCat++;
 
 
-            <div class="products-header">
+											var listClass = "class=collapsed";
+											var ariaExpand = "false";
+											var panelCollapse = "collapse";
+											if (!String.IsNullOrEmpty(cat.Name))
+											{
 
-                <div class="row">
-                    <div class="col-xs-6 col-sm-4">
-                        <form name="products_per_page" id="products_per_page" class="form-inline products-per-page">
-                            <div class="form-group">
-                                <label>Show:</label>
-                            </div>
-                            <div class="form-group">
-                                <select name="prod_page_show" id="prod_page_show" class="form-control">
-                                    @for (int i = 1; i < 11; i++)
-                                    {
-                                        <option @(Model.PaginationViewModel.PageSize == i ? " selected " : string.Empty) value="@i">@i</option>
-                                    }
-                                    <option @(Model.PaginationViewModel.PageSize == 12 ? " selected " : string.Empty) value="12">12</option>
-                                    <option @(Model.PaginationViewModel.PageSize == 24 ? " selected " : string.Empty) value="24">24</option>
-                                    <option @(Model.PaginationViewModel.PageSize == 10000 ? " selected " : string.Empty) value="10000">ALL</option>
-                                </select>
-                            </div>
-                        </form>
-                    </div>
+												if (cat.Name.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase) ||
+																cat.ParentName.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase) ||
+																(cat.ProductMenulistViewModel != null && cat.ProductMenulistViewModel.Any(c => c.Name.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase))))
+												{
+													listClass = " ";
+													ariaExpand = "true";
+													panelCollapse = "collapse in";
+												}
 
-                    <div class="col-xs-6 col-sm-8">
-                        <div class="btn-group toggle-list-grid hidden-xs" role="group">
-                            <button type="button" class="btn btn-default active" id="toggle-grid"><i class="fa fa-th"></i></button>
-                            <button type="button" class="btn btn-default" id="toggle-list"><i class="fa fa-list"></i></button>
-                        </div>
-                        <form name="products_sort" id="products_sort" class="form-inline order-by">
-                            <div class="form-group">
-                                <label>Sort by:</label>
-                            </div>
-                            <div class="form-group">
+												var catProducts = cat.ProductMenulistViewModel;
+												if (catProducts.Any())
+												{
+													<li class="panel">
+														<a @listClass role="button" data-toggle="collapse" data-parent="#categories" href="#parent-@currentCat" aria-expanded="@ariaExpand" aria-controls="parent-@currentCat">@cat.Name</a>
 
-                                <select name="OrderBy" id="OrderBy" class="form-control">
-                                    <option @(Model.PaginationViewModel.OrderBy == string.Empty ? " selected " : string.Empty) value="">Default</option>
-                                    <option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByBrand ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByBrand">@CSDemo.Constants.Products.OrderByBrand</option>
-                                    <option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByRatings ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByRatings">@CSDemo.Constants.Products.OrderByRatings</option>
-                                    <option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByNewness ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByNewness">@CSDemo.Constants.Products.OrderByNewness</option>
-                                    <option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByPriceAsc ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByPriceAsc">@CSDemo.Constants.Products.OrderByPriceAsc</option>
-                                    <option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByPriceDesc ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByPriceDesc">@CSDemo.Constants.Products.OrderByPriceDesc</option>
-                                </select>
-                                <input type="hidden" name="CategoryID" id="Category" value="@Model.PaginationViewModel.CategoryId"/>
-                                <input type="hidden" name="Category" id="Category" value="@Model.PaginationViewModel.Category"/>
-                                <input type="hidden" name="PageSize" id="PageSize" value="@Model.PaginationViewModel.PageSize"/>
-                                <input type="hidden" name="CurrentPage" id="CurrentPage" value="@Model.PaginationViewModel.CurrentPage"/>
-                            </div>
-                        </form>
-                    </div>
+														<ul id="parent-@currentCat" class="list-unstyled panel-collapse @panelCollapse" role="menu">
 
-                </div>
-            </div>
-            <div class="row grid" id="products">
-                <div class="col-sm-12">
-                    @Html.Raw(Model.Category.CategoryDescription)
-                </div>
-                @foreach (CSDemo.Models.Product.Product product in Model.Category.Products)
-                {
-                    if (!string.IsNullOrEmpty(product.ListPrice.Trim()) && product.Title != "Add Initials") //TODO: demo fix, hiding initials product
-                    {
+															<li><a href="@cat.Url@cid"><span class="fa fa-arrow-right"></span></a></li>
+															@if (catProducts != null)
+															{
+																foreach (CSDemo.Models.Product.ProductMenulistViewModel catProduct in catProducts)
+																{
+																	if (catProduct.Name.Trim().Equals(Model.Category.Name.Trim(), StringComparison.OrdinalIgnoreCase))
+																	{
 
-                        int count = 0;
+																		<li><a href="@catProduct.Url"><strong>@catProduct.Name</strong></a></li>
+																	}
+																	else
+																	{
+																		<li><a href="@catProduct.Url">@catProduct.Name</a></li>
 
-                        if (product.DefinitionName == "GeneralCategory")
-                        {
+																	}
+																}
+															}
+														</ul>
+													</li>
+												}
+											}
+										}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</aside>
+				</div>
+				<div class="col-sm-9">
+
+					@if (Model.Category.Products == null)
+					{
+						<h2>@Html.Raw(Model.Category.Description)</h2>
+						<div class="products-header">
+							<div class="row">
+								<div class="col-xs-12 col-sm-12">
+									<h2>This category has no products or sub-categories</h2>
+								</div>
+							</div>
+
+						</div>
+					}
+					else
+					{
+
+
+						<div class="products-header">
+
+							<div class="row">
+								<div class="col-xs-6 col-sm-4">
+									<form name="products_per_page" id="products_per_page" class="form-inline products-per-page">
+										<div class="form-group">
+											<label>Show:</label>
+										</div>
+										<div class="form-group">
+											<select name="prod_page_show" id="prod_page_show" class="form-control">
+												@for (int i = 1; i < 11; i++)
+												{
+													<option @(Model.PaginationViewModel.PageSize == i ? " selected " : string.Empty) value="@i">@i</option>
+												}
+												<option @(Model.PaginationViewModel.PageSize == 12 ? " selected " : string.Empty) value="12">12</option>
+												<option @(Model.PaginationViewModel.PageSize == 24 ? " selected " : string.Empty) value="24">24</option>
+												<option @(Model.PaginationViewModel.PageSize == 10000 ? " selected " : string.Empty) value="10000">ALL</option>
+											</select>
+										</div>
+									</form>
+								</div>
+
+								<div class="col-xs-6 col-sm-8">
+									<div class="btn-group toggle-list-grid hidden-xs" role="group">
+										<button type="button" class="btn btn-default active" id="toggle-grid"><i class="fa fa-th"></i></button>
+										<button type="button" class="btn btn-default" id="toggle-list"><i class="fa fa-list"></i></button>
+									</div>
+									<form name="products_sort" id="products_sort" class="form-inline order-by">
+										<div class="form-group">
+											<label>Sort by:</label>
+										</div>
+										<div class="form-group">
+
+											<select name="OrderBy" id="OrderBy" class="form-control">
+												<option @(Model.PaginationViewModel.OrderBy == string.Empty ? " selected " : string.Empty) value="">Default</option>
+												<option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByBrand ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByBrand">@CSDemo.Constants.Products.OrderByBrand</option>
+												<option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByRatings ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByRatings">@CSDemo.Constants.Products.OrderByRatings</option>
+												<option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByNewness ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByNewness">@CSDemo.Constants.Products.OrderByNewness</option>
+												<option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByPriceAsc ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByPriceAsc">@CSDemo.Constants.Products.OrderByPriceAsc</option>
+												<option @(Model.PaginationViewModel.OrderBy == CSDemo.Constants.Products.OrderByPriceDesc ? " selected " : string.Empty) value="@CSDemo.Constants.Products.OrderByPriceDesc">@CSDemo.Constants.Products.OrderByPriceDesc</option>
+											</select>
+											<input type="hidden" name="CategoryID" id="Category" value="@Model.PaginationViewModel.CategoryId" />
+											<input type="hidden" name="Category" id="Category" value="@Model.PaginationViewModel.Category" />
+											<input type="hidden" name="PageSize" id="PageSize" value="@Model.PaginationViewModel.PageSize" />
+											<input type="hidden" name="CurrentPage" id="CurrentPage" value="@Model.PaginationViewModel.CurrentPage" />
+										</div>
+									</form>
+								</div>
+
+							</div>
+						</div>
+						<div class="row grid" id="products">
+							<div class="col-sm-12">
+								@Html.Raw(Model.Category.CategoryDescription)
+							</div>
+							@foreach (CSDemo.Models.Product.Product product in Model.Category.Products)
+							{
+								if (!string.IsNullOrEmpty(product.ListPrice.Trim()) && product.Title != "Add Initials") //TODO: demo fix, hiding initials product
+								{
+
+									int count = 0;
+
+									if (product.DefinitionName == "GeneralCategory")
+									{
 
                             <!-- PRODUCT - START -->
-                            <div class="col-sm-4 col-xs-6">
-                                <article class="product-item">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="product-overlay">
-                                                <div class="product-mask"></div>
-                                                <a href="@product.Url" class="product-permalink"></a>
-                                                @foreach (var image in product.Images)
-                                                {
-                                                    count++;
-                                                    @RenderImage(image, x => x, new {Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive "}, isEditable: false)
-                                                    ;
+										<div class="col-sm-4 col-xs-6">
+											<article class="product-item">
+												<div class="row">
+													<div class="col-sm-3">
+														<div class="product-overlay">
+															<div class="product-mask"></div>
+															<a href="@product.Url" class="product-permalink"></a>
+															@foreach (var image in product.Images)
+															{
+																count++;
+																@RenderImage(image, x => x, new { Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive " }, isEditable: false)
+;
 
-                                                    if (count == 1)
-                                                    {
-                                                        break;
-                                                    }
-                                                }
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <div class="product-body" style="height: 146px">
-                                                <h3>@product.Title </h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
+																if (count == 1)
+																{
+																	break;
+																}
+															}
+														</div>
+													</div>
+													<div class="col-sm-9">
+														<div class="product-body" style="height: 146px">
+															<h3>@product.Title </h3>
+														</div>
+													</div>
+												</div>
+											</article>
+										</div>
                             <!-- PRODUCT - END -->
-                            continue;
-                        }
+										continue;
+									}
 
 
                         <!-- PRODUCT - START -->
-                        <div class="col-sm-4 col-xs-6">
-                            <article class="product-item">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <div class="product-overlay">
-                                            <div class="product-mask"></div>
-                                            <a href="@product.Url" class="product-permalink"></a>
-                                            @if (product.Images != null && product.Images.Any())
-                                            {
-                                                foreach (var image in product.Images)
-                                                {
-                                                    count++;
-                                                    @RenderImage(image, x => x, new {Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive product-image-" + count}, isEditable: false)
-                                                    ;
-                                                    if (count == 2)
-                                                    {
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                            else
-                                            {
-                                                if (!string.IsNullOrEmpty(product.Image1) || !string.IsNullOrEmpty(product.Image2))
-                                                {
-                                                    var altImages = product.AltImages();
-                                                    foreach (var src in altImages)
-                                                    {
-                                                        count++;
-                                                        <img src="@src" style="width: 420px; height: 287px; background-color: #ffffff" class="img-responsive product-image-@count"/>
-                                                        if (count == 2)
-                                                        {
-                                                            break;
-                                                        }
-                                                    }
-                                                }
-                                            }
+									<div class="col-sm-4 col-xs-6">
+										<article class="product-item">
+											<div class="row">
+												<div class="col-sm-3">
+													<div class="product-overlay">
+														<div class="product-mask"></div>
+														<a href="@product.Url" class="product-permalink"></a>
+														@if (product.Images != null && product.Images.Any())
+														{
+															foreach (var image in product.Images)
+															{
+																count++;
+																@RenderImage(image, x => x, new { Width = 420, Height = 287, AS = 1, BC = "ffffff", @class = "img-responsive product-image-" + count }, isEditable: false)
+;
+																if (count == 2)
+																{
+																	break;
+																}
+															}
+														}
+														else
+														{
+															if (!string.IsNullOrEmpty(product.Image1) || !string.IsNullOrEmpty(product.Image2))
+															{
+																var altImages = product.AltImages();
+																foreach (var src in altImages)
+																{
+																	count++;
+																	<img src="@src" style="width: 420px; height: 287px; background-color: #ffffff" class="img-responsive product-image-@count" />if (count == 2)
+																	{
+																		break;
+																	}
+																}
+															}
+														}
 
 
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <div class="product-body">
-                                            <h3><a href="@product.Url">@product.Title</a></h3>
-                                            <div class="product-labels">
-                                                @if (product.IsNew)
-                                                {
-                                                    <span class="label label-info">new</span>
-                                                }
-                                                @if (product.IsOnSale)
-                                                {
-                                                    <span class="label label-danger">sale</span>
-                                                }
-                                            </div>
+													</div>
+												</div>
+												<div class="col-sm-9">
+													<div class="product-body">
+														<h3><a href="@product.Url">@product.Title</a></h3>
+														<div class="product-labels">
+															@if (product.IsNew)
+															{
+																<span class="label label-info">new</span>
+															}
+															@if (product.IsOnSale)
+															{
+																<span class="label label-danger">sale</span>
+															}
+														</div>
 
-                                            <div class="product-rating">
-                                                <i class="fa fa-star@(product.Rating > 0 ? string.Empty : "-o")"></i>
-                                                <i class="fa fa-star@(product.Rating > 1 ? string.Empty : "-o")"></i>
-                                                <i class="fa fa-star@(product.Rating > 2 ? string.Empty : "-o")"></i>
-                                                <i class="fa fa-star@(product.Rating > 3 ? string.Empty : "-o")"></i>
-                                                <i class="fa fa-star@(product.Rating > 4 ? string.Empty : "-o")"></i>
-                                            </div>
-                                            <span class="price">
-                                                @if (product.IsOnSale && (product.Price != product.SalePrice))
-                                                {
-                                                    <ins><del class="amount sale-old-price">@product.ListPrice</del></ins>
-                                                    <ins><span id="@string.Concat("productAmount", product.VariantProdId)" class="amount">@product.SalePrice.ToString("C")</span></ins>
-                                                }
-                                                else
-                                                {
-                                                    <ins><span id="@string.Concat("productAmount", product.VariantProdId)" class="amount">@product.ListPrice</span></ins>
-                                                }
-                                            </span>
-                                            <p>@product.Description</p>
-                                            @*@Html.Partial("~/Views/Product/_ComparisonControl.cshtml", product)*@
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
+														<div class="product-rating">
+															<i class="fa fa-star@(product.Rating > 0 ? string.Empty : "-o")"></i>
+															<i class="fa fa-star@(product.Rating > 1 ? string.Empty : "-o")"></i>
+															<i class="fa fa-star@(product.Rating > 2 ? string.Empty : "-o")"></i>
+															<i class="fa fa-star@(product.Rating > 3 ? string.Empty : "-o")"></i>
+															<i class="fa fa-star@(product.Rating > 4 ? string.Empty : "-o")"></i>
+														</div>
+														<span class="price">
+															@if (product.IsOnSale && (product.Price != product.SalePrice))
+															{
+																<ins><del class="amount sale-old-price">@product.ListPrice</del></ins>
+																<ins><span id="@string.Concat("productAmount", product.VariantProdId)" class="amount">@product.SalePrice.ToString("C")</span></ins>
+															}
+															else
+															{
+																<ins><span id="@string.Concat("productAmount", product.VariantProdId)" class="amount">@product.ListPrice</span></ins>
+															}
+														</span>
+														<p>@product.Description</p>
+
+														<div style="clear:both; margin-bottom: 15px;">
+															<form name="@product.ProductId" id="@product.ProductId">
+																<input type="hidden" id="ProductId" name="ProductId" value="@product.ProductId" />
+																<input type="hidden" id="CatalogName" name="CatalogName" value="@product.CatalogName" />
+																<input type="hidden" name="VariantId" id="@string.Concat("VariantID", product.VariantProdId)" value="@product.DefaultVariant" />
+																<div class="product-quantity clearfix" style="margin-bottom: 10px; ">
+																	<a class="btn btn-default" id="qty-minus">-</a>
+																	<input type="text" class="form-control" id="Quantity" value="1" style="display: inline; width: 20%; vertical-align: bottom;" />
+																	<a class="btn btn-default" id="qty-plus">+</a>
+																</div>
+
+																<a href="javascript:void(0)" data-formid="@product.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(product.ID).ToString()" class="btn btn-primary variant_btn add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+																@if (product.ProductVariants != null)
+																{
+																	foreach (var prodVariant in product.ProductVariants)
+																	{
+																		var clickCmd = "out-of-stock";
+																		if (prodVariant.StockQuantity > 0)
+																		{
+																			clickCmd = "add-to-cart";
+																		}
+																		<a href="javascript:void(0)" data-formid="@product.ProductId" data-contextitemid="@Sitecore.Data.ID.Parse(product.ID).ToString()" class="btn btn-primary variant_btn variant_btn_@prodVariant.VariantId @clickCmd" style="display: none"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+																	}
+																}
+																</form>
+																@*@Html.Partial("~/Views/Product/_ComparisonControl.cshtml", product)*@
+</div>
+													</div>
+												</div>
+											</div>
+										</article>
+									</div>
                         <!-- PRODUCT - END -->
-                    }
-                }
-            </div>
-            if (Model.PaginationViewModel.TotalPages > 1)
-            {
-                var left = (Model.PaginationViewModel.CurrentPage > 1) ? Model.PaginationViewModel.CurrentPage - 1 : 1;
-                var right = (Model.PaginationViewModel.CurrentPage < Model.PaginationViewModel.TotalPages) ? Model.PaginationViewModel.CurrentPage + 1 : Model.PaginationViewModel.TotalPages;
+								}
+							}
+						</div>
+						if (Model.PaginationViewModel.TotalPages > 1)
+						{
+							var left = (Model.PaginationViewModel.CurrentPage > 1) ? Model.PaginationViewModel.CurrentPage - 1 : 1;
+							var right = (Model.PaginationViewModel.CurrentPage < Model.PaginationViewModel.TotalPages) ? Model.PaginationViewModel.CurrentPage + 1 : Model.PaginationViewModel.TotalPages;
 
-                <div class="pagination-wrapper">
-                    <ul id="products_page" class="pagination">
-                        <li><a val="@left" href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                        @for (int i = 0; i < Model.PaginationViewModel.TotalPages; i++)
-                        {
-                            var thePage = i + 1;
-                            var active = (Model.PaginationViewModel.CurrentPage == thePage) ? " class=active" : "";
-                            <li @active><a val="@thePage" href="#">@thePage</a></li>
-                        }
-                        <li><a val="@right" href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                    </ul>
-                </div>
-            }
-        }
-        </div>
+							<div class="pagination-wrapper">
+								<ul id="products_page" class="pagination">
+									<li><a val="@left" href="#"><i class="fa fa-angle-double-left"></i></a></li>
+									@for (int i = 0; i < Model.PaginationViewModel.TotalPages; i++)
+									{
+										var thePage = i + 1;
+										var active = (Model.PaginationViewModel.CurrentPage == thePage) ? " class=active" : "";
+										<li @active><a val="@thePage" href="#">@thePage</a></li>
+									}
+									<li><a val="@right" href="#"><i class="fa fa-angle-double-right"></i></a></li>
+								</ul>
+							</div>
+						}
+					}
+				</div>
 
-        </div>
-        </section>
-    }
+			</div>
+		</section>
+	}
 }
 else
 {
-    <section class="content products">
-        <div class="container">
-            <h2>
-                Category products not found!
-            </h2>
+	<section class="content products">
+		<div class="container">
+			<h2>
+				Category products not found!
+			</h2>
 
-            <h3>
-                The Category you are looking for does not exist in your current catalog.
-            </h3>
-        </div>
-    </section>
+			<h3>
+				The Category you are looking for does not exist in your current catalog.
+			</h3>
+		</div>
+	</section>
 }
 
