@@ -38,6 +38,7 @@ using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data;
 using Sitecore.Diagnostics;
 using Sitecore.Commerce.Pipelines;
+using CSDemo.Helpers;
 
 namespace CSDemo.Models.Checkout.Cart
 {
@@ -83,7 +84,16 @@ namespace CSDemo.Models.Checkout.Cart
                 return "Anonymous";
             }
 
-            var ret = string.Empty;
+
+			var inmateId = InmateHelper.GetSelectedInmateId();
+
+			if (string.IsNullOrEmpty(inmateId))
+			{
+				return "No Inmate Selected";
+			}
+
+
+			var ret = string.Empty;
             // Create cart object
             var cartLineItem = new CartLineItem
             {
@@ -113,8 +123,16 @@ namespace CSDemo.Models.Checkout.Cart
 
         public CommerceCart AddToCart(CartLineItem cartLine)
         {
-            // create cartitem
-            var cartItem = new CommerceCartLine(cartLine.CatalogName, cartLine.ProductId,
+
+			var inmateId = InmateHelper.GetSelectedInmateId();
+
+			if (string.IsNullOrEmpty(inmateId))
+			{
+				return null;
+			}
+
+			// create cartitem
+			var cartItem = new CommerceCartLine(cartLine.CatalogName, cartLine.ProductId,
                 cartLine.VariantId == "-1" ? null : cartLine.VariantId, cartLine.Quantity);
 
             // update stock in formation
@@ -133,9 +151,10 @@ namespace CSDemo.Models.Checkout.Cart
             {
                 info.Refresh = true;
             }
+					
 
-            // for testing
-            request.Properties.Add("InmateNumber", "123451");
+			request.Properties.Add("InmateNumber", inmateId);
+			
 
             var cartResult = _cartServiceProvider.AddCartLines(request);
 
@@ -614,10 +633,15 @@ namespace CSDemo.Models.Checkout.Cart
                 FaxNumber = shippingAddress.FaxNumber,
                 Country = shippingAddress.Country,
                 CountryCode = shippingAddress.CountryCode,
-                ZipPostalCode = shippingAddress.ZipPostalCode
+                ZipPostalCode = shippingAddress.ZipPostalCode,
+				
             };
 
-            try
+			shipping.Properties = new Sitecore.Commerce.PropertyCollection();
+
+			shipping.Properties.Add("InmateId", shippingAddress.InmateId);
+
+			try
             {
                 var cartParties = cart.Parties.ToList();
                 var partyList = new List<Party> { shipping };
@@ -2035,7 +2059,20 @@ namespace CSDemo.Models.Checkout.Cart
 
         public GetShippingMethodsResult GetShippingMethods()
         {
-            try
+
+			// Set Shippng Address as facility
+			var inmate = InmateHelper.GetSelectedInmate();
+			var faciltiyAddress = FacilityHelper.GetFacilityAddress();
+
+			faciltiyAddress.FirstName = inmate.FirstName;
+			faciltiyAddress.LastName = inmate.LastName;
+			faciltiyAddress.CountryCode = faciltiyAddress.Country;
+			faciltiyAddress.InmateId = inmate.Id;
+
+			ApplyShippingToCart(faciltiyAddress);
+
+
+			try
             {
                 var shippingService = new ShippingServiceProvider();
                 var shippingOption = new ShippingOption

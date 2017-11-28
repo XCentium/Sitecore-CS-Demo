@@ -60,13 +60,19 @@ namespace CSDemo.Controllers
         {
             // TODO: save inmate to session
             Inmate inmate;
-            if (model.SelectedFacility == null || string.IsNullOrEmpty(model.SelectedFacility.Id))
+            if (model.SelectedFacility == null || string.IsNullOrEmpty(model.SelectedFacility.ExternalId))
             {
                 inmate = _dataService.GetInmate(model.SelectedInmateId);
-            }
+				var facilityItem = FacilityHelper.GetFacilityByExternalId(inmate.AssociatedFacilityId);
+				if (facilityItem != null)
+				{
+					model.SelectedFacility = new KeefePOC.Models.Facility(facilityItem);
+				}
+
+			}
             else
             {
-                inmate = _dataService.GetInmate(model.SelectedFacility.Id, model.SelectedInmateId);
+                inmate = _dataService.GetInmate(model.SelectedFacility.ExternalId, model.SelectedInmateId);
             }
 
             FacilityHelper.SaveSelectedFacility(model.SelectedFacility);

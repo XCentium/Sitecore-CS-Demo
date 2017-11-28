@@ -23,6 +23,7 @@ namespace KeefePOC.Models
         public string Tier { get; set; }
         public string Block { get; set; }
         public string Cell { get; set; }
+		public string AssociatedFacilityId { get; set; }
 
 
         public List<string> Restrictions { get; set; } = new List<string>();

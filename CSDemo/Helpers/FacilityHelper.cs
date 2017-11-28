@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using CSDemo.Models;
+using CSDemo.Models.Checkout.Cart;
 using CSDemo.Models.InmateSearch;
 using CSDemo.Models.Product;
 using KeefePOC.Models;
 using Sitecore.Diagnostics;
+using Sitecore.Data.Items;
 
 namespace CSDemo.Helpers
 {
@@ -53,7 +55,7 @@ namespace CSDemo.Helpers
             HttpContext.Current.Session["SELECTED_FACILITY"] = modelSelectedFacility;
         }
 
-		public static Address GetFacilityAddress()
+		public static CSDemo.Models.Checkout.Cart.Address GetFacilityAddress()
 		{			
 			var facilityId = GetSelectedFacilityId();
 
@@ -63,9 +65,23 @@ namespace CSDemo.Helpers
 			var facilityItem = Sitecore.Context.Database.GetItem(facilityId);
 			var facility = GlassHelper.Cast<FacilityModel>(facilityItem);
 
-			if (facility != null) return new Address() {  AddressLine1 = facility.AddressLine1, AddressLine2 = facility.AddressLine2, CountryRegionCode = facility.Country, City = facility.City,  ZipPostalCode = facility.PostalCode, StateProvinceCode = facility.State };
+			if (facility != null) return new CSDemo.Models.Checkout.Cart.Address() {  Address1 = facility.AddressLine1, Address2 = facility.AddressLine2, Country = facility.Country, City = facility.City,  ZipPostalCode = facility.PostalCode, State = facility.State };
 
 			return null;
 		}
-    }
+
+		internal static Item GetFacilityByExternalId(string associatedFacilityId)
+		{
+			string facilityLocation = "/sitecore/content/Global Configuration/Facilities";		
+
+			var folder = Sitecore.Context.Database.GetItem(facilityLocation);
+
+			var facilityItem = folder.Children.FirstOrDefault(c => c["ExternalID"] == associatedFacilityId);
+
+			
+			//var facility = GlassHelper.Cast<FacilityModel>(facilityItem);
+
+			return facilityItem;
+		}
+	}
 }
