@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
-using System.Web.Mvc;
+using CSDemo.Configuration;
 using CSDemo.Contracts;
 using CSDemo.Contracts.Product;
 using CSDemo.Helpers;
@@ -26,6 +26,8 @@ using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
 using Sitecore.Commerce.Contacts;
 using Sitecore.Commerce.Entities.Inventory;
 using Sitecore.Commerce.Services.Inventory;
+using Sitecore.ContentSearch;
+using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
@@ -41,6 +43,7 @@ namespace CSDemo.Models.Product
         #region Calculated Properties
 
         private decimal _salePrice = -1;
+        private IEnumerable<ID> _paths;
 
         public IEnumerable<ProductVariant> ProductVariants { get; set; }
 
@@ -84,7 +87,7 @@ namespace CSDemo.Models.Product
                 return fallbackItem != null ? GlassHelper.Cast<RelatedProductsFallback>(fallbackItem) : new RelatedProductsFallback();
             }
         }
-        
+
         public IEnumerable<Product> GetRelatedProductsFallback()
         {
             var fallbackComponentPath = Context.Site.RootPath + "/Components/RelatedProducts/Related Products Fallback";
@@ -236,7 +239,7 @@ namespace CSDemo.Models.Product
         [SitecoreInfo(SitecoreInfoType.Path)]
         public virtual string Path { get; set; }
 
-       
+
         //[SitecoreInfo(SitecoreInfoType.DisplayName)]
         [SitecoreField(Fields.DisplayName), DataMember]
         public virtual string Title { get; set; }
@@ -529,7 +532,8 @@ namespace CSDemo.Models.Product
                     {
                         yield return null;
                     }
-                    else { 
+                    else
+                    {
                         foreach (var message in result.Messages)
                         {
                             Log.Warn(message, result);
@@ -562,6 +566,42 @@ namespace CSDemo.Models.Product
 
         [DataMember]
         public int ViewCount => ProductHelper.GetProductViewCount(ID, ProductId);
+
+        public virtual IEnumerable<ID> Paths
+        {
+            get
+            {
+                if (_paths != null && _paths.Count() >= 0)
+                {
+                    return _paths;
+                }
+
+                var paths = new List<ID>();
+
+                var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
+
+                using (var context = index.CreateSearchContext())
+                {
+                    var queryable = context.GetQueryable<SearchResultItem>()
+                        .Where(x => x.Language == Context.Language.Name);
+
+
+                    var products =
+                        queryable.FirstOrDefault(x => x["_latestversion"] == "1" &&
+                                x["commercesearchitemtype"] == "product" &&
+                                x["catalogitemid"] == ProductId.ToLower());
+
+                    if (products != null)
+                    {
+                        paths = products.Paths.ToList();
+                    }
+                }
+
+                return paths;
+            }
+
+            set { _paths = value; }
+        }
 
         #endregion
     }
