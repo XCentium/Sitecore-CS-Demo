@@ -494,7 +494,7 @@ namespace CSDemo.Models.Product
 							//   {
 							var categoryChildern = category
 								.GetChildren()
-								.Where(i => i.TemplateID.ToString() == Constants.Products.CategoriesTemplateId)
+								.Where(i => i.TemplateName.ToString() == "GeneralCategory")
 								.Select(GlassHelper.Cast<Product>).ToList();
 
 							categoryChildern = ProductHelper.FilterProductsByRestrictions(categoryChildern);
