@@ -12,6 +12,7 @@ using Sitecore.Data.Items;
 using KeefePOC.Models.Enumerations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using CSDemo.Helpers;
 
 namespace CSDemo.Controllers
 {
@@ -108,7 +109,28 @@ namespace CSDemo.Controllers
 
         public ActionResult SearchInmates(Inmate search)
         {
-            var result = dataService.SearchInmates(search);
+
+			List<Inmate> result = new List<Inmate>();
+
+			var facilityId = search.AssociatedFacilityId;
+
+			if (!string.IsNullOrEmpty(facilityId))
+			{
+				var facilityItem = Sitecore.Context.Database.GetItem(facilityId);
+				if (facilityItem != null)
+				{
+					var facility = new KeefePOC.Models.Facility(facilityItem);
+					search.AssociatedFacilityId = facility.ExternalId;
+				}
+
+				result = dataService.SearchInmates(search.AssociatedFacilityId, search);
+			}
+			else
+			{
+				result = dataService.SearchInmates(search);
+			}
+
+			
 
             var converted = JsonConvert.SerializeObject(result);
             return Content(converted, "application/json");

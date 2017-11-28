@@ -46,10 +46,15 @@ namespace CSDemo.Controllers
             }
             else
             {
-                var inmate = _dataService.GetInmate(facilityId, inmateId);
+				var facilityItem = Sitecore.Context.Database.GetItem(facilityId);
+				if (facilityItem != null)
+				{
+					model.SelectedFacility = new KeefePOC.Models.Facility(facilityItem);
+				}
+				var inmate = _dataService.GetInmate(model.SelectedFacility.ExternalId, inmateId);
                 model.SelectedInmate = inmate;
-                var facility = Sitecore.Context.Database.GetItem(facilityId);
-                model.SelectedFacility = new KeefePOC.Models.Facility(facility);
+                //var facility = Sitecore.Context.Database.GetItem(facilityId);
+                //model.SelectedFacility = new KeefePOC.Models.Facility(facility);
             }
 
             return View(model);
