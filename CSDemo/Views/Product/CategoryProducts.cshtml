@@ -268,7 +268,7 @@
 															<i class="fa fa-star@(product.Rating > 4 ? string.Empty : "-o")"></i>
 														</div>
 														<span class="price">
-															@if (product.IsOnSale && (product.Price != product.SalePrice))
+															@if (product.IsOnSale && (product.Price != product.SalePrice) && product.SalePrice > 0)
 															{
 																<ins><del class="amount sale-old-price">@product.ListPrice</del></ins>
 																<ins><span id="@string.Concat("productAmount", product.VariantProdId)" class="amount">@product.SalePrice.ToString("C")</span></ins>
