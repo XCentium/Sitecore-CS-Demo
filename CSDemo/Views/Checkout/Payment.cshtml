@@ -16,6 +16,7 @@
 
 @{
     var cartHelper = new CartHelper();
+	cartHelper.InitiateCheckout();
     var commercecart = cartHelper.GetCustomerCart();
 
     var paymentOptions = cartHelper.GetPaymentOptions();
@@ -37,7 +38,7 @@
                 <article class="account-content checkout-steps">
 
                     <div class="row row-no-padding">
-                        <div class="col-xs-6 col-sm-3">
+                        @*<div class="col-xs-6 col-sm-3">
                             <div class="checkout-step active">
                                 <div class="number">1</div>
                                 <div class="title">Billing & Shipping Address</div>
@@ -48,7 +49,7 @@
                                 <div class="number">2</div>
                                 <div class="title">Shipping Method</div>
                             </div>
-                        </div>
+                        </div>*@
                         <div class="col-xs-6 col-sm-3">
                             <div class="checkout-step active">
                                 <div class="number">3</div>

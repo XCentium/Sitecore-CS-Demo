@@ -2057,9 +2057,8 @@ namespace CSDemo.Models.Checkout.Cart
             return false;
         }
 
-        public GetShippingMethodsResult GetShippingMethods()
-        {
-
+		public void InitiateCheckout()
+		{
 			// Set Shippng Address as facility
 			var inmate = InmateHelper.GetSelectedInmate();
 			var faciltiyAddress = FacilityHelper.GetFacilityAddress();
@@ -2071,7 +2070,16 @@ namespace CSDemo.Models.Checkout.Cart
 
 			ApplyShippingToCart(faciltiyAddress);
 
+			string shippingMethodId = "e14965b9-306a-43c4-bffc-3c67be8726fa|Ground"; //TODO: for POC only
 
+			if (!AddShippingMethodToCart(shippingMethodId))
+			{
+				throw new Exception("AddShippingMethodToCart failed.");
+			}
+		}
+
+        public GetShippingMethodsResult GetShippingMethods()
+        {
 			try
             {
                 var shippingService = new ShippingServiceProvider();
