@@ -52,5 +52,20 @@ namespace CSDemo.Helpers
         {
             HttpContext.Current.Session["SELECTED_FACILITY"] = modelSelectedFacility;
         }
+
+		public static Address GetFacilityAddress()
+		{			
+			var facilityId = GetSelectedFacilityId();
+
+			if (string.IsNullOrWhiteSpace(facilityId))
+				return null;
+
+			var facilityItem = Sitecore.Context.Database.GetItem(facilityId);
+			var facility = GlassHelper.Cast<FacilityModel>(facilityItem);
+
+			if (facility != null) return new Address() {  AddressLine1 = facility.AddressLine1, AddressLine2 = facility.AddressLine2, CountryRegionCode = facility.Country, City = facility.City,  ZipPostalCode = facility.PostalCode, StateProvinceCode = facility.State };
+
+			return null;
+		}
     }
 }
