@@ -2066,17 +2066,19 @@ namespace CSDemo.Models.Checkout.Cart
 
 			faciltiyAddress.FirstName = inmate.FirstName;
 			faciltiyAddress.LastName = inmate.LastName;
-			faciltiyAddress.CountryCode = faciltiyAddress.Country;
+			faciltiyAddress.Country = null;
+			faciltiyAddress.CountryCode = "US";
 			faciltiyAddress.InmateId = inmate.Id;
 
 			ApplyShippingToCart(faciltiyAddress);
+			//ApplyShippingToCart(address);
 
-			string shippingMethodId = "e14965b9-306a-43c4-bffc-3c67be8726fa|Ground"; //TODO: for POC only
+			//string shippingMethodId = "e14965b9-306a-43c4-bffc-3c67be8726fa|Ground"; //TODO: for POC only
 
-			if (!AddShippingMethodToCart(shippingMethodId))
-			{
-				throw new Exception("AddShippingMethodToCart failed.");
-			}
+			//if (!AddShippingMethodToCart(shippingMethodId))
+			//{
+			//	throw new Exception("AddShippingMethodToCart failed.");
+			//}
 		}
 
         public GetShippingMethodsResult GetShippingMethods()

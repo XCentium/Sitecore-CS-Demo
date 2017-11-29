@@ -52,13 +52,13 @@
                         </div>*@
                         <div class="col-xs-6 col-sm-3">
                             <div class="checkout-step active">
-                                <div class="number">3</div>
+                                <div class="number">1</div>
                                 <div class="title">Payment Method</div>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-3">
                             <div class="checkout-step">
-                                <div class="number">4</div>
+                                <div class="number">2</div>
                                 <div class="title">Review</div>
                             </div>
                         </div>
@@ -88,11 +88,11 @@
                         }
                         <h3>Billing Information</h3>
                         <div class="products-order checkout billing-information">
-                            <div class="checkbox">
+                            @*<div class="checkbox">
                                 <input id="check-billing" name="check-billing" type="checkbox" checked>
                                 <label for="check-billing" data-toggle="collapse" data-target="#billing-address-collapse" aria-controls="billing-address-collapse">My delivery and billing addresses are the same.</label>
-                            </div>
-                            <div id="billing-address-collapse" class="collapse">
+                            </div>*@
+                            <div id="billing-address">
                                 @if (addresses != null && addresses.Any())
                                 {
                                     <button class="btn btn-primary addresses-toggle" type="button" data-toggle="collapse" data-target="#my-addresses-billing" aria-expanded="false" aria-controls="my-addresses-billing">My Saved Addresses</button>
