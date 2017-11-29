@@ -49,6 +49,23 @@ namespace CSDemo.Controllers
 
         #region Methods
 
+		public ActionResult FreePromoItems()
+		{
+			string query = "Free-";
+			var searchModel = new Search();
+			if (string.IsNullOrWhiteSpace(query)) return View(searchModel);
+			
+
+			var theSortField = Constants.Products.Title;
+						
+
+			var searchInfo = GetSearchInfo(query, 1, null, theSortField, 50, CommerceConstants.SortDirection.Asc);
+
+			searchModel = GetSearchModel(searchInfo.SearchOptions, searchInfo.SearchQuery, searchInfo.CatalogName, 50, 1, theSortField, true);
+
+			return View(searchModel);
+		}
+
         public ActionResult SearchResults(
             [Bind(Prefix = Constants.QueryStrings.SearchQuery)] string query,
             [Bind(Prefix = Constants.QueryStrings.Facets)] string facetValues,
@@ -206,7 +223,7 @@ namespace CSDemo.Controllers
         }
 
 
-        private Search GetSearchModel(CommerceSearchOptions searchOptions, string searchKeyword, string catalogName, int pageSize, int pageNumber, string sortField)
+        private Search GetSearchModel(CommerceSearchOptions searchOptions, string searchKeyword, string catalogName, int pageSize, int pageNumber, string sortField, bool freeProducts=false)
         {
             using (new SecurityDisabler())
             {
@@ -222,7 +239,15 @@ namespace CSDemo.Controllers
                 if (!string.IsNullOrEmpty(searchKeyword.Trim()))
                 {
                     SearchResponse searchResponse = null;
-                    searchResponse = SearchCatalogItemsByKeyword(searchKeyword, catalogName, searchOptions);
+
+					if (freeProducts)
+					{
+						searchResponse = SearchCatalogFreeItemsByKeyword(searchKeyword, catalogName, searchOptions);
+					}
+					else
+					{
+						searchResponse = SearchCatalogItemsByKeyword(searchKeyword, catalogName, searchOptions);
+					}
 
                     if (searchResponse != null)
                     {
@@ -285,13 +310,14 @@ namespace CSDemo.Controllers
             
             using (var context = searchIndex.CreateSearchContext())
             {
-                var searchResults = context.GetQueryable<CustomCommerceSearchResultItem>()
-                    .Where(item => item.Content.Contains(keyword) || item.ProductTags.Contains(keyword))
-                    .Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product)
-                    .Where(item => item.CatalogName == catalogName)
-                    .Where(item => item.Language == Sitecore.Context.Language.Name);
+				var searchResults = context.GetQueryable<CustomCommerceSearchResultItem>()
+					.Where(item => item.Content.Contains(keyword) || item.ProductTags.Contains(keyword))
+					.Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product)
+					.Where(item => item.CatalogName == catalogName)
+					.Where(item => item.Language == Sitecore.Context.Language.Name)
+					.Where(item => !item.Name.StartsWith("Free-"));					
 
-                searchResults = ProductHelper.FilterProductsByRestrictions(searchResults);
+				searchResults = ProductHelper.FilterProductsByRestrictions(searchResults);
 
                 searchResults = searchResults
                     .Select(p => new CustomCommerceSearchResultItem()
@@ -310,8 +336,45 @@ namespace CSDemo.Controllers
             }
         }
 
-        #endregion
+		private static SearchResponse SearchCatalogFreeItemsByKeyword(string keyword, string catalogName,
+			CommerceSearchOptions searchOptions)
+		{
+			Assert.ArgumentNotNullOrEmpty(catalogName, "catalogName");
 
-        #endregion
-    }
+			var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
+			var searchIndex = searchManager.GetIndex(ConfigurationHelper.GetProductSearchIndex());
+
+			using (var context = searchIndex.CreateSearchContext())
+			{
+				var searchResults = context.GetQueryable<CustomCommerceSearchResultItem>()
+					//.Where(item => item.Content.Contains(keyword) || item.ProductTags.Contains(keyword))
+					.Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product)
+					.Where(item => item.CatalogName == catalogName)
+					.Where(item => item.Language == Sitecore.Context.Language.Name)
+					.Where(item => item.Name.StartsWith("Free-"));
+
+				//searchResults = ProductHelper.FilterProductsByRestrictions(searchResults);
+
+				searchResults = searchResults
+					.Select(p => new CustomCommerceSearchResultItem()
+					{
+						ItemId = p.ItemId,
+						Uri = p.Uri
+					});
+
+				searchResults = searchManager.AddSearchOptionsToQuery<CustomCommerceSearchResultItem>(searchResults, searchOptions);
+
+				var results = searchResults.GetResults();
+
+				var response = SearchResponse.CreateFromSearchResultsItems(searchOptions, results);
+
+				return response;
+			}
+		}
+
+
+		#endregion
+
+		#endregion
+	}
 }

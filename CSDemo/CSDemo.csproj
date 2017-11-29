@@ -699,6 +699,7 @@
     <Content Include="Views\SelectedInmate\Home.cshtml" />
     <Content Include="Views\SelectedInmate\Empty.cshtml" />
     <Content Include="Views\Widgets\ExtraContentWidget.cshtml" />
+    <Content Include="Views\GeneralSearch\FreePromoItems.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

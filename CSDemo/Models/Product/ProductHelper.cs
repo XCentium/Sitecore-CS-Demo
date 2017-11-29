@@ -29,6 +29,10 @@ using Sitecore.Links;
 using Convert = System.Convert;
 using Log = Sitecore.Diagnostics.Log;
 using Sitecore.Collections;
+using Sitecore.Commerce.Connect.CommerceServer;
+using Sitecore.Commerce.Connect.CommerceServer.Search;
+using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
+using Sitecore.ContentSearch.Linq;
 
 #endregion
 
@@ -1667,6 +1671,42 @@ namespace CSDemo.Models.Product
 			}
 			return null;
 
+		}
+
+		private static SearchResponse SearchCatalogItemsByKeyword(string keyword, string catalogName,
+			CommerceSearchOptions searchOptions)
+		{
+			Assert.ArgumentNotNullOrEmpty(catalogName, "catalogName");
+
+			var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
+			var searchIndex = searchManager.GetIndex(ConfigurationHelper.GetProductSearchIndex());
+
+			using (var context = searchIndex.CreateSearchContext())
+			{
+				var searchResults = context.GetQueryable<CustomCommerceSearchResultItem>()
+					.Where(item => item.Content.Contains(keyword) || item.ProductTags.Contains(keyword))
+					.Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product)
+					.Where(item => item.CatalogName == catalogName)
+					.Where(item => item.Language == Sitecore.Context.Language.Name)
+					.Where(item => !item.Name.StartsWith("Free-"));
+
+				searchResults = ProductHelper.FilterProductsByRestrictions(searchResults);
+
+				searchResults = searchResults
+					.Select(p => new CustomCommerceSearchResultItem()
+					{
+						ItemId = p.ItemId,
+						Uri = p.Uri
+					});
+
+				searchResults = searchManager.AddSearchOptionsToQuery<CustomCommerceSearchResultItem>(searchResults, searchOptions);
+
+				var results = searchResults.GetResults();
+
+				var response = SearchResponse.CreateFromSearchResultsItems(searchOptions, results);
+
+				return response;
+			}
 		}
 	}
 }
