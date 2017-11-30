@@ -47,12 +47,43 @@ namespace CSDemo.Helpers
 
         private static Facility GetSelectedFacility()
         {
-            return HttpContext.Current.Session["SELECTED_FACILITY"] as KeefePOC.Models.Facility;
+            var cookie = HttpContext.Current.Request.Cookies["SELECTED_FACILITY"];
+
+            if (cookie == null || string.IsNullOrEmpty(cookie.Value))
+            {
+                return null;
+            }
+
+            return new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<Facility>(cookie.Value);
+
+           // return HttpContext.Current.Session["SELECTED_FACILITY"] as KeefePOC.Models.Facility;
         }
 
         public static void SaveSelectedFacility(Facility modelSelectedFacility)
         {
-            HttpContext.Current.Session["SELECTED_FACILITY"] = modelSelectedFacility;
+
+            if (modelSelectedFacility != null)
+            {
+                var cookie = HttpContext.Current.Request.Cookies["SELECTED_FACILITY"];
+                if (cookie != null)
+                {
+                    cookie.Value = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(modelSelectedFacility);
+                    cookie.Expires = DateTime.Now.AddDays(365);
+                    HttpContext.Current.Response.SetCookie(cookie); // updates existing cookie, cookies.add.. can cause multiple cookies
+                }
+                else
+                {
+                    HttpCookie newCookie = new HttpCookie("SELECTED_FACILITY")
+                    {
+                        Expires = DateTime.Now.AddDays(365),
+                        Value = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(modelSelectedFacility)
+                    };
+                    HttpContext.Current.Response.SetCookie(newCookie);
+                }
+            }
+
+
+            //HttpContext.Current.Session["SELECTED_FACILITY"] = modelSelectedFacility;
         }
 
 		public static CSDemo.Models.Checkout.Cart.Address GetFacilityAddress()

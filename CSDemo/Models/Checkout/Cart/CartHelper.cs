@@ -498,6 +498,18 @@ namespace CSDemo.Models.Checkout.Cart
             var shoppingCart = new ShoppingCart();
             if (shoppingCartTotal == null) return shoppingCart;
 
+			if(cart.Parties != null)
+			{
+				shoppingCart.ShipTo = cart.Parties.Where(x => x.PartyId == "0").FirstOrDefault();
+				//shoppingCart.ShipTo = cart.Parties.Where(x => ((Sitecore.Commerce.Connect.CommerceServer.Orders.Models.CommerceParty)(cart.Parties).Items[0]).Name == "Shipping").FirstOrDefault();
+
+                if(shoppingCart.ShipTo == null)
+                {
+                    shoppingCart.ShipTo = new Party();
+                }
+
+            }
+
             shoppingCart.LineTotal = cart.Total as CommerceTotal == null
                 ? 0
                 : (cart.Total as CommerceTotal).Subtotal;
@@ -618,9 +630,9 @@ namespace CSDemo.Models.Checkout.Cart
         {
             var cart = GetCustomerCart();
 
-            var shipping = new CommerceParty
-            {
-                ExternalId = "0",
+			var shipping = new CommerceParty
+			{
+				ExternalId = "0",
                 Name = Constants.Products.ShippingAddress,
                 PartyId = "0",
                 FirstName = shippingAddress.FirstName,
@@ -2086,8 +2098,11 @@ namespace CSDemo.Models.Checkout.Cart
 		        faciltiyAddress.Country = null;
 		        faciltiyAddress.CountryCode = "US";
 		        faciltiyAddress.InmateId = inmate.Id;
+				//faciltiyAddress.Company = "Shipping";
+				//faciltiyAddress.ExternalId = inmate.Id;
 
-		        ApplyShippingToCart(faciltiyAddress);
+
+				ApplyShippingToCart(faciltiyAddress);
 		        //ApplyShippingToCart(address);
 
 		        //add shipping method
