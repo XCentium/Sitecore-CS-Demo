@@ -1,9 +1,15 @@
 ﻿@model CSDemo.Models.SelectedInmate.SelectedInmateViewModel
 
 <div class="container">
-    <p><strong>Shopping For:</strong> @Model.SelectedInmate.FullName (@Model.SelectedInmate.Tier - @Model.SelectedInmate.Block - @Model.SelectedInmate.Cell)</p>
-    @using (Html.BeginForm("CancelOrder", "SelectedInmate", FormMethod.Post))
-    {
-        <button type="submit">Cancel Order</button>
-    }
+
+	@using (Html.BeginForm("CancelOrder", "SelectedInmate", FormMethod.Post))
+	{
+		<p class="text-right">
+			<br />
+			<strong>Shopping For:</strong> @Model.SelectedInmate.FullName (@Model.SelectedInmate.Tier - @Model.SelectedInmate.Block - @Model.SelectedInmate.Cell)
+			<button type="submit">Cancel Order</button>
+
+		</p>
+	}
+
 </div>

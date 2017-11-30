@@ -9,125 +9,135 @@ using System;
 
 namespace CSDemo.Helpers
 {
-    public class InmateHelper
-    {
-        public static string GetSelectedInmateId()
-        {
-            return GetSelectedInmate()?.InmateNumber;
-        }
+	public class InmateHelper
+	{
+		public static string GetSelectedInmateId()
+		{
+			return GetSelectedInmate()?.InmateNumber;
+		}
 
-        public static Inmate GetSelectedInmate()
-        {
+		public static Inmate GetSelectedInmate()
+		{
 
-            var cookie = Get("KEEF_INMATE");
+			var cookie = Get("KEEF_INMATE");
 
-            if(cookie == null || string.IsNullOrEmpty(cookie.Value))
-            {
-                return null;
-            }
-            
-            return new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<Inmate>(cookie.Value);
+			if (cookie == null || string.IsNullOrEmpty(cookie.Value))
+			{
+				return null;
+			}
 
-            //return HttpContext.Current?.Session["SELECTED_INMATE"] as Inmate;
-        }
+			return new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<Inmate>(cookie.Value);
 
-        public static void SaveSelectedInmate(Inmate inmate)
-        {
+			//return HttpContext.Current?.Session["SELECTED_INMATE"] as Inmate;
+		}
 
-            if (inmate!= null)
-            {
-                var cookie = Get("KEEF_INMATE");
-                if (cookie != null)
-                {
-                    cookie.Value = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(inmate);
-                    cookie.Expires = DateTime.Now.AddDays(365);
-                    HttpContext.Current.Response.SetCookie(cookie); // updates existing cookie, cookies.add.. can cause multiple cookies
-                }
-                else
-                {
-                    HttpCookie newCookie = new HttpCookie("KEEF_INMATE")
-                    {
-                        Expires = DateTime.Now.AddDays(365),
-                        Value = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(inmate)
-                    };
-                    HttpContext.Current.Response.SetCookie(newCookie);
-                }
-            }
+		public static void SaveSelectedInmate(Inmate inmate)
+		{
 
-            //HttpContext.Current.Session["SELECTED_INMATE"] = inmate;
-        }
+			if (inmate != null)
+			{
+				var cookie = Get("KEEF_INMATE");
+				if (cookie != null)
+				{
+					cookie.Value = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(inmate);
+					cookie.Expires = DateTime.Now.AddDays(365);
+					HttpContext.Current.Response.SetCookie(cookie); // updates existing cookie, cookies.add.. can cause multiple cookies
+				}
+				else
+				{
+					HttpCookie newCookie = new HttpCookie("KEEF_INMATE")
+					{
+						Expires = DateTime.Now.AddDays(365),
+						Value = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(inmate)
+					};
+					HttpContext.Current.Response.SetCookie(newCookie);
+				}
+			}
+			else
+			{
+				var cookie = Get("KEEF_INMATE");
+				if (cookie != null)
+				{
+					// expire the cookie
+					cookie.Expires = DateTime.Now.AddDays(-30);
+					HttpContext.Current.Response.SetCookie(cookie); // updates existing cookie, cookies.add.. can cause multiple cookies
+				}
+			}
 
-        public static List<string> GetProductRestrictions()
-        {
-            var inmateId = GetSelectedInmateId();
+			//HttpContext.Current.Session["SELECTED_INMATE"] = inmate;
+		}
 
-            if (string.IsNullOrWhiteSpace(inmateId))
-                return new List<string>();
+		public static List<string> GetProductRestrictions()
+		{
+			var inmateId = GetSelectedInmateId();
 
-            var svc = new KeefeDataService(new DemoFacilityRepository(), new DemoProgramRepository(), new DemoInmateRepository());
-            return svc.GetProductRestrictionsForInmate(inmateId);
-        }
+			if (string.IsNullOrWhiteSpace(inmateId))
+				return new List<string>();
 
-        public static bool IsRestrictedMale()
-        {
-            var restrictions = GetProductRestrictions();
+			var svc = new KeefeDataService(new DemoFacilityRepository(), new DemoProgramRepository(), new DemoInmateRepository());
+			return svc.GetProductRestrictionsForInmate(inmateId);
+		}
 
-            return restrictions != null && restrictions.Any(r => r.Contains("male"));
-        }
+		public static bool IsRestrictedMale()
+		{
+			var restrictions = GetProductRestrictions();
 
-        public static bool IsRestrictedFemale()
-        {
-            var restrictions = GetProductRestrictions();
+			return restrictions != null && restrictions.Any(r => r.Contains("male"));
+		}
 
-            return restrictions != null && restrictions.Any(r => r.Contains("female"));
-        }
+		public static bool IsRestrictedFemale()
+		{
+			var restrictions = GetProductRestrictions();
 
-        public static bool IsRestrictedSugarFree()
-        {
-            var restrictions = GetProductRestrictions();
+			return restrictions != null && restrictions.Any(r => r.Contains("female"));
+		}
 
-            return restrictions != null && restrictions.Any(r => r.Contains("sugarfree"));
-        }
+		public static bool IsRestrictedSugarFree()
+		{
+			var restrictions = GetProductRestrictions();
 
-        public static bool IsRestrictedKosher()
-        {
-            var restrictions = GetProductRestrictions();
+			return restrictions != null && restrictions.Any(r => r.Contains("sugarfree"));
+		}
 
-            return restrictions != null && restrictions.Any(r => r.Contains("kosher"));
-        }
+		public static bool IsRestrictedKosher()
+		{
+			var restrictions = GetProductRestrictions();
 
-        public static bool IsRestrictedGlutenFree()
-        {
-            var restrictions = GetProductRestrictions();
+			return restrictions != null && restrictions.Any(r => r.Contains("kosher"));
+		}
 
-            return restrictions != null && restrictions.Any(r => r.Contains("glutenfree"));
-        }
+		public static bool IsRestrictedGlutenFree()
+		{
+			var restrictions = GetProductRestrictions();
 
-        public static List<string> GetProductBlacklist()
-        {
-            var inmateId = GetSelectedInmateId();
+			return restrictions != null && restrictions.Any(r => r.Contains("glutenfree"));
+		}
 
-            if (string.IsNullOrWhiteSpace(inmateId))
-                return new List<string>();
+		public static List<string> GetProductBlacklist()
+		{
+			var inmateId = GetSelectedInmateId();
 
-            var svc = new KeefeDataService(new DemoFacilityRepository(), new DemoProgramRepository(), new DemoInmateRepository());
-            return svc.GetBlacklistedItemsForInmate(inmateId);
-        }
+			if (string.IsNullOrWhiteSpace(inmateId))
+				return new List<string>();
 
-        public static HttpCookie Get(string cookieName)
-        {
-            return string.IsNullOrWhiteSpace(cookieName) ? null : HttpContext.Current.Request.Cookies[cookieName];
-        }
+			var svc = new KeefeDataService(new DemoFacilityRepository(), new DemoProgramRepository(), new DemoInmateRepository());
+			return svc.GetBlacklistedItemsForInmate(inmateId);
+		}
 
-        public static void Set(string cookieName, string cookieValue, int cookieExpirationInDays = 365)
-        {
+		public static HttpCookie Get(string cookieName)
+		{
+			return string.IsNullOrWhiteSpace(cookieName) ? null : HttpContext.Current.Request.Cookies[cookieName];
+		}
 
-            var cookie = HttpContext.Current.Request.Cookies[cookieName] ?? new HttpCookie(cookieName);
-            cookie.Value = cookieValue;
-            cookie.Expires = DateTime.Now.AddDays(cookieExpirationInDays);
+		public static void Set(string cookieName, string cookieValue, int cookieExpirationInDays = 365)
+		{
 
-            //   cookie.Values[cookieName] = cookieValue;
-            HttpContext.Current.Response.Cookies.Set(cookie);
-        }
-    }
+			var cookie = HttpContext.Current.Request.Cookies[cookieName] ?? new HttpCookie(cookieName);
+			cookie.Value = cookieValue;
+			cookie.Expires = DateTime.Now.AddDays(cookieExpirationInDays);
+
+			//   cookie.Values[cookieName] = cookieValue;
+			HttpContext.Current.Response.Cookies.Set(cookie);
+		}
+	}
 }
