@@ -650,6 +650,9 @@ namespace CSDemo.Models.Checkout.Cart
                 cartParties.AddRange(partyList);
                 cart.Parties = cartParties.AsReadOnly();
 
+                //add payment info to cart
+                cart = AddPartyToCart(cart, shipping);
+
                 // clear cart cache and add updated cart to cache
                 UpdateCartInCache(cart);
                 return true;
@@ -904,6 +907,18 @@ namespace CSDemo.Models.Checkout.Cart
             var addShippingInfoResult = _cartServiceProvider.AddShippingInfo(addShippingInfoRequest);
             if (!addShippingInfoResult.Success)
             {
+                var msgs = addShippingInfoResult.SystemMessages;
+
+                if (msgs != null)
+                {
+                    foreach (var msg in msgs)
+                    {
+                        Log.Error($"CartHelper.AddShippingMethodToCart, addShippingInfoResult.SystemMessages = {msg.Message}", msg);
+                    }
+                }
+
+
+                Log.Error($"CartHelper.AddShippingMethodToCart, Failed.", new object());
                 return false;
             }
 
@@ -2060,26 +2075,34 @@ namespace CSDemo.Models.Checkout.Cart
 
 		public void InitiateCheckout()
 		{
-			// Set Shippng Address as facility
-			var inmate = InmateHelper.GetSelectedInmate();
-			var faciltiyAddress = FacilityHelper.GetFacilityAddress();
+		    try
+		    {
+		        // Set Shippng Address as facility
+		        var inmate = InmateHelper.GetSelectedInmate();
+		        var faciltiyAddress = FacilityHelper.GetFacilityAddress();
 
-			faciltiyAddress.FirstName = inmate.FirstName;
-			faciltiyAddress.LastName = inmate.LastName;
-			faciltiyAddress.Country = null;
-			faciltiyAddress.CountryCode = "US";
-			faciltiyAddress.InmateId = inmate.Id;
+		        faciltiyAddress.FirstName = inmate.FirstName;
+		        faciltiyAddress.LastName = inmate.LastName;
+		        faciltiyAddress.Country = null;
+		        faciltiyAddress.CountryCode = "US";
+		        faciltiyAddress.InmateId = inmate.Id;
 
-			ApplyShippingToCart(faciltiyAddress);
-			//ApplyShippingToCart(address);
+		        ApplyShippingToCart(faciltiyAddress);
+		        //ApplyShippingToCart(address);
 
-			//string shippingMethodId = "e14965b9-306a-43c4-bffc-3c67be8726fa|Ground"; //TODO: for POC only
+		        //add shipping method
+		        var shippingMethodId = "e14965b9-306a-43c4-bffc-3c67be8726fa|Ground"; //TODO: for POC only
 
-			//if (!AddShippingMethodToCart(shippingMethodId))
-			//{
-			//	throw new Exception("AddShippingMethodToCart failed.");
-			//}
-		}
+		        if (!AddShippingMethodToCart(shippingMethodId))
+		        {
+		            throw new Exception("AddShippingMethodToCart failed.");
+		        }
+            }
+		    catch (Exception e)
+		    {
+		        Log.Error($"CartHelper.InitiateCheckout, Error = {e.Message}", e);
+		    }
+        }
 
         public GetShippingMethodsResult GetShippingMethods()
         {
