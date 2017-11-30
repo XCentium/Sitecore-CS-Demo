@@ -27,5 +27,7 @@ namespace KeefePOC.Models
 
 
         public List<string> Restrictions { get; set; } = new List<string>();
+        public double CurrentQuarterTotalOrderWeight { get; set; }
+        public decimal CurrentQuarterTotalOrderPrice { get; set; }
     }
 }

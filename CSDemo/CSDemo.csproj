@@ -367,7 +367,9 @@
     <Compile Include="Helpers\GlassHelper.cs" />
     <Compile Include="Helpers\InmateHelper.cs" />
     <Compile Include="Helpers\FacilityHelper.cs" />
+    <Compile Include="Helpers\ProgramHelper.cs" />
     <Compile Include="Models\FacilityModel.cs" />
+    <Compile Include="Models\ProgramModel.cs" />
     <Compile Include="Rules\Conditions\PreTaxTotal.cs" />
     <Compile Include="Models\Account\RegisterUserInputModel.cs" />
     <Compile Include="Models\InmateSearch\InmateSearchViewModel.cs" />

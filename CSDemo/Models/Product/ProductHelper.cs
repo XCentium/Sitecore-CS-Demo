@@ -637,7 +637,7 @@ namespace CSDemo.Models.Product
 
 		internal static SearchResultItem GetCommerceItemByProductId(string productId)
 		{
-			var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetProductSearchIndex());
+			var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
 			try
 			{
 				using (var context = index.CreateSearchContext())

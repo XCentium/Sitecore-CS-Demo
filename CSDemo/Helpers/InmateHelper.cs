@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using KeefePOC.Models;
@@ -11,12 +12,36 @@ namespace CSDemo.Helpers
     {
         public static string GetSelectedInmateId()
         {
+            if (ConfigurationManager.AppSettings["DebugMode"] == "1")
+            {
+                return "123456";
+            }
+
             return GetSelectedInmate()?.InmateNumber;
         }
 
         public static Inmate GetSelectedInmate()
         {
-            return HttpContext.Current?.Session["SELECTED_INMATE"] as Inmate;
+            var inmate = HttpContext.Current?.Session["SELECTED_INMATE"] as Inmate;
+
+            if (inmate == null && ConfigurationManager.AppSettings["DebugMode"] == "1")
+            {
+                var inmateNo = GetSelectedInmateId();
+                return new Inmate
+                {
+                    InmateNumber = GetSelectedInmateId(),
+                    CurrentQuarterTotalOrderWeight = CurrentQuarterTotalOrderWeight(inmateNo),
+                    CurrentQuarterTotalOrderPrice = CurrentQuarterTotalOrderPrice(inmateNo)
+            };
+            }
+
+            if (inmate != null) { 
+                //populate quarterly totals from service
+                inmate.CurrentQuarterTotalOrderWeight = CurrentQuarterTotalOrderWeight(inmate.InmateNumber);
+                inmate.CurrentQuarterTotalOrderPrice = CurrentQuarterTotalOrderPrice(inmate.InmateNumber);
+            }
+
+            return inmate;
         }
 
         public static void SaveSelectedInmate(Inmate inmate)
@@ -79,6 +104,24 @@ namespace CSDemo.Helpers
 
             var svc = new KeefeDataService(new DemoFacilityRepository(), new DemoProgramRepository(), new DemoInmateRepository());
             return svc.GetBlacklistedItemsForInmate(inmateId);
+        }
+
+        public static double CurrentQuarterTotalOrderWeight(string inmateId)
+        {
+            if (string.IsNullOrWhiteSpace(inmateId))
+                return -1;
+
+            var svc = new KeefeDataService(new DemoFacilityRepository(), new DemoProgramRepository(), new DemoInmateRepository());
+            return svc.GetCurrentQuarterOrderTotalWeightForInmate(inmateId);
+        }
+
+        public static decimal CurrentQuarterTotalOrderPrice(string inmateId)
+        {
+            if (string.IsNullOrWhiteSpace(inmateId))
+                return -1;
+
+            var svc = new KeefeDataService(new DemoFacilityRepository(), new DemoProgramRepository(), new DemoInmateRepository());
+            return svc.GetCurrentQuarterOrderTotalPriceForInmate(inmateId);
         }
     }
 }

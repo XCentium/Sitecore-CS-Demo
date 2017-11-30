@@ -2,23 +2,19 @@
 using KeefePOC.Interfaces.Services;
 using KeefePOC.Repositories;
 using KeefePOC.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using KeefePOC.Models;
 using Sitecore.Data.Items;
-using KeefePOC.Models.Enumerations;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using CSDemo.Helpers;
+using CSDemo.Models;
 
 namespace CSDemo.Controllers
 {
     public class LandingPageController : Controller
     {
-        IDataService dataService = new KeefeDataService(new DemoFacilityRepository(), new DemoProgramRepository(), new DemoInmateRepository());
+        private readonly IDataService _dataService = new KeefeDataService(new DemoFacilityRepository(), new DemoProgramRepository(), new DemoInmateRepository());
         const string ProgramTemplateId = "{3D80C537-D7A4-4DBB-9C1B-B2B810F0A2C8}";
         const string FacilityTemplateId = "{E2232845-B8A5-4651-BA44-0CB1ED54AA9E}";
         const string ProgramLocation = "/sitecore/content/Global Configuration/Programs";
@@ -26,7 +22,7 @@ namespace CSDemo.Controllers
 
         public ActionResult Home()
         {
-            var states = dataService.GetStates();
+            var states = _dataService.GetStates();
             var model = new HomeViewModel(states);
             return View(model);
         }
@@ -36,10 +32,12 @@ namespace CSDemo.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var states = dataService.GetStates();
-                var refreshModel = new HomeViewModel(states);
-                refreshModel.SelectedProgram = model.SelectedProgram;
-                refreshModel.SelectedState = model.SelectedState;
+                var states = _dataService.GetStates();
+                var refreshModel = new HomeViewModel(states)
+                {
+                    SelectedProgram = model.SelectedProgram,
+                    SelectedState = model.SelectedState
+                };
 
                 // TODO: populate error message
 
@@ -47,6 +45,11 @@ namespace CSDemo.Controllers
             }
 
             var program = Sitecore.Context.Database.GetItem(model.SelectedProgram);
+
+            //save program
+            var selectedProgram = GlassHelper.Cast<ProgramModel>(program);
+            ProgramHelper.SaveSelectedProgram(selectedProgram);
+
             Sitecore.Data.Fields.LinkField linkField = program.Fields["Program Home Page"];
             var redirectUrl = linkField.GetFriendlyUrl();
 
@@ -71,7 +74,7 @@ namespace CSDemo.Controllers
         public ActionResult GetPrograms(string state)
         {
             // Get this from sitecore now.
-            List<Program> programs = new List<Program>();
+            var programs = new List<Program>();
             var programItem = Sitecore.Context.Database.GetItem(ProgramLocation);
 
             //if null: check if the data is published to web db. Also add isActive check
@@ -81,7 +84,7 @@ namespace CSDemo.Controllers
                 {
                     if (program["State"] == state)
                     {
-                        var model = new Program(program);
+                        var model = new  Program(program);
                         programs.Add(model);
                     }
                 }
@@ -109,8 +112,7 @@ namespace CSDemo.Controllers
 
         public ActionResult SearchInmates(Inmate search)
         {
-
-			List<Inmate> result = new List<Inmate>();
+			List<Inmate> result;
 
 			var facilityId = search.AssociatedFacilityId;
 
@@ -119,15 +121,15 @@ namespace CSDemo.Controllers
 				var facilityItem = Sitecore.Context.Database.GetItem(facilityId);
 				if (facilityItem != null)
 				{
-					var facility = new KeefePOC.Models.Facility(facilityItem);
+					var facility = new Facility(facilityItem);
 					search.AssociatedFacilityId = facility.ExternalId;
 				}
 
-				result = dataService.SearchInmates(search.AssociatedFacilityId, search);
+				result = _dataService.SearchInmates(search.AssociatedFacilityId, search);
 			}
 			else
 			{
-				result = dataService.SearchInmates(search);
+				result = _dataService.SearchInmates(search);
 			}
 
 			

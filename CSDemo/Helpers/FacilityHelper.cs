@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using CSDemo.Models;
-using CSDemo.Models.Checkout.Cart;
-using CSDemo.Models.InmateSearch;
 using CSDemo.Models.Product;
 using KeefePOC.Models;
 using Sitecore.Diagnostics;
@@ -42,12 +41,27 @@ namespace CSDemo.Helpers
 
         private static string GetSelectedFacilityId()
         {
+            if (ConfigurationManager.AppSettings["DebugMode"] == "1")
+            {
+                return "{7CBB94CB-F321-4428-B05E-21540E8B4A58}";
+            }
+
             return GetSelectedFacility()?.Id;
         }
 
         private static Facility GetSelectedFacility()
         {
-            return HttpContext.Current.Session["SELECTED_FACILITY"] as KeefePOC.Models.Facility;
+            var facility = HttpContext.Current.Session["SELECTED_FACILITY"] as Facility;
+
+            if (facility == null && ConfigurationManager.AppSettings["DebugMode"] == "1")
+            {
+               return new Facility
+               {
+                   Id = GetSelectedFacilityId()
+               };
+            }
+
+            return facility;
         }
 
         public static void SaveSelectedFacility(Facility modelSelectedFacility)

@@ -16,5 +16,7 @@ namespace KeefePOC.Interfaces.Repositories
         List<Inmate> SearchInmates(string facilityId,Inmate request);
 		List<string> GetBlacklistedItemsForInmate(string inmateId);
         List<string> GetProductRestrictionsForInmate(string inmateId);
+        double GetCurrentQuarterOrderTotalWeightForInmate(string inmateId);
+        decimal GetCurrentQuarterOrderTotalPriceForInmate(string inmateId);
     }
 }

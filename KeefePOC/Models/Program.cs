@@ -38,5 +38,7 @@ namespace KeefePOC.Models
 
         public string ProgramHomePage { get; set; }
 
+        public decimal QuarterlyOrderWeightLimit { get; set; }
+        public decimal QuarterlyOrderPriceLimit { get; set; }
     }
 }
