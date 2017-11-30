@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sitecore.Commerce.Entities;
 
 #endregion
 
@@ -20,6 +21,8 @@ namespace CSDemo.Models.Checkout.Cart
         public string Currency { get; set; }
 
         public decimal LineTotal { get; set; }
+
+		public Party ShipTo { get; set; }
 
         public decimal TotalWeight
         {
@@ -93,6 +96,7 @@ namespace CSDemo.Models.Checkout.Cart
             Shipping = 0.00m;
             Tax = 0.00m;
             GrandTotal = 0.00m;
+			ShipTo = new Party();
 
         }
 
@@ -111,5 +115,7 @@ namespace CSDemo.Models.Checkout.Cart
 
             return discount;
         }
+
+
     }
 }
