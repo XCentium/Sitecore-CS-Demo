@@ -59,7 +59,7 @@ namespace CSDemo.Helpers
                 programSaved.QuarterlyOrderWeightLimit = GetProgramQuarterlyOrderWeightLimit(programSaved.ID);
             }
 
-            return program;
+            return programSaved;
         }
 
         private static double GetProgramQuarterlyOrderWeightLimit(Guid programId)
