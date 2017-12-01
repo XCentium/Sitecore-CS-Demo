@@ -90,8 +90,9 @@ namespace CSDemo.Controllers
            // var siteNode = contextDB.GetItem(siteName);
 
 
-            var program = Sitecore.Context.Database.GetItem(siteName);
-
+            var siteNode = Sitecore.Context.Database.GetItem(siteName);
+            var programId = siteNode["Program"];
+            var program = Sitecore.Context.Database.GetItem(programId);
             //save program
             var selectedProgram = GlassHelper.Cast<ProgramModel>(program);
             ProgramHelper.SaveSelectedProgram(selectedProgram);
