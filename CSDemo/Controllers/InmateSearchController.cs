@@ -5,6 +5,7 @@ using KeefePOC.Repositories;
 using KeefePOC.Services;
 using System.Web.Mvc;
 using CSDemo.Helpers;
+using CSDemo.Models;
 
 namespace CSDemo.Controllers
 {
@@ -82,6 +83,20 @@ namespace CSDemo.Controllers
 
             FacilityHelper.SaveSelectedFacility(model.SelectedFacility);
             InmateHelper.SaveSelectedInmate(inmate);
+
+
+            var siteName = Sitecore.Context.Site.ContentStartPath;
+
+           // var siteNode = contextDB.GetItem(siteName);
+
+
+            var siteNode = Sitecore.Context.Database.GetItem(siteName);
+            var programId = siteNode["Program"];
+            var program = Sitecore.Context.Database.GetItem(programId);
+            //save program
+            var selectedProgram = GlassHelper.Cast<ProgramModel>(program);
+            ProgramHelper.SaveSelectedProgram(selectedProgram);
+                       
 
             return Redirect("/");
         }
