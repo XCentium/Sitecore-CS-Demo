@@ -61,7 +61,7 @@ namespace CSDemo.Controllers
 
 			var searchInfo = GetSearchInfo(query, 1, null, theSortField, 50, CommerceConstants.SortDirection.Asc);
 
-			searchModel = GetSearchModel(searchInfo.SearchOptions, searchInfo.SearchQuery, searchInfo.CatalogName, 50, 1, theSortField, true);
+			searchModel = GetSearchModel(searchInfo.SearchOptions, searchInfo.SearchQuery, "PromoProducts", 50, 1, theSortField, true);
 
 			return View(searchModel);
 		}
@@ -346,23 +346,23 @@ namespace CSDemo.Controllers
 
 			using (var context = searchIndex.CreateSearchContext())
 			{
-				var searchResults = context.GetQueryable<CustomCommerceSearchResultItem>()
-					//.Where(item => item.Content.Contains(keyword) || item.ProductTags.Contains(keyword))
-					.Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product)
-					.Where(item => item.CatalogName == catalogName)
-					.Where(item => item.Language == Sitecore.Context.Language.Name)
-					.Where(item => item.Name.StartsWith("Free-"));
+                var searchResults = context.GetQueryable<CommerceProductSearchResultItem>()
+                    //.Where(item => item.Content.Contains(keyword) || item.ProductTags.Contains(keyword))
+                    .Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product)
+                    .Where(item => item.CatalogName == catalogName)
+                    .Where(item => item.Language == Sitecore.Context.Language.Name);
+					//.Where(item => item.Name.StartsWith("Free"));
 
 				//searchResults = ProductHelper.FilterProductsByRestrictions(searchResults);
 
 				searchResults = searchResults
-					.Select(p => new CustomCommerceSearchResultItem()
+					.Select(p => new CommerceProductSearchResultItem()
 					{
 						ItemId = p.ItemId,
 						Uri = p.Uri
 					});
 
-				searchResults = searchManager.AddSearchOptionsToQuery<CustomCommerceSearchResultItem>(searchResults, searchOptions);
+				searchResults = searchManager.AddSearchOptionsToQuery<CommerceProductSearchResultItem>(searchResults, searchOptions);
 
 				var results = searchResults.GetResults();
 

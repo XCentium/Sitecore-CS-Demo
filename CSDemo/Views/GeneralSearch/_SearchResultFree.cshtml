@@ -1,0 +1,37 @@
+﻿@inherits  Glass.Mapper.Sc.Web.Mvc.GlassView<CSDemo.Contracts.Product.IProduct>
+    @using System.Linq
+<div class="col-md-4 col-sm-3 col-xs-6">
+    <article class="product-item">
+        <div class="row">
+            <div class="col-sm-3">                
+            </div>
+            <div class="col-sm-9">
+                <div class="product-body">
+                    <h3>@Model.Title</h3>
+                    <div class="product-labels">
+                        @if (Model.IsNew)
+                        {
+                            <span class="label label-info">new</span>
+                        }
+                        @if (Model.IsOnSale)
+                        {
+                            <span class="label label-danger">sale</span>
+                        }
+                    </div>                    
+                    <div class="product-rating">
+                        <i class="fa fa-star@(Model.Rating>0 ? string.Empty:"-o" )"></i>
+                        <i class="fa fa-star@(Model.Rating>1 ? string.Empty:"-o" )"></i>
+                        <i class="fa fa-star@(Model.Rating>2 ? string.Empty:"-o" )"></i>
+                        <i class="fa fa-star@(Model.Rating>3 ? string.Empty:"-o" )"></i>
+                        <i class="fa fa-star@(Model.Rating>4 ? string.Empty:"-o" )"></i>
+                    </div>
+                    <div class="checkbox pull-left">
+                        <input type="checkbox" id="@Model.ProductId" name="@Model.ProductId"  catalogName="PromoProducts" />
+                        <label for="@Model.ProductId">Select for Add To Cart</label>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </article>
+</div>
