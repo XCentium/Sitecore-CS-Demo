@@ -20,26 +20,31 @@ namespace KeefePOC.Models
 		{
 			InmateCatalog c = new InmateCatalog();
 
-			c.InmateId = "123452";
-			c.Products = new List<string>() { "Snickers-1-86-oz-Bar" };
+
+            c.InmateId = "123451";
+            c.Products = new List<string>() { "10003" };
+            Blacklist.Add(c);
+
+            c.InmateId = "123452";
+			c.Products = new List<string>() { "10001" };
 			Blacklist.Add(c);
 
 			c = new InmateCatalog();
 
 			c.InmateId = "123452";
-			c.Products = new List<string>() { "3-Musketeers-1-92-oz-Bar" };
+			c.Products = new List<string>() { "10002" };
 			Blacklist.Add(c);
 
 			c = new InmateCatalog();
 
 			c.InmateId = "123453";
-			c.Products = new List<string>() { "Doritos-8-oz-Nacho-Cheese-Chips" };
+			c.Products = new List<string>() { "10004" };
 			Blacklist.Add(c);
 
 		    c = new InmateCatalog();
 
 		    c.InmateId = "123456";
-		    c.Products = new List<string>() { "3-Musketeers-1-92-oz-Bar" };
+		    c.Products = new List<string>() { "10002" };
 		    Blacklist.Add(c);
 
 

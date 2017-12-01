@@ -528,7 +528,7 @@ namespace CSDemo.Models.Checkout.Cart
 
 			if(cart.Parties != null)
 			{
-				shoppingCart.ShipTo = cart.Parties.Where(x => x.PartyId == "0").FirstOrDefault();
+				shoppingCart.ShipTo = cart.Parties.Where(x => x.PartyId == "0" && x.FirstName.StartsWith("Inmate")).FirstOrDefault();
 				//shoppingCart.ShipTo = cart.Parties.Where(x => ((Sitecore.Commerce.Connect.CommerceServer.Orders.Models.CommerceParty)(cart.Parties).Items[0]).Name == "Shipping").FirstOrDefault();
 
                 if(shoppingCart.ShipTo == null)
@@ -664,7 +664,7 @@ namespace CSDemo.Models.Checkout.Cart
                 Name = Constants.Products.ShippingAddress,
                 PartyId = "0",
                 FirstName = shippingAddress.FirstName,
-                LastName = shippingAddress.LastName,
+                LastName = shippingAddress.LastName + $"({shippingAddress.InmateId})",
                 Address1 = shippingAddress.Address1,
                 Address2 = shippingAddress.Address2,
                 City = shippingAddress.City,
