@@ -24,7 +24,6 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using CSDemo.Configuration;
-using CSDemo.Models.Page;
 using AddPartiesRequest = Sitecore.Commerce.Services.Carts.AddPartiesRequest;
 using UpdatePartiesRequest = Sitecore.Commerce.Services.Carts.UpdatePartiesRequest;
 using Sitecore.Commerce.Services.Payments;
@@ -37,8 +36,8 @@ using Sitecore.ContentSearch.Linq;
 using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data;
 using Sitecore.Diagnostics;
-using Sitecore.Commerce.Pipelines;
 using CSDemo.Helpers;
+using Sitecore.Commerce;
 
 namespace CSDemo.Models.Checkout.Cart
 {
@@ -78,38 +77,45 @@ namespace CSDemo.Models.Checkout.Cart
 
         public string AddProductToCart(string quantity, string productId, string catalogName, string variantId)
         {
-			// Temporarily Commenting out until login is fixed on the server.
-			//var loggedIn = Sitecore.Context.User.IsAuthenticated;
-			//if (!loggedIn)
-			//{
-			//	return "Anonymous";
-			//}
-
-
-			var inmateId = InmateHelper.GetSelectedInmateId();
-
-			if (string.IsNullOrEmpty(inmateId))
-			{
-				return "No Inmate Selected";
-			}
-
-
-			var ret = string.Empty;
-            // Create cart object
-            var cartLineItem = new CartLineItem
+            try
             {
-                Quantity = uint.Parse(quantity),
-                ProductId = productId,
-                CatalogName = catalogName,
-                VariantId = variantId
-            };
-            var cart = AddToCart(cartLineItem);
-            if (cart == null || cart.Properties[Constants.Cart.BasketErrors] != null)
-            {
-                // no cart OR _basket_errors present
-                ret = Constants.Cart.ErrorInBasket;
+                var inmateId = InmateHelper.GetSelectedInmateId();
+
+                if (string.IsNullOrEmpty(inmateId))
+                {
+                    return "No Inmate Selected";
+                }
+
+                var ret = string.Empty;
+                // Create cart object
+                var cartLineItem = new CartLineItem
+                {
+                    Quantity = uint.Parse(quantity),
+                    ProductId = productId,
+                    CatalogName = catalogName,
+                    VariantId = variantId
+                };
+                var cart = AddToCart(cartLineItem);
+
+                //check for custom validation errors
+                if (!string.IsNullOrWhiteSpace(cart?.Properties["KeefeValidationMessage"]?.ToString()))
+                {
+                    return cart.Properties["KeefeValidationMessage"].ToString();
+                }
+
+                //check for other errors
+                if (cart == null || cart.Properties[Constants.Cart.BasketErrors] != null)
+                {
+                    // no cart OR _basket_errors present
+                    ret = Constants.Cart.ErrorInBasket;
+                }
+                return ret;
             }
-            return ret;
+            catch (Exception e)
+            {
+                Log.Error($"CartHelper.AddProductToCart(), error={e.Message}", e);
+                return "Error occured in adding product. Please check logs.";
+            }
         }
 
         public bool ViewCartPromo()
@@ -124,7 +130,6 @@ namespace CSDemo.Models.Checkout.Cart
 
         public CommerceCart AddToCart(CartLineItem cartLine)
         {
-
 			var inmateId = InmateHelper.GetSelectedInmateId();
 
 			if (string.IsNullOrEmpty(inmateId))
@@ -158,6 +163,30 @@ namespace CSDemo.Models.Checkout.Cart
 			
 
             var cartResult = _cartServiceProvider.AddCartLines(request);
+            if (!cartResult.Success)
+            {
+                var msg = "";
+                if (cartResult.SystemMessages != null)
+                {
+                    foreach (var systemMessage in cartResult.SystemMessages)
+                    {
+                        if (!string.IsNullOrWhiteSpace(msg))
+                        {
+                            msg += " | ";
+                        }
+
+                        msg += systemMessage.Message;
+                    }
+                }
+                
+                return new CommerceCart
+                {
+                    Properties = new PropertyCollection
+                    {
+                        new PropertyItem("KeefeValidationMessage", msg)
+                    }
+                };
+            }
 
             // add cart to cache
             var cart = cartResult.Cart as CommerceCart;
@@ -165,7 +194,6 @@ namespace CSDemo.Models.Checkout.Cart
 
             return cartResult.Cart as CommerceCart;
         }
-
 
         /// <summary>
         ///     AddCart To Cache
@@ -934,7 +962,7 @@ namespace CSDemo.Models.Checkout.Cart
                 return false;
             }
 
-            //update cart in cache
+            //update cart in cachet
             if (addShippingInfoResult.Success && addShippingInfoResult.Cart != null)
             {
                 UpdateCartInCache(addShippingInfoResult.Cart as CommerceCart);
@@ -2232,25 +2260,86 @@ namespace CSDemo.Models.Checkout.Cart
             var result = new ValidatePurchaseResult
             {
                 ProductId = productId,
-                Quantity = qty
+                Quantity = qty,
+                IsValidForPurchase = false
             };
 
             try
             {
-                var summary = GetProductGroupsSummaryByCart();
-
-                if (summary == null || summary.Count <= 0)
-                {
-                    result.Message = "No Product Group Summary OR No items in cart";
-                    result.IsValidForPurchase = true;
-                    return result;
-                }
-
+                //check product
                 var product = ProductHelper.GetCommerceItemByProductId(productId);
 
                 if (product == null)
                 {
                     result.Message = "Product not found.";
+                    return result;
+                }
+
+                var productListPrice = !string.IsNullOrWhiteSpace(product["listprice"])
+                    ? decimal.Parse(product["listprice"])
+                    : 0;
+                var totalProductPrice = productListPrice * qty;
+
+                var productWeight = !string.IsNullOrWhiteSpace(product["weight"])
+                    ? qty * double.Parse(product["weight"])
+                    : 0;
+                var totalProductWeight = productWeight * qty;
+
+                //0 - get cart contents and summary
+                var summary = GetProductGroupsSummaryByCart();
+                
+                //1 - check program level weight and price restrictions
+                var currentProgram = ProgramHelper.GetSelectedProgram();
+
+                if (currentProgram == null)
+                {
+                    result.Message = "Cannot find currently selected Program";
+                    return result;
+                }
+
+                //get inmate total orders for the quarter
+                var inmate = InmateHelper.GetSelectedInmate();
+
+                if (summary == null || summary.Count <= 0)
+                {
+                    //check only item to add vs limits
+                    if ((totalProductWeight + inmate.CurrentQuarterTotalOrderWeight) > currentProgram.QuarterlyOrderWeightLimit)
+                    {
+                        result.Message = "Cannot add product. Reason: Program Quarterly Weight Restriction.";
+                        return result;
+                    }
+
+                    if ((totalProductPrice + inmate.CurrentQuarterTotalOrderPrice) > currentProgram.QuarterlyOrderPriceLimit)
+                    {
+                        result.Message = "Cannot add product. Reason: Program Quarterly Price Restriction.";
+                        return result;
+                    }
+                }
+                else
+                {
+                    var totalCartWeight = summary.Sum(c => c.WeightTotal);
+                    var totalCartPrice = summary.Sum(c => c.PriceTotal);
+
+                    //check cart items + item to add vs limits
+                    if ((totalProductWeight + inmate.CurrentQuarterTotalOrderWeight + totalCartWeight) > currentProgram.QuarterlyOrderWeightLimit)
+                    {
+                        result.Message = "Cannot add product. Reason: Program Quarterly Weight Restriction.";
+                        return result;
+                    }
+
+                    if ((totalProductPrice + inmate.CurrentQuarterTotalOrderPrice + totalCartPrice) > currentProgram.QuarterlyOrderPriceLimit)
+                    {
+                        result.Message = "Cannot add product. Reason: Program Quarterly Price Restriction.";
+                        return result;
+                    }
+
+                }
+
+                //2 - check product group weight and price restrictions
+                if (summary == null || summary.Count <= 0)
+                {
+                    result.Message = "No Product Group Summary OR No items in cart";
+                    result.IsValidForPurchase = true;
                     return result;
                 }
 
@@ -2262,36 +2351,40 @@ namespace CSDemo.Models.Checkout.Cart
                     //remove all entries in summary not associated to product
                     summary = summary.Where(s => productGroupdIdGuids.Contains(s.Id)).ToList();
 
-                    var isOverWeight = false;
-                    var isOverPriced = false;
-
                     foreach (var productGroupId in productGroupIds)
                     {
                         foreach (var groupSummary in summary)
                         {
                             if (groupSummary.Id == Guid.Parse(productGroupId))
                             {
-                                groupSummary.PriceTotal += qty * decimal.Parse(product["listprice"]);
-                                groupSummary.WeightTotal += !string.IsNullOrWhiteSpace(product["weight"]) ? qty * double.Parse(product["weight"]) : 0;
+                                groupSummary.PriceTotal += qty * productListPrice;
+                                groupSummary.WeightTotal += productWeight;
 
-                                if (!isOverPriced)
-                                    isOverPriced = groupSummary.PriceTotal > groupSummary.PriceLimit;
+                                var isOverPriced = groupSummary.PriceTotal > groupSummary.PriceLimit;
+                                if (isOverPriced)
+                                {
+                                    result.Message = "Product Group Price Limit reached";
+                                    return result;
+                                }
 
-                                if (!isOverWeight)
-                                    isOverWeight = groupSummary.WeightTotal > groupSummary.WeightLimit;
+                                var isOverWeight = groupSummary.WeightTotal > groupSummary.WeightLimit;
+                                if (isOverWeight)
+                                {
+                                    result.Message = "Product Group Weight Limit reached";
+                                    return result;
+                                }
                             }
                         }
                     }
 
-                    result.ProductGroups = summary;
-                    result.Message = isOverPriced ? "Price Limit reached|" : string.Empty;
-                    result.Message += isOverWeight ? "Weight Limit reached" : string.Empty;
-                    result.IsValidForPurchase = !isOverPriced && !isOverWeight;
+                    result.IsValidForPurchase = true;
                 }
             }
             catch (Exception ex)
             {
                 Log.Error($"CartHelper.IsValidForPurchase(), Error = {ex.Message}", ex);
+                Log.Error($"CartHelper.IsValidForPurchase(), Stack trace = {ex.StackTrace}", ex);
+                throw;
             }
 
             return result;
@@ -2397,7 +2490,7 @@ namespace CSDemo.Models.Checkout.Cart
             }
             catch (Exception ex)
             {
-                Log.Error($"CartHelper.GetProductGroupLimits(), Error = {ex.Message}", ex);
+                Log.Error($"CartHelper.GetProductGroupsByStorefront(), Error = {ex.Message}", ex);
             }
 
             return new List<ProductGroup>();

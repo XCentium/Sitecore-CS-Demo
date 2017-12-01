@@ -83,5 +83,15 @@ namespace KeefePOC.Services
         {
             return inmateRepo.GetProductRestrictionsForInmate(inmateId);
         }
+
+        public double GetCurrentQuarterOrderTotalWeightForInmate(string inmateId)
+        {
+            return inmateRepo.GetCurrentQuarterOrderTotalWeightForInmate(inmateId);
+        }
+
+        public decimal GetCurrentQuarterOrderTotalPriceForInmate(string inmateId)
+        {
+            return inmateRepo.GetCurrentQuarterOrderTotalPriceForInmate(inmateId);
+        }
     }
 }

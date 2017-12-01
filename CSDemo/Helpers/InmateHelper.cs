@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using KeefePOC.Models;
@@ -6,35 +7,56 @@ using KeefePOC.Repositories;
 using KeefePOC.Services;
 using System;
 
-
 namespace CSDemo.Helpers
 {
     public class InmateHelper
     {
         public static string GetSelectedInmateId()
         {
+            if (ConfigurationManager.AppSettings["DebugMode"] == "1")
+            {
+                return "123456";
+            }
+
             return GetSelectedInmate()?.InmateNumber;
         }
 
         public static Inmate GetSelectedInmate()
         {
-
             var cookie = Get("KEEF_INMATE");
 
-            if(cookie == null || string.IsNullOrEmpty(cookie.Value))
+            if (string.IsNullOrEmpty(cookie?.Value))
             {
+                if (ConfigurationManager.AppSettings["DebugMode"] == "1")
+                {
+                    var inmateNo = GetSelectedInmateId();
+                    return new Inmate
+                    {
+                        InmateNumber = GetSelectedInmateId(),
+                        CurrentQuarterTotalOrderWeight = CurrentQuarterTotalOrderWeight(inmateNo),
+                        CurrentQuarterTotalOrderPrice = CurrentQuarterTotalOrderPrice(inmateNo)
+                    };
+                }
+
                 return null;
             }
-            
-            return new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<Inmate>(cookie.Value);
 
-            //return HttpContext.Current?.Session["SELECTED_INMATE"] as Inmate;
+            var inmate = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<Inmate>(cookie.Value);
+
+            if (inmate != null)
+            {
+                //populate quarterly totals from service
+                inmate.CurrentQuarterTotalOrderWeight = CurrentQuarterTotalOrderWeight(inmate.InmateNumber);
+                inmate.CurrentQuarterTotalOrderPrice = CurrentQuarterTotalOrderPrice(inmate.InmateNumber);
+            }
+
+            return inmate;
         }
 
         public static void SaveSelectedInmate(Inmate inmate)
         {
 
-            if (inmate!= null)
+            if (inmate != null)
             {
                 var cookie = Get("KEEF_INMATE");
                 if (cookie != null)
@@ -53,8 +75,16 @@ namespace CSDemo.Helpers
                     HttpContext.Current.Response.SetCookie(newCookie);
                 }
             }
-
-            //HttpContext.Current.Session["SELECTED_INMATE"] = inmate;
+            else
+            {
+                var cookie = Get("KEEF_INMATE");
+                if (cookie != null)
+                {
+                    // expire the cookie
+                    cookie.Expires = DateTime.Now.AddDays(-30);
+                    HttpContext.Current.Response.SetCookie(cookie); // updates existing cookie, cookies.add.. can cause multiple cookies
+                }
+            }
         }
 
         public static List<string> GetProductRestrictions()
@@ -128,6 +158,24 @@ namespace CSDemo.Helpers
 
             //   cookie.Values[cookieName] = cookieValue;
             HttpContext.Current.Response.Cookies.Set(cookie);
+        }
+
+        public static double CurrentQuarterTotalOrderWeight(string inmateId)
+        {
+            if (string.IsNullOrWhiteSpace(inmateId))
+                return -1;
+
+            var svc = new KeefeDataService(new DemoFacilityRepository(), new DemoProgramRepository(), new DemoInmateRepository());
+            return svc.GetCurrentQuarterOrderTotalWeightForInmate(inmateId);
+        }
+
+        public static decimal CurrentQuarterTotalOrderPrice(string inmateId)
+        {
+            if (string.IsNullOrWhiteSpace(inmateId))
+                return -1;
+
+            var svc = new KeefeDataService(new DemoFacilityRepository(), new DemoProgramRepository(), new DemoInmateRepository());
+            return svc.GetCurrentQuarterOrderTotalPriceForInmate(inmateId);
         }
     }
 }

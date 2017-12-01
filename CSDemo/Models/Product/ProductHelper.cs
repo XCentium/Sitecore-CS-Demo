@@ -239,13 +239,30 @@ namespace CSDemo.Models.Product
 										var productItem = subProd.GlassCast<Product>();
 										childrenList.Add(productItem);
 
-										var variants = subProd.GetChildren();
+										if (subProd.HasChildren)
+										{
+											// Update ProductVariants
+											productItem.ProductVariants =
+												subProd.GetChildren().Select(x => x.GlassCast<ProductVariant>()); //todo: refactor
+
+											BuildUiVariants(productItem);
+										}
+
 									}
 								}
 								else
 								{
 									var productItem = prod.GlassCast<Product>();
 									childrenList.Add(productItem);
+
+									if (prod.HasChildren)
+									{
+										// Update ProductVariants
+										productItem.ProductVariants =
+											prod.GetChildren().Select(x => x.GlassCast<ProductVariant>()); //todo: refactor
+
+										BuildUiVariants(productItem);
+									}
 								}
 							}
 						}
@@ -255,6 +272,14 @@ namespace CSDemo.Models.Product
 							var productItem = subcat.GlassCast<Product>();
 							childrenList.Add(productItem);
 
+							if (subcat.HasChildren)
+							{
+								// Update ProductVariants
+								productItem.ProductVariants =
+									subcat.GetChildren().Select(x => x.GlassCast<ProductVariant>()); //todo: refactor
+
+								BuildUiVariants(productItem);
+							}
 						}
 
 					}
@@ -302,7 +327,6 @@ namespace CSDemo.Models.Product
 						// Process ProductVariants
 						foreach (var product in category.Products)
 						{
-
 							var catProdItem = catItem.GetChildren().FirstOrDefault(x => x.ID.ToGuid() == product.ID);
 							if (catProdItem != null && catProdItem.HasChildren)
 							{
@@ -637,7 +661,7 @@ namespace CSDemo.Models.Product
 
 		internal static SearchResultItem GetCommerceItemByProductId(string productId)
 		{
-			var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetProductSearchIndex());
+			var index = ContentSearchManager.GetIndex(ConfigurationHelper.GetSearchIndex());
 			try
 			{
 				using (var context = index.CreateSearchContext())

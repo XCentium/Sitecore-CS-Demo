@@ -462,16 +462,14 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (result) {
-
                 if (result.d == "") {
-
                     showActionMessage("Product Added to Cart");
                     loadCart();
-
                 } else if (result.d === "Anonymous") {
                     window.location.href = "/Account/Signin?returnUrl=" + window.location.pathname;
+                } else {
+                    showActionMessage(result.d);
                 }
-
             },
             error: function (error) {
                 console.log(error);

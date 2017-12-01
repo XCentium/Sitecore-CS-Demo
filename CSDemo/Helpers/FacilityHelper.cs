@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using CSDemo.Models;
-using CSDemo.Models.Checkout.Cart;
-using CSDemo.Models.InmateSearch;
 using CSDemo.Models.Product;
 using KeefePOC.Models;
 using Sitecore.Diagnostics;
@@ -42,6 +41,11 @@ namespace CSDemo.Helpers
 
         private static string GetSelectedFacilityId()
         {
+            if (ConfigurationManager.AppSettings["DebugMode"] == "1")
+            {
+                return "{7CBB94CB-F321-4428-B05E-21540E8B4A58}";
+            }
+
             return GetSelectedFacility()?.Id;
         }
 
@@ -51,12 +55,18 @@ namespace CSDemo.Helpers
 
             if (cookie == null || string.IsNullOrEmpty(cookie.Value))
             {
+                if (ConfigurationManager.AppSettings["DebugMode"] == "1")
+                {
+                    return new Facility
+                    {
+                        Id = GetSelectedFacilityId()
+                    };
+                }
+
                 return null;
             }
 
             return new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<Facility>(cookie.Value);
-
-           // return HttpContext.Current.Session["SELECTED_FACILITY"] as KeefePOC.Models.Facility;
         }
 
         public static void SaveSelectedFacility(Facility modelSelectedFacility)
@@ -73,7 +83,7 @@ namespace CSDemo.Helpers
                 }
                 else
                 {
-                    HttpCookie newCookie = new HttpCookie("SELECTED_FACILITY")
+                    var newCookie = new HttpCookie("SELECTED_FACILITY")
                     {
                         Expires = DateTime.Now.AddDays(365),
                         Value = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(modelSelectedFacility)
@@ -81,12 +91,9 @@ namespace CSDemo.Helpers
                     HttpContext.Current.Response.SetCookie(newCookie);
                 }
             }
-
-
-            //HttpContext.Current.Session["SELECTED_FACILITY"] = modelSelectedFacility;
         }
 
-		public static CSDemo.Models.Checkout.Cart.Address GetFacilityAddress()
+		public static Models.Checkout.Cart.Address GetFacilityAddress()
 		{			
 			var facilityId = GetSelectedFacilityId();
 
@@ -96,14 +103,15 @@ namespace CSDemo.Helpers
 			var facilityItem = Sitecore.Context.Database.GetItem(facilityId);
 			var facility = GlassHelper.Cast<FacilityModel>(facilityItem);
 
-			if (facility != null) return new CSDemo.Models.Checkout.Cart.Address() {  Address1 = facility.AddressLine1, Address2 = facility.AddressLine2, Country = facility.Country, City = facility.City,  ZipPostalCode = facility.PostalCode, State = facility.State };
+			if (facility != null)
+                return new CSDemo.Models.Checkout.Cart.Address() {  Address1 = facility.AddressLine1, Address2 = facility.AddressLine2, Country = facility.Country, City = facility.City,  ZipPostalCode = facility.PostalCode, State = facility.State };
 
 			return null;
 		}
 
 		internal static Item GetFacilityByExternalId(string associatedFacilityId)
 		{
-			string facilityLocation = "/sitecore/content/Global Configuration/Facilities";		
+			const string facilityLocation = "/sitecore/content/Global Configuration/Facilities";		
 
 			var folder = Sitecore.Context.Database.GetItem(facilityLocation);
 
