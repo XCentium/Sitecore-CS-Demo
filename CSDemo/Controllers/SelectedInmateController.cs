@@ -30,6 +30,11 @@ namespace CSDemo.Controllers
 
 			var model = new SelectedInmateViewModel();
 			model.SelectedInmate = inmate;
+
+			var facility = FacilityHelper.GetFacilityByExternalId(inmate.AssociatedFacilityId);
+			if (facility != null)
+				model.FacilityName = facility.DisplayName;
+
 			return View(model);
 		}
 
@@ -37,6 +42,7 @@ namespace CSDemo.Controllers
 		public ActionResult CancelOrder()
 		{
 			InmateHelper.SaveSelectedInmate(null);
+			FacilityHelper.SaveSelectedFacility(null);
 
 			// TODO: Clear cart
 

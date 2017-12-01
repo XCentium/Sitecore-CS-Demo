@@ -491,6 +491,8 @@ namespace CSDemo.Models.Product
 		/// <returns></returns>
 		private static IEnumerable<CategoryMenulistViewModel> GetCategoryMenuList(string parentIds)
 		{
+
+			var productCategoryBlacklist = FacilityHelper.GetProgramProductCategoryBlacklist();
 			var categoryMenulistViewModel = new List<CategoryMenulistViewModel>();
 			if (!string.IsNullOrEmpty(parentIds))
 			{
@@ -499,6 +501,9 @@ namespace CSDemo.Models.Product
 				{
 
 					var categories = GetCategoryMenuListByParentId(parentId);
+
+					//categories = ProductHelper.FilterCategoriesByRestrictions(categories);
+
 					if (categories != null)
 					{
 						var cnt = 0;
@@ -515,6 +520,7 @@ namespace CSDemo.Models.Product
 							//c.Url = LinkManager.GetItemUrl(category);
 							c.Url = "/categories/" + c.Name;
 
+							if (productCategoryBlacklist.Any() && !productCategoryBlacklist.Any(cbcat => cbcat.ID == category.ID.Guid)) continue;
 
 							// need to rewrite to boost performance
 							//  var i = 0;
@@ -524,8 +530,6 @@ namespace CSDemo.Models.Product
 								.GetChildren()
 								.Where(i => i.TemplateName.ToString() == "GeneralCategory")
 								.Select(GlassHelper.Cast<Product>).ToList();
-
-							categoryChildern = ProductHelper.FilterProductsByRestrictions(categoryChildern);
 
 							c.ProductsCount = categoryChildern.Count();
 
@@ -1472,6 +1476,8 @@ namespace CSDemo.Models.Product
 			return searchResults;
 		}
 
+		#region Filter Products
+
 		public static List<Product> FilterProductsByRestrictions(List<Product> searchResults)
 		{
 			try
@@ -1534,6 +1540,7 @@ namespace CSDemo.Models.Product
 					{
 						var id = ID.Parse(blacklistedCategoryId);
 
+						var first = searchResults.First().Paths;
 						searchResults = searchResults
 							.Where(sr => !sr.Paths.Contains(id)).ToList();
 					}
@@ -1630,6 +1637,8 @@ namespace CSDemo.Models.Product
 
 			return searchResults;
 		}
+
+		#endregion
 
 		public static List<string> GetFreeProducts()
 		{

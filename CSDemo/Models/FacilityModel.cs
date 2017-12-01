@@ -4,11 +4,11 @@ using Glass.Mapper.Sc.Configuration.Attributes;
 
 namespace CSDemo.Models
 {
-    [SitecoreType(AutoMap = true)]
-    public class FacilityModel
-    {
-        [SitecoreField("Product Category Blacklist")]
-        public virtual IEnumerable<Category> BlackListedProductCategories { get; set; }
+	[SitecoreType(AutoMap = true)]
+	public class FacilityModel
+	{
+		[SitecoreField("ProgramCategories")]
+		public virtual IEnumerable<Category> ProgramCategories { get; set; }
 
 		[SitecoreField("Address Line 1")]
 		public virtual string AddressLine1 { get; set; }
@@ -24,7 +24,7 @@ namespace CSDemo.Models
 
 		[SitecoreField("Postal Code")]
 		public virtual string PostalCode { get; set; }
-		
+
 		[SitecoreField("Country")]
 		public virtual string Country { get; set; }
 

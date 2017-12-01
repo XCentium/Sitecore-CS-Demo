@@ -5,9 +5,11 @@ using System.Web;
 
 namespace CSDemo.Models.SelectedInmate
 {
-    public class SelectedInmateViewModel
-    {
-        public bool IsHippa { get; set; }
-        public KeefePOC.Models.Inmate SelectedInmate { get; set; }
-    }
+	public class SelectedInmateViewModel
+	{
+		public bool IsHippa { get; set; }
+		public KeefePOC.Models.Inmate SelectedInmate { get; set; }
+
+		public string FacilityName { get; set; }
+	}
 }
