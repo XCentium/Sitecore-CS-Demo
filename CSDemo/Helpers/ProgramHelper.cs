@@ -22,22 +22,41 @@ namespace CSDemo.Helpers
         {
             var program = HttpContext.Current?.Session["SELECTED_PROGRAM"] as ProgramModel;
 
-            if (program == null && ConfigurationManager.AppSettings["DebugMode"] == "1")
-            {
-                var id = Guid.Parse(GetSelectedProgramId());
+            var cookie = HttpContext.Current.Request.Cookies["SELECTED_PROGRAM"];
 
-                return new ProgramModel
+            if (cookie == null || string.IsNullOrEmpty(cookie.Value))
+            {
+                if(ConfigurationManager.AppSettings["DebugMode"] == "1")
                 {
-                    ID = Guid.Parse(GetSelectedProgramId()),
-                    QuarterlyOrderPriceLimit = GetProgramQuarterlyOrderPriceLimit(id),
-                    QuarterlyOrderWeightLimit = GetProgramQuarterlyOrderWeightLimit(id)
-                };
+                    var id = Guid.Parse(GetSelectedProgramId());
+
+                    return new ProgramModel
+                    {
+                        ID = Guid.Parse(GetSelectedProgramId()),
+                        QuarterlyOrderPriceLimit = GetProgramQuarterlyOrderPriceLimit(id),
+                        QuarterlyOrderWeightLimit = GetProgramQuarterlyOrderWeightLimit(id)
+                    };
+                }
             }
 
-            if (program != null)
+            var programSaved = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<ProgramModel>(cookie.Value);
+
+            //if (program == null && ConfigurationManager.AppSettings["DebugMode"] == "1")
+            //{
+            //    var id = Guid.Parse(GetSelectedProgramId());
+
+            //    return new ProgramModel
+            //    {
+            //        ID = Guid.Parse(GetSelectedProgramId()),
+            //        QuarterlyOrderPriceLimit = GetProgramQuarterlyOrderPriceLimit(id),
+            //        QuarterlyOrderWeightLimit = GetProgramQuarterlyOrderWeightLimit(id)
+            //    };
+            //}
+
+            if (programSaved != null)
             {
-                program.QuarterlyOrderPriceLimit = GetProgramQuarterlyOrderPriceLimit(program.ID);
-                program.QuarterlyOrderWeightLimit = GetProgramQuarterlyOrderWeightLimit(program.ID);
+                programSaved.QuarterlyOrderPriceLimit = GetProgramQuarterlyOrderPriceLimit(programSaved.ID);
+                programSaved.QuarterlyOrderWeightLimit = GetProgramQuarterlyOrderWeightLimit(programSaved.ID);
             }
 
             return program;
@@ -72,6 +91,26 @@ namespace CSDemo.Helpers
         public static void SaveSelectedProgram(ProgramModel program)
         {
             HttpContext.Current.Session["SELECTED_PROGRAM"] = program;
+
+            if (program != null)
+            {
+                var cookie = HttpContext.Current.Request.Cookies["SELECTED_PROGRAM"];
+                if (cookie != null)
+                {
+                    cookie.Value = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(program);
+                    cookie.Expires = DateTime.Now.AddDays(365);
+                    HttpContext.Current.Response.SetCookie(cookie); // updates existing cookie, cookies.add.. can cause multiple cookies
+                }
+                else
+                {
+                    var newCookie = new HttpCookie("SELECTED_PROGRAM")
+                    {
+                        Expires = DateTime.Now.AddDays(365),
+                        Value = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(program)
+                    };
+                    HttpContext.Current.Response.SetCookie(newCookie);
+                }
+            }
         }
     }
 }
