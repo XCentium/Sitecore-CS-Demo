@@ -2490,7 +2490,7 @@ namespace CSDemo.Models.Checkout.Cart
             }
             catch (Exception ex)
             {
-                Log.Error($"CartHelper.GetProductGroupLimits(), Error = {ex.Message}", ex);
+                Log.Error($"CartHelper.GetProductGroupsByStorefront(), Error = {ex.Message}", ex);
             }
 
             return new List<ProductGroup>();
