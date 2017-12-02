@@ -2281,7 +2281,7 @@ namespace CSDemo.Models.Checkout.Cart
                 var totalProductPrice = productListPrice * qty;
 
                 var productWeight = !string.IsNullOrWhiteSpace(product["weight"])
-                    ? qty * double.Parse(product["weight"])
+                    ? double.Parse(product["weight"])
                     : 0;
                 var totalProductWeight = productWeight * qty;
 
