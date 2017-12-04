@@ -502,8 +502,6 @@ namespace CSDemo.Models.Product
 
 					var categories = GetCategoryMenuListByParentId(parentId);
 
-					//categories = ProductHelper.FilterCategoriesByRestrictions(categories);
-
 					if (categories != null)
 					{
 						var cnt = 0;
@@ -520,7 +518,7 @@ namespace CSDemo.Models.Product
 							//c.Url = LinkManager.GetItemUrl(category);
 							c.Url = "/categories/" + c.Name;
 
-							if (productCategoryBlacklist.Any() && !productCategoryBlacklist.Any(cbcat => cbcat.ID == category.ID.Guid)) continue;
+							if (productCategoryBlacklist.Any() && productCategoryBlacklist.Any(cbcat => cbcat.ID == category.ID.Guid)) continue;
 
 							// need to rewrite to boost performance
 							//  var i = 0;
@@ -528,7 +526,7 @@ namespace CSDemo.Models.Product
 							//   {
 							var categoryChildern = category
 								.GetChildren()
-								.Where(i => i.TemplateName.ToString() == "GeneralCategory")
+								.Where(i => i.TemplateName.ToString() == "GeneralCategory" && !productCategoryBlacklist.Any(pc => pc.ID == i.ID.Guid))
 								.Select(GlassHelper.Cast<Product>).ToList();
 
 							c.ProductsCount = categoryChildern.Count();

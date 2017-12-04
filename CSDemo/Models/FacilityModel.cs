@@ -7,7 +7,7 @@ namespace CSDemo.Models
 	[SitecoreType(AutoMap = true)]
 	public class FacilityModel
 	{
-		[SitecoreField("ProgramCategories")]
+		[SitecoreField("Product Category Blacklist")]
 		public virtual IEnumerable<Category> ProgramCategories { get; set; }
 
 		[SitecoreField("Address Line 1")]
