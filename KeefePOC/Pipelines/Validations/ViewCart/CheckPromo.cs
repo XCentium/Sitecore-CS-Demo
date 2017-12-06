@@ -17,36 +17,43 @@ namespace KeefePOC.Pipelines.Validations.ViewCart
 
 		public override void Process(ServicePipelineArgs args)
 		{
-			Item item = Sitecore.Context.Item;
-			Sitecore.Data.Database contextDB = Sitecore.Configuration.Factory.GetDatabase(item.Database.Name);
-			//Sitecore.Data.Items.Item ruleItem = contextDB.GetItem(new Sitecore.Data.ID(SitecoreConstants.ItemGUID), item.Language);
-			//String rule = ruleItem.Fields["Rule"].Value;
-
-			var rule = GetViewCartRules(contextDB);
-
-			if (!string.IsNullOrEmpty(rule))
+			try
 			{
-				var rules = RuleFactory.ParseRules<RuleContext>(item.Database, XElement.Parse(rule));
+				Item item = Sitecore.Context.Item;
+				Sitecore.Data.Database contextDB = Sitecore.Configuration.Factory.GetDatabase(item.Database.Name);
+				//Sitecore.Data.Items.Item ruleItem = contextDB.GetItem(new Sitecore.Data.ID(SitecoreConstants.ItemGUID), item.Language);
+				//String rule = ruleItem.Fields["Rule"].Value;
 
-				var ruleContext = new RuleContext()
-				{
-					Item = item
-				};
+				var rule = GetViewCartRules(contextDB);
 
-				if (rules.Rules.Any())
+				if (!string.IsNullOrEmpty(rule))
 				{
-					var executed = false;
-					foreach (var ruleItem in rules.Rules)
+					var rules = RuleFactory.ParseRules<RuleContext>(item.Database, XElement.Parse(rule));
+
+					var ruleContext = new RuleContext()
 					{
-						executed = ruleItem.Evaluate(ruleContext);
-					}					
-					
-					args.Result.Success = executed;
+						Item = item
+					};
+
+					if (rules.Rules.Any())
+					{
+						var executed = false;
+						foreach (var ruleItem in rules.Rules)
+						{
+							executed = ruleItem.Evaluate(ruleContext);
+						}
+
+						args.Result.Success = executed;
+					}
+				}
+				else
+				{
+					args.Result.Success = false;
 				}
 			}
-			else
+			catch (Exception ex)
 			{
-				args.Result.Success = false;
+
 			}
 		}
 
@@ -59,7 +66,7 @@ namespace KeefePOC.Pipelines.Validations.ViewCart
 
 			var program = siteNode["Program"];
 
-			if(!string.IsNullOrEmpty(program))
+			if (!string.IsNullOrEmpty(program))
 			{
 				var ruleItem = contextDB.GetItem(program);
 				var rules = ruleItem.Fields["Promo"].Value;

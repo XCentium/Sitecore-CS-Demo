@@ -33,6 +33,7 @@ using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Search;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
 using Sitecore.ContentSearch.Linq;
+using System.Text.RegularExpressions;
 
 #endregion
 
@@ -708,9 +709,52 @@ namespace CSDemo.Models.Product
 					var fullOrderDetail = GetCustomerOrderDetail(order.ExternalId, cartHelper);
 					orderDetails.Add(fullOrderDetail);
 				}
+
+				IEnumerable<IGrouping<string, OrderDetailViewModel>> groupedDetails = orderDetails.GroupBy(o => o.Shipping.FirstName + " " + o.Shipping.LastName);
+				ordersViewModel.GroupedOrders = GroupOrders(orderDetails);
 				ordersViewModel.Orders = orderDetails;
 			}
+
 			return ordersViewModel;
+		}
+
+		private static Dictionary<KeefePOC.Models.Inmate, List<OrderDetailViewModel>> GroupOrders(List<OrderDetailViewModel> orders)
+		{
+			var model = new Dictionary<KeefePOC.Models.Inmate, List<OrderDetailViewModel>>();
+			foreach (var order in orders)
+			{
+				var inmate = ExtractInmate(order.Shipping);
+				if (inmate == null || string.IsNullOrEmpty(inmate.InmateNumber)) continue;
+
+				var matchingInmate = model.Keys.FirstOrDefault(i => i.InmateNumber == inmate.InmateNumber);
+				if (matchingInmate == null)
+				{
+					var orderList = new List<OrderDetailViewModel>() { order };
+					model.Add(inmate, orderList);
+				}
+				else
+				{
+					model[matchingInmate].Add(order);
+				}
+			}
+
+			return model;
+		}
+
+		private static KeefePOC.Models.Inmate ExtractInmate(CommerceParty shipping)
+		{
+			var model = new KeefePOC.Models.Inmate();
+			model.FirstName = shipping.FirstName;
+
+			var regex = new Regex(@"(.*)(\(.*\))");
+			var match = regex.Match(shipping.LastName);
+			if (match.Success)
+			{
+				model.LastName = match.Groups[1].Value;
+				model.InmateNumber = match.Groups[2].Value.Replace("(", "").Replace(")", "");
+			}
+
+			return model;
 		}
 
 		/// <summary>

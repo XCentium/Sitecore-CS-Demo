@@ -1,63 +1,125 @@
 ﻿@model CSDemo.Models.Account.OrdersViewModel
 <!-- ==========================
-    MY ACCOUNT - START
+	MY ACCOUNT - START
 =========================== -->
 <section class="content account">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-3">
-                <aside class="sidebar">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<aside class="sidebar">
 
-                    <!-- WIDGET:CATEGORIES - START -->
-                    <div class="widget widget-navigation">
-                        <ul class="nav nav-pills nav-stacked">
-                            <li><a href="~/account">Account Dashboard</a></li>
-                            <li><a href="#">Personal Infromation</a></li>
-                            <li><a href="~/Account/Addresses">My Address</a></li>
-                            <li class="active"><a href="~/account/orders">My Orders</a></li>
-                            <li><a href="#">Warranty Claims</a></li>
-                            <li><a href="#">Wishlist</a></li>
-                            <li><a href="~/categories">Back to Shop</a></li>
-                        </ul>
-                    </div>
-                    <!-- WIDGET:CATEGORIES - END -->
+					<!-- WIDGET:CATEGORIES - START -->
+					<div class="widget widget-navigation">
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="~/account">Account Dashboard</a></li>
+							<li><a href="#">Personal Infromation</a></li>
+							<li><a href="~/Account/Addresses">My Address</a></li>
+							<li class="active"><a href="~/account/orders">My Orders</a></li>
+							@*<li><a href="#">Warranty Claims</a></li>
+								<li><a href="#">Wishlist</a></li>*@
+							<li><a href="~/categories">Back to Shop</a></li>
+						</ul>
+					</div>
+					<!-- WIDGET:CATEGORIES - END -->
 
-                </aside>
-            </div>
-            <div class="col-sm-9">
-                <article class="account-content">
-                    <h3>My Orders</h3>
-                    <div class="table-responsive border">
-                        <table class="table table-bordered">
-                            <tr>
-                                <th class="col-xs-2">Order ID</th>
-                                <th class="col-xs-3">Date</th>
-                                <th class="col-md-1 hidden-xs hidden-sm">Items</th>
-                                <th class="col-xs-2">Total Price</th>
-                                <th class="col-xs-3">Status</th>
-                                <th class="col-xs-1"></th>
-                            </tr>
-                            @if (Model != null && Model.Orders != null) { 
-                                foreach(var order in Model.Orders){
-                                    <tr>
-                                        <td><a href="~/account/orders/@order.OrderId">#@order.TrackingNumber</a></td>
-                                        <td> @order.OrderDate </td>
-                                        <td class="hidden-xs hidden-sm">@order.NumberofItems</td>
-                                        <td>@order.TotalPrice</td>
-                                        <td><span class="label label-info">@order.OrderStatus</span></td>
-                                        <td><a href="~/account/orders/@order.OrderId" class="btn btn-primary btn-sm">View</a></td>
-                                    </tr>
-                                
-                                }
-                            }
- 
-                        </table>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </div>
+				</aside>
+			</div>
+			<div class="col-sm-9">
+				<article class="account-content">
+					<h3>My Orders</h3>
+					<div class="table-responsive border">
+
+						@*@if (Model != null && Model.Orders != null) {
+								foreach(var order in Model.Orders){
+									<tr>
+										<td><a href="~/account/orders/@order.OrderId">#@order.TrackingNumber</a></td>
+										<td> @order.OrderDate </td>
+										<td class="hidden-xs hidden-sm">@order.NumberofItems</td>
+										<td>@order.TotalPrice</td>
+										<td><span class="label label-info">@order.OrderStatus</span></td>
+										<td><a href="~/account/orders/@order.OrderId" class="btn btn-primary btn-sm">View</a></td>
+									</tr>
+
+								}
+							}*@
+
+						@if (Model != null && Model.GroupedOrders != null)
+						{
+							foreach (var group in Model.GroupedOrders)
+							{
+								<table class="table table-bordered">
+									<caption>@group.Key.FirstName @group.Key.LastName</caption>
+									<tr>
+										<th class="col-xs-2">Order ID</th>
+										<th class="col-xs-3">Date</th>
+										<th class="col-md-1 hidden-xs hidden-sm">Items</th>
+										<th class="col-xs-2">Total Price</th>
+										<th class="col-xs-3">Status</th>
+										<th class="col-xs-1"></th>
+									</tr>
+									@foreach (var order in group.Value)
+									{
+										<tr>
+											<td><a href="~/account/orders/@order.OrderId">#@order.TrackingNumber</a></td>
+											<td> @order.OrderDate </td>
+											<td class="hidden-xs hidden-sm">@order.NumberofItems</td>
+											<td>@order.TotalPrice</td>
+											<td><span class="label label-info">@order.OrderStatus</span></td>
+											<td>
+												<a href="~/account/orders/@order.OrderId" class="btn btn-primary btn-sm">View</a>
+												<form action="/api/sitecore/Checkout/ReorderItems" method="POST">
+													<input type="hidden" name="orderId" value="@order.OrderId" />
+													<button class="reorder btn btn-info btn-sm" disabled type="submit">Reorder</button>
+												</form>
+											</td>
+										</tr>
+									}
+
+								</table>
+							}
+						}
+					</div>
+				</article>
+			</div>
+		</div>
+	</div>
 </section>
 <!-- ==========================
-    MY ACCOUNT - END
+	MY ACCOUNT - END
 =========================== -->
+<script type="text/javascript">
+	var hasCart = false;
+
+	$.ajax({
+		method: "POST",
+		dataType: "json",
+		contentType: "application/json; charset=utf-8",
+		url: "/AJAX/cart.asmx/LoadCart",
+		success: function (result) {
+			if (result.d && result.d.CartItems && result.d.CartItems.length > 0) {
+				hasCart = true;
+
+			}
+
+			$(".reorder").removeAttr("disabled");
+		}
+	})
+
+
+
+	$(".reorder").on("click", function (e) {
+
+		var link = $(e.target);
+		if (hasCart) {
+			if (confirm("You have items in your cart. If you proceed, the contents of the original order will be merged with your existing cart.")) {
+				alert("TODO: Merge items to cart");
+			} else {
+
+				e.preventDefault();
+				return false;
+			}
+		}
+
+
+	});
+</script>

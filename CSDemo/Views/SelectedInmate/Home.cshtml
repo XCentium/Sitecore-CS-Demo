@@ -6,7 +6,15 @@
 	{
 		<p class="text-right">
 			<br />
-			<strong>Shopping For:</strong> @Model.SelectedInmate.FullName (@Model.SelectedInmate.Tier - @Model.SelectedInmate.Block - @Model.SelectedInmate.Cell at @Model.FacilityName)
+			<strong>Shopping For:</strong> 
+			@if (Model.IsHippa)
+			{
+				<span>@Model.SelectedInmate.InmateNumber at @Model.FacilityName</span>
+			}
+			else
+			{
+				<span>@Model.SelectedInmate.FullName (@Model.SelectedInmate.Tier - @Model.SelectedInmate.Block - @Model.SelectedInmate.Cell at @Model.FacilityName)</span>
+			}
 			<button type="submit">Cancel Order</button>
 
 		</p>
