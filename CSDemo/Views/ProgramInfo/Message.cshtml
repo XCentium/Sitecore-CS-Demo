@@ -1,0 +1,13 @@
+﻿@model CSDemo.Models.ProgramInfo.MessageViewModel
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<img src="@Model.ImageSrc" />
+		</div>
+		<div class="col-md-6">
+			@Html.Raw(Model.Message)
+		</div>
+	</div>
+</div>
