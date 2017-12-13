@@ -353,6 +353,7 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\CSBaseController.cs" />
+    <Compile Include="Controllers\FaqController.cs" />
     <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\InmateSearchController.cs" />
     <Compile Include="Controllers\LandingPageController.cs" />
@@ -361,6 +362,7 @@
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\GeneralSearchController.cs" />
+    <Compile Include="Controllers\ProgramInfoController.cs" />
     <Compile Include="Controllers\SelectedInmateController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\WidgetsController.cs" />
@@ -369,6 +371,8 @@
     <Compile Include="Helpers\FacilityHelper.cs" />
     <Compile Include="Helpers\ProgramHelper.cs" />
     <Compile Include="Models\FacilityModel.cs" />
+    <Compile Include="Models\Faq\FaqViewModel.cs" />
+    <Compile Include="Models\ProgramInfo\MessageViewModel.cs" />
     <Compile Include="Models\ProgramModel.cs" />
     <Compile Include="Rules\Conditions\PreTaxTotal.cs" />
     <Compile Include="Models\Account\RegisterUserInputModel.cs" />
@@ -703,6 +707,9 @@
     <Content Include="Views\Widgets\ExtraContentWidget.cshtml" />
     <Content Include="Views\GeneralSearch\FreePromoItems.cshtml" />
     <Content Include="Views\GeneralSearch\_SearchResultFree.cshtml" />
+    <Content Include="Views\Messages\GlobalMessage.cshtml" />
+    <Content Include="Views\ProgramInfo\Message.cshtml" />
+    <Content Include="Views\Faq\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
