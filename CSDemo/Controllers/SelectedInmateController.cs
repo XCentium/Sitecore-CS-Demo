@@ -1,4 +1,5 @@
 ﻿using CSDemo.Helpers;
+using CSDemo.Models;
 using CSDemo.Models.SelectedInmate;
 using KeefePOC.Interfaces.Services;
 using KeefePOC.Models;
@@ -33,7 +34,11 @@ namespace CSDemo.Controllers
 
 			var facility = FacilityHelper.GetFacilityByExternalId(inmate.AssociatedFacilityId);
 			if (facility != null)
+			{
+				var facilityModel = GlassHelper.Cast<FacilityModel>(facility);
+				model.SelectedInmate.IsHippa = facilityModel?.IsHippa ?? false;
 				model.FacilityName = facility.DisplayName;
+			}
 
 			return View(model);
 		}

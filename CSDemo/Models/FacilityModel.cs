@@ -31,5 +31,7 @@ namespace CSDemo.Models
 		[SitecoreField("ExternalID")]
 		public virtual string ExteernalId { get; set; }
 
+		[SitecoreField("HIPPA Facility")]
+		public virtual bool IsHippa { get; set; }
 	}
 }

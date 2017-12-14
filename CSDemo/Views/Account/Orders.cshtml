@@ -48,7 +48,7 @@
 							foreach (var group in Model.GroupedOrders)
 							{
 								<table class="table table-bordered">
-									<caption>@group.Key.FirstName @group.Key.LastName</caption>
+									<caption>@group.Key.FirstName @group.Key.LastName - @group.Key.InmateNumber</caption>
 									<tr>
 										<th class="col-xs-2">Order ID</th>
 										<th class="col-xs-3">Date</th>
@@ -112,7 +112,7 @@
 		var link = $(e.target);
 		if (hasCart) {
 			if (confirm("You have items in your cart. If you proceed, the contents of the original order will be merged with your existing cart.")) {
-				alert("TODO: Merge items to cart");
+				
 			} else {
 
 				e.preventDefault();

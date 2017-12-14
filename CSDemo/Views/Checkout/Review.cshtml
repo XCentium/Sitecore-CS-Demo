@@ -104,7 +104,29 @@
                                     <ul class="list-unstyled" id="shippingAddress">
 										<li>
 											<b>
-												@shoppingCart.ShipTo.FirstName @shoppingCart.ShipTo.LastName
+												@{ 
+	//string firstName = shoppingCart.ShipTo.FirstName;
+													//string lastName = shoppingCart.ShipTo.LastName;
+													//var regex = new System.Text.RegularExpressions.Regex(@"(.*)(\(.*\))");
+													//var match = regex.Match(shoppingCart.ShipTo.LastName);
+													//if (match.Success)
+													//{
+													//	var inmateNumber = match.Groups[2].Value.Replace("(", "").Replace(")", "");
+
+													//}
+
+													var inmate = CSDemo.Helpers.InmateHelper.GetSelectedInmate();
+													var facility = CSDemo.Helpers.FacilityHelper.GetFacilityByExternalId(inmate.AssociatedFacilityId);
+													if (facility != null)
+													{
+														var facilityModel = CSDemo.Helpers.GlassHelper.Cast<CSDemo.Models.FacilityModel>(facility);
+														inmate.IsHippa = facilityModel.IsHippa;
+													}
+
+													string firstName = inmate.FirstName;
+													string lastName = inmate.LastName + " - " + inmate.InmateNumber;
+												}
+												@firstName @lastName
 											</b>
 										</li>
 										<li>

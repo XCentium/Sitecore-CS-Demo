@@ -119,7 +119,7 @@ namespace CSDemo.Helpers
 			return null;
 		}
 
-		internal static Item GetFacilityByExternalId(string associatedFacilityId)
+		public static Item GetFacilityByExternalId(string associatedFacilityId)
 		{
 			const string facilityLocation = "/sitecore/content/Global Configuration/Facilities";
 

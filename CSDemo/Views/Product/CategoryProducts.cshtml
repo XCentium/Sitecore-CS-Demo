@@ -284,7 +284,7 @@
 															<form name="@product.ProductId" id="@product.ProductId">
 																<input type="hidden" id="ProductId" name="ProductId" value="@product.ProductId" />
 																<input type="hidden" id="CatalogName" name="CatalogName" value="@product.CatalogName" />
-																<input type="hidden" name="VariantId" id="@string.Concat("VariantID", product.VariantProdId)" value="@product.DefaultVariant" />
+																<input type="hidden" name="VariantId" id="@string.Concat("VariantID", product.VariantProdId)" value="@(string.IsNullOrEmpty(product.DefaultVariant) ? "-1" : product.DefaultVariant)" />
 																<div class="product-quantity clearfix" style="margin-bottom: 10px; ">
 																	<a class="btn btn-default" id="qty-minus">-</a>
 																	<input type="text" class="form-control" id="Quantity" value="1" style="display: inline; width: 20%; vertical-align: bottom;" />

@@ -28,15 +28,15 @@ namespace KeefePOC.Pipelines.Validations.AddToCart
 
 			var inmateNumber = (string)request.Properties["InmateNumber"];
 
-			if(string.IsNullOrEmpty(inmateNumber))
-			{
-				args.Result.Success = false;
-				args.Result.SystemMessages.Add(new SystemMessage()
-				{
-					Message = "Inmate is empty"
-				});
-			}
-			else
+			//if(string.IsNullOrEmpty(inmateNumber))
+			//{
+			//	args.Result.Success = false;
+			//	args.Result.SystemMessages.Add(new SystemMessage()
+			//	{
+			//		Message = "Inmate is empty"
+			//	});
+			//}
+			//else
 			{
 				var dataService = new KeefeDataService(new DemoFacilityRepository(), new DemoProgramRepository(), new DemoInmateRepository());
 
@@ -46,7 +46,7 @@ namespace KeefePOC.Pipelines.Validations.AddToCart
 
 				itemsBeindAddedToCart = request.Lines.Select(x => x.Product.ProductId).ToList();
 
-				foreach(var product in itemsBeindAddedToCart)
+				foreach (var product in itemsBeindAddedToCart)
 				{
 					if (blacklistedProducts.Contains(product))
 					{
@@ -61,7 +61,7 @@ namespace KeefePOC.Pipelines.Validations.AddToCart
 					{
 						args.Result.Success = true;
 					}
-				}		
+				}
 
 
 			}

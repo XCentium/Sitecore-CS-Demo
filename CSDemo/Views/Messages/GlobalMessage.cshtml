@@ -1,9 +1,19 @@
 ﻿@model RenderingModel
 
-<div class="container text-center">
-	<div class="row">
-		<h1>@Html.Sitecore().Field("Title")</h1>
-		<p>@Html.Sitecore().Field("Body")</p>
+<div class="global-message">
+	<div class="container text-center">
+		<div class="row">
+			<div class="close">x</div>
+			<h1>@Html.Sitecore().Field("Title")</h1>
+			@Html.Sitecore().Field("Body")
+		</div>
 	</div>
 </div>
 
+<script type="text/javascript">
+	$(function () {
+		$(".global-message .close").on("click", function (e) {
+			$(".global-message").slideUp();
+		})
+	});
+</script>

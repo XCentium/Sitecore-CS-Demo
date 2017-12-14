@@ -34,6 +34,7 @@ using Sitecore.Commerce.Connect.CommerceServer.Search;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
 using Sitecore.ContentSearch.Linq;
 using System.Text.RegularExpressions;
+using KeefePOC.Repositories;
 
 #endregion
 
@@ -725,6 +726,16 @@ namespace CSDemo.Models.Product
 			{
 				var inmate = ExtractInmate(order.Shipping);
 				if (inmate == null || string.IsNullOrEmpty(inmate.InmateNumber)) continue;
+
+				var existingInmate = new DemoInmateRepository().GetInmate(inmate.InmateNumber);
+				
+
+				var facility = FacilityHelper.GetFacilityByExternalId(existingInmate.AssociatedFacilityId);
+				if (facility != null)
+				{
+					var facilityModel = GlassHelper.Cast<FacilityModel>(facility);
+					inmate.IsHippa = facilityModel.IsHippa;
+				}
 
 				var matchingInmate = model.Keys.FirstOrDefault(i => i.InmateNumber == inmate.InmateNumber);
 				if (matchingInmate == null)

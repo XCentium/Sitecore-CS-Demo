@@ -5971,3 +5971,14 @@ footer.navbar a:hover {
     color: #E87169;
 }
 
+.global-message {
+	background: #fff;
+}
+
+.global-message h1 {
+	font-size: 1.6em;
+}
+
+.program-message {
+	margin-bottom: 25px;
+}

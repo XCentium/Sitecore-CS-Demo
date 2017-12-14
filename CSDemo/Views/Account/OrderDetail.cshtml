@@ -67,12 +67,24 @@
                             <div class="col-sm-6">
                                 <div class="box">
                                     <h4>Shipping Address</h4>
-                                    <ul class="list-unstyled">
-                                        <li><b>@Model.Shipping.FirstName @Model.Shipping.LastName</b></li>
-                                        <li>@Model.Shipping.Address1</li>
-                                        <li>@Model.Shipping.ZipPostalCode @Model.Shipping.City</li>
-                                        <li>@Model.Shipping.Country</li>
-                                    </ul>
+									@{
+										var inmate = CSDemo.Helpers.InmateHelper.GetSelectedInmate();
+										var facility = CSDemo.Helpers.FacilityHelper.GetFacilityByExternalId(inmate.AssociatedFacilityId);
+										if (facility != null)
+										{
+											var facilityModel = CSDemo.Helpers.GlassHelper.Cast<CSDemo.Models.FacilityModel>(facility);
+											inmate.IsHippa = facilityModel.IsHippa;
+										}
+
+										string firstName = inmate.FirstName;
+										string lastName = inmate.LastName + " - " + inmate.InmateNumber;
+									}
+									<ul class="list-unstyled">
+										<li><b>@firstName @lastName</b></li>
+										<li>@Model.Shipping.Address1</li>
+										<li>@Model.Shipping.ZipPostalCode @Model.Shipping.City</li>
+										<li>@Model.Shipping.Country</li>
+									</ul>
                                 </div>
                             </div>
                         </div>
