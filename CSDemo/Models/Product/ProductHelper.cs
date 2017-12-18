@@ -725,7 +725,11 @@ namespace CSDemo.Models.Product
 			foreach (var order in orders)
 			{
 				var inmate = ExtractInmate(order.Shipping);
-				if (inmate == null || string.IsNullOrEmpty(inmate.InmateNumber)) continue;
+				if (inmate == null || string.IsNullOrEmpty(inmate.InmateNumber))
+				{
+					
+					continue;
+				}
 
 				var existingInmate = new DemoInmateRepository().GetInmate(inmate.InmateNumber);
 				

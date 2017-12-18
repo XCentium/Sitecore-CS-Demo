@@ -57,7 +57,7 @@
                                 <div class="box">
                                     <h4>Billing Address</h4>
                                     <ul class="list-unstyled">
-                                        <li><b>@Model.Billing.FirstName @Model.Billing.LastName</b></li>
+                                        <li><b>John Dough</b></li>
                                         <li>@Model.Billing.Address1</li>
                                         <li>@Model.Billing.ZipPostalCode @Model.Billing.City</li>
                                         <li>@Model.Billing.Country</li>
@@ -82,7 +82,7 @@
 									<ul class="list-unstyled">
 										<li><b>@firstName @lastName</b></li>
 										<li>@Model.Shipping.Address1</li>
-										<li>@Model.Shipping.ZipPostalCode @Model.Shipping.City</li>
+										<li>90999 Anytown</li>
 										<li>@Model.Shipping.Country</li>
 									</ul>
                                 </div>
@@ -101,6 +101,14 @@
                                     <h4>Shipping Method</h4>
                                     <ul class="list-unstyled">
                                         <li>@Model.ShippingMethod</li>
+										@{
+											var regularItems = Model.OrderLines.Where(c => !c.ProductName.ToLower().Contains("digital")).ToList();
+											var digitalItems = Model.OrderLines.Where(c => c.ProductName.ToLower().Contains("digital")).ToList();
+										}
+										@if (digitalItems.Any())
+										{
+											<li>Electronic Delivery</li>
+										}
                                     </ul>
                                 </div>
                             </div>
@@ -132,7 +140,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach (var line in Model.OrderLines)
+                                            @foreach (var line in regularItems)
                                             {
                                                 
                                                 <tr>
@@ -144,6 +152,33 @@
                                                 </tr>
                                             }
                                         </tbody>
+										@if (digitalItems.Any())
+										{
+											<thead>
+												<tr>
+													<th></th>
+													<th>
+														<strong>Digital Items</strong> - <em>Will be delivered electronically</em>
+													</th>
+													<th>Unit Price</th>
+													<th>Quantity</th>
+													<th>Subtotal</th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach (var line in digitalItems)
+												{
+
+													<tr>
+														<td class="col-xs-1"><img src="@line.ImageUrl" alt="" class="img-responsive"></td>
+														<td class="col-xs-4 col-md-5"><h4><a href="@line.Url">@line.ProductName</h4></td>
+														<td class="col-xs-2 text-center"><span>@line.UnitPrice</span></td>
+														<td class="col-xs-2 col-md-1 text-center"><span><b>@line.Quantity items</b></span></td>
+														<td class="col-xs-2 text-center"><span><b>@line.SubTotal</b></span></td>
+													</tr>
+												}
+											</tbody>
+										}
                                     </table>
                                 </div>
 

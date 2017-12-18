@@ -21,11 +21,11 @@ namespace KeefePOC.Models
 			InmateCatalog c = new InmateCatalog();
 
 
-            c.InmateId = "123451";
-            c.Products = new List<string>() { "10003" };
-            Blacklist.Add(c);
+			c.InmateId = "123451";
+			c.Products = new List<string>() { "10003" };
+			Blacklist.Add(c);
 
-            c.InmateId = "123452";
+			c.InmateId = "123452";
 			c.Products = new List<string>() { "10001" };
 			Blacklist.Add(c);
 
@@ -41,14 +41,14 @@ namespace KeefePOC.Models
 			c.Products = new List<string>() { "10004" };
 			Blacklist.Add(c);
 
-		    c = new InmateCatalog();
+			c = new InmateCatalog();
 
-		    c.InmateId = "123456";
-		    c.Products = new List<string>() { "10002" };
-		    Blacklist.Add(c);
+			c.InmateId = "123456";
+			c.Products = new List<string>() { "10004" };
+			Blacklist.Add(c);
 
 
-            var str = Newtonsoft.Json.JsonConvert.SerializeObject(Blacklist);			
+			var str = Newtonsoft.Json.JsonConvert.SerializeObject(Blacklist);
 		}
 	}
 
@@ -59,35 +59,35 @@ namespace KeefePOC.Models
 			Products = new List<string>();
 		}
 		public string InmateId;
-		public List<string> Products; 
+		public List<string> Products;
 	}
 
-    public class InmateProductRestrictions
-    {
-        public List<string> Restrictions;
+	public class InmateProductRestrictions
+	{
+		public List<string> Restrictions;
 
-        public InmateProductRestrictions()
-        {
-            Restrictions = new List<string>();
-        }
+		public InmateProductRestrictions()
+		{
+			Restrictions = new List<string>();
+		}
 
-        public void PopulateSampleData(string inmateId)
-        {
-            switch (inmateId)
-            {
-                case "123451":
-                    Restrictions.Add("male");
-                    break;
-                case "123452":
-                    Restrictions.Add("female");
-                    break;
-                case "123453":
-                    Restrictions.Add("kosher");
-                    Restrictions.Add("glutenfree");
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
+		public void PopulateSampleData(string inmateId)
+		{
+			switch (inmateId)
+			{
+				case "123451":
+					Restrictions.Add("male");
+					break;
+				case "123452":
+					Restrictions.Add("female");
+					break;
+				case "123453":
+					Restrictions.Add("kosher");
+					Restrictions.Add("glutenfree");
+					break;
+				default:
+					break;
+			}
+		}
+	}
 }
