@@ -2344,7 +2344,7 @@ namespace CSDemo.Models.Checkout.Cart
 					return result;
 				}
 
-				if (!string.IsNullOrWhiteSpace(product["commerceproductgroupids"]))
+				//if (product["commerceproductgroupids"] != null && !string.IsNullOrWhiteSpace(product["commerceproductgroupids"]))
 				{
 					var productGroupIds = product["commerceproductgroupids"].Split('|');
 					var productGroupdIdGuids = productGroupIds.Select(i => Guid.Parse(i));
@@ -2380,6 +2380,8 @@ namespace CSDemo.Models.Checkout.Cart
 
 					result.IsValidForPurchase = true;
 				}
+				else
+				result.IsValidForPurchase = true;
 			}
 			catch (Exception ex)
 			{

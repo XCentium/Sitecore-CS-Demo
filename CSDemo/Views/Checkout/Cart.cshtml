@@ -9,7 +9,7 @@
 
 	var cartHelper = new CartHelper();
 
-	if(cartHelper.ViewCartPromo())
+	if (cartHelper.ViewCartPromo())
 	{
 		Response.Redirect("/Cart Promos");
 	}
@@ -49,79 +49,79 @@
 		}
 
 	}
- }
+}
 
 <!-- ==========================
-    MY ACCOUNT - START
+	MY ACCOUNT - START
 =========================== -->
 
 <section class="content account">
-    <div class="container">
+	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
 				@Html.Sitecore().Placeholder("cart-promo-banner")
 			</div>
-			</div>
-        <div class="row">
-            <div class="col-sm-12">
-                <article class="account-content">
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<article class="account-content">
 
-                    <form id="cart-form" name="cart-form">
-                        <div class="products-order shopping-cart">
+					<form id="cart-form" name="cart-form">
+						<div class="products-order shopping-cart">
 
-                            @if (shoppingCart.Total > 0)
-                            {
-                                <div class="table-responsive">
-                                    <table class="table table-products">
-                                        <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Product</th>
-                                            <th>Unit Price</th>
-                                            <th>Quantity</th>
-                                            <th>Discount</th>
-                                            <th>Subtotal</th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
+							@if (shoppingCart.Total > 0)
+							{
+								<div class="table-responsive">
+									<table class="table table-products">
+										<thead>
+											<tr>
+												<th></th>
+												<th>Product</th>
+												<th>Unit Price</th>
+												<th>Quantity</th>
+												<th>Discount</th>
+												<th>Subtotal</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
 
-											@{ 
+											@{
 												var regularItems = shoppingCart.CartItems.Where(c => !c.ProductName.ToLower().Contains("digital")).ToList();
 												var digitalItems = shoppingCart.CartItems.Where(c => c.ProductName.ToLower().Contains("digital")).ToList();
 											}
 
-                                        @foreach (var cartItem in regularItems)
-                                        {
-                                            var unitPrice = string.Format("{0:0.00}", cartItem.UnitPrice);
-                                            var discountAmount = string.Format("{0:0.00}", cartItem.Discount);
-                                            var subTotal = string.Format("{0:0.00}", cartItem.Amount);
-                                            <tr>
-                                                <td class="col-xs-2"><img src="@cartItem.ImageUrl" alt="" class="img-responsive"></td>
-                                                <td class="col-xs-5 col-md-5">
-                                                    <h4><a href="/categories/@cartItem.Category/@cartItem.CsProductId">@cartItem.ProductName</a><small></small></h4>
-                                                    @if (cartItem.Adjustments.Count > 0)
-                                                    {
-                                                        <h5>Adjustments:</h5>
-                                                    }
-                                                    @for (var ctr = 0; ctr < cartItem.Adjustments.Count; ctr++)
-                                                    {
-                                                        <span class="adjustment">@(ctr + 1) - @cartItem.Adjustments[ctr]</span><br/>
-                                                    }
-                                                </td>
-                                                <td class="col-xs-1 text-center"><span>$@unitPrice</span></td>
-                                                <td class="col-xs-1 col-md-1">
-                                                    <div class="form-group">
-                                                        <input type="text" name="quantity" class="form-control" value="@cartItem.Quantity"><input type="hidden" name="externalID" class="form-control" value="@cartItem.ExternalId">
-                                                    </div>
-                                                </td>
-                                                <td class="col-xs-1 text-center"><span><b>$@discountAmount</b></span></td>
-                                                <td class="col-xs-1 text-center"><span><b>$@subTotal</b></span></td>
-                                                <td class="col-xs-1 text-center"><a href="javascript:void(0)" data-externalid="@cartItem.ExternalId" class="btn btn-primary RemoveProduct"><i class="fa fa-times"></i></a></td>
-                                            </tr>
-                                        }
-										@if (digitalItems.Any())
-										{
+											@foreach (var cartItem in regularItems)
+											{
+												var unitPrice = string.Format("{0:0.00}", cartItem.UnitPrice);
+												var discountAmount = string.Format("{0:0.00}", cartItem.Discount);
+												var subTotal = string.Format("{0:0.00}", cartItem.Amount);
+												<tr>
+													<td class="col-xs-2"><img src="@cartItem.ImageUrl" alt="" class="img-responsive"></td>
+													<td class="col-xs-5 col-md-5">
+														<h4><a href="/categories/@cartItem.Category/@cartItem.CsProductId">@cartItem.ProductName</a><small></small></h4>
+														@if (cartItem.Adjustments.Count > 0)
+														{
+															<h5>Adjustments:</h5>
+														}
+														@for (var ctr = 0; ctr < cartItem.Adjustments.Count; ctr++)
+														{
+															<span class="adjustment">@(ctr + 1) - @cartItem.Adjustments[ctr]</span><br />
+														}
+													</td>
+													<td class="col-xs-1 text-center"><span>$@unitPrice</span></td>
+													<td class="col-xs-1 col-md-1">
+														<div class="form-group">
+															<input type="text" name="quantity" class="form-control" value="@cartItem.Quantity"><input type="hidden" name="externalID" class="form-control" value="@cartItem.ExternalId">
+														</div>
+													</td>
+													<td class="col-xs-1 text-center"><span><b>$@discountAmount</b></span></td>
+													<td class="col-xs-1 text-center"><span><b>$@subTotal</b></span></td>
+													<td class="col-xs-1 text-center"><a href="javascript:void(0)" data-externalid="@cartItem.ExternalId" class="btn btn-primary RemoveProduct"><i class="fa fa-times"></i></a></td>
+												</tr>
+											}
+											@if (digitalItems.Any())
+											{
 											<thead>
 												<tr>
 													<th></th>
@@ -165,116 +165,141 @@
 												</tr>
 											}
 										}
-                                        </tbody>
-                                    </table>
-                                </div>
+											</tbody>
+										</table>
+									</div>
 
-                                <a href="/categories" class="btn btn-inverse">Continue Shopping</a>
-                                <a href="/cart" class="btn btn-inverse update-cart">Update Shopping Cart</a>
+									<a href="/categories" class="btn btn-inverse">Continue Shopping</a>
+									<a href="/cart" class="btn btn-inverse update-cart">Update Shopping Cart</a>
 
-                                if(Sitecore.Context.User.IsAuthenticated)
-                                {
-                                    <a href="#" class="btn btn-inverse quickbuy">Buy with 1-Click Checkout</a>
-                                    <span style="float: right;
+
+									Item item = Sitecore.Context.Item;
+									Sitecore.Data.Database contextDB = Sitecore.Configuration.Factory.GetDatabase(item.Database.Name);
+									var siteName = Sitecore.Context.Site.ContentStartPath;
+
+									var siteNode = contextDB.GetItem(siteName);
+
+									var program = siteNode["Program"];
+
+									var ruleItem = contextDB.GetItem(program);
+									var rules = ruleItem.Fields["Purchaser Blacklist"].Value;
+
+
+
+									if (Sitecore.Context.User != null && Sitecore.Context.User.IsAuthenticated && !string.IsNullOrEmpty(Sitecore.Context.User.Profile.Email) && rules.ToLower().Contains(Sitecore.Context.User.Profile.Email.ToLower()))
+									{
+										<button href="#" class="btn btn-inverse quickbuy" disabled>Buy with 1-Click Checkout</button>
+										<button href="/checkout/payment" disabled class="btn btn-inverse checkout">Proceed to Checkout</button>
+
+										<p class="text-right"><span class="text-danger"><br />This account is unable to complete purchase.<br />Please contact customer service for assistance.</span></p>
+									}
+									else
+									{
+										if (Sitecore.Context.User.IsAuthenticated)
+										{
+											<a href="#" class="btn btn-inverse quickbuy">Buy with 1-Click Checkout</a>
+											<span style="float: right;
                                       display: block;
                                       margin: 5px 10px;
                                       font-size: 16px;
-                                      color: #777777;"> - or - </span>
-                                }
-                                    
-                                <a href="/checkout/payment" class="btn btn-inverse checkout">Proceed to Checkout</a>
-                            }
-                            else
-                            {
-                                <h2>Your cart is empty. Why not add something?</h2>
+                                      color: #777777;">- or -</span>
+										}
+
+										<a href="/checkout/payment" class="btn btn-inverse checkout">Proceed to Checkout</a>
+									}
+								}
+								else
+								{
+									<h2>Your cart is empty. Why not add something?</h2>
 
 
-                                <a href="/categories" class="btn btn-inverse">Continue Shopping</a>
-                            }
+									<a href="/categories" class="btn btn-inverse">Continue Shopping</a>
+								}
 
 
-                        </div>
-                        @if (shoppingCart.ProductsTotal > 0 && Sitecore.Context.User.Name=="customer3")
-                        {
-                            if (totalAmountSpentWithinAMonth + shoppingCart.GrandTotal > maxAllowedTopendWithinAMonth)
-                            {
-                                <p style="color:red; font-weight:bold">
-                                    You have exceeded your 30-day limit of $@maxAllowedTopendWithinAMonth (current running amount is $@Math.Round(totalAmountSpentWithinAMonth + shoppingCart.Total, 2)).
-                                    Please remove items worth $@Math.Round(Math.Abs(maxAllowedTopendWithinAMonth - (totalAmountSpentWithinAMonth + shoppingCart.Total)), 2) to proceed.
-                                </p>
-                            }
-                            if (shoppingCart.TotalWeight > maxAllowedWeight)
-                            {
-                                <p style="color:red; font-weight:bold">
-                                    You have exceeded the maximum allowed weight for a single order (@maxAllowedWeight lbs.).
-                                    Please remove items from the cart to bring the weight down by @Math.Round(Math.Abs(maxAllowedWeight - shoppingCart.TotalWeight), 2) lbs. to proceed.
-                                </p>
-                            }
-                        }
+						</div>
+						@if (shoppingCart.ProductsTotal > 0 && Sitecore.Context.User.Name == "customer3")
+						{
+							if (totalAmountSpentWithinAMonth + shoppingCart.GrandTotal > maxAllowedTopendWithinAMonth)
+							{
+								<p style="color:red; font-weight:bold">
+									You have exceeded your 30-day limit of $@maxAllowedTopendWithinAMonth (current running amount is $@Math.Round(totalAmountSpentWithinAMonth + shoppingCart.Total, 2)).
+									Please remove items worth $@Math.Round(Math.Abs(maxAllowedTopendWithinAMonth - (totalAmountSpentWithinAMonth + shoppingCart.Total)), 2) to proceed.
+								</p>
+							}
+							if (shoppingCart.TotalWeight > maxAllowedWeight)
+							{
+								<p style="color:red; font-weight:bold">
+									You have exceeded the maximum allowed weight for a single order (@maxAllowedWeight lbs.).
+									Please remove items from the cart to bring the weight down by @Math.Round(Math.Abs(maxAllowedWeight - shoppingCart.TotalWeight), 2) lbs. to proceed.
+								</p>
+							}
+						}
 
-                        <div class="products-order shopping-cart">
-                            <div class="table-responsive">
-                                <table class="table table-products">
-                                    <tr>
-                                        <td style="width: 50%;">
-                                            <div class="cart-adjustments">
-                                                @if (shoppingCart != null && shoppingCart.Adjustments != null && shoppingCart.Adjustments.Count > 0)
-                                                {
-                                                    <h5>Cart Adjustments:</h5>
+						<div class="products-order shopping-cart">
+							<div class="table-responsive">
+								<table class="table table-products">
+									<tr>
+										<td style="width: 50%;">
+											<div class="cart-adjustments">
+												@if (shoppingCart != null && shoppingCart.Adjustments != null && shoppingCart.Adjustments.Count > 0)
+												{
+													<h5>Cart Adjustments:</h5>
 
-                                                    for (var ctr = 0; ctr < shoppingCart.Adjustments.Count; ctr++)
-                                                    {
-                                                        <span class="adjustment">@(ctr + 1) - @shoppingCart.Adjustments[ctr]</span><br/>
-                                                    }
-                                                }
-                                            </div>
-                                        </td>
-                                        <td style="border-color: white">
-                                            <ul class="list-unstyled order-total">
-                                                <li>Total products<span>$@lineTotal</span></li>
-                                                <li>Discount<span>- $@discount</span></li>
-                                                <li>Shipping<span class="total">$@shipping</span></li>
-                                                <li>Tax<span class="total">$@tax</span></li>
-                                                <li>Grandtotal<span class="total">$@grandtotal</span></li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        @if (shoppingCart.ProductsTotal > 0)
-                        {
-                            <div class="cart-upsell">
-                                @if (reachedStatus != null && reachedStatus.Amount != 0 && (currentStatus == null || reachedStatus.Name != currentStatus.Name))
-                                {
-                                    <p class="highlight">Congratulations! You've qualified for our @reachedStatus.Name status! After completing this purchase you will be able to enjoy all the benefits of the membership.</p>
-                                }
+													for (var ctr = 0; ctr < shoppingCart.Adjustments.Count; ctr++)
+													{
+														<span class="adjustment">@(ctr + 1) - @shoppingCart.Adjustments[ctr]</span><br />
+													}
+												}
+											</div>
+										</td>
+										<td style="border-color: white">
+											<ul class="list-unstyled order-total">
+												<li>Total products<span>$@lineTotal</span></li>
+												<li>Discount<span>- $@discount</span></li>
+												<li>Shipping<span class="total">$@shipping</span></li>
+												<li>Tax<span class="total">$@tax</span></li>
+												<li>Grandtotal<span class="total">$@grandtotal</span></li>
+											</ul>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						@if (shoppingCart.ProductsTotal > 0)
+						{
+							<div class="cart-upsell">
+								@if (reachedStatus != null && reachedStatus.Amount != 0 && (currentStatus == null || reachedStatus.Name != currentStatus.Name))
+								{
+									<p class="highlight">Congratulations! You've qualified for our @reachedStatus.Name status! After completing this purchase you will be able to enjoy all the benefits of the membership.</p>
+								}
 
-                                @if (nextStatus != null && nextStatus.Amount != 0)
-                                {
-                                    <p><img style="float: right; margin: 5px" src="@nextStatus.Badge.Src?w=30" alt="@nextStatus.Badge.Alt" title="@nextStatus.Name Member"/>
-                                        You are $@Math.Round(nextStatus.Amount - shoppingCart.ProductsTotal, 2) away from becoming a @nextStatus.Name member, which gives you extra discounts coupons in the mail and free shipping on all orders.
-                                        <br/><br/><a class="btn btn-inverse" href="/categories" title="Continue Shopping">Get More</a>
-                                    </p>
+								@if (nextStatus != null && nextStatus.Amount != 0)
+								{
+									<p>
+										<img style="float: right; margin: 5px" src="@nextStatus.Badge.Src?w=30" alt="@nextStatus.Badge.Alt" title="@nextStatus.Name Member" />
+										You are $@Math.Round(nextStatus.Amount - shoppingCart.ProductsTotal, 2) away from becoming a @nextStatus.Name member, which gives you extra discounts coupons in the mail and free shipping on all orders.
+										<br /><br /><a class="btn btn-inverse" href="/categories" title="Continue Shopping">Get More</a>
+									</p>
 
-                                }
+								}
 
-                            </div>
-                        }
-                        <div class="clearfix">
-                            @if (shoppingCart != null && shoppingCart.Total > 0 
-                                 && (totalAmountSpentWithinAMonth + shoppingCart.GrandTotal <= maxAllowedTopendWithinAMonth  && Sitecore.Context.User.Name=="customer3")
-                                 && (shoppingCart.TotalWeight <= maxAllowedWeight  && Sitecore.Context.User.Name=="customer3"))
-                            {
-                                <a href="/checkout/payment" class="btn btn-primary btn-lg pull-right ">Checkout</a>
-                            }
-                               
-                        </div>
-                    </form>
+							</div>
+						}
+						<div class="clearfix">
+							@if (shoppingCart != null && shoppingCart.Total > 0
+								 && (totalAmountSpentWithinAMonth + shoppingCart.GrandTotal <= maxAllowedTopendWithinAMonth && Sitecore.Context.User.Name == "customer3")
+								 && (shoppingCart.TotalWeight <= maxAllowedWeight && Sitecore.Context.User.Name == "customer3"))
+							{
+								<a href="/checkout/payment" class="btn btn-primary btn-lg pull-right ">Checkout</a>
+							}
 
-                </article>
-            </div>
+						</div>
+					</form>
 
-        </div>
-    </div>
+				</article>
+			</div>
+
+		</div>
+	</div>
 </section>
