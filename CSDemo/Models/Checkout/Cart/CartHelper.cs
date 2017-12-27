@@ -912,30 +912,73 @@ namespace CSDemo.Models.Checkout.Cart
 		/// <returns></returns>
 		internal bool AddShippingMethodToCart(string shippingMethodId)
 		{
-			var shippingData = shippingMethodId.Split('|');
+			var regularShipping = "e14965b9-306a-43c4-bffc-3c67be8726fa|Ground";
+			var digitalShipping = "7E077EDC-7103-460B-988F-78B0211B9261".ToLower() + "|Email";
+
+			var shippingData = regularShipping.Split('|');
+			var digitalShippingData = digitalShipping.Split('|');
 			var cart = GetCustomerCart();
 
-			// prepare shipping methods list with chosen shipping method
-			var shippingMethodList = new List<ShippingMethodInputModelItem>
+			var shippingMethodList = new List<ShippingMethodInputModelItem>();
+
+			var normalItems = cart.Lines.Where(l => !l.Product.ProductName.ToLower().Contains("digital")).ToList();
+			var digitalItems = cart.Lines.Where(l => l.Product.ProductName.ToLower().Contains("digital")).ToList();
+
+			if (normalItems.Any())
 			{
-				new ShippingMethodInputModelItem
-					{
-						ShippingMethodID = shippingData[0],
-						ShippingMethodName = shippingData[1],
-						ShippingPreferenceType = "1",
-						PartyID = "0"
-					}
-			};
+				// prepare shipping methods list with chosen shipping method
+
+				shippingMethodList.Add(new ShippingMethodInputModelItem
+				{
+					ShippingMethodID = shippingData[0],
+					ShippingMethodName = shippingData[1],
+					ShippingPreferenceType = "1",
+					PartyID = "0"
+				});
+
+			}
+
+			if (digitalItems.Any())
+			{
+
+
+				shippingMethodList.Add(new ShippingMethodInputModelItem
+				{
+					ShippingMethodID = digitalShippingData[0],
+					ShippingMethodName = digitalShippingData[1],
+					ElectronicDeliveryEmail = "testwithhardcodedemail@site.com",
+					ElectronicDeliveryEmailContent = InmateHelper.GetSelectedInmateId(),
+					ShippingPreferenceType = "3",
+					PartyID = "0"
+				});
+			}
 
 			//prepare shipping list - items to be shipped
 			var internalShippingList = shippingMethodList.ToShippingInfoList();
-			var orderPreferenceType = InputModelExtension.GetShippingOptionType("1");
+			var orderPreferenceType = digitalItems.Any() ? normalItems.Any() ? InputModelExtension.GetShippingOptionType("4") : InputModelExtension.GetShippingOptionType("3") : InputModelExtension.GetShippingOptionType("1");
 
 			if (orderPreferenceType != ShippingOptionType.DeliverItemsIndividually)
 			{
 				foreach (var shipping in internalShippingList)
 				{
+
 					shipping.LineIDs = (from CommerceCartLine lineItem in cart.Lines select lineItem.ExternalCartLineId).ToList().AsReadOnly();
+
+				}
+			}
+			else
+			{
+				foreach (var shipping in internalShippingList)
+				{
+					if (shipping.ShippingMethodName == "Email")
+					{
+						shipping.LineIDs = digitalItems.Select(lineItem => lineItem.ExternalCartLineId).ToList().AsReadOnly();
+					}
+					else
+					{
+						shipping.LineIDs = normalItems.Select(lineItem => lineItem.ExternalCartLineId).ToList().AsReadOnly();
+					}
+
 				}
 			}
 
@@ -943,6 +986,7 @@ namespace CSDemo.Models.Checkout.Cart
 			shipments.AddRange(internalShippingList);
 
 			//update cart with shipping info
+			//cart.Email = "test1a@site.com";
 			var addShippingInfoRequest = new Sitecore.Commerce.Engine.Connect.Services.Carts.AddShippingInfoRequest(cart, shipments, orderPreferenceType);
 			var addShippingInfoResult = _cartServiceProvider.AddShippingInfo(addShippingInfoRequest);
 			if (!addShippingInfoResult.Success)

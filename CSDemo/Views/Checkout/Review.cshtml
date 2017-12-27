@@ -104,7 +104,7 @@
 									<ul class="list-unstyled" id="shippingAddress">
 										<li>
 											<b>
-												@{			//string firstName = shoppingCart.ShipTo.FirstName;
+												@{ //string firstName = shoppingCart.ShipTo.FirstName;
 													//string lastName = shoppingCart.ShipTo.LastName;
 													//var regex = new System.Text.RegularExpressions.Regex(@"(.*)(\(.*\))");
 													//var match = regex.Match(shoppingCart.ShipTo.LastName);
@@ -128,12 +128,22 @@
 												@firstName @lastName
 											</b>
 										</li>
-										<li>
-											@shoppingCart.ShipTo.Address1 @shoppingCart.ShipTo.Address2
-										</li>
-										<li>
-											@shoppingCart.ShipTo.ZipPostalCode, @shoppingCart.ShipTo.State, @shoppingCart.ShipTo.Country
-										</li>
+										@if (string.IsNullOrEmpty(shoppingCart.ShipTo.Address1))
+										{
+											<li>
+												Order will be delivered electronically
+											</li>
+										}
+										else
+										{
+											<li>
+												@shoppingCart.ShipTo.Address1 @shoppingCart.ShipTo.Address2
+											</li>
+											<li>
+												@shoppingCart.ShipTo.ZipPostalCode, @shoppingCart.ShipTo.State, @shoppingCart.ShipTo.Country
+											</li>
+										}
+
 									</ul>
 								</div>
 							</div>
@@ -147,8 +157,8 @@
 									</ul>
 								</div>
 								<div class="box">
-									<h4>Shipping Method</h4>
-									<ul class="list-unstyled" id="shippingMethod"></ul>
+									@*<h4>Shipping Method</h4>
+										<ul class="list-unstyled" id="shippingMethod"></ul>*@
 								</div>
 							</div>
 							<div class="col-sm-6">
@@ -167,62 +177,65 @@
 						@if (shoppingCart != null && shoppingCart.Total > 0)
 						{
 
-						<div class="products-order checkout shopping-cart">
-							<div class="table-responsive">
-								<table class="table table-products">
-									<thead>
-										<tr>
-											<th></th>
-											<th>Product</th>
-											<th>Unit Price</th>
-											<th>Quantity</th>
-											<th>Discount</th>
-											<th>Subtotal</th>
-										</tr>
-									</thead>
-
-										@foreach (CartItem cartItem in regularItems)
+							<div class="products-order checkout shopping-cart">
+								<div class="table-responsive">
+									<table class="table table-products">
+										@if (regularItems.Any())
 										{
-											var unitPrice = string.Format("{0:0.00}", cartItem.UnitPrice);
-											var subTotal = string.Format("{0:0.00}", cartItem.Amount);
-											var discountAmount = string.Format("{0:0.00}", cartItem.Discount);
-											<tr>
-												<td class="col-xs-2"><img src="@cartItem.ImageUrl" alt="" class="img-responsive"></td>
-												<td class="col-xs-5 col-md-5">
-													<h4><a href="/categories/@cartItem.Category/@cartItem.CsProductId">@cartItem.ProductName</a><small></small></h4>
-													@if (cartItem.Adjustments.Count > 0)
-													{
-														<h5>Adjustments:</h5>
-													}
-													@for (var ctr = 0; ctr < cartItem.Adjustments.Count; ctr++)
-													{
-														<span class="adjustment">@(ctr + 1) - @cartItem.Adjustments[ctr]</span><br />
-													}
-													@if (cartItem.ProductName.ToLower().Contains("digital"))
-													{
-														<p style="font-size: 0.9em"><em>This item will be delivered electronically.</em></p>
-													}
-												</td>
-												<td class="col-xs-1 text-center"><span>$@unitPrice</span></td>
-												<td class="col-xs-1 col-md-1 text-center"><span><b>@cartItem.Quantity</b></span></td>
-												<td class="col-xs-1 text-center"><span><b>$@discountAmount</b></span></td>
-												<td class="col-xs-2 text-center"><span><b>$@subTotal</b></span></td>
-											</tr>
+											<thead>
+												<tr>
+													<th></th>
+													<th>Product</th>
+													<th>Unit Price</th>
+													<th>Quantity</th>
+													<th>Discount</th>
+													<th>Subtotal</th>
+												</tr>
+											</thead>
+
+											foreach (CartItem cartItem in regularItems)
+											{
+												var unitPrice = string.Format("{0:0.00}", cartItem.UnitPrice);
+												var subTotal = string.Format("{0:0.00}", cartItem.Amount);
+												var discountAmount = string.Format("{0:0.00}", cartItem.Discount);
+												<tr>
+													<td class="col-xs-2"><img src="@cartItem.ImageUrl" alt="" class="img-responsive"></td>
+													<td class="col-xs-5 col-md-5">
+														<h4><a href="/categories/@cartItem.Category/@cartItem.CsProductId">@cartItem.ProductName</a><small></small></h4>
+														@if (cartItem.Adjustments.Count > 0)
+														{
+															<h5>Adjustments:</h5>
+														}
+														@for (var ctr = 0; ctr < cartItem.Adjustments.Count; ctr++)
+														{
+															<span class="adjustment">@(ctr + 1) - @cartItem.Adjustments[ctr]</span><br />
+														}
+														@if (cartItem.ProductName.ToLower().Contains("digital"))
+														{
+															<p style="font-size: 0.9em"><em>This item will be delivered electronically.</em></p>
+														}
+													</td>
+													<td class="col-xs-1 text-center"><span>$@unitPrice</span></td>
+													<td class="col-xs-1 col-md-1 text-center"><span><b>@cartItem.Quantity</b></span></td>
+													<td class="col-xs-1 text-center"><span><b>$@discountAmount</b></span></td>
+													<td class="col-xs-2 text-center"><span><b>$@subTotal</b></span></td>
+												</tr>
+											}
 										}
 										@if (digitalItems.Any())
 										{
-										<thead>
-											<tr>
-												<th></th>
-												<th>
-													<strong>Digital Items</strong> - <em>Will be delivered electronically</em>
-												</th>
-												<th>Unit Price</th>
-												<th>Quantity</th>
-												<th>Discount</th>
-												<th>Subtotal</th>
-											</tr>
-										</thead>
+											<thead>
+												<tr>
+													<th></th>
+													<th>
+														<strong>Digital Items</strong> - <em>Will be delivered electronically</em>
+													</th>
+													<th>Unit Price</th>
+													<th>Quantity</th>
+													<th>Discount</th>
+													<th>Subtotal</th>
+												</tr>
+											</thead>
 											foreach (var cartItem in digitalItems)
 											{
 												var unitPrice = string.Format("{0:0.00}", cartItem.UnitPrice);
@@ -285,13 +298,13 @@
 								</div>
 								<a href="/checkout/thank-you" data-contextitemid="@Sitecore.Context.Item.ID.ToString()" class="btn btn-primary btn-lg pull-right SubmitReview">Confirm Order</a>
 							</div>
-							}
-						</form>
-					</article>
-				</div>
+						}
+					</form>
+				</article>
 			</div>
 		</div>
-	</section>
-	<!-- ==========================
-		MY ACCOUNT - END
-	=========================== -->
+	</div>
+</section>
+<!-- ==========================
+	MY ACCOUNT - END
+=========================== -->

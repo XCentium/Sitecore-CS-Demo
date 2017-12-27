@@ -727,12 +727,12 @@ namespace CSDemo.Models.Product
 				var inmate = ExtractInmate(order.Shipping);
 				if (inmate == null || string.IsNullOrEmpty(inmate.InmateNumber))
 				{
-					
+					throw new Exception(order.Shipping.LastName);
 					continue;
 				}
 
 				var existingInmate = new DemoInmateRepository().GetInmate(inmate.InmateNumber);
-				
+
 
 				var facility = FacilityHelper.GetFacilityByExternalId(existingInmate.AssociatedFacilityId);
 				if (facility != null)
@@ -768,6 +768,11 @@ namespace CSDemo.Models.Product
 				model.LastName = match.Groups[1].Value;
 				model.InmateNumber = match.Groups[2].Value.Replace("(", "").Replace(")", "");
 			}
+			else
+			{
+				throw new Exception(shipping.LastName);
+				var actual = shipping.LastName;
+			}
 
 			return model;
 		}
@@ -799,8 +804,29 @@ namespace CSDemo.Models.Product
 				orderDetail.OrderStatus = commerceOrderHead.Status;
 				orderDetail.UserId = commerceOrderHead.UserId;
 				orderDetail.ExternalId = commerceOrderHead.ExternalId;
-				orderDetail.Billing = commerceOrderHead.Parties.ElementAt(1) as CommerceParty;
-				orderDetail.Shipping = commerceOrderHead.Parties.ElementAt(0) as CommerceParty;
+				if (commerceOrderHead.Parties.Count < 2)
+				{
+
+					orderDetail.Billing = commerceOrderHead.Parties.ElementAt(0) as CommerceParty;
+					//orderDetail.Shipping = commerceOrderHead.Parties.ElementAt(0) as CommerceParty;
+
+					var inmtnumtemp = commerceOrderHead.Shipping[0].Properties["ElectronicDeliveryEmailContent"].ToString();
+					if (string.IsNullOrEmpty(inmtnumtemp) || inmtnumtemp == "Test Content")
+						commerceOrderHead.Shipping[0].Properties["ElectronicDeliveryEmailContent"] = "123456";
+
+					orderDetail.Shipping = new CommerceParty()
+					{
+						FirstName = "Electronic",
+						LastName = $"Order ({commerceOrderHead.Shipping[0].Properties["ElectronicDeliveryEmailContent"]})",
+						Address1 = "Will be sent electronically",
+					};
+				}
+				else
+				{
+					orderDetail.Billing = commerceOrderHead.Parties.ElementAt(1) as CommerceParty;
+					orderDetail.Shipping = commerceOrderHead.Parties.ElementAt(0) as CommerceParty;
+				}
+
 				if (orderDetail.Billing == null)
 				{
 					orderDetail.Billing = new CommerceParty();
