@@ -724,10 +724,11 @@ namespace CSDemo.Models.Product
 			var model = new Dictionary<KeefePOC.Models.Inmate, List<OrderDetailViewModel>>();
 			foreach (var order in orders)
 			{
+				if (string.IsNullOrEmpty(order.Shipping.LastName) || order.Shipping.LastName.Contains("()") || !order.Shipping.LastName.EndsWith(")")) continue;
+
 				var inmate = ExtractInmate(order.Shipping);
 				if (inmate == null || string.IsNullOrEmpty(inmate.InmateNumber))
 				{
-					throw new Exception(order.Shipping.LastName);
 					continue;
 				}
 
@@ -766,6 +767,13 @@ namespace CSDemo.Models.Product
 			if (match.Success)
 			{
 				model.LastName = match.Groups[1].Value;
+
+
+				if (string.IsNullOrEmpty(match.Groups[2].Value))
+				{
+					throw new Exception(shipping.LastName);
+				}
+
 				model.InmateNumber = match.Groups[2].Value.Replace("(", "").Replace(")", "");
 			}
 			else
@@ -812,12 +820,12 @@ namespace CSDemo.Models.Product
 
 					var inmtnumtemp = commerceOrderHead.Shipping[0].Properties["ElectronicDeliveryEmailContent"].ToString();
 					if (string.IsNullOrEmpty(inmtnumtemp) || inmtnumtemp == "Test Content")
-						commerceOrderHead.Shipping[0].Properties["ElectronicDeliveryEmailContent"] = "123456";
+						inmtnumtemp = "123456";
 
 					orderDetail.Shipping = new CommerceParty()
 					{
 						FirstName = "Electronic",
-						LastName = $"Order ({commerceOrderHead.Shipping[0].Properties["ElectronicDeliveryEmailContent"]})",
+						LastName = $"Order ({inmtnumtemp})",
 						Address1 = "Will be sent electronically",
 					};
 				}
