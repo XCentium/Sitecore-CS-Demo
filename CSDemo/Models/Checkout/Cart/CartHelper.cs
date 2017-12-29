@@ -77,6 +77,12 @@ namespace CSDemo.Models.Checkout.Cart
 
 		public string AddProductToCart(string quantity, string productId, string catalogName, string variantId)
 		{
+			var loggedIn = Sitecore.Context.User.IsAuthenticated;
+			if (!loggedIn)
+			{
+				return "Anonymous";
+			}
+
 			try
 			{
 				var inmateId = InmateHelper.GetSelectedInmateId();

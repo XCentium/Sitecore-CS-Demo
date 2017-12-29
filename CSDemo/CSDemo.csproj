@@ -711,6 +711,7 @@
     <Content Include="Views\Messages\GlobalMessage.cshtml" />
     <Content Include="Views\ProgramInfo\Message.cshtml" />
     <Content Include="Views\Faq\List.cshtml" />
+    <Content Include="Views\InmateSearch\WhiteListUnauthorized.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

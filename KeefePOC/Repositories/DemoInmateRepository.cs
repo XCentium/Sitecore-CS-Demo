@@ -20,6 +20,7 @@ namespace KeefePOC.Repositories
 			DemoInmates.Add(new Inmate() { FirstName = "Inmate", LastName = "Four", Id = "123454", InmateNumber = "123454", Tier = "Tier4", Block = "Block4", Cell = "Cell4", AssociatedFacilityId = "CAHOSP2", CurrentQuarterTotalOrderPrice = 10, CurrentQuarterTotalOrderWeight = 10 });
 			DemoInmates.Add(new Inmate() { FirstName = "Inmate", LastName = "Five", Id = "123455", InmateNumber = "123455", Tier = "Tier5", Block = "Block5", Cell = "Cell5", AssociatedFacilityId = "CAHOSP1", CurrentQuarterTotalOrderPrice = 10, CurrentQuarterTotalOrderWeight = 10 });
 			DemoInmates.Add(new Inmate() { FirstName = "Inmate", LastName = "Six", Id = "123456", InmateNumber = "123456", Tier = "Tier6", Block = "Block6", Cell = "Cell6WW", AssociatedFacilityId = "CAJAIL1", CurrentQuarterTotalOrderPrice = 10, CurrentQuarterTotalOrderWeight = 10 });
+			DemoInmates.Add(new Inmate() { FirstName = "Inmate", LastName = "Seven", Id = "123457", InmateNumber = "123457", Tier = "Tier7", Block = "Block7", Cell = "Cell7", AssociatedFacilityId = "CAJAIL4", CurrentQuarterTotalOrderPrice = 100, CurrentQuarterTotalOrderWeight = 100 });
 
 			DemoInmates.Add(new Inmate() { FirstName = "Inmate", LastName = "Test", Id = "700001", InmateNumber = "700001", Tier = "Tier1", Block = "Block1", Cell = "Cell1", AssociatedFacilityId = "CAHOSP1", CurrentQuarterTotalOrderPrice = 10, CurrentQuarterTotalOrderWeight = 10 });
 			DemoInmates.Add(new Inmate() { FirstName = "Inmate", LastName = "Test", Id = "700002", InmateNumber = "700002", Tier = "Tier1", Block = "Block1", Cell = "Cell1", AssociatedFacilityId = "CAHOSP1", CurrentQuarterTotalOrderPrice = 10, CurrentQuarterTotalOrderWeight = 10 });
@@ -90,6 +91,20 @@ namespace KeefePOC.Repositories
 				return DemoInmates.Where(i => i.InmateNumber.Contains(request.InmateNumber)).ToList();
 			else
 				return DemoInmates.Where(i => (i.InmateNumber.Contains(request.InmateNumber) || (i.FirstName == request.FirstName && i.MiddleName == request.MiddleName && i.LastName == request.LastName)) && i.AssociatedFacilityId == facilityId).ToList();
+		}
+
+		public List<string> GetInmateWhitelist(string inmateId)
+		{
+			if (inmateId == "123457")
+			{
+				return new List<string>
+				{
+					"Inmate Seven",
+					"Jane Doe"
+				};
+			}
+			else
+				return new List<string>();
 		}
 	}
 }

@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 
 namespace KeefePOC.Interfaces.Repositories
 {
-    public interface IInmateRepository
-    {
-        List<Inmate> GetInmates(string facilityId);
-        Inmate GetInmate(string inmateNumber);
-        Inmate GetInmate(string facilityId, string inmateNumber);
-        List<Inmate> SearchInmates(Inmate request);
-        List<Inmate> SearchInmates(string facilityId,Inmate request);
+	public interface IInmateRepository
+	{
+		List<Inmate> GetInmates(string facilityId);
+		Inmate GetInmate(string inmateNumber);
+		Inmate GetInmate(string facilityId, string inmateNumber);
+		List<Inmate> SearchInmates(Inmate request);
+		List<Inmate> SearchInmates(string facilityId, Inmate request);
 		List<string> GetBlacklistedItemsForInmate(string inmateId);
-        List<string> GetProductRestrictionsForInmate(string inmateId);
-        double GetCurrentQuarterOrderTotalWeightForInmate(string inmateId);
-        decimal GetCurrentQuarterOrderTotalPriceForInmate(string inmateId);
-    }
+		List<string> GetProductRestrictionsForInmate(string inmateId);
+		List<string> GetInmateWhitelist(string inmateId);
+		double GetCurrentQuarterOrderTotalWeightForInmate(string inmateId);
+		decimal GetCurrentQuarterOrderTotalPriceForInmate(string inmateId);
+	}
 }
