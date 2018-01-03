@@ -64,7 +64,8 @@ namespace CSDemo.Controllers
 				var loggedIn = Sitecore.Context.User.IsAuthenticated;
 				if (!loggedIn)
 				{
-					return View("WhiteListUnauthorized");
+					ViewBag.ReturnUrl = Request.Url.PathAndQuery;
+					return View("WhiteListAnonymous");
 				}
 
 				var whiteList = new DemoInmateRepository().GetInmateWhitelist(inmateId);
