@@ -294,7 +294,7 @@
 								else
 								{
 									<p>
-										<strong>Bonus Offer: Spend at least @string.Format("{0:c}", topromospend) more on this order and you'll automatically qualify for additional discounts: @(programItem["PromoDescription"])</strong>
+										<strong>Bonus Offer: @(programItem["UpsellMessage"].Replace("[RemainingCost]", string.Format("{0:c}", topromospend))) @(programItem["PromoDescription"])</strong>
 									</p>
 								}
 							}
