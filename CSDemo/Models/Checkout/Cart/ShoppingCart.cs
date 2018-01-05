@@ -27,13 +27,20 @@ namespace CSDemo.Models.Checkout.Cart
         public decimal TotalWeight
         {
             get
-            {
-                var totalWeight = CartItems.Sum(i => Product.Product.GetProduct(i.ProductId).Weight);
-                return totalWeight;
-            }
-        }
+			{
+				var totalWeight = CartItems.Sum(i => GetWeight(i));
+				return totalWeight;
+			}
+		}
 
-        private decimal _productsTotal;
+		private static decimal GetWeight(CartItem i)
+		{
+			var product = Product.Product.GetProduct(i.ProductId);
+			var result =  product.Weight;
+			return result;
+		}
+
+		private decimal _productsTotal;
         public decimal ProductsTotal
         {
 

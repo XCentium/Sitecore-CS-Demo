@@ -369,6 +369,7 @@
     <Compile Include="Helpers\GlassHelper.cs" />
     <Compile Include="Helpers\InmateHelper.cs" />
     <Compile Include="Helpers\FacilityHelper.cs" />
+    <Compile Include="Helpers\LimitsHelper.cs" />
     <Compile Include="Helpers\ProgramHelper.cs" />
     <Compile Include="Models\FacilityModel.cs" />
     <Compile Include="Models\Faq\FaqViewModel.cs" />

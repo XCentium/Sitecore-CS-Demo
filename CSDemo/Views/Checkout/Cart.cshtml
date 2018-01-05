@@ -4,17 +4,24 @@
 @using CSDemo.Models.Account
 @using Sitecore
 @using System.Linq
+@using CSDemo.Helpers
 
 @{
+	Item item = Sitecore.Context.Item;
+	Sitecore.Data.Database contextDB = Sitecore.Configuration.Factory.GetDatabase(item.Database.Name);
+	var siteName = Sitecore.Context.Site.ContentStartPath;
+
+	var siteNode = contextDB.GetItem(siteName);
+
+	var program = siteNode["Program"];
+	var programItem = contextDB.GetItem(program);
 
 	var cartHelper = new CartHelper();
 
-	if (cartHelper.ViewCartPromo())
-	{
-		Response.Redirect("/Cart Promos");
-	}
-
 	var shoppingCart = cartHelper.GetMiniCart();
+
+	var promoCode = programItem["PromoCode"];
+	new CartHelper().RemovePromoCode(promoCode);
 
 	var nextStatus = UserStatus.GetNextStatus(shoppingCart.ProductsTotal);
 	var currentStatus = UserStatus.GetStatus(Sitecore.Context.User);
@@ -25,9 +32,14 @@
 	var tax = "0.00";
 	var grandtotal = "0.00";
 	var total = "0.00";
-	var totalAmountSpentWithinAMonth = Order.GetTotalAmountOrderedWithinPeriod(Sitecore.Analytics.Tracker.Current.Contact, 30);
-	var maxAllowedTopendWithinAMonth = 500;
-	var maxAllowedWeight = 20;
+
+	var email = (Sitecore.Context.User == null || Sitecore.Context.User.Profile == null || string.IsNullOrEmpty(Sitecore.Context.User.Profile.Email)) ? string.Empty : Sitecore.Context.User.Profile.Email;
+	var totalAmountSpentWithinAMonth = LimitsHelper.GetCurrentPeriodSpend(email);
+	var totalAmountWeightWithinAMonth = LimitsHelper.GetCurrentPeriodWeight(email);
+
+
+	var maxAllowedTopendWithinAMonth = LimitsHelper.GetProgramSpendLimit();
+	var maxAllowedWeight = LimitsHelper.GetProgramWeightLimit();
 	if (shoppingCart != null && shoppingCart.Total > 0)
 	{
 
@@ -59,6 +71,12 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
+				@{
+					if (cartHelper.ViewCartPromo())
+					{
+						<h2 id="free-items">Congratulations, you have qualified for free promotional goods. Please click <a href="/cart-promos">here</a> to view free items and add to cart</h2>
+					}
+				}
 				@Html.Sitecore().Placeholder("cart-promo-banner")
 			</div>
 		</div>
@@ -173,13 +191,7 @@
 									<a href="/cart" class="btn btn-inverse update-cart">Update Shopping Cart</a>
 
 
-									Item item = Sitecore.Context.Item;
-									Sitecore.Data.Database contextDB = Sitecore.Configuration.Factory.GetDatabase(item.Database.Name);
-									var siteName = Sitecore.Context.Site.ContentStartPath;
 
-									var siteNode = contextDB.GetItem(siteName);
-
-									var program = siteNode["Program"];
 
 									var ruleItem = contextDB.GetItem(program);
 									var rules = ruleItem.Fields["Purchaser Blacklist"].Value;
@@ -188,7 +200,7 @@
 
 									if (Sitecore.Context.User != null && Sitecore.Context.User.IsAuthenticated && !string.IsNullOrEmpty(Sitecore.Context.User.Profile.Email) && rules.ToLower().Contains(Sitecore.Context.User.Profile.Email.ToLower()))
 									{
-										<button href="#" class="btn btn-inverse quickbuy" disabled>Buy with 1-Click Checkout</button>
+										@*<button href="#" class="btn btn-inverse quickbuy" disabled>Buy with 1-Click Checkout</button>*@
 										<button href="/checkout/payment" disabled class="btn btn-inverse checkout">Proceed to Checkout</button>
 
 										<p class="text-right"><span class="text-danger"><br />This account is unable to complete purchase.<br />Please contact customer service for assistance.</span></p>
@@ -197,12 +209,12 @@
 									{
 										if (Sitecore.Context.User.IsAuthenticated)
 										{
-											<a href="#" class="btn btn-inverse quickbuy">Buy with 1-Click Checkout</a>
-											<span style="float: right;
-                                      display: block;
-                                      margin: 5px 10px;
-                                      font-size: 16px;
-                                      color: #777777;">- or -</span>
+											@*<a href="#" class="btn btn-inverse quickbuy">Buy with 1-Click Checkout</a>*@
+											@*<span style="float: right;
+												display: block;
+												margin: 5px 10px;
+												font-size: 16px;
+												color: #777777;">- or -</span>*@
 										}
 
 										<a href="/checkout/payment" class="btn btn-inverse checkout">Proceed to Checkout</a>
@@ -218,21 +230,73 @@
 
 
 						</div>
-						@if (shoppingCart.ProductsTotal > 0 && Sitecore.Context.User.Name == "customer3")
+
+						@if (shoppingCart.ProductsTotal > 0)
 						{
-							if (totalAmountSpentWithinAMonth + shoppingCart.GrandTotal > maxAllowedTopendWithinAMonth)
+							var spendThreshold = decimal.Parse(programItem["PriceLimitThreshold"]);
+							var actualSpend = totalAmountSpentWithinAMonth + shoppingCart.GrandTotal - shoppingCart.Shipping - shoppingCart.Tax;
+							var lefttospend = maxAllowedTopendWithinAMonth - (totalAmountSpentWithinAMonth + shoppingCart.GrandTotal - shoppingCart.Shipping - shoppingCart.Tax);
+							var topromospend = lefttospend - spendThreshold;
+							if (actualSpend > maxAllowedTopendWithinAMonth)
 							{
 								<p style="color:red; font-weight:bold">
-									You have exceeded your 30-day limit of $@maxAllowedTopendWithinAMonth (current running amount is $@Math.Round(totalAmountSpentWithinAMonth + shoppingCart.Total, 2)).
-									Please remove items worth $@Math.Round(Math.Abs(maxAllowedTopendWithinAMonth - (totalAmountSpentWithinAMonth + shoppingCart.Total)), 2) to proceed.
+									Your current total spend for the period is $@Math.Round(totalAmountSpentWithinAMonth + shoppingCart.Total, 2).<br />
+									The total in your cart causes you to exceed the current program spend limit of $@maxAllowedTopendWithinAMonth.<br />
+									Please reduce your cart total to a maximum of $@Math.Round(Math.Abs(maxAllowedTopendWithinAMonth - (totalAmountSpentWithinAMonth + shoppingCart.Total)), 2) to proceed.
 								</p>
 							}
-							if (shoppingCart.TotalWeight > maxAllowedWeight)
+							else if (shoppingCart.TotalWeight > maxAllowedWeight)
 							{
 								<p style="color:red; font-weight:bold">
-									You have exceeded the maximum allowed weight for a single order (@maxAllowedWeight lbs.).
+									The total in your cart causes you to exceed the program weight of @maxAllowedWeight lbs..
 									Please remove items from the cart to bring the weight down by @Math.Round(Math.Abs(maxAllowedWeight - shoppingCart.TotalWeight), 2) lbs. to proceed.
 								</p>
+							}
+							else
+							{
+								<style>
+									table strong {
+										display: inline-block;
+										width: 240px;
+									}
+								</style>
+								<table width="60%" cellpadding="5">
+									<tr>
+										<td>
+											<p>
+												<strong>Program Spend Limit per Quarter: </strong> @string.Format("{0:c}", maxAllowedTopendWithinAMonth)<br />
+												<strong>Your Spend this Quarter:</strong> @string.Format("{0:c}", totalAmountSpentWithinAMonth)<br />
+												<strong>Total Spend including cart:</strong> @string.Format("{0:c}", actualSpend)
+											</p>
+										</td>
+										<td>
+												<p>
+													<strong>Program Weight Limit per Quarter: </strong> @maxAllowedWeight lbs.<br />
+													<strong>Your Weight Usage this Quarter:</strong> @totalAmountWeightWithinAMonth lbs.<br />
+													<strong>Weight Usage including cart:</strong> @(shoppingCart.TotalWeight) lbs.
+												</p>
+											</td>
+									</tr>
+								</table>
+								if (maxAllowedTopendWithinAMonth - actualSpend > 0)
+								{
+
+									<p>
+										You can still add @string.Format("{0:c}", lefttospend) worth of merchandise this quarter.
+									</p>
+
+								}
+
+								if (topromospend <= 0)
+								{
+									<p class="text-danger" style="color: green"><strong>You qualify for a discount! Use code @(programItem["PromoCode"]) during checkout to receive: @(programItem["PromoDescription"]).</strong></p>
+								}
+								else
+								{
+									<p>
+										<strong>Bonus Offer: Spend at least @string.Format("{0:c}", topromospend) more on this order and you'll automatically qualify for additional discounts: @(programItem["PromoDescription"])</strong>
+									</p>
+								}
 							}
 						}
 
@@ -288,8 +352,8 @@
 						}
 						<div class="clearfix">
 							@if (shoppingCart != null && shoppingCart.Total > 0
-								 && (totalAmountSpentWithinAMonth + shoppingCart.GrandTotal <= maxAllowedTopendWithinAMonth && Sitecore.Context.User.Name == "customer3")
-								 && (shoppingCart.TotalWeight <= maxAllowedWeight && Sitecore.Context.User.Name == "customer3"))
+&& (totalAmountSpentWithinAMonth + shoppingCart.GrandTotal <= maxAllowedTopendWithinAMonth && Sitecore.Context.User.Name == "customer3")
+&& (shoppingCart.TotalWeight <= maxAllowedWeight && Sitecore.Context.User.Name == "customer3"))
 							{
 								<a href="/checkout/payment" class="btn btn-primary btn-lg pull-right ">Checkout</a>
 							}

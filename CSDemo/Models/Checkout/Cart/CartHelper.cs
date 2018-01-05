@@ -1586,6 +1586,21 @@ namespace CSDemo.Models.Checkout.Cart
 			return true;
 		}
 
+		public bool RemovePromoCode(string promoCode)
+		{
+			var cart = GetCustomerCart();
+			var request = new RemovePromoCodeRequest(cart, promoCode);
+
+			var cartService = new CommerceCartServiceProvider();
+			var result = cartService.RemovePromoCode(request);
+			//var result = ((CommerceCartServiceProvider)_cartServiceProvider).AddPromoCode(request);
+
+			if (!result.Success || result.Cart == null) return false;
+
+			UpdateCartInCache(result.Cart as CommerceCart);
+			return true;
+		}
+
 		public IEnumerable<PaymentOption> GetPaymentOptions()
 		{
 			var cartResult = GetCustomerCart();

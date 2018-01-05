@@ -39,6 +39,16 @@ namespace CSDemo.Controllers
 
 		public ActionResult Cart()
 		{
+			var item = Sitecore.Context.Item;
+			Sitecore.Data.Database contextDB = Sitecore.Configuration.Factory.GetDatabase(item.Database.Name);
+			var siteName = Sitecore.Context.Site.ContentStartPath;
+
+			var siteNode = contextDB.GetItem(siteName);
+
+			var program = siteNode["Program"];
+			var programItem = contextDB.GetItem(program);
+			var promoCode = programItem["PromoCode"];
+			new CartHelper().RemovePromoCode(promoCode);
 			return View();
 		}
 
