@@ -231,11 +231,13 @@
 
 						</div>
 
+
 						@if (shoppingCart.ProductsTotal > 0)
 						{
 							var spendThreshold = decimal.Parse(programItem["PriceLimitThreshold"]);
-							var actualSpend = totalAmountSpentWithinAMonth + shoppingCart.GrandTotal - shoppingCart.Shipping - shoppingCart.Tax;
-							var lefttospend = maxAllowedTopendWithinAMonth - (totalAmountSpentWithinAMonth + shoppingCart.GrandTotal - shoppingCart.Shipping - shoppingCart.Tax);
+							var subTotal = shoppingCart.GrandTotal - shoppingCart.Tax;
+							var actualSpend = totalAmountSpentWithinAMonth + subTotal;
+							var lefttospend = maxAllowedTopendWithinAMonth - (totalAmountSpentWithinAMonth + subTotal);
 							var topromospend = lefttospend - spendThreshold;
 							if (actualSpend > maxAllowedTopendWithinAMonth)
 							{
@@ -270,14 +272,16 @@
 											</p>
 										</td>
 										<td>
-												<p>
-													<strong>Program Weight Limit per Quarter: </strong> @maxAllowedWeight lbs.<br />
-													<strong>Your Weight Usage this Quarter:</strong> @totalAmountWeightWithinAMonth lbs.<br />
-													<strong>Weight Usage including cart:</strong> @(shoppingCart.TotalWeight) lbs.
-												</p>
-											</td>
+											<p>
+												<strong>Program Weight Limit per Quarter: </strong> @maxAllowedWeight lbs.<br />
+												<strong>Your Weight Usage this Quarter:</strong> @totalAmountWeightWithinAMonth lbs.<br />
+												<strong>Weight Usage including cart:</strong> @(shoppingCart.TotalWeight) lbs.
+											</p>
+										</td>
 									</tr>
 								</table>
+
+
 								if (maxAllowedTopendWithinAMonth - actualSpend > 0)
 								{
 
