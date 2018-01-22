@@ -513,14 +513,15 @@ namespace CSDemo.Models.Product
 							var c = new CategoryMenulistViewModel();
 							c.ID = category.ID.ToString();
 							c.Name = category.Name;
-							if (category.Parent != null && !category.Parent.Name.Equals("departments", StringComparison.OrdinalIgnoreCase) && !category.Parent.Name.Equals("ca", StringComparison.OrdinalIgnoreCase))
+							if (category.Parent != null && !category.Parent.Name.Equals("departments", StringComparison.OrdinalIgnoreCase) && (!category.Parent.Name.Equals("ca", StringComparison.OrdinalIgnoreCase) && !category.Parent.Name.Equals("oh-food", StringComparison.OrdinalIgnoreCase)))
 								c.ParentName = category.Parent.Name;
 							else
 								c.ParentName = string.Empty;
 							//c.Url = LinkManager.GetItemUrl(category);
 							c.Url = "/categories/" + c.Name;
 
-							if (productCategoryBlacklist.Any() && productCategoryBlacklist.Any(cbcat => cbcat.ID == category.ID.Guid)) continue;
+							if (productCategoryBlacklist.Any() && productCategoryBlacklist.Any(cbcat => cbcat.ID == category.ID.Guid))
+								continue;
 
 							// need to rewrite to boost performance
 							//  var i = 0;
@@ -545,6 +546,18 @@ namespace CSDemo.Models.Product
 
 							if (categoryChildern.Count > 0)
 								categoryMenulistViewModel.Add(c);
+							else
+							{
+								var tempCat = GlassHelper.Cast<Product>(category);
+								var tempnav = new ProductMenulistViewModel
+								{
+									Name = tempCat.Title,
+									Url = tempCat.Url
+								};
+								c.ProductsCount = 1;
+								c.ProductMenulistViewModel = new List<ProductMenulistViewModel>() { tempnav };
+								categoryMenulistViewModel.Add(c);
+							}
 						}
 					}
 

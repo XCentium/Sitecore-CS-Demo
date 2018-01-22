@@ -39,7 +39,7 @@ namespace KeefePOC.Models
 		public bool IsHippa { get; set; }
 
 
-		public string FullName { get { return string.Concat(FirstName, " ", LastName); } }
+		public string FullName { get { return string.Concat(FirstName, " ", MiddleName, " ", LastName); } }
 
 		public string Tier { get; set; }
 		public string Block { get; set; }
