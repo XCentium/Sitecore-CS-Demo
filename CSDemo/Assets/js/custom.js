@@ -260,7 +260,9 @@
   	    });
 	
 	    // Only call this carousel if there is more than 1 image
-        if( $(".product-carousel .item").length > 1) {
+	    if ($(".product-carousel .item").length > 1) {
+	    	if (location.href.indexOf("22565422120") > -1) return;
+
 	        $(".product-carousel").owlCarousel({
     	        items : 1,
 		        loop : true,

@@ -125,12 +125,19 @@ namespace CSDemo.AJAX
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public bool ApplyShippingMethodToCart(string shippingMethodId)
-        {
-            return CartHelper.AddShippingMethodToCart(shippingMethodId);
-        }
+        public bool ApplyShippingMethodToCart(string shippingMethodId, string email = "")
+		{
+			return CartHelper.AddShippingMethodToCart(shippingMethodId, email);
+		}
 
-        [WebMethod(EnableSession = true)]
+		[WebMethod(EnableSession = true)]
+		[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+		public bool ApplyMixedShippingMethodToCart(string physicalShippingId, string digitalShippingId, string email)
+		{
+			return CartHelper.AddMixedShippingMethodToCart(physicalShippingId, digitalShippingId, email);
+		}
+
+		[WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public bool ApplyPaymentMethodToCart(string paymentExternalId, string nameoncard, string creditcard,
             string expmonth, string expyear, string ccv)

@@ -340,6 +340,9 @@ namespace CSDemo.Models.Product
         [SitecoreField(Fields.ProductTags)]
         public virtual IEnumerable<ProductTag> ProductTags { get; set; }
 
+		[SitecoreField(Fields.Tags)]
+		public virtual string Tags { get; set; }
+
         [SitecoreField(Fields.Image1)]
         public virtual string Image1 { get; set; }
 
@@ -415,6 +418,7 @@ namespace CSDemo.Models.Product
             public const string DisplayName = "__Display name";
             public const string UnitOfMeasure = "Unit Of Measure";
             public const string ProductTags = "Product Tags";
+			public const string Tags = "Tags";
             public const string Image1 = "Image1";
             public const string Image2 = "Image2";
             public const string Image3 = "Image3";

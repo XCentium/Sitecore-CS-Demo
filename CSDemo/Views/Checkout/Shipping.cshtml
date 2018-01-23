@@ -1,88 +1,106 @@
-﻿<!-- ==========================
-    MY ACCOUNT - START
+﻿@using CSDemo.Models.Checkout.Cart
+@using System.Linq
+
+<!-- ==========================
+	MY ACCOUNT - START
 =========================== -->
 
 <section class="content account">
-    <div class="container">
-        <div class="row">
+	<div class="container">
+		<div class="row">
 
-            <div class="col-sm-12">
-                <article class="account-content checkout-steps">
+			<div class="col-sm-12">
+				<article class="account-content checkout-steps">
 
-                    <div class="row row-no-padding">
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="checkout-step active">
-                                <div class="number">1</div>
-                                <div class="title">Billing & Shipping Address</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="checkout-step active">
-                                <div class="number">2</div>
-                                <div class="title">Shipping Method</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="checkout-step">
-                                <div class="number">3</div>
-                                <div class="title">Payment Method</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="checkout-step">
-                                <div class="number">4</div>
-                                <div class="title">Review</div>
-                            </div>
-                        </div>
-                    </div>
+					<div class="row row-no-padding">
+						<div class="col-xs-6 col-sm-3">
+							<div class="checkout-step active">
+								<div class="number">1</div>
+								<div class="title">Billing & Shipping Address</div>
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-3">
+							<div class="checkout-step active">
+								<div class="number">2</div>
+								<div class="title">Shipping Method</div>
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-3">
+							<div class="checkout-step">
+								<div class="number">3</div>
+								<div class="title">Payment Method</div>
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-3">
+							<div class="checkout-step">
+								<div class="number">4</div>
+								<div class="title">Review</div>
+							</div>
+						</div>
+					</div>
 
-                    <div class="progress checkout-progress hidden-xs"><div class="progress-bar" role="progressbar" aria-valuenow="33.3" aria-valuemin="0" aria-valuemax="100" style="width:33.3%;"></div></div>
+					<div class="progress checkout-progress hidden-xs"><div class="progress-bar" role="progressbar" aria-valuenow="33.3" aria-valuemin="0" aria-valuemax="100" style="width:33.3%;"></div></div>
 
-                    <form id="shipping-form" name="shipping-form">
-                        <h3>Shipping Method</h3>
-                        <div class="products-order checkout shipping-method">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div id="shipping-methods" role="tablist" aria-multiselectable="true">
-                                        <div class="panel radio">
-                                            <input type="radio" name="optionsRadios" value="Delivery to your address" id="radio-shipping-2" checked>
-                                            <label for="radio-shipping-2" class="collapsed" data-toggle="collapse" data-target="#parent-2" data-parent="#shipping-methods" aria-controls="parent-2">Delivery to your address</label>
-                                            <div id="parent-2" class="panel-collapse collapse in" role="tabpanel">
-                                                @{
-                                                    var cartHelper = new CSDemo.Models.Checkout.Cart.CartHelper();
-                                                    var options = cartHelper.GetShippingMethods();
-                                                }
+					<form id="shipping-form" name="shipping-form">
+						<h3>Shipping Method</h3>
+						<div class="products-order checkout shipping-method">
+							<div class="row">
+								<div class="col-sm-6">
+									<div id="shipping-methods" role="tablist" aria-multiselectable="true">
+										@{
+											var cartHelper = new CartHelper();
+											var shoppingCart = cartHelper.GetMiniCart();
+											var regularItems = shoppingCart.CartItems.Where(c => string.IsNullOrEmpty(CSDemo.Models.Product.Product.GetProduct(c.CsProductId).Tags) || !CSDemo.Models.Product.Product.GetProduct(c.CsProductId).Tags.Contains("entitlement")).ToList();
+											var digitalItems = shoppingCart.CartItems.Where(c => !string.IsNullOrEmpty(CSDemo.Models.Product.Product.GetProduct(c.CsProductId).Tags) && CSDemo.Models.Product.Product.GetProduct(c.CsProductId).Tags.Contains("entitlement")).ToList();
+										}
 
-                                                @if (options != null)
-                                                {
-                                                    var count = 0;
-                                                    foreach (var shippingMethod in options.ShippingMethods)
-                                                    {
-                                                        count++;
+										@if (regularItems.Any())
+										{
+											<div class="panel radio">
+												<input type="radio" name="optionsRadios" value="Delivery to your address" id="radio-shipping-2" checked>
+												<label for="radio-shipping-2" class="collapsed" data-toggle="collapse" data-target="#parent-2" data-parent="#shipping-methods" aria-controls="parent-2">Delivery to your address</label>
+												<div id="parent-2" class="panel-collapse collapse in" role="tabpanel">
+													@{			var options = cartHelper.GetShippingMethods();
+													}
 
-                                                        <div class="radio">
-                                                            <input type="radio" name="radio_shipping_2_options" value="@shippingMethod.ExternalId|@shippingMethod.Description" id="radio_shipping_2_@count" required>
-                                                            <label for="radio_shipping_2_@count">@shippingMethod.Description<span> </span></label>
-                                                        </div>
-                                                    }
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix">
-                            <a href="/checkout/payment" class="btn btn-primary btn-lg pull-right SubmitShipping">Continue</a>
-                        </div>
-                    </form>
+													@if (options != null)
+													{
+														var count = 0;
+														foreach (var shippingMethod in options.ShippingMethods)
+														{
+															count++;
 
-                </article>
-            </div>
+															<div class="radio">
+																<input type="radio" name="radio_shipping_2_options" value="@shippingMethod.ExternalId|@shippingMethod.Description" id="radio_shipping_2_@count" required>
+																<label for="radio_shipping_2_@count">@shippingMethod.Description<span> </span></label>
+															</div>
+														}
+													}
+												</div>
+											</div>				}
+										@if (digitalItems.Any())
+										{
+											<p>For items with electronic delivery, please provide an email address for the recipient:</p>
+											<input type="email" name="digital_shipping_address" value="" id="digital_shipping_address" required />
+											<input type="hidden" name="email_shipping_id" value="7e077edc-7103-460b-988f-78b0211b9261|Email" id="email_shipping_id" required />
+										}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<a href="/checkout/payment" class="btn btn-primary btn-lg pull-right SubmitShipping">Continue</a>
+						</div>
+					</form>
 
-        </div>
-    </div>
+
+
+				</article>
+			</div>
+
+		</div>
+	</div>
 </section>
 <!-- ==========================
-    MY ACCOUNT - END
+	MY ACCOUNT - END
 =========================== -->

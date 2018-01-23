@@ -5,205 +5,254 @@
 @{
 
 
-    var cartHelper = new CartHelper();
-    ShoppingCart shoppingCart = cartHelper.GetMiniCart(true);
+	var cartHelper = new CartHelper();
+	ShoppingCart shoppingCart = cartHelper.GetMiniCart(true);
 
-    var lineTotal = "0.00";
-    var discount = "0.00";
-    var shipping = "0.00";
-    var tax = "0.00";
-    var grandtotal = "0.00";
-    var total = "0.00";
+	var lineTotal = "0.00";
+	var discount = "0.00";
+	var shipping = "0.00";
+	var tax = "0.00";
+	var grandtotal = "0.00";
+	var total = "0.00";
 
-    if (shoppingCart != null && shoppingCart.Total > 0)
-    {
+	if (shoppingCart != null && shoppingCart.Total > 0)
+	{
 
-        try
-        {
+		try
+		{
 
-            lineTotal = string.Format("{0:0.00}", shoppingCart.LineTotal);
-            discount = string.Format("{0:0.00}", shoppingCart.Discount);
-            shipping = string.Format("{0:0.00}", shoppingCart.Shipping);
-            tax = string.Format("{0:0.00}", shoppingCart.Tax);
-            grandtotal = string.Format("{0:0.00}", shoppingCart.GrandTotal);
-            total = string.Format("{0:0.00}", shoppingCart.ProductsTotal);
+			lineTotal = string.Format("{0:0.00}", shoppingCart.LineTotal);
+			discount = string.Format("{0:0.00}", shoppingCart.Discount);
+			shipping = string.Format("{0:0.00}", shoppingCart.Shipping);
+			tax = string.Format("{0:0.00}", shoppingCart.Tax);
+			grandtotal = string.Format("{0:0.00}", shoppingCart.GrandTotal);
+			total = string.Format("{0:0.00}", shoppingCart.ProductsTotal);
 
-            //if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { total = shoppingCart.ProductsTotal > 0 ? ((decimal)0.90 * shoppingCart.ProductsTotal).ToString("C") : shoppingCart.ProductsTotal.ToString("C"); }
-            //if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { total = shoppingCart.ProductsTotal > 0 ? ((decimal)0.75 * shoppingCart.ProductsTotal).ToString("C") : shoppingCart.ProductsTotal.ToString("C"); }
-
-
-
-        }
-        catch (Exception)
-        {
+			//if (Sitecore.Context.User.IsInRole("CommerceUsers\\Dealer")) { total = shoppingCart.ProductsTotal > 0 ? ((decimal)0.90 * shoppingCart.ProductsTotal).ToString("C") : shoppingCart.ProductsTotal.ToString("C"); }
+			//if (Sitecore.Context.User.IsInRole("CommerceUsers\\Retailer")) { total = shoppingCart.ProductsTotal > 0 ? ((decimal)0.75 * shoppingCart.ProductsTotal).ToString("C") : shoppingCart.ProductsTotal.ToString("C"); }
 
 
-        }
 
-    }
+		}
+		catch (Exception)
+		{
+
+
+		}
+
+	}
 
 }
 
 <!-- ==========================
-    MY ACCOUNT - START
+	MY ACCOUNT - START
 =========================== -->
 <section class="content account">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <article class="account-content checkout-steps">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<article class="account-content checkout-steps">
 
-                    <div class="row row-no-padding">
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="checkout-step active">
-                                <div class="number">1</div>
-                                <div class="title">Billing & Shipping Address</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="checkout-step active">
-                                <div class="number">2</div>
-                                <div class="title">Shipping Method</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="checkout-step active">
-                                <div class="number">3</div>
-                                <div class="title">Payment Method</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="checkout-step active">
-                                <div class="number">4</div>
-                                <div class="title">Review</div>
-                            </div>
-                        </div>
-                    </div>
+					<div class="row row-no-padding">
+						<div class="col-xs-6 col-sm-3">
+							<div class="checkout-step active">
+								<div class="number">1</div>
+								<div class="title">Billing & Shipping Address</div>
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-3">
+							<div class="checkout-step active">
+								<div class="number">2</div>
+								<div class="title">Shipping Method</div>
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-3">
+							<div class="checkout-step active">
+								<div class="number">3</div>
+								<div class="title">Payment Method</div>
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-3">
+							<div class="checkout-step active">
+								<div class="number">4</div>
+								<div class="title">Review</div>
+							</div>
+						</div>
+					</div>
 
-                    <div class="progress checkout-progress hidden-xs"><div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%;"></div></div>
+					<div class="progress checkout-progress hidden-xs"><div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%;"></div></div>
 
-                    <form id="review-form" name="review-form">
-                        <h3>Review Order</h3>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="box">
-                                    <h4>Billing Address</h4>
-                                    <ul class="list-unstyled" id="billingAddress"></ul>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="box">
-                                    <h4>Shipping Address</h4>
-                                    <ul class="list-unstyled" id="shippingAddress"></ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="box">
-                                    <h4>Payment Method</h4>
-                                    <ul class="list-unstyled" id="paymentMethod">
-                                        <li>Via Credit Card</li>
-                                    </ul>
-                                </div>
-                                <div class="box">
-                                    <h4>Shipping Method</h4>
-                                    <ul class="list-unstyled" id="shippingMethod"></ul>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="box">
-                                    <h4>Order Details</h4>
-                                    <ul class="list-unstyled" id="orderDetails"></ul>
-                                    <h5>Addition information:</h5>
-                                    <p id="AdditionalInformation"></p>
-                                </div>
-                            </div>
-                        </div>
-                        @if (shoppingCart != null && shoppingCart.Total > 0)
-                        {
+					<form id="review-form" name="review-form">
+						<h3>Review Order</h3>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="box">
+									<h4>Billing Address</h4>
+									<ul class="list-unstyled" id="billingAddress"></ul>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="box">
+									<h4>Shipping Address</h4>
+									<ul class="list-unstyled" id="shippingAddress"></ul>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="box">
+									<h4>Payment Method</h4>
+									<ul class="list-unstyled" id="paymentMethod">
+										<li>Via Credit Card</li>
+									</ul>
+								</div>
+								<div class="box">
+									<h4>Shipping Method</h4>
+									<ul class="list-unstyled" id="shippingMethod"></ul>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="box">
+									<h4>Order Details</h4>
+									<ul class="list-unstyled" id="orderDetails"></ul>
+									<h5>Addition information:</h5>
+									<p id="AdditionalInformation"></p>
+								</div>
+							</div>
+						</div>
+						@if (shoppingCart != null && shoppingCart.Total > 0)
+						{
 
-                            <div class="products-order checkout shopping-cart">
-                                <div class="table-responsive">
-                                    <table class="table table-products">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>Product</th>
-                                                <th>Unit Price</th>
-                                                <th>Quantity</th>
-                                                <th>Discount</th>
-                                                <th>Subtotal</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+							<div class="products-order checkout shopping-cart">
+								<div class="table-responsive">
+									<table class="table table-products">
+										@{
+											var regularItems = shoppingCart.CartItems.Where(c => string.IsNullOrEmpty(CSDemo.Models.Product.Product.GetProduct(c.CsProductId).Tags) || !CSDemo.Models.Product.Product.GetProduct(c.CsProductId).Tags.Contains("entitlement")).ToList();
+											var digitalItems = shoppingCart.CartItems.Where(c => !string.IsNullOrEmpty(CSDemo.Models.Product.Product.GetProduct(c.CsProductId).Tags) && CSDemo.Models.Product.Product.GetProduct(c.CsProductId).Tags.Contains("entitlement")).ToList();
+										}
 
-                                            @foreach (CartItem cartItem in shoppingCart.CartItems)
-                                            {
-                                                var unitPrice = string.Format("{0:0.00}", cartItem.UnitPrice);
-                                                var subTotal = string.Format("{0:0.00}", cartItem.Amount);
-                                                var discountAmount = string.Format("{0:0.00}", cartItem.Discount);
-                                                <tr>
-                                                    <td class="col-xs-2"><img src="@cartItem.ImageUrl" alt="" class="img-responsive"></td>
-                                                    <td class="col-xs-5 col-md-5">
-                                                        <h4><a href="/categories/@cartItem.Category/@cartItem.CsProductId">@cartItem.ProductName</a><small></small></h4>
-                                                        @if (cartItem.Adjustments.Count > 0)
-                                                        {
-                                                            <h5>Adjustments:</h5>
-                                                        }
-                                                        @for (var ctr = 0; ctr < cartItem.Adjustments.Count; ctr++)
-                                                        {
-                                                            <span class="adjustment">@(ctr + 1) - @cartItem.Adjustments[ctr]</span><br/>
-                                                        }
-                                                    </td>
-                                                    <td class="col-xs-1 text-center"><span>$@unitPrice</span></td>
-                                                    <td class="col-xs-1 col-md-1 text-center"><span><b>@cartItem.Quantity</b></span></td>
-                                                    <td class="col-xs-1 text-center"><span><b>$@discountAmount</b></span></td>
-                                                    <td class="col-xs-2 text-center"><span><b>$@subTotal</b></span></td>
-                                                </tr>
-                                            }
+										@if (regularItems.Any())
+										{
+											<thead>
+												<tr>
+													<th></th>
+													<th>Product</th>
+													<th>Unit Price</th>
+													<th>Quantity</th>
+													<th>Discount</th>
+													<th>Subtotal</th>
+												</tr>
+											</thead>
+											<tbody>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+												@foreach (CartItem cartItem in regularItems)
+												{
+													var unitPrice = string.Format("{0:0.00}", cartItem.UnitPrice);
+													var subTotal = string.Format("{0:0.00}", cartItem.Amount);
+													var discountAmount = string.Format("{0:0.00}", cartItem.Discount);
+													<tr>
+														<td class="col-xs-2"><img src="@cartItem.ImageUrl" alt="" class="img-responsive"></td>
+														<td class="col-xs-5 col-md-5">
+															<h4><a href="/categories/@cartItem.Category/@cartItem.CsProductId">@cartItem.ProductName</a><small></small></h4>
+															@if (cartItem.Adjustments.Count > 0)
+															{
+																<h5>Adjustments:</h5>
+															}
+															@for (var ctr = 0; ctr < cartItem.Adjustments.Count; ctr++)
+															{
+																<span class="adjustment">@(ctr + 1) - @cartItem.Adjustments[ctr]</span><br />
+															}
+														</td>
+														<td class="col-xs-1 text-center"><span>$@unitPrice</span></td>
+														<td class="col-xs-1 col-md-1 text-center"><span><b>@cartItem.Quantity</b></span></td>
+														<td class="col-xs-1 text-center"><span><b>$@discountAmount</b></span></td>
+														<td class="col-xs-2 text-center"><span><b>$@subTotal</b></span></td>
+													</tr>
+												}
 
-                            <div class="products-order checkout shopping-cart clearfix">
-                                    <div class="col-xs-12 col-sm-6">
-                                        @if (shoppingCart.Adjustments.Count > 0)
-                                        {
-                                            <h5>Cart Adjustments:</h5>
-                                        }
-                                        @for (var ctr = 0; ctr < shoppingCart.Adjustments.Count; ctr++)
-                                        {
-                                            <span class="adjustment">@(ctr + 1) - @shoppingCart.Adjustments[ctr]</span><br/>
-                                        }
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6">
-                                        <ul class="list-unstyled order-total">
-                                            <li>Total products<span>@lineTotal</span></li>
-                                            <li>Discount<span>- $@discount</span></li>
-                                            <li>Shipping<span class="total">$@shipping</span></li>
-                                            <li>Tax<span class="total">$@tax</span></li>
-                                            <li>Grandtotal<span class="total">$@grandtotal</span></li>
-                                        </ul>
-                                    </div>
- 
-                            </div>
-                            <div class="clearfix">
-                                <div class="checkbox pull-left">
-                                    <input type="checkbox" id="checkout_terms_conditions" name="checkout_terms_conditions" required />
-                                    <label for="checkout_terms_conditions">I have read and agree to the <a href="/terms-and-conditions" target="_blank">Terms & Conditions</a></label>
-                                </div>
-                                <a href="/checkout/thank-you" data-contextitemid="@Sitecore.Context.Item.ID.ToString()" class="btn btn-primary btn-lg pull-right SubmitReview">Confirm Order</a>
-                            </div>
-                        }
-                    </form>
-                </article>
-            </div>
-        </div>
-    </div>
+											</tbody>
+										}
+										@if (digitalItems.Any())
+										{
+											<thead>
+												<tr>
+													<th></th>
+													<th>
+														<strong>Digital Items</strong> - <em>Will be delivered electronically</em>
+													</th>
+													<th>Unit Price</th>
+													<th>Quantity</th>
+													<th>Discount</th>
+													<th>Subtotal</th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach (var cartItem in digitalItems)
+												{
+													var unitPrice = string.Format("{0:0.00}", cartItem.UnitPrice);
+													var subTotal = string.Format("{0:0.00}", cartItem.Amount);
+													var discountAmount = string.Format("{0:0.00}", cartItem.Discount);
+													<tr>
+														<td class="col-xs-2"><img src="@cartItem.ImageUrl" alt="" class="img-responsive"></td>
+														<td class="col-xs-5 col-md-5">
+															<h4><a href="/categories/@cartItem.Category/@cartItem.CsProductId">@cartItem.ProductName</a><small></small></h4>
+															@if (cartItem.Adjustments.Count > 0)
+															{
+																<h5>Adjustments:</h5>
+															}
+															@for (var ctr = 0; ctr < cartItem.Adjustments.Count; ctr++)
+															{
+																<span class="adjustment">@(ctr + 1) - @cartItem.Adjustments[ctr]</span><br />
+															}
+														</td>
+														<td class="col-xs-1 text-center"><span>$@unitPrice</span></td>
+														<td class="col-xs-1 col-md-1 text-center"><span><b>@cartItem.Quantity</b></span></td>
+														<td class="col-xs-1 text-center"><span><b>$@discountAmount</b></span></td>
+														<td class="col-xs-2 text-center"><span><b>$@subTotal</b></span></td>
+													</tr>
+												}
+											</tbody>
+										}
+									</table>
+								</div>
+							</div>
+
+							<div class="products-order checkout shopping-cart clearfix">
+								<div class="col-xs-12 col-sm-6">
+									@if (shoppingCart.Adjustments.Count > 0)
+									{
+										<h5>Cart Adjustments:</h5>
+									}
+									@for (var ctr = 0; ctr < shoppingCart.Adjustments.Count; ctr++)
+									{
+										<span class="adjustment">@(ctr + 1) - @shoppingCart.Adjustments[ctr]</span><br />
+									}
+								</div>
+								<div class="col-xs-12 col-sm-6">
+									<ul class="list-unstyled order-total">
+										<li>Total products<span>@lineTotal</span></li>
+										<li>Discount<span>- $@discount</span></li>
+										<li>Shipping<span class="total">$@shipping</span></li>
+										<li>Tax<span class="total">$@tax</span></li>
+										<li>Grandtotal<span class="total">$@grandtotal</span></li>
+									</ul>
+								</div>
+
+							</div>
+							<div class="clearfix">
+								<div class="checkbox pull-left">
+									<input type="checkbox" id="checkout_terms_conditions" name="checkout_terms_conditions" required />
+									<label for="checkout_terms_conditions">I have read and agree to the <a href="/terms-and-conditions" target="_blank">Terms & Conditions</a></label>
+								</div>
+								<a href="/checkout/thank-you" data-contextitemid="@Sitecore.Context.Item.ID.ToString()" class="btn btn-primary btn-lg pull-right SubmitReview">Confirm Order</a>
+							</div>
+											}
+					</form>
+				</article>
+			</div>
+		</div>
+	</div>
 </section>
 <!-- ==========================
-    MY ACCOUNT - END
+	MY ACCOUNT - END
 =========================== -->
