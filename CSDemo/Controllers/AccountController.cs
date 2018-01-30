@@ -9,6 +9,10 @@ using Sitecore;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Web;
 using Address = CSDemo.Models.Account.Address;
+using System.Web.UI;
+using CSDemo.Models.Json;
+using System;
+using Sitecore.Commerce.Connect.CommerceServer;
 
 #endregion
 namespace CSDemo.Controllers
@@ -162,6 +166,39 @@ namespace CSDemo.Controllers
             return View(model);
 
         }
+		[HttpGet, AllowAnonymous, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+		public ActionResult Register() => View();
 
-    }
+		[HttpPost, AllowAnonymous, OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+		public JsonResult Register(RegisterUserInputModel inputModel)
+		{
+			try
+			{
+				RegisterBaseJsonResult result = new RegisterBaseJsonResult();
+				this.ValidateModel(result);
+				if (result.HasErrors)
+				{
+					return base.Json(result, JsonRequestBehavior.AllowGet);
+				}
+				//string userId = this.CurrentVisitorContext.UserId;
+				var usr = new AccountHelper();
+				var response = usr.RegisterUser(Sitecore.Context.Site.Name, inputModel);
+				if (response.Success && (response.CommerceUser != null))
+				{
+					result.Initialize(response.CommerceUser);
+					//usr.Login(response.CommerceUser.UserName, inputModel.Password, false);
+				}
+				else
+				{
+					result.SetErrors(response);
+				}
+				return base.Json(result);
+			}
+			catch (Exception exception)
+			{
+				CommerceLog.Current.Error("Register", this, exception);
+				return base.Json(new BaseJsonResult("Register", exception), JsonRequestBehavior.AllowGet);
+			}
+		}
+	}
 }

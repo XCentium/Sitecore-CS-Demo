@@ -357,6 +357,9 @@
     <Compile Include="Controllers\GeneralSearchController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Helpers\GlassHelper.cs" />
+    <Compile Include="Models\Account\RegisterUserInputModel.cs" />
+    <Compile Include="Models\Json\BaseJsonResult.cs" />
+    <Compile Include="Models\Json\RegisterBaseJsonResult.cs" />
     <Compile Include="Models\Recommendations\Recommendations.cs" />
     <Compile Include="Helpers\RecommendationsHelper.cs" />
     <Compile Include="Models\Account\AccountHelper.cs" />
@@ -663,6 +666,7 @@
     <Content Include="Views\Product\ProductSampler.cshtml" />
     <Content Include="Views\Product\FrequentlyBoughtTogetherProducts.cshtml" />
     <Content Include="Views\Product\UserRecommendedProducts.cshtml" />
+    <None Include="Properties\PublishProfiles\Josh-Local.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

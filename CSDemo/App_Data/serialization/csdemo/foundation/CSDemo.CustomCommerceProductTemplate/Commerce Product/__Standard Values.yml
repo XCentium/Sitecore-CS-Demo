@@ -13,6 +13,7 @@ SharedFields:
   Type: Multilist
   Value: |
     {3B423C39-C10C-4B4F-8692-B563CA632B31}
+    {929CE3F4-5333-4F37-8C22-5C3BFE1BD57B}
     {154DC6DA-89C4-4704-8CDA-95994D794BEA}
 - ID: 83798d75-df25-4c28-9327-e8bac2b75292
   Hint: __Insert Rules
@@ -23,6 +24,7 @@ SharedFields:
   Type: Multilist
   Value: |
     {3B423C39-C10C-4B4F-8692-B563CA632B31}
+    {929CE3F4-5333-4F37-8C22-5C3BFE1BD57B}
     {154DC6DA-89C4-4704-8CDA-95994D794BEA}
 - ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
   Hint: __Renderings
@@ -50,7 +52,6 @@ SharedFields:
         <r ds="{27B8B175-F0C5-4CB9-A91D-40A8C8516DC9}" id="{5DB98A10-52BD-4AB0-9E2B-C40C45FD2FAE}" par="" ph="addtocart" uid="{59246F17-EC96-46F0-A632-BE4671929091}" />
         <r ds="{E48E2CCA-493D-410D-9B15-B2E1A0939730}" id="{A6D72BB2-F51C-4468-97A2-75FB8EA100D0}" par="" ph="shareandprint" uid="{9B706406-941F-4707-BBB1-A298CC0FEE82}" />
         <r id="{0B0ECF42-1026-4DDA-866B-EEE84778E831}" ph="center" uid="{8B8DFD0C-2842-4B5D-BA29-4753FB35DCEA}" />
-        <r ds="{960B18B8-0011-4352-A8AB-BBC9FFC2C561}" id="{CD0E1B2B-4D8F-4053-9F70-13E10D11F534}" par="" ph="center" uid="{94DC048A-9D1D-4244-9F19-0CFB8FE7D0E6}" />
         <r ds="{F6504124-F766-43D0-824B-EB339CAE8E5F}" id="{2658217E-196A-4041-8F81-B8AFA7E377EE}" par="" ph="bottom" uid="{90413A71-AF3B-426B-938F-DCD2F2968374}" />
       </d>
       <d id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}" l="{F5034347-7E92-41D7-B8EB-F51D1F1BCF1C}">
@@ -84,7 +85,7 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20160223T015546Z
+      Value: 20150825T083428Z
     - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
       Hint: __Created by
       Value: sitecore\Anonymous
@@ -97,7 +98,7 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20130521T203141Z
+      Value: 20130521T133141
     - ID: 4391dd60-9ecb-44a8-b550-ceb6a96f43d8
       Hint: SortId
       Value: 0

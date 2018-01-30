@@ -6,6 +6,7 @@ using Sitecore.Analytics;
 using Sitecore.Analytics.Model.Entities;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities.Customers;
+using Sitecore.Commerce.Services;
 using Sitecore.Commerce.Services.Customers;
 using Sitecore.Data.Items;
 using Sitecore.Security.Accounts;
@@ -16,6 +17,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Web.Security;
 
 #endregion
 
@@ -660,5 +662,44 @@ namespace CSDemo.Models.Account
         {
             return Cookie.Get(Constants.Commerce.UserSelectedCatalogPostfix) != null ? Cookie.Get(Constants.Commerce.UserSelectedCatalogPostfix).Value : null;
         }
-    }
+
+		public virtual CreateUserResult RegisterUser(string shopName, RegisterUserInputModel inputModel)
+		{
+			CreateUserResult result;
+
+			try
+			{
+				CreateUserRequest request = new CreateUserRequest(inputModel.UserName, inputModel.Password, inputModel.UserName, shopName);
+				result = _customerServiceProvider.CreateUser(request);
+				if (!result.Success)
+				{
+					//Helpers.LogSystemMessages(result.SystemMessages, result);
+					return result;
+				}
+				else if ((result.Success && (result.CommerceUser == null)) && (result.SystemMessages.Count<SystemMessage>() == 0))
+				{
+					result.Success = false;
+					SystemMessage item = new SystemMessage
+					{
+						Message = "user already exists."//StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.UserAlreadyExists, true)
+					};
+					result.SystemMessages.Add(item);
+				}
+			}
+			catch (MembershipCreateUserException exception)
+			{
+				result = new CreateUserResult
+				{
+					Success = false
+				};
+				SystemMessage message2 = new SystemMessage
+				{
+					Message = "Status code: " + exception.StatusCode//ErrorCodeToString(exception.StatusCode)
+				};
+				result.SystemMessages.Add(message2);
+			}
+
+			return result;
+		}
+	}
 }
